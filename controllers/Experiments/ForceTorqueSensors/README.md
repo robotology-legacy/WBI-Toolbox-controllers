@@ -1,0 +1,1 @@
+In this experiment we check the robot force/torque sensors performance while on single and double support. We compare the data from the sensors with the data obtained via wholeBodyDynamicsTree
