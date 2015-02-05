@@ -7,15 +7,7 @@ project(WBI-Toolbox-controllers)
 
 set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} ${CMAKE_CURRENT_SOURCE_DIR}/cmake)
 
-find_package(Matlab      REQUIRED)
 find_package(YARP        REQUIRED)
-
-if(MATLAB_FOUND)        
-        message(STATUS "Matlab ${MATLAB_VERSION} was found for WBI-Toolbox-controllers!! The configuration may continue")
-else()
-        message(FATAL_ERROR "Matlab not found for WBI-Toolbox-controllers.")
-endif()
-
 
 set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} ${YARP_MODULE_PATH})
 include(YarpInstallationHelpers)
