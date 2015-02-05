@@ -15,4 +15,5 @@ yarp_configure_external_installation(codyco)
 
 set(WBI-TOOLBOX-CONTROLLERS_SHARE_DIR "${CMAKE_INSTALL_PREFIX}/share/WBI-Toolbox-controllers")
 # Fake installation. Just installs the README.md file
-install(FILE ${CMAKE_CURRENT_SOURCE_DIR}/README.md DESTINATION ${WBI-TOOLBOX-CONTROLLERS_SHARE_DIR})
+#install(FILE ${CMAKE_CURRENT_SOURCE_DIR}/README.md DESTINATION ${WBI-TOOLBOX-CONTROLLERS_SHARE_DIR})
+install(CODE "MESSAGE(\"This repository simply acts as a container\")")
