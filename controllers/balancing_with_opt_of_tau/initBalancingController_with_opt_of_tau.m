@@ -1,13 +1,14 @@
 %WBC ASW
  clear all
  
-setenv('YARP_ROBOT_NAME', 'iCubGenova01');
-robotName = 'icub';
+setenv('YARP_ROBOT_NAME', 'icubGazeboSim');
+robotName = 'icubGazeboSim';
 localName = 'balancing';
 ROBOT_DOF = 23;
+ROBOT_DOF_FOR_SIMULINK = eye(ROBOT_DOF);
 
-number_of_feet_on_ground          = 1;
-DEMO_LEFT_AND_RIGHT               =  0; 
+number_of_feet_on_ground          = 2;
+DEMO_LEFT_AND_RIGHT               = 0; 
 directionOfOscillation            = [0;1;0];
 referenceParams                   = [0.0  0.0];  %referenceParams(1) = amplitude of ascillations in meters referenceParams(2) = frequency of ascillations in hertz
 amplitudesOscillationsOnOneFoot   = zeros(1,ROBOT_DOF);
@@ -121,4 +122,8 @@ end
 
 impedances          = [impTorso(1,:),impArms(1,:),impArms(1,:),impLeftLeg(1,:),impRightLeg(1,:)];
 increasingRatesImp  = [impTorso(2,:),impArms(2,:),impArms(2,:),impLeftLeg(2,:),impRightLeg(2,:)];
+
+if (size(impedances,2) ~= ROBOT_DOF)
+    error('Dimension mismatch between ROBOT_DOF and dimension of the variable impedences. Check these variables in the file initBalancingController_with_opt_of_tau.m');
+end
 impedencesSat       = [80   100    400];
