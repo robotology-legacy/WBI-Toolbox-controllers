@@ -3,9 +3,8 @@ clc;
 
 n             = 25; % Number of DOF
 k             = 12; % Number of constraints
-numberOfTasks = 2;
+numberOfTasks = 2;  % Without counting postural and the force task 
 
-% I assume to have two tasks with the postural task
 % Dimensions of tasks
 m  = [5 7];
 
@@ -19,7 +18,16 @@ h = rand(n + 6,1);
 
 
 %Desired acceleration for each tesk star{n} is the fStar
-star     = cell(numberOfTasks+2,1);
+star     = cell(numberOfTasks+2,1); 
+% star is a cell array that contains
+% star{1} = postural desired acceleration
+% star{2} = acceleration of the 2nd lowest pripority task
+% ...
+% star{numberOfTasks+1} = acceleration of the 2nd highest pripority task 
+% star{end}             = desired force
+
+%Then, we have the associated Jacobians and JDotqDot
+
 J        = cell(numberOfTasks+2,1);
 JDotqDot = cell(numberOfTasks+2,1);
 
