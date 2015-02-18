@@ -9,7 +9,7 @@ ROBOT_DOF = 23;
 % Controller period
 Ts             = 0.01; 
  
-DEMO_MOVING_LEG_AND_ARMS = 1;
+DEMO_MOVING_LEG_AND_ARMS = 0;
 % Controller gains for convergence of the desired centroidal momentum. 
 % The first three elements are the Proportional, Intagral, and the Derivative
 % gains taking place in xComDDStart, i.e. 
@@ -21,7 +21,6 @@ DEMO_MOVING_LEG_AND_ARMS = 1;
 %
 % hwDot = -Gains(4)*hw  
 
-gainsPCOM                 = diag([ 45   45  45]);  
 gainsICOM                 = diag([  0    0   0]);
 gainsDCOM                 = diag([  1    1   1]);
 
@@ -36,6 +35,10 @@ gainMomentum              = 1 ;
 
 if (DEMO_MOVING_LEG_AND_ARMS == 0)
     simulationTime = inf;
+    
+    gainsPCOM                 = diag([ 100   100  100]);  
+
+    
     impTorso            = [  40    40   40
                               0     0    0]; 
 
@@ -50,9 +53,21 @@ if (DEMO_MOVING_LEG_AND_ARMS == 0)
                          
     amplitudesOscillationsOnOneFoot   = zeros(1,ROBOT_DOF);
     frequenciesOscillationsOnOneFoot  = zeros(1,ROBOT_DOF);
+    
+    
+    q0 = zeros(1,23);
+    postures   = [ inf, q0];
+              
+    minJerkTransitionTime = 3;
+    A_f = [20 1 inf];
+    
                          
 else
     simulationTime      = inf;
+    
+    gainsPCOM                 = diag([ 45   45  45]);  
+
+    
     impTorso            = [  60    60   60
                               0     0    0]; 
 

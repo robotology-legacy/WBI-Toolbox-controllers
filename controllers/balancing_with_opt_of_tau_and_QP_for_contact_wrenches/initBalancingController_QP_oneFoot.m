@@ -42,7 +42,7 @@ if (DEMO_MOVING_LEG_AND_ARMS == 0)
     impArms             = [ 13  13   13   10  
                             0    0    0   0              ];
 
-    impLeftLeg          = [ 70   70 650     300      0   0
+    impLeftLeg          = [ 70  110 650     300      0   0
                              0    0   0       0      0   0]; 
 
     impRightLeg         = [ 40   40  20      10     10   10
