@@ -7,7 +7,7 @@ Model {
     NumRootInports	    0
     NumRootOutports	    0
     ParameterArgumentNames  ""
-    ComputedModelVersion    "1.80"
+    ComputedModelVersion    "1.90"
     NumModelReferences	    0
     NumTestPointedSignals   0
   }
@@ -31,7 +31,7 @@ Model {
       $ObjectID		      2
       $ClassName	      "Simulink.WindowInfo"
       IsActive		      [1]
-      Location		      [229.0, 96.0, 800.0, 626.0]
+      Location		      [-4.0, 19.0, 1915.0, 1064.0]
       Object {
 	$PropName		"ModelBrowserInfo"
 	$ObjectID		3
@@ -46,7 +46,7 @@ Model {
 	$PropName		"ExplorerBarInfo"
 	$ObjectID		4
 	$ClassName		"Simulink.ExplorerBarInfo"
-	Visible			[1]
+	Visible			[0]
       }
       Array {
 	Type			"Simulink.EditorInfo"
@@ -56,9 +56,9 @@ Model {
 	  IsActive		  [1]
 	  ViewObjType		  "SimulinkTopLevel"
 	  LoadSaveID		  "0"
-	  Extents		  [742.0, 429.0]
-	  ZoomFactor		  [1.1725146198830412]
-	  Offset		  [123.5860349127183, 197.05985037406484]
+	  Extents		  [1859.0, 928.0]
+	  ZoomFactor		  [1.9956331877729259]
+	  Offset		  [46.300695774070107, 85.984682713347922]
 	}
 	Object {
 	  $ObjectID		  6
@@ -77,11 +77,11 @@ Model {
   Creator		  "daniele"
   UpdateHistory		  "UpdateHistoryNever"
   ModifiedByFormat	  "%<Auto>"
-  LastModifiedBy	  "jorhabib"
+  LastModifiedBy	  "daniele"
   ModifiedDateFormat	  "%<Auto>"
-  LastModifiedDate	  "Mon Dec 15 16:21:09 2014"
-  RTWModifiedTimeStamp	  340561239
-  ModelVersionFormat	  "1.%<AutoIncrement:80>"
+  LastModifiedDate	  "Mon Feb 23 11:11:06 2015"
+  RTWModifiedTimeStamp	  346590614
+  ModelVersionFormat	  "1.%<AutoIncrement:90>"
   ConfigurationManager	  "none"
   SampleTimeColors	  off
   SampleTimeAnnotations	  off
@@ -809,10 +809,12 @@ Model {
       PreserveConstantTs      off
     }
     Block {
-      BlockType		      From
-      GotoTag		      "A"
-      IconDisplay	      "Tag"
-      TagVisibility	      "local"
+      BlockType		      Display
+      Format		      "short"
+      Decimation	      "10"
+      Floating		      off
+      Lockdown		      off
+      SampleTime	      "-1"
     }
     Block {
       BlockType		      Gain
@@ -828,12 +830,6 @@ Model {
       RndMeth		      "Floor"
       SaturateOnIntegerOverflow	on
       SampleTime	      "-1"
-    }
-    Block {
-      BlockType		      Goto
-      GotoTag		      "A"
-      IconDisplay	      "Tag"
-      TagVisibility	      "local"
     }
     Block {
       BlockType		      Mux
@@ -859,6 +855,24 @@ Model {
       SourceOfInitialOutputValue "Dialog"
       OutputWhenDisabled      "held"
       InitialOutput	      "[]"
+    }
+    Block {
+      BlockType		      Scope
+      ModelBased	      off
+      TickLabels	      "OneTimeTick"
+      ZoomMode		      "on"
+      Grid		      "on"
+      TimeRange		      "auto"
+      YMin		      "-5"
+      YMax		      "5"
+      SaveToWorkspace	      off
+      SaveName		      "ScopeData"
+      DataFormat	      "Array"
+      LimitDataPoints	      on
+      MaxDataPoints	      "5000"
+      Decimation	      "1"
+      SampleInput	      off
+      SampleTime	      "-1"
     }
     Block {
       BlockType		      Selector
@@ -920,7 +934,7 @@ Model {
   }
   System {
     Name		    "impedanceControl_new_wbi_ID"
-    Location		    [229, 96, 1029, 722]
+    Location		    [-4, 19, 1911, 1083]
     Open		    on
     ModelBrowserVisibility  off
     ModelBrowserWidth	    200
@@ -932,9 +946,18 @@ Model {
     TiledPaperMargins	    [0.500000, 0.500000, 0.500000, 0.500000]
     TiledPageScale	    1
     ShowPageBoundaries	    off
-    ZoomFactor		    "117"
+    ZoomFactor		    "200"
     ReportName		    "simulink-default.rpt"
-    SIDHighWatermark	    "45"
+    SIDHighWatermark	    "52"
+    Block {
+      BlockType		      Constant
+      Name		      "Constant1"
+      SID		      "32"
+      Position		      [220, 435, 285, 465]
+      ZOrder		      142
+      ShowName		      off
+      Value		      "zeros(16,1)"
+    }
     Block {
       BlockType		      Gain
       Name		      "Gain"
@@ -985,26 +1008,43 @@ Model {
       SaturateOnIntegerOverflow	off
     }
     Block {
-      BlockType		      Goto
-      Name		      "Goto"
-      SID		      "37"
-      Position		      [260, 320, 300, 350]
-      ZOrder		      138
-      GotoTag		      "q"
-      TagVisibility	      "global"
+      BlockType		      Gain
+      Name		      "Gain4"
+      SID		      "47"
+      Position		      [525, 495, 555, 525]
+      ZOrder		      145
+      ShowName		      off
+      ParamDataTypeStr	      "Inherit: Inherit via internal rule"
+      OutDataTypeStr	      "Inherit: Inherit via internal rule"
+      SaturateOnIntegerOverflow	off
     }
     Block {
       BlockType		      Reference
       Name		      "Joint Angles"
       SID		      "1"
       Ports		      [0, 1]
-      Position		      [160, 248, 230, 292]
+      Position		      [95, 248, 165, 292]
       ZOrder		      1
       BackgroundColor	      "[0.375000, 0.187500, 0.000000]"
       ShowName		      off
-      LibraryVersion	      "1.212"
+      LibraryVersion	      "1.231"
       SourceBlock	      "WBCLibrary/wholeBodyStates/Joint Angles"
       SourceType	      "Joint Angles"
+      ContentPreviewEnabled   off
+      robotName		      "robotName"
+      localName		      "localName"
+    }
+    Block {
+      BlockType		      Reference
+      Name		      "Joint Torques"
+      SID		      "48"
+      Ports		      [0, 1]
+      Position		      [565, 93, 635, 137]
+      ZOrder		      146
+      BackgroundColor	      "[1.000000, 0.634000, 0.268000]"
+      LibraryVersion	      "1.231"
+      SourceBlock	      "WBCLibrary/wholeBodyStates/Joint Torques"
+      SourceType	      "Joint Torques"
       ContentPreviewEnabled   off
       robotName		      "robotName"
       localName		      "localName"
@@ -1017,12 +1057,70 @@ Model {
       Position		      [400, 353, 470, 397]
       ZOrder		      24
       BackgroundColor	      "[0.634000, 0.401533, 0.000000]"
-      LibraryVersion	      "1.212"
+      LibraryVersion	      "1.231"
       SourceBlock	      "WBCLibrary/wholeBodyStates/Joint Velocities"
       SourceType	      "Joint Velocities"
       ContentPreviewEnabled   off
       robotName		      "robotName"
       localName		      "localName"
+    }
+    Block {
+      BlockType		      Mux
+      Name		      "Mux"
+      SID		      "34"
+      Ports		      [2, 1]
+      Position		      [315, 441, 320, 479]
+      ZOrder		      140
+      ShowName		      off
+      Inputs		      "2"
+      DisplayOption	      "bar"
+    }
+    Block {
+      BlockType		      Reference
+      Name		      "Real Time Synchronizer"
+      SID		      "46"
+      Ports		      []
+      Position		      [255, 125, 380, 160]
+      ZOrder		      139
+      ForegroundColor	      "[0.916667, 0.916667, 0.916667]"
+      BackgroundColor	      "gray"
+      DropShadow	      on
+      ShowName		      off
+      Priority		      "-10"
+      LibraryVersion	      "1.231"
+      SourceBlock	      "WBCLibrary/Utilities/Real Time Synchronizer"
+      SourceType	      ""
+      ContentPreviewEnabled   off
+      threadPeriod	      "Ts"
+    }
+    Block {
+      BlockType		      Scope
+      Name		      "Scope"
+      SID		      "50"
+      Ports		      [1]
+      Position		      [905, 99, 935, 131]
+      ZOrder		      148
+      Floating		      off
+      Location		      [187, 363, 1555, 1051]
+      Open		      off
+      NumInputPorts	      "1"
+      List {
+	ListType		AxesTitles
+	axes1			"%<SignalLabel>"
+      }
+      List {
+	ListType		ScopeGraphics
+	FigureColor		"[0.5 0.5 0.5]"
+	AxesColor		"[0 0 0]"
+	AxesTickColor		"[1 1 1]"
+	LineColors		"[1 1 0;1 0 1;0 1 1;1 0 0;0 1 0;0 0 1]"
+	LineStyles		"-|-|-|-|-|-"
+	LineWidths		"[0.5 0.5 0.5 0.5 0.5 0.5]"
+	MarkerStyles		"none|none|none|none|none|none"
+      }
+      ShowLegends	      on
+      LegendLocations	      "0.87701     0.79815    0.096857     0.14262"
+      LimitDataPoints	      off
     }
     Block {
       BlockType		      Selector
@@ -1044,7 +1142,7 @@ Model {
       ZOrder		      27
       BackgroundColor	      "[0.941176, 0.415686, 0.192157]"
       ShowName		      off
-      LibraryVersion	      "1.212"
+      LibraryVersion	      "1.231"
       SourceBlock	      "WBCLibrary/wholeBodyActuators/Set Torques"
       SourceType	      "Set Joint Torques   "
       ContentPreviewEnabled   off
@@ -1081,16 +1179,36 @@ Model {
       SaturateOnIntegerOverflow	off
     }
     Block {
+      BlockType		      Sum
+      Name		      "Sum2"
+      SID		      "49"
+      Ports		      [2, 1]
+      Position		      [725, 105, 745, 125]
+      ZOrder		      147
+      ShowName		      off
+      IconShape		      "round"
+      Inputs		      "|+-"
+      InputSameDT	      off
+      OutDataTypeStr	      "Inherit: Inherit via internal rule"
+      SaturateOnIntegerOverflow	off
+      Port {
+	PortNumber		1
+	Name			"torqueError"
+	RTWStorageClass		"Auto"
+	DataLoggingNameMode	"SignalName"
+      }
+    }
+    Block {
       BlockType		      SubSystem
       Name		      "base + dq'"
       SID		      "24"
       Ports		      [0, 1]
-      Position		      [220, 498, 270, 532]
-      ZOrder		      134
+      Position		      [95, 498, 145, 532]
+      ZOrder		      144
       RequestExecContextInheritance off
       System {
 	Name			"base + dq'"
-	Location		[49, 24, 1366, 768]
+	Location		[683, 54, 1366, 768]
 	Open			off
 	ModelBrowserVisibility	off
 	ModelBrowserWidth	200
@@ -1113,7 +1231,7 @@ Model {
 	  ForegroundColor	  "red"
 	  BackgroundColor	  "yellow"
 	  ShowName		  off
-	  LibraryVersion	  "1.212"
+	  LibraryVersion	  "1.231"
 	  SourceBlock		  "WBCLibrary/wholeBodyStates/Joint Velocities"
 	  SourceType		  "Joint Velocities"
 	  ContentPreviewEnabled	  off
@@ -1128,7 +1246,7 @@ Model {
 	  Position		  [65, 93, 140, 137]
 	  ZOrder		  -1
 	  BackgroundColor	  "[0.047000, 0.909000, 0.803000]"
-	  LibraryVersion	  "1.212"
+	  LibraryVersion	  "1.231"
 	  SourceBlock		  "WBCLibrary/wholeBodyModel/Jacobians/Left Foot Jacobian"
 	  SourceType		  "Left Foot Jacobian"
 	  ContentPreviewEnabled	  off
@@ -1155,7 +1273,7 @@ Model {
 	  ZOrder		  -2
 	  ForegroundColor	  "red"
 	  BackgroundColor	  "yellow"
-	  LibraryVersion	  "1.212"
+	  LibraryVersion	  "1.231"
 	  SourceBlock		  "WBCLibrary/wholeBodyModel/Jacobians/Right Foot Jacobian"
 	  SourceType		  "Right Foot Jacobian"
 	  ContentPreviewEnabled	  off
@@ -1170,7 +1288,7 @@ Model {
 	  Position		  [180, 68, 290, 112]
 	  ZOrder		  -14
 	  BackgroundColor	  "[0.753334, 1.000000, 0.112472]"
-	  LibraryVersion	  "1.212"
+	  LibraryVersion	  "1.231"
 	  SourceBlock		  "WBCLibrary/Utilities/baseVelocity"
 	  SourceType		  "baseVelocity"
 	  ContentPreviewEnabled	  off
@@ -1234,93 +1352,6 @@ Model {
       }
     }
     Block {
-      BlockType		      SubSystem
-      Name		      "base + q"
-      SID		      "31"
-      Ports		      [0, 1]
-      Position		      [220, 454, 270, 486]
-      ZOrder		      133
-      NamePlacement	      "alternate"
-      RequestExecContextInheritance off
-      System {
-	Name			"base + q"
-	Location		[49, 24, 1284, 768]
-	Open			off
-	ModelBrowserVisibility	off
-	ModelBrowserWidth	200
-	ScreenColor		"white"
-	PaperOrientation	"landscape"
-	PaperPositionMode	"auto"
-	PaperType		"usletter"
-	PaperUnits		"inches"
-	TiledPaperMargins	[0.500000, 0.500000, 0.500000, 0.500000]
-	TiledPageScale		1
-	ShowPageBoundaries	off
-	ZoomFactor		"100"
-	Block {
-	  BlockType		  Constant
-	  Name			  "Constant1"
-	  SID			  "32"
-	  Position		  [30, 25, 60, 55]
-	  ZOrder		  -4
-	  ShowName		  off
-	  Value			  "zeros(16,1)"
-	}
-	Block {
-	  BlockType		  From
-	  Name			  "From"
-	  SID			  "33"
-	  Position		  [25, 71, 65, 99]
-	  ZOrder		  -9
-	  ShowName		  off
-	  GotoTag		  "q"
-	  TagVisibility		  "global"
-	}
-	Block {
-	  BlockType		  Mux
-	  Name			  "Mux"
-	  SID			  "34"
-	  Ports			  [2, 1]
-	  Position		  [95, 41, 100, 79]
-	  ZOrder		  -12
-	  ShowName		  off
-	  Inputs		  "2"
-	  DisplayOption		  "bar"
-	}
-	Block {
-	  BlockType		  Outport
-	  Name			  "q'"
-	  SID			  "35"
-	  Position		  [125, 53, 155, 67]
-	  ZOrder		  -13
-	  IconDisplay		  "Port number"
-	}
-	Line {
-	  ZOrder		  1
-	  SrcBlock		  "Mux"
-	  SrcPort		  1
-	  DstBlock		  "q'"
-	  DstPort		  1
-	}
-	Line {
-	  ZOrder		  2
-	  SrcBlock		  "From"
-	  SrcPort		  1
-	  Points		  [10, 0]
-	  DstBlock		  "Mux"
-	  DstPort		  2
-	}
-	Line {
-	  ZOrder		  3
-	  SrcBlock		  "Constant1"
-	  SrcPort		  1
-	  Points		  [15, 0]
-	  DstBlock		  "Mux"
-	  DstPort		  1
-	}
-      }
-    }
-    Block {
       BlockType		      Reference
       Name		      "computeh"
       SID		      "36"
@@ -1330,13 +1361,22 @@ Model {
       ForegroundColor	      "red"
       BackgroundColor	      "yellow"
       ShowName		      off
-      LibraryVersion	      "1.212"
+      LibraryVersion	      "1.231"
       SourceBlock	      "WBCLibrary/wholeBodyModel/Dynamics/computeh"
       SourceType	      "Generalized Bias Forces"
       ContentPreviewEnabled   off
       val		      "7"
       robotname		      "robotName"
       localname		      "localName"
+    }
+    Block {
+      BlockType		      Display
+      Name		      "g(q)"
+      SID		      "51"
+      Ports		      [1]
+      Position		      [805, 347, 885, 473]
+      ZOrder		      149
+      Decimation	      "1"
     }
     Block {
       BlockType		      Reference
@@ -1347,42 +1387,19 @@ Model {
       ZOrder		      20
       BackgroundColor	      "[0.537255, 0.721569, 1.000000]"
       ShowName		      off
-      LibraryVersion	      "1.212"
+      LibraryVersion	      "1.231"
       SourceBlock	      "WBCLibrary/Utilities/holder\n"
       SourceType	      "Holder"
       ContentPreviewEnabled   off
     }
     Block {
-      BlockType		      Reference
-      Name		      "synchronize"
-      SID		      "45"
-      Ports		      []
-      Position		      [620, 469, 705, 511]
-      ZOrder		      139
-      ForegroundColor	      "[0.900000, 0.000000, 0.472153]"
-      ShowName		      off
-      LibraryVersion	      "1.212"
-      SourceBlock	      "WBCLibrary/Utilities/synchronize"
-      SourceType	      "ySynchronizer"
-      rate		      "0.010"
-      scaleFactor	      "1"
-    }
-    Line {
-      ZOrder		      1
-      SrcBlock		      "Joint Angles"
-      SrcPort		      1
-      Points		      [5, 0]
-      Branch {
-	ZOrder			2
-	Points			[0, 65]
-	DstBlock		"Goto"
-	DstPort			1
-      }
-      Branch {
-	ZOrder			3
-	DstBlock		"Gain"
-	DstPort			1
-      }
+      BlockType		      Display
+      Name		      "tauM"
+      SID		      "52"
+      Ports		      [1]
+      Position		      [815, 167, 895, 293]
+      ZOrder		      150
+      Decimation	      "1"
     }
     Line {
       ZOrder		      4
@@ -1443,16 +1460,18 @@ Model {
       ZOrder		      12
       SrcBlock		      "Sum1"
       SrcPort		      1
-      DstBlock		      "Set Torques1"
-      DstPort		      1
-    }
-    Line {
-      ZOrder		      13
-      SrcBlock		      "base + q"
-      SrcPort		      1
-      Points		      [60, 0]
-      DstBlock		      "computeh"
-      DstPort		      1
+      Points		      [4, 0]
+      Branch {
+	ZOrder			35
+	Points			[0, -90; 106, 0]
+	DstBlock		"Sum2"
+	DstPort			2
+      }
+      Branch {
+	ZOrder			34
+	DstBlock		"Set Torques1"
+	DstPort			1
+      }
     }
     Line {
       ZOrder		      14
@@ -1462,7 +1481,7 @@ Model {
       DstPort		      2
     }
     Line {
-      ZOrder		      15
+      ZOrder		      29
       SrcBlock		      "base + dq'"
       SrcPort		      1
       DstBlock		      "Gain3"
@@ -1479,9 +1498,92 @@ Model {
       ZOrder		      17
       SrcBlock		      "Selector1"
       SrcPort		      1
-      Points		      [145, 0]
+      Points		      [24, 0]
+      Branch {
+	ZOrder			38
+	Points			[0, 29; 299, 0; 0, -129]
+	DstBlock		"g(q)"
+	DstPort			1
+      }
+      Branch {
+	ZOrder			37
+	DstBlock		"Gain4"
+	DstPort			1
+      }
+    }
+    Line {
+      ZOrder		      21
+      SrcBlock		      "Mux"
+      SrcPort		      1
+      Points		      [10, 0]
+      DstBlock		      "computeh"
+      DstPort		      1
+    }
+    Line {
+      FontName		      "Helvetica"
+      FontSize		      9
+      FontWeight	      "normal"
+      FontAngle		      "normal"
+      ZOrder		      1
+      SrcBlock		      "Joint Angles"
+      SrcPort		      1
+      Points		      [17, 0]
+      Branch {
+	ZOrder			31
+	Points			[0, 200]
+	DstBlock		"Mux"
+	DstPort			2
+      }
+      Branch {
+	ZOrder			30
+	DstBlock		"Gain"
+	DstPort			1
+      }
+    }
+    Line {
+      FontName		      "Helvetica"
+      FontSize		      9
+      FontWeight	      "normal"
+      FontAngle		      "normal"
+      ZOrder		      20
+      SrcBlock		      "Constant1"
+      SrcPort		      1
+      DstBlock		      "Mux"
+      DstPort		      1
+    }
+    Line {
+      ZOrder		      32
+      SrcBlock		      "Gain4"
+      SrcPort		      1
+      Points		      [50, 0]
       DstBlock		      "Sum1"
       DstPort		      3
+    }
+    Line {
+      ZOrder		      33
+      SrcBlock		      "Joint Torques"
+      SrcPort		      1
+      Points		      [21, 0]
+      Branch {
+	ZOrder			40
+	Points			[0, 115]
+	DstBlock		"tauM"
+	DstPort			1
+      }
+      Branch {
+	ZOrder			39
+	DstBlock		"Sum2"
+	DstPort			1
+      }
+    }
+    Line {
+      Name		      "torqueError"
+      ZOrder		      36
+      Labels		      [1, 1]
+      SrcBlock		      "Sum2"
+      SrcPort		      1
+      DstBlock		      "Scope"
+      DstPort		      1
     }
     Annotation {
       SID		      "42"
