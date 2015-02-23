@@ -18,7 +18,7 @@
 
 
 ROBOT_DOF = 3;
-Kp        = 1/2*diag( ones(1,ROBOT_DOF)  );
+Kp        = 1/10*diag( ones(1,ROBOT_DOF)  );
 
 
 robotName = 'icub';
