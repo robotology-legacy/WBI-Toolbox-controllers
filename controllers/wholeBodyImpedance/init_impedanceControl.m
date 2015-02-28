@@ -1,7 +1,7 @@
 %% icubGazeboSim
 % setenv('YARP_ROBOT_NAME', 'icubGazeboSim');
 
-ROBOT_DOF = 1;
+ROBOT_DOF = 23;
 Kp        = 1/10*diag( ones(1,ROBOT_DOF)  );
 
 
