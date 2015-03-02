@@ -1,20 +1,21 @@
 %WBC ASW
  clear all
  
-setenv('YARP_ROBOT_NAME', 'icubGazeboSim');
-robotName = 'icubGazeboSim';
+% setenv('YARP_ROBOT_NAME', 'icubGazeboSim');
+
+robotName = 'icub';
 localName = 'balancing';
 ROBOT_DOF = 23;
 ROBOT_DOF_FOR_SIMULINK = eye(ROBOT_DOF);
 
 number_of_feet_on_ground          = 2;
-DEMO_LEFT_AND_RIGHT               = 0; 
+DEMO_LEFT_AND_RIGHT               = 1; 
 directionOfOscillation            = [0;1;0];
 referenceParams                   = [0.0  0.0];  %referenceParams(1) = amplitude of ascillations in meters referenceParams(2) = frequency of ascillations in hertz
 amplitudesOscillationsOnOneFoot   = zeros(1,ROBOT_DOF);
 frequenciesOscillationsOnOneFoot  = zeros(1,ROBOT_DOF);
 
-DEMO_MOVING_LEG_AND_ARMS = 0;  % It is taken into account only if number_of_feet_on_ground = 1
+DEMO_MOVING_LEG_AND_ARMS = 1;  % It is taken into account only if number_of_feet_on_ground = 1
 
 
 % Controller period
@@ -34,7 +35,7 @@ noOscillationTime = 0;
 % hwDot = -Gains(4)*hw  
 
 if (number_of_feet_on_ground == 2)
-    gainsPCOM                 = diag([100  100 100]);
+    gainsPCOM                 = diag([ 30   50  50]);
     gainsICOM                 = diag([  0    0   0]);
     gainsDCOM                 = diag([  0    0   0]);
 
@@ -49,23 +50,27 @@ if (number_of_feet_on_ground == 2)
 
 
     % 
-    impTorso            = [   60    20   10
+    impTorso            = [   30    30   15
                                0     0    0]; 
-    impArms             = [ 8    8    8  12   
+    impArms             = [13   13   13  15   
                             0    0    0   0   ];
                         
-    impLeftLeg          = [ 35   10    0      350    350  10
+    impLeftLeg          = [ 35   10   40      350    70  2
                              0    0   0        0      0   0]; 
 
-    impRightLeg         = [ 35   10    0      350    350  10
+    impRightLeg         = [ 35   10   40      350    70  2
                              0    0   0        0      0   0]; 
     
     if (DEMO_LEFT_AND_RIGHT == 1)
         directionOfOscillation = [0;1;0];
-        referenceParams        = [0.03 0.1];  %referenceParams(1) = amplitude of ascillations in meters
+        referenceParams        = [0.04 0.5];  %referenceParams(1) = amplitude of ascillations in meters
     end
 end
+
+
+
 if (number_of_feet_on_ground == 1)
+    %%
     gainsPCOM                 = diag([120  140 120]);
     gainsICOM                 = diag([  0    0   0]);
     gainsDCOM                 = diag([  1    1   1]);
@@ -89,7 +94,7 @@ if (number_of_feet_on_ground == 1)
         impLeftLeg          = [ 70   70 650     300      0   0
                                  0    0   0       0      0   0]; 
 
-        impRightLeg         = [ 20   20  20      10     10   10
+        impRightLeg         = [ 20   20  20      10      0    0
                                  0    0   0       0      0   0];
 
     else
@@ -118,8 +123,8 @@ if (number_of_feet_on_ground == 1)
         amplitudesOscillationsOnOneFoot   = [amplTorso,amplArms,amplArms,amplLeftLeg,amplRightLeg];
         frequenciesOscillationsOnOneFoot  = [freqTorso,freqArms,freqArms,freqLeftLeg,freqRightLeg];
     end
+%%    
 end
-
 impedances          = [impTorso(1,:),impArms(1,:),impArms(1,:),impLeftLeg(1,:),impRightLeg(1,:)];
 increasingRatesImp  = [impTorso(2,:),impArms(2,:),impArms(2,:),impLeftLeg(2,:),impRightLeg(2,:)];
 
