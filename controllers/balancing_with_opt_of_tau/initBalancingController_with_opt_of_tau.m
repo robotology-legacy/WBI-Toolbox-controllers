@@ -19,5 +19,5 @@ simulationTime    = inf;
 run(strcat('robots/',YARP_ROBOT_NAME,'/gains.m')); %Load gains for the specific robot
 
 if (size(impedances,2) ~= ROBOT_DOF)
-    error('Dimension mismatch between ROBOT_DOF and dimension of the variable impedences. Check these variables in the file initBalancingController_with_opt_of_tau.m');
+    error('Dimension mismatch between ROBOT_DOF and dimension of the variable impedences. Check these variables in the file gains.m');
 end
