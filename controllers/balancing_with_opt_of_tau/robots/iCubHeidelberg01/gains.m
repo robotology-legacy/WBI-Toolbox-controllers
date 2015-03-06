@@ -1,4 +1,4 @@
-ROBOT_DOF = 23;
+ROBOT_DOF = 15;
 
 amplitudesOscillationsOnOneFoot   = zeros(1,ROBOT_DOF);
 frequenciesOscillationsOnOneFoot  = zeros(1,ROBOT_DOF);
@@ -19,11 +19,10 @@ ROBOT_DOF_FOR_SIMULINK = eye(ROBOT_DOF);
 
 
 %%
-%           PARAMETERS FOR TWO FEET ONE GROUND
-
-
+%       PARAMETERS FOR TWO FEET ON GROUND 
+%
 if (number_of_feet_on_ground == 2)
-    gainsPCOM                 = diag([ 30   50  50]);
+    gainsPCOM                 = diag([100  100 100]);
     gainsICOM                 = diag([  0    0   0]);
     gainsDCOM                 = diag([  0    0   0]);
 
@@ -38,44 +37,48 @@ if (number_of_feet_on_ground == 2)
 
 
     % 
-    impTorso            = [   30    30   15
+    impTorso            = [   60    20   10
                                0     0    0]; 
-    impArms             = [13   13   13  15   
+    impArms             = [8    8    8  12   
                             0    0    0   0   ];
                         
-    impLeftLeg          = [ 35   10   40      350    70  2
+    impLeftLeg          = [ 35   10    0      350    350  10
                              0    0   0        0      0   0]; 
 
-    impRightLeg         = [ 35   10   40      350    70  2
+    impRightLeg         = [35   10    0      350    350  10
                              0    0   0        0      0   0]; 
+                                                  
     
     if (DEMO_LEFT_AND_RIGHT == 1)
         directionOfOscillation = [0;1;0];
         referenceParams        = [0.04 0.5];  %referenceParams(1) = amplitude of ascillations in meters
     end
+
+    
     
     if (DEMO_MOVING_LEG_AND_ARMS == 1)
-        amplTorso            = [ 10  20   30 ]; 
-        amplArms             = [ 20  20   20   0];
+        amplTorso            = [ 10  10   10 ]; 
+        amplArms             = [  0   0    0   0];
         amplLeftLeg          = [  0   0    0   0   0   0]; 
-        amplRightLeg         = [  0   0    0   0   0   0];
+        amplRightLeg         = [ 25  25   25  15   0   0];
 
-        freqTorso            = [ 0.2  0.1  0.2]; 
-        freqArms             = [ 0.2  0.2  0.2  0.2];
+        freqTorso            = [ 0.0  0.0  0.0]; 
+        freqArms             = [ 0.0  0.0  0.0  0.0];
         freqLeftLeg          = [ 0.0  0.0  0.0  0.0  0.0  0.0]; 
-        freqRightLeg         = [ 0.0  0.0  0.0  0.0  0.0  0.0]; %[ 0.0  0.3  0.0  0.0  0.0  0.0];
+        freqRightLeg         = [ 0.2  0.2  0.0  0.0  0.0  0.0]; %[ 0.0  0.3  0.0  0.0  0.0  0.0];
 
         amplitudesOscillationsOnOneFoot   = [amplTorso,amplArms,amplArms,amplLeftLeg,amplRightLeg];
         frequenciesOscillationsOnOneFoot  = [freqTorso,freqArms,freqArms,freqLeftLeg,freqRightLeg];
     end
+    
+    
 end
 
 %%
-%           PARAMETERS FOR ONLY ONE FOOT ONE GROUND
-
+%       PARAMETERS FOR ONLY ONE FOOT ON GROUND 
+%
 
 if (number_of_feet_on_ground == 1)
-    %%
     gainsPCOM                 = diag([120  140 120]);
     gainsICOM                 = diag([  0    0   0]);
     gainsDCOM                 = diag([  1    1   1]);
@@ -101,6 +104,8 @@ if (number_of_feet_on_ground == 1)
 
         impRightLeg         = [ 20   20  20      10      0    0
                                  0    0   0       0      0   0];
+                             
+                             
 
     else
         impTorso            = [  70    20   50
@@ -131,8 +136,8 @@ if (number_of_feet_on_ground == 1)
 %%    
 end
 
-impedances          = [impTorso(1,:),impArms(1,:),impArms(1,:),impLeftLeg(1,:),impRightLeg(1,:)];
-increasingRatesImp  = [impTorso(2,:),impArms(2,:),impArms(2,:),impLeftLeg(2,:),impRightLeg(2,:)];
+impedances          = [impTorso(1,:),impLeftLeg(1,:),impRightLeg(1,:)];
+increasingRatesImp  = [impTorso(2,:),impLeftLeg(2,:),impRightLeg(2,:)];
 impedencesSat       = [80   100    400];
 
 if (size(impedances,2) ~= ROBOT_DOF)
