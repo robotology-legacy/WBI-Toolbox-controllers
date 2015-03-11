@@ -137,6 +137,7 @@ if (number_of_feet_on_ground == 1)
 end
 
 impedances          = [impTorso(1,:),impLeftLeg(1,:),impRightLeg(1,:)];
+dampings            = zeros(1,ROBOT_DOF);
 increasingRatesImp  = [impTorso(2,:),impLeftLeg(2,:),impRightLeg(2,:)];
 impedencesSat       = [80   100    400];
 
