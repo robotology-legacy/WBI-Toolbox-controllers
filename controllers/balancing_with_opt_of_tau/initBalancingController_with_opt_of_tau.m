@@ -1,6 +1,6 @@
 clear all
 
-robotName = 'icub';
+robotName = 'icubGazeboSim';
 localName = 'balancing';
 
 number_of_feet_on_ground = 2;
