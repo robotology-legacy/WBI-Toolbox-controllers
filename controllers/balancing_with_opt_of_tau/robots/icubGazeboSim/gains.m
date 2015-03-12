@@ -22,7 +22,7 @@ ROBOT_DOF_FOR_SIMULINK = eye(ROBOT_DOF);
 %       PARAMETERS FOR TWO FEET ON GROUND 
 %
 if (number_of_feet_on_ground == 2)
-    gainsPCOM                 = diag([ 50   50  50]);
+    gainsPCOM                 = diag([ 40   40  40]);
     gainsICOM                 = diag([  0    0   0]);
     gainsDCOM                 = 2*sqrt(gainsPCOM);
 
@@ -37,25 +37,25 @@ if (number_of_feet_on_ground == 2)
 
 
     % 
-    dampTorso            = [1    1   1]; 
+    dampTorso            = [1    1   1]*0; 
     
-    dampArms             = [1    1   1   1];
+    dampArms             = [1    1   1   1]*0;
                         
-    dampLeftLeg          = [0.0    0.0   1   1   1   1]; 
+    dampLeftLeg          = [0.0    0.0   0   0   0   0]; 
 
-    dampRightLeg         = [0.0    0.0   1   1   1   1]; 
+    dampRightLeg         = [0.0    0.0   0   0   0   0]; 
                                                   
     
     % 
-    impTorso            = [   40    40   10
+    impTorso            = [   60    60   10
                                0     0    0]; 
     impArms             = [8    8    8   12   
                             0   0    0    0];
                         
-    impLeftLeg          = [ 35   20    30     350    250  10
+    impLeftLeg          = [ 35   20    30     350    550  10
                              0    0     0       0      0   0]; 
 
-    impRightLeg         = [35   20    30      350    250  10
+    impRightLeg         = [35   20    30      350    550  10
                             0    0     0        0      0   0]; 
                                                   
     
@@ -156,7 +156,7 @@ if (number_of_feet_on_ground == 1)
 end
 
 impedances          = [impTorso(1,:),impArms(1,:),impArms(1,:),impLeftLeg(1,:),impRightLeg(1,:)];
-dampings            = [dampTorso,dampArms,dampArms,dampLeftLeg,dampRightLeg]*0.0;
+dampings            = [dampTorso,dampArms,dampArms,dampLeftLeg,dampRightLeg];
 increasingRatesImp  = [impTorso(2,:),impArms(2,:),impArms(2,:),impLeftLeg(2,:),impRightLeg(2,:)];
 impedencesSat       = [80   100    400];
 
