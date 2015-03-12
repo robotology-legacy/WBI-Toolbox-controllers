@@ -24,7 +24,7 @@ ROBOT_DOF_FOR_SIMULINK = eye(ROBOT_DOF);
 if (number_of_feet_on_ground == 2)
     gainsPCOM                 = diag([ 50   50  50]);
     gainsICOM                 = diag([  0    0   0]);
-    gainsDCOM                 = diag([  0    0   0]);
+    gainsDCOM                 = 2*sqrt(gainsPCOM);
 
     minCoMx_y                 = [-0.1   -0.25 ];  
     maxCoMx_y                 = [ 0.1    0.05 ];
@@ -47,7 +47,7 @@ if (number_of_feet_on_ground == 2)
                                                   
     
     % 
-    impTorso            = [   60    60   10
+    impTorso            = [   40    40   10
                                0     0    0]; 
     impArms             = [8    8    8   12   
                             0   0    0    0];
@@ -61,7 +61,7 @@ if (number_of_feet_on_ground == 2)
     
     if (DEMO_LEFT_AND_RIGHT == 1)
         directionOfOscillation = [0;1;0];
-        referenceParams        = [0.03 0.05];  %referenceParams(1) = amplitude of ascillations in meters
+        referenceParams        = [0.03 0.025];  %referenceParams(1) = amplitude of ascillations in meters
     end
 
     
