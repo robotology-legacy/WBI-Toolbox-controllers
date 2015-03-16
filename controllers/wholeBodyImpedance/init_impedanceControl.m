@@ -1,7 +1,7 @@
 %% icubGazeboSim
 
 ROBOT_DOF = 1;
-Kp        = 1/1*diag( ones(1,ROBOT_DOF)  );
+Kp        = 1/10*diag( ones(1,ROBOT_DOF)  );
 
 
 robotName = 'icub';

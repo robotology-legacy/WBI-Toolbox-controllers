@@ -22,9 +22,9 @@ ROBOT_DOF_FOR_SIMULINK = eye(ROBOT_DOF);
 %       PARAMETERS FOR TWO FEET ON GROUND 
 %
 if (number_of_feet_on_ground == 2)
-    gainsPCOM                 = diag([ 40   40  40]);
+    gainsPCOM                 = diag([100  100 100]);
     gainsICOM                 = diag([  0    0   0]);
-    gainsDCOM                 = 2*sqrt(gainsPCOM);
+    gainsDCOM                 = diag([  0    0   0]);
 
     minCoMx_y                 = [-0.1   -0.25 ];  
     maxCoMx_y                 = [ 0.1    0.05 ];
@@ -37,31 +37,21 @@ if (number_of_feet_on_ground == 2)
 
 
     % 
-    dampTorso            = [1    1   1]*0; 
-    
-    dampArms             = [1    1   1   1]*0;
-                        
-    dampLeftLeg          = [0.0    0.0   0   0   0   0]; 
-
-    dampRightLeg         = [0.0    0.0   0   0   0   0]; 
-                                                  
-    
-    % 
-    impTorso            = [   60    60   10
+    impTorso            = [   60    20   10
                                0     0    0]; 
-    impArms             = [8    8    8   12   
-                            0   0    0    0];
+    impArms             = [8    8    8  12   
+                            0    0    0   0   ];
                         
-    impLeftLeg          = [ 35   20    30     350    550   0
-                             0    0     0       0      0   0]; 
+    impLeftLeg          = [ 35   10    0      350    350  10
+                             0    0   0        0      0   0]; 
 
-    impRightLeg         = [35   20    30      350    550   0
-                            0    0     0        0      0   0]; 
+    impRightLeg         = [35   10    0      350    350  10
+                             0    0   0        0      0   0]; 
                                                   
     
     if (DEMO_LEFT_AND_RIGHT == 1)
         directionOfOscillation = [0;1;0];
-        referenceParams        = [0.03 0.025];  %referenceParams(1) = amplitude of ascillations in meters
+        referenceParams        = [0.04 0.5];  %referenceParams(1) = amplitude of ascillations in meters
     end
 
     
@@ -100,15 +90,6 @@ if (number_of_feet_on_ground == 1)
 
     gainMomentum              = 1 ;
 
-    
-    dampTorso            = [1    1   1]; 
-    
-    dampArms             = [1    1   1   1];
-                        
-    dampLeftLeg          = [1    1   1   1   1   1]; 
-
-    dampRightLeg         = [1    1   1   1   1   1]; 
-   
     % Impadances acting in the null space of the desired contact forces 
 
     if (DEMO_MOVING_LEG_AND_ARMS == 0)
@@ -156,7 +137,7 @@ if (number_of_feet_on_ground == 1)
 end
 
 impedances          = [impTorso(1,:),impArms(1,:),impArms(1,:),impLeftLeg(1,:),impRightLeg(1,:)];
-dampings            = [dampTorso,dampArms,dampArms,dampLeftLeg,dampRightLeg];
+dampings            = zeros(1,ROBOT_DOF);
 increasingRatesImp  = [impTorso(2,:),impArms(2,:),impArms(2,:),impLeftLeg(2,:),impRightLeg(2,:)];
 impedencesSat       = [80   100    400];
 

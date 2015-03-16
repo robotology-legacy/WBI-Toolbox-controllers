@@ -1,5 +1,8 @@
 ROBOT_DOF = 23;
 
+transferCoMyDes                   = -0.035;
+transferCoMxDes                   =  0.03;
+transferTime                      = 30;
 amplitudesOscillationsOnOneFoot   = zeros(1,ROBOT_DOF);
 frequenciesOscillationsOnOneFoot  = zeros(1,ROBOT_DOF);
 directionOfOscillation            = [0;1;0];
@@ -52,10 +55,10 @@ if (number_of_feet_on_ground == 2)
     impArms             = [8    8    8   12   
                             0   0    0    0];
                         
-    impLeftLeg          = [ 35   20    30     350    550   0
+    impLeftLeg          = [ 35    0    30     350    50   0
                              0    0     0       0      0   0]; 
 
-    impRightLeg         = [35   20    30      350    550   0
+    impRightLeg         = [35    0    30      350    50   0
                             0    0     0        0      0   0]; 
                                                   
     
