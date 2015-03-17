@@ -1,10 +1,10 @@
 ROBOT_DOF = 23;
 
-transferCoMyDes                   = -0.04;
+transferCoMyDes                   = -0.035;
 transferCoMxDes                   =  0.03;
-transferTime                      = 30;
+transferTime                      = 20;
 tBalancing                        = 15;
-forceThreshold                    = 100;
+forceThreshold                    = 80;
 CoMErrorThreshold                 = 0.1;
 smoothingTimeJacobians            = 3;
 trajectoryTimePOstural            = 5;
