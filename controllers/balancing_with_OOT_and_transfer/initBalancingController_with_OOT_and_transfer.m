@@ -3,12 +3,6 @@ clear all
 robotName = 'icubGazeboSim';
 localName = 'balancing';
 
-number_of_feet_on_ground = 2;
-DEMO_LEFT_AND_RIGHT      = 1;
-noOscillationTime        = 0;
-
-
-DEMO_MOVING_LEG_AND_ARMS = 0;  
 
 % Controller period
 Ts                = 0.01;

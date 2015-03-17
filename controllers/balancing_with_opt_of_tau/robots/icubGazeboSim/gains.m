@@ -61,7 +61,7 @@ if (number_of_feet_on_ground == 2)
     
     if (DEMO_LEFT_AND_RIGHT == 1)
         directionOfOscillation = [0;1;0];
-        referenceParams        = [0.03 0.025];  %referenceParams(1) = amplitude of ascillations in meters
+        referenceParams        = [0.02 0.025];  %referenceParams(1) = amplitude of ascillations in meters
     end
 
     

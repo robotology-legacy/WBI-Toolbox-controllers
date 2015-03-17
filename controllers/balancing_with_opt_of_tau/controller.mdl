@@ -7,7 +7,7 @@ Model {
     NumRootInports	    0
     NumRootOutports	    0
     ParameterArgumentNames  ""
-    ComputedModelVersion    "1.1961"
+    ComputedModelVersion    "1.1964"
     NumModelReferences	    0
     NumTestPointedSignals   0
   }
@@ -31,7 +31,7 @@ Model {
       $ObjectID		      2
       $ClassName	      "Simulink.WindowInfo"
       IsActive		      [1]
-      Location		      [10.0, 62.0, 1346.0, 696.0]
+      Location		      [0.0, 27.0, 1366.0, 741.0]
       Object {
 	$PropName		"ModelBrowserInfo"
 	$ObjectID		3
@@ -67,7 +67,7 @@ Model {
 	  LoadSaveID		  "736"
 	  Extents		  [1135.0, 596.0]
 	  ZoomFactor		  [0.6]
-	  Offset		  [84.223565934589033, 173.44442368008845]
+	  Offset		  [84.223565934589146, 173.44442368008839]
 	}
 	Object {
 	  $ObjectID		  7
@@ -94,7 +94,7 @@ Model {
 	  LoadSaveID		  "915"
 	  Extents		  [1135.0, 596.0]
 	  ZoomFactor		  [0.61244541484716153]
-	  Offset		  [454.69063335561486, -10.859180035650638]
+	  Offset		  [454.690633355615, -10.859180035650638]
 	}
 	Object {
 	  $ObjectID		  10
@@ -115,9 +115,9 @@ Model {
   ModifiedByFormat	  "%<Auto>"
   LastModifiedBy	  "daniele"
   ModifiedDateFormat	  "%<Auto>"
-  LastModifiedDate	  "Fri Mar 13 17:01:10 2015"
-  RTWModifiedTimeStamp	  348061453
-  ModelVersionFormat	  "1.%<AutoIncrement:1961>"
+  LastModifiedDate	  "Mon Mar 16 16:01:03 2015"
+  RTWModifiedTimeStamp	  348422459
+  ModelVersionFormat	  "1.%<AutoIncrement:1964>"
   ConfigurationManager	  "none"
   SampleTimeColors	  off
   SampleTimeAnnotations	  on
@@ -1065,7 +1065,7 @@ Model {
   }
   System {
     Name		    "controller"
-    Location		    [683, 27, 1366, 768]
+    Location		    [10, 89, 1356, 758]
     Open		    on
     ModelBrowserVisibility  on
     ModelBrowserWidth	    200
@@ -1122,7 +1122,7 @@ Model {
       }
       System {
 	Name			"Subsystem"
-	Location		[10, 62, 1356, 758]
+	Location		[0, 27, 1366, 768]
 	Open			on
 	ModelBrowserVisibility	on
 	ModelBrowserWidth	200
@@ -1179,7 +1179,7 @@ Model {
 	  }
 	  System {
 	    Name		    "BalancintController_One_TwoFeet"
-	    Location		    [10, 62, 1356, 758]
+	    Location		    [0, 27, 1366, 768]
 	    Open		    on
 	    ModelBrowserVisibility  on
 	    ModelBrowserWidth	    200
@@ -2219,10 +2219,11 @@ Model {
 	  Ports			  [3]
 	  Position		  [1945, 569, 2025, 701]
 	  ZOrder		  301
+	  Commented		  "on"
 	  RequestExecContextInheritance	off
 	  System {
 	    Name		    "Dump and visualize"
-	    Location		    [0, 54, 1366, 768]
+	    Location		    [10, 89, 1356, 758]
 	    Open		    on
 	    ModelBrowserVisibility  on
 	    ModelBrowserWidth	    200
@@ -6494,15 +6495,15 @@ Stateflow {
       "ORQUE MINIMIZATION BASED ON arbitrary vector F0\n% Maux = [     eye(3)     zeros(3,22)\n%           zeros(22,3) "
       "     inv(Mj(4:end,4:end))];\n%define tau_0 (the arbitrary vector)\nN0_tau        = eye(ROBOT_DOF) - PInv_JcMinvS"
       "t*JcMinvSt;\n\nmult_f_tau0   =  Mbj'/Mb*transpose(Jc(:,1:6))-transpose(Jc(:,7:end)); % multiplier of f in tau0\n"
-      "n_tau0        =  g(7:end) - diag(impedances)*(q-qjInit) - Mbj'/Mb*h(1:6) -diag(dampings)*N0_tau*qD ; % additiona"
-      "l terms in tau0 - Mj*(kPandD_Postural(1,:)'.*(q-qjInit) + kPandD_Postural(2,:)'.*qD) \n%\n\nmult_f_tau    = PInv"
-      "_JcMinvSt*(-JcMinvJct)    + N0_tau*mult_f_tau0;\nn_tau         = PInv_JcMinvSt*(JcMinv*h-JcDv) + N0_tau*n_tau0;\n"
-      "\n% f desired is given as:\n% f*   = pinvA*(HDotDes - grav)  + (I-pinvA*A) * f0\n% f*   =           f_HDot      "
-      "  +     N0_f    * f0\nf_HDot = pinvA*(HDotDes - grav);\n\n% tau is given as:\n% tau = (mult_f_tau*N0_f)* f0 + (n"
-      "_tau+mult_f_tau*f_HDot)\n% tau =        X_tau     * f0 +                   Y_tau\n\nY_tau         = n_tau + mult"
-      "_f_tau*f_HDot;\ntau           = Y_tau;\nif number_of_feet_on_ground == 2\n    N0_f          = eye(12,12)-pinvA*A"
-      ";\n    X_tau         = mult_f_tau*N0_f;\n    f0            = -pinv(X_tau)*Y_tau;\n    tau           = X_tau     "
-      "* f0 +                   Y_tau;\nend\n\nerrorCoM = xcom - desired_x_dx_ddx_CoM(:,1);\n\n\n"
+      "n_tau0        =  h(7:end) - diag(impedances)*(q-qjInit) - Mbj'/Mb*h(1:6) -diag(dampings)*N0_tau*qD ; % additiona"
+      "l terms in tau0 - Mj*(kPandD_Postural(1,:)'.*(q-qjInit) + kPandD_Postural(2,:)'.*qD) \n%\n\nmult_f_tau    = N0_t"
+      "au*mult_f_tau0  -PInv_JcMinvSt*JcMinvJct ;\nn_tau         = PInv_JcMinvSt*(JcMinv*h-JcDv) + N0_tau*n_tau0;\n\n% "
+      "f desired is given as:\n% f*   = pinvA*(HDotDes - grav)  + (I-pinvA*A) * f0\n% f*   =           f_HDot        + "
+      "    N0_f    * f0\nf_HDot = pinvA*(HDotDes - grav);\n\n% tau is given as:\n% tau = (mult_f_tau*N0_f)* f0 + (n_tau"
+      "+mult_f_tau*f_HDot)\n% tau =        X_tau     * f0 +                   Y_tau\n\nY_tau         = n_tau + mult_f_t"
+      "au*f_HDot;\ntau           = Y_tau;\nif number_of_feet_on_ground == 2\n    N0_f          = eye(12,12)-pinvA*A;\n "
+      "   X_tau         = mult_f_tau*N0_f;\n    f0            = -pinv(X_tau)*Y_tau;\n    tau           = X_tau     * f0"
+      " +                   Y_tau;\nend\n\nerrorCoM = xcom - desired_x_dx_ddx_CoM(:,1);\n\n\n"
       editorLayout	      "100 M4x1[10 5 700 500]"
     }
   }
