@@ -7,7 +7,7 @@ Model {
     NumRootInports	    0
     NumRootOutports	    0
     ParameterArgumentNames  ""
-    ComputedModelVersion    "1.143"
+    ComputedModelVersion    "1.155"
     NumModelReferences	    0
     NumTestPointedSignals   0
   }
@@ -30,7 +30,7 @@ Model {
       $ObjectID		      2
       $ClassName	      "Simulink.WindowInfo"
       IsActive		      [1]
-      Location		      [840.0, 59.0, 840.0, 991.0]
+      Location		      [839.0, 59.0, 840.0, 990.0]
       Object {
 	$PropName		"ModelBrowserInfo"
 	$ObjectID		3
@@ -54,9 +54,9 @@ Model {
 	IsActive		[1]
 	ViewObjType		"SimulinkTopLevel"
 	LoadSaveID		"0"
-	Extents			[803.0, 848.0]
-	ZoomFactor		[0.46604714968945848]
-	Offset			[-10.039879032258071, -541.77919354838718]
+	Extents			[804.0, 847.0]
+	ZoomFactor		[0.50391376013037115]
+	Offset			[-7.7825316704548015, -438.92158303125768]
       }
     }
   }
@@ -66,9 +66,9 @@ Model {
   ModifiedByFormat	  "%<Auto>"
   LastModifiedBy	  "pucci"
   ModifiedDateFormat	  "%<Auto>"
-  LastModifiedDate	  "Thu Mar 12 20:13:08 2015"
-  RTWModifiedTimeStamp	  348091968
-  ModelVersionFormat	  "1.%<AutoIncrement:143>"
+  LastModifiedDate	  "Fri Mar 13 11:27:18 2015"
+  RTWModifiedTimeStamp	  348145958
+  ModelVersionFormat	  "1.%<AutoIncrement:155>"
   ConfigurationManager	  "none"
   SampleTimeColors	  off
   SampleTimeAnnotations	  off
@@ -184,7 +184,7 @@ Model {
 	  $ObjectID		  8
 	  Version		  "1.14.3"
 	  StartTime		  "0.0"
-	  StopTime		  "Inf"
+	  StopTime		  "simulationTime"
 	  AbsTol		  "auto"
 	  FixedStep		  "Ts"
 	  InitialStep		  "auto"
@@ -973,7 +973,7 @@ Model {
   }
   System {
     Name		    "computedTorqueControl"
-    Location		    [840, 59, 1680, 1050]
+    Location		    [839, 59, 1679, 1049]
     Open		    on
     ModelBrowserVisibility  off
     ModelBrowserWidth	    200
@@ -985,14 +985,14 @@ Model {
     TiledPaperMargins	    [0.500000, 0.500000, 0.500000, 0.500000]
     TiledPageScale	    1
     ShowPageBoundaries	    off
-    ZoomFactor		    "47"
+    ZoomFactor		    "50"
     ReportName		    "simulink-default.rpt"
-    SIDHighWatermark	    "233"
+    SIDHighWatermark	    "235"
     Block {
       BlockType		      Clock
       Name		      "Clock"
       SID		      "185"
-      Position		      [35, 205, 55, 225]
+      Position		      [35, 220, 55, 240]
       ZOrder		      230
       ShowName		      off
     }
@@ -1000,7 +1000,7 @@ Model {
       BlockType		      Constant
       Name		      "Constant"
       SID		      "186"
-      Position		      [20, 285, 110, 305]
+      Position		      [20, 300, 110, 320]
       ZOrder		      231
       ShowName		      off
       Value		      "ampl_and_freq"
@@ -1009,7 +1009,7 @@ Model {
       BlockType		      Constant
       Name		      "Constant1"
       SID		      "188"
-      Position		      [545, 95, 610, 125]
+      Position		      [545, 110, 610, 140]
       ZOrder		      246
       ShowName		      off
       Value		      "zeros(16,1)"
@@ -1018,7 +1018,7 @@ Model {
       BlockType		      Constant
       Name		      "Constant2"
       SID		      "230"
-      Position		      [570, 150, 635, 180]
+      Position		      [610, 165, 675, 195]
       ZOrder		      268
       ShowName		      off
       Value		      "zeros(6,1)"
@@ -1027,19 +1027,25 @@ Model {
       BlockType		      Gain
       Name		      "Gain"
       SID		      "189"
-      Position		      [690, 240, 745, 270]
+      Position		      [690, 255, 745, 285]
       ZOrder		      259
       ShowName		      off
       Gain		      "180/pi"
       ParamDataTypeStr	      "Inherit: Inherit via internal rule"
       OutDataTypeStr	      "Inherit: Inherit via internal rule"
       SaturateOnIntegerOverflow	off
+      Port {
+	PortNumber		1
+	Name			"qTilde"
+	RTWStorageClass		"Auto"
+	DataLoggingNameMode	"SignalName"
+      }
     }
     Block {
       BlockType		      Gain
       Name		      "Gain1"
       SID		      "190"
-      Position		      [635, 375, 690, 405]
+      Position		      [635, 390, 690, 420]
       ZOrder		      236
       ShowName		      off
       Gain		      "Kp"
@@ -1052,7 +1058,7 @@ Model {
       BlockType		      Gain
       Name		      "Gain3"
       SID		      "231"
-      Position		      [635, 515, 690, 545]
+      Position		      [635, 530, 690, 560]
       ZOrder		      269
       ShowName		      off
       Gain		      "Kd"
@@ -1066,7 +1072,7 @@ Model {
       Name		      "Joint Angles"
       SID		      "193"
       Ports		      [0, 1]
-      Position		      [290, 408, 360, 452]
+      Position		      [290, 423, 360, 467]
       ZOrder		      232
       BackgroundColor	      "[0.376471, 0.188235, 0.000000]"
       ShowName		      off
@@ -1082,7 +1088,7 @@ Model {
       Name		      "Joint Torques"
       SID		      "194"
       Ports		      [0, 1]
-      Position		      [1290, 518, 1360, 562]
+      Position		      [1180, 583, 1250, 627]
       ZOrder		      248
       BackgroundColor	      "[1.000000, 0.635294, 0.266667]"
       ShowName		      off
@@ -1092,13 +1098,19 @@ Model {
       ContentPreviewEnabled   off
       robotName		      "robotName"
       localName		      "localName"
+      Port {
+	PortNumber		1
+	Name			"tauMeas"
+	RTWStorageClass		"Auto"
+	DataLoggingNameMode	"SignalName"
+      }
     }
     Block {
       BlockType		      Reference
       Name		      "Joint Velocities"
       SID		      "195"
       Ports		      [0, 1]
-      Position		      [430, 508, 500, 552]
+      Position		      [430, 523, 500, 567]
       ZOrder		      237
       BackgroundColor	      "[0.634000, 0.401533, 0.000000]"
       ShowName		      off
@@ -1114,7 +1126,7 @@ Model {
       Name		      "MATLAB Function"
       SID		      "187"
       Ports		      [2, 3]
-      Position		      [135, 174, 360, 336]
+      Position		      [135, 189, 360, 351]
       ZOrder		      229
       ShowName		      off
       LibraryVersion	      "1.32"
@@ -1290,7 +1302,7 @@ Model {
       Name		      "Mux"
       SID		      "196"
       Ports		      [2, 1]
-      Position		      [715, 101, 720, 139]
+      Position		      [715, 116, 720, 154]
       ZOrder		      245
       ShowName		      off
       Inputs		      "2"
@@ -1301,7 +1313,7 @@ Model {
       Name		      "Mux1"
       SID		      "197"
       Ports		      [2, 1]
-      Position		      [1575, 656, 1580, 694]
+      Position		      [1445, 551, 1450, 589]
       ZOrder		      253
       ShowName		      off
       Inputs		      "2"
@@ -1312,7 +1324,7 @@ Model {
       Name		      "Mux2"
       SID		      "229"
       Ports		      [2, 1]
-      Position		      [670, 156, 675, 194]
+      Position		      [700, 171, 705, 209]
       ZOrder		      266
       ShowName		      off
       Inputs		      "2"
@@ -1323,20 +1335,26 @@ Model {
       Name		      "Product"
       SID		      "227"
       Ports		      [2, 1]
-      Position		      [1215, 322, 1245, 353]
+      Position		      [1105, 337, 1135, 368]
       ZOrder		      265
       ShowName		      off
       InputSameDT	      off
       OutDataTypeStr	      "Inherit: Inherit via internal rule"
       RndMeth		      "Floor"
       SaturateOnIntegerOverflow	off
+      Port {
+	PortNumber		1
+	Name			"M(q)qDD*"
+	RTWStorageClass		"Auto"
+	DataLoggingNameMode	"SignalName"
+      }
     }
     Block {
       BlockType		      Reference
       Name		      "Real Time Synchronizer"
       SID		      "198"
       Ports		      []
-      Position		      [1340, 620, 1465, 655]
+      Position		      [800, 20, 925, 55]
       ZOrder		      244
       ForegroundColor	      "[0.916667, 0.916667, 0.916667]"
       BackgroundColor	      "gray"
@@ -1350,55 +1368,28 @@ Model {
       threadPeriod	      "Ts"
     }
     Block {
-      BlockType		      Scope
-      Name		      "Scope1"
-      SID		      "200"
-      Ports		      [2]
-      Position		      [1650, 666, 1680, 699]
-      ZOrder		      252
-      Floating		      off
-      Location		      [2, 88, 1680, 1046]
-      Open		      off
-      NumInputPorts	      "2"
-      List {
-	ListType		AxesTitles
-	axes1			"%<SignalLabel>"
-	axes2			"%<SignalLabel>"
-      }
-      List {
-	ListType		ScopeGraphics
-	FigureColor		"[0.5 0.5 0.5]"
-	AxesColor		"[0 0 0]"
-	AxesTickColor		"[1 1 1]"
-	LineColors		"[1 1 0;1 0 1;0 1 1;1 0 0;0 1 0;0 0 1]"
-	LineStyles		"-|-|-|-|-|-"
-	LineWidths		"[0.5 0.5 0.5 0.5 0.5 0.5]"
-	MarkerStyles		"none|none|none|none|none|none"
-      }
-      ShowLegends	      off
-      YMin		      "-5~-5"
-      YMax		      "5~5"
-      SaveName		      "ScopeData1"
-      LimitDataPoints	      off
-      ScrollMode	      off
-    }
-    Block {
       BlockType		      Selector
       Name		      "Selector1"
       SID		      "201"
       Ports		      [1, 1]
-      Position		      [820, 151, 860, 189]
+      Position		      [820, 166, 860, 204]
       ZOrder		      243
       ShowName		      off
       InputPortWidth	      "ROBOT_DOF+6"
       Indices		      "[7:ROBOT_DOF+6]"
+      Port {
+	PortNumber		1
+	Name			"h(q)"
+	RTWStorageClass		"Auto"
+	DataLoggingNameMode	"SignalName"
+      }
     }
     Block {
       BlockType		      Selector
       Name		      "Selector2"
       SID		      "224"
       Ports		      [1, 1]
-      Position		      [1030, 191, 1070, 229]
+      Position		      [1030, 206, 1070, 244]
       ZOrder		      262
       ShowName		      off
       NumberOfDimensions      "2"
@@ -1412,7 +1403,7 @@ Model {
       Name		      "Set Torques1"
       SID		      "202"
       Ports		      [1]
-      Position		      [1465, 393, 1535, 437]
+      Position		      [1290, 318, 1360, 362]
       ZOrder		      240
       BackgroundColor	      "[0.941176, 0.415686, 0.192157]"
       ShowName		      off
@@ -1429,7 +1420,7 @@ Model {
       Name		      "Sum"
       SID		      "203"
       Ports		      [2, 1]
-      Position		      [545, 380, 565, 400]
+      Position		      [545, 395, 565, 415]
       ZOrder		      235
       ShowName		      off
       IconShape		      "round"
@@ -1443,7 +1434,7 @@ Model {
       Name		      "Sum1"
       SID		      "204"
       Ports		      [3, 1]
-      Position		      [805, 354, 840, 451]
+      Position		      [805, 369, 840, 466]
       ZOrder		      238
       ShowName		      off
       Inputs		      "|+++"
@@ -1456,7 +1447,7 @@ Model {
       Name		      "Sum2"
       SID		      "205"
       Ports		      [2, 1]
-      Position		      [1370, 490, 1390, 510]
+      Position		      [1240, 510, 1280, 550]
       ZOrder		      249
       ShowName		      off
       IconShape		      "round"
@@ -1476,7 +1467,7 @@ Model {
       Name		      "Sum3"
       SID		      "221"
       Ports		      [2, 1]
-      Position		      [575, 520, 595, 540]
+      Position		      [575, 535, 595, 555]
       ZOrder		      257
       ShowName		      off
       IconShape		      "round"
@@ -1490,19 +1481,25 @@ Model {
       Name		      "Sum4"
       SID		      "222"
       Ports		      [2, 1]
-      Position		      [1310, 293, 1345, 357]
+      Position		      [1180, 308, 1215, 372]
       ZOrder		      260
       ShowName		      off
       InputSameDT	      off
       OutDataTypeStr	      "Inherit: Inherit via internal rule"
       SaturateOnIntegerOverflow	off
+      Port {
+	PortNumber		1
+	Name			"tauDes"
+	RTWStorageClass		"Auto"
+	DataLoggingNameMode	"SignalName"
+      }
     }
     Block {
       BlockType		      Reference
       Name		      "computeh"
       SID		      "214"
       Ports		      [2, 1]
-      Position		      [750, 151, 800, 184]
+      Position		      [750, 166, 800, 199]
       ZOrder		      241
       ForegroundColor	      "red"
       BackgroundColor	      "yellow"
@@ -1520,7 +1517,7 @@ Model {
       Name		      "massMatrix"
       SID		      "223"
       Ports		      [1, 1]
-      Position		      [940, 188, 1010, 232]
+      Position		      [940, 203, 1010, 247]
       ZOrder		      261
       BackgroundColor	      "[0.968627, 0.058824, 0.376471]"
       ShowName		      off
@@ -1534,73 +1531,11 @@ Model {
     }
     Block {
       BlockType		      Scope
-      Name		      "q, qD"
-      SID		      "232"
-      Ports		      [2]
-      Position		      [645, 641, 675, 674]
-      ZOrder		      270
-      Floating		      off
-      Location		      [2, 88, 1680, 1046]
-      Open		      off
-      NumInputPorts	      "2"
-      List {
-	ListType		AxesTitles
-	axes1			"%<SignalLabel>"
-	axes2			"%<SignalLabel>"
-      }
-      List {
-	ListType		ScopeGraphics
-	FigureColor		"[0.5 0.5 0.5]"
-	AxesColor		"[0 0 0]"
-	AxesTickColor		"[1 1 1]"
-	LineColors		"[1 1 0;1 0 1;0 1 1;1 0 0;0 1 0;0 0 1]"
-	LineStyles		"-|-|-|-|-|-"
-	LineWidths		"[0.5 0.5 0.5 0.5 0.5 0.5]"
-	MarkerStyles		"none|none|none|none|none|none"
-      }
-      ShowLegends	      off
-      YMin		      "-5~-5"
-      YMax		      "5~5"
-      LimitDataPoints	      off
-      ScrollMode	      off
-    }
-    Block {
-      BlockType		      Scope
-      Name		      "qErr"
-      SID		      "220"
-      Ports		      [1]
-      Position		      [775, 239, 805, 271]
-      ZOrder		      256
-      Floating		      off
-      Location		      [1, 88, 1681, 1049]
-      Open		      off
-      NumInputPorts	      "1"
-      List {
-	ListType		AxesTitles
-	axes1			"%<SignalLabel>"
-      }
-      List {
-	ListType		ScopeGraphics
-	FigureColor		"[0.5 0.5 0.5]"
-	AxesColor		"[0 0 0]"
-	AxesTickColor		"[1 1 1]"
-	LineColors		"[1 1 0;1 0 1;0 1 1;1 0 0;0 1 0;0 0 1]"
-	LineStyles		"-|-|-|-|-|-"
-	LineWidths		"[0.5 0.5 0.5 0.5 0.5 0.5]"
-	MarkerStyles		"none|none|none|none|none|none"
-      }
-      ShowLegends	      off
-      SaveName		      "ScopeData2"
-      LimitDataPoints	      off
-      ScrollMode	      off
-    }
-    Block {
-      BlockType		      Scope
-      Name		      "ref"
-      SID		      "233"
+      Name		      "scope"
+      SID		      "200"
       Ports		      [3]
-      Position		      [450, 20, 500, 80]
-      ZOrder		      271
+      Position		      [1475, 510, 1510, 630]
+      ZOrder		      252
       Floating		      off
       Location		      [2, 88, 1680, 1043]
       Open		      off
@@ -1621,18 +1556,51 @@ Model {
 	LineWidths		"[0.5 0.5 0.5 0.5 0.5 0.5]"
 	MarkerStyles		"none|none|none|none|none|none"
       }
-      ShowLegends	      off
-      YMin		      "-5~-5~-5"
-      YMax		      "5~5~5"
-      SaveName		      "ScopeData3"
+      ShowLegends	      on
+      LegendLocations	      "0.90234     0.92731    0.076035    0.021081\n0.91422     0.59771    0.064217    0.037582\n"
+      "0.92355     0.29997    0.054926    0.021081"
+      TimeRange		      "20"
+      YMin		      "-8~-6~-8"
+      YMax		      "8~8~8"
+      SaveName		      "ScopeData1"
+      LimitDataPoints	      off
+      ScrollMode	      off
+    }
+    Block {
+      BlockType		      Scope
+      Name		      "scope1"
+      SID		      "235"
+      Ports		      [2]
+      Position		      [1250, 204, 1320, 286]
+      ZOrder		      271
+      Floating		      off
+      Location		      [2, 91, 1680, 1043]
+      Open		      off
+      NumInputPorts	      "2"
+      List {
+	ListType		AxesTitles
+	axes1			"%<SignalLabel>"
+	axes2			"%<SignalLabel>"
+      }
+      List {
+	ListType		ScopeGraphics
+	FigureColor		"[0.5 0.5 0.5]"
+	AxesColor		"[0 0 0]"
+	AxesTickColor		"[1 1 1]"
+	LineColors		"[1 1 0;1 0 1;0 1 1;1 0 0;0 1 0;0 0 1]"
+	LineStyles		"-|-|-|-|-|-"
+	LineWidths		"[0.5 0.5 0.5 0.5 0.5 0.5]"
+	MarkerStyles		"none|none|none|none|none|none"
+      }
+      ShowLegends	      on
+      LegendLocations	      "0.93136     0.92709     0.04716    0.021148\n0.90875     0.45693    0.069657    0.021148"
+      TimeRange		      "20"
+      YMin		      "-8~-6"
+      YMax		      "8~8"
       LimitDataPoints	      off
       ScrollMode	      off
     }
     Line {
-      FontName		      "Helvetica"
-      FontSize		      9
-      FontWeight	      "normal"
-      FontAngle		      "normal"
       ZOrder		      373
       SrcBlock		      "Clock"
       SrcPort		      1
@@ -1640,10 +1608,6 @@ Model {
       DstPort		      1
     }
     Line {
-      FontName		      "Helvetica"
-      FontSize		      9
-      FontWeight	      "normal"
-      FontAngle		      "normal"
       ZOrder		      375
       SrcBlock		      "Constant"
       SrcPort		      1
@@ -1657,19 +1621,9 @@ Model {
       Points		      [17, 0]
       Branch {
 	ZOrder			420
-	Points			[37, 0]
-	Branch {
-	  ZOrder		  478
-	  Points		  [0, 220]
-	  DstBlock		  "q, qD"
-	  DstPort		  1
-	}
-	Branch {
-	  ZOrder		  477
-	  Points		  [136, 0]
-	  DstBlock		  "Sum"
-	  DstPort		  2
-	}
+	Points			[173, 0]
+	DstBlock		"Sum"
+	DstPort			2
       }
       Branch {
 	ZOrder			396
@@ -1682,19 +1636,9 @@ Model {
       ZOrder		      419
       SrcBlock		      "MATLAB Function"
       SrcPort		      1
-      Points		      [39, 0]
-      Branch {
-	ZOrder			491
-	Points			[0, -170]
-	DstBlock		"ref"
-	DstPort			1
-      }
-      Branch {
-	ZOrder			490
-	Points			[101, 0; 0, 190]
-	DstBlock		"Sum"
-	DstPort			1
-      }
+      Points		      [140, 0; 0, 190]
+      DstBlock		      "Sum"
+      DstPort		      1
     }
     Line {
       ZOrder		      383
@@ -1707,6 +1651,7 @@ Model {
       ZOrder		      471
       SrcBlock		      "Mux2"
       SrcPort		      1
+      Points		      [0, 0]
       DstBlock		      "computeh"
       DstPort		      2
     }
@@ -1742,39 +1687,38 @@ Model {
       DstPort		      1
     }
     Line {
+      Name		      "tauMeas"
       ZOrder		      402
       SrcBlock		      "Joint Torques"
       SrcPort		      1
-      Points		      [9, 0]
+      Points		      [5, 0; 0, -25]
       Branch {
-	ZOrder			401
-	Points			[0, 52; 145, 0; 0, 93]
+	ZOrder			500
+	Labels			[1, 1]
 	DstBlock		"Mux1"
 	DstPort			2
       }
       Branch {
-	ZOrder			400
-	Points			[6, 0]
+	ZOrder			497
 	DstBlock		"Sum2"
 	DstPort			2
       }
     }
     Line {
       Name		      "torqueError"
-      ZOrder		      405
+      ZOrder		      494
       Labels		      [0, 0]
       SrcBlock		      "Sum2"
       SrcPort		      1
-      Points		      [23, 0; 0, 20; 6, 0; 0, 58; 189, 0; 0, 112]
-      DstBlock		      "Scope1"
-      DstPort		      2
+      DstBlock		      "scope"
+      DstPort		      1
     }
     Line {
-      ZOrder		      411
+      ZOrder		      495
       SrcBlock		      "Mux1"
       SrcPort		      1
-      DstBlock		      "Scope1"
-      DstPort		      1
+      DstBlock		      "scope"
+      DstPort		      2
     }
     Line {
       ZOrder		      438
@@ -1804,19 +1748,9 @@ Model {
       ZOrder		      429
       SrcBlock		      "MATLAB Function"
       SrcPort		      2
-      Points		      [51, 0]
-      Branch {
-	ZOrder			489
-	Points			[0, -205]
-	DstBlock		"ref"
-	DstPort			2
-      }
-      Branch {
-	ZOrder			488
-	Points			[28, 0; 0, 200; 141, 0]
-	DstBlock		"Sum3"
-	DstPort			1
-      }
+      Points		      [79, 0; 0, 200; 141, 0]
+      DstBlock		      "Sum3"
+      DstPort		      1
     }
     Line {
       ZOrder		      475
@@ -1827,37 +1761,53 @@ Model {
       DstPort		      2
     }
     Line {
-      ZOrder		      440
+      Name		      "qTilde"
+      ZOrder		      527
+      Labels		      [7, 1]
       SrcBlock		      "Gain"
       SrcPort		      1
-      DstBlock		      "qErr"
-      DstPort		      1
+      Points		      [14, 0; 0, 281; -14, 0; 0, 232; 668, 0; 0, -173]
+      DstBlock		      "scope"
+      DstPort		      3
     }
     Line {
+      Name		      "h(q)"
       ZOrder		      445
       SrcBlock		      "Selector1"
       SrcPort		      1
-      Points		      [23, 0; 0, 140]
-      DstBlock		      "Sum4"
-      DstPort		      1
+      Points		      [23, 0; 0, 140; 255, 0]
+      Branch {
+	ZOrder			539
+	Labels			[2, 1]
+	Points			[0, -100]
+	DstBlock		"scope1"
+	DstPort			1
+      }
+      Branch {
+	ZOrder			538
+	DstBlock		"Sum4"
+	DstPort			1
+      }
     }
     Line {
+      Name		      "tauDes"
       ZOrder		      447
       SrcBlock		      "Sum4"
       SrcPort		      1
-      Points		      [20, 0; 0, 90]
+      Points		      [40, 0]
       Branch {
-	ZOrder			449
-	Points			[0, 48; 10, 0]
+	ZOrder			492
+	Points			[0, 138]
 	Branch {
-	  ZOrder		  452
-	  DstBlock		  "Sum2"
+	  ZOrder		  501
+	  Labels		  [3, 1]
+	  Points		  [103, 0; 0, 82]
+	  DstBlock		  "Mux1"
 	  DstPort		  1
 	}
 	Branch {
-	  ZOrder		  451
-	  Points		  [167, 0; 0, 202]
-	  DstBlock		  "Mux1"
+	  ZOrder		  452
+	  DstBlock		  "Sum2"
 	  DstPort		  1
 	}
       }
@@ -1868,26 +1818,12 @@ Model {
       }
     }
     Line {
-      FontName		      "Helvetica"
-      FontSize		      9
-      FontWeight	      "normal"
-      FontAngle		      "normal"
       ZOrder		      453
       SrcBlock		      "MATLAB Function"
       SrcPort		      3
-      Points		      [69, 0]
-      Branch {
-	ZOrder			487
-	Points			[0, -240]
-	DstBlock		"ref"
-	DstPort			3
-      }
-      Branch {
-	ZOrder			486
-	Points			[344, 0; 0, 130]
-	DstBlock		"Sum1"
-	DstPort			3
-      }
+      Points		      [413, 0; 0, 130]
+      DstBlock		      "Sum1"
+      DstPort		      3
     }
     Line {
       ZOrder		      461
@@ -1897,17 +1833,29 @@ Model {
       DstPort		      1
     }
     Line {
+      Name		      "M(q)qDD*"
       ZOrder		      465
       SrcBlock		      "Product"
       SrcPort		      1
-      DstBlock		      "Sum4"
-      DstPort		      2
+      Points		      [18, 0]
+      Branch {
+	ZOrder			537
+	Labels			[2, 1]
+	Points			[0, -90]
+	DstBlock		"scope1"
+	DstPort			2
+      }
+      Branch {
+	ZOrder			536
+	DstBlock		"Sum4"
+	DstPort			2
+      }
     }
     Line {
       ZOrder		      466
       SrcBlock		      "Selector2"
       SrcPort		      1
-      Points		      [88, 0; 0, 120]
+      Points		      [16, 0; 0, 120]
       DstBlock		      "Product"
       DstPort		      1
     }
@@ -1920,39 +1868,33 @@ Model {
       DstPort		      2
     }
     Line {
-      ZOrder		      433
-      SrcBlock		      "Joint Velocities"
-      SrcPort		      1
-      Points		      [19, 0]
-      Branch {
-	ZOrder			482
-	DstBlock		"Sum3"
-	DstPort			2
-      }
-      Branch {
-	ZOrder			480
-	Points			[0, 135]
-	DstBlock		"q, qD"
-	DstPort			2
-      }
-      Branch {
-	ZOrder			481
-	Points			[0, -345]
-	DstBlock		"Mux2"
-	DstPort			2
-      }
-    }
-    Line {
       ZOrder		      474
       SrcBlock		      "Constant2"
       SrcPort		      1
       DstBlock		      "Mux2"
       DstPort		      1
     }
+    Line {
+      ZOrder		      433
+      SrcBlock		      "Joint Velocities"
+      SrcPort		      1
+      Points		      [31, 0]
+      Branch {
+	ZOrder			532
+	Points			[0, -345]
+	DstBlock		"Mux2"
+	DstPort			2
+      }
+      Branch {
+	ZOrder			529
+	DstBlock		"Sum3"
+	DstPort			2
+      }
+    }
     Annotation {
       SID		      "217"
       Name		      "Kd"
-      Position		      [707, 580, 721, 595]
+      Position		      [707, 595, 721, 610]
       InternalMargins	      [0, 0, 0, 0]
       FixedHeight	      off
       FixedWidth	      off
@@ -1963,7 +1905,7 @@ Model {
     Annotation {
       SID		      "218"
       Name		      "Kp"
-      Position		      [717, 431, 731, 446]
+      Position		      [717, 446, 731, 461]
       InternalMargins	      [0, 0, 0, 0]
       FixedHeight	      off
       FixedWidth	      off
@@ -1997,10 +1939,7 @@ Stateflow {
     firstTransition	    10
     firstJunction	    9
     viewObj		    2
-    visible		    1
     machine		    1
-    subviewS {
-    }
     ssIdHighWaterMark	    8
     decomposition	    CLUSTER_CHART
     type		    EML_CHART

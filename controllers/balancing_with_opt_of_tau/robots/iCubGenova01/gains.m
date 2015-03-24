@@ -37,9 +37,9 @@ if (number_of_feet_on_ground == 2)
 
 
     % 
-    impTorso            = [   60    20   10
+    impTorso            = [   20    20   20
                                0     0    0]; 
-    impArms             = [8    8    8  12   
+    impArms             = [12   12   12  14   
                             0    0    0   0   ];
                         
     impLeftLeg          = [ 35   10    0      350    350  10
@@ -47,7 +47,16 @@ if (number_of_feet_on_ground == 2)
 
     impRightLeg         = [35   10    0      350    350  10
                              0    0   0        0      0   0]; 
-                                                  
+                         
+                         
+    intTorso            = [1    1    1]; 
+    intArms             = [1    1    1   0  ];
+                        
+    intLeftLeg          = [0   0    0    0    0  0]; 
+
+    intRightLeg         = [0   0    0    0    0  0]; 
+                            
+                         
     
     if (DEMO_LEFT_AND_RIGHT == 1)
         directionOfOscillation = [0;1;0];
@@ -135,7 +144,8 @@ if (number_of_feet_on_ground == 1)
     end
 %%    
 end
-
+satIntegral         = 15;
+integralGains       = [intTorso,intArms,intArms,intLeftLeg,intRightLeg];
 impedances          = [impTorso(1,:),impArms(1,:),impArms(1,:),impLeftLeg(1,:),impRightLeg(1,:)];
 dampings            = zeros(1,ROBOT_DOF);
 increasingRatesImp  = [impTorso(2,:),impArms(2,:),impArms(2,:),impLeftLeg(2,:),impRightLeg(2,:)];

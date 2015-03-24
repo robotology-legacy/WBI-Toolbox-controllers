@@ -9,7 +9,7 @@ ROBOT_DOF = 23;
 % Controller period
 Ts             = 0.01; 
  
-DEMO_MOVING_LEG_AND_ARMS = 0;
+DEMO_MOVING_LEG_AND_ARMS = 1;
 % Controller gains for convergence of the desired centroidal momentum. 
 % The first three elements are the Proportional, Intagral, and the Derivative
 % gains taking place in xComDDStart, i.e. 
