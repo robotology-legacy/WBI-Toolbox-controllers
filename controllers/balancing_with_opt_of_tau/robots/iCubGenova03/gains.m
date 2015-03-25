@@ -18,7 +18,7 @@ ROBOT_DOF_FOR_SIMULINK = eye(ROBOT_DOF);
 % hwDot = -Gains(4)*hw  
 
 if (number_of_feet_on_ground == 2)
-    gainsPCOM                 = diag([ 30   50  50]);
+    gainsPCOM                 = diag([ 50   50  50]);
     gainsICOM                 = diag([  0    0   0]);
     gainsDCOM                 = diag([  0    0   0]);
 
@@ -33,16 +33,23 @@ if (number_of_feet_on_ground == 2)
 
 
     % 
-    impTorso            = [   30    30   15
+    impTorso            = [   40    40   40
                                0     0    0]; 
     impArms             = [13   13   13  15   
                             0    0    0   0   ];
                         
-    impLeftLeg          = [ 35   10   40      350    70  2
+    impLeftLeg          = [ 35   10   40      950    70  2
                              0    0   0        0      0   0]; 
 
-    impRightLeg         = [ 35   10   40      350    70  2
+    impRightLeg         = [ 35   10   40      950    70  2
                              0    0   0        0      0   0]; 
+                         
+    intTorso            = [1    1    1]; 
+    intArms             = [1    1    1   0  ];
+                        
+    intLeftLeg          = [0   0    0    0    0  0]; 
+
+    intRightLeg         = [0   0    0    0    0  0]; 
     
     if (DEMO_LEFT_AND_RIGHT == 1)
         directionOfOscillation = [0;1;0];
@@ -108,8 +115,9 @@ if (number_of_feet_on_ground == 1)
     end
 %%    
 end
-
+satIntegral         = 15;
 impedances          = [impTorso(1,:),impArms(1,:),impArms(1,:),impLeftLeg(1,:),impRightLeg(1,:)];
+integralGains       = [intTorso,intArms,intArms,intLeftLeg,intRightLeg]*0;
 dampings            = zeros(1,ROBOT_DOF);
 increasingRatesImp  = [impTorso(2,:),impArms(2,:),impArms(2,:),impLeftLeg(2,:),impRightLeg(2,:)];
 impedencesSat       = [80   100    400];
