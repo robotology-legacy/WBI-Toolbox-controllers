@@ -1,6 +1,6 @@
 clear all
 
-robotName = 'icubGazeboSim';
+robotName = 'icub';
 localName = 'balancing';
 
 
