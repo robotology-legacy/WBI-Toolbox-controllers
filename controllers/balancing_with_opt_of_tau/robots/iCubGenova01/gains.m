@@ -6,6 +6,7 @@ directionOfOscillation            = [0;1;0];
 referenceParams                   = [0.0  0.0];  %referenceParams(1) = amplitude of ascillations in meters referenceParams(2) = frequency of ascillations in hertz
 
 ROBOT_DOF_FOR_SIMULINK = eye(ROBOT_DOF);
+qTildeMax              = 10*pi/180;
 % Controller gains for convergence of the desired centroidal momentum. 
 % The first three elements are the Proportional, Intagral, and the Derivative
 % gains taking place in xComDDStart, i.e. 
@@ -22,30 +23,30 @@ ROBOT_DOF_FOR_SIMULINK = eye(ROBOT_DOF);
 %       PARAMETERS FOR TWO FEET ON GROUND 
 %
 if (number_of_feet_on_ground == 2)
-    gainsPCOM                 = diag([100  100 100]);
+    gainsPCOM                 = diag([100  100 100])/2;
     gainsICOM                 = diag([  0    0   0]);
-    gainsDCOM                 = diag([  0    0   0]);
+    gainsDCOM                 = 2*sqrt(gainsPCOM);
 
     minCoMx_y                 = [-0.1   -0.25 ];  
     maxCoMx_y                 = [ 0.1    0.05 ];
     satGainsPCOM              = 300;
     increasingRatesGainsPCOM  = [ 0     0    ];
 
-    gainMomentum           = 1 ;
+    gainMomentum              = 1 ;
 
     % Impadances acting in the null space of the desired contact forces 
 
 
     % 
-    impTorso            = [   20    20   20
+    impTorso            = [   30    30   30
                                0     0    0]; 
-    impArms             = [12   12   12  14   
+    impArms             = [ 8    8   20  10   
                             0    0    0   0   ];
                         
-    impLeftLeg          = [ 35   10    0      350    350  10
+    impLeftLeg          = [ 35   10   60      700    350  100
                              0    0   0        0      0   0]; 
 
-    impRightLeg         = [35   10    0      350    350  10
+    impRightLeg         = [35   10    60      700    350  100
                              0    0   0        0      0   0]; 
                          
                          
@@ -145,7 +146,7 @@ if (number_of_feet_on_ground == 1)
 %%    
 end
 satIntegral         = 15;
-integralGains       = [intTorso,intArms,intArms,intLeftLeg,intRightLeg];
+integralGains       = [intTorso,intArms,intArms,intLeftLeg,intRightLeg]*0;
 impedances          = [impTorso(1,:),impArms(1,:),impArms(1,:),impLeftLeg(1,:),impRightLeg(1,:)];
 dampings            = zeros(1,ROBOT_DOF);
 increasingRatesImp  = [impTorso(2,:),impArms(2,:),impArms(2,:),impLeftLeg(2,:),impRightLeg(2,:)];
