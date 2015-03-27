@@ -38,7 +38,7 @@ if (number_of_feet_on_ground == 2)
     impArms             = [13   13   13  15   
                             0    0    0   0   ];
                         
-    impLeftLeg          = [ 35   10   40      950    70  2
+    impLeftLeg          = [ 35   10   40     1200    70  2
                              0    0   0        0      0   0]; 
 
     impRightLeg         = [ 35   10   40      950    70  2
