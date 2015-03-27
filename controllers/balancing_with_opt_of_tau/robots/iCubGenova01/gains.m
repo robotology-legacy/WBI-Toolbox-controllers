@@ -6,7 +6,7 @@ directionOfOscillation            = [0;1;0];
 referenceParams                   = [0.0  0.0];  %referenceParams(1) = amplitude of ascillations in meters referenceParams(2) = frequency of ascillations in hertz
 
 ROBOT_DOF_FOR_SIMULINK = eye(ROBOT_DOF);
-qTildeMax              = 10*pi/180;
+qTildeMax              = 20*pi/180;
 % Controller gains for convergence of the desired centroidal momentum. 
 % The first three elements are the Proportional, Intagral, and the Derivative
 % gains taking place in xComDDStart, i.e. 
@@ -25,7 +25,7 @@ qTildeMax              = 10*pi/180;
 if (number_of_feet_on_ground == 2)
     gainsPCOM                 = diag([100  100 100])/2;
     gainsICOM                 = diag([  0    0   0]);
-    gainsDCOM                 = 2*sqrt(gainsPCOM);
+    gainsDCOM                 = 2*sqrt(gainsPCOM)*0;
 
     minCoMx_y                 = [-0.1   -0.25 ];  
     maxCoMx_y                 = [ 0.1    0.05 ];
@@ -40,18 +40,18 @@ if (number_of_feet_on_ground == 2)
     % 
     impTorso            = [   30    30   30
                                0     0    0]; 
-    impArms             = [ 8    8   20  10   
-                            0    0    0   0   ];
+    impArms             = [ 8    8    20   10   
+                            0    0     0    1   ];
                         
-    impLeftLeg          = [ 35   10   60      700    350  100
+    impLeftLeg          = [ 35   10   60     700      0  10
                              0    0   0        0      0   0]; 
 
-    impRightLeg         = [35   10    60      700    350  100
+    impRightLeg         = [35   10    60     700      0  10
                              0    0   0        0      0   0]; 
                          
                          
-    intTorso            = [1    1    1]; 
-    intArms             = [1    1    1   0  ];
+    intTorso            = [0   0    0]; 
+    intArms             = [0   0    0    0  ];
                         
     intLeftLeg          = [0   0    0    0    0  0]; 
 
@@ -61,7 +61,7 @@ if (number_of_feet_on_ground == 2)
     
     if (DEMO_LEFT_AND_RIGHT == 1)
         directionOfOscillation = [0;1;0];
-        referenceParams        = [0.04 0.5];  %referenceParams(1) = amplitude of ascillations in meters
+        referenceParams        = [0.03 0.1];  %referenceParams(1) = amplitude of ascillations in meters
     end
 
     
@@ -146,11 +146,11 @@ if (number_of_feet_on_ground == 1)
 %%    
 end
 satIntegral         = 15;
-integralGains       = [intTorso,intArms,intArms,intLeftLeg,intRightLeg]*0;
+integralGains       = [intTorso,intArms,intArms,intLeftLeg,intRightLeg];
 impedances          = [impTorso(1,:),impArms(1,:),impArms(1,:),impLeftLeg(1,:),impRightLeg(1,:)];
 dampings            = zeros(1,ROBOT_DOF);
 increasingRatesImp  = [impTorso(2,:),impArms(2,:),impArms(2,:),impLeftLeg(2,:),impRightLeg(2,:)];
-impedencesSat       = [80   100    400];
+impedencesSat       = [45   25    1000];
 
 if (size(impedances,2) ~= ROBOT_DOF)
     error('Dimension mismatch between ROBOT_DOF and dimension of the variable impedences. Check these variables in the file gains.m');

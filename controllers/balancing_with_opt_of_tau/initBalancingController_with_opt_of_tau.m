@@ -1,4 +1,4 @@
-clear all
+clear all;
 
 robotName = 'icub';
 localName = 'balancing';
