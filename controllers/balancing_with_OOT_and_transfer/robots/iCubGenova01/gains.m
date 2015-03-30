@@ -1,14 +1,15 @@
 ROBOT_DOF = 23;
 
-transferCoMyDes                   = -0.01;
-transferCoMxDes                   =  0.03;
-transferTime                      = 5;
+CoMDes                            = [   0  ,-0.01,0;
+                                      0.055,-0.05,0.523700057608765];
+transferTime                      = 1;
 tBalancing                        = 1;
-forceThreshold                    = 100;
-CoMErrorThreshold                 = 0.1;
+forceThreshold                    = 40;
+CoMErrorThreshold                 = 0.01;
 smoothingTimeJacobians            = 0.5;
 trajectoryTimePostural            = transferTime;
 NUMBER_OF_STATES                  = 4;
+
 
 qDesRightFoot   = [ -0.0549299228319975,-0.0103377194156588,0.332187941148811,...
                     -0.625058025521925,0.506720866348244,0.146634215133112,0.882695474335550,...
@@ -61,12 +62,12 @@ dampRightLeg         = [0.0    0.0   0   0   0   0];
 
 
 % 
-impTorso            = [   60    20   10
+impTorso            = [   60    50   50
                            0     0    0]; 
-impArms             = [8    8    8  12   
-                        0    0    0   0   ];
+impArms             = [15   15    20   12   
+                        0    0     0    0   ];
 
-impLeftLeg          = [160  160    10      350    350  100
+impLeftLeg          = [260  260  10      350    350  100
                          0    0   0        0      0   0]; 
 
 impRightLeg         = [160  160    10      350    350  100
