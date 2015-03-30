@@ -6,6 +6,7 @@ directionOfOscillation            = [0;1;0];
 referenceParams                   = [0.0  0.0];  %referenceParams(1) = amplitude of ascillations in meters referenceParams(2) = frequency of ascillations in hertz
 
 ROBOT_DOF_FOR_SIMULINK = eye(ROBOT_DOF);
+qTildeMax              = 10*pi/180;
 % Controller gains for convergence of the desired centroidal momentum. 
 % The first three elements are the Proportional, Intagral, and the Derivative
 % gains taking place in xComDDStart, i.e. 
@@ -120,7 +121,7 @@ impedances          = [impTorso(1,:),impArms(1,:),impArms(1,:),impLeftLeg(1,:),i
 integralGains       = [intTorso,intArms,intArms,intLeftLeg,intRightLeg]*0;
 dampings            = zeros(1,ROBOT_DOF);
 increasingRatesImp  = [impTorso(2,:),impArms(2,:),impArms(2,:),impLeftLeg(2,:),impRightLeg(2,:)];
-impedencesSat       = [80   100    400];
+impedencesSat       = [80   100    1400];
 
 if (size(impedances,2) ~= ROBOT_DOF)
     error('Dimension mismatch between ROBOT_DOF and dimension of the variable impedences. Check these variables in the file gains.m');
