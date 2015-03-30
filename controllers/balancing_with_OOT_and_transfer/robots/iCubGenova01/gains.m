@@ -1,13 +1,13 @@
 ROBOT_DOF = 23;
 
-transferCoMyDes                   = -0.005;
+transferCoMyDes                   = -0.01;
 transferCoMxDes                   =  0.03;
-transferTime                      = 5.5;
+transferTime                      = 10;
 tBalancing                        = 1;
 forceThreshold                    = 100;
 CoMErrorThreshold                 = 0.1;
 smoothingTimeJacobians            = 0.5;
-trajectoryTimePOstural            = transferTime;
+trajectoryTimePostural            = transferTime;
 NUMBER_OF_STATES                  = 4;
 
 qDesRightFoot   = [-0.00889926124093822,0.00500583444802759,-0.00230153307955296,...
@@ -38,7 +38,7 @@ ROBOT_DOF_FOR_SIMULINK = eye(ROBOT_DOF);
 
 gainsPCOM                 = diag([100  100 100])/3;
 gainsICOM                 = diag([  0    0   0]);
-gainsDCOM                 = 2*sqrt(gainsPCOM);
+gainsDCOM                 = 2*sqrt(gainsPCOM)*0;
 
 minCoMx_y                 = [-0.1   -0.25 ];  
 maxCoMx_y                 = [ 0.1    0.05 ];
