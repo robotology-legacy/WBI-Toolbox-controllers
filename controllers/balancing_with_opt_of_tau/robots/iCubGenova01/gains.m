@@ -38,9 +38,9 @@ if (number_of_feet_on_ground == 2)
 
 
     % 
-    impTorso            = [   30    30   30
+    impTorso            = [   40    40   40
                                0     0    0]; 
-    impArms             = [ 8    8    20   10   
+    impArms             = [15   15    20   12   
                             0    0     0    1   ];
                         
     impLeftLeg          = [ 35   10   60     700      0  10
@@ -61,7 +61,7 @@ if (number_of_feet_on_ground == 2)
     
     if (DEMO_LEFT_AND_RIGHT == 1)
         directionOfOscillation = [0;1;0];
-        referenceParams        = [0.03 0.1];  %referenceParams(1) = amplitude of ascillations in meters
+        referenceParams        = [0.02 0.5];  %referenceParams(1) = amplitude of ascillations in meters
     end
 
     

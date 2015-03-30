@@ -4,7 +4,7 @@ robotName = 'icub';
 localName = 'balancing';
 
 number_of_feet_on_ground = 2;
-DEMO_LEFT_AND_RIGHT      = 0;
+DEMO_LEFT_AND_RIGHT      = 1;
 noOscillationTime        = 0;
 
 
