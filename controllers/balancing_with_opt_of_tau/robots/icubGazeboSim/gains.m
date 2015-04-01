@@ -69,21 +69,21 @@ if (number_of_feet_on_ground == 2)
                         
     if (DEMO_LEFT_AND_RIGHT == 1)
         directionOfOscillation = [0;1;0];
-        referenceParams        = [0.02 0.025];  %referenceParams(1) = amplitude of ascillations in meters
+        referenceParams        = [0.025 0.05];  %referenceParams(1) = amplitude of ascillations in meters
     end
 
     
     
     if (DEMO_MOVING_LEG_AND_ARMS == 1)
-        amplTorso            = [ 10  10   10 ]; 
-        amplArms             = [  0   0    0   0];
+        amplTorso            = [  5   5   10 ]; 
+        amplArms             = [ 10  10   10  10];
         amplLeftLeg          = [  0   0    0   0   0   0]; 
-        amplRightLeg         = [ 25  25   25  15   0   0];
+        amplRightLeg         = [  0   0    0   0   0   0];
 
-        freqTorso            = [ 0.0  0.0  0.0]; 
-        freqArms             = [ 0.0  0.0  0.0  0.0];
+        freqTorso            = [ 0.1  0.1  0.1]; 
+        freqArms             = [ 0.1  0.1  0.1  0.1];
         freqLeftLeg          = [ 0.0  0.0  0.0  0.0  0.0  0.0]; 
-        freqRightLeg         = [ 0.2  0.2  0.0  0.0  0.0  0.0]; %[ 0.0  0.3  0.0  0.0  0.0  0.0];
+        freqRightLeg         = [ 0.0  0.0  0.0  0.0  0.0  0.0]; %[ 0.0  0.3  0.0  0.0  0.0  0.0];
 
         amplitudesOscillationsOnOneFoot   = [amplTorso,amplArms,amplArms,amplLeftLeg,amplRightLeg];
         frequenciesOscillationsOnOneFoot  = [freqTorso,freqArms,freqArms,freqLeftLeg,freqRightLeg];
