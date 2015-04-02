@@ -48,7 +48,12 @@ if (number_of_feet_on_ground == 2)
     impRightLeg         = [35   10    0      350    350  10
                              0    0   0        0      0   0]; 
                                                   
-    
+    intTorso            = [0    0    0]; 
+                        
+    intLeftLeg          = [0   0    0    0    0  0]; 
+
+    intRightLeg         = [0   0    0    0    0  0]; 
+                         
     if (DEMO_LEFT_AND_RIGHT == 1)
         directionOfOscillation = [0;1;0];
         referenceParams        = [0.04 0.5];  %referenceParams(1) = amplitude of ascillations in meters
@@ -89,7 +94,13 @@ if (number_of_feet_on_ground == 1)
     increasingRatesGainsPCOM  = [ 0     0    ];
 
     gainMomentum              = 1 ;
+    
+    intTorso            = [0    0    0]; 
+                        
+    intLeftLeg          = [0   0    0    0    0  0]; 
 
+    intRightLeg         = [0   0    0    0    0  0];
+    
     % Impadances acting in the null space of the desired contact forces 
 
     if (DEMO_MOVING_LEG_AND_ARMS == 0)
@@ -135,7 +146,8 @@ if (number_of_feet_on_ground == 1)
     end
 %%    
 end
-
+satIntegral         = 15;
+integralGains       = [intTorso,intLeftLeg,intRightLeg];
 impedances          = [impTorso(1,:),impLeftLeg(1,:),impRightLeg(1,:)];
 dampings            = zeros(1,ROBOT_DOF);
 increasingRatesImp  = [impTorso(2,:),impLeftLeg(2,:),impRightLeg(2,:)];

@@ -45,8 +45,8 @@ if (number_of_feet_on_ground == 2)
     impRightLeg         = [ 35   10   40      950    70  2
                              0    0   0        0      0   0]; 
                          
-    intTorso            = [1    1    1]; 
-    intArms             = [1    1    1   0  ];
+    intTorso            = [0    0    0]; 
+    intArms             = [0    0    0   0  ];
                         
     intLeftLeg          = [0   0    0    0    0  0]; 
 
@@ -72,6 +72,13 @@ if (number_of_feet_on_ground == 1)
     increasingRatesGainsPCOM  = [ 0     0    ];
 
     gainMomentum              = 1 ;
+    
+    intTorso            = [0    0    0]; 
+    intArms             = [0    0    0   0  ];
+                        
+    intLeftLeg          = [0   0    0    0    0  0]; 
+
+    intRightLeg         = [0   0    0    0    0  0]; 
 
     % Impadances acting in the null space of the desired contact forces 
 
@@ -117,8 +124,8 @@ if (number_of_feet_on_ground == 1)
 %%    
 end
 satIntegral         = 15;
+integralGains       = [intTorso,intArms,intArms,intLeftLeg,intRightLeg];
 impedances          = [impTorso(1,:),impArms(1,:),impArms(1,:),impLeftLeg(1,:),impRightLeg(1,:)];
-integralGains       = [intTorso,intArms,intArms,intLeftLeg,intRightLeg]*0;
 dampings            = zeros(1,ROBOT_DOF);
 increasingRatesImp  = [impTorso(2,:),impArms(2,:),impArms(2,:),impLeftLeg(2,:),impRightLeg(2,:)];
 impedencesSat       = [80   100    1400];

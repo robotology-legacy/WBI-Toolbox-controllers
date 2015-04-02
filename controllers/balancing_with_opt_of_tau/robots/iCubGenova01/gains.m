@@ -100,6 +100,13 @@ if (number_of_feet_on_ground == 1)
 
     gainMomentum              = 1 ;
 
+    intTorso            = [0    0    0]; 
+    intArms             = [0    0    0   0  ];
+                        
+    intLeftLeg          = [0   0    0    0    0  0]; 
+
+    intRightLeg         = [0   0    0    0    0  0]; 
+    
     % Impadances acting in the null space of the desired contact forces 
 
     if (DEMO_MOVING_LEG_AND_ARMS == 0)
