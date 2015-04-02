@@ -6,6 +6,7 @@ directionOfOscillation            = [0;1;0];
 referenceParams                   = [0.0  0.0];  %referenceParams(1) = amplitude of ascillations in meters referenceParams(2) = frequency of ascillations in hertz
 
 ROBOT_DOF_FOR_SIMULINK = eye(ROBOT_DOF);
+qTildeMax              = 20*pi/180;
 % Controller gains for convergence of the desired centroidal momentum. 
 % The first three elements are the Proportional, Intagral, and the Derivative
 % gains taking place in xComDDStart, i.e. 
@@ -59,23 +60,30 @@ if (number_of_feet_on_ground == 2)
                             0    0     0        0      0   0]; 
                                                   
     
+    intTorso            = [0   0    0]; 
+    intArms             = [0   0    0    0  ];
+                        
+    intLeftLeg          = [0   0    0    0    0  0]; 
+
+    intRightLeg         = [0   0    0    0    0  0];                     
+                        
     if (DEMO_LEFT_AND_RIGHT == 1)
         directionOfOscillation = [0;1;0];
-        referenceParams        = [0.02 0.025];  %referenceParams(1) = amplitude of ascillations in meters
+        referenceParams        = [0.025 0.05];  %referenceParams(1) = amplitude of ascillations in meters
     end
 
     
     
     if (DEMO_MOVING_LEG_AND_ARMS == 1)
-        amplTorso            = [ 10  10   10 ]; 
-        amplArms             = [  0   0    0   0];
+        amplTorso            = [  5   5   10 ]; 
+        amplArms             = [ 10  10   10  10];
         amplLeftLeg          = [  0   0    0   0   0   0]; 
-        amplRightLeg         = [ 25  25   25  15   0   0];
+        amplRightLeg         = [  0   0    0   0   0   0];
 
-        freqTorso            = [ 0.0  0.0  0.0]; 
-        freqArms             = [ 0.0  0.0  0.0  0.0];
+        freqTorso            = [ 0.1  0.1  0.1]; 
+        freqArms             = [ 0.1  0.1  0.1  0.1];
         freqLeftLeg          = [ 0.0  0.0  0.0  0.0  0.0  0.0]; 
-        freqRightLeg         = [ 0.2  0.2  0.0  0.0  0.0  0.0]; %[ 0.0  0.3  0.0  0.0  0.0  0.0];
+        freqRightLeg         = [ 0.0  0.0  0.0  0.0  0.0  0.0]; %[ 0.0  0.3  0.0  0.0  0.0  0.0];
 
         amplitudesOscillationsOnOneFoot   = [amplTorso,amplArms,amplArms,amplLeftLeg,amplRightLeg];
         frequenciesOscillationsOnOneFoot  = [freqTorso,freqArms,freqArms,freqLeftLeg,freqRightLeg];
@@ -108,6 +116,13 @@ if (number_of_feet_on_ground == 1)
     dampLeftLeg          = [1    1   1   1   1   1]; 
 
     dampRightLeg         = [1    1   1   1   1   1]; 
+    
+    intTorso            = [0   0    0]; 
+    intArms             = [0   0    0    0  ];
+                        
+    intLeftLeg          = [0   0    0    0    0  0]; 
+
+    intRightLeg         = [0   0    0    0    0  0];   
    
     % Impadances acting in the null space of the desired contact forces 
 
@@ -155,6 +170,8 @@ if (number_of_feet_on_ground == 1)
 %%    
 end
 
+satIntegral         = 15;
+integralGains       = [intTorso,intArms,intArms,intLeftLeg,intRightLeg];
 impedances          = [impTorso(1,:),impArms(1,:),impArms(1,:),impLeftLeg(1,:),impRightLeg(1,:)];
 dampings            = [dampTorso,dampArms,dampArms,dampLeftLeg,dampRightLeg];
 increasingRatesImp  = [impTorso(2,:),impArms(2,:),impArms(2,:),impLeftLeg(2,:),impRightLeg(2,:)];
