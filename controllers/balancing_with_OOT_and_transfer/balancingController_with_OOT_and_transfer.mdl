@@ -1,16 +1,17 @@
 Model {
   Name			  "balancingController_with_OOT_and_transfer"
-  Version		  8.4
+  Version		  8.3
   MdlSubVersion		  0
   SavedCharacterEncoding  "UTF-8"
   GraphicalInterface {
     NumRootInports	    0
     NumRootOutports	    0
     ParameterArgumentNames  ""
-    ComputedModelVersion    "1.2303"
+    ComputedModelVersion    "1.2305"
     NumModelReferences	    0
     NumTestPointedSignals   0
   }
+  SaveDefaultBlockParams  on
   ScopeRefreshTime	  0.035000
   OverrideScopeRefreshTime on
   DisableAllScopes	  off
@@ -30,7 +31,7 @@ Model {
       $ObjectID		      2
       $ClassName	      "Simulink.WindowInfo"
       IsActive		      [1]
-      Location		      [0.0, 59.0, 1920.0, 1021.0]
+      Location		      [0.0, 54.0, 1366.0, 714.0]
       Object {
 	$PropName		"ModelBrowserInfo"
 	$ObjectID		3
@@ -45,26 +46,26 @@ Model {
 	$PropName		"ExplorerBarInfo"
 	$ObjectID		4
 	$ClassName		"Simulink.ExplorerBarInfo"
-	Visible			[1]
+	Visible			[0]
       }
       Array {
 	Type			"Simulink.EditorInfo"
-	Dimension		3
+	Dimension		4
 	Object {
 	  $ObjectID		  5
 	  IsActive		  [1]
 	  ViewObjType		  "SimulinkSubsys"
 	  LoadSaveID		  "61"
-	  Extents		  [1689.0, 876.0]
-	  ZoomFactor		  [0.976958525345622]
-	  Offset		  [806.9735993369377, 88.669811320754718]
+	  Extents		  [1135.0, 596.0]
+	  ZoomFactor		  [0.65437788018433174]
+	  Offset		  [807.79142825704207, 81.60563380281684]
 	}
 	Object {
 	  $ObjectID		  6
 	  IsActive		  [0]
 	  ViewObjType		  "SimulinkTopLevel"
 	  LoadSaveID		  "0"
-	  Extents		  [1689.0, 876.0]
+	  Extents		  [1135.0, 596.0]
 	  ZoomFactor		  [1.0]
 	  Offset		  [0.0, 0.0]
 	}
@@ -77,6 +78,15 @@ Model {
 	  ZoomFactor		  [1.25]
 	  Offset		  [0.0, 0.0]
 	}
+	Object {
+	  $ObjectID		  8
+	  IsActive		  [0]
+	  ViewObjType		  "SimulinkSubsys"
+	  LoadSaveID		  "976"
+	  Extents		  [1135.0, 596.0]
+	  ZoomFactor		  [0.78779472954230245]
+	  Offset		  [-40.69344190140832, 1981.2288732394366]
+	}
 	PropName		"EditorsInfo"
       }
     }
@@ -85,11 +95,11 @@ Model {
   Creator		  "daniele"
   UpdateHistory		  "UpdateHistoryNever"
   ModifiedByFormat	  "%<Auto>"
-  LastModifiedBy	  "pucci"
+  LastModifiedBy	  "daniele"
   ModifiedDateFormat	  "%<Auto>"
-  LastModifiedDate	  "Fri Apr 03 16:03:10 2015"
+  LastModifiedDate	  "Fri Apr 03 16:25:22 2015"
   RTWModifiedTimeStamp	  349879686
-  ModelVersionFormat	  "1.%<AutoIncrement:2303>"
+  ModelVersionFormat	  "1.%<AutoIncrement:2305>"
   ConfigurationManager	  "none"
   SampleTimeColors	  off
   SampleTimeAnnotations	  on
@@ -107,7 +117,6 @@ Model {
   SortedOrder		  on
   ExecutionContextIcon	  off
   ShowLinearizationAnnotations on
-  ShowMarkup		  on
   BlockNameDataTip	  off
   BlockParametersDataTip  off
   BlockDescriptionStringDataTip	off
@@ -130,7 +139,7 @@ Model {
   TryForcingSFcnDF	  off
   Object {
     $PropName		    "DataLoggingOverride"
-    $ObjectID		    8
+    $ObjectID		    9
     $ClassName		    "Simulink.SimulationData.ModelLoggingInfo"
     model_		    "balancingController_with_OOT_and_transfer"
     signals_		    []
@@ -166,9 +175,6 @@ Model {
   CovSFcnEnable		  off
   CovBoundaryAbsTol	  0.000010
   CovBoundaryRelTol	  0.010000
-  CovUseTimeInterval	  off
-  CovStartTime		  0
-  CovStopTime		  0
   ExtModeBatchMode	  off
   ExtModeEnableFloating	  on
   ExtModeTrigType	  "manual"
@@ -197,14 +203,14 @@ Model {
     Type		    "Handle"
     Dimension		    1
     Simulink.ConfigSet {
-      $ObjectID		      9
-      Version		      "1.14.3"
+      $ObjectID		      10
+      Version		      "1.14.2"
       Array {
 	Type			"Handle"
 	Dimension		8
 	Simulink.SolverCC {
-	  $ObjectID		  10
-	  Version		  "1.14.3"
+	  $ObjectID		  11
+	  Version		  "1.14.2"
 	  StartTime		  "0.0"
 	  StopTime		  "simulationTime"
 	  AbsTol		  "auto"
@@ -238,8 +244,8 @@ Model {
 	  InsertRTBMode		  "Whenever possible"
 	}
 	Simulink.DataIOCC {
-	  $ObjectID		  11
-	  Version		  "1.14.3"
+	  $ObjectID		  12
+	  Version		  "1.14.2"
 	  Decimation		  "1"
 	  ExternalInput		  "[t, u]"
 	  FinalStateName	  "xFinal"
@@ -271,8 +277,8 @@ Model {
 	  Refine		  "1"
 	}
 	Simulink.OptimizationCC {
-	  $ObjectID		  12
-	  Version		  "1.14.3"
+	  $ObjectID		  13
+	  Version		  "1.14.2"
 	  Array {
 	    Type		    "Cell"
 	    Dimension		    8
@@ -290,7 +296,7 @@ Model {
 	  BooleanDataType	  on
 	  ConditionallyExecuteInputs on
 	  InlineParams		  off
-	  UseDivisionForNetSlopeComputation "Off"
+	  UseIntDivNetSlope	  off
 	  UseFloatMulNetSlope	  off
 	  DefaultUnderspecifiedDataType	"double"
 	  UseSpecifiedMinMax	  off
@@ -331,8 +337,8 @@ Model {
 	  ParallelExecutionInRapidAccelerator on
 	}
 	Simulink.DebuggingCC {
-	  $ObjectID		  13
-	  Version		  "1.14.3"
+	  $ObjectID		  14
+	  Version		  "1.14.2"
 	  RTPrefix		  "error"
 	  ConsistencyChecking	  "none"
 	  ArrayBoundsChecking	  "none"
@@ -419,11 +425,10 @@ Model {
 	  SFUnconditionalTransitionShadowingDiag "warning"
 	  SFUndirectedBroadcastEventsDiag "warning"
 	  SFTransitionActionBeforeConditionDiag	"warning"
-	  IntegerSaturationMsg	  "warning"
 	}
 	Simulink.HardwareCC {
-	  $ObjectID		  14
-	  Version		  "1.14.3"
+	  $ObjectID		  15
+	  Version		  "1.14.2"
 	  ProdBitPerChar	  8
 	  ProdBitPerShort	  16
 	  ProdBitPerInt		  32
@@ -463,8 +468,8 @@ Model {
 	  ProdEqTarget		  on
 	}
 	Simulink.ModelReferenceCC {
-	  $ObjectID		  15
-	  Version		  "1.14.3"
+	  $ObjectID		  16
+	  Version		  "1.14.2"
 	  UpdateModelReferenceTargets "IfOutOfDateOrStructuralChange"
 	  CheckModelReferenceTargetMessage "error"
 	  EnableParallelModelReferenceBuilds off
@@ -478,8 +483,8 @@ Model {
 	  SupportModelReferenceSimTargetCustomCode off
 	}
 	Simulink.SFSimCC {
-	  $ObjectID		  16
-	  Version		  "1.14.3"
+	  $ObjectID		  17
+	  Version		  "1.14.2"
 	  SFSimEnableDebug	  on
 	  SFSimOverflowDetection  on
 	  SFSimEcho		  on
@@ -494,8 +499,8 @@ Model {
 	}
 	Simulink.RTWCC {
 	  $BackupClass		  "Simulink.RTWCC"
-	  $ObjectID		  17
-	  Version		  "1.14.3"
+	  $ObjectID		  18
+	  Version		  "1.14.2"
 	  Array {
 	    Type		    "Cell"
 	    Dimension		    15
@@ -581,8 +586,8 @@ Model {
 	    Type		    "Handle"
 	    Dimension		    2
 	    Simulink.CodeAppCC {
-	      $ObjectID		      18
-	      Version		      "1.14.3"
+	      $ObjectID		      19
+	      Version		      "1.14.2"
 	      Array {
 		Type			"Cell"
 		Dimension		22
@@ -651,8 +656,8 @@ Model {
 	    }
 	    Simulink.GRTTargetCC {
 	      $BackupClass	      "Simulink.TargetCC"
-	      $ObjectID		      19
-	      Version		      "1.14.3"
+	      $ObjectID		      20
+	      Version		      "1.14.2"
 	      Array {
 		Type			"Cell"
 		Dimension		14
@@ -710,14 +715,12 @@ Model {
 	      SupportVariableSizeSignals off
 	      EnableShiftOperators    on
 	      ParenthesesLevel	      "Nominal"
-	      CastingMode	      "Nominal"
 	      MATLABClassNameForMDSCustomization "Simulink.SoftwareTarget.GRTCustomization"
 	      ModelStepFunctionPrototypeControlCompliant off
 	      CPPClassGenCompliant    on
 	      AutosarCompliant	      off
 	      GRTInterface	      on
 	      GenerateAllocFcn	      off
-	      GenerateSharedConstants on
 	      UseMalloc		      off
 	      ExtMode		      off
 	      ExtModeStaticAlloc      off
@@ -740,17 +743,17 @@ Model {
       }
       Name		      "Configuration"
       CurrentDlgPage	      "Solver"
-      ConfigPrmDlgPosition     [ 181, 59, 1321, 816 ] 
+      ConfigPrmDlgPosition     [ 175, 27, 1315, 734 ] 
     }
     PropName		    "ConfigurationSets"
   }
   Simulink.ConfigSet {
     $PropName		    "ActiveConfigurationSet"
-    $ObjectID		    9
+    $ObjectID		    10
   }
   Object {
     $PropName		    "DataTransfer"
-    $ObjectID		    20
+    $ObjectID		    21
     $ClassName		    "Simulink.GlobalDataTransfer"
     DefaultTransitionBetweenSyncTasks "Ensure deterministic transfer (maximum delay)"
     DefaultTransitionBetweenAsyncTasks "Ensure data integrity only"
@@ -893,8 +896,6 @@ Model {
       IgnoreLimit	      off
       StateMustResolveToSignalObject off
       RTWStateStorageClass    "Auto"
-      ICPrevOutput	      "DiscIntNeverNeededParam"
-      ICPrevScaledInput	      "DiscIntNeverNeededParam"
     }
     Block {
       BlockType		      Gain
@@ -1068,7 +1069,7 @@ Model {
   }
   System {
     Name		    "balancingController_with_OOT_and_transfer"
-    Location		    [10, 67, 1928, 1087]
+    Location		    [0, 54, 1366, 768]
     Open		    on
     ModelBrowserVisibility  on
     ModelBrowserWidth	    200
@@ -1094,27 +1095,27 @@ Model {
       RequestExecContextInheritance off
       Object {
 	$PropName		"MaskObject"
-	$ObjectID		21
+	$ObjectID		22
 	$ClassName		"Simulink.Mask"
 	Array {
 	  Type			  "Simulink.MaskParameter"
 	  Dimension		  3
 	  Object {
-	    $ObjectID		    22
+	    $ObjectID		    23
 	    Type		    "edit"
 	    Name		    "robotName"
 	    Prompt		    "robot name"
 	    Value		    "robotName"
 	  }
 	  Object {
-	    $ObjectID		    23
+	    $ObjectID		    24
 	    Type		    "edit"
 	    Name		    "Ts"
 	    Prompt		    "Ts"
 	    Value		    "Ts"
 	  }
 	  Object {
-	    $ObjectID		    24
+	    $ObjectID		    25
 	    Type		    "edit"
 	    Name		    "localName"
 	    Prompt		    "module name"
@@ -1125,7 +1126,7 @@ Model {
       }
       System {
 	Name			"Subsystem"
-	Location		[0, 59, 1920, 1080]
+	Location		[0, 54, 1366, 768]
 	Open			on
 	ModelBrowserVisibility	on
 	ModelBrowserWidth	200
@@ -1137,7 +1138,7 @@ Model {
 	TiledPaperMargins	[0.500000, 0.500000, 0.500000, 0.500000]
 	TiledPageScale		1
 	ShowPageBoundaries	off
-	ZoomFactor		"98"
+	ZoomFactor		"65"
 	Block {
 	  BlockType		  Constant
 	  Name			  "\n\n  2"
@@ -1408,12 +1409,12 @@ Model {
 	      ZOrder		      291
 	      BackgroundColor	      "[1.000000, 0.258824, 0.819608]"
 	      ShowName		      off
-	      LibraryVersion	      "1.240"
+	      LibraryVersion	      "1.241"
 	      SourceBlock	      "WBCLibrary/wholeBodyModel/Jacobians/Left Foot Jacobian"
 	      SourceType	      "Left Foot Jacobian"
 	      ContentPreviewEnabled   off
-	      robotName		      robotName
-	      localName		      localName
+	      robotName		      "robotName"
+	      localName		      "localName"
 	    }
 	    Block {
 	      BlockType		      Mux
@@ -1435,12 +1436,12 @@ Model {
 	      ZOrder		      292
 	      BackgroundColor	      "[0.996078, 0.000000, 0.996078]"
 	      ShowName		      off
-	      LibraryVersion	      "1.240"
+	      LibraryVersion	      "1.241"
 	      SourceBlock	      "WBCLibrary/wholeBodyModel/Jacobians/Right Foot Jacobian"
 	      SourceType	      "Right Foot Jacobian"
 	      ContentPreviewEnabled   off
-	      robotName		      robotName
-	      localName		      localName
+	      robotName		      "robotName"
+	      localName		      "localName"
 	    }
 	    Block {
 	      BlockType		      SubSystem
@@ -1457,7 +1458,7 @@ Model {
 	      SFBlockType	      "MATLAB Function"
 	      Object {
 		$PropName		"MaskObject"
-		$ObjectID		25
+		$ObjectID		26
 		$ClassName		"Simulink.Mask"
 		SelfModifiable		"on"
 		Display			"bgColor = Simulink.Root.ColorString2Rgb(get_param(gcbh, 'BackgroundColor')); image(imread('private/eml_me"
@@ -1988,13 +1989,13 @@ Model {
 	      ZOrder		      294
 	      BackgroundColor	      "[0.662196, 0.000000, 1.000000]"
 	      ShowName		      off
-	      LibraryVersion	      "1.240"
+	      LibraryVersion	      "1.241"
 	      SourceBlock	      "WBCLibrary/wholeBodyModel/Dynamics/dJ*dq LeftFoot"
 	      SourceType	      "dJ*dq Left Foot"
 	      ContentPreviewEnabled   off
-	      val		      9
-	      robotName		      robotName
-	      localName		      localName
+	      val		      "9"
+	      robotName		      "robotName"
+	      localName		      "localName"
 	    }
 	    Block {
 	      BlockType		      Reference
@@ -2005,13 +2006,13 @@ Model {
 	      ZOrder		      293
 	      BackgroundColor	      "[0.501000, 0.015000, 0.850000]"
 	      ShowName		      off
-	      LibraryVersion	      "1.240"
+	      LibraryVersion	      "1.241"
 	      SourceBlock	      "WBCLibrary/wholeBodyModel/Dynamics/dJ*dq RightFoot"
 	      SourceType	      "dJ*dq Right Foot"
 	      ContentPreviewEnabled   off
-	      val		      9
-	      robotName		      robotName
-	      localName		      localName
+	      val		      "9"
+	      robotName		      "robotName"
+	      localName		      "localName"
 	    }
 	    Block {
 	      BlockType		      Scope
@@ -2049,7 +2050,6 @@ Model {
 	      YMax		      "5~5~150~5"
 	      SaveName		      "ScopeData2"
 	      LimitDataPoints	      off
-	      ScrollMode	      off
 	    }
 	    Block {
 	      BlockType		      Outport
@@ -2437,6 +2437,8 @@ Model {
 	  ShowName		  off
 	  InitialCondition	  "[0 0 0]"
 	  SampleTime		  "Ts"
+	  ICPrevOutput		  "DiscIntNeverNeededParam"
+	  ICPrevScaledInput	  "DiscIntNeverNeededParam"
 	}
 	Block {
 	  BlockType		  SubSystem
@@ -2518,7 +2520,7 @@ Model {
 	      ZOrder		      320
 	      BackgroundColor	      "lightBlue"
 	      DropShadow	      on
-	      LibraryVersion	      "1.240"
+	      LibraryVersion	      "1.241"
 	      SourceBlock	      "WBCLibrary/Utilities/23-DoFs WBI to YARP"
 	      SourceType	      ""
 	      ContentPreviewEnabled   off
@@ -2567,7 +2569,7 @@ Model {
 	      BackgroundColor	      "lightBlue"
 	      DropShadow	      on
 	      Commented		      "on"
-	      LibraryVersion	      "1.240"
+	      LibraryVersion	      "1.241"
 	      SourceBlock	      "WBCLibrary/Utilities/23-DoFs WBI to YARP"
 	      SourceType	      ""
 	      ContentPreviewEnabled   off
@@ -2616,7 +2618,7 @@ Model {
 	      ZOrder		      322
 	      BackgroundColor	      "lightBlue"
 	      DropShadow	      on
-	      LibraryVersion	      "1.240"
+	      LibraryVersion	      "1.241"
 	      SourceBlock	      "WBCLibrary/Utilities/23-DoFs WBI to YARP"
 	      SourceType	      ""
 	      ContentPreviewEnabled   off
@@ -2630,7 +2632,7 @@ Model {
 	      ZOrder		      323
 	      BackgroundColor	      "lightBlue"
 	      DropShadow	      on
-	      LibraryVersion	      "1.240"
+	      LibraryVersion	      "1.241"
 	      SourceBlock	      "WBCLibrary/Utilities/23-DoFs WBI to YARP"
 	      SourceType	      ""
 	      ContentPreviewEnabled   off
@@ -2644,7 +2646,7 @@ Model {
 	      ZOrder		      324
 	      BackgroundColor	      "lightBlue"
 	      DropShadow	      on
-	      LibraryVersion	      "1.240"
+	      LibraryVersion	      "1.241"
 	      SourceBlock	      "WBCLibrary/Utilities/23-DoFs WBI to YARP"
 	      SourceType	      ""
 	      ContentPreviewEnabled   off
@@ -2658,7 +2660,7 @@ Model {
 	      ZOrder		      436
 	      BackgroundColor	      "lightBlue"
 	      DropShadow	      on
-	      LibraryVersion	      "1.240"
+	      LibraryVersion	      "1.241"
 	      SourceBlock	      "WBCLibrary/Utilities/23-DoFs WBI to YARP"
 	      SourceType	      ""
 	      ContentPreviewEnabled   off
@@ -2672,7 +2674,7 @@ Model {
 	      ZOrder		      440
 	      BackgroundColor	      "lightBlue"
 	      DropShadow	      on
-	      LibraryVersion	      "1.240"
+	      LibraryVersion	      "1.241"
 	      SourceBlock	      "WBCLibrary/Utilities/23-DoFs WBI to YARP"
 	      SourceType	      ""
 	      ContentPreviewEnabled   off
@@ -2714,7 +2716,6 @@ Model {
 	      SaveName		      "CoM_data"
 	      DataFormat	      "StructureWithTime"
 	      LimitDataPoints	      off
-	      ScrollMode	      off
 	    }
 	    Block {
 	      BlockType		      Demux
@@ -2822,12 +2823,12 @@ Model {
 	      ZOrder		      305
 	      BackgroundColor	      "[1.000000, 0.501961, 0.000000]"
 	      ShowName		      off
-	      LibraryVersion	      "1.240"
+	      LibraryVersion	      "1.241"
 	      SourceBlock	      "WBCLibrary/wholeBodyStates/Joint Angles"
 	      SourceType	      "Joint Angles"
 	      ContentPreviewEnabled   off
-	      robotName		      robotName
-	      localName		      localName
+	      robotName		      "robotName"
+	      localName		      "localName"
 	      Port {
 		PortNumber		1
 		Name			"qj"
@@ -2844,12 +2845,12 @@ Model {
 	      ZOrder		      251
 	      BackgroundColor	      "[1.000000, 0.634000, 0.268000]"
 	      ShowName		      off
-	      LibraryVersion	      "1.240"
+	      LibraryVersion	      "1.241"
 	      SourceBlock	      "WBCLibrary/wholeBodyStates/Joint Torques"
 	      SourceType	      "Joint Torques"
 	      ContentPreviewEnabled   off
-	      robotName		      robotName
-	      localName		      localName
+	      robotName		      "robotName"
+	      localName		      "localName"
 	    }
 	    Block {
 	      BlockType		      Mux
@@ -3265,7 +3266,6 @@ Model {
 	      YMax		      "250~180"
 	      SaveName		      "ScopeData6"
 	      LimitDataPoints	      off
-	      ScrollMode	      off
 	    }
 	    Block {
 	      BlockType		      Reference
@@ -3276,12 +3276,12 @@ Model {
 	      ZOrder		      446
 	      BackgroundColor	      "black"
 	      Commented		      "on"
-	      LibraryVersion	      "1.240"
+	      LibraryVersion	      "1.241"
 	      SourceBlock	      "WBCLibrary/Utilities/yarp read"
 	      SourceType	      "yarp read"
-	      from		      ['/wholeBodyDynamicsTree/filtered/l_foot_ft_sensor:o']
+	      from		      "['/wholeBodyDynamicsTree/filtered/l_foot_ft_sensor:o']"
 	      to		      "'...'"
-	      num		      6
+	      num		      "6"
 	      blocking		      off
 	      timestamp		      off
 	      autoconnect	      on
@@ -3324,7 +3324,6 @@ Model {
 	      YMax		      "0.4~60~60~20~20"
 	      SaveName		      "ScopeData3"
 	      LimitDataPoints	      off
-	      ScrollMode	      off
 	    }
 	    Block {
 	      BlockType		      Scope
@@ -3364,7 +3363,6 @@ Model {
 	      YMax		      "0.4~60~60~20~20"
 	      SaveName		      "ScopeData5"
 	      LimitDataPoints	      off
-	      ScrollMode	      off
 	    }
 	    Block {
 	      BlockType		      Scope
@@ -3403,7 +3401,6 @@ Model {
 	      SaveName		      "qj_and_v"
 	      DataFormat	      "StructureWithTime"
 	      LimitDataPoints	      off
-	      ScrollMode	      off
 	    }
 	    Block {
 	      BlockType		      Scope
@@ -3442,7 +3439,6 @@ Model {
 	      SaveName		      "tauDes"
 	      DataFormat	      "StructureWithTime"
 	      LimitDataPoints	      off
-	      ScrollMode	      off
 	    }
 	    Block {
 	      BlockType		      Scope
@@ -3484,7 +3480,6 @@ Model {
 	      SaveName		      "tauError"
 	      DataFormat	      "StructureWithTime"
 	      LimitDataPoints	      off
-	      ScrollMode	      off
 	    }
 	    Block {
 	      BlockType		      Scope
@@ -3523,7 +3518,6 @@ Model {
 	      SaveName		      "tauMeasured"
 	      DataFormat	      "StructureWithTime"
 	      LimitDataPoints	      off
-	      ScrollMode	      off
 	    }
 	    Block {
 	      BlockType		      Scope
@@ -3564,7 +3558,6 @@ Model {
 	      SaveName		      "qj_and_v1"
 	      DataFormat	      "StructureWithTime"
 	      LimitDataPoints	      off
-	      ScrollMode	      off
 	    }
 	    Line {
 	      Name		      "CoM_Error"
@@ -4173,12 +4166,12 @@ Model {
 	      Position		      [330, 488, 395, 532]
 	      ZOrder		      215
 	      ShowName		      off
-	      LibraryVersion	      "1.240"
+	      LibraryVersion	      "1.241"
 	      SourceBlock	      "WBCLibrary/wholeBodyModel/Dynamics/Cent Momentum"
 	      SourceType	      "Centroidal Momentum"
 	      ContentPreviewEnabled   off
-	      robotName		      robotName
-	      localName		      localName
+	      robotName		      "robotName"
+	      localName		      "localName"
 	    }
 	    Block {
 	      BlockType		      Gain
@@ -4201,13 +4194,13 @@ Model {
 	      ZOrder		      211
 	      BackgroundColor	      "magenta"
 	      ShowName		      off
-	      LibraryVersion	      "1.240"
+	      LibraryVersion	      "1.241"
 	      SourceBlock	      "WBCLibrary/wholeBodyModel/Dynamics/computeh"
 	      SourceType	      "Generalized Bias Forces"
 	      ContentPreviewEnabled   off
-	      val		      7
-	      robotname		      robotName
-	      localname		      localName
+	      val		      "7"
+	      robotname		      "robotName"
+	      localname		      "localName"
 	    }
 	    Block {
 	      BlockType		      Reference
@@ -4218,13 +4211,13 @@ Model {
 	      ZOrder		      213
 	      BackgroundColor	      "magenta"
 	      ShowName		      off
-	      LibraryVersion	      "1.240"
+	      LibraryVersion	      "1.241"
 	      SourceBlock	      "WBCLibrary/wholeBodyModel/Dynamics/computeh"
 	      SourceType	      "Generalized Bias Forces"
 	      ContentPreviewEnabled   off
-	      val		      7
-	      robotname		      robotName
-	      localname		      localName
+	      val		      "7"
+	      robotname		      "robotName"
+	      localname		      "localName"
 	    }
 	    Block {
 	      BlockType		      Reference
@@ -4235,13 +4228,13 @@ Model {
 	      ZOrder		      212
 	      BackgroundColor	      "red"
 	      ShowName		      off
-	      LibraryVersion	      "1.240"
+	      LibraryVersion	      "1.241"
 	      SourceBlock	      "WBCLibrary/wholeBodyModel/Dynamics/massMatrix"
 	      SourceType	      "Mass Matrix"
 	      ContentPreviewEnabled   off
-	      val		      8
-	      robotname		      robotName
-	      localname		      localName
+	      val		      "8"
+	      robotname		      "robotName"
+	      localname		      "localName"
 	    }
 	    Block {
 	      BlockType		      Outport
@@ -4438,8 +4431,8 @@ Model {
 	  RequestExecContextInheritance	off
 	  System {
 	    Name		    "State machine\n"
-	    Location		    [10, 67, 1928, 1087]
-	    Open		    off
+	    Location		    [0, 54, 1366, 768]
+	    Open		    on
 	    ModelBrowserVisibility  on
 	    ModelBrowserWidth	    200
 	    ScreenColor		    "white"
@@ -4450,7 +4443,7 @@ Model {
 	    TiledPaperMargins	    [0.500000, 0.500000, 0.500000, 0.500000]
 	    TiledPageScale	    1
 	    ShowPageBoundaries	    off
-	    ZoomFactor		    "114"
+	    ZoomFactor		    "79"
 	    Block {
 	      BlockType		      Reference
 	      Name		      "COMFwdKin "
@@ -4460,12 +4453,12 @@ Model {
 	      ZOrder		      311
 	      BackgroundColor	      "lightBlue"
 	      ShowName		      off
-	      LibraryVersion	      "1.240"
+	      LibraryVersion	      "1.241"
 	      SourceBlock	      "WBCLibrary/wholeBodyModel/Forward Kinematics/COMFwdKin "
 	      SourceType	      "Center of Mass Forward Kinematics"
 	      ContentPreviewEnabled   off
-	      robotName		      robotName
-	      localName		      localName
+	      robotName		      "robotName"
+	      localName		      "localName"
 	    }
 	    Block {
 	      BlockType		      Clock
@@ -4611,12 +4604,12 @@ Model {
 	      ZOrder		      437
 	      BackgroundColor	      "orange"
 	      ShowName		      off
-	      LibraryVersion	      "1.240"
+	      LibraryVersion	      "1.241"
 	      SourceBlock	      "WBCLibrary/wholeBodyStates/Joint Angles"
 	      SourceType	      "Joint Angles"
 	      ContentPreviewEnabled   off
-	      robotName		      robotName
-	      localName		      localName
+	      robotName		      "robotName"
+	      localName		      "localName"
 	    }
 	    Block {
 	      BlockType		      Concatenate
@@ -4721,7 +4714,6 @@ Model {
 	      YMax		      "250"
 	      SaveName		      "ScopeData1"
 	      LimitDataPoints	      off
-	      ScrollMode	      off
 	    }
 	    Block {
 	      BlockType		      SubSystem
@@ -4748,7 +4740,7 @@ Model {
 	      }
 	      System {
 		Name			"feet_wrenches"
-		Location		[10, 67, 1928, 1087]
+		Location		[0, 59, 1920, 1080]
 		Open			on
 		ModelBrowserVisibility	on
 		ModelBrowserWidth	200
@@ -5683,7 +5675,7 @@ Model {
 	      Position		      [215, 2644, 275, 2686]
 	      ZOrder		      313
 	      BackgroundColor	      "[0.537255, 0.721569, 1.000000]"
-	      LibraryVersion	      "1.240"
+	      LibraryVersion	      "1.241"
 	      SourceBlock	      "WBCLibrary/Utilities/holder\n"
 	      SourceType	      "Holder"
 	      ContentPreviewEnabled   off
@@ -5697,7 +5689,7 @@ Model {
 	      ZOrder		      416
 	      BackgroundColor	      "[0.537255, 0.721569, 1.000000]"
 	      ShowName		      off
-	      LibraryVersion	      "1.240"
+	      LibraryVersion	      "1.241"
 	      SourceBlock	      "WBCLibrary/Utilities/holder\n"
 	      SourceType	      "Holder"
 	      ContentPreviewEnabled   off
@@ -5711,13 +5703,13 @@ Model {
 	      ZOrder		      324
 	      BackgroundColor	      "[0.156863, 1.000000, 0.639216]"
 	      ShowName		      off
-	      LibraryVersion	      "1.240"
+	      LibraryVersion	      "1.241"
 	      SourceBlock	      "WBCLibrary/Utilities/minJerkTrajGen"
 	      SourceType	      "minJerkTrajGen  "
 	      ContentPreviewEnabled   off
-	      dim		      3
-	      Ts		      Ts
-	      Tt		      transferTime
+	      dim		      "3"
+	      Ts		      "Ts"
+	      Tt		      "transferTime"
 	    }
 	    Block {
 	      BlockType		      Reference
@@ -5728,13 +5720,13 @@ Model {
 	      ZOrder		      408
 	      BackgroundColor	      "[0.156863, 1.000000, 0.639216]"
 	      ShowName		      off
-	      LibraryVersion	      "1.240"
+	      LibraryVersion	      "1.241"
 	      SourceBlock	      "WBCLibrary/Utilities/minJerkTrajGen"
 	      SourceType	      "minJerkTrajGen  "
 	      ContentPreviewEnabled   off
-	      dim		      NUMBER_OF_STATES
-	      Ts		      Ts
-	      Tt		      smoothingTimeJacobians
+	      dim		      "NUMBER_OF_STATES"
+	      Ts		      "Ts"
+	      Tt		      "smoothingTimeJacobians"
 	      Port {
 		PortNumber		1
 		Name			"stateSmooth"
@@ -5751,13 +5743,13 @@ Model {
 	      ZOrder		      417
 	      BackgroundColor	      "[0.156863, 1.000000, 0.639216]"
 	      ShowName		      off
-	      LibraryVersion	      "1.240"
+	      LibraryVersion	      "1.241"
 	      SourceBlock	      "WBCLibrary/Utilities/minJerkTrajGen"
 	      SourceType	      "minJerkTrajGen  "
 	      ContentPreviewEnabled   off
-	      dim		      ROBOT_DOF
-	      Ts		      Ts
-	      Tt		      trajectoryTimePostural
+	      dim		      "ROBOT_DOF"
+	      Ts		      "Ts"
+	      Tt		      "trajectoryTimePostural"
 	    }
 	    Block {
 	      BlockType		      Reference
@@ -5767,12 +5759,12 @@ Model {
 	      Position		      [20, 2025, 90, 2095]
 	      ZOrder		      433
 	      BackgroundColor	      "black"
-	      LibraryVersion	      "1.240"
+	      LibraryVersion	      "1.241"
 	      SourceBlock	      "WBCLibrary/Utilities/yarp read"
 	      SourceType	      "yarp read"
-	      from		      ['/wholeBodyDynamicsTree/filtered/r_foot_ft_sensor:o']
-	      to		      ['...']
-	      num		      6
+	      from		      "['/wholeBodyDynamicsTree/filtered/r_foot_ft_sensor:o']"
+	      to		      "['...']"
+	      num		      "6"
 	      blocking		      off
 	      timestamp		      off
 	      autoconnect	      on
@@ -6226,7 +6218,6 @@ Model {
 	      YMax		      "4~1.2~30"
 	      SaveName		      "ScopeData4"
 	      LimitDataPoints	      off
-	      ScrollMode	      off
 	    }
 	    Block {
 	      BlockType		      Outport
@@ -6690,12 +6681,12 @@ Model {
 	      ZOrder		      41
 	      BackgroundColor	      "[0.732000, 0.463600, 0.000000]"
 	      ShowName		      off
-	      LibraryVersion	      "1.240"
+	      LibraryVersion	      "1.241"
 	      SourceBlock	      "WBCLibrary/wholeBodyStates/Joint Velocities"
 	      SourceType	      "Joint Velocities"
 	      ContentPreviewEnabled   off
-	      robotName		      robotName
-	      localName		      localName
+	      robotName		      "robotName"
+	      localName		      "localName"
 	    }
 	    Block {
 	      BlockType		      Reference
@@ -6705,12 +6696,12 @@ Model {
 	      Position		      [20, 18, 95, 62]
 	      ZOrder		      -1
 	      BackgroundColor	      "[0.047000, 0.909000, 0.803000]"
-	      LibraryVersion	      "1.240"
+	      LibraryVersion	      "1.241"
 	      SourceBlock	      "WBCLibrary/wholeBodyModel/Jacobians/Left Foot Jacobian"
 	      SourceType	      "Left Foot Jacobian"
 	      ContentPreviewEnabled   off
-	      robotName		      robotName
-	      localName		      localName
+	      robotName		      "robotName"
+	      localName		      "localName"
 	    }
 	    Block {
 	      BlockType		      SubSystem
@@ -6875,12 +6866,12 @@ Model {
 	      Position		      [20, 113, 90, 157]
 	      ZOrder		      -2
 	      BackgroundColor	      "[0.000000, 1.000000, 0.533000]"
-	      LibraryVersion	      "1.240"
+	      LibraryVersion	      "1.241"
 	      SourceBlock	      "WBCLibrary/wholeBodyModel/Jacobians/Right Foot Jacobian"
 	      SourceType	      "Right Foot Jacobian"
 	      ContentPreviewEnabled   off
-	      robotName		      robotName
-	      localName		      localName
+	      robotName		      "robotName"
+	      localName		      "localName"
 	    }
 	    Block {
 	      BlockType		      Outport
@@ -7076,12 +7067,12 @@ Model {
 	      ZOrder		      245
 	      BackgroundColor	      "[1.000000, 0.203922, 0.027451]"
 	      ShowName		      off
-	      LibraryVersion	      "1.240"
+	      LibraryVersion	      "1.241"
 	      SourceBlock	      "WBCLibrary/wholeBodyModel/Joint Limits"
 	      SourceType	      "Joint Limits"
 	      ContentPreviewEnabled   off
-	      robotName		      robotName
-	      localName		      localName
+	      robotName		      "robotName"
+	      localName		      "localName"
 	    }
 	    Block {
 	      BlockType		      SubSystem
@@ -7099,7 +7090,7 @@ Model {
 	      SFBlockType	      "MATLAB Function"
 	      Object {
 		$PropName		"MaskObject"
-		$ObjectID		26
+		$ObjectID		27
 		$ClassName		"Simulink.Mask"
 		SelfModifiable		"on"
 		Display			"bgColor = Simulink.Root.ColorString2Rgb(get_param(gcbh, 'BackgroundColor')); image(imread('private/eml_me"
@@ -7511,7 +7502,7 @@ Model {
 }
 #Finite State Machines
 #
-#   Stateflow 80000001
+#   Stateflow Version 8.1 (R2014a) dated Feb  7 2014, 22:23:55
 #
 #
 Stateflow {
@@ -7521,7 +7512,7 @@ Stateflow {
     created		    "18-Feb-2014 10:14:40"
     isLibrary		    0
     firstTarget		    111
-    sfVersion		    80000001
+    sfVersion		    76014001.002
   }
   chart {
     id			    2
