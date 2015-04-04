@@ -7,7 +7,7 @@ Model {
     NumRootInports	    0
     NumRootOutports	    0
     ParameterArgumentNames  ""
-    ComputedModelVersion    "1.2053"
+    ComputedModelVersion    "1.2056"
     NumModelReferences	    0
     NumTestPointedSignals   0
   }
@@ -88,9 +88,9 @@ Model {
   ModifiedByFormat	  "%<Auto>"
   LastModifiedBy	  "daniele"
   ModifiedDateFormat	  "%<Auto>"
-  LastModifiedDate	  "Sat Apr 04 16:56:46 2015"
-  RTWModifiedTimeStamp	  350067393
-  ModelVersionFormat	  "1.%<AutoIncrement:2053>"
+  LastModifiedDate	  "Sat Apr 04 17:25:21 2015"
+  RTWModifiedTimeStamp	  350069099
+  ModelVersionFormat	  "1.%<AutoIncrement:2056>"
   ConfigurationManager	  "none"
   SampleTimeColors	  off
   SampleTimeAnnotations	  on
@@ -949,7 +949,7 @@ Model {
     ShowPageBoundaries	    off
     ZoomFactor		    "719"
     ReportName		    "simulink-default.rpt"
-    SIDHighWatermark	    "1170"
+    SIDHighWatermark	    "1171"
     Block {
       BlockType		      SubSystem
       Name		      "Subsystem"
@@ -1113,17 +1113,17 @@ Model {
 	}
 	Block {
 	  BlockType		  Reference
-	  Name			  "Set Angles"
-	  SID			  "1166"
+	  Name			  "Set Angles (Direct)"
+	  SID			  "1171"
 	  Ports			  [1]
-	  Position		  [1055, 403, 1125, 447]
-	  ZOrder		  329
-	  BackgroundColor	  "[0.855000, 0.450000, 0.133000]"
+	  Position		  [1055, 403, 1130, 447]
+	  ZOrder		  334
+	  BackgroundColor	  "[0.831373, 0.274510, 0.200000]"
 	  LibraryVersion	  "1.241"
-	  SourceBlock		  "WBCLibrary/wholeBodyActuators/Set Angles"
-	  SourceType		  "Set Joint Angles"
+	  SourceBlock		  "WBCLibrary/wholeBodyActuators/Set Angles (Direct)"
+	  SourceType		  "Set Velocities"
 	  ContentPreviewEnabled	  off
-	  val			  "5"
+	  val			  "20"
 	  robotName		  "robotName"
 	  localName		  "localName"
 	}
@@ -1241,7 +1241,7 @@ Model {
 	  Position		  [1090, 476, 1120, 544]
 	  ZOrder		  331
 	  Floating		  off
-	  Location		  [94, 335, 1462, 1023]
+	  Location		  [7, 83, 1373, 767]
 	  Open			  off
 	  NumInputPorts		  "5"
 	  List {
@@ -1263,12 +1263,12 @@ Model {
 	    MarkerStyles	    "none|none|none|none|none|none"
 	  }
 	  ShowLegends		  on
-	  LegendLocations	  "0.90369     0.86689    0.070541    0.074491\n0.89496     0.66122    0.079313    0.097202\n 0.890"
-	  "6     0.47663    0.083699    0.097202\n0.89496     0.24698    0.079313     0.14262\n 0.8906    0.062387    0.083699"
-	  "     0.14262"
+	  LegendLocations	  "0.90364     0.86667    0.070644    0.074927\n 0.8949     0.66094    0.079429     0.09777\n0.8905"
+	  "4     0.47635    0.083821     0.09777\n 0.8949     0.24656    0.079429     0.14346\n0.89054    0.066356    0.083821"
+	  "     0.14346"
 	  TimeRange		  "5"
-	  YMin			  "-50~-50~-50~-100~-100"
-	  YMax			  "100~50~50~100~100"
+	  YMin			  "-50~-200~-200~-100~-200"
+	  YMax			  "100~200~200~100~200"
 	  LimitDataPoints	  off
 	}
 	Line {
@@ -1286,10 +1286,10 @@ Model {
 	  DstPort		  1
 	}
 	Line {
-	  ZOrder		  1046
+	  ZOrder		  1060
 	  SrcBlock		  "Subsystem1"
 	  SrcPort		  1
-	  DstBlock		  "Set Angles"
+	  DstBlock		  "Set Angles (Direct)"
 	  DstPort		  1
 	}
 	Line {
