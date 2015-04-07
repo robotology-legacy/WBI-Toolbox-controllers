@@ -1,7 +1,9 @@
 ROBOT_DOF = 23;
 
-amplTorso            = [ 15  -15   10 ]; 
-amplArms             = [ 20  -20   20  -20];
+Kp  = 25;
+
+amplTorso            = [  5   -5   10 ]; 
+amplArms             = [ 10  -10   10  -10];
 amplLeftLeg          = [ 20  -20   10  -10  5  -5]; 
 amplRightLeg         = [ 20  -20   10  -10  5  -5];
 

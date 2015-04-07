@@ -7,7 +7,7 @@ Model {
     NumRootInports	    0
     NumRootOutports	    0
     ParameterArgumentNames  ""
-    ComputedModelVersion    "1.2056"
+    ComputedModelVersion    "1.2061"
     NumModelReferences	    0
     NumTestPointedSignals   0
   }
@@ -31,7 +31,7 @@ Model {
       $ObjectID		      2
       $ClassName	      "Simulink.WindowInfo"
       IsActive		      [1]
-      Location		      [10.0, 62.0, 1366.0, 714.0]
+      Location		      [0.0, 54.0, 1366.0, 714.0]
       Object {
 	$PropName		"ModelBrowserInfo"
 	$ObjectID		3
@@ -75,8 +75,8 @@ Model {
 	  ViewObjType		  "SimulinkSubsys"
 	  LoadSaveID		  "61"
 	  Extents		  [1135.0, 596.0]
-	  ZoomFactor		  [2.1353383458646613]
-	  Offset		  [609.23415492957747, 338.44366197183103]
+	  ZoomFactor		  [1.8699324324324325]
+	  Offset		  [620.513098464318, 360.13595302619694]
 	}
 	PropName		"EditorsInfo"
       }
@@ -88,9 +88,9 @@ Model {
   ModifiedByFormat	  "%<Auto>"
   LastModifiedBy	  "daniele"
   ModifiedDateFormat	  "%<Auto>"
-  LastModifiedDate	  "Sat Apr 04 17:25:21 2015"
-  RTWModifiedTimeStamp	  350069099
-  ModelVersionFormat	  "1.%<AutoIncrement:2056>"
+  LastModifiedDate	  "Mon Apr 06 11:01:53 2015"
+  RTWModifiedTimeStamp	  350218715
+  ModelVersionFormat	  "1.%<AutoIncrement:2061>"
   ConfigurationManager	  "none"
   SampleTimeColors	  off
   SampleTimeAnnotations	  on
@@ -873,6 +873,16 @@ Model {
       SampleTime	      "-1"
     }
     Block {
+      BlockType		      Selector
+      NumberOfDimensions      "1"
+      IndexMode		      "One-based"
+      InputPortWidth	      "-1"
+      SampleTime	      "-1"
+      IndexOptions	      "Index vector (dialog)"
+      Indices		      "1"
+      OutputSizes	      "1"
+    }
+    Block {
       BlockType		      Sin
       SineType		      "Time based"
       TimeSource	      "Use simulation time"
@@ -935,7 +945,7 @@ Model {
   }
   System {
     Name		    "positionControl"
-    Location		    [10, 62, 1356, 758]
+    Location		    [10, 62, 1376, 776]
     Open		    on
     ModelBrowserVisibility  on
     ModelBrowserWidth	    200
@@ -949,7 +959,7 @@ Model {
     ShowPageBoundaries	    off
     ZoomFactor		    "719"
     ReportName		    "simulink-default.rpt"
-    SIDHighWatermark	    "1171"
+    SIDHighWatermark	    "1182"
     Block {
       BlockType		      SubSystem
       Name		      "Subsystem"
@@ -992,7 +1002,7 @@ Model {
       }
       System {
 	Name			"Subsystem"
-	Location		[10, 62, 1376, 776]
+	Location		[0, 54, 1366, 768]
 	Open			on
 	ModelBrowserVisibility	on
 	ModelBrowserWidth	200
@@ -1004,13 +1014,13 @@ Model {
 	TiledPaperMargins	[0.500000, 0.500000, 0.500000, 0.500000]
 	TiledPageScale		1
 	ShowPageBoundaries	off
-	ZoomFactor		"214"
+	ZoomFactor		"187"
 	Block {
 	  BlockType		  Reference
 	  Name			  "23-DoFs WBI to YARP"
 	  SID			  "1169"
 	  Ports			  [1, 5]
-	  Position		  [885, 476, 995, 544]
+	  Position		  [885, 566, 995, 634]
 	  ZOrder		  332
 	  BackgroundColor	  "lightBlue"
 	  DropShadow		  on
@@ -1055,10 +1065,34 @@ Model {
 	  BlockType		  Gain
 	  Name			  "Gain"
 	  SID			  "1170"
-	  Position		  [755, 492, 830, 528]
+	  Position		  [755, 582, 830, 618]
 	  ZOrder		  333
 	  ShowName		  off
 	  Gain			  "180/pi"
+	  ParamDataTypeStr	  "Inherit: Inherit via internal rule"
+	  OutDataTypeStr	  "Inherit: Inherit via internal rule"
+	  SaturateOnIntegerOverflow off
+	}
+	Block {
+	  BlockType		  Gain
+	  Name			  "Gain1"
+	  SID			  "1173"
+	  Position		  [1020, 390, 1050, 420]
+	  ZOrder		  336
+	  ShowName		  off
+	  Gain			  "Kp"
+	  ParamDataTypeStr	  "Inherit: Inherit via internal rule"
+	  OutDataTypeStr	  "Inherit: Inherit via internal rule"
+	  SaturateOnIntegerOverflow off
+	}
+	Block {
+	  BlockType		  Gain
+	  Name			  "Gain2"
+	  SID			  "1179"
+	  Position		  [730, 505, 760, 535]
+	  ZOrder		  342
+	  ShowName		  off
+	  Gain			  "0"
 	  ParamDataTypeStr	  "Inherit: Inherit via internal rule"
 	  OutDataTypeStr	  "Inherit: Inherit via internal rule"
 	  SaturateOnIntegerOverflow off
@@ -1068,7 +1102,7 @@ Model {
 	  Name			  "Joint Angles"
 	  SID			  "1165"
 	  Ports			  [0, 1]
-	  Position		  [625, 403, 695, 447]
+	  Position		  [635, 383, 705, 427]
 	  ZOrder		  328
 	  BackgroundColor	  "[0.375000, 0.187500, 0.000000]"
 	  LibraryVersion	  "1.241"
@@ -1083,7 +1117,7 @@ Model {
 	  Name			  "Joint Velocities"
 	  SID			  "1167"
 	  Ports			  [0, 1]
-	  Position		  [625, 488, 695, 532]
+	  Position		  [635, 578, 705, 622]
 	  ZOrder		  330
 	  BackgroundColor	  "[0.634000, 0.401533, 0.000000]"
 	  LibraryVersion	  "1.241"
@@ -1098,7 +1132,7 @@ Model {
 	  Name			  "Real Time Synchronizer"
 	  SID			  "877"
 	  Ports			  []
-	  Position		  [835, 345, 960, 380]
+	  Position		  [1095, 505, 1220, 540]
 	  ZOrder		  274
 	  ForegroundColor	  "[0.916667, 0.916667, 0.916667]"
 	  BackgroundColor	  "[0.501961, 0.501961, 0.501961]"
@@ -1112,18 +1146,29 @@ Model {
 	  threadPeriod		  "Ts"
 	}
 	Block {
+	  BlockType		  Selector
+	  Name			  "Selector"
+	  SID			  "1182"
+	  Ports			  [1, 1]
+	  Position		  [945, 486, 985, 524]
+	  ZOrder		  345
+	  ShowName		  off
+	  InputPortWidth	  "29"
+	  Indices		  "[7:29]"
+	}
+	Block {
 	  BlockType		  Reference
-	  Name			  "Set Angles (Direct)"
-	  SID			  "1171"
+	  Name			  "Set Torques"
+	  SID			  "1172"
 	  Ports			  [1]
-	  Position		  [1055, 403, 1130, 447]
-	  ZOrder		  334
-	  BackgroundColor	  "[0.831373, 0.274510, 0.200000]"
+	  Position		  [1150, 383, 1220, 427]
+	  ZOrder		  335
+	  BackgroundColor	  "[0.941000, 0.415000, 0.192000]"
 	  LibraryVersion	  "1.241"
-	  SourceBlock		  "WBCLibrary/wholeBodyActuators/Set Angles (Direct)"
-	  SourceType		  "Set Velocities"
+	  SourceBlock		  "WBCLibrary/wholeBodyActuators/Set Torques"
+	  SourceType		  "Set Joint Torques   "
 	  ContentPreviewEnabled	  off
-	  val			  "20"
+	  val			  "6"
 	  robotName		  "robotName"
 	  localName		  "localName"
 	}
@@ -1132,7 +1177,7 @@ Model {
 	  Name			  "Subsystem1"
 	  SID			  "1148"
 	  Ports			  [1, 1]
-	  Position		  [855, 407, 975, 443]
+	  Position		  [855, 387, 960, 423]
 	  ZOrder		  326
 	  ShowName		  off
 	  RequestExecContextInheritance	off
@@ -1221,11 +1266,72 @@ Model {
 	  }
 	}
 	Block {
+	  BlockType		  Sum
+	  Name			  "Sum"
+	  SID			  "1174"
+	  Ports			  [2, 1]
+	  Position		  [980, 395, 1000, 415]
+	  ZOrder		  337
+	  ShowName		  off
+	  IconShape		  "round"
+	  Inputs		  "|+-"
+	  InputSameDT		  off
+	  OutDataTypeStr	  "Inherit: Inherit via internal rule"
+	  SaturateOnIntegerOverflow off
+	}
+	Block {
+	  BlockType		  Sum
+	  Name			  "Sum1"
+	  SID			  "1181"
+	  Ports			  [2, 1]
+	  Position		  [1075, 395, 1095, 415]
+	  ZOrder		  344
+	  ShowName		  off
+	  IconShape		  "round"
+	  Inputs		  "|++"
+	  InputSameDT		  off
+	  OutDataTypeStr	  "Inherit: Inherit via internal rule"
+	  SaturateOnIntegerOverflow off
+	}
+	Block {
+	  BlockType		  Reference
+	  Name			  "computeh"
+	  SID			  "1175"
+	  Ports			  [2, 1]
+	  Position		  [795, 475, 865, 535]
+	  ZOrder		  338
+	  BackgroundColor	  "[0.850000, 0.010000, 0.698000]"
+	  ShowName		  off
+	  LibraryVersion	  "1.241"
+	  SourceBlock		  "WBCLibrary/wholeBodyModel/Dynamics/computeh"
+	  SourceType		  "Generalized Bias Forces"
+	  ContentPreviewEnabled	  off
+	  val			  "7"
+	  robotname		  "robotName"
+	  localname		  "localName"
+	}
+	Block {
+	  BlockType		  Reference
+	  Name			  "dq_b + dq_j"
+	  SID			  "1177"
+	  Ports			  [0, 1]
+	  Position		  [640, 508, 690, 532]
+	  ZOrder		  340
+	  ShowName		  off
+	  LibraryVersion	  "1.241"
+	  SourceBlock		  "WBCLibrary/wholeBodyStates/dq_b + dq_j"
+	  SourceType		  "Floating base velocity + robot joint velocities"
+	  ContentPreviewEnabled	  off
+	  robotName		  "robotName"
+	  localName		  "localName"
+	  Ts			  "Ts"
+	}
+	Block {
 	  BlockType		  Reference
 	  Name			  "holder\n"
 	  SID			  "1164"
 	  Ports			  [1, 1]
-	  Position		  [730, 404, 790, 446]
+	  Position		  [755, 384, 815, 426]
 	  ZOrder		  327
 	  BackgroundColor	  "[0.537255, 0.721569, 1.000000]"
 	  LibraryVersion	  "1.241"
@@ -1238,11 +1344,11 @@ Model {
 	  Name			  "qD"
 	  SID			  "1168"
 	  Ports			  [5]
-	  Position		  [1090, 476, 1120, 544]
+	  Position		  [1090, 566, 1120, 634]
 	  ZOrder		  331
 	  Floating		  off
-	  Location		  [7, 83, 1373, 767]
-	  Open			  off
+	  Location		  [5, 79, 1359, 756]
+	  Open			  on
 	  NumInputPorts		  "5"
 	  List {
 	    ListType		    AxesTitles
@@ -1263,33 +1369,52 @@ Model {
 	    MarkerStyles	    "none|none|none|none|none|none"
 	  }
 	  ShowLegends		  on
-	  LegendLocations	  "0.90364     0.86667    0.070644    0.074927\n 0.8949     0.66094    0.079429     0.09777\n0.8905"
-	  "4     0.47635    0.083821     0.09777\n 0.8949     0.24656    0.079429     0.14346\n0.89054    0.066356    0.083821"
-	  "     0.14346"
+	  LegendLocations	  "0.90233     0.86411     0.07127    0.075702\n0.89346     0.65787    0.080133    0.098781\n0.8890"
+	  "3     0.47323    0.084564    0.098781\n0.89346     0.24243    0.080133     0.14494\n0.88903    0.059269    0.084564"
+	  "     0.14494"
 	  TimeRange		  "5"
-	  YMin			  "-50~-200~-200~-100~-200"
-	  YMax			  "100~200~200~100~200"
+	  YMin			  "-40~-50~-50~-100~-200"
+	  YMax			  "40~50~100~100~200"
 	  LimitDataPoints	  off
+	}
+	Block {
+	  BlockType		  Reference
+	  Name			  "q_b + q_j"
+	  SID			  "1178"
+	  Ports			  [0, 1]
+	  Position		  [640, 479, 690, 501]
+	  ZOrder		  341
+	  ShowName		  off
+	  LibraryVersion	  "1.241"
+	  SourceBlock		  "WBCLibrary/wholeBodyStates/q_b + q_j"
+	  SourceType		  "Floating Base + Roobot Joints"
+	  ContentPreviewEnabled	  off
+	  robotName		  "robotName"
+	  localName		  "localName"
+	  Ts			  "Ts"
 	}
 	Line {
 	  ZOrder		  1044
 	  SrcBlock		  "Joint Angles"
 	  SrcPort		  1
-	  DstBlock		  "holder\n"
-	  DstPort		  1
+	  Points		  [12, 0]
+	  Branch {
+	    ZOrder		    1072
+	    Points		    [0, 61; 268, 0]
+	    DstBlock		    "Sum"
+	    DstPort		    2
+	  }
+	  Branch {
+	    ZOrder		    1071
+	    DstBlock		    "holder\n"
+	    DstPort		    1
+	  }
 	}
 	Line {
 	  ZOrder		  1045
 	  SrcBlock		  "holder\n"
 	  SrcPort		  1
 	  DstBlock		  "Subsystem1"
-	  DstPort		  1
-	}
-	Line {
-	  ZOrder		  1060
-	  SrcBlock		  "Subsystem1"
-	  SrcPort		  1
-	  DstBlock		  "Set Angles (Direct)"
 	  DstPort		  1
 	}
 	Line {
@@ -1351,10 +1476,74 @@ Model {
 	  DstBlock		  "23-DoFs WBI to YARP"
 	  DstPort		  1
 	}
+	Line {
+	  ZOrder		  1070
+	  SrcBlock		  "Subsystem1"
+	  SrcPort		  1
+	  DstBlock		  "Sum"
+	  DstPort		  1
+	}
+	Line {
+	  ZOrder		  1073
+	  SrcBlock		  "Sum"
+	  SrcPort		  1
+	  DstBlock		  "Gain1"
+	  DstPort		  1
+	}
+	Line {
+	  ZOrder		  1078
+	  SrcBlock		  "q_b + q_j"
+	  SrcPort		  1
+	  DstBlock		  "computeh"
+	  DstPort		  1
+	}
+	Line {
+	  ZOrder		  1080
+	  SrcBlock		  "dq_b + dq_j"
+	  SrcPort		  1
+	  DstBlock		  "Gain2"
+	  DstPort		  1
+	}
+	Line {
+	  ZOrder		  1081
+	  SrcBlock		  "Gain2"
+	  SrcPort		  1
+	  DstBlock		  "computeh"
+	  DstPort		  2
+	}
+	Line {
+	  ZOrder		  1086
+	  SrcBlock		  "Gain1"
+	  SrcPort		  1
+	  DstBlock		  "Sum1"
+	  DstPort		  1
+	}
+	Line {
+	  ZOrder		  1087
+	  SrcBlock		  "computeh"
+	  SrcPort		  1
+	  DstBlock		  "Selector"
+	  DstPort		  1
+	}
+	Line {
+	  ZOrder		  1088
+	  SrcBlock		  "Sum1"
+	  SrcPort		  1
+	  DstBlock		  "Set Torques"
+	  DstPort		  1
+	}
+	Line {
+	  ZOrder		  1089
+	  SrcBlock		  "Selector"
+	  SrcPort		  1
+	  Points		  [95, 0]
+	  DstBlock		  "Sum1"
+	  DstPort		  2
+	}
 	Annotation {
 	  SID			  "992"
 	  Name			  " "
-	  Position		  [628, 594, 632, 611]
+	  Position		  [628, 639, 632, 656]
 	  InternalMargins	  [0, 0, 0, 0]
 	  FixedHeight		  off
 	  FixedWidth		  off
