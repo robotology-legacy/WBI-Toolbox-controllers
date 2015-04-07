@@ -7,7 +7,7 @@ Model {
     NumRootInports	    0
     NumRootOutports	    0
     ParameterArgumentNames  ""
-    ComputedModelVersion    "1.2044"
+    ComputedModelVersion    "1.2057"
     NumModelReferences	    0
     NumTestPointedSignals   0
   }
@@ -31,7 +31,7 @@ Model {
       $ObjectID		      2
       $ClassName	      "Simulink.WindowInfo"
       IsActive		      [1]
-      Location		      [677.0, 54.0, 683.0, 707.0]
+      Location		      [1366.0, 27.0, 1920.0, 1053.0]
       Object {
 	$PropName		"ModelBrowserInfo"
 	$ObjectID		3
@@ -56,27 +56,27 @@ Model {
 	  IsActive		  [0]
 	  ViewObjType		  "SimulinkSubsys"
 	  LoadSaveID		  "781"
-	  Extents		  [1449.0, 846.0]
+	  Extents		  [1689.0, 935.0]
 	  ZoomFactor		  [1.5]
 	  Offset		  [-62.469135802469, 118.27086594372304]
 	}
 	Object {
 	  $ObjectID		  6
-	  IsActive		  [0]
+	  IsActive		  [1]
 	  ViewObjType		  "SimulinkSubsys"
 	  LoadSaveID		  "915"
-	  Extents		  [440.0, 589.0]
-	  ZoomFactor		  [1.0]
-	  Offset		  [869.58043841019412, 481.90920181027508]
+	  Extents		  [1689.0, 935.0]
+	  ZoomFactor		  [1.3494636623294192]
+	  Offset		  [503.7661329771222, 288.5660699503311]
 	}
 	Object {
 	  $ObjectID		  7
-	  IsActive		  [1]
+	  IsActive		  [0]
 	  ViewObjType		  "SimulinkSubsys"
 	  LoadSaveID		  "61"
-	  Extents		  [452.0, 589.0]
-	  ZoomFactor		  [0.30241331082172929]
-	  Offset		  [581.70574145047158, -293.83279591686312]
+	  Extents		  [1689.0, 935.0]
+	  ZoomFactor		  [1.0260180995475112]
+	  Offset		  [505.942448490904, 230.25358324145529]
 	}
 	Object {
 	  $ObjectID		  8
@@ -115,9 +115,9 @@ Model {
   ModifiedByFormat	  "%<Auto>"
   LastModifiedBy	  "daniele"
   ModifiedDateFormat	  "%<Auto>"
-  LastModifiedDate	  "Sat Apr 04 15:12:44 2015"
-  RTWModifiedTimeStamp	  350061138
-  ModelVersionFormat	  "1.%<AutoIncrement:2044>"
+  LastModifiedDate	  "Tue Apr 07 17:06:17 2015"
+  RTWModifiedTimeStamp	  350326438
+  ModelVersionFormat	  "1.%<AutoIncrement:2057>"
   ConfigurationManager	  "none"
   SampleTimeColors	  off
   SampleTimeAnnotations	  on
@@ -1079,7 +1079,7 @@ Model {
     ShowPageBoundaries	    off
     ZoomFactor		    "710"
     ReportName		    "simulink-default.rpt"
-    SIDHighWatermark	    "992"
+    SIDHighWatermark	    "1004"
     Block {
       BlockType		      SubSystem
       Name		      "Subsystem"
@@ -1122,7 +1122,7 @@ Model {
       }
       System {
 	Name			"Subsystem"
-	Location		[677, 54, 1360, 761]
+	Location		[1366, 27, 3286, 1080]
 	Open			on
 	ModelBrowserVisibility	on
 	ModelBrowserWidth	200
@@ -1134,7 +1134,7 @@ Model {
 	TiledPaperMargins	[0.500000, 0.500000, 0.500000, 0.500000]
 	TiledPageScale		1
 	ShowPageBoundaries	off
-	ZoomFactor		"30"
+	ZoomFactor		"103"
 	Block {
 	  BlockType		  Constant
 	  Name			  "\n\n  1"
@@ -2548,7 +2548,7 @@ Model {
 	  RequestExecContextInheritance	off
 	  System {
 	    Name		    "Dump and visualize"
-	    Location		    [683, 54, 1366, 768]
+	    Location		    [1366, 27, 3286, 1080]
 	    Open		    on
 	    ModelBrowserVisibility  on
 	    ModelBrowserWidth	    200
@@ -2560,7 +2560,7 @@ Model {
 	    TiledPaperMargins	    [0.500000, 0.500000, 0.500000, 0.500000]
 	    TiledPageScale	    1
 	    ShowPageBoundaries	    off
-	    ZoomFactor		    "100"
+	    ZoomFactor		    "135"
 	    Block {
 	      BlockType		      Inport
 	      Name		      "tauDesired"
@@ -2651,45 +2651,195 @@ Model {
 	    }
 	    Block {
 	      BlockType		      Reference
-	      Name		      "23-DoFs WBI to YARP2"
-	      SID		      "941"
+	      Name		      "23-DoFs WBI to YARP1"
+	      SID		      "994"
 	      Ports		      [1, 5]
 	      Position		      [820, 351, 930, 449]
-	      ZOrder		      315
+	      ZOrder		      319
 	      BackgroundColor	      "lightBlue"
 	      DropShadow	      on
 	      LibraryVersion	      "1.241"
 	      SourceBlock	      "WBCLibrary/Utilities/23-DoFs WBI to YARP"
 	      SourceType	      ""
 	      ContentPreviewEnabled   off
+	      Port {
+		PortNumber		1
+		Name			"torso"
+		RTWStorageClass		"Auto"
+		DataLoggingNameMode	"SignalName"
+	      }
+	      Port {
+		PortNumber		2
+		Name			"left_arm"
+		PropagatedSignals	"leftArm"
+		RTWStorageClass		"Auto"
+		DataLoggingNameMode	"SignalName"
+	      }
+	      Port {
+		PortNumber		3
+		Name			"right_arm"
+		PropagatedSignals	"rightArm"
+		RTWStorageClass		"Auto"
+		DataLoggingNameMode	"SignalName"
+	      }
+	      Port {
+		PortNumber		4
+		Name			"left_leg"
+		PropagatedSignals	"leftLeg"
+		RTWStorageClass		"Auto"
+		DataLoggingNameMode	"SignalName"
+	      }
+	      Port {
+		PortNumber		5
+		Name			"right_leg"
+		PropagatedSignals	"rightLeg"
+		RTWStorageClass		"Auto"
+		DataLoggingNameMode	"SignalName"
+	      }
+	    }
+	    Block {
+	      BlockType		      Reference
+	      Name		      "23-DoFs WBI to YARP2"
+	      SID		      "995"
+	      Ports		      [1, 5]
+	      Position		      [820, 466, 930, 564]
+	      ZOrder		      320
+	      BackgroundColor	      "lightBlue"
+	      DropShadow	      on
+	      LibraryVersion	      "1.241"
+	      SourceBlock	      "WBCLibrary/Utilities/23-DoFs WBI to YARP"
+	      SourceType	      ""
+	      ContentPreviewEnabled   off
+	      Port {
+		PortNumber		1
+		Name			"torso"
+		RTWStorageClass		"Auto"
+		DataLoggingNameMode	"SignalName"
+	      }
+	      Port {
+		PortNumber		2
+		Name			"left_arm"
+		PropagatedSignals	"leftArm"
+		RTWStorageClass		"Auto"
+		DataLoggingNameMode	"SignalName"
+	      }
+	      Port {
+		PortNumber		3
+		Name			"right_arm"
+		PropagatedSignals	"rightArm"
+		RTWStorageClass		"Auto"
+		DataLoggingNameMode	"SignalName"
+	      }
+	      Port {
+		PortNumber		4
+		Name			"left_leg"
+		PropagatedSignals	"leftLeg"
+		RTWStorageClass		"Auto"
+		DataLoggingNameMode	"SignalName"
+	      }
+	      Port {
+		PortNumber		5
+		Name			"right_leg"
+		PropagatedSignals	"rightLeg"
+		RTWStorageClass		"Auto"
+		DataLoggingNameMode	"SignalName"
+	      }
 	    }
 	    Block {
 	      BlockType		      Reference
 	      Name		      "23-DoFs WBI to YARP3"
-	      SID		      "942"
+	      SID		      "996"
 	      Ports		      [1, 5]
-	      Position		      [820, 466, 930, 564]
-	      ZOrder		      316
+	      Position		      [820, 591, 930, 689]
+	      ZOrder		      321
 	      BackgroundColor	      "lightBlue"
 	      DropShadow	      on
 	      LibraryVersion	      "1.241"
 	      SourceBlock	      "WBCLibrary/Utilities/23-DoFs WBI to YARP"
 	      SourceType	      ""
 	      ContentPreviewEnabled   off
+	      Port {
+		PortNumber		1
+		Name			"torso"
+		RTWStorageClass		"Auto"
+		DataLoggingNameMode	"SignalName"
+	      }
+	      Port {
+		PortNumber		2
+		Name			"left_arm"
+		PropagatedSignals	"leftArm"
+		RTWStorageClass		"Auto"
+		DataLoggingNameMode	"SignalName"
+	      }
+	      Port {
+		PortNumber		3
+		Name			"right_arm"
+		PropagatedSignals	"rightArm"
+		RTWStorageClass		"Auto"
+		DataLoggingNameMode	"SignalName"
+	      }
+	      Port {
+		PortNumber		4
+		Name			"left_leg"
+		PropagatedSignals	"leftLeg"
+		RTWStorageClass		"Auto"
+		DataLoggingNameMode	"SignalName"
+	      }
+	      Port {
+		PortNumber		5
+		Name			"right_leg"
+		PropagatedSignals	"rightLeg"
+		RTWStorageClass		"Auto"
+		DataLoggingNameMode	"SignalName"
+	      }
 	    }
 	    Block {
 	      BlockType		      Reference
 	      Name		      "23-DoFs WBI to YARP4"
-	      SID		      "943"
+	      SID		      "999"
 	      Ports		      [1, 5]
-	      Position		      [820, 591, 930, 689]
-	      ZOrder		      317
+	      Position		      [1490, 696, 1600, 794]
+	      ZOrder		      324
 	      BackgroundColor	      "lightBlue"
 	      DropShadow	      on
 	      LibraryVersion	      "1.241"
 	      SourceBlock	      "WBCLibrary/Utilities/23-DoFs WBI to YARP"
 	      SourceType	      ""
 	      ContentPreviewEnabled   off
+	      Port {
+		PortNumber		1
+		Name			"torso"
+		RTWStorageClass		"Auto"
+		DataLoggingNameMode	"SignalName"
+	      }
+	      Port {
+		PortNumber		2
+		Name			"left_arm"
+		PropagatedSignals	"leftArm"
+		RTWStorageClass		"Auto"
+		DataLoggingNameMode	"SignalName"
+	      }
+	      Port {
+		PortNumber		3
+		Name			"right_arm"
+		PropagatedSignals	"rightArm"
+		RTWStorageClass		"Auto"
+		DataLoggingNameMode	"SignalName"
+	      }
+	      Port {
+		PortNumber		4
+		Name			"left_leg"
+		PropagatedSignals	"leftLeg"
+		RTWStorageClass		"Auto"
+		DataLoggingNameMode	"SignalName"
+	      }
+	      Port {
+		PortNumber		5
+		Name			"right_leg"
+		PropagatedSignals	"rightLeg"
+		RTWStorageClass		"Auto"
+		DataLoggingNameMode	"SignalName"
+	      }
 	    }
 	    Block {
 	      BlockType		      Scope
@@ -2728,6 +2878,23 @@ Model {
 	      LimitDataPoints	      off
 	    }
 	    Block {
+	      BlockType		      Demux
+	      Name		      "Demux"
+	      SID		      "1002"
+	      Ports		      [1, 2]
+	      Position		      [1445, 608, 1450, 672]
+	      ZOrder		      327
+	      ShowName		      off
+	      Outputs		      "2"
+	      DisplayOption	      "bar"
+	      Port {
+		PortNumber		1
+		Name			"vb"
+		RTWStorageClass		"Auto"
+		DataLoggingNameMode	"SignalName"
+	      }
+	    }
+	    Block {
 	      BlockType		      Gain
 	      Name		      "Gain"
 	      SID		      "934"
@@ -2743,21 +2910,38 @@ Model {
 	      BlockType		      Gain
 	      Name		      "Gain1"
 	      SID		      "936"
-	      Position		      [1295, 622, 1345, 658]
-	      ZOrder		      311
+	      Position		      [1400, 727, 1450, 763]
+	      ZOrder		      328
 	      ShowName		      off
-	      Commented		      "on"
 	      Gain		      "180/pi"
 	      ParamDataTypeStr	      "Inherit: Inherit via internal rule"
 	      OutDataTypeStr	      "Inherit: Inherit via internal rule"
 	      SaturateOnIntegerOverflow	off
 	    }
 	    Block {
+	      BlockType		      Gain
+	      Name		      "Gain2"
+	      SID		      "1004"
+	      Position		      [1500, 637, 1550, 673]
+	      ZOrder		      329
+	      ShowName		      off
+	      Gain		      "180/pi"
+	      ParamDataTypeStr	      "Inherit: Inherit via internal rule"
+	      OutDataTypeStr	      "Inherit: Inherit via internal rule"
+	      SaturateOnIntegerOverflow	off
+	      Port {
+		PortNumber		1
+		Name			"wb"
+		RTWStorageClass		"Auto"
+		DataLoggingNameMode	"SignalName"
+	      }
+	    }
+	    Block {
 	      BlockType		      Reference
 	      Name		      "Joint Angles"
 	      SID		      "920"
 	      Ports		      [0, 1]
-	      Position		      [1195, 499, 1245, 531]
+	      Position		      [1205, 499, 1255, 531]
 	      ZOrder		      305
 	      BackgroundColor	      "[1.000000, 0.501961, 0.000000]"
 	      ShowName		      off
@@ -2837,7 +3021,6 @@ Model {
 	      Ports		      [0, 1]
 	      Position		      [1205, 623, 1255, 657]
 	      ZOrder		      304
-	      Commented		      "on"
 	      RequestExecContextInheritance off
 	      Port {
 		PortNumber		1
@@ -2847,7 +3030,7 @@ Model {
 	      }
 	      System {
 		Name			"base + dq'"
-		Location		[0, 27, 1366, 768]
+		Location		[1366, 27, 3286, 1080]
 		Open			off
 		ModelBrowserVisibility	on
 		ModelBrowserWidth	200
@@ -2869,7 +3052,7 @@ Model {
 		  ZOrder		  41
 		  BackgroundColor	  "[0.732000, 0.463600, 0.000000]"
 		  ShowName		  off
-		  LibraryVersion	  "1.232"
+		  LibraryVersion	  "1.241"
 		  SourceBlock		  "WBCLibrary/wholeBodyStates/Joint Velocities"
 		  SourceType		  "Joint Velocities"
 		  ContentPreviewEnabled	  off
@@ -2884,7 +3067,7 @@ Model {
 		  Position		  [65, 93, 140, 137]
 		  ZOrder		  -1
 		  BackgroundColor	  "[0.047000, 0.909000, 0.803000]"
-		  LibraryVersion	  "1.232"
+		  LibraryVersion	  "1.241"
 		  SourceBlock		  "WBCLibrary/wholeBodyModel/Jacobians/Left Foot Jacobian"
 		  SourceType		  "Left Foot Jacobian"
 		  ContentPreviewEnabled	  off
@@ -2910,7 +3093,7 @@ Model {
 		  Position		  [70, 28, 140, 72]
 		  ZOrder		  -2
 		  BackgroundColor	  "[0.000000, 1.000000, 0.533000]"
-		  LibraryVersion	  "1.232"
+		  LibraryVersion	  "1.241"
 		  SourceBlock		  "WBCLibrary/wholeBodyModel/Jacobians/Right Foot Jacobian"
 		  SourceType		  "Right Foot Jacobian"
 		  ContentPreviewEnabled	  off
@@ -3257,7 +3440,7 @@ Model {
 	      Position		      [1660, 468, 1745, 562]
 	      ZOrder		      312
 	      Floating		      off
-	      Location		      [1, 88, 1681, 1049]
+	      Location		      [2954, 54, 3904, 1074]
 	      Open		      off
 	      NumInputPorts	      "5"
 	      List {
@@ -3279,11 +3462,55 @@ Model {
 		MarkerStyles		"none|none|none|none|none|none"
 	      }
 	      ShowLegends	      on
-	      TimeRange		      "400"
-	      YMin		      "-40~-50~-50~-20~-40"
-	      YMax		      "20~100~100~40~40"
+	      LegendLocations	      "0.85974      0.9098     0.10158    0.050245\n0.84079     0.70527     0.12053    0.065564"
+	      "\n0.83447     0.51605     0.12684    0.065564\n0.84079      0.2962     0.12053    0.096201\n0.83447       0.106"
+	      "     0.12684    0.096201"
+	      TimeRange		      "40"
+	      YMin		      "-10~-50~-50~-20~-40"
+	      YMax		      "10~100~100~40~40"
 	      SaveToWorkspace	      on
 	      SaveName		      "qj_and_v"
+	      DataFormat	      "StructureWithTime"
+	      LimitDataPoints	      off
+	    }
+	    Block {
+	      BlockType		      Scope
+	      Name		      "qjD"
+	      SID		      "928"
+	      Ports		      [5]
+	      Position		      [1665, 698, 1745, 792]
+	      ZOrder		      306
+	      Floating		      off
+	      Location		      [2330, 54, 4252, 1081]
+	      Open		      off
+	      NumInputPorts	      "5"
+	      List {
+		ListType		AxesTitles
+		axes1			"%<SignalLabel>"
+		axes2			"%<SignalLabel>"
+		axes3			"%<SignalLabel>"
+		axes4			"%<SignalLabel>"
+		axes5			"%<SignalLabel>"
+	      }
+	      List {
+		ListType		ScopeGraphics
+		FigureColor		"[0.501960784313725 0.501960784313725 0.501960784313725]"
+		AxesColor		"[0 0 0]"
+		AxesTickColor		"[1 1 1]"
+		LineColors		"[1 1 0;1 0 1;0 1 1;1 0 0;0 1 0;0 0 1]"
+		LineStyles		"-|-|-|-|-|-"
+		LineWidths		"[0.5 0.5 0.5 0.5 0.5 0.5]"
+		MarkerStyles		"none|none|none|none|none|none"
+	      }
+	      ShowLegends	      on
+	      LegendLocations	      "0.93226       0.909    0.050208    0.049903\n0.92279     0.71134    0.059573    0.065117"
+	      "\n0.91859     0.52017    0.062695    0.065117\n0.92279     0.30237    0.059573    0.095545\n0.92015      0.1112"
+	      "    0.062695    0.095545"
+	      TimeRange		      "15"
+	      YMin		      "-15~-10~-20~-20~-20"
+	      YMax		      "20~10~30~20~20"
+	      SaveToWorkspace	      on
+	      SaveName		      "qj_and_v1"
 	      DataFormat	      "StructureWithTime"
 	      LimitDataPoints	      off
 	    }
@@ -3295,7 +3522,7 @@ Model {
 	      Position		      [1030, 353, 1130, 447]
 	      ZOrder		      250
 	      Floating		      off
-	      Location		      [811, 91, 1674, 1043]
+	      Location		      [1372, 54, 2322, 1074]
 	      Open		      off
 	      NumInputPorts	      "5"
 	      List {
@@ -3317,9 +3544,12 @@ Model {
 		MarkerStyles		"none|none|none|none|none|none"
 	      }
 	      ShowLegends	      on
-	      TimeRange		      "60"
-	      YMin		      "-10~-4~-4~-10~-10"
-	      YMax		      "10~4~4~10~10"
+	      LegendLocations	      "0.86079      0.9098     0.10158    0.050245\n0.84184     0.70527     0.12053    0.065564"
+	      "\n0.83553     0.51605     0.12684    0.065564\n0.84184      0.2962     0.12053    0.096201\n0.83553       0.106"
+	      "     0.12684    0.096201"
+	      TimeRange		      "14"
+	      YMin		      "-20~-4~-4~-8~-10"
+	      YMax		      "10~4~4~4~10"
 	      SaveToWorkspace	      on
 	      SaveName		      "tauDes"
 	      DataFormat	      "StructureWithTime"
@@ -3333,7 +3563,7 @@ Model {
 	      Position		      [1030, 464, 1130, 566]
 	      ZOrder		      287
 	      Floating		      off
-	      Location		      [1, 88, 1681, 1049]
+	      Location		      [2333, 56, 4253, 1079]
 	      Open		      off
 	      NumInputPorts	      "5"
 	      List {
@@ -3355,6 +3585,9 @@ Model {
 		MarkerStyles		"none|none|none|none|none|none"
 	      }
 	      ShowLegends	      on
+	      LegendLocations	      "0.93086     0.91007     0.05026    0.050098\n0.92148     0.70613    0.059635    0.065371"
+	      "\n0.91836      0.5165     0.06276    0.065371\n0.92148     0.29631    0.059635    0.095919\n0.91836     0.10667"
+	      "     0.06276    0.095919"
 	      TimeRange		      "60"
 	      YMin		      "-4~-2~-4~-10~-10"
 	      YMax		      "4~2~4~10~10"
@@ -3371,7 +3604,7 @@ Model {
 	      Position		      [1025, 591, 1130, 689]
 	      ZOrder		      289
 	      Floating		      off
-	      Location		      [2, 94, 1680, 1043]
+	      Location		      [2332, 54, 3282, 1074]
 	      Open		      off
 	      NumInputPorts	      "5"
 	      List {
@@ -3393,29 +3626,58 @@ Model {
 		MarkerStyles		"none|none|none|none|none|none"
 	      }
 	      ShowLegends	      on
-	      TimeRange		      "25"
-	      YMin		      "-5~-5~-5~-5~-5"
-	      YMax		      "5~5~5~5~5"
+	      LegendLocations	      "0.86079      0.9098     0.10158    0.050245\n0.84184     0.70527     0.12053    0.065564"
+	      "\n0.83553     0.51605     0.12684    0.065564\n0.84184      0.2962     0.12053    0.096201\n0.83553     0.10993"
+	      "     0.12684    0.096201"
+	      TimeRange		      "14"
+	      YMin		      "-15~-8~-5~-8~-10"
+	      YMax		      "10~4~5~6~10"
 	      SaveToWorkspace	      on
 	      SaveName		      "tauMeasured"
 	      DataFormat	      "StructureWithTime"
 	      LimitDataPoints	      off
 	    }
 	    Block {
+	      BlockType		      Selector
+	      Name		      "v - vb"
+	      SID		      "997"
+	      Ports		      [1, 1]
+	      Position		      [1320, 621, 1360, 659]
+	      ZOrder		      322
+	      InputPortWidth	      "ROBOT_DOF+6"
+	      Indices		      "[1:6]"
+	      Port {
+		PortNumber		1
+		Name			"vb"
+		RTWStorageClass		"Auto"
+		DataLoggingNameMode	"SignalName"
+	      }
+	    }
+	    Block {
+	      BlockType		      Selector
+	      Name		      "v -> qjD"
+	      SID		      "998"
+	      Ports		      [1, 1]
+	      Position		      [1320, 726, 1360, 764]
+	      ZOrder		      323
+	      InputPortWidth	      "ROBOT_DOF+6"
+	      Indices		      "[7:ROBOT_DOF+6]"
+	    }
+	    Block {
 	      BlockType		      Scope
-	      Name		      "v"
-	      SID		      "928"
-	      Ports		      [1]
-	      Position		      [1665, 606, 1745, 674]
-	      ZOrder		      306
-	      Commented		      "on"
+	      Name		      "vb"
+	      SID		      "1000"
+	      Ports		      [2]
+	      Position		      [1665, 609, 1740, 671]
+	      ZOrder		      325
 	      Floating		      off
-	      Location		      [7, 83, 1373, 767]
+	      Location		      [1372, 54, 2322, 1074]
 	      Open		      off
-	      NumInputPorts	      "1"
+	      NumInputPorts	      "2"
 	      List {
 		ListType		AxesTitles
 		axes1			"%<SignalLabel>"
+		axes2			"%<SignalLabel>"
 	      }
 	      List {
 		ListType		ScopeGraphics
@@ -3428,11 +3690,12 @@ Model {
 		MarkerStyles		"none|none|none|none|none|none"
 	      }
 	      ShowLegends	      on
+	      LegendLocations	      "0.87974      0.9098    0.082632    0.050245\n0.87974     0.43627    0.082632    0.050245"
 	      TimeRange		      "10"
-	      YMin		      "-0.124"
-	      YMax		      "-0.106"
+	      YMin		      "-0.1~-10"
+	      YMax		      "0.1~10"
 	      SaveToWorkspace	      on
-	      SaveName		      "qj_and_v1"
+	      SaveName		      "qj_and_v2"
 	      DataFormat	      "StructureWithTime"
 	      LimitDataPoints	      off
 	    }
@@ -3461,65 +3724,16 @@ Model {
 	      SrcPort		      1
 	      Points		      [8, 0]
 	      Branch {
-		ZOrder			848
-		DstBlock		"23-DoFs WBI to YARP2"
-		DstPort			1
-	      }
-	      Branch {
-		ZOrder			534
+		ZOrder			904
 		Points			[0, 50]
 		DstBlock		"Sum"
 		DstPort			1
 	      }
-	    }
-	    Line {
-	      ZOrder		      849
-	      SrcBlock		      "23-DoFs WBI to YARP3"
-	      SrcPort		      3
-	      DstBlock		      "tauError"
-	      DstPort		      3
-	    }
-	    Line {
-	      ZOrder		      843
-	      SrcBlock		      "23-DoFs WBI to YARP2"
-	      SrcPort		      4
-	      DstBlock		      "tauDes"
-	      DstPort		      4
-	    }
-	    Line {
-	      ZOrder		      850
-	      SrcBlock		      "23-DoFs WBI to YARP3"
-	      SrcPort		      4
-	      DstBlock		      "tauError"
-	      DstPort		      4
-	    }
-	    Line {
-	      ZOrder		      847
-	      SrcBlock		      "23-DoFs WBI to YARP2"
-	      SrcPort		      3
-	      DstBlock		      "tauDes"
-	      DstPort		      3
-	    }
-	    Line {
-	      ZOrder		      856
-	      SrcBlock		      "23-DoFs WBI to YARP4"
-	      SrcPort		      4
-	      DstBlock		      "tauMeasured"
-	      DstPort		      4
-	    }
-	    Line {
-	      ZOrder		      851
-	      SrcBlock		      "23-DoFs WBI to YARP3"
-	      SrcPort		      1
-	      DstBlock		      "tauError"
-	      DstPort		      1
-	    }
-	    Line {
-	      ZOrder		      858
-	      SrcBlock		      "23-DoFs WBI to YARP4"
-	      SrcPort		      5
-	      DstBlock		      "tauMeasured"
-	      DstPort		      5
+	      Branch {
+		ZOrder			902
+		DstBlock		"23-DoFs WBI to YARP1"
+		DstPort			1
+	      }
 	    }
 	    Line {
 	      ZOrder		      87
@@ -3527,30 +3741,16 @@ Model {
 	      SrcPort		      1
 	      Points		      [20, 0]
 	      Branch {
-		ZOrder			860
+		ZOrder			929
 		Points			[0, 60]
-		DstBlock		"23-DoFs WBI to YARP4"
+		DstBlock		"23-DoFs WBI to YARP3"
 		DstPort			1
 	      }
 	      Branch {
-		ZOrder			531
+		ZOrder			928
 		DstBlock		"Sum"
 		DstPort			2
 	      }
-	    }
-	    Line {
-	      ZOrder		      857
-	      SrcBlock		      "23-DoFs WBI to YARP4"
-	      SrcPort		      3
-	      DstBlock		      "tauMeasured"
-	      DstPort		      3
-	    }
-	    Line {
-	      ZOrder		      859
-	      SrcBlock		      "23-DoFs WBI to YARP4"
-	      SrcPort		      2
-	      DstBlock		      "tauMeasured"
-	      DstPort		      2
 	    }
 	    Line {
 	      Name		      "CoM_Desired"
@@ -3571,20 +3771,6 @@ Model {
 	      }
 	    }
 	    Line {
-	      ZOrder		      852
-	      SrcBlock		      "23-DoFs WBI to YARP3"
-	      SrcPort		      2
-	      DstBlock		      "tauError"
-	      DstPort		      2
-	    }
-	    Line {
-	      ZOrder		      855
-	      SrcBlock		      "23-DoFs WBI to YARP4"
-	      SrcPort		      1
-	      DstBlock		      "tauMeasured"
-	      DstPort		      1
-	    }
-	    Line {
 	      Name		      "CoM_Measured"
 	      ZOrder		      723
 	      Labels		      [1, 1]
@@ -3594,51 +3780,23 @@ Model {
 	      DstPort		      1
 	    }
 	    Line {
-	      ZOrder		      853
-	      SrcBlock		      "23-DoFs WBI to YARP3"
-	      SrcPort		      5
-	      DstBlock		      "tauError"
-	      DstPort		      5
-	    }
-	    Line {
-	      ZOrder		      844
-	      SrcBlock		      "23-DoFs WBI to YARP2"
-	      SrcPort		      1
-	      DstBlock		      "tauDes"
-	      DstPort		      1
-	    }
-	    Line {
-	      Name		      "torqueError"
-	      ZOrder		      854
-	      Labels		      [0, 0]
-	      SrcBlock		      "Sum"
-	      SrcPort		      1
-	      Points		      [65, 0; 0, 65]
-	      DstBlock		      "23-DoFs WBI to YARP3"
-	      DstPort		      1
-	    }
-	    Line {
-	      ZOrder		      845
-	      SrcBlock		      "23-DoFs WBI to YARP2"
-	      SrcPort		      2
-	      DstBlock		      "tauDes"
-	      DstPort		      2
-	    }
-	    Line {
-	      ZOrder		      846
-	      SrcBlock		      "23-DoFs WBI to YARP2"
-	      SrcPort		      5
-	      DstBlock		      "tauDes"
-	      DstPort		      5
-	    }
-	    Line {
 	      Name		      "v"
-	      ZOrder		      752
-	      Labels		      [1, 1]
+	      ZOrder		      961
+	      Labels		      [0, 0]
 	      SrcBlock		      "base + dq'"
 	      SrcPort		      1
-	      DstBlock		      "Gain1"
-	      DstPort		      1
+	      Points		      [28, 0]
+	      Branch {
+		ZOrder			932
+		Points			[0, 105]
+		DstBlock		"v -> qjD"
+		DstPort			1
+	      }
+	      Branch {
+		ZOrder			931
+		DstBlock		"v - vb"
+		DstPort			1
+	      }
 	    }
 	    Line {
 	      Name		      "qj"
@@ -3654,13 +3812,6 @@ Model {
 	      SrcBlock		      "Gain"
 	      SrcPort		      1
 	      DstBlock		      "23-DoFs WBI to YARP"
-	      DstPort		      1
-	    }
-	    Line {
-	      ZOrder		      817
-	      SrcBlock		      "Gain1"
-	      SrcPort		      1
-	      DstBlock		      "v"
 	      DstPort		      1
 	    }
 	    Line {
@@ -3707,6 +3858,245 @@ Model {
 	      SrcPort		      3
 	      DstBlock		      "qj"
 	      DstPort		      3
+	    }
+	    Line {
+	      Name		      "right_leg"
+	      ZOrder		      900
+	      Labels		      [1, 1]
+	      SrcBlock		      "23-DoFs WBI to YARP1"
+	      SrcPort		      5
+	      DstBlock		      "tauDes"
+	      DstPort		      5
+	    }
+	    Line {
+	      Name		      "torso"
+	      ZOrder		      896
+	      Labels		      [1, 1]
+	      SrcBlock		      "23-DoFs WBI to YARP1"
+	      SrcPort		      1
+	      DstBlock		      "tauDes"
+	      DstPort		      1
+	    }
+	    Line {
+	      Name		      "left_arm"
+	      ZOrder		      897
+	      Labels		      [1, 1]
+	      SrcBlock		      "23-DoFs WBI to YARP1"
+	      SrcPort		      2
+	      DstBlock		      "tauDes"
+	      DstPort		      2
+	    }
+	    Line {
+	      Name		      "left_leg"
+	      ZOrder		      899
+	      Labels		      [1, 1]
+	      SrcBlock		      "23-DoFs WBI to YARP1"
+	      SrcPort		      4
+	      DstBlock		      "tauDes"
+	      DstPort		      4
+	    }
+	    Line {
+	      Name		      "right_arm"
+	      ZOrder		      898
+	      Labels		      [1, 1]
+	      SrcBlock		      "23-DoFs WBI to YARP1"
+	      SrcPort		      3
+	      DstBlock		      "tauDes"
+	      DstPort		      3
+	    }
+	    Line {
+	      Name		      "right_leg"
+	      ZOrder		      915
+	      Labels		      [1, 1]
+	      SrcBlock		      "23-DoFs WBI to YARP2"
+	      SrcPort		      5
+	      DstBlock		      "tauError"
+	      DstPort		      5
+	    }
+	    Line {
+	      Name		      "torso"
+	      ZOrder		      911
+	      Labels		      [1, 1]
+	      SrcBlock		      "23-DoFs WBI to YARP2"
+	      SrcPort		      1
+	      DstBlock		      "tauError"
+	      DstPort		      1
+	    }
+	    Line {
+	      Name		      "left_arm"
+	      ZOrder		      912
+	      Labels		      [1, 1]
+	      SrcBlock		      "23-DoFs WBI to YARP2"
+	      SrcPort		      2
+	      DstBlock		      "tauError"
+	      DstPort		      2
+	    }
+	    Line {
+	      Name		      "left_leg"
+	      ZOrder		      914
+	      Labels		      [1, 1]
+	      SrcBlock		      "23-DoFs WBI to YARP2"
+	      SrcPort		      4
+	      DstBlock		      "tauError"
+	      DstPort		      4
+	    }
+	    Line {
+	      Name		      "right_arm"
+	      ZOrder		      913
+	      Labels		      [1, 1]
+	      SrcBlock		      "23-DoFs WBI to YARP2"
+	      SrcPort		      3
+	      DstBlock		      "tauError"
+	      DstPort		      3
+	    }
+	    Line {
+	      Name		      "torqueError"
+	      ZOrder		      916
+	      Labels		      [0, 0]
+	      SrcBlock		      "Sum"
+	      SrcPort		      1
+	      Points		      [65, 0; 0, 65]
+	      DstBlock		      "23-DoFs WBI to YARP2"
+	      DstPort		      1
+	    }
+	    Line {
+	      Name		      "right_leg"
+	      ZOrder		      927
+	      Labels		      [1, 1]
+	      SrcBlock		      "23-DoFs WBI to YARP3"
+	      SrcPort		      5
+	      DstBlock		      "tauMeasured"
+	      DstPort		      5
+	    }
+	    Line {
+	      Name		      "torso"
+	      ZOrder		      923
+	      Labels		      [1, 1]
+	      SrcBlock		      "23-DoFs WBI to YARP3"
+	      SrcPort		      1
+	      DstBlock		      "tauMeasured"
+	      DstPort		      1
+	    }
+	    Line {
+	      Name		      "left_arm"
+	      ZOrder		      924
+	      Labels		      [1, 1]
+	      SrcBlock		      "23-DoFs WBI to YARP3"
+	      SrcPort		      2
+	      DstBlock		      "tauMeasured"
+	      DstPort		      2
+	    }
+	    Line {
+	      Name		      "left_leg"
+	      ZOrder		      926
+	      Labels		      [1, 1]
+	      SrcBlock		      "23-DoFs WBI to YARP3"
+	      SrcPort		      4
+	      DstBlock		      "tauMeasured"
+	      DstPort		      4
+	    }
+	    Line {
+	      Name		      "right_arm"
+	      ZOrder		      925
+	      Labels		      [1, 1]
+	      SrcBlock		      "23-DoFs WBI to YARP3"
+	      SrcPort		      3
+	      DstBlock		      "tauMeasured"
+	      DstPort		      3
+	    }
+	    Line {
+	      Name		      "right_leg"
+	      ZOrder		      949
+	      Labels		      [1, 1]
+	      SrcBlock		      "23-DoFs WBI to YARP4"
+	      SrcPort		      5
+	      DstBlock		      "qjD"
+	      DstPort		      5
+	    }
+	    Line {
+	      Name		      "torso"
+	      ZOrder		      953
+	      Labels		      [1, 1]
+	      SrcBlock		      "23-DoFs WBI to YARP4"
+	      SrcPort		      1
+	      DstBlock		      "qjD"
+	      DstPort		      1
+	    }
+	    Line {
+	      Name		      "left_arm"
+	      ZOrder		      950
+	      Labels		      [1, 1]
+	      SrcBlock		      "23-DoFs WBI to YARP4"
+	      SrcPort		      2
+	      DstBlock		      "qjD"
+	      DstPort		      2
+	    }
+	    Line {
+	      Name		      "left_leg"
+	      ZOrder		      951
+	      Labels		      [1, 1]
+	      SrcBlock		      "23-DoFs WBI to YARP4"
+	      SrcPort		      4
+	      DstBlock		      "qjD"
+	      DstPort		      4
+	    }
+	    Line {
+	      Name		      "right_arm"
+	      ZOrder		      952
+	      Labels		      [1, 1]
+	      SrcBlock		      "23-DoFs WBI to YARP4"
+	      SrcPort		      3
+	      DstBlock		      "qjD"
+	      DstPort		      3
+	    }
+	    Line {
+	      ZOrder		      938
+	      SrcBlock		      "v -> qjD"
+	      SrcPort		      1
+	      DstBlock		      "Gain1"
+	      DstPort		      1
+	    }
+	    Line {
+	      Name		      "vb"
+	      ZOrder		      956
+	      Labels		      [-1, 1]
+	      SrcBlock		      "v - vb"
+	      SrcPort		      1
+	      DstBlock		      "Demux"
+	      DstPort		      1
+	    }
+	    Line {
+	      Name		      "vb"
+	      ZOrder		      959
+	      Labels		      [1, 1]
+	      SrcBlock		      "Demux"
+	      SrcPort		      1
+	      DstBlock		      "vb"
+	      DstPort		      1
+	    }
+	    Line {
+	      ZOrder		      960
+	      SrcBlock		      "Demux"
+	      SrcPort		      2
+	      Points		      [0, -2; 0, 2]
+	      DstBlock		      "Gain2"
+	      DstPort		      1
+	    }
+	    Line {
+	      ZOrder		      962
+	      SrcBlock		      "Gain1"
+	      SrcPort		      1
+	      DstBlock		      "23-DoFs WBI to YARP4"
+	      DstPort		      1
+	    }
+	    Line {
+	      Name		      "wb"
+	      ZOrder		      963
+	      Labels		      [1, 1]
+	      SrcBlock		      "Gain2"
+	      SrcPort		      1
+	      DstBlock		      "vb"
+	      DstPort		      2
 	    }
 	  }
 	}
@@ -4068,7 +4458,7 @@ Model {
 	  RequestExecContextInheritance	off
 	  System {
 	    Name		    "Subsystem"
-	    Location		    [683, 54, 1366, 768]
+	    Location		    [0, 795, 1366, 1536]
 	    Open		    on
 	    ModelBrowserVisibility  on
 	    ModelBrowserWidth	    200
@@ -5676,7 +6066,7 @@ Model {
 	  RequestExecContextInheritance	off
 	  System {
 	    Name		    "nonlinearImpedances"
-	    Location		    [683, 54, 1366, 768]
+	    Location		    [1366, 27, 3286, 1080]
 	    Open		    on
 	    ModelBrowserVisibility  on
 	    ModelBrowserWidth	    200
