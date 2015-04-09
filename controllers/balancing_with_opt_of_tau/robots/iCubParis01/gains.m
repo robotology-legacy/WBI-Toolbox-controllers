@@ -85,7 +85,7 @@ end
 
 if (number_of_feet_on_ground == 1)
     %%
-    gainsPCOM                 = diag([120  140 120]);
+    gainsPCOM                 = diag([120  140 120])/3;
     gainsICOM                 = diag([  0    0   0]);
     gainsDCOM                 = diag([  1    1   1]);
 
@@ -113,7 +113,7 @@ if (number_of_feet_on_ground == 1)
         impArms             = [ 13  13   13   5  
                                 0    0    0   0              ];
 
-        impLeftLeg          = [ 70   70 650     300      0   0
+        impLeftLeg          = [ 70   70  65      30      0   0
                                  0    0   0       0      0   0]; 
 
         impRightLeg         = [ 20   20  20      10      0    0
