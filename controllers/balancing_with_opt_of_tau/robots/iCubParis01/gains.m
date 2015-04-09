@@ -39,16 +39,16 @@ if (number_of_feet_on_ground == 2)
 
 
     % 
-    impTorso            = [   30    30   15
+    impTorso            = [   40    40   40
                                0     0    0]; 
-    impArms             = [13   13   13  15   
-                            0    0    0   0   ];
+    impArms             = [15   15   20   12    
+                            0    0    0    0   ];
                         
-    impLeftLeg          = [ 35   10   40      350    70  2
-                             0    0   0        0      0   0]; 
+    impLeftLeg          = [ 35   10   40      100    70  2
+                             0    0   0         0     0   0]; 
 
-    impRightLeg         = [ 35   10   40      350    70  2
-                             0    0   0        0      0   0]; 
+    impRightLeg         = [ 35   10   40      100    70   2
+                             0    0   0         0     0   0]; 
     
     intTorso            = [0   0    0]; 
     intArms             = [0   0    0    0  ];
@@ -148,12 +148,12 @@ if (number_of_feet_on_ground == 1)
 %%    
 end
 
-satIntegral         = 15;
+satIntegral         = 0;
 integralGains       = [intTorso,intArms,intArms,intLeftLeg,intRightLeg];
 impedances          = [impTorso(1,:),impArms(1,:),impArms(1,:),impLeftLeg(1,:),impRightLeg(1,:)];
 dampings            = zeros(1,ROBOT_DOF);
 increasingRatesImp  = [impTorso(2,:),impArms(2,:),impArms(2,:),impLeftLeg(2,:),impRightLeg(2,:)];
-impedencesSat       = [80   100    400];
+impedencesSat       = [80   25    1400];
 
 if (size(impedances,2) ~= ROBOT_DOF)
     error('Dimension mismatch between ROBOT_DOF and dimension of the variable impedences. Check these variables in the file gains.m');
