@@ -1,5 +1,5 @@
 Model {
-  Name			  "controller"
+  Name			  "balancingOptTau"
   Version		  8.3
   MdlSubVersion		  0
   SavedCharacterEncoding  "UTF-8"
@@ -7,7 +7,7 @@ Model {
     NumRootInports	    0
     NumRootOutports	    0
     ParameterArgumentNames  ""
-    ComputedModelVersion    "1.2090"
+    ComputedModelVersion    "1.2092"
     NumModelReferences	    0
     NumTestPointedSignals   0
   }
@@ -21,7 +21,7 @@ Model {
   MinMaxOverflowArchiveMode "Overwrite"
   FPTRunName		  "Run 1"
   MaxMDLFileLineLength	  120
-  InitFcn		  "initBalancingController_with_opt_of_tau;"
+  InitFcn		  "initBalancingOptTau;"
   Object {
     $PropName		    "BdWindowsInfo"
     $ObjectID		    1
@@ -31,7 +31,7 @@ Model {
       $ObjectID		      2
       $ClassName	      "Simulink.WindowInfo"
       IsActive		      [1]
-      Location		      [1366.0, 0.0, 1920.0, 1080.0]
+      Location		      [1372.0, 20.0, 1920.0, 1080.0]
       Object {
 	$PropName		"ModelBrowserInfo"
 	$ObjectID		3
@@ -85,7 +85,7 @@ Model {
 	  LoadSaveID		  "889"
 	  Extents		  [1689.0, 935.0]
 	  ZoomFactor		  [1.5218120805369124]
-	  Offset		  [243.09812568908478, 147.3717264545528]
+	  Offset		  [243.09812568908478, 147.37172645455269]
 	}
 	Object {
 	  $ObjectID		  9
@@ -106,9 +106,9 @@ Model {
   ModifiedByFormat	  "%<Auto>"
   LastModifiedBy	  "daniele"
   ModifiedDateFormat	  "%<Auto>"
-  LastModifiedDate	  "Thu Apr 09 15:39:19 2015"
-  RTWModifiedTimeStamp	  350494754
-  ModelVersionFormat	  "1.%<AutoIncrement:2090>"
+  LastModifiedDate	  "Fri Apr 10 09:21:40 2015"
+  RTWModifiedTimeStamp	  350558493
+  ModelVersionFormat	  "1.%<AutoIncrement:2092>"
   ConfigurationManager	  "none"
   SampleTimeColors	  off
   SampleTimeAnnotations	  on
@@ -752,7 +752,7 @@ Model {
       }
       Name		      "Configuration"
       CurrentDlgPage	      "Solver"
-      ConfigPrmDlgPosition     [ 203, 27, 1323, 894 ] 
+      ConfigPrmDlgPosition     [ 197, 339, 1317, 1046 ] 
     }
     PropName		    "ConfigurationSets"
   }
@@ -1055,7 +1055,7 @@ Model {
     }
   }
   System {
-    Name		    "controller"
+    Name		    "balancingOptTau"
     Location		    [-10, 19, 1376, 778]
     Open		    off
     ModelBrowserVisibility  on
@@ -1113,7 +1113,7 @@ Model {
       }
       System {
 	Name			"Subsystem"
-	Location		[1366, 366, 3286, 1419]
+	Location		[1366, 366, 3286, 1392]
 	Open			on
 	ModelBrowserVisibility	on
 	ModelBrowserWidth	200
@@ -1807,7 +1807,7 @@ Model {
 		  BlockType		  S-Function
 		  Name			  " SFunction "
 		  SID			  "756::808"
-		  Tag			  "Stateflow S-Function controller 3"
+		  Tag			  "Stateflow S-Function balancingOptTau 3"
 		  Ports			  [23, 4]
 		  Position		  [180, 65, 230, 545]
 		  ZOrder		  58
@@ -2539,7 +2539,7 @@ Model {
 	  RequestExecContextInheritance	off
 	  System {
 	    Name		    "Dump and visualize"
-	    Location		    [1366, 0, 3286, 1080]
+	    Location		    [1372, 20, 3292, 1100]
 	    Open		    on
 	    ModelBrowserVisibility  on
 	    ModelBrowserWidth	    200
@@ -3240,7 +3240,7 @@ Model {
 		    BlockType		    S-Function
 		    Name		    " SFunction "
 		    SID			    "926:1030::1483"
-		    Tag			    "Stateflow S-Function controller 5"
+		    Tag			    "Stateflow S-Function balancingOptTau 5"
 		    Ports		    [4, 2]
 		    Position		    [180, 102, 230, 203]
 		    ZOrder		    53
@@ -4443,7 +4443,7 @@ Model {
 	  RequestExecContextInheritance	off
 	  System {
 	    Name		    "Subsystem"
-	    Location		    [1366, 366, 3286, 1419]
+	    Location		    [1366, 366, 3286, 1392]
 	    Open		    on
 	    ModelBrowserVisibility  on
 	    ModelBrowserWidth	    200
@@ -5466,7 +5466,7 @@ Model {
 		    BlockType		    S-Function
 		    Name		    " SFunction "
 		    SID			    "274:1030::1483"
-		    Tag			    "Stateflow S-Function controller 2"
+		    Tag			    "Stateflow S-Function balancingOptTau 2"
 		    Ports		    [4, 2]
 		    Position		    [180, 102, 230, 203]
 		    ZOrder		    53
@@ -5883,7 +5883,7 @@ Model {
 		  BlockType		  S-Function
 		  Name			  " SFunction "
 		  SID			  "804::761"
-		  Tag			  "Stateflow S-Function controller 4"
+		  Tag			  "Stateflow S-Function balancingOptTau 4"
 		  Ports			  [4, 2]
 		  Position		  [180, 102, 230, 203]
 		  ZOrder		  34
@@ -6285,7 +6285,7 @@ Model {
 	  RequestExecContextInheritance	off
 	  System {
 	    Name		    "nonlinearImpedances"
-	    Location		    [1366, 366, 3286, 1419]
+	    Location		    [1366, 366, 3286, 1392]
 	    Open		    on
 	    ModelBrowserVisibility  on
 	    ModelBrowserWidth	    200
@@ -6624,7 +6624,7 @@ Model {
 		  BlockType		  S-Function
 		  Name			  " SFunction "
 		  SID			  "795::762"
-		  Tag			  "Stateflow S-Function controller 6"
+		  Tag			  "Stateflow S-Function balancingOptTau 6"
 		  Ports			  [7, 2]
 		  Position		  [180, 100, 230, 260]
 		  ZOrder		  73
@@ -7048,7 +7048,7 @@ Model {
 	      BlockType		      S-Function
 	      Name		      " SFunction "
 	      SID		      "779::768"
-	      Tag		      "Stateflow S-Function controller 1"
+	      Tag		      "Stateflow S-Function balancingOptTau 1"
 	      Ports		      [5, 3]
 	      Position		      [180, 100, 230, 220]
 	      ZOrder		      78
@@ -7499,7 +7499,7 @@ Model {
 Stateflow {
   machine {
     id			    1
-    name		    "controller"
+    name		    "balancingOptTau"
     created		    "18-Feb-2014 10:14:40"
     isLibrary		    0
     firstTarget		    88
