@@ -20,3 +20,14 @@ Ts                = 0.01; % [s]
 % Load gains and parameters for the specific robot
 run(strcat('robots/',getenv('YARP_ROBOT_NAME'),'/gains.m')); 
 
+% Uncomment the following line if you want to sync Gazebo and simulink.
+%
+% setenv('YARP_CLOCK','/clock');
+%
+% Remember that in this case, you have to launch gazebo as follow:
+% 
+% gazebo -slibgazebo_yarp_clock.so
+%
+% Also, open the subsystem "Synchronizer" in the simulonk model 
+% "balancingOptTau.mdl" and comment the block "Real Time Syncronizer" and
+% uncomment the block "ySynchronizer".
