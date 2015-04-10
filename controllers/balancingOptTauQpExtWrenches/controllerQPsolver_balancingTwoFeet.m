@@ -4,7 +4,7 @@ setup(block);
 
 function setup(block)
     
-block.NumInputPorts  = 5; 
+block.NumInputPorts  = 4; 
 block.NumOutputPorts = 1; 
 
 % Setup port properties to be inherited or dynamic
@@ -24,7 +24,6 @@ block.InputPort(1).Dimensions        = 13*12;      % %1 % [quadTerm,linTerm]
 block.InputPort(2).Dimensions        = 28*13;      % %2 % [Aineq,bineq]
 block.InputPort(3).Dimensions        = 13;      % %3 % [Aeq,beq] 
 block.InputPort(4).Dimensions        = 6*2*3;   % %4 % [x0;lb;ub] 
-block.InputPort(5).Dimensions        = 1;   % %5 % n_constraint 
 % Override output port properties
 block.OutputPort(1).Dimensions       = 6*2;
 
@@ -43,19 +42,16 @@ block.InputPort(1).DatatypeID  = 0;  % double
 block.InputPort(2).DatatypeID  = 0;  % double
 block.InputPort(3).DatatypeID  = 0;  % double
 block.InputPort(4).DatatypeID  = 0;  % double
-block.InputPort(5).DatatypeID  = 0;  % double
 
 block.InputPort(1).Complexity  = 'Real';
 block.InputPort(2).Complexity  = 'Real';
 block.InputPort(3).Complexity  = 'Real';
 block.InputPort(4).Complexity  = 'Real';
-block.InputPort(5).Complexity  = 'Real';
 
 block.InputPort(1).DirectFeedthrough = true;
 block.InputPort(2).DirectFeedthrough = true;
 block.InputPort(3).DirectFeedthrough = true;
 block.InputPort(4).DirectFeedthrough = true;
-block.InputPort(5).DirectFeedthrough = true;
 
 block.OutputPort(1).DatatypeID  = 0; % double
 block.OutputPort(1).Complexity  = 'Real';
@@ -205,8 +201,7 @@ block.RegBlockMethod('Terminate', @Terminate); % Required
 
 function Outputs(block)
 
-n_constraint = block.InputPort(5).Data;
-fdim = n_constraint*6; 
+fdim                = 2*6; 
 QPterms             = block.InputPort(1).Data;
 const_ineq          = block.InputPort(2).Data;
 const_eq            = block.InputPort(3).Data;
@@ -260,7 +255,7 @@ if exitFlag ~= 0
     exitFlag
     iter
     auxOutput
-    desiredf0 = zeros(6*n_constraint,1);
+    desiredf0 = zeros(6*2,1);
 end
 
 block.OutputPort(1).Data = desiredf0;
