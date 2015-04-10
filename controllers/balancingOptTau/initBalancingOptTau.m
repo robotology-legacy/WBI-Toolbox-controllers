@@ -13,7 +13,6 @@ noOscillationTime        = 0; % If DEMO_LEFT_AND_RIGHT = 1, the variable noOscil
 
 DEMO_MOVING_LEG_AND_ARMS = 0; 
 
- 
 
 % Controller period
 Ts                = 0.01; % [s]
