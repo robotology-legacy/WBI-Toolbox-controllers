@@ -1,5 +1,5 @@
 Model {
-  Name			  "balancingController_with_OOT_and_transfer"
+  Name			  "balancingOptTauExternalFsmForStep"
   Version		  8.3
   MdlSubVersion		  0
   SavedCharacterEncoding  "UTF-8"
@@ -7,7 +7,7 @@ Model {
     NumRootInports	    0
     NumRootOutports	    0
     ParameterArgumentNames  ""
-    ComputedModelVersion    "1.2318"
+    ComputedModelVersion    "1.2319"
     NumModelReferences	    0
     NumTestPointedSignals   0
   }
@@ -21,7 +21,7 @@ Model {
   MinMaxOverflowArchiveMode "Overwrite"
   FPTRunName		  "Run 1"
   MaxMDLFileLineLength	  120
-  InitFcn		  "initBalancingController_with_OOT_and_transfer;"
+  InitFcn		  "initBalancingOptTauExternalFsmForStep;"
   Object {
     $PropName		    "BdWindowsInfo"
     $ObjectID		    1
@@ -31,7 +31,7 @@ Model {
       $ObjectID		      2
       $ClassName	      "Simulink.WindowInfo"
       IsActive		      [1]
-      Location		      [1366.0, 0.0, 1920.0, 1080.0]
+      Location		      [1366.0, 27.0, 1920.0, 1053.0]
       Object {
 	$PropName		"ModelBrowserInfo"
 	$ObjectID		3
@@ -53,7 +53,7 @@ Model {
 	Dimension		4
 	Object {
 	  $ObjectID		  5
-	  IsActive		  [0]
+	  IsActive		  [1]
 	  ViewObjType		  "SimulinkSubsys"
 	  LoadSaveID		  "61"
 	  Extents		  [1689.0, 935.0]
@@ -80,7 +80,7 @@ Model {
 	}
 	Object {
 	  $ObjectID		  8
-	  IsActive		  [1]
+	  IsActive		  [0]
 	  ViewObjType		  "SimulinkSubsys"
 	  LoadSaveID		  "976"
 	  Extents		  [1689.0, 935.0]
@@ -97,9 +97,9 @@ Model {
   ModifiedByFormat	  "%<Auto>"
   LastModifiedBy	  "daniele"
   ModifiedDateFormat	  "%<Auto>"
-  LastModifiedDate	  "Thu Apr 09 19:24:47 2015"
-  RTWModifiedTimeStamp	  350508286
-  ModelVersionFormat	  "1.%<AutoIncrement:2318>"
+  LastModifiedDate	  "Fri Apr 10 09:19:34 2015"
+  RTWModifiedTimeStamp	  350558317
+  ModelVersionFormat	  "1.%<AutoIncrement:2319>"
   ConfigurationManager	  "none"
   SampleTimeColors	  off
   SampleTimeAnnotations	  on
@@ -1068,8 +1068,8 @@ Model {
     }
   }
   System {
-    Name		    "balancingController_with_OOT_and_transfer"
-    Location		    [1366, 366, 3286, 1392]
+    Name		    "balancingOptTauExternalFsmForStep"
+    Location		    [1366, 339, 3286, 1419]
     Open		    on
     ModelBrowserVisibility  on
     ModelBrowserWidth	    200
@@ -1126,7 +1126,7 @@ Model {
       }
       System {
 	Name			"Subsystem"
-	Location		[1366, 0, 3286, 1080]
+	Location		[1366, 27, 3286, 1080]
 	Open			on
 	ModelBrowserVisibility	on
 	ModelBrowserWidth	200
@@ -1710,7 +1710,7 @@ Model {
 		  BlockType		  S-Function
 		  Name			  " SFunction "
 		  SID			  "756::808"
-		  Tag			  "Stateflow S-Function balancingController_with_OOT_and_transfer 3"
+		  Tag			  "Stateflow S-Function balancingOptTauExternalFsmForStep 3"
 		  Ports			  [24, 4]
 		  Position		  [180, 65, 230, 565]
 		  ZOrder		  59
@@ -3070,7 +3070,7 @@ Model {
 		    BlockType		    S-Function
 		    Name		    " SFunction "
 		    SID			    "1268::1481"
-		    Tag			    "Stateflow S-Function balancingController_with_OOT_and_transfer 5"
+		    Tag			    "Stateflow S-Function balancingOptTauExternalFsmForStep 5"
 		    Ports		    [3, 2]
 		    Position		    [180, 100, 230, 180]
 		    ZOrder		    50
@@ -4426,7 +4426,7 @@ Model {
 	  RequestExecContextInheritance	off
 	  System {
 	    Name		    "State machine\n"
-	    Location		    [1366, 0, 3286, 1080]
+	    Location		    [1366, 27, 3286, 1080]
 	    Open		    on
 	    ModelBrowserVisibility  on
 	    ModelBrowserWidth	    200
@@ -4735,7 +4735,7 @@ Model {
 	      }
 	      System {
 		Name			"feet_wrenches"
-		Location		[1366, 366, 3286, 1392]
+		Location		[1366, 339, 3286, 1419]
 		Open			on
 		ModelBrowserVisibility	on
 		ModelBrowserWidth	200
@@ -5100,7 +5100,7 @@ Model {
 		    BlockType		    S-Function
 		    Name		    " SFunction "
 		    SID			    "1260::1481"
-		    Tag			    "Stateflow S-Function balancingController_with_OOT_and_transfer 6"
+		    Tag			    "Stateflow S-Function balancingOptTauExternalFsmForStep 6"
 		    Ports		    [3, 2]
 		    Position		    [180, 100, 230, 180]
 		    ZOrder		    50
@@ -5424,7 +5424,7 @@ Model {
 		    BlockType		    S-Function
 		    Name		    " SFunction "
 		    SID			    "1188::57"
-		    Tag			    "Stateflow S-Function balancingController_with_OOT_and_transfer 7"
+		    Tag			    "Stateflow S-Function balancingOptTauExternalFsmForStep 7"
 		    Ports		    [4, 3]
 		    Position		    [180, 102, 230, 203]
 		    ZOrder		    10
@@ -5939,7 +5939,7 @@ Model {
 		  BlockType		  S-Function
 		  Name			  " SFunction "
 		  SID			  "1061::69"
-		  Tag			  "Stateflow S-Function balancingController_with_OOT_and_transfer 1"
+		  Tag			  "Stateflow S-Function balancingOptTauExternalFsmForStep 1"
 		  Ports			  [13, 6]
 		  Position		  [180, 90, 230, 370]
 		  ZOrder		  45
@@ -6766,7 +6766,7 @@ Model {
 		  BlockType		  S-Function
 		  Name			  " SFunction "
 		  SID			  "1253::1481"
-		  Tag			  "Stateflow S-Function balancingController_with_OOT_and_transfer 2"
+		  Tag			  "Stateflow S-Function balancingOptTauExternalFsmForStep 2"
 		  Ports			  [3, 2]
 		  Position		  [180, 100, 230, 180]
 		  ZOrder		  50
@@ -7156,7 +7156,7 @@ Model {
 		  BlockType		  S-Function
 		  Name			  " SFunction "
 		  SID			  "804::758"
-		  Tag			  "Stateflow S-Function balancingController_with_OOT_and_transfer 4"
+		  Tag			  "Stateflow S-Function balancingOptTauExternalFsmForStep 4"
 		  Ports			  [4, 2]
 		  Position		  [180, 102, 230, 203]
 		  ZOrder		  31
@@ -7503,7 +7503,7 @@ Model {
 Stateflow {
   machine {
     id			    1
-    name		    "balancingController_with_OOT_and_transfer"
+    name		    "balancingOptTauExternalFsmForStep"
     created		    "18-Feb-2014 10:14:40"
     isLibrary		    0
     firstTarget		    111
@@ -7519,10 +7519,7 @@ Stateflow {
     firstTransition	    25
     firstJunction	    24
     viewObj		    2
-    visible		    1
     machine		    1
-    subviewS {
-    }
     ssIdHighWaterMark	    52
     decomposition	    CLUSTER_CHART
     type		    EML_CHART
