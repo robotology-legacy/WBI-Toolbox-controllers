@@ -1,4 +1,4 @@
-ROBOT_DOF = 23;
+ROBOT_DOF = 25;
 
 amplitudesOscillationsOnOneFoot   = zeros(1,ROBOT_DOF);
 frequenciesOscillationsOnOneFoot  = zeros(1,ROBOT_DOF);
