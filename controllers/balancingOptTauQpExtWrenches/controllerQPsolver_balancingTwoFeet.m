@@ -1,10 +1,10 @@
-function controllerQPsolver(block)
+function controllerQPsolver_balancingTwoFeet(block)
 
 setup(block);
 
 function setup(block)
     
-block.NumInputPorts  = 4; 
+block.NumInputPorts  = 5; 
 block.NumOutputPorts = 1; 
 
 % Setup port properties to be inherited or dynamic
@@ -20,38 +20,32 @@ block.SetPreCompOutPortInfoToDynamic;
 
 % for now based on both feet (needs to be defined dynamically)
 % Override input port properties
-block.InputPort(1).Dimensions        = 13*12;      % %1 % [quadTerm,linTerm]               
-block.InputPort(2).Dimensions        = 28*13;      % %2 % [Aineq,bineq]
-block.InputPort(3).Dimensions        = 13;      % %3 % [Aeq,beq] 
-block.InputPort(4).Dimensions        = 6*2*3;   % %4 % [x0;lb;ub] 
+block.InputPort(1).Dimensions        = [ 1  2];   % State
+block.InputPort(2).Dimensions        = [12 12];   % HessianMatrixQP2Feet               
+block.InputPort(3).Dimensions        = [ 1 12];   % gradientQP2Feet
+block.InputPort(4).Dimensions        = [28 12];   % ConstraintsMatrixQP2Feet 
+block.InputPort(5).Dimensions        = [ 1 28];   % bVectorConstraintsQp2Feet 
 % Override output port properties
-block.OutputPort(1).Dimensions       = 6*2;
-
-% % use this if on left foot only 
-% % Override input port properties
-% block.InputPort(1).Dimensions        = [1 7*6];      % %1 % [quadTerm,linTerm]               
-% block.InputPort(2).Dimensions        = [1 14*7];      % %2 % [Aineq,bineq]
-% block.InputPort(3).Dimensions        = [1 7];      % %3 % [Aeq,beq] 
-% block.InputPort(4).Dimensions        = [1 6*3];   % %4 % [x0;lb;ub] 
-% block.InputPort(5).Dimensions        = 1;   % %5 % n_constraint 
-% % Override output port properties
-% block.OutputPort(1).Dimensions       = 6;
+block.OutputPort(1).Dimensions       = 12;
 
 % Override input and output port properties
 block.InputPort(1).DatatypeID  = 0;  % double
 block.InputPort(2).DatatypeID  = 0;  % double
 block.InputPort(3).DatatypeID  = 0;  % double
 block.InputPort(4).DatatypeID  = 0;  % double
+block.InputPort(5).DatatypeID  = 0;  % double
 
 block.InputPort(1).Complexity  = 'Real';
 block.InputPort(2).Complexity  = 'Real';
 block.InputPort(3).Complexity  = 'Real';
 block.InputPort(4).Complexity  = 'Real';
+block.InputPort(5).Complexity  = 'Real';
 
 block.InputPort(1).DirectFeedthrough = true;
 block.InputPort(2).DirectFeedthrough = true;
 block.InputPort(3).DirectFeedthrough = true;
 block.InputPort(4).DirectFeedthrough = true;
+block.InputPort(5).DirectFeedthrough = true;
 
 block.OutputPort(1).DatatypeID  = 0; % double
 block.OutputPort(1).Complexity  = 'Real';
@@ -200,65 +194,29 @@ block.RegBlockMethod('Terminate', @Terminate); % Required
 %%
 
 function Outputs(block)
-
-fdim                = 2*6; 
-QPterms             = block.InputPort(1).Data;
-const_ineq          = block.InputPort(2).Data;
-const_eq            = block.InputPort(3).Data;
-x0_lb_ub            = block.InputPort(4).Data;
-
-QPterms    = reshape(QPterms,fdim+1,fdim);
-  quadTerm = QPterms(1:fdim,:);
-   linTerm = QPterms(fdim+1,:);
-   
-const_ineq = reshape(const_ineq,28,fdim+1);   
-% const_ineq = reshape(const_ineq,14,fdim+1);
-
-     Aineq = const_ineq(:,1:fdim);
-     bineq = const_ineq(:,fdim+1);
-const_eq   = reshape(const_eq,1,fdim+1);
-       Aeq = const_eq(:,1:fdim);
-       beq = const_eq(:,fdim+1);
-x0         = x0_lb_ub(1:fdim);               
-lb         = x0_lb_ub(fdim+1:2*fdim);
-ub         = x0_lb_ub(2*fdim+1:3*fdim);
-
-% block.InputPort(1).Dimensions        = 12*13;      % %1 % [quadTerm,linTerm]               
-% block.InputPort(2).Dimensions        = 24*13;      % %2 % [Aineq,bineq]
-% block.InputPort(3).Dimensions        = 13;      % %3 % [Aeq,beq] 
-% block.InputPort(4).Dimensions        = 6*2*3;   % %4 % [x0;lb;ub] 
-
-         
-% QP FOR TORQUE MINIMIZATION BASED ON arbitrary vector F0
-
-% options = optimset('Algorithm','active-set','Display','off');
     
-% [desiredf0, ~, exitFlag, ~, ~] = quadprog( quadTerm, linTerm, ...
-%                                               Aineq,   bineq, ... %inequalities
-%                                                 Aeq,     beq, ... %equalities
-%                                                  lb,      ub, ... %bounds
-%                                                  x0,          ... %initial solution
-%                                                  options);
+    constraints                = block.InputPort(1).Data;
+    
+    if sum(constraints) == 2 
+        HessianMatrixQP2Feet       = block.InputPort(2).Data;
+        gradientQP2Feet            = block.InputPort(3).Data;
+        ConstraintsMatrixQP2Feet   = block.InputPort(4).Data;
+        bVectorConstraintsQp2Feet  = block.InputPort(5).Data;
 
 
-% [desiredf0, ~, exitFlag, ~, ~] = quadprog( quadTerm, linTerm, ...
-%                                               Aineq, bineq, ...   % Inequalities
-%                                                  [],   [], ...    % Equalities
-%                                                  lb,      ub, ... % Bounds
-%                                                  x0);          % Initial solution
-                                                 
-  
-[desiredf0,~,exitFlag,iter,~,auxOutput] = qpOASES(quadTerm,linTerm',Aineq,[],[],[],bineq);           
- 
-if exitFlag ~= 0
-    disp('QP failed with');
-    exitFlag
-    iter
-    auxOutput
-    desiredf0 = zeros(6*2,1);
-end
+        [desiredf0,~,exitFlag,iter,~,auxOutput] = qpOASES(HessianMatrixQP2Feet,gradientQP2Feet',ConstraintsMatrixQP2Feet,[],[],[],bVectorConstraintsQp2Feet);           
 
-block.OutputPort(1).Data = desiredf0;
+        if exitFlag ~= 0
+            disp('QP failed with');
+            exitFlag
+            iter
+            auxOutput
+            desiredf0 = zeros(6*2,1);
+        end
+    else
+            desiredf0 = zeros(6*2,1);
+    end
+    block.OutputPort(1).Data = desiredf0;
 
 %end Outputs
 
