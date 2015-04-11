@@ -60,7 +60,7 @@ if (sum(activeFeetConstraints) == 2)
                          
     if (DEMO_LEFT_AND_RIGHT == 1)
         directionOfOscillation = [0;1;0];
-        referenceParams        = [0.02 0.1];  %referenceParams(1) = amplitude of ascillations in meters
+        referenceParams        = [0.03 0.05];  %referenceParams(1) = amplitude of ascillations in meters
     end
     
     if (DEMO_MOVING_LEG_AND_ARMS == 1)
@@ -170,7 +170,10 @@ numberOfPoints               = 4; % The friction cone is approximated by using l
 forceFrictionCoefficient     = 1;%1/3;  
 torsionalFrictionCoefficient = 2/150;
 
+footSize                     = [ -0.1 0.1   ;    % xMin, xMax
+                                 -0.1 0.1  ];   % yMin, yMax    
+
+fZmin                        = 10;
+
 %% The QP solver will search a solution fo that 
 % satisfies the inequality Aineq_f F(fo) < bineq_f
-
-

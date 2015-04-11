@@ -23,8 +23,8 @@ block.SetPreCompOutPortInfoToDynamic;
 block.InputPort(1).Dimensions        = [ 1  2];   % State
 block.InputPort(2).Dimensions        = [12 12];   % HessianMatrixQP2Feet               
 block.InputPort(3).Dimensions        = [ 1 12];   % gradientQP2Feet
-block.InputPort(4).Dimensions        = [28 12];   % ConstraintsMatrixQP2Feet 
-block.InputPort(5).Dimensions        = [ 1 28];   % bVectorConstraintsQp2Feet 
+block.InputPort(4).Dimensions        = [38 12];   % ConstraintsMatrixQP2Feet 
+block.InputPort(5).Dimensions        = [ 1 38];   % bVectorConstraintsQp2Feet 
 % Override output port properties
 block.OutputPort(1).Dimensions       = 12;
 

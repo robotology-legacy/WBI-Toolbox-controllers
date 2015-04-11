@@ -22,6 +22,4 @@ Ts                = 0.01; % [s]
 % Load gains and parameters for the specific robot
 run(strcat('robots/',getenv('YARP_ROBOT_NAME'),'/gains.m')); 
 
-[ConstraintsMatrix2Feet,bVectorConstraints2Feet]= constraint_fcone_QP(forceFrictionCoefficient,numberOfPoints,torsionalFrictionCoefficient,2);
-
-[ConstraintsMatrix1Foot,bVectorConstraints1Foot]= constraint_fcone_QP(forceFrictionCoefficient,numberOfPoints,torsionalFrictionCoefficient,1);
+[ConstraintsMatrix,bVectorConstraints]= constraints(forceFrictionCoefficient,numberOfPoints,torsionalFrictionCoefficient,footSize,fZmin);
