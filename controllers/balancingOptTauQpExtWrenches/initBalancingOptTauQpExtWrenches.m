@@ -2,9 +2,9 @@ clear all;
 clc;
 
 robotName = 'icub';            
-localName = 'balancing';
+localName = 'matlabTorqueBalancingQP';
 
-simulationTime    = 60;       % Simulation time in seconds
+simulationTime    = inf;       % Simulation time in seconds
 
 activeFeetConstraints    = [1 1];
 
