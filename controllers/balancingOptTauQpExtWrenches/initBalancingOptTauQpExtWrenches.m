@@ -1,10 +1,10 @@
 clear all;
 clc;
 
-robotName = 'icubGazeboSim';            
+robotName = 'icub';            
 localName = 'balancing';
 
-simulationTime    = inf;       % Simulation time in seconds
+simulationTime    = 60;       % Simulation time in seconds
 
 activeFeetConstraints    = [1 1];
 
@@ -12,7 +12,7 @@ DEMO_LEFT_AND_RIGHT      = 1;  % Either 0 or 1
 noOscillationTime        = 0; % If DEMO_LEFT_AND_RIGHT = 1, the variable noOscillationTime is the time, in seconds, 
                                % that the robot waits before starting the left-and-righ
 
-DEMO_MOVING_LEG_AND_ARMS = 1; 
+DEMO_MOVING_LEG_AND_ARMS = 0; 
 
  
 

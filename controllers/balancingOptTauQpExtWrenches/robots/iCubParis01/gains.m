@@ -23,7 +23,7 @@ qTildeMax              = 20*pi/180;
 %           PARAMETERS FOR TWO FEET ONE GROUND
 
 
-if (number_of_feet_on_ground == 2)
+if (sum(activeFeetConstraints) == 2)
     gainsPCOM                 = diag([ 30   50  50]);
     gainsICOM                 = diag([  0    0   0]);
     gainsDCOM                 = diag([  0    0   0]);
@@ -83,7 +83,7 @@ end
 %           PARAMETERS FOR ONLY ONE FOOT ONE GROUND
 
 
-if (number_of_feet_on_ground == 1)
+if (sum(activeFeetConstraints) == 1)
     %%
     gainsPCOM                 = diag([120  140 120])/3;
     gainsICOM                 = diag([  0    0   0]);
@@ -170,10 +170,10 @@ numberOfPoints               = 4; % The friction cone is approximated by using l
 forceFrictionCoefficient     = 1;%1/3;  
 torsionalFrictionCoefficient = 2/150;
 
+footSize                     = [ -0.1 0.1   ;    % xMin, xMax
+                                 -0.1 0.1  ];   % yMin, yMax    
+
+fZmin                        = 10;
+
 %% The QP solver will search a solution fo that 
 % satisfies the inequality Aineq_f F(fo) < bineq_f
-
-[ConstraintsMatrix2Feet,bVectorConstraints2Feet]= constraint_fcone_QP(forceFrictionCoefficient,numberOfPoints,torsionalFrictionCoefficient,2);
-
-[ConstraintsMatrix1Foot,bVectorConstraints1Foot]= constraint_fcone_QP(forceFrictionCoefficient,numberOfPoints,torsionalFrictionCoefficient,1);
-
