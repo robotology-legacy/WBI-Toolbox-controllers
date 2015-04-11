@@ -24,9 +24,9 @@ qTildeMax              = 20*pi/180;
 
 
 if (sum(activeFeetConstraints) == 2)
-    gainsPCOM                 = diag([ 30   50  50]);
+    gainsPCOM                 = diag([ 40   40  40]);
     gainsICOM                 = diag([  0    0   0]);
-    gainsDCOM                 = diag([  0    0   0]);
+    gainsDCOM                 = 2*sqrt(gainsPCOM);
 
     minCoMx_y                 = [-0.1   -0.25 ];  
     maxCoMx_y                 = [ 0.1    0.05 ];
@@ -60,7 +60,7 @@ if (sum(activeFeetConstraints) == 2)
                          
     if (DEMO_LEFT_AND_RIGHT == 1)
         directionOfOscillation = [0;1;0];
-        referenceParams        = [0.03 0.5];  %referenceParams(1) = amplitude of ascillations in meters
+        referenceParams        = [0.02 0.1];  %referenceParams(1) = amplitude of ascillations in meters
     end
     
     if (DEMO_MOVING_LEG_AND_ARMS == 1)
