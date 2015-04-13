@@ -48,6 +48,8 @@ increasingRatesGainsPCOM  = [ 0     0    ];
 
 gainMomentum           = 1 ;
 
+qTildeMax              = 20*pi/180;
+
 % Impadances acting in the null space of the desired contact forces 
 
 
@@ -62,9 +64,9 @@ dampRightLeg         = [0.0    0.0   0   0   0   0];
 
 
 % 
-impTorso            = [   40    40   40
+impTorso            = [   40    40   30
                            0     0    0]; 
-impArms             = [15   15   20   12    
+impArms             = [23   10   15   12    
                         0    0    0    0   ];
 
 impLeftLeg          = [ 35   10   40      100    70  2
@@ -78,7 +80,7 @@ impRightLeg         = [ 35   10   40      100    70   2
 impedances          = [impTorso(1,:),impArms(1,:),impArms(1,:),impLeftLeg(1,:),impRightLeg(1,:)];
 dampings            = [dampTorso,dampArms,dampArms,dampLeftLeg,dampRightLeg];
 increasingRatesImp  = [impTorso(2,:),impArms(2,:),impArms(2,:),impLeftLeg(2,:),impRightLeg(2,:)];
-impedencesSat       = [80   100    400];
+impedencesSat       = [50   30    400];
 
 if (size(impedances,2) ~= ROBOT_DOF)
     error('Dimension mismatch between ROBOT_DOF and dimension of the variable impedences. Check these variables in the file gains.m');
