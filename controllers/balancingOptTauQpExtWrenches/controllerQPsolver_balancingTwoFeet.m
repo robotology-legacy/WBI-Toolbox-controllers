@@ -204,13 +204,14 @@ function Outputs(block)
         bVectorConstraintsQp2Feet  = block.InputPort(5).Data;
 
 
-        [desiredf0,~,exitFlag,iter,~,auxOutput] = qpOASES(HessianMatrixQP2Feet,gradientQP2Feet',ConstraintsMatrixQP2Feet,[],[],[],bVectorConstraintsQp2Feet');           
+        [desiredf0,~,exitFlag,iter,lambda,auxOutput] = qpOASES(HessianMatrixQP2Feet,gradientQP2Feet',ConstraintsMatrixQP2Feet,[],[],[],bVectorConstraintsQp2Feet');           
 
         if exitFlag ~= 0
             disp('QP failed with');
             exitFlag
             iter
             auxOutput
+            lambda
             desiredf0 = zeros(6*2,1);
         end
     else
