@@ -1,7 +1,7 @@
 clear all;
 
-robotName = 'icub';            
-localName = 'balancing';
+robotName = 'icubGazeboSim';            
+localName = 'matlabTrqBalancing';
 
 simulationTime    = inf;       % Simulation time in seconds
 
