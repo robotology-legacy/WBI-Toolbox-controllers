@@ -1,7 +1,7 @@
 clear all
 
-robotName = 'icubGazeboSim';
-localName = 'matlabTrqBalancingExtFsm';
+robotName = 'icub';
+localName = 'matlabTorqueBalancing';
 
 
 % Controller period
