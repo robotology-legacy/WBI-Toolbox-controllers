@@ -7,7 +7,7 @@ Model {
     NumRootInports	    0
     NumRootOutports	    0
     ParameterArgumentNames  ""
-    ComputedModelVersion    "1.2114"
+    ComputedModelVersion    "1.2122"
     NumModelReferences	    0
     NumTestPointedSignals   0
   }
@@ -31,7 +31,7 @@ Model {
       $ObjectID		      2
       $ClassName	      "Simulink.WindowInfo"
       IsActive		      [1]
-      Location		      [0.0, 339.0, 1366.0, 741.0]
+      Location		      [-4.0, 358.0, 1374.0, 725.0]
       Object {
 	$PropName		"ModelBrowserInfo"
 	$ObjectID		3
@@ -65,16 +65,16 @@ Model {
 	  IsActive		  [0]
 	  ViewObjType		  "SimulinkSubsys"
 	  LoadSaveID		  "915"
-	  Extents		  [1135.0, 623.0]
-	  ZoomFactor		  [1.3500120645644691]
-	  Offset		  [503.77034730583983, 288.70679842715231]
+	  Extents		  [1135.0, 596.0]
+	  ZoomFactor		  [0.68351383874849569]
+	  Offset		  [299.3018265845069, 330.51760563380287]
 	}
 	Object {
 	  $ObjectID		  7
 	  IsActive		  [0]
 	  ViewObjType		  "SimulinkTopLevel"
 	  LoadSaveID		  "0"
-	  Extents		  [1135.0, 596.0]
+	  Extents		  [1123.0, 589.0]
 	  ZoomFactor		  [4.0]
 	  Offset		  [23.436459427521072, 1.5407300420168042]
 	}
@@ -110,9 +110,9 @@ Model {
 	  IsActive		  [1]
 	  ViewObjType		  "SimulinkSubsys"
 	  LoadSaveID		  "61"
-	  Extents		  [1135.0, 596.0]
-	  ZoomFactor		  [0.61009667024704628]
-	  Offset		  [399.59688600352126, 174.05281690140839]
+	  Extents		  [1123.0, 589.0]
+	  ZoomFactor		  [0.61272923408845748]
+	  Offset		  [543.59336487676092, 174.15140845070431]
 	}
 	PropName		"EditorsInfo"
       }
@@ -124,9 +124,9 @@ Model {
   ModifiedByFormat	  "%<Auto>"
   LastModifiedBy	  "daniele"
   ModifiedDateFormat	  "%<Auto>"
-  LastModifiedDate	  "Mon Apr 13 19:27:38 2015"
-  RTWModifiedTimeStamp	  350851909
-  ModelVersionFormat	  "1.%<AutoIncrement:2114>"
+  LastModifiedDate	  "Tue Apr 14 17:52:44 2015"
+  RTWModifiedTimeStamp	  350930269
+  ModelVersionFormat	  "1.%<AutoIncrement:2122>"
   ConfigurationManager	  "none"
   SampleTimeColors	  off
   SampleTimeAnnotations	  on
@@ -922,6 +922,14 @@ Model {
       RTWStateStorageClass    "Auto"
     }
     Block {
+      BlockType		      Display
+      Format		      "short"
+      Decimation	      "10"
+      Floating		      off
+      Lockdown		      off
+      SampleTime	      "-1"
+    }
+    Block {
       BlockType		      Gain
       Gain		      "1"
       Multiplication	      "Element-wise(K.*u)"
@@ -955,6 +963,14 @@ Model {
       Interpolate	      on
     }
     Block {
+      BlockType		      MATLABFcn
+      MATLABFcn		      "sin"
+      OutputDimensions	      "-1"
+      OutputSignalType	      "auto"
+      Output1D		      on
+      SampleTime	      "-1"
+    }
+    Block {
       BlockType		      Mux
       Inputs		      "4"
       DisplayOption	      "none"
@@ -978,6 +994,11 @@ Model {
       SourceOfInitialOutputValue "Dialog"
       OutputWhenDisabled      "held"
       InitialOutput	      "[]"
+    }
+    Block {
+      BlockType		      Reshape
+      OutputDimensionality    "1-D array"
+      OutputDimensions	      "[1,1]"
     }
     Block {
       BlockType		      S-Function
@@ -1095,7 +1116,7 @@ Model {
   }
   System {
     Name		    "balancingOptTau"
-    Location		    [0, 366, 1366, 1080]
+    Location		    [-4, 358, 1370, 1083]
     Open		    on
     ModelBrowserVisibility  on
     ModelBrowserWidth	    200
@@ -1109,7 +1130,7 @@ Model {
     ShowPageBoundaries	    off
     ZoomFactor		    "400"
     ReportName		    "simulink-default.rpt"
-    SIDHighWatermark	    "1018"
+    SIDHighWatermark	    "1025"
     Block {
       BlockType		      SubSystem
       Name		      "Subsystem"
@@ -1121,7 +1142,7 @@ Model {
       RequestExecContextInheritance off
       System {
 	Name			"Subsystem"
-	Location		[0, 339, 1366, 1080]
+	Location		[-4, 358, 1370, 1083]
 	Open			on
 	ModelBrowserVisibility	on
 	ModelBrowserWidth	200
@@ -2539,7 +2560,7 @@ Model {
 	    TiledPaperMargins	    [0.500000, 0.500000, 0.500000, 0.500000]
 	    TiledPageScale	    1
 	    ShowPageBoundaries	    off
-	    ZoomFactor		    "135"
+	    ZoomFactor		    "68"
 	    Block {
 	      BlockType		      Inport
 	      Name		      "tauDesired"
@@ -2821,6 +2842,40 @@ Model {
 	      }
 	    }
 	    Block {
+	      BlockType		      Reference
+	      Name		      "Base Position"
+	      SID		      "1020"
+	      Ports		      [0, 1]
+	      Position		      [660, 1067, 735, 1113]
+	      ZOrder		      331
+	      LibraryVersion	      "1.250"
+	      SourceBlock	      "WBCLibrary/wholeBodyStates/Base Position"
+	      SourceType	      "Compute base Position"
+	      ContentPreviewEnabled   off
+	      robotName		      "robotName"
+	      localName		      "localName"
+	    }
+	    Block {
+	      BlockType		      Reference
+	      Name		      "Base velocity"
+	      SID		      "1019"
+	      Ports		      [0, 1]
+	      Position		      [1280, 902, 1355, 948]
+	      ZOrder		      330
+	      LibraryVersion	      "1.250"
+	      SourceBlock	      "WBCLibrary/wholeBodyStates/Base velocity"
+	      SourceType	      "Compute base velocity"
+	      ContentPreviewEnabled   off
+	      robotName		      "robotName"
+	      localName		      "localName"
+	      Port {
+		PortNumber		1
+		Name			"vb WBI"
+		RTWStorageClass		"Auto"
+		DataLoggingNameMode	"SignalName"
+	      }
+	    }
+	    Block {
 	      BlockType		      Scope
 	      Name		      "CoM"
 	      SID		      "857"
@@ -2876,6 +2931,15 @@ Model {
 	      }
 	    }
 	    Block {
+	      BlockType		      Display
+	      Name		      "Display"
+	      SID		      "1023"
+	      Ports		      [1]
+	      Position		      [1025, 1017, 1330, 1163]
+	      ZOrder		      334
+	      Decimation	      "1"
+	    }
+	    Block {
 	      BlockType		      Gain
 	      Name		      "Gain"
 	      SID		      "934"
@@ -2918,6 +2982,16 @@ Model {
 	      }
 	    }
 	    Block {
+	      BlockType		      MATLABFcn
+	      Name		      "Interpreted MATLAB\nFunction"
+	      SID		      "1024"
+	      Ports		      [1, 1]
+	      Position		      [840, 1075, 910, 1105]
+	      ZOrder		      335
+	      ShowName		      off
+	      MATLABFcn		      "u'"
+	    }
+	    Block {
 	      BlockType		      Reference
 	      Name		      "Joint Angles"
 	      SID		      "920"
@@ -2954,6 +3028,17 @@ Model {
 	      ContentPreviewEnabled   off
 	      robotName		      "robotName"
 	      localName		      "localName"
+	    }
+	    Block {
+	      BlockType		      Reshape
+	      Name		      "Reshape"
+	      SID		      "1022"
+	      Ports		      [1, 1]
+	      Position		      [770, 1078, 800, 1102]
+	      ZOrder		      333
+	      ShowName		      off
+	      OutputDimensionality    "Customize"
+	      OutputDimensions	      "[4,4]"
 	    }
 	    Block {
 	      BlockType		      Sum
@@ -2994,6 +3079,20 @@ Model {
 		RTWStorageClass		"Auto"
 		DataLoggingNameMode	"SignalName"
 	      }
+	    }
+	    Block {
+	      BlockType		      Sum
+	      Name		      "Sum2"
+	      SID		      "1025"
+	      Ports		      [2, 1]
+	      Position		      [1500, 975, 1520, 995]
+	      ZOrder		      336
+	      ShowName		      off
+	      IconShape		      "round"
+	      Inputs		      "|+-"
+	      InputSameDT	      off
+	      OutDataTypeStr	      "Inherit: Inherit via internal rule"
+	      SaturateOnIntegerOverflow	off
 	    }
 	    Block {
 	      BlockType		      SubSystem
@@ -3668,6 +3767,39 @@ Model {
 	      DataFormat	      "StructureWithTime"
 	      LimitDataPoints	      off
 	    }
+	    Block {
+	      BlockType		      Scope
+	      Name		      "vbs"
+	      SID		      "1021"
+	      Ports		      [3]
+	      Position		      [1545, 909, 1575, 941]
+	      ZOrder		      332
+	      Floating		      off
+	      Location		      [188, 395, 1556, 1083]
+	      Open		      off
+	      NumInputPorts	      "3"
+	      List {
+		ListType		AxesTitles
+		axes1			"%<SignalLabel>"
+		axes2			"%<SignalLabel>"
+		axes3			"%<SignalLabel>"
+	      }
+	      List {
+		ListType		ScopeGraphics
+		FigureColor		"[0.5 0.5 0.5]"
+		AxesColor		"[0 0 0]"
+		AxesTickColor		"[1 1 1]"
+		LineColors		"[1 1 0;1 0 1;0 1 1;1 0 0;0 1 0;0 0 1]"
+		LineStyles		"-|-|-|-|-|-"
+		LineWidths		"[0.5 0.5 0.5 0.5 0.5 0.5]"
+		MarkerStyles		"none|none|none|none|none|none"
+	      }
+	      ShowLegends	      on
+	      YMin		      "-5~-5~-5"
+	      YMax		      "5~5~5"
+	      SaveName		      "ScopeData3"
+	      LimitDataPoints	      off
+	    }
 	    Line {
 	      Name		      "CoM_Error"
 	      ZOrder		      1
@@ -4028,11 +4160,31 @@ Model {
 	    Line {
 	      Name		      "vb"
 	      ZOrder		      46
-	      Labels		      [-1, 1]
 	      SrcBlock		      "v - vb"
 	      SrcPort		      1
-	      DstBlock		      "Demux"
-	      DstPort		      1
+	      Points		      [29, 0]
+	      Branch {
+		ZOrder			60
+		Labels			[2, 1]
+		Points			[0, 275; 76, 0]
+		Branch {
+		  ZOrder		  62
+		  Points		  [0, 70]
+		  DstBlock		  "Sum2"
+		  DstPort		  1
+		}
+		Branch {
+		  ZOrder		  61
+		  DstBlock		  "vbs"
+		  DstPort		  1
+		}
+	      }
+	      Branch {
+		ZOrder			59
+		Labels			[-1, 1]
+		DstBlock		"Demux"
+		DstPort			1
+	      }
 	    }
 	    Line {
 	      Name		      "vb"
@@ -4066,6 +4218,65 @@ Model {
 	      SrcPort		      1
 	      DstBlock		      "vb"
 	      DstPort		      2
+	    }
+	    Line {
+	      ZOrder		      52
+	      SrcBlock		      "Base Position"
+	      SrcPort		      1
+	      DstBlock		      "Reshape"
+	      DstPort		      1
+	    }
+	    Line {
+	      ZOrder		      53
+	      SrcBlock		      "Reshape"
+	      SrcPort		      1
+	      DstBlock		      "Interpreted MATLAB\nFunction"
+	      DstPort		      1
+	    }
+	    Line {
+	      ZOrder		      54
+	      SrcBlock		      "Interpreted MATLAB\nFunction"
+	      SrcPort		      1
+	      DstBlock		      "Display"
+	      DstPort		      1
+	    }
+	    Line {
+	      Name		      "vb WBI"
+	      ZOrder		      58
+	      SrcBlock		      "Base velocity"
+	      SrcPort		      1
+	      Points		      [53, 0]
+	      Branch {
+		ZOrder			64
+		Points			[0, 98; 97, 0]
+		DstBlock		"Sum2"
+		DstPort			2
+	      }
+	      Branch {
+		ZOrder			63
+		Labels			[1, 1]
+		DstBlock		"vbs"
+		DstPort			2
+	      }
+	    }
+	    Line {
+	      ZOrder		      66
+	      SrcBlock		      "Sum2"
+	      SrcPort		      1
+	      Points		      [5, 0]
+	      DstBlock		      "vbs"
+	      DstPort		      3
+	    }
+	    Annotation {
+	      SID		      "992"
+	      Name		      " "
+	      Position		      [745, 1038, 749, 1055]
+	      InternalMargins	      [0, 0, 0, 0]
+	      FixedHeight	      off
+	      FixedWidth	      off
+	      HorizontalAlignment     "left"
+	      VerticalAlignment	      "top"
+	      ZOrder		      -1
 	    }
 	  }
 	}
@@ -7476,17 +7687,6 @@ Model {
 	  FixedHeight		  off
 	  FixedWidth		  off
 	  ZOrder		  -1
-	}
-	Annotation {
-	  SID			  "992"
-	  Name			  " "
-	  Position		  [630, 613, 634, 630]
-	  InternalMargins	  [0, 0, 0, 0]
-	  FixedHeight		  off
-	  FixedWidth		  off
-	  HorizontalAlignment	  "left"
-	  VerticalAlignment	  "top"
-	  ZOrder		  -2
 	}
       }
     }

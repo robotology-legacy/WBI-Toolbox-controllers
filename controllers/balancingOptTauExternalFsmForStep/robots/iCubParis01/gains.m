@@ -6,7 +6,7 @@ transferTime                      = 10;
 tBalancing                        = 1;
 forceThreshold                    = 40;
 CoMErrorThreshold                 = 0.01;
-smoothingTimeJacobians            = 0.5;
+smoothingTimeJacobians            = 0.25;
 trajectoryTimePostural            = transferTime;
 NUMBER_OF_STATES                  = 4;
 
