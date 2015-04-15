@@ -7,7 +7,7 @@ Model {
     NumRootInports	    0
     NumRootOutports	    0
     ParameterArgumentNames  ""
-    ComputedModelVersion    "1.2385"
+    ComputedModelVersion    "1.2388"
     NumModelReferences	    0
     NumTestPointedSignals   0
   }
@@ -64,10 +64,10 @@ Model {
 	  $ObjectID		  6
 	  IsActive		  [1]
 	  ViewObjType		  "SimulinkSubsys"
-	  LoadSaveID		  "915"
+	  LoadSaveID		  "61"
 	  Extents		  [1689.0, 935.0]
-	  ZoomFactor		  [1.0980629539951574]
-	  Offset		  [-89.081587651598682, -0.74972436604195281]
+	  ZoomFactor		  [1.0033185840707965]
+	  Offset		  [833.6370245314223, 89.046306504961464]
 	}
 	Object {
 	  $ObjectID		  7
@@ -88,9 +88,9 @@ Model {
   ModifiedByFormat	  "%<Auto>"
   LastModifiedBy	  "daniele"
   ModifiedDateFormat	  "%<Auto>"
-  LastModifiedDate	  "Wed Apr 15 11:13:22 2015"
-  RTWModifiedTimeStamp	  350996979
-  ModelVersionFormat	  "1.%<AutoIncrement:2385>"
+  LastModifiedDate	  "Wed Apr 15 12:54:21 2015"
+  RTWModifiedTimeStamp	  351000419
+  ModelVersionFormat	  "1.%<AutoIncrement:2388>"
   ConfigurationManager	  "none"
   SampleTimeColors	  off
   SampleTimeAnnotations	  on
@@ -1091,8 +1091,8 @@ Model {
       }
       System {
 	Name			"Subsystem"
-	Location		[1366, 0, 3286, 1080]
-	Open			off
+	Location		[1366, 27, 3286, 1080]
+	Open			on
 	ModelBrowserVisibility	on
 	ModelBrowserWidth	200
 	ScreenColor		"white"
@@ -1114,7 +1114,7 @@ Model {
 	  RequestExecContextInheritance	off
 	  System {
 	    Name		    "BalancintController_One_TwoFeet"
-	    Location		    [1366, 0, 3286, 1080]
+	    Location		    [1366, 27, 3286, 1080]
 	    Open		    off
 	    ModelBrowserVisibility  on
 	    ModelBrowserWidth	    200
@@ -2401,7 +2401,7 @@ Model {
 	  RequestExecContextInheritance	off
 	  System {
 	    Name		    "DesValues"
-	    Location		    [1366, 339, 3286, 1419]
+	    Location		    [1366, 339, 3286, 1392]
 	    Open		    on
 	    ModelBrowserVisibility  on
 	    ModelBrowserWidth	    200
@@ -3031,7 +3031,7 @@ Model {
 	  System {
 	    Name		    "Dump and visualize"
 	    Location		    [1366, 27, 3286, 1080]
-	    Open		    on
+	    Open		    off
 	    ModelBrowserVisibility  on
 	    ModelBrowserWidth	    200
 	    ScreenColor		    "white"
@@ -4799,7 +4799,7 @@ Model {
 	  RequestExecContextInheritance	off
 	  System {
 	    Name		    "M(q) h(q,dq) g(q)"
-	    Location		    [1366, 339, 3286, 1419]
+	    Location		    [1366, 339, 3286, 1392]
 	    Open		    on
 	    ModelBrowserVisibility  on
 	    ModelBrowserWidth	    200
@@ -6820,9 +6820,10 @@ Stateflow {
       "           f_HDot        +     N0_f    * f0\nf_HDot = pinvA*(HDotDes - grav);\n\n% tau is given as:\n% tau = (mu"
       "lt_f_tau*N0_f)* f0 + (n_tau+mult_f_tau*f_HDot)\n% tau =        X_tau     * f0 +                   Y_tau\n\nY_tau"
       "            = PInv_JcMinvSt*(JcMinv*h-JcDv) + N0_tau*n_tau0 + mult_f_tau*f_HDot;\n\nN0_f             =  eye(12,1"
-      "2)-pinvA*A;\nX_tau            = mult_f_tau*N0_f;\nf0               = -pinv(X_tau)*Y_tau;\ntau              = X_t"
-      "au   * f0*state(1)*state(2)   +  Y_tau;\ndesiredForces    = N0_f    * f0*state(1)*state(2)   +  f_HDot;\n\nerror"
-      "CoM = xcom - desired_x_dx_ddx_CoM(:,1);\n\n\n\n"
+      "2)-pinvA*A;\nX_tau            = mult_f_tau*N0_f;\nif state(1) > 0.99 && state(2) > 0.99\n    f0 = -pinv(X_tau, P"
+      "INV_TOL)*Y_tau;\nelse\n    f0 = zeros(12,1);\nend\ntau              = X_tau   * f0*state(1)*state(2)   +  Y_tau;"
+      "\ndesiredForces    = N0_f    * f0*state(1)*state(2)   +  f_HDot;\n\nerrorCoM = xcom - desired_x_dx_ddx_CoM(:,1);"
+      "\n\n\n\n"
       editorLayout	      "100 M4x1[10 5 700 500]"
     }
   }
