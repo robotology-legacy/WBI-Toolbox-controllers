@@ -7,7 +7,7 @@ Model {
     NumRootInports	    0
     NumRootOutports	    0
     ParameterArgumentNames  ""
-    ComputedModelVersion    "1.2388"
+    ComputedModelVersion    "1.2389"
     NumModelReferences	    0
     NumTestPointedSignals   0
   }
@@ -67,7 +67,7 @@ Model {
 	  LoadSaveID		  "61"
 	  Extents		  [1689.0, 935.0]
 	  ZoomFactor		  [1.0033185840707965]
-	  Offset		  [833.6370245314223, 89.046306504961464]
+	  Offset		  [833.6370245314223, 89.046306504961478]
 	}
 	Object {
 	  $ObjectID		  7
@@ -75,8 +75,8 @@ Model {
 	  ViewObjType		  "SimulinkSubsys"
 	  LoadSaveID		  "976"
 	  Extents		  [1689.0, 935.0]
-	  ZoomFactor		  [1.7210626185958253]
-	  Offset		  [386.24446148015431, 2254.8654906284455]
+	  ZoomFactor		  [1.7016885553470917]
+	  Offset		  [443.15791241730983, 2248.7728776185227]
 	}
 	PropName		"EditorsInfo"
       }
@@ -88,9 +88,9 @@ Model {
   ModifiedByFormat	  "%<Auto>"
   LastModifiedBy	  "daniele"
   ModifiedDateFormat	  "%<Auto>"
-  LastModifiedDate	  "Wed Apr 15 12:54:21 2015"
-  RTWModifiedTimeStamp	  351000419
-  ModelVersionFormat	  "1.%<AutoIncrement:2388>"
+  LastModifiedDate	  "Wed Apr 15 16:56:42 2015"
+  RTWModifiedTimeStamp	  351017231
+  ModelVersionFormat	  "1.%<AutoIncrement:2389>"
   ConfigurationManager	  "none"
   SampleTimeColors	  off
   SampleTimeAnnotations	  on
@@ -1048,7 +1048,7 @@ Model {
     ShowPageBoundaries	    off
     ZoomFactor		    "100"
     ReportName		    "simulink-default.rpt"
-    SIDHighWatermark	    "1467"
+    SIDHighWatermark	    "1468"
     Block {
       BlockType		      SubSystem
       Name		      "Subsystem"
@@ -2401,7 +2401,7 @@ Model {
 	  RequestExecContextInheritance	off
 	  System {
 	    Name		    "DesValues"
-	    Location		    [1366, 339, 3286, 1392]
+	    Location		    [1366, 27, 3286, 1080]
 	    Open		    on
 	    ModelBrowserVisibility  on
 	    ModelBrowserWidth	    200
@@ -2413,7 +2413,7 @@ Model {
 	    TiledPaperMargins	    [0.500000, 0.500000, 0.500000, 0.500000]
 	    TiledPageScale	    1
 	    ShowPageBoundaries	    off
-	    ZoomFactor		    "172"
+	    ZoomFactor		    "170"
 	    Block {
 	      BlockType		      SubSystem
 	      Name		      "CoM(0)"
@@ -2555,6 +2555,29 @@ Model {
 	      Value		      "ones(2,1)"
 	    }
 	    Block {
+	      BlockType		      Demux
+	      Name		      "Demux"
+	      SID		      "1468"
+	      Ports		      [1, 2]
+	      Position		      [1185, 2616, 1190, 2654]
+	      ZOrder		      469
+	      ShowName		      off
+	      Outputs		      "2"
+	      DisplayOption	      "bar"
+	      Port {
+		PortNumber		1
+		Name			"Left Foot Constraint Active"
+		RTWStorageClass		"Auto"
+		DataLoggingNameMode	"SignalName"
+	      }
+	      Port {
+		PortNumber		2
+		Name			"Right Foot Constraint Active"
+		RTWStorageClass		"Auto"
+		DataLoggingNameMode	"SignalName"
+	      }
+	    }
+	    Block {
 	      BlockType		      Reference
 	      Name		      "Read desired_x_dx_ddx_CoM\nas 9 element vector "
 	      SID		      "1332"
@@ -2659,12 +2682,6 @@ Model {
 	      Criteria		      "u2 > Threshold"
 	      InputSameDT	      off
 	      SaturateOnIntegerOverflow	off
-	      Port {
-		PortNumber		1
-		Name			"constraints"
-		RTWStorageClass		"Auto"
-		DataLoggingNameMode	"SignalName"
-	      }
 	    }
 	    Block {
 	      BlockType		      Terminator
@@ -2787,7 +2804,7 @@ Model {
 	      Name		      "state"
 	      SID		      "1363"
 	      Ports		      [2]
-	      Position		      [1225, 2616, 1255, 2649]
+	      Position		      [1350, 2616, 1380, 2654]
 	      ZOrder		      468
 	      Floating		      off
 	      Location		      [1373, 56, 3281, 1072]
@@ -2809,7 +2826,7 @@ Model {
 		MarkerStyles		"none|none|none|none|none|none"
 	      }
 	      ShowLegends	      on
-	      TimeRange		      "4"
+	      TimeRange		      "120"
 	      YMin		      "0~0"
 	      YMax		      "2~2"
 	      LimitDataPoints	      off
@@ -2877,11 +2894,11 @@ Model {
 	      SrcPort		      1
 	      Points		      [39, 0]
 	      Branch {
-		ZOrder			1594
-		Labels			[2, 1]
-		Points			[0, -75]
-		DstBlock		"state"
-		DstPort			2
+		ZOrder			1616
+		Labels			[2, 0]
+		Points			[0, -80]
+		DstBlock		"Demux"
+		DstPort			1
 	      }
 	      Branch {
 		ZOrder			1593
@@ -3000,23 +3017,29 @@ Model {
 	      DstPort		      1
 	    }
 	    Line {
-	      Name		      "constraints"
 	      ZOrder		      1581
 	      SrcBlock		      "Switch2"
 	      SrcPort		      1
-	      Points		      [102, 0]
-	      Branch {
-		ZOrder			1597
-		Labels			[2, 1]
-		Points			[0, -95]
-		DstBlock		"state"
-		DstPort			1
-	      }
-	      Branch {
-		ZOrder			1596
-		DstBlock		"minJerkTrajGen1"
-		DstPort			1
-	      }
+	      DstBlock		      "minJerkTrajGen1"
+	      DstPort		      1
+	    }
+	    Line {
+	      Name		      "Left Foot Constraint Active"
+	      ZOrder		      1617
+	      Labels		      [1, 1]
+	      SrcBlock		      "Demux"
+	      SrcPort		      1
+	      DstBlock		      "state"
+	      DstPort		      1
+	    }
+	    Line {
+	      Name		      "Right Foot Constraint Active"
+	      ZOrder		      1618
+	      Labels		      [1, 1]
+	      SrcBlock		      "Demux"
+	      SrcPort		      2
+	      DstBlock		      "state"
+	      DstPort		      2
 	    }
 	  }
 	}
@@ -3302,6 +3325,8 @@ Model {
 		MarkerStyles		"none|none|none|none|none|none"
 	      }
 	      ShowLegends	      on
+	      LegendLocations	      "0.90867     0.90945    0.072589    0.050443\n0.91182     0.59449    0.069444    0.050443"
+	      "\n0.91811     0.27854    0.063155    0.050443"
 	      TimeRange		      "30"
 	      YMin		      "-0.09999999999999998~-0.1~-0.011"
 	      YMax		      "0.55~0.6000000000000001~0.008"
@@ -3969,7 +3994,7 @@ Model {
 	      Position		      [1270, 144, 1315, 246]
 	      ZOrder		      434
 	      Floating		      off
-	      Location		      [928, 281, 2836, 1297]
+	      Location		      [1372, 58, 3280, 1074]
 	      Open		      off
 	      NumInputPorts	      "5"
 	      List {
@@ -3991,9 +4016,6 @@ Model {
 		MarkerStyles		"none|none|none|none|none|none"
 	      }
 	      ShowLegends	      on
-	      LegendLocations	      "0.83502     0.87896     0.11661    0.050443\n0.82754     0.67697      0.1229    0.065822"
-	      "\n0.82381     0.49238     0.12605    0.065822\n0.82754     0.27009      0.1229     0.09658\n0.90384     0.19627"
-	      "     0.12605     0.09658"
 	      TimeRange		      "34.19"
 	      YMin		      "-1e-27~-40~-40~-20~-20"
 	      YMax		      "1e-28~60~60~20~20"
@@ -6327,7 +6349,7 @@ Model {
 	  RequestExecContextInheritance	off
 	  System {
 	    Name		    "synchronizer"
-	    Location		    [1372, 27, 3292, 1080]
+	    Location		    [1366, 27, 3286, 1080]
 	    Open		    off
 	    ModelBrowserVisibility  on
 	    ModelBrowserWidth	    200
