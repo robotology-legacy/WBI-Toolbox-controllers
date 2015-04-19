@@ -7,7 +7,7 @@ Model {
     NumRootInports	    0
     NumRootOutports	    0
     ParameterArgumentNames  ""
-    ComputedModelVersion    "1.2046"
+    ComputedModelVersion    "1.2051"
     NumModelReferences	    0
     NumTestPointedSignals   0
   }
@@ -31,7 +31,7 @@ Model {
       $ObjectID		      2
       $ClassName	      "Simulink.WindowInfo"
       IsActive		      [1]
-      Location		      [6.0, 339.0, 1366.0, 741.0]
+      Location		      [0.0, 54.0, 1360.0, 714.0]
       Object {
 	$PropName		"ModelBrowserInfo"
 	$ObjectID		3
@@ -56,9 +56,9 @@ Model {
 	  IsActive		  [1]
 	  ViewObjType		  "SimulinkSubsys"
 	  LoadSaveID		  "61"
-	  Extents		  [1135.0, 596.0]
+	  Extents		  [1129.0, 596.0]
 	  ZoomFactor		  [0.65513264129181081]
-	  Offset		  [491.26320422535196, 263.63028169014086]
+	  Offset		  [495.8424295774646, 263.63028169014086]
 	}
 	Object {
 	  $ObjectID		  6
@@ -88,9 +88,9 @@ Model {
   ModifiedByFormat	  "%<Auto>"
   LastModifiedBy	  "daniele"
   ModifiedDateFormat	  "%<Auto>"
-  LastModifiedDate	  "Wed Apr 15 11:26:52 2015"
-  RTWModifiedTimeStamp	  350854333
-  ModelVersionFormat	  "1.%<AutoIncrement:2046>"
+  LastModifiedDate	  "Sun Apr 19 15:55:13 2015"
+  RTWModifiedTimeStamp	  351359711
+  ModelVersionFormat	  "1.%<AutoIncrement:2051>"
   ConfigurationManager	  "none"
   SampleTimeColors	  off
   SampleTimeAnnotations	  on
@@ -1065,7 +1065,7 @@ Model {
     ShowPageBoundaries	    off
     ZoomFactor		    "719"
     ReportName		    "simulink-default.rpt"
-    SIDHighWatermark	    "1261"
+    SIDHighWatermark	    "1262"
     Block {
       BlockType		      SubSystem
       Name		      "Subsystem"
@@ -1108,7 +1108,7 @@ Model {
       }
       System {
 	Name			"Subsystem"
-	Location		[6, 339, 1372, 1080]
+	Location		[0, 54, 1360, 768]
 	Open			on
 	ModelBrowserVisibility	on
 	ModelBrowserWidth	200
@@ -3818,7 +3818,7 @@ Model {
 	  RequestExecContextInheritance	off
 	  System {
 	    Name		    "State machine\n"
-	    Location		    [6, 339, 1372, 1080]
+	    Location		    [0, 27, 1360, 768]
 	    Open		    off
 	    ModelBrowserVisibility  on
 	    ModelBrowserWidth	    200
@@ -3830,7 +3830,7 @@ Model {
 	    TiledPaperMargins	    [0.500000, 0.500000, 0.500000, 0.500000]
 	    TiledPageScale	    1
 	    ShowPageBoundaries	    off
-	    ZoomFactor		    "136"
+	    ZoomFactor		    "139"
 	    Block {
 	      BlockType		      Inport
 	      Name		      "qj"
@@ -4932,7 +4932,7 @@ Model {
 	  RequestExecContextInheritance	off
 	  System {
 	    Name		    "base + dq'"
-	    Location		    [0, 366, 1366, 1080]
+	    Location		    [6, 27, 1366, 768]
 	    Open		    on
 	    ModelBrowserVisibility  on
 	    ModelBrowserWidth	    200
@@ -5022,7 +5022,7 @@ Model {
 	      }
 	      System {
 		Name			"baseVelocity"
-		Location		[0, 366, 1366, 1080]
+		Location		[6, 27, 1366, 768]
 		Open			on
 		ModelBrowserVisibility	on
 		ModelBrowserWidth	200
@@ -5430,7 +5430,7 @@ Model {
 	  RequestExecContextInheritance	off
 	  System {
 	    Name		    "controller_QP"
-	    Location		    [6, 339, 1372, 1080]
+	    Location		    [0, 54, 1360, 768]
 	    Open		    off
 	    ModelBrowserVisibility  on
 	    ModelBrowserWidth	    200
@@ -6107,6 +6107,26 @@ Model {
 	      SaturateOnIntegerOverflow	off
 	    }
 	    Block {
+	      BlockType		      Sum
+	      Name		      "Sum1"
+	      SID		      "1262"
+	      Ports		      [2, 1]
+	      Position		      [3500, 1290, 3570, 1360]
+	      ZOrder		      411
+	      ShowName		      off
+	      IconShape		      "round"
+	      Inputs		      "|+-"
+	      InputSameDT	      off
+	      OutDataTypeStr	      "Inherit: Inherit via internal rule"
+	      SaturateOnIntegerOverflow	off
+	      Port {
+		PortNumber		1
+		Name			"error fDes QP and no QP"
+		RTWStorageClass		"Auto"
+		DataLoggingNameMode	"SignalName"
+	      }
+	    }
+	    Block {
 	      BlockType		      Reference
 	      Name		      "dJ*dq LeftFoot"
 	      SID		      "955"
@@ -6144,17 +6164,18 @@ Model {
 	      BlockType		      Scope
 	      Name		      "f"
 	      SID		      "1014"
-	      Ports		      [2]
-	      Position		      [3760, 1204, 3945, 1426]
+	      Ports		      [3]
+	      Position		      [3760, 1226, 3950, 1424]
 	      ZOrder		      405
 	      Floating		      off
-	      Location		      [7, 395, 1361, 1072]
+	      Location		      [7, 83, 1355, 760]
 	      Open		      off
-	      NumInputPorts	      "2"
+	      NumInputPorts	      "3"
 	      List {
 		ListType		AxesTitles
 		axes1			"%<SignalLabel>"
 		axes2			"%<SignalLabel>"
+		axes3			"%<SignalLabel>"
 	      }
 	      List {
 		ListType		ScopeGraphics
@@ -6168,8 +6189,8 @@ Model {
 	      }
 	      ShowLegends	      off
 	      TimeRange		      "40"
-	      YMin		      "-50~-50"
-	      YMax		      "200~200"
+	      YMin		      "-50~-50~-5"
+	      YMax		      "200~200~5"
 	      SaveName		      "ScopeData2"
 	      LimitDataPoints	      off
 	    }
@@ -7481,12 +7502,22 @@ Model {
 	    Line {
 	      Name		      "fDes no QP"
 	      ZOrder		      920
-	      Labels		      [-1, 1]
 	      SrcBlock		      "tau(f)\n"
 	      SrcPort		      15
 	      Points		      [721, 0; 0, -45]
-	      DstBlock		      "f"
-	      DstPort		      2
+	      Branch {
+		ZOrder			943
+		Points			[1059, 0]
+		DstBlock		"Sum1"
+		DstPort			2
+	      }
+	      Branch {
+		ZOrder			942
+		Labels			[-1, 1]
+		Points			[-471, 0; 0, 20]
+		DstBlock		"f"
+		DstPort			3
+	      }
 	    }
 	    Line {
 	      Name		      "fDesQP"
@@ -7496,18 +7527,28 @@ Model {
 	      Points		      [30, 0]
 	      Branch {
 		ZOrder			915
-		Points			[0, 700; 466, 0]
+		Points			[0, 700; 312, 0]
 		Branch {
-		  ZOrder		  923
-		  Labels		  [1, 0; -1, 0]
-		  Points		  [0, -55]
-		  DstBlock		  "fDesQP"
+		  ZOrder		  938
+		  Points		  [0, 65]
+		  DstBlock		  "Sum1"
 		  DstPort		  1
 		}
 		Branch {
-		  ZOrder		  922
-		  DstBlock		  "f"
-		  DstPort		  1
+		  ZOrder		  937
+		  Points		  [154, 0]
+		  Branch {
+		    ZOrder		    923
+		    Labels		    [1, 0; -1, 0]
+		    Points		    [0, -55]
+		    DstBlock		    "fDesQP"
+		    DstPort		    1
+		  }
+		  Branch {
+		    ZOrder		    922
+		    DstBlock		    "f"
+		    DstPort		    1
+		  }
 		}
 	      }
 	      Branch {
@@ -7598,6 +7639,15 @@ Model {
 	      Points		      [1239, 0; 0, 220]
 	      DstBlock		      "Product1"
 	      DstPort		      1
+	    }
+	    Line {
+	      Name		      "error fDes QP and no QP"
+	      ZOrder		      944
+	      Labels		      [1, 1]
+	      SrcBlock		      "Sum1"
+	      SrcPort		      1
+	      DstBlock		      "f"
+	      DstPort		      2
 	    }
 	  }
 	}

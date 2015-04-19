@@ -50,6 +50,7 @@ if (sum(activeFeetConstraints) == 2)
     impRightLeg         = [ 35   10   40      100    70   2
                              0    0   0         0     0   0]; 
     
+                         
     intTorso            = [0   0    0]; 
     intArms             = [0   0    0    0  ];
                         
@@ -60,7 +61,7 @@ if (sum(activeFeetConstraints) == 2)
                          
     if (DEMO_LEFT_AND_RIGHT == 1)
         directionOfOscillation = [0;1;0];
-        referenceParams        = [0.05 0.01];  %referenceParams(1) = amplitude of ascillations in meters
+        referenceParams        = [0.03 0.1];  %referenceParams(1) = amplitude of ascillations in meters
     end
     
     if (DEMO_MOVING_LEG_AND_ARMS == 1)

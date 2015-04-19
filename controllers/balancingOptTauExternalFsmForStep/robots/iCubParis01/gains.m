@@ -6,7 +6,7 @@ transferTime                      = 10;
 tBalancing                        = 1;
 forceThreshold                    = 40;
 CoMErrorThreshold                 = 0.01;
-smoothingTimeJacobians            = 0.25;
+smoothingTimeJacobians            = 0.5;
 trajectoryTimePostural            = transferTime;
 NUMBER_OF_STATES                  = 4;
 
@@ -74,7 +74,19 @@ impLeftLeg          = [ 35   10   40      100    70  2
 
 impRightLeg         = [ 35   10   40      100    70   2
                          0    0   0         0     0   0]; 
-                                                  
+                           
+if STEP == 1
+    impTorso            = [   40    40   30
+                               0     0    0]; 
+    impArms             = [23   10   15   12    
+                            0    0    0    0   ];
+
+    impLeftLeg          = [ 70   10   40      100    70  2
+                            0    0   0         0     0   0]/2; 
+
+    impRightLeg         = [ 70   10   40      100    70   2
+                             0    0   0         0     0   0]/2; 
+end
     
    
 impedances          = [impTorso(1,:),impArms(1,:),impArms(1,:),impLeftLeg(1,:),impRightLeg(1,:)];
