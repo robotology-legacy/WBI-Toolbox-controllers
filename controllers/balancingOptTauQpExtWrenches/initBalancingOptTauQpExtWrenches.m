@@ -6,13 +6,11 @@ localName = 'matlabTorqueBalancing';
 
 simulationTime    = inf;       % Simulation time in seconds
 
-USE_QPO_SOLVER    = 0;
+USE_QP_SOLVER    = 0;
 
 LEFT_RIGHT_FOOT_IN_CONTACT  = [1 1];
 
-
-DEMO_MOVING_LEG_AND_ARMS    = 0; 
-DEMO_LEFT_AND_RIGHT         = 0;  % Either 0 or 1 
+DEMO_LEFT_AND_RIGHT         = 1;  % Either 0 or 1 
 
  
 

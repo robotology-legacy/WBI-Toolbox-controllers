@@ -1,7 +1,5 @@
 ROBOT_DOF = 23;
 
-amplitudesOscillationsOnOneFoot   = zeros(1,ROBOT_DOF);
-frequenciesOscillationsOnOneFoot  = zeros(1,ROBOT_DOF);
 directionOfOscillation            = [0;0;0];
 referenceParams                   = [0.0  0.0];  %referenceParams(1) = amplitude of ascillations in meters referenceParams(2) = frequency of ascillations in hertz
 
@@ -9,21 +7,10 @@ noOscillationTime        = 0; % If DEMO_LEFT_AND_RIGHT = 1, the variable noOscil
                                % that the robot waits before starting the left-and-righ
 
 
-tBalancing                        = 1;
 smoothingTimeJacobians            = 0.5;
 
 ROBOT_DOF_FOR_SIMULINK = eye(ROBOT_DOF);
 qTildeMax              = 20*pi/180;
-% Controller gains for convergence of the desired centroidal momentum. 
-% The first three elements are the Proportional, Intagral, and the Derivative
-% gains taking place in xComDDStart, i.e. 
-%
-% xComDDStart = xDDcomDes - Gains(1)*(xcom - xcomDes) - Gains(2)*IntErrorCoM - Gains(3)*(xDcom - xDcomDes)  
-%
-% The fourth element is the gain for the 
-% angular part of the centroidal momentum convergence, i.e. 
-%
-% hwDot = -Gains(4)*hw  
 
 
 %%
@@ -71,20 +58,6 @@ if (sum(LEFT_RIGHT_FOOT_IN_CONTACT) == 2)
         referenceParams        = [0.02 0.5];  %referenceParams(1) = amplitude of ascillations in meters
     end
     
-    if (DEMO_MOVING_LEG_AND_ARMS == 1)
-        amplTorso            = [ 10  20   30 ]; 
-        amplArms             = [ 20  20   20   0];
-        amplLeftLeg          = [  0   0    0   0   0   0]; 
-        amplRightLeg         = [  0   0    0   0   0   0];
-
-        freqTorso            = [ 0.2  0.1  0.2]; 
-        freqArms             = [ 0.2  0.2  0.2  0.2];
-        freqLeftLeg          = [ 0.0  0.0  0.0  0.0  0.0  0.0]; 
-        freqRightLeg         = [ 0.0  0.0  0.0  0.0  0.0  0.0]; %[ 0.0  0.3  0.0  0.0  0.0  0.0];
-
-        amplitudesOscillationsOnOneFoot   = [amplTorso,amplArms,amplArms,amplLeftLeg,amplRightLeg];
-        frequenciesOscillationsOnOneFoot  = [freqTorso,freqArms,freqArms,freqLeftLeg,freqRightLeg];
-    end
 end
 
 %%
@@ -114,45 +87,17 @@ if (sum(LEFT_RIGHT_FOOT_IN_CONTACT) == 1)
 
     intRightLeg         = [0   0    0    0    0  0];  
     
-    if (DEMO_MOVING_LEG_AND_ARMS == 0)
-        impTorso            = [  20    20   20
-                                  0     0    0]; 
+    impTorso            = [  20    20   20
+                              0     0    0]; 
 
-        impArms             = [ 13  13   13   5  
-                                0    0    0   0              ];
+    impArms             = [ 13  13   13   5  
+                            0    0    0   0              ];
 
-        impLeftLeg          = [ 70   70 650     300      0   0
-                                 0    0   0       0      0   0]; 
+    impLeftLeg          = [ 70   70 650     300      0   0
+                             0    0   0       0      0   0]; 
 
-        impRightLeg         = [ 20   20  20      10      0    0
-                                 0    0   0       0      0   0];
-
-    else
-        impTorso            = [  70    20   50
-                                  0     0    0]; 
-
-        impArms             = [ 13  13   13   10  
-                                0    0    0   0              ];
-
-        impLeftLeg          = [ 70   70 650     300      0   0
-                                 0    0   0       0      0   0]; 
-
-        impRightLeg         = [ 40   40  20      10     10   10
-                                 0    0   0       0      0   0];
-
-        amplTorso            = [ 10  10   10 ]; 
-        amplArms             = [  0   0    0   0];
-        amplLeftLeg          = [  0   0    0   0   0   0]; 
-        amplRightLeg         = [ 25  25   25  15   0   0];
-
-        freqTorso            = [ 0.0  0.0  0.0]; 
-        freqArms             = [ 0.0  0.0  0.0  0.0];
-        freqLeftLeg          = [ 0.0  0.0  0.0  0.0  0.0  0.0]; 
-        freqRightLeg         = [ 0.2  0.2  0.0  0.0  0.0  0.0]; %[ 0.0  0.3  0.0  0.0  0.0  0.0];
-
-        amplitudesOscillationsOnOneFoot   = [amplTorso,amplArms,amplArms,amplLeftLeg,amplRightLeg];
-        frequenciesOscillationsOnOneFoot  = [freqTorso,freqArms,freqArms,freqLeftLeg,freqRightLeg];
-    end
+    impRightLeg         = [ 20   20  20      10      0    0
+                             0    0   0       0      0   0];
 %%    
 end
 
