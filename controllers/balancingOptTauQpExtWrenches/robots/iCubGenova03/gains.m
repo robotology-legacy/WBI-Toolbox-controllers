@@ -1,3 +1,19 @@
+ROBOT_DOF = 23;
+
+amplitudesOscillationsOnOneFoot   = zeros(1,ROBOT_DOF);
+frequenciesOscillationsOnOneFoot  = zeros(1,ROBOT_DOF);
+directionOfOscillation            = [0;0;0];
+referenceParams                   = [0.0  0.0];  %referenceParams(1) = amplitude of ascillations in meters referenceParams(2) = frequency of ascillations in hertz
+
+noOscillationTime        = 0; % If DEMO_LEFT_AND_RIGHT = 1, the variable noOscillationTime is the time, in seconds, 
+                               % that the robot waits before starting the left-and-righ
+
+
+tBalancing                        = 1;
+smoothingTimeJacobians            = 0.5;
+
+ROBOT_DOF_FOR_SIMULINK = eye(ROBOT_DOF);
+qTildeMax              = 20*pi/180;
 % Controller gains for convergence of the desired centroidal momentum. 
 % The first three elements are the Proportional, Intagral, and the Derivative
 % gains taking place in xComDDStart, i.e. 
@@ -10,59 +26,146 @@
 % hwDot = -Gains(4)*hw  
 
 
-ROBOT_DOF = 23;
-gainsPCOM                 = diag([ 40   40  40])/10;
-gainsICOM                 = diag([  0    0   0]);
-gainsDCOM                 = 2*sqrt(gainsPCOM);
-
-minCoMx_y                 = [-0.1   -0.25 ];  
-maxCoMx_y                 = [ 0.1    0.05 ];
-satGainsPCOM              = 300;
-increasingRatesGainsPCOM  = [ 0     0    ];
-
-gainMomentum           = 1 ;
-
-% Impadances acting in the null space of the desired contact forces 
+%%
+%           PARAMETERS FOR TWO FEET ONE GROUND
 
 
-% 
-impTorso            = [   60    20   10
-                           0     0    0]; 
-impArms             = [ 8    8    8  12   
-                        0    0    0   0   ];
-impLegs             = [ 35   10    0      350    350  10
-                         0    0   0        0      0   0]; 
-impedances          = [impTorso(1,:),impArms(1,:),impArms(1,:),impLegs(1,:),impLegs(1,:)];
-increasingRatesImp  = [impTorso(2,:),impArms(2,:),impArms(2,:),impLegs(2,:),impLegs(2,:)];
-impedencesSat       = [80   100    400];
+if (sum(LEFT_RIGHT_FOOT_IN_CONTACT) == 2)
+    gainsPCOM                 = diag([ 50   50  50]);
+    gainsICOM                 = diag([  0    0   0]);
+    gainsDCOM                 = diag([  0    0   0]);
+
+    minCoMx_y                 = [-0.1   -0.25 ];  
+    maxCoMx_y                 = [ 0.1    0.05 ];
+    satGainsPCOM              = 300;
+    increasingRatesGainsPCOM  = [ 0     0    ];
+
+    gainMomentum           = 1 ;
+
+    % Impadances acting in the null space of the desired contact forces 
 
 
+    % 
+    impTorso            = [   40    40   40
+                               0     0    0]; 
+    impArms             = [13   13   13  15   
+                            0    0    0   0   ];
+                        
+    impLeftLeg          = [ 35   10   40     1200    70  2
+                             0    0   0        0      0   0]; 
 
-kpTorso            =   [ 30   30    30]; 
-kpArms             =   [ 50   50    50   50   ];
-kpLegs             =   [ 35   70    20   500   100  10]; 
+    impRightLeg         = [ 35   10   40      950    70  2
+                             0    0   0        0      0   0]; 
+                         
+    intTorso            = [0   0    0]; 
+    intArms             = [0   0    0    0  ];
+                        
+    intLeftLeg          = [0   0    0    0    0  0]; 
 
-kdTorso            = [ 1     1     1]; 
-kdArms             = [ 1     1     1     1      ];
-kdLegs             = [ 1     1     1     1     1     1]; 
+    intRightLeg         = [0   0    0    0    0  0];                        
+                         
+                         
+    if (DEMO_LEFT_AND_RIGHT == 1)
+        directionOfOscillation = [0;1;0];
+        referenceParams        = [0.04 0.5];  %referenceParams(1) = amplitude of ascillations in meters
+    end
+    
+    if (DEMO_MOVING_LEG_AND_ARMS == 1)
+        amplTorso            = [ 10  20   30 ]; 
+        amplArms             = [ 20  20   20   0];
+        amplLeftLeg          = [  0   0    0   0   0   0]; 
+        amplRightLeg         = [  0   0    0   0   0   0];
 
-kPandD_Postural    = [ kpTorso(1,:),kpArms(1,:),kpArms(1,:),kpLegs(1,:),kpLegs(1,:)
-                       kdTorso(1,:),kdArms(1,:),kdArms(1,:),kdLegs(1,:),kdLegs(1,:)]*0;
+        freqTorso            = [ 0.2  0.1  0.2]; 
+        freqArms             = [ 0.2  0.2  0.2  0.2];
+        freqLeftLeg          = [ 0.0  0.0  0.0  0.0  0.0  0.0]; 
+        freqRightLeg         = [ 0.0  0.0  0.0  0.0  0.0  0.0]; %[ 0.0  0.3  0.0  0.0  0.0  0.0];
 
-                   
-if (DEMO_LEFT_AND_RIGHT == 1)
-    directionOfOscillation = [0;1;0];
-    referenceParams        = [0.03 0.1];  %referenceParams(1) = amplitude of ascillations in meters
-else                                      %referenceParams(2) = frequency of ascillations in hertz
-    directionOfOscillation = [0;1;0];
-    referenceParams        = [0.0  0.0];  %referenceParams(1) = amplitude of ascillations in meters
+        amplitudesOscillationsOnOneFoot   = [amplTorso,amplArms,amplArms,amplLeftLeg,amplRightLeg];
+        frequenciesOscillationsOnOneFoot  = [freqTorso,freqArms,freqArms,freqLeftLeg,freqRightLeg];
+    end
 end
-%% Parameters for QP
-number_of_feet_on_ground = 2;
-init_conditions_QP   = zeros(6*number_of_feet_on_ground,1);
-lower_bound_opt_var  = -inf*ones(6*number_of_feet_on_ground,1);
-upper_bound_opt_var  = inf*ones(6*number_of_feet_on_ground,1);
-init_params_QP       = [init_conditions_QP;lower_bound_opt_var;upper_bound_opt_var];
+
+%%
+%           PARAMETERS FOR ONLY ONE FOOT ONE GROUND
+
+
+if (sum(LEFT_RIGHT_FOOT_IN_CONTACT) == 1)
+    %%
+    gainsPCOM                 = diag([120  140 120]);
+    gainsICOM                 = diag([  0    0   0]);
+    gainsDCOM                 = diag([  0    0   0]);
+
+    minCoMx_y                 = [-0.1   -0.25 ];  
+    maxCoMx_y                 = [ 0.1    0.05 ];
+    satGainsPCOM              = 300;
+    increasingRatesGainsPCOM  = [ 0     0    ];
+
+    gainMomentum              = 1 ;
+
+    % Impadances acting in the null space of the desired contact forces 
+
+    
+    intTorso            = [0   0    0]; 
+    intArms             = [0   0    0    0  ];
+                        
+    intLeftLeg          = [0   0    0    0    0  0]; 
+
+    intRightLeg         = [0   0    0    0    0  0];  
+    
+    if (DEMO_MOVING_LEG_AND_ARMS == 0)
+        impTorso            = [  20    20   20
+                                  0     0    0]; 
+
+        impArms             = [ 13  13   13   5  
+                                0    0    0   0              ];
+
+        impLeftLeg          = [ 70   70 650     300      0   0
+                                 0    0   0       0      0   0]; 
+
+        impRightLeg         = [ 20   20  20      10      0    0
+                                 0    0   0       0      0   0];
+
+    else
+        impTorso            = [  70    20   50
+                                  0     0    0]; 
+
+        impArms             = [ 13  13   13   10  
+                                0    0    0   0              ];
+
+        impLeftLeg          = [ 70   70 650     300      0   0
+                                 0    0   0       0      0   0]; 
+
+        impRightLeg         = [ 40   40  20      10     10   10
+                                 0    0   0       0      0   0];
+
+        amplTorso            = [ 10  10   10 ]; 
+        amplArms             = [  0   0    0   0];
+        amplLeftLeg          = [  0   0    0   0   0   0]; 
+        amplRightLeg         = [ 25  25   25  15   0   0];
+
+        freqTorso            = [ 0.0  0.0  0.0]; 
+        freqArms             = [ 0.0  0.0  0.0  0.0];
+        freqLeftLeg          = [ 0.0  0.0  0.0  0.0  0.0  0.0]; 
+        freqRightLeg         = [ 0.2  0.2  0.0  0.0  0.0  0.0]; %[ 0.0  0.3  0.0  0.0  0.0  0.0];
+
+        amplitudesOscillationsOnOneFoot   = [amplTorso,amplArms,amplArms,amplLeftLeg,amplRightLeg];
+        frequenciesOscillationsOnOneFoot  = [freqTorso,freqArms,freqArms,freqLeftLeg,freqRightLeg];
+    end
+%%    
+end
+
+satIntegral         = 0;
+integralGains       = [intTorso,intArms,intArms,intLeftLeg,intRightLeg];
+impedances          = [impTorso(1,:),impArms(1,:),impArms(1,:),impLeftLeg(1,:),impRightLeg(1,:)];
+dampings            = zeros(1,ROBOT_DOF);
+increasingRatesImp  = [impTorso(2,:),impArms(2,:),impArms(2,:),impLeftLeg(2,:),impRightLeg(2,:)];
+impedencesSat       = [80   25    1400];
+
+if (size(impedances,2) ~= ROBOT_DOF)
+    error('Dimension mismatch between ROBOT_DOF and dimension of the variable impedences. Check these variables in the file gains.m');
+end
+
 
 %% constraints for QP for balancing on both feet - friction cone - z-moment - in terms of f (not f0!)
 
@@ -74,29 +177,10 @@ numberOfPoints               = 4; % The friction cone is approximated by using l
 forceFrictionCoefficient     = 1;%1/3;  
 torsionalFrictionCoefficient = 2/150;
 
+footSize                     = [ -0.1 0.1   ;    % xMin, xMax
+                                 -0.1 0.1  ];   % yMin, yMax    
+
+fZmin                        = 10;
+
 %% The QP solver will search a solution fo that 
 % satisfies the inequality Aineq_f F(fo) < bineq_f
-
-[Aineq_fcone,bineq_fcone]= constraint_fcone_QP(forceFrictionCoefficient,numberOfPoints,number_of_feet_on_ground);
-
-
-if number_of_feet_on_ground == 2
-    Aineq_torsion = [ 0         , 0, -torsionalFrictionCoefficient,               0,               0, 1, zeros(1,6);
-                      0         , 0, -torsionalFrictionCoefficient,               0,               0,-1, zeros(1,6); 
-                      zeros(1,6), 0,              0,                -torsionalFrictionCoefficient, 0, 0,      1;
-                      zeros(1,6), 0,              0,                -torsionalFrictionCoefficient, 0, 0,     -1];   
-    bineq_torsion = zeros(4,1);
-else
-    Aineq_torsion = [ 0, 0, -torsionalFrictionCoefficient, 0, 0, 1;
-                      0, 0, -torsionalFrictionCoefficient, 0, 0,-1];
-    bineq_torsion = zeros(2,1); 
-end    
-%
-
-% merge the constraints together
-% here still in terms of f (not f0) 
-% (the constraint on f0 are variable and calculated in the controller)
-Aineq_F = [ Aineq_fcone;
-            Aineq_torsion];
-bineq_F = [ bineq_fcone;
-            bineq_torsion];

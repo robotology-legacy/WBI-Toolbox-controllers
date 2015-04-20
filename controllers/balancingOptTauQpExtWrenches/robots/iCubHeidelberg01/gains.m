@@ -1,4 +1,4 @@
-ROBOT_DOF = 23;
+ROBOT_DOF = 15;
 
 amplitudesOscillationsOnOneFoot   = zeros(1,ROBOT_DOF);
 frequenciesOscillationsOnOneFoot  = zeros(1,ROBOT_DOF);
@@ -31,9 +31,9 @@ qTildeMax              = 20*pi/180;
 
 
 if (sum(LEFT_RIGHT_FOOT_IN_CONTACT) == 2)
-    gainsPCOM                 = diag([100  100 100])/2;
+    gainsPCOM                 = diag([ 40   40  40]);
     gainsICOM                 = diag([  0    0   0]);
-    gainsDCOM                 = 2*sqrt(gainsPCOM)*0;
+    gainsDCOM                 = 2*sqrt(gainsPCOM);
 
     minCoMx_y                 = [-0.1   -0.25 ];  
     maxCoMx_y                 = [ 0.1    0.05 ];
@@ -46,20 +46,17 @@ if (sum(LEFT_RIGHT_FOOT_IN_CONTACT) == 2)
 
 
     % 
-    impTorso            = [   40    40   40
+    impTorso            = [   60    60   10
                                0     0    0]; 
-    impArms             = [15   15    20   12   
-                            0    0     0    1   ];
                         
-    impLeftLeg          = [ 35   10   60     700      0  10
-                             0    0   0        0      0   0]; 
+    impLeftLeg          = [ 35   20    30     350    550   0
+                             0    0     0       0      0   0]; 
 
-    impRightLeg         = [35   10    60     700      0  10
-                             0    0   0        0      0   0]; 
+    impRightLeg         = [35   20    30      350    550   0
+                            0    0     0        0      0   0]; 
     
                          
     intTorso            = [0   0    0]; 
-    intArms             = [0   0    0    0  ];
                         
     intLeftLeg          = [0   0    0    0    0  0]; 
 
@@ -68,22 +65,20 @@ if (sum(LEFT_RIGHT_FOOT_IN_CONTACT) == 2)
                          
     if (DEMO_LEFT_AND_RIGHT == 1)
         directionOfOscillation = [0;1;0];
-        referenceParams        = [0.02 0.5];  %referenceParams(1) = amplitude of ascillations in meters
+        referenceParams        = [0.03 0.1];  %referenceParams(1) = amplitude of ascillations in meters
     end
     
     if (DEMO_MOVING_LEG_AND_ARMS == 1)
         amplTorso            = [ 10  20   30 ]; 
-        amplArms             = [ 20  20   20   0];
         amplLeftLeg          = [  0   0    0   0   0   0]; 
         amplRightLeg         = [  0   0    0   0   0   0];
 
         freqTorso            = [ 0.2  0.1  0.2]; 
-        freqArms             = [ 0.2  0.2  0.2  0.2];
         freqLeftLeg          = [ 0.0  0.0  0.0  0.0  0.0  0.0]; 
         freqRightLeg         = [ 0.0  0.0  0.0  0.0  0.0  0.0]; %[ 0.0  0.3  0.0  0.0  0.0  0.0];
 
-        amplitudesOscillationsOnOneFoot   = [amplTorso,amplArms,amplArms,amplLeftLeg,amplRightLeg];
-        frequenciesOscillationsOnOneFoot  = [freqTorso,freqArms,freqArms,freqLeftLeg,freqRightLeg];
+        amplitudesOscillationsOnOneFoot   = [amplTorso,amplLeftLeg,amplRightLeg];
+        frequenciesOscillationsOnOneFoot  = [freqTorso,freqLeftLeg,freqRightLeg];
     end
 end
 
@@ -93,9 +88,9 @@ end
 
 if (sum(LEFT_RIGHT_FOOT_IN_CONTACT) == 1)
     %%
-    gainsPCOM                 = diag([120  140 120]);
+    gainsPCOM                 = diag([120  140 120])/3;
     gainsICOM                 = diag([  0    0   0]);
-    gainsDCOM                 = diag([  0    0   0]);
+    gainsDCOM                 = diag([  1    1   1]);
 
     minCoMx_y                 = [-0.1   -0.25 ];  
     maxCoMx_y                 = [ 0.1    0.05 ];
@@ -108,7 +103,6 @@ if (sum(LEFT_RIGHT_FOOT_IN_CONTACT) == 1)
 
     
     intTorso            = [0   0    0]; 
-    intArms             = [0   0    0    0  ];
                         
     intLeftLeg          = [0   0    0    0    0  0]; 
 
@@ -118,10 +112,7 @@ if (sum(LEFT_RIGHT_FOOT_IN_CONTACT) == 1)
         impTorso            = [  20    20   20
                                   0     0    0]; 
 
-        impArms             = [ 13  13   13   5  
-                                0    0    0   0              ];
-
-        impLeftLeg          = [ 70   70 650     300      0   0
+        impLeftLeg          = [ 70   70  65      30      0   0
                                  0    0   0       0      0   0]; 
 
         impRightLeg         = [ 20   20  20      10      0    0
@@ -131,9 +122,6 @@ if (sum(LEFT_RIGHT_FOOT_IN_CONTACT) == 1)
         impTorso            = [  70    20   50
                                   0     0    0]; 
 
-        impArms             = [ 13  13   13   10  
-                                0    0    0   0              ];
-
         impLeftLeg          = [ 70   70 650     300      0   0
                                  0    0   0       0      0   0]; 
 
@@ -141,27 +129,25 @@ if (sum(LEFT_RIGHT_FOOT_IN_CONTACT) == 1)
                                  0    0   0       0      0   0];
 
         amplTorso            = [ 10  10   10 ]; 
-        amplArms             = [  0   0    0   0];
         amplLeftLeg          = [  0   0    0   0   0   0]; 
         amplRightLeg         = [ 25  25   25  15   0   0];
 
         freqTorso            = [ 0.0  0.0  0.0]; 
-        freqArms             = [ 0.0  0.0  0.0  0.0];
         freqLeftLeg          = [ 0.0  0.0  0.0  0.0  0.0  0.0]; 
         freqRightLeg         = [ 0.2  0.2  0.0  0.0  0.0  0.0]; %[ 0.0  0.3  0.0  0.0  0.0  0.0];
 
-        amplitudesOscillationsOnOneFoot   = [amplTorso,amplArms,amplArms,amplLeftLeg,amplRightLeg];
-        frequenciesOscillationsOnOneFoot  = [freqTorso,freqArms,freqArms,freqLeftLeg,freqRightLeg];
+        amplitudesOscillationsOnOneFoot   = [amplTorso,amplLeftLeg,amplRightLeg];
+        frequenciesOscillationsOnOneFoot  = [freqTorso,freqLeftLeg,freqRightLeg];
     end
 %%    
 end
 
 satIntegral         = 0;
-integralGains       = [intTorso,intArms,intArms,intLeftLeg,intRightLeg];
-impedances          = [impTorso(1,:),impArms(1,:),impArms(1,:),impLeftLeg(1,:),impRightLeg(1,:)];
+integralGains       = [intTorso,intLeftLeg,intRightLeg];
+impedances          = [impTorso(1,:),impLeftLeg(1,:),impRightLeg(1,:)];
 dampings            = zeros(1,ROBOT_DOF);
-increasingRatesImp  = [impTorso(2,:),impArms(2,:),impArms(2,:),impLeftLeg(2,:),impRightLeg(2,:)];
-impedencesSat       = [45   25    1000];
+increasingRatesImp  = [impTorso(2,:),impLeftLeg(2,:),impRightLeg(2,:)];
+impedencesSat       = [80   25    1400];
 
 if (size(impedances,2) ~= ROBOT_DOF)
     error('Dimension mismatch between ROBOT_DOF and dimension of the variable impedences. Check these variables in the file gains.m');

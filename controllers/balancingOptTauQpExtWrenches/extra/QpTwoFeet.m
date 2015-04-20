@@ -4,7 +4,7 @@ setup(block);
 
 function setup(block)
     
-block.NumInputPorts  = 5; 
+block.NumInputPorts  = 6; 
 block.NumOutputPorts = 2; 
 
 % Setup port properties to be inherited or dynamic
@@ -20,11 +20,12 @@ block.SetPreCompOutPortInfoToDynamic;
 
 % for now based on both feet (needs to be defined dynamically)
 % Override input port properties
-block.InputPort(1).Dimensions        = [ 1  2];   % State
+block.InputPort(1).Dimensions        = [ 1  2];   % LEFT_RIGHT_FOOT_IN_CONTACT
 block.InputPort(2).Dimensions        = [12 12];   % HessianMatrixQP2Feet               
 block.InputPort(3).Dimensions        = [ 1 12];   % gradientQP2Feet
 block.InputPort(4).Dimensions        = [38 12];   % ConstraintsMatrixQP2Feet 
 block.InputPort(5).Dimensions        = [ 1 38];   % bVectorConstraintsQp2Feet 
+block.InputPort(6).Dimensions        = 1 ;        % USE_QPO_SOLVER
 % Override output port properties
 block.OutputPort(1).Dimensions       = 12;
 block.OutputPort(2).Dimensions       = 1;
@@ -35,18 +36,21 @@ block.InputPort(2).DatatypeID  = 0;  % double
 block.InputPort(3).DatatypeID  = 0;  % double
 block.InputPort(4).DatatypeID  = 0;  % double
 block.InputPort(5).DatatypeID  = 0;  % double
+block.InputPort(6).DatatypeID  = 0;  % double
 
 block.InputPort(1).Complexity  = 'Real';
 block.InputPort(2).Complexity  = 'Real';
 block.InputPort(3).Complexity  = 'Real';
 block.InputPort(4).Complexity  = 'Real';
 block.InputPort(5).Complexity  = 'Real';
+block.InputPort(6).Complexity  = 'Real';
 
 block.InputPort(1).DirectFeedthrough = true;
 block.InputPort(2).DirectFeedthrough = true;
 block.InputPort(3).DirectFeedthrough = true;
 block.InputPort(4).DirectFeedthrough = true;
 block.InputPort(5).DirectFeedthrough = true;
+block.InputPort(6).DirectFeedthrough = true;
 
 block.OutputPort(1).DatatypeID  = 0; % double
 block.OutputPort(1).Complexity  = 'Real';
@@ -108,17 +112,6 @@ block.OutputPort(2).SamplingMode = fd;
 %%   Required         : No
 %%   C-Mex counterpart: mdlSetWorkWidths
 %%
-% function DoPostPropSetup(block)
-% 
-% numberOfPoints = 2; %number of points in a quadrant
-% block.NumDworks = 1;
-%   
-%   block.Dwork(1).Name            = 'A';
-%   block.Dwork(1).Dimensions      = 2 * 12 * (4 * (numberOfPoints - 2) + 4);
-%   block.Dwork(1).DatatypeID      = 0;      % double
-%   block.Dwork(1).Complexity      = 'Real'; % real
-%   block.Dwork(1).UsedAsDiscState = false;
-  
 
 %%
 %% InitializeConditions:
@@ -130,55 +123,6 @@ block.OutputPort(2).SamplingMode = fd;
 %%   C-MEX counterpart: mdlInitializeConditions
 %%
 % function InitializeConditions(block)
-
-% %compute friction cones contraints
-% staticFrictionCoefficient = 0.45;
-% %approximation with straight lines
-% numberOfPoints = 2; %number of points in a quadrant
-% 
-% %split the pi/2 angle into numberOfPoints - 1;
-% segmentAngle = pi/2 / (numberOfPoints - 1);
-% 
-% %define angle
-% angle = 0 : segmentAngle : (2 * pi - segmentAngle);
-% points = [cos(angle); sin(angle)];
-% numberOfEquations = size(points, 2);
-% assert(size(points, 2) == (4 * (numberOfPoints - 2) + 4));
-% 
-% %A*x <= b, with b is all zeros.
-% A = zeros(numberOfEquations, 6);
-% 
-% %define equations
-% for i = 1 : numberOfEquations
-%    firstPoint = points(:, i);
-%    secondPoint = points(:, rem(i, numberOfEquations) + 1);
-%    
-%    %define line passing through the above points
-%    angularCoefficients = (secondPoint(2) - firstPoint(2)) / (secondPoint(1) - firstPoint(1));
-%    offsets = firstPoint(2) - angularCoefficients * firstPoint(1);
-% 
-%    inequalityFactor = +1;
-%    %if any of the two points are between pi and 2pi, then the inequality is
-%    %in the form of y >= m*x + q, and I need to change the sign of it.
-%    if (angle(i) > pi || angle(rem(i, numberOfEquations) + 1) > pi)
-%        inequalityFactor = -1;
-%    end
-%    
-%    %a force is 6 dimensional f = [fx, fy, fz, mux, muy, muz]'
-%    %I have constraints on fx and fy, and the offset will be multiplied by
-%    %mu * fz
-%    
-%    A(i,:) = inequalityFactor .* [-angularCoefficients, 1, -offsets * staticFrictionCoefficient, 0, 0, 0];
-%    
-% end
-% 
-% %I have to duplicate the matrices and vector for the two feet
-% A = [A, zeros(size(A));
-%     zeros(size(A)), A];
-% 
-% %reshape matrix into single vector
-% A = reshape(A, 12 * 2 * numberOfEquations, 1);
-% block.Dwork(1).Data = A;
 
 
 % end InitializeConditions
@@ -208,24 +152,29 @@ block.OutputPort(2).SamplingMode = fd;
 
 function Outputs(block)
     
-    constraints                = block.InputPort(1).Data;
+    LEFT_RIGHT_FOOT_IN_CONTACT                    = block.InputPort(1).Data;
+    exitFlag                   = 0;
     
-    if sum(constraints) == 2 
+    if sum(LEFT_RIGHT_FOOT_IN_CONTACT) > 1.98
         HessianMatrixQP2Feet       = block.InputPort(2).Data;
         gradientQP2Feet            = block.InputPort(3).Data;
         ConstraintsMatrixQP2Feet   = block.InputPort(4).Data;
         bVectorConstraintsQp2Feet  = block.InputPort(5).Data;
-
-
-        [desiredf0,~,exitFlag,iter,lambda,auxOutput] = qpOASES(HessianMatrixQP2Feet,gradientQP2Feet',ConstraintsMatrixQP2Feet,[],[],[],bVectorConstraintsQp2Feet');           
-        if exitFlag ~= 0
-            disp('QP failed with');
-            exitFlag
-            iter
-            auxOutput
-            lambda
-            desiredf0 = zeros(6*2,1);
+        USE_QPO_SOLVER                = block.InputPort(6).Data;
+        if USE_QPO_SOLVER == 1
+            [desiredf0,~,exitFlag,iter,lambda,auxOutput] = qpOASES(HessianMatrixQP2Feet,gradientQP2Feet',ConstraintsMatrixQP2Feet,[],[],[],bVectorConstraintsQp2Feet');           
+            if exitFlag ~= 0
+                disp('QP failed with');
+                exitFlag
+                iter
+                auxOutput
+                lambda
+                desiredf0 = zeros(6*2,1);
+            end
+        else
+            desiredf0 = - inv(HessianMatrixQP2Feet)*gradientQP2Feet';
         end
+            
     else
             desiredf0 = zeros(6*2,1);
     end
