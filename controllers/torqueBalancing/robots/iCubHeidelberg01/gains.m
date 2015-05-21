@@ -63,7 +63,7 @@ end
 
 if (sum(LEFT_RIGHT_FOOT_IN_CONTACT) == 1)
     %%
-    gainsPCOM                 = diag([120  140 120])/3;
+    gainsPCOM                 = diag([120  140 120])/13;
     gainsICOM                 = diag([  0    0   0]);
     gainsDCOM                 = diag([  1    1   1]);
 

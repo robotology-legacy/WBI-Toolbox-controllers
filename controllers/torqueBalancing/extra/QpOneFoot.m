@@ -160,7 +160,7 @@ block.OutputPort(2).SamplingMode = fd;
 
 function Outputs(block)
     
-    LEFT_RIGHT_FOOT_IN_CONTACT                = block.InputPort(1).Data;
+    LEFT_RIGHT_FOOT_IN_CONTACT = block.InputPort(1).Data;
     exitFlag                   = 0;
     
     if sum(LEFT_RIGHT_FOOT_IN_CONTACT) > 0.98 && sum(LEFT_RIGHT_FOOT_IN_CONTACT) < 1.02
@@ -168,7 +168,7 @@ function Outputs(block)
         gradientQP1Foot            = block.InputPort(3).Data;
         ConstraintsMatrixQP1Foot   = block.InputPort(4).Data;
         bVectorConstraintsQP1Foot  = block.InputPort(5).Data;
-        USE_QPO_SOLVER                = block.InputPort(6).Data;
+        USE_QPO_SOLVER             = block.InputPort(6).Data;
         if USE_QPO_SOLVER == 1
             [desiredf0,~,exitFlag,iter,lambda,auxOutput] = qpOASES(HessianMatrixQP1Foot,gradientQP1Foot',ConstraintsMatrixQP1Foot,[],[],[],bVectorConstraintsQP1Foot');           
 
