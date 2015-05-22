@@ -63,7 +63,7 @@ end
 
 if (sum(LEFT_RIGHT_FOOT_IN_CONTACT) == 1)
     %%
-    gainsPCOM                 = diag([120  140 120])/13;
+    gainsPCOM                 = diag([120  140 120])/3;
     gainsICOM                 = diag([  0    0   0]);
     gainsDCOM                 = diag([  1    1   1]);
 
@@ -72,7 +72,7 @@ if (sum(LEFT_RIGHT_FOOT_IN_CONTACT) == 1)
     satGainsPCOM              = 300;
     increasingRatesGainsPCOM  = [ 0     0    ];
 
-    gainMomentum              = 1 ;
+    gainMomentum              = 0.5 ;
 
     % Impadances acting in the null space of the desired contact forces 
 
@@ -83,13 +83,13 @@ if (sum(LEFT_RIGHT_FOOT_IN_CONTACT) == 1)
 
     intRightLeg         = [0   0    0    0    0  0];  
     
-    impTorso            = [  20    20   20
-                              0     0    0]; 
+    impTorso            = [  20    30   20
+                              0     0    0]*5; 
 
-    impLeftLeg          = [ 70   70  65      30      0   0
+    impLeftLeg          = [ 100   70  65      30     20  20
                              0    0   0       0      0   0]; 
 
-    impRightLeg         = [ 20   20  20      10      0    0
+    impRightLeg         = [ 30   30  30      30     40   40
                              0    0   0       0      0   0];
 
    
