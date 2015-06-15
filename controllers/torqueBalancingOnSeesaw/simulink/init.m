@@ -5,6 +5,8 @@ localName        = 'seesawBalancingController';
 Ts = 0.01;
 seesawKind       = 2;
 
+orientationOffset = [-0.7; 0; 0];
+
 seesaw_inertial  = '/quaternionEKFModule/filteredOrientationEuler:o';
 % wbm_modelInitialise(robotName);
 % [qj,~,~,~]       = wholeBodyModel('get-state');
@@ -13,16 +15,16 @@ ROBOT_DOF        = 23;
 addpath(genpath('../matlab'));
 
 model.robot.dofs = ROBOT_DOF;
-model.robot.lFootCentreDistance = 0.11;
+model.robot.lFootCentreDistance =  0.11;
 model.robot.rFootCentreDistance = -0.11;
     
 seesaw           = struct;
 seesaw.h         = 0.1;
 seesaw.rho       = 0.362;
-seesaw.delta     = seesaw.rho - 0.5*seesaw.h;
+seesaw.delta     = seesaw.rho - seesaw.h + 0.002;
 seesaw.inertia   = diag([7.6698599e-02, 3.7876787e-02, 1.0893139e-01]);
 seesaw.mass      = 4.2;
-seesaw.top       = seesaw.delta - (seesaw.rho - seesaw.h) ;
+seesaw.top       = 0.002;% seesaw.delta - (seesaw.rho - seesaw.h) ;
 seesaw.kind      = seesawKind;
 switch seesaw.kind
     case 1 %Spherical seesaw
@@ -35,7 +37,7 @@ end
 
 regs             = struct;
 regs.pinvTol     = 1e-5;
-regs.pinvDamp    = 1e-2;
+regs.pinvDamp    = 1e-1;
 
 
 model.seesaw     = seesaw;
@@ -58,9 +60,9 @@ noOscillationTime        = 0; % If DEMO_LEFT_AND_RIGHT = 1, the variable noOscil
                                % that the robot waits before starting the left-and-righ
 
 %%Gains and references
-gains.posturalProp  = diag([60   60    10 ...
-                             8    8     8      12      ...
-                             8    8     8      12     ...
+gains.posturalProp  = diag([10   10    10 ...
+                             12   12   12      12      ...
+                             12   12   12      12     ...
                             35   20    30      35     55   0,...
                             35   20    30      35     55   0]);
 gains.posturalDamp  = diag([ 1    1     1 ...
@@ -70,7 +72,7 @@ gains.posturalDamp  = diag([ 1    1     1 ...
                              1    1     1       1      1   1])*0;
 TorqueMax          = 24;
 gains.omegaGain    = 0;
-gains.xcomPGain    = 50/2 ;
+gains.xcomPGain    = diag([2.5, 5, 100]);%diag([2.5, 5, 5]);
 gains.xcomDGain    = 2*sqrt(gains.xcomPGain)*0;
 gains.Hw           = 1;
 gains.onSeesaw     = 1;
