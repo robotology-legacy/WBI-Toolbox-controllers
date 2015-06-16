@@ -3,7 +3,7 @@ ROBOT_DOF = 23;
 directionOfOscillation            = [0;0;0];
 referenceParams                   = [0.0  0.0];  %referenceParams(1) = amplitude of ascillations in meters referenceParams(2) = frequency of ascillations in hertz
 
-noOscillationTime        = 0; % If DEMO_LEFT_AND_RIGHT = 1, the variable noOscillationTime is the time, in seconds, 
+noOscillationTime        = 0; % If DEMO_MOVEMENTS = 1, the variable noOscillationTime is the time, in seconds, 
                                % that the robot waits before starting the left-and-righ
 
 
@@ -51,7 +51,7 @@ if (sum(LEFT_RIGHT_FOOT_IN_CONTACT) == 2)
     intRightLeg         = [0   0    0    0    0  0];                        
                          
                          
-    if (DEMO_LEFT_AND_RIGHT == 1)
+    if (DEMO_MOVEMENTS == 1)
         directionOfOscillation = [0;1;0];
         referenceParams        = [0.02 0.5];  %referenceParams(1) = amplitude of ascillations in meters
     end
@@ -96,6 +96,22 @@ if (sum(LEFT_RIGHT_FOOT_IN_CONTACT) == 1)
     impRightLeg         = [ 20   20  20      10      0    0
                              0    0   0       0      0   0];
 
+    if (DEMO_MOVEMENTS == 1)
+        gainsPCOM                 = diag([ 45   45  45]);  
+    
+        impTorso            = [  60    60   60
+                                  0     0    0]; 
+
+        impArms             = [ 15  15   15   7 
+                                0    0    0   0              ];
+
+        impLeftLeg          = [ 90  110 65     30      0   0
+                                 0    0   0     0      0   0]; 
+
+        impRightLeg         = [ 70   70  20      10     10   10
+                                 0    0   0       0      0   0];
+
+    end
     
 %%    
 end
