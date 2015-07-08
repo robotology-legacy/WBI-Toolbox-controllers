@@ -5,7 +5,7 @@ localName        = 'seesawBalancingController';
 Ts = 0.01;
 seesawKind       = 2;
 
-orientationOffset = [-0.7; 0; 0];
+orientationOffset = [-1.2; 0; 0];
 
 seesaw_inertial  = '/quaternionEKFModule/filteredOrientationEuler:o';
 % wbm_modelInitialise(robotName);
@@ -20,7 +20,7 @@ model.robot.rFootCentreDistance = -0.11;
     
 seesaw           = struct;
 seesaw.h         = 0.1;
-seesaw.rho       = 0.362;
+seesaw.rho       = 0.362;%0.175;%0.362; % init value 0.362
 seesaw.delta     = seesaw.rho - seesaw.h + 0.002;
 seesaw.inertia   = diag([7.6698599e-02, 3.7876787e-02, 1.0893139e-01]);
 seesaw.mass      = 4.2;
@@ -38,6 +38,7 @@ end
 regs             = struct;
 regs.pinvTol     = 1e-5;
 regs.pinvDamp    = 1e-1;
+regs.pinvDampA   = 1e-2;
 
 
 model.seesaw     = seesaw;
@@ -63,16 +64,17 @@ noOscillationTime        = 0; % If DEMO_LEFT_AND_RIGHT = 1, the variable noOscil
 gains.posturalProp  = diag([10   10    10 ...
                              12   12   12      12      ...
                              12   12   12      12     ...
-                            35   20    30      35     55   0,...
-                            35   20    30      35     55   0]);
+                            35    0    30      35     55   0,...
+                            35    0    30      35     55   0]);
 gains.posturalDamp  = diag([ 1    1     1 ...
                              1    1     1       1       ...
                              1    1     1       1       ...
                              1    1     1       1      1   1,...
                              1    1     1       1      1   1])*0;
 TorqueMax          = 24;
-gains.omegaGain    = 0;
-gains.xcomPGain    = diag([2.5, 5, 100]);%diag([2.5, 5, 5]);
+gains.thetaGain    = 100;
+gains.omegaGain    = 10;
+gains.xcomPGain    = diag([2.5, 30, 50]);%diag([2.5, 5, 100])%diag([2.5, 5, 5]);
 gains.xcomDGain    = 2*sqrt(gains.xcomPGain)*0;
 gains.Hw           = 1;
 gains.onSeesaw     = 1;

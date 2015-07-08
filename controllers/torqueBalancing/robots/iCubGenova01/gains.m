@@ -87,10 +87,10 @@ if (sum(LEFT_RIGHT_FOOT_IN_CONTACT) == 1)
     impTorso            = [  20    20   20
                               0     0    0]; 
 
-    impArms             = [ 13  13   13   5  
+    impArms             = [ 13  17   13   5  
                             0    0    0   0              ];
 
-    impLeftLeg          = [ 70   70  65      30      0   0
+    impLeftLeg          = [ 70   70  65      300      0   0
                              0    0   0       0      0   0]; 
 
     impRightLeg         = [ 20   20  20      10      0    0
