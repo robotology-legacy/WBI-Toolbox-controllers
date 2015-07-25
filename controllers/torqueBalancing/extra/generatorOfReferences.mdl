@@ -1,16 +1,17 @@
 Model {
   Name			  "generatorOfReferences"
-  Version		  8.4
+  Version		  8.3
   MdlSubVersion		  0
   SavedCharacterEncoding  "UTF-8"
   GraphicalInterface {
     NumRootInports	    0
     NumRootOutports	    0
     ParameterArgumentNames  ""
-    ComputedModelVersion    "1.1988"
+    ComputedModelVersion    "1.1994"
     NumModelReferences	    0
     NumTestPointedSignals   0
   }
+  SaveDefaultBlockParams  on
   ScopeRefreshTime	  0.035000
   OverrideScopeRefreshTime on
   DisableAllScopes	  off
@@ -30,7 +31,7 @@ Model {
       $ObjectID		      2
       $ClassName	      "Simulink.WindowInfo"
       IsActive		      [1]
-      Location		      [0.0, 27.0, 1920.0, 1053.0]
+      Location		      [686.0, 54.0, 668.0, 707.0]
       Object {
 	$PropName		"ModelBrowserInfo"
 	$ObjectID		3
@@ -45,19 +46,19 @@ Model {
 	$PropName		"ExplorerBarInfo"
 	$ObjectID		4
 	$ClassName		"Simulink.ExplorerBarInfo"
-	Visible			[1]
+	Visible			[0]
       }
       Array {
 	Type			"Simulink.EditorInfo"
-	Dimension		3
+	Dimension		2
 	Object {
 	  $ObjectID		  5
 	  IsActive		  [1]
 	  ViewObjType		  "SimulinkSubsys"
-	  LoadSaveID		  "955"
-	  Extents		  [1689.0, 876.0]
-	  ZoomFactor		  [2.1294871794871795]
-	  Offset		  [8.4256472004816381, 46.983343367449308]
+	  LoadSaveID		  "61"
+	  Extents		  [437.0, 589.0]
+	  ZoomFactor		  [0.73826714801444049]
+	  Offset		  [992.03667481662592, -281.90709046454765]
 	}
 	Object {
 	  $ObjectID		  6
@@ -68,15 +69,6 @@ Model {
 	  ZoomFactor		  [1.25]
 	  Offset		  [0.0, 0.0]
 	}
-	Object {
-	  $ObjectID		  7
-	  IsActive		  [0]
-	  ViewObjType		  "SimulinkSubsys"
-	  LoadSaveID		  "969"
-	  Extents		  [1689.0, 903.0]
-	  ZoomFactor		  [1.01]
-	  Offset		  [0.0, 0.0]
-	}
 	PropName		"EditorsInfo"
       }
     }
@@ -85,11 +77,11 @@ Model {
   Creator		  "daniele"
   UpdateHistory		  "UpdateHistoryNever"
   ModifiedByFormat	  "%<Auto>"
-  LastModifiedBy	  "pucci"
+  LastModifiedBy	  "daniele"
   ModifiedDateFormat	  "%<Auto>"
-  LastModifiedDate	  "Tue Jun 16 11:24:50 2015"
-  RTWModifiedTimeStamp	  356354567
-  ModelVersionFormat	  "1.%<AutoIncrement:1988>"
+  LastModifiedDate	  "Wed Jun 17 17:04:56 2015"
+  RTWModifiedTimeStamp	  356461482
+  ModelVersionFormat	  "1.%<AutoIncrement:1994>"
   ConfigurationManager	  "none"
   SampleTimeColors	  off
   SampleTimeAnnotations	  on
@@ -107,7 +99,6 @@ Model {
   SortedOrder		  on
   ExecutionContextIcon	  off
   ShowLinearizationAnnotations on
-  ShowMarkup		  on
   BlockNameDataTip	  off
   BlockParametersDataTip  off
   BlockDescriptionStringDataTip	off
@@ -130,7 +121,7 @@ Model {
   TryForcingSFcnDF	  off
   Object {
     $PropName		    "DataLoggingOverride"
-    $ObjectID		    8
+    $ObjectID		    7
     $ClassName		    "Simulink.SimulationData.ModelLoggingInfo"
     model_		    "generatorOfReferences"
     signals_		    []
@@ -166,9 +157,6 @@ Model {
   CovSFcnEnable		  off
   CovBoundaryAbsTol	  0.000010
   CovBoundaryRelTol	  0.010000
-  CovUseTimeInterval	  off
-  CovStartTime		  0
-  CovStopTime		  0
   ExtModeBatchMode	  off
   ExtModeEnableFloating	  on
   ExtModeTrigType	  "manual"
@@ -197,14 +185,14 @@ Model {
     Type		    "Handle"
     Dimension		    1
     Simulink.ConfigSet {
-      $ObjectID		      9
-      Version		      "1.14.3"
+      $ObjectID		      8
+      Version		      "1.14.2"
       Array {
 	Type			"Handle"
 	Dimension		8
 	Simulink.SolverCC {
-	  $ObjectID		  10
-	  Version		  "1.14.3"
+	  $ObjectID		  9
+	  Version		  "1.14.2"
 	  StartTime		  "0.0"
 	  StopTime		  "inf"
 	  AbsTol		  "auto"
@@ -238,8 +226,8 @@ Model {
 	  InsertRTBMode		  "Whenever possible"
 	}
 	Simulink.DataIOCC {
-	  $ObjectID		  11
-	  Version		  "1.14.3"
+	  $ObjectID		  10
+	  Version		  "1.14.2"
 	  Decimation		  "1"
 	  ExternalInput		  "[t, u]"
 	  FinalStateName	  "xFinal"
@@ -271,8 +259,8 @@ Model {
 	  Refine		  "1"
 	}
 	Simulink.OptimizationCC {
-	  $ObjectID		  12
-	  Version		  "1.14.3"
+	  $ObjectID		  11
+	  Version		  "1.14.2"
 	  Array {
 	    Type		    "Cell"
 	    Dimension		    8
@@ -290,7 +278,7 @@ Model {
 	  BooleanDataType	  on
 	  ConditionallyExecuteInputs on
 	  InlineParams		  off
-	  UseDivisionForNetSlopeComputation "Off"
+	  UseIntDivNetSlope	  off
 	  UseFloatMulNetSlope	  off
 	  DefaultUnderspecifiedDataType	"double"
 	  UseSpecifiedMinMax	  off
@@ -331,8 +319,8 @@ Model {
 	  ParallelExecutionInRapidAccelerator on
 	}
 	Simulink.DebuggingCC {
-	  $ObjectID		  13
-	  Version		  "1.14.3"
+	  $ObjectID		  12
+	  Version		  "1.14.2"
 	  RTPrefix		  "error"
 	  ConsistencyChecking	  "none"
 	  ArrayBoundsChecking	  "none"
@@ -419,11 +407,10 @@ Model {
 	  SFUnconditionalTransitionShadowingDiag "warning"
 	  SFUndirectedBroadcastEventsDiag "warning"
 	  SFTransitionActionBeforeConditionDiag	"warning"
-	  IntegerSaturationMsg	  "warning"
 	}
 	Simulink.HardwareCC {
-	  $ObjectID		  14
-	  Version		  "1.14.3"
+	  $ObjectID		  13
+	  Version		  "1.14.2"
 	  ProdBitPerChar	  8
 	  ProdBitPerShort	  16
 	  ProdBitPerInt		  32
@@ -463,8 +450,8 @@ Model {
 	  ProdEqTarget		  on
 	}
 	Simulink.ModelReferenceCC {
-	  $ObjectID		  15
-	  Version		  "1.14.3"
+	  $ObjectID		  14
+	  Version		  "1.14.2"
 	  UpdateModelReferenceTargets "IfOutOfDateOrStructuralChange"
 	  CheckModelReferenceTargetMessage "error"
 	  EnableParallelModelReferenceBuilds off
@@ -478,8 +465,8 @@ Model {
 	  SupportModelReferenceSimTargetCustomCode off
 	}
 	Simulink.SFSimCC {
-	  $ObjectID		  16
-	  Version		  "1.14.3"
+	  $ObjectID		  15
+	  Version		  "1.14.2"
 	  SFSimEnableDebug	  on
 	  SFSimOverflowDetection  on
 	  SFSimEcho		  on
@@ -494,8 +481,8 @@ Model {
 	}
 	Simulink.RTWCC {
 	  $BackupClass		  "Simulink.RTWCC"
-	  $ObjectID		  17
-	  Version		  "1.14.3"
+	  $ObjectID		  16
+	  Version		  "1.14.2"
 	  Array {
 	    Type		    "Cell"
 	    Dimension		    15
@@ -581,8 +568,8 @@ Model {
 	    Type		    "Handle"
 	    Dimension		    2
 	    Simulink.CodeAppCC {
-	      $ObjectID		      18
-	      Version		      "1.14.3"
+	      $ObjectID		      17
+	      Version		      "1.14.2"
 	      Array {
 		Type			"Cell"
 		Dimension		22
@@ -651,8 +638,8 @@ Model {
 	    }
 	    Simulink.GRTTargetCC {
 	      $BackupClass	      "Simulink.TargetCC"
-	      $ObjectID		      19
-	      Version		      "1.14.3"
+	      $ObjectID		      18
+	      Version		      "1.14.2"
 	      Array {
 		Type			"Cell"
 		Dimension		14
@@ -710,14 +697,12 @@ Model {
 	      SupportVariableSizeSignals off
 	      EnableShiftOperators    on
 	      ParenthesesLevel	      "Nominal"
-	      CastingMode	      "Nominal"
 	      MATLABClassNameForMDSCustomization "Simulink.SoftwareTarget.GRTCustomization"
 	      ModelStepFunctionPrototypeControlCompliant off
 	      CPPClassGenCompliant    on
 	      AutosarCompliant	      off
 	      GRTInterface	      on
 	      GenerateAllocFcn	      off
-	      GenerateSharedConstants on
 	      UseMalloc		      off
 	      ExtMode		      off
 	      ExtModeStaticAlloc      off
@@ -746,11 +731,11 @@ Model {
   }
   Simulink.ConfigSet {
     $PropName		    "ActiveConfigurationSet"
-    $ObjectID		    9
+    $ObjectID		    8
   }
   Object {
     $PropName		    "DataTransfer"
-    $ObjectID		    20
+    $ObjectID		    19
     $ClassName		    "Simulink.GlobalDataTransfer"
     DefaultTransitionBetweenSyncTasks "Ensure deterministic transfer (maximum delay)"
     DefaultTransitionBetweenAsyncTasks "Ensure data integrity only"
@@ -965,7 +950,7 @@ Model {
   }
   System {
     Name		    "generatorOfReferences"
-    Location		    [62, 78, 1779, 984]
+    Location		    [686, 54, 1354, 761]
     Open		    on
     ModelBrowserVisibility  on
     ModelBrowserWidth	    200
@@ -991,27 +976,27 @@ Model {
       RequestExecContextInheritance off
       Object {
 	$PropName		"MaskObject"
-	$ObjectID		21
+	$ObjectID		20
 	$ClassName		"Simulink.Mask"
 	Array {
 	  Type			  "Simulink.MaskParameter"
 	  Dimension		  3
 	  Object {
-	    $ObjectID		    22
+	    $ObjectID		    21
 	    Type		    "edit"
 	    Name		    "robotName"
 	    Prompt		    "robot name"
 	    Value		    "robotName"
 	  }
 	  Object {
-	    $ObjectID		    23
+	    $ObjectID		    22
 	    Type		    "edit"
 	    Name		    "Ts"
 	    Prompt		    "Ts"
 	    Value		    "Ts"
 	  }
 	  Object {
-	    $ObjectID		    24
+	    $ObjectID		    23
 	    Type		    "edit"
 	    Name		    "localName"
 	    Prompt		    "module name"
@@ -1022,8 +1007,8 @@ Model {
       }
       System {
 	Name			"Subsystem"
-	Location		[0, 27, 1920, 1080]
-	Open			off
+	Location		[686, 54, 1354, 761]
+	Open			on
 	ModelBrowserVisibility	on
 	ModelBrowserWidth	200
 	ScreenColor		"white"
@@ -1034,7 +1019,7 @@ Model {
 	TiledPaperMargins	[0.500000, 0.500000, 0.500000, 0.500000]
 	TiledPageScale		1
 	ShowPageBoundaries	off
-	ZoomFactor		"300"
+	ZoomFactor		"74"
 	Block {
 	  BlockType		  SubSystem
 	  Name			  "CoM reference generator"
@@ -1044,7 +1029,6 @@ Model {
 	  ZOrder		  314
 	  ForegroundColor	  "red"
 	  BackgroundColor	  "green"
-	  Commented		  "on"
 	  RequestExecContextInheritance	off
 	  System {
 	    Name		    "CoM reference generator"
@@ -1129,7 +1113,6 @@ Model {
 	      YMin		      "-5~-5~-5"
 	      YMax		      "5~5~5"
 	      LimitDataPoints	      off
-	      ScrollMode	      off
 	    }
 	    Block {
 	      BlockType		      SubSystem
@@ -1164,7 +1147,7 @@ Model {
 		  ZOrder		  208
 		  BackgroundColor	  "lightBlue"
 		  ShowName		  off
-		  LibraryVersion	  "1.249"
+		  LibraryVersion	  "1.278"
 		  SourceBlock		  "WBCLibrary/wholeBodyModel/Forward Kinematics/COMFwdKin "
 		  SourceType		  "Center of Mass Forward Kinematics"
 		  ContentPreviewEnabled	  off
@@ -1190,7 +1173,7 @@ Model {
 		  Position		  [245, 369, 305, 411]
 		  ZOrder		  211
 		  BackgroundColor	  "[0.537255, 0.721569, 1.000000]"
-		  LibraryVersion	  "1.249"
+		  LibraryVersion	  "1.278"
 		  SourceBlock		  "WBCLibrary/Utilities/holder\n"
 		  SourceType		  "Holder"
 		  ContentPreviewEnabled	  off
@@ -1271,7 +1254,7 @@ Model {
 	      SFBlockType	      "MATLAB Function"
 	      Object {
 		$PropName		"MaskObject"
-		$ObjectID		25
+		$ObjectID		24
 		$ClassName		"Simulink.Mask"
 		SelfModifiable		"on"
 		Display			"bgColor = Simulink.Root.ColorString2Rgb(get_param(gcbh, 'BackgroundColor')); image(imread('private/eml_me"
@@ -1449,7 +1432,7 @@ Model {
 	      Position		      [545, 128, 610, 172]
 	      ZOrder		      302
 	      BackgroundColor	      "black"
-	      LibraryVersion	      "1.249"
+	      LibraryVersion	      "1.278"
 	      SourceBlock	      "WBCLibrary/Utilities/yarp write"
 	      SourceType	      ""
 	      ContentPreviewEnabled   off
@@ -1596,7 +1579,6 @@ Model {
 	      DataFormat	      "StructureWithTime"
 	      LimitDataPoints	      off
 	      SampleTime	      "0"
-	      ScrollMode	      off
 	    }
 	    Block {
 	      BlockType		      Scope
@@ -1630,7 +1612,6 @@ Model {
 	      SaveName		      "ScopeData4"
 	      DataFormat	      "StructureWithTime"
 	      SampleTime	      "0"
-	      ScrollMode	      off
 	    }
 	    Block {
 	      BlockType		      Scope
@@ -1665,7 +1646,6 @@ Model {
 	      SaveName		      "ScopeData2"
 	      DataFormat	      "StructureWithTime"
 	      SampleTime	      "0"
-	      ScrollMode	      off
 	    }
 	    Block {
 	      BlockType		      Reference
@@ -2277,7 +2257,6 @@ Model {
 	      YMax		      "0.3~160~10"
 	      SaveName		      "ScopeData1"
 	      LimitDataPoints	      off
-	      ScrollMode	      off
 	    }
 	    Block {
 	      BlockType		      Sum
@@ -2334,7 +2313,6 @@ Model {
 	      DataFormat	      "StructureWithTime"
 	      LimitDataPoints	      off
 	      SampleTime	      "0"
-	      ScrollMode	      off
 	    }
 	    Line {
 	      Name		      "CoM Acc*"
@@ -2452,7 +2430,7 @@ Model {
 	    Annotation {
 	      SID		      "950"
 	      Name		      "CoM Integral"
-	      Position		      [139, 114, 198, 129]
+	      Position		      [139, 114, 199, 131]
 	      InternalMargins	      [0, 0, 0, 0]
 	      FixedHeight	      off
 	      FixedWidth	      off
@@ -2471,11 +2449,12 @@ Model {
 	  ZOrder		  316
 	  ForegroundColor	  "red"
 	  BackgroundColor	  "green"
+	  Commented		  "on"
 	  RequestExecContextInheritance	off
 	  System {
 	    Name		    "Postural reference generator"
-	    Location		    [0, 27, 1920, 1080]
-	    Open		    on
+	    Location		    [686, 54, 1354, 761]
+	    Open		    off
 	    ModelBrowserVisibility  on
 	    ModelBrowserWidth	    200
 	    ScreenColor		    "white"
@@ -2486,7 +2465,7 @@ Model {
 	    TiledPaperMargins	    [0.500000, 0.500000, 0.500000, 0.500000]
 	    TiledPageScale	    1
 	    ShowPageBoundaries	    off
-	    ZoomFactor		    "213"
+	    ZoomFactor		    "52"
 	    Block {
 	      BlockType		      Constant
 	      Name		      "\n\n  1"
@@ -2578,7 +2557,6 @@ Model {
 	      YMax		      "2"
 	      SaveName		      "ScopeData6"
 	      LimitDataPoints	      off
-	      ScrollMode	      off
 	    }
 	    Block {
 	      BlockType		      Terminator
@@ -2642,7 +2620,7 @@ Model {
 	      SFBlockType	      "MATLAB Function"
 	      Object {
 		$PropName		"MaskObject"
-		$ObjectID		26
+		$ObjectID		25
 		$ClassName		"Simulink.Mask"
 		SelfModifiable		"on"
 		Display			"bgColor = Simulink.Root.ColorString2Rgb(get_param(gcbh, 'BackgroundColor')); image(imread('private/eml_me"
@@ -2993,7 +2971,7 @@ Model {
 }
 #Finite State Machines
 #
-#   Stateflow 80000001
+#   Stateflow Version 8.1 (R2014a) dated Feb  7 2014, 22:23:55
 #
 #
 Stateflow {
@@ -3003,7 +2981,7 @@ Stateflow {
     created		    "18-Feb-2014 10:14:40"
     isLibrary		    0
     firstTarget		    26
-    sfVersion		    80000001
+    sfVersion		    76014001.002
   }
   chart {
     id			    2
@@ -3262,7 +3240,7 @@ Stateflow {
       isEML		      1
       script		      "function qDes = fcn(q,q0,noOscillationTime,referenceParamsPost,t,mask,postures)\n%#codegen\n\nqDe"
       "s = q0;\n\nif t > postures(1,1) && t <= postures(2,1)\n    qDes = postures(1,2:end)';\nelseif t > postures(2,1) "
-      "&& t <= postures(3,1)\n    qDes = postures(2,2:end)';\nelseif t > postures(3,1) % && t <= postures(4,1)\n    qDe"
+      "&& t <= postures(3,1)\n    qDes = postures(2,2:end)';\nelseif t > postures(3,1)  %&& t <= postures(4,1)\n    qDe"
       "s = postures(3,2:end)';\n% elseif t > postures(4,1)\n%     qDes = postures(4,2:end)';\n%     qDes(2) = q0(2) + r"
       "eferenceParamsPost(1)*sin(referenceParamsPost(2)*(t-(postures(2,1) + 5 + noOscillationTime)));\nend\n\n% if t > "
       "noOscillationTime\n%     qDes1(1:3) = q0(1:3) + referenceParamsPost(1)*sin(referenceParamsPost(2)*(t-noOscillati"

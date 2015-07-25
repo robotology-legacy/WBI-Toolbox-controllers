@@ -52,7 +52,7 @@ if (sum(LEFT_RIGHT_FOOT_IN_CONTACT) == 2)
     intRightLeg         = [0   0    0    0    0  0];                        
                          
                          
-    if (DEMO_LEFT_AND_RIGHT == 1)
+    if (DEMO_MOVEMENTS == 1)
         directionOfOscillation = [0;1;0];
         referenceParams        = [0.02 0.1];  %referenceParams(1) = amplitude of ascillations in meters
     end

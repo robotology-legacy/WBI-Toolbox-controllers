@@ -1,14 +1,14 @@
 clear all;
 clc;
 
-robotName = 'icub';            
+robotName = 'icubGazeboSim';            
 localName = 'matlabTorqueBalancing';
 
 simulationTime    = inf;       % Simulation time in seconds
 
 USE_QP_SOLVER    = 0;
 
-LEFT_RIGHT_FOOT_IN_CONTACT  = [1 0];
+LEFT_RIGHT_FOOT_IN_CONTACT  = [1 1];
 
 DEMO_MOVEMENTS         = 1;  % Either 0 or 1 
 

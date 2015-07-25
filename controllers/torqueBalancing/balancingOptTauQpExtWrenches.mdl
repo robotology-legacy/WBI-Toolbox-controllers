@@ -1,6 +1,6 @@
 Model {
   Name			  "balancingOptTauQpExtWrenches"
-  Version		  8.4
+  Version		  8.3
   MdlSubVersion		  0
   SavedCharacterEncoding  "UTF-8"
   GraphicalInterface {
@@ -11,6 +11,7 @@ Model {
     NumModelReferences	    0
     NumTestPointedSignals   0
   }
+  SaveDefaultBlockParams  on
   ScopeRefreshTime	  0.035000
   OverrideScopeRefreshTime on
   DisableAllScopes	  off
@@ -30,7 +31,7 @@ Model {
       $ObjectID		      2
       $ClassName	      "Simulink.WindowInfo"
       IsActive		      [1]
-      Location		      [0.0, 27.0, 960.0, 1053.0]
+      Location		      [10.0, 62.0, 660.0, 696.0]
       Object {
 	$PropName		"ModelBrowserInfo"
 	$ObjectID		3
@@ -45,7 +46,7 @@ Model {
 	$PropName		"ExplorerBarInfo"
 	$ObjectID		4
 	$ClassName		"Simulink.ExplorerBarInfo"
-	Visible			[1]
+	Visible			[0]
       }
       Object {
 	$PropName		"EditorsInfo"
@@ -54,9 +55,9 @@ Model {
 	IsActive		[1]
 	ViewObjType		"SimulinkSubsys"
 	LoadSaveID		"61"
-	Extents			[709.0, 860.0]
-	ZoomFactor		[0.46818452812555394]
-	Offset			[665.097260462555, -363.08088413853966]
+	Extents			[429.0, 579.0]
+	ZoomFactor		[0.2810890913679146]
+	Offset			[645.19372707823948, -298.48932227995124]
       }
     }
   }
@@ -64,10 +65,10 @@ Model {
   Creator		  "daniele"
   UpdateHistory		  "UpdateHistoryNever"
   ModifiedByFormat	  "%<Auto>"
-  LastModifiedBy	  "pucci"
+  LastModifiedBy	  "daniele"
   ModifiedDateFormat	  "%<Auto>"
-  LastModifiedDate	  "Wed Jun 17 17:39:49 2015"
-  RTWModifiedTimeStamp	  356462028
+  LastModifiedDate	  "Mon Jul 06 01:00:34 2015"
+  RTWModifiedTimeStamp	  358045225
   ModelVersionFormat	  "1.%<AutoIncrement:2149>"
   ConfigurationManager	  "none"
   SampleTimeColors	  off
@@ -86,7 +87,6 @@ Model {
   SortedOrder		  on
   ExecutionContextIcon	  off
   ShowLinearizationAnnotations on
-  ShowMarkup		  on
   BlockNameDataTip	  off
   BlockParametersDataTip  off
   BlockDescriptionStringDataTip	off
@@ -145,9 +145,6 @@ Model {
   CovSFcnEnable		  off
   CovBoundaryAbsTol	  0.000010
   CovBoundaryRelTol	  0.010000
-  CovUseTimeInterval	  off
-  CovStartTime		  0
-  CovStopTime		  0
   ExtModeBatchMode	  off
   ExtModeEnableFloating	  on
   ExtModeTrigType	  "manual"
@@ -177,13 +174,13 @@ Model {
     Dimension		    1
     Simulink.ConfigSet {
       $ObjectID		      7
-      Version		      "1.14.3"
+      Version		      "1.14.2"
       Array {
 	Type			"Handle"
 	Dimension		8
 	Simulink.SolverCC {
 	  $ObjectID		  8
-	  Version		  "1.14.3"
+	  Version		  "1.14.2"
 	  StartTime		  "0.0"
 	  StopTime		  "simulationTime"
 	  AbsTol		  "auto"
@@ -218,7 +215,7 @@ Model {
 	}
 	Simulink.DataIOCC {
 	  $ObjectID		  9
-	  Version		  "1.14.3"
+	  Version		  "1.14.2"
 	  Decimation		  "1"
 	  ExternalInput		  "[t, u]"
 	  FinalStateName	  "xFinal"
@@ -251,7 +248,7 @@ Model {
 	}
 	Simulink.OptimizationCC {
 	  $ObjectID		  10
-	  Version		  "1.14.3"
+	  Version		  "1.14.2"
 	  Array {
 	    Type		    "Cell"
 	    Dimension		    8
@@ -269,7 +266,7 @@ Model {
 	  BooleanDataType	  on
 	  ConditionallyExecuteInputs on
 	  InlineParams		  off
-	  UseDivisionForNetSlopeComputation "Off"
+	  UseIntDivNetSlope	  off
 	  UseFloatMulNetSlope	  off
 	  DefaultUnderspecifiedDataType	"double"
 	  UseSpecifiedMinMax	  off
@@ -311,7 +308,7 @@ Model {
 	}
 	Simulink.DebuggingCC {
 	  $ObjectID		  11
-	  Version		  "1.14.3"
+	  Version		  "1.14.2"
 	  RTPrefix		  "error"
 	  ConsistencyChecking	  "none"
 	  ArrayBoundsChecking	  "none"
@@ -398,11 +395,10 @@ Model {
 	  SFUnconditionalTransitionShadowingDiag "warning"
 	  SFUndirectedBroadcastEventsDiag "warning"
 	  SFTransitionActionBeforeConditionDiag	"warning"
-	  IntegerSaturationMsg	  "warning"
 	}
 	Simulink.HardwareCC {
 	  $ObjectID		  12
-	  Version		  "1.14.3"
+	  Version		  "1.14.2"
 	  ProdBitPerChar	  8
 	  ProdBitPerShort	  16
 	  ProdBitPerInt		  32
@@ -443,7 +439,7 @@ Model {
 	}
 	Simulink.ModelReferenceCC {
 	  $ObjectID		  13
-	  Version		  "1.14.3"
+	  Version		  "1.14.2"
 	  UpdateModelReferenceTargets "IfOutOfDateOrStructuralChange"
 	  CheckModelReferenceTargetMessage "error"
 	  EnableParallelModelReferenceBuilds off
@@ -458,7 +454,7 @@ Model {
 	}
 	Simulink.SFSimCC {
 	  $ObjectID		  14
-	  Version		  "1.14.3"
+	  Version		  "1.14.2"
 	  SFSimEnableDebug	  on
 	  SFSimOverflowDetection  on
 	  SFSimEcho		  on
@@ -474,7 +470,7 @@ Model {
 	Simulink.RTWCC {
 	  $BackupClass		  "Simulink.RTWCC"
 	  $ObjectID		  15
-	  Version		  "1.14.3"
+	  Version		  "1.14.2"
 	  Array {
 	    Type		    "Cell"
 	    Dimension		    15
@@ -561,7 +557,7 @@ Model {
 	    Dimension		    2
 	    Simulink.CodeAppCC {
 	      $ObjectID		      16
-	      Version		      "1.14.3"
+	      Version		      "1.14.2"
 	      Array {
 		Type			"Cell"
 		Dimension		22
@@ -631,7 +627,7 @@ Model {
 	    Simulink.GRTTargetCC {
 	      $BackupClass	      "Simulink.TargetCC"
 	      $ObjectID		      17
-	      Version		      "1.14.3"
+	      Version		      "1.14.2"
 	      Array {
 		Type			"Cell"
 		Dimension		14
@@ -689,14 +685,12 @@ Model {
 	      SupportVariableSizeSignals off
 	      EnableShiftOperators    on
 	      ParenthesesLevel	      "Nominal"
-	      CastingMode	      "Nominal"
 	      MATLABClassNameForMDSCustomization "Simulink.SoftwareTarget.GRTCustomization"
 	      ModelStepFunctionPrototypeControlCompliant off
 	      CPPClassGenCompliant    on
 	      AutosarCompliant	      off
 	      GRTInterface	      on
 	      GenerateAllocFcn	      off
-	      GenerateSharedConstants on
 	      UseMalloc		      off
 	      ExtMode		      off
 	      ExtModeStaticAlloc      off
@@ -842,8 +836,6 @@ Model {
       IgnoreLimit	      off
       StateMustResolveToSignalObject off
       RTWStateStorageClass    "Auto"
-      ICPrevOutput	      "DiscIntNeverNeededParam"
-      ICPrevScaledInput	      "DiscIntNeverNeededParam"
     }
     Block {
       BlockType		      From
@@ -1115,7 +1107,7 @@ Model {
       }
       System {
 	Name			"Subsystem"
-	Location		[0, 27, 960, 1080]
+	Location		[10, 62, 670, 758]
 	Open			on
 	ModelBrowserVisibility	on
 	ModelBrowserWidth	200
@@ -1127,7 +1119,7 @@ Model {
 	TiledPaperMargins	[0.500000, 0.500000, 0.500000, 0.500000]
 	TiledPageScale		1
 	ShowPageBoundaries	off
-	ZoomFactor		"47"
+	ZoomFactor		"28"
 	Block {
 	  BlockType		  SubSystem
 	  Name			  "DesValues"
@@ -1593,7 +1585,6 @@ Model {
 	      YMin		      "0~0"
 	      YMax		      "2~2"
 	      LimitDataPoints	      off
-	      ScrollMode	      off
 	    }
 	    Block {
 	      BlockType		      Scope
@@ -1628,7 +1619,6 @@ Model {
 	      YMax		      "2~2"
 	      SaveName		      "ScopeData7"
 	      LimitDataPoints	      off
-	      ScrollMode	      off
 	    }
 	    Block {
 	      BlockType		      SubSystem
@@ -2543,7 +2533,6 @@ Model {
 	      SaveName		      "CoM_data"
 	      DataFormat	      "StructureWithTime"
 	      LimitDataPoints	      off
-	      ScrollMode	      off
 	    }
 	    Block {
 	      BlockType		      Demux
@@ -2776,7 +2765,7 @@ Model {
 	      Position		      [1035, 655, 1065, 695]
 	      ZOrder		      479
 	      Commented		      "on"
-	      LibraryVersion	      "1.354"
+	      LibraryVersion	      "1.287"
 	      SourceBlock	      "simulink/Sinks/XY Graph"
 	      SourceType	      "XY scope."
 	      ContentPreviewEnabled   off
@@ -2794,7 +2783,7 @@ Model {
 	      Position		      [1035, 735, 1065, 775]
 	      ZOrder		      480
 	      Commented		      "on"
-	      LibraryVersion	      "1.354"
+	      LibraryVersion	      "1.287"
 	      SourceBlock	      "simulink/Sinks/XY Graph"
 	      SourceType	      "XY scope."
 	      ContentPreviewEnabled   off
@@ -3639,7 +3628,6 @@ Model {
 	      YMax		      "200~200~5"
 	      SaveName		      "ScopeData2"
 	      LimitDataPoints	      off
-	      ScrollMode	      off
 	    }
 	    Block {
 	      BlockType		      From
@@ -3699,7 +3687,6 @@ Model {
 	      SaveName		      "qj_and_v"
 	      DataFormat	      "StructureWithTime"
 	      LimitDataPoints	      off
-	      ScrollMode	      off
 	    }
 	    Block {
 	      BlockType		      Scope
@@ -3739,7 +3726,6 @@ Model {
 	      SaveName		      "qj_and_v1"
 	      DataFormat	      "StructureWithTime"
 	      LimitDataPoints	      off
-	      ScrollMode	      off
 	    }
 	    Block {
 	      BlockType		      Scope
@@ -3779,7 +3765,6 @@ Model {
 	      SaveName		      "qj_and_v3"
 	      DataFormat	      "StructureWithTime"
 	      LimitDataPoints	      off
-	      ScrollMode	      off
 	    }
 	    Block {
 	      BlockType		      Scope
@@ -3817,7 +3802,6 @@ Model {
 	      SaveName		      "qj_and_v4"
 	      DataFormat	      "StructureWithTime"
 	      LimitDataPoints	      off
-	      ScrollMode	      off
 	    }
 	    Block {
 	      BlockType		      Scope
@@ -3859,7 +3843,6 @@ Model {
 	      SaveName		      "tauDes"
 	      DataFormat	      "StructureWithTime"
 	      LimitDataPoints	      off
-	      ScrollMode	      off
 	    }
 	    Block {
 	      BlockType		      Scope
@@ -3898,7 +3881,6 @@ Model {
 	      SaveName		      "tauError"
 	      DataFormat	      "StructureWithTime"
 	      LimitDataPoints	      off
-	      ScrollMode	      off
 	    }
 	    Block {
 	      BlockType		      Scope
@@ -3940,7 +3922,6 @@ Model {
 	      SaveName		      "tauMeasured"
 	      DataFormat	      "StructureWithTime"
 	      LimitDataPoints	      off
-	      ScrollMode	      off
 	    }
 	    Block {
 	      BlockType		      Selector
@@ -4005,7 +3986,6 @@ Model {
 	      SaveName		      "qj_and_v2"
 	      DataFormat	      "StructureWithTime"
 	      LimitDataPoints	      off
-	      ScrollMode	      off
 	    }
 	    Line {
 	      Name		      "CoM_Error"
@@ -5711,6 +5691,8 @@ Model {
 	      ShowName		      off
 	      InitialCondition	      "[0 0 0]"
 	      SampleTime	      "Ts"
+	      ICPrevOutput	      "DiscIntNeverNeededParam"
+	      ICPrevScaledInput	      "DiscIntNeverNeededParam"
 	    }
 	    Block {
 	      BlockType		      DiscreteIntegrator
@@ -5724,6 +5706,8 @@ Model {
 	      ShowName		      off
 	      InitialCondition	      "zeros(ROBOT_DOF,1)"
 	      SampleTime	      "Ts"
+	      ICPrevOutput	      "DiscIntNeverNeededParam"
+	      ICPrevScaledInput	      "DiscIntNeverNeededParam"
 	    }
 	    Block {
 	      BlockType		      Gain
@@ -8130,7 +8114,6 @@ Model {
 	      DataFormat	      "StructureWithTime"
 	      LimitDataPoints	      off
 	      SampleTime	      "0"
-	      ScrollMode	      off
 	    }
 	    Block {
 	      BlockType		      Scope
@@ -8165,7 +8148,6 @@ Model {
 	      DataFormat	      "StructureWithTime"
 	      LimitDataPoints	      off
 	      SampleTime	      "0"
-	      ScrollMode	      off
 	    }
 	    Block {
 	      BlockType		      SubSystem
@@ -8880,7 +8862,7 @@ Model {
 	Annotation {
 	  SID			  "1194"
 	  Name			  "DOUBLE CLICK THIS TO\n CHOOSE SYNCHRONIZER"
-	  Position		  [1981, 323, 2111, 351]
+	  Position		  [1981, 323, 2112, 355]
 	  InternalMargins	  [0, 0, 0, 0]
 	  FixedHeight		  off
 	  FixedWidth		  off
@@ -8892,7 +8874,7 @@ Model {
 }
 #Finite State Machines
 #
-#   Stateflow 80000001
+#   Stateflow Version 8.1 (R2014a) dated Feb  7 2014, 22:23:55
 #
 #
 Stateflow {
@@ -8902,7 +8884,7 @@ Stateflow {
     created		    "18-Feb-2014 10:14:40"
     isLibrary		    0
     firstTarget		    104
-    sfVersion		    80000001
+    sfVersion		    76014001.002
   }
   chart {
     id			    2

@@ -14,7 +14,7 @@ simulationTime    = inf;
 
 ROBOT_DOF = 23;
 directionOfOscillation  = [0;1;0];
-referenceParamsCoM      = [0.03  0.05];  %referenceParams(1) = amplitude of ascillations in meters referenceParams(2) = frequency of ascillations in hertz
+referenceParamsCoM      = [0.06  0.2];  %referenceParams(1) = amplitude of ascillations in meters referenceParams(2) = frequency of ascillations in hertz
 referenceParamsPost     = [30*pi/180  2];           
 mask                    = zeros(ROBOT_DOF ,1);
 mask(4:end)                 = 1;                    
@@ -56,7 +56,7 @@ mask(4:end)                 = 1;
 postures = [ noOscillationTime,  q1;
              7+noOscillationTime, q2;
              15+noOscillationTime, q3;
-             20+noOscillationTime, q4];
+             40+noOscillationTime, q4];
          
 Tt = 5;
 
