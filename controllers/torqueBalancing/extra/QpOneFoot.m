@@ -1,4 +1,4 @@
-function controllerQPsolver_balancingOneFoot(block)
+function QpOneFoot(block)
 
 setup(block);
 

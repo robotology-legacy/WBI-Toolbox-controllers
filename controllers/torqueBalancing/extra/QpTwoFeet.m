@@ -1,4 +1,4 @@
-function controllerQPsolver_balancingTwoFeet(block)
+function QpTwoFeet(block)
 
 setup(block);
 
