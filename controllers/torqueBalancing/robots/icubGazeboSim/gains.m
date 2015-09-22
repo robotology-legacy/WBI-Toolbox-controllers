@@ -1,5 +1,4 @@
 ROBOT_DOF = 23;
-
 directionOfOscillation            = [0;0;0];
 referenceParams                   = [0.0  0.0];  %referenceParams(1) = amplitude of ascillations in meters referenceParams(2) = frequency of ascillations in hertz
 
@@ -7,6 +6,8 @@ noOscillationTime        = 0; % If DEMO_LEFT_AND_RIGHT = 1, the variable noOscil
                                % that the robot waits before starting the left-and-righ
 
  
+maxTorque = 24;
+
 smoothingTimeJacobians            = 0.5;
 
 ROBOT_DOF_FOR_SIMULINK = eye(ROBOT_DOF);
@@ -130,3 +131,6 @@ fZmin                        = 10;
 
 %% The QP solver will search a solution fo that 
 % satisfies the inequality Aineq_f F(fo) < bineq_f
+reg.pinvTol     = 1e-5;
+reg.pinvDamp    = 0.01;
+reg.HessianQP   = 1e-7;
