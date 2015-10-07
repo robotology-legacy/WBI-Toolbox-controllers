@@ -8,7 +8,7 @@ references.noOscillationTime       = 0; % If DEMO_LEFT_AND_RIGHT = 1, the variab
                                        % that the robot waits before starting the left-and-righ
 
  
-maxTorque = 24;
+sat.torque = 24;
 
 smoothingTimeJacobians            = 0.5;
 

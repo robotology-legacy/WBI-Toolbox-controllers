@@ -1,5 +1,5 @@
 Model {
-  Name			  "balancingOptTauQpExtWrenches"
+  Name			  "torqueBalancing"
   Version		  8.3
   MdlSubVersion		  0
   SavedCharacterEncoding  "UTF-8"
@@ -7,7 +7,7 @@ Model {
     NumRootInports	    0
     NumRootOutports	    0
     ParameterArgumentNames  ""
-    ComputedModelVersion    "1.2176"
+    ComputedModelVersion    "1.2179"
     NumModelReferences	    0
     NumTestPointedSignals   0
   }
@@ -21,7 +21,7 @@ Model {
   MinMaxOverflowArchiveMode "Overwrite"
   FPTRunName		  "Run 1"
   MaxMDLFileLineLength	  120
-  InitFcn		  "initBalancingOptTauQpExtWrenches;"
+  InitFcn		  "initTorqueBalancing;"
   Object {
     $PropName		    "BdWindowsInfo"
     $ObjectID		    1
@@ -31,7 +31,7 @@ Model {
       $ObjectID		      2
       $ClassName	      "Simulink.WindowInfo"
       IsActive		      [1]
-      Location		      [1366.0, 27.0, 1680.0, 1023.0]
+      Location		      [0.0, 54.0, 1366.0, 714.0]
       Object {
 	$PropName		"ModelBrowserInfo"
 	$ObjectID		3
@@ -65,9 +65,9 @@ Model {
 	  IsActive		  [1]
 	  ViewObjType		  "SimulinkSubsys"
 	  LoadSaveID		  "61"
-	  Extents		  [1449.0, 905.0]
-	  ZoomFactor		  [0.94206008583690981]
-	  Offset		  [653.46811823747123, 270.138952164009]
+	  Extents		  [1135.0, 596.0]
+	  ZoomFactor		  [0.9420600858369097]
+	  Offset		  [977.226660378701, 270.138952164009]
 	}
 	PropName		"EditorsInfo"
       }
@@ -79,9 +79,9 @@ Model {
   ModifiedByFormat	  "%<Auto>"
   LastModifiedBy	  "daniele"
   ModifiedDateFormat	  "%<Auto>"
-  LastModifiedDate	  "Wed Oct 07 20:33:28 2015"
-  RTWModifiedTimeStamp	  366150799
-  ModelVersionFormat	  "1.%<AutoIncrement:2176>"
+  LastModifiedDate	  "Thu Oct 08 00:39:29 2015"
+  RTWModifiedTimeStamp	  366165504
+  ModelVersionFormat	  "1.%<AutoIncrement:2179>"
   ConfigurationManager	  "none"
   SampleTimeColors	  off
   SampleTimeAnnotations	  on
@@ -1061,8 +1061,8 @@ Model {
     }
   }
   System {
-    Name		    "balancingOptTauQpExtWrenches"
-    Location		    [1366, 27, 3046, 1050]
+    Name		    "torqueBalancing"
+    Location		    [6, 54, 1372, 768]
     Open		    on
     ModelBrowserVisibility  on
     ModelBrowserWidth	    200
@@ -1119,7 +1119,7 @@ Model {
       }
       System {
 	Name			"Subsystem"
-	Location		[1366, 27, 3046, 1050]
+	Location		[0, 54, 1366, 768]
 	Open			on
 	ModelBrowserVisibility	on
 	ModelBrowserWidth	200
@@ -1678,7 +1678,7 @@ Model {
 		  BlockType		  S-Function
 		  Name			  " SFunction "
 		  SID			  "1304::766"
-		  Tag			  "Stateflow S-Function balancingOptTauQpExtWrenches 3"
+		  Tag			  "Stateflow S-Function torqueBalancing 3"
 		  Ports			  [2, 2]
 		  Position		  [180, 105, 230, 165]
 		  ZOrder		  73
@@ -3340,7 +3340,7 @@ Model {
 		    BlockType		    S-Function
 		    Name		    " SFunction "
 		    SID			    "1246:1030::1480"
-		    Tag			    "Stateflow S-Function balancingOptTauQpExtWrenches 7"
+		    Tag			    "Stateflow S-Function torqueBalancing 7"
 		    Ports		    [4, 2]
 		    Position		    [180, 102, 230, 203]
 		    ZOrder		    50
@@ -4833,8 +4833,8 @@ Model {
 	  ZOrder		  305
 	  ShowName		  off
 	  InputPortMap		  "u0"
-	  UpperLimit		  "maxTorque"
-	  LowerLimit		  "-maxTorque"
+	  UpperLimit		  "sat.torque"
+	  LowerLimit		  "-sat.torque"
 	}
 	Block {
 	  BlockType		  Reference
@@ -5080,7 +5080,7 @@ Model {
 		    BlockType		    S-Function
 		    Name		    " SFunction "
 		    SID			    "274:1030::1480"
-		    Tag			    "Stateflow S-Function balancingOptTauQpExtWrenches 2"
+		    Tag			    "Stateflow S-Function torqueBalancing 2"
 		    Ports		    [4, 2]
 		    Position		    [180, 102, 230, 203]
 		    ZOrder		    50
@@ -6338,7 +6338,7 @@ Model {
 		  BlockType		  S-Function
 		  Name			  " SFunction "
 		  SID			  "894::834"
-		  Tag			  "Stateflow S-Function balancingOptTauQpExtWrenches 5"
+		  Tag			  "Stateflow S-Function torqueBalancing 5"
 		  Ports			  [22, 16]
 		  Position		  [180, 55, 230, 515]
 		  ZOrder		  78
@@ -7486,7 +7486,7 @@ Model {
 		  BlockType		  S-Function
 		  Name			  " SFunction "
 		  SID			  "804::758"
-		  Tag			  "Stateflow S-Function balancingOptTauQpExtWrenches 4"
+		  Tag			  "Stateflow S-Function torqueBalancing 4"
 		  Ports			  [4, 2]
 		  Position		  [180, 102, 230, 203]
 		  ZOrder		  31
@@ -7952,7 +7952,7 @@ Model {
 		  BlockType		  S-Function
 		  Name			  " SFunction "
 		  SID			  "1320::765"
-		  Tag			  "Stateflow S-Function balancingOptTauQpExtWrenches 8"
+		  Tag			  "Stateflow S-Function torqueBalancing 8"
 		  Ports			  [4, 2]
 		  Position		  [180, 107, 230, 208]
 		  ZOrder		  76
@@ -8528,7 +8528,7 @@ Model {
 Stateflow {
   machine {
     id			    1
-    name		    "balancingOptTauQpExtWrenches"
+    name		    "torqueBalancing"
     created		    "18-Feb-2014 10:14:40"
     isLibrary		    0
     firstTarget		    96
