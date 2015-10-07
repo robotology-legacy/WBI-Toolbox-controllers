@@ -20,7 +20,7 @@ Ts                = 0.01; % [s]
 % Load gains and parameters for the specific robot
 run(strcat('robots/',getenv('YARP_ROBOT_NAME'),'/gains.m')); 
 addpath('extra/')
-[ConstraintsMatrix,bVectorConstraints]= constraints(forceFrictionCoefficient,numberOfPoints,torsionalFrictionCoefficient,footSize,fZmin);
+[ConstraintsMatrix,bVectorConstraints]= constraints(forceFrictionCoefficient,numberOfPoints,torsionalFrictionCoefficient,gain.footSize,fZmin);
 
 
 % Uncomment the following line if you want to sync Gazebo and simulink.

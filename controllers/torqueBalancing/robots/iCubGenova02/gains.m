@@ -27,15 +27,15 @@ if (sum(LEFT_RIGHT_FOOT_IN_CONTACT) == 2)
     % Impadances acting in the null space of the desired contact forces 
 
     impTorso            = [   40    40   40
-                               0     0    0]; 
+                               0     0    0]/10; 
     impArms             = [15   15    20   12   
                             0    0     0    1   ];
                         
-    impLeftLeg          = [ 35   10   60     700      0  10
-                             0    0   0        0      0   0]; 
+    impLeftLeg          = [ 35   10   0     7      0  10
+                             0    0    0       0      0   0]; 
 
-    impRightLeg         = [35   10    60     700      0  10
-                             0    0   0        0      0   0]; 
+    impRightLeg         = [35   10     0    7      0  10
+                             0    0     0      0      0   0]; 
     
                          
     intTorso            = [0   0    0]; 
@@ -43,12 +43,12 @@ if (sum(LEFT_RIGHT_FOOT_IN_CONTACT) == 2)
                         
     intLeftLeg          = [0   0    0    0    0  0]; 
 
-    intRightLeg         = [0   0    0    0    0  0];                        
+    intRightLeg         = [0   0     0  0    0  0];                        
                          
                          
     if (DEMO_MOVEMENTS == 1)
         references.directionOfOscillation  = [0;1;0];
-        references.amplitudeOfOscillation  = 0.02;
+        references.amplitudeOfOscillation  = 0.07;
         references.frequencyOfOscillation  = 0.5;
     end
 end
@@ -88,7 +88,7 @@ if (sum(LEFT_RIGHT_FOOT_IN_CONTACT) == 1)
                              0    0   0       0      0   0];
 
     if (DEMO_MOVEMENTS == 1)
-        gain.PCOM           = diag([ 45   45  45]);  
+        gain.PCOM           = diag([ 45   75  45]);  %45   75  45
     
         impTorso            = [  60    60   60
                                   0     0    0]; 
@@ -96,11 +96,11 @@ if (sum(LEFT_RIGHT_FOOT_IN_CONTACT) == 1)
         impArms             = [ 15  15   15   7 
                                 0    0    0   0              ];
 
-        impLeftLeg          = [ 90  110 65     30      0   0
-                                 0    0   0     0      0   0]; 
+        impLeftLeg          = [ 90  110      30      0   0 0
+                                 0    0       0      0   0 0]; 
 
-        impRightLeg         = [ 70   70  20      10     10   10
-                                 0    0   0       0      0   0];
+        impRightLeg         = [ 70   70       10     10   10 0   %20
+                                 0    0         0      0   0 0];
 
     end
     
