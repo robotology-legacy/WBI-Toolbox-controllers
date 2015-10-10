@@ -14,6 +14,7 @@ Users willing to use the module should follow this list.
 - Bring the robot in a suitable home position (e.g. `$ yarpmotorgui --from homePoseBalancingTwoFeet.ini` and then pressing the 'Home All' button)
 - (Robot Only) Launch `wholeBodyDynamicsTree` with the following parameters: `--autoconnect --assume_fixed l_foot_dh_frame`
 - (Robot Only) Execute the [sensors calibration script](https://github.com/robotology/codyco-modules/blob/master/src/scripts/twoFeetStandingIdleAndCalib.sh): `$ twoFeetStandingIdleAndCalib.sh`
+- Set the working directory of MATLAB to the directory containing the `torqueBalncing.mdl` model. 
 - Open the simulink model `torqueBalancing.mdl`
 - Run the module 
 
