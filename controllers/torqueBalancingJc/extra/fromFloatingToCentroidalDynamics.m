@@ -26,9 +26,6 @@ gc            = M(1,1)*gravAcc*e3;
 
 CNu           = h - g;
 
-CNu_j         = CNu(7:end);
-CNu_b         = CNu(1:6);
-
 Mb            =   M(1:6,1:6);
 Mbj           =   M(1:6,7:end);
 
@@ -36,7 +33,7 @@ C_cNu_c_dT    = invTt*CNu - Mc*dT*Nu;
 
 C_cNu_c       = [ zeros(3,1); 
                   C_cNu_c_dT(4:6); 
-                  CNu_j-(Mbj')*(Mb\CNu_b)];
+                  CNu(7:end)-(Mbj')*(Mb\CNu(1:6))];
 
 %new dT*Nu computation for Jacobian
 dTNu          = Mc\(CNu-C_cNu_c);  

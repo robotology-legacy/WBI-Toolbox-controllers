@@ -1,9 +1,10 @@
 clear all;
 clc;
 
-robotName = 'icubGazeboSim';          
-setenv('YARP_ROBOT_NAME','icubGazeboSim');
+robotName = 'icub';          
+% setenv('YARP_ROBOT_NAME','icubGazeboSim');
 localName = 'matlabTorqueBalancing';
+
 
 simulationTime    = inf;       % Simulation time in seconds
 

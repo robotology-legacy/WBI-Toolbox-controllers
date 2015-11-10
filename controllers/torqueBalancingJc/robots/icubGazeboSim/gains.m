@@ -30,11 +30,18 @@ if (sum(LEFT_RIGHT_FOOT_IN_CONTACT) == 2)
     impArms             = [ 1   1    1    1   
                             0   0    0    0];
                         
-    impLeftLeg          = [  1    1     1       1      20   1
+    impLeftLeg          = [  1    1     1       1      4   1
                              0    0     0       0      0   0]; 
 
-    impRightLeg         = [ 1    1     1       1      20   1
+    impRightLeg         = [ 1    1     1       1       4   1
                             0    0     0        0      0   0]; 
+    
+    dampTorso            = [  0    0    0]; 
+    dampArms             = [ 0   0    0    0];
+                        
+    dampLeftLeg          = [ 0    0     0       0      2*sqrt(impLeftLeg(1,5))   0]; 
+
+    dampRightLeg         = [ 0    0     0       0      2*sqrt(impLeftLeg(1,5))   0]; 
     
                          
     intTorso            = [0   0    0]; 
@@ -81,17 +88,29 @@ if (sum(LEFT_RIGHT_FOOT_IN_CONTACT) == 1)
 
     impRightLeg         = [ 20   20  20      10      0    0
                              0    0   0       0      0   0];
+                         
+                         
+    dampTorso            = [  0    0    0
+                              0    0    0]; 
+    dampArms             = [ 0   0    0    0   
+                             0   0    0    0];
+                        
+    dampLeftLeg          = [ 0    0     0       0      2*sqrt(impLeftLeg(1,5))   0
+                             0    0     0       0      0   0]; 
+
+    dampRightLeg         = [ 0    0     0       0      2*sqrt(impLeftLeg(1,5))   0
+                             0    0     0       0      0   0]; 
 %%    
 end
 
 sat.integral              = 0;
 gain.integral            = [intTorso,intArms,intArms,intLeftLeg,intRightLeg];
 gain.impedances          = [impTorso(1,:),impArms(1,:),impArms(1,:),impLeftLeg(1,:),impRightLeg(1,:)];
-gain.dampings            = zeros(1,ROBOT_DOF);
+gain.dampings            = [dampTorso,dampArms,dampArms,dampLeftLeg,dampRightLeg];
 gain.increasingRatesImp  = [impTorso(2,:),impArms(2,:),impArms(2,:),impLeftLeg(2,:),impRightLeg(2,:)];
 sat.impedences            = [80   25    1400];
 
-if (size(gain.impedances,2) ~= ROBOT_DOF)
+if (size(gain.impedances,2) ~= ROBOT_DOF || size(gain.dampings,2) ~= ROBOT_DOF)
     error('Dimension mismatch between ROBOT_DOF and dimension of the variable impedences. Check these variables in the file gains.m');
 end
 
