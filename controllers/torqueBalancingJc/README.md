@@ -1,10 +1,6 @@
 ##Module description
 
-This module implements a torque control balancing strategy.
-It computes the interaction forces at the feet in order to stabilise a desired centroidal dynamics, which implies the tracking of a desired center-of-mass trajectory.
-A cost function penalizing high joint torques - that generate the feet forces - is added to the control framework.
-
-For details see [iCub whole-body control through force regulation on rigid non-coplanar contacts](http://journal.frontiersin.org/article/10.3389/frobt.2015.00006/abstract)
+This module implements a torque control balancing strategy, ... . 
 
 ###Launch procedure
 The procedure to run the torque balancing module is still quite elaborate.
