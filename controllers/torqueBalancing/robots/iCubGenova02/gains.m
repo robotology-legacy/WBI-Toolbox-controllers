@@ -18,7 +18,7 @@ gain.qTildeMax              = 20*pi/180;
 %%
 %           PARAMETERS FOR TWO FEET ONE GROUND
 if (sum(LEFT_RIGHT_FOOT_IN_CONTACT) == 2)
-    gain.PCOM                 = diag([50    50  50])/2;
+    gain.PCOM                 = diag([50    50  50]);
     gain.ICOM                 = diag([  0    0   0]);
     gain.DCOM                 = 2*sqrt(gain.PCOM)*0;
 
@@ -27,7 +27,7 @@ if (sum(LEFT_RIGHT_FOOT_IN_CONTACT) == 2)
     % Impadances acting in the null space of the desired contact forces 
 
     impTorso            = [   40    40   40
-                               0     0    0]/10; 
+                               0     0    0]; 
     impArms             = [15   15    20   12   
                             0    0     0    1   ];
                         
