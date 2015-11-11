@@ -16,6 +16,8 @@ SMOOTH_DES_COM      = 0;   % If equal to one, the desired streamed values of the
 SMOOTH_DES_Q        = 1;   % If equal to one, the desired streamed values of the postural tasks are smoothed internally through mimum jerk trajectory
 SMOOTH_CONSTRAINTS  = 1;   % If equal to one, the desired streamed values of the logic vector identifying the active constraints are smoothed internally through mimum jerk trajectory
 
+USE_SM = true; % If equal to true, the (internal) state machine will be used. The robot will switch from 2 to 1 (left) foot
+               % PLEASE, use logical values (true or false)
 % Controller period
 Ts                = 0.01; % [s]
 
@@ -32,6 +34,10 @@ if DEMO_MOVEMENTS == 1
         %just try to launch the one in the path (?)
         references;
     end
+end
+
+if USE_SM == true
+    initStateMachine;
 end
 
 % If you want to sync Gazebo and simulink, 
