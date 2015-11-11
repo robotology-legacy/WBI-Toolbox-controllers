@@ -24,6 +24,16 @@ run(strcat('robots/',getenv('YARP_ROBOT_NAME'),'/gains.m'));
 addpath('extra/')
 [ConstraintsMatrix,bVectorConstraints]= constraints(forceFrictionCoefficient,numberOfPoints,torsionalFrictionCoefficient,gain.footSize,fZmin);
 
+if DEMO_MOVEMENTS == 1
+    robotSpecificReferences = fullfile('robots',getenv('YARP_ROBOT_NAME'),'references.m');
+    if exist(robotSpecificReferences, 'file')
+        run(robotSpecificReferences);
+    else
+        %just try to launch the one in the path (?)
+        references;
+    end
+end
+
 % If you want to sync Gazebo and simulink, 
 % remember that you have to launch gazebo as follow:
 % 
