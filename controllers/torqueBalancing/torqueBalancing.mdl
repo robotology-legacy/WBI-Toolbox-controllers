@@ -7,7 +7,7 @@ Model {
     NumRootInports	    0
     NumRootOutports	    0
     ParameterArgumentNames  ""
-    ComputedModelVersion    "1.2325"
+    ComputedModelVersion    "1.2328"
     NumModelReferences	    0
     NumTestPointedSignals   0
   }
@@ -63,10 +63,10 @@ Model {
 	  $ObjectID		  6
 	  IsActive		  [1]
 	  ViewObjType		  "SimulinkSubsys"
-	  LoadSaveID		  "1263"
+	  LoadSaveID		  "1499"
 	  Extents		  [1056.0, 548.0]
-	  ZoomFactor		  [1.0]
-	  Offset		  [597.7626459143969, 2255.0]
+	  ZoomFactor		  [1.1572809386021232]
+	  Offset		  [-447.75357186284043, 101.23812925583661]
 	}
 	PropName		"EditorsInfo"
       }
@@ -78,9 +78,9 @@ Model {
   ModifiedByFormat	  "%<Auto>"
   LastModifiedBy	  "makaveli"
   ModifiedDateFormat	  "%<Auto>"
-  LastModifiedDate	  "Thu Nov 12 09:10:47 2015"
-  RTWModifiedTimeStamp	  369220232
-  ModelVersionFormat	  "1.%<AutoIncrement:2325>"
+  LastModifiedDate	  "Thu Nov 12 10:12:23 2015"
+  RTWModifiedTimeStamp	  369222350
+  ModelVersionFormat	  "1.%<AutoIncrement:2328>"
   ConfigurationManager	  "none"
   SampleTimeColors	  off
   SampleTimeAnnotations	  on
@@ -1188,7 +1188,7 @@ Model {
 	  System {
 	    Name		    "DesValues"
 	    Location		    [0, 23, 1280, 744]
-	    Open		    on
+	    Open		    off
 	    ModelBrowserVisibility  on
 	    ModelBrowserWidth	    200
 	    ScreenColor		    "white"
@@ -1199,7 +1199,7 @@ Model {
 	    TiledPaperMargins	    [0.500000, 0.500000, 0.500000, 0.500000]
 	    TiledPageScale	    1
 	    ShowPageBoundaries	    off
-	    ZoomFactor		    "100"
+	    ZoomFactor		    "60"
 	    Block {
 	      BlockType		      Reference
 	      Name		      " LEFT_RIGHT_FOOT_IN_CONTACT"
@@ -2129,7 +2129,7 @@ Model {
 	      System {
 		Name			"State Machine"
 		Location		[0, 23, 1280, 744]
-		Open			off
+		Open			on
 		ModelBrowserVisibility	on
 		ModelBrowserWidth	200
 		ScreenColor		"white"
@@ -11245,7 +11245,7 @@ Model {
 	  Variant		  off
 	  System {
 	    Name		    "synchronizer"
-	    Location		    [0, 0, 1280, 800]
+	    Location		    [0, 23, 1280, 744]
 	    Open		    off
 	    ModelBrowserVisibility  on
 	    ModelBrowserWidth	    200
@@ -11269,6 +11269,7 @@ Model {
 	      BackgroundColor	      "gray"
 	      DropShadow	      on
 	      ShowName		      off
+	      Commented		      "on"
 	      LibraryVersion	      "1.285"
 	      SourceBlock	      "WBCLibrary/Utilities/Real Time Synchronizer"
 	      SourceType	      ""
@@ -11284,7 +11285,6 @@ Model {
 	      ZOrder		      303
 	      ForegroundColor	      "[0.901961, 0.000000, 0.470588]"
 	      ShowName		      off
-	      Commented		      "on"
 	      LibraryVersion	      "1.285"
 	      SourceBlock	      "WBCLibrary/Utilities/synchronize"
 	      SourceType	      "ySynchronizer"
@@ -14070,7 +14070,7 @@ Stateflow {
     eml {
       isEML		      1
       script		      "function [CoMDes,qDes,constraints] = stateMachineFCN(CoM_0, q0, CoM, t, references)\n%#codegen\n["
-      "CoMDes,qDes,constraints] = stateMachine(CoM_0, q0, CoM, t, references);"
+      "CoMDes,qDes,constraints, currentState] = stateMachine(CoM_0, q0, CoM, t, references);\n\ncurrentState\n"
       editorLayout	      "100 M4x1[10 5 700 500]"
     }
   }

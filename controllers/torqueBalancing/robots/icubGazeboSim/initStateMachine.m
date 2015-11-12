@@ -1,4 +1,6 @@
-references.com.states      = [0,0,0];
+state = 0;
+
+references.com.states      = [0,0.0,0.5];
 references.com.threshold   = 0.01;
 
 references.tBalancing      = 10;

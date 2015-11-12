@@ -1,10 +1,10 @@
-function [CoMDes,qDes,constraints] = stateMachine(CoM_0, q0, CoM, t, references)
+function [CoMDes,qDes,constraints, currentState] = stateMachine(CoM_0, q0, CoM, t, references)
     %#codegen
     global state;
     global tSwitch;
 
     CoMDes      = CoM_0;
-    constraints = [1;1];
+    constraints = [1; 1];
     qDes        = q0;
 
     %% Two feet balancing.
@@ -16,7 +16,7 @@ function [CoMDes,qDes,constraints] = stateMachine(CoM_0, q0, CoM, t, references)
 
     %% Left transition
     if state == 1 
-        CoMDes    =  references.com.states(1,:)'; %new reference for CoM
+        CoMDes    =  references.com.states(state,:)'; %new reference for CoM
         CoMError  = CoMDes - CoM;
         qDes      = references.joints.states(1,:)'; % new reference for q
         if norm(CoMError) < references.com.threshold
@@ -28,7 +28,7 @@ function [CoMDes,qDes,constraints] = stateMachine(CoM_0, q0, CoM, t, references)
     %% Left foot balancing
     if state == 2 
         constraints = [1; 0]; %right foot is no longer a constraints
-        CoMDes      =  references.com.states(1,:)';
+        CoMDes      =  references.com.states(state,:)';
         qDes        =  references.joints.states(1,:)';
 
         if t > tSwitch + references.DT % yoga
@@ -40,6 +40,8 @@ function [CoMDes,qDes,constraints] = stateMachine(CoM_0, q0, CoM, t, references)
         end
     end
 
+    currentState = state;
+    
     % if state == 3
     %     stateVec = [0;0;1;0];
     %     qDes(end-11:end)      =  qDesRightFoot(2,end-11:end);

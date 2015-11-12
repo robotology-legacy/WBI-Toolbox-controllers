@@ -1,5 +1,6 @@
 ROBOT_DOF = 23;
 
+robotName = 'icubGazeboSim';
 
 references.directionOfOscillation  = [0;0;0];
 references.amplitudeOfOscillation  = 0.0;  %referenceParams(1) = amplitude of ascillations in meters referenceParams(2) = frequency of ascillations in hertz
