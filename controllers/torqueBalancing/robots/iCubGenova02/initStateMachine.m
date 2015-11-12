@@ -1,13 +1,15 @@
 state = 0;
 
-references.com.states      = [0,0.0,0.5];
-references.com.threshold   = 0.01;
+sm.com.states      = [0,0.0,0.551;
+                      0,0.0,0.551;
+                      0,0.0,0.551];
+sm.com.threshold   = 0.01;
 
-references.tBalancing      = 10;
+sm.tBalancing      = 10;
 
-references.DT              = 5;
+sm.DT              = 5;
 
-references.joints.states = [zeros(1,ROBOT_DOF)];
+sm.joints.states = [zeros(1,ROBOT_DOF)];
 
 q1 = [-0.0790    0.2279    0.4519 ...   
     -1.1621    0.6663    0.4919    0.9947 ...  
@@ -35,7 +37,7 @@ q4 = [-0.0179  0.3218    0.0076 ...
 
 
 
-references.joints.points = [ 20,q1;
+sm.joints.points = [ 20,q1;
                              30,q2;
                              40,q3;
                              50,q4];
