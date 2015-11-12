@@ -16,9 +16,9 @@ function [CoMDes,qDes,constraints, currentState] = stateMachine(CoM_0, q0, CoM, 
 
     %% Left transition
     if state == 1 
-        CoMDes    =  references.com.states(state,:)'; %new reference for CoM
+        CoMDes(2)    =  references.com.states(state,2)'; %new reference for CoM
         CoMError  = CoMDes - CoM;
-%         qDes      = references.joints.states(1,:)'; % new reference for q
+%         qDes      = references.joints.states(state,:)'; % new reference for q
         if norm(CoMError) < references.com.threshold
            state = 2; 
            tSwitch = t;
@@ -28,17 +28,27 @@ function [CoMDes,qDes,constraints, currentState] = stateMachine(CoM_0, q0, CoM, 
     %% Left foot balancing
     if state == 2 
         constraints = [1; 0]; %right foot is no longer a constraints
-        CoMDes      =  references.com.states(state,:)';
-%         qDes        =  references.joints.states(1,:)';
+        CoMDes(2)    =  references.com.states(state,2)'; %new reference for CoM
+%         qDes        =  references.joints.states(state,:)';
 
         if t > tSwitch + references.DT % yoga
-            for i = 1: size(references.joints.points,1)-1
-                if t > references.joints.points(i,1) && t <= references.joints.points(i+1,1)
-                    qDes = references.joints.points(i,2:end)';
-                end
+            state = 3;
+            tSwitch = t;
+        end
+    end
+    
+    %% YOGA LEFT FOOT
+    if state == 3 
+        constraints = [1; 0]; %right foot is no longer a constraints
+        CoMDes(2)    =  references.com.states(state,2)'; %new reference for CoM
+%         qDes        =  references.joints.states(state,:)';
+        for i = 1: size(references.joints.points,1)-1
+            if t > (references.joints.points(i,1) + tSwitch) && t <= (references.joints.points(i+1,1)+ tSwitch)
+                qDes = references.joints.points(i,2:end)';
             end
         end
     end
+
 
     currentState = state;
     

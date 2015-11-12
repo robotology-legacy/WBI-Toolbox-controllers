@@ -1,15 +1,9 @@
-references = struct;
-references.com = struct;
-
 references.com.directionOfOscillation  = [0;0;0];
 references.com.amplitudeOfOscillation  = 0.0;  %referenceParams(1) = amplitude of ascillations in meters referenceParams(2) = frequency of ascillations in hertz
 references.com.frequencyOfOscillation  = 0.0;
 references.com.points                  = 0;
 references.com.noOscillationTime       = 3;    % that the robot waits before starting the left-and-righ
-references.com.smoothingTime           = 3;
  
-references.joints                      = struct;
-references.joints.smoothingTime        = 1;
 references.joints.points               = 0;
 
 if (sum(LEFT_RIGHT_FOOT_IN_CONTACT) == 2)

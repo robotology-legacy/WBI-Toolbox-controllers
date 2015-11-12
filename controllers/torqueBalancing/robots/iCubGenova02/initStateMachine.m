@@ -1,15 +1,99 @@
+references.joints.smoothingTime    = 2.0;
+references.com.smoothingTime       = 2;
+
+gain.PCOM                 = diag([50    70  50]);
+gain.ICOM                 = diag([  0    0   0]);
+gain.DCOM                 = 2*sqrt(gain.PCOM)*0;
+
+gain.PAngularMomentum     = 1 ;
+
+% Impadances acting in the null space of the desired contact forces 
+
+impTorso            = [10   10   20
+                        0    0    0]; 
+impArms             = [10   10    10    8   
+                        0    0     0    0   ];
+
+impLeftLeg          = [ 30   30  200   200     10  10
+                         0    0    0     0      0   0]; 
+
+impRightLeg         = [ 30   30   30    60     10  10
+                         0    0    0     0      0   0]; 
+
+
+intTorso            = [0   0    0]; 
+intArms             = [0   0    0    0  ];
+
+intLeftLeg          = [0   0    0    0    0  0]; 
+
+intRightLeg         = [0   0     0  0    0  0];  
+
+
+gain.integral            = [intTorso,intArms,intArms,intLeftLeg,intRightLeg];
+gain.impedances          = [impTorso(1,:),impArms(1,:),impArms(1,:),impLeftLeg(1,:),impRightLeg(1,:)];
+
+
+
 state = 0;
 
-sm.com.states      = [0,0.0,0.551;
-                      0,0.0,0.551;
-                      0,0.0,0.551];
-sm.com.threshold   = 0.01;
 
-sm.tBalancing      = 10;
 
-sm.DT              = 5;
 
-sm.joints.states = [zeros(1,ROBOT_DOF)];
+sm.com.states      = [0,0.0,0.511;
+                      0,0.0,0.511;
+                      0,0.0,0.511];
+sm.com.threshold   = 0.02;
+
+sm.tBalancing      = 1;
+
+sm.DT              = 0;
+
+sm.joints.states = [[   -0.0616
+    0.2463
+   -0.0114
+   -0.8484
+    0.6056
+    0.1165
+    0.7609
+   -0.8435
+    0.5816
+    0.0977
+    0.7589
+    0.1170
+   -0.1931
+    0.0354
+   -0.2332
+   -0.0891
+    0.1433
+    0.0693
+    0.3536
+   -0.0250
+   -0.1300
+   -0.0331
+   -0.1082]';
+   [   -0.0616
+    0.2463
+   -0.0114
+   -0.8484
+    0.6056
+    0.1165
+    0.7609
+   -0.8435
+    0.5816
+    0.0977
+    0.7589
+    0.1170
+   -0.1931
+    0.0354
+   -0.2332
+   -0.0891
+    0.1433
+    0.0693
+    0.3536
+   -0.0250
+   -0.1300
+   -0.0331
+   -0.1082]'];
 
 q1 = [-0.0790    0.2279    0.4519 ...   
     -1.1621    0.6663    0.4919    0.9947 ...  
@@ -21,7 +105,7 @@ q2 = [-0.0790    0.2279    0.4519 ...
     -1.1621    0.6663    0.4965    0.9947 ...
     -1.0717    1.2904   -0.2493    1.0948 ...
      0.3850    0.4889   -0.0001   -0.2958   -0.0990    0.0249 ...
-     0.3714    0.1906    1.3253   -0.9794    0.6374   -0.0614 ];
+     0.2858    1.2190    1.2227   -1.7446    0.1469   -0.3468 ];
 
 q3 = [-0.0852   -0.4273    0.0821 ...
      0.1391    1.4585    0.2464    0.3042  ... 
@@ -37,9 +121,9 @@ q4 = [-0.0179  0.3218    0.0076 ...
 
 
 
-sm.joints.points = [ 20,q1;
-                             30,q2;
-                             40,q3;
-                             50,q4];
+sm.joints.points = [ 0,q1;
+                     references.joints.smoothingTime,q2;
+                     2*references.joints.smoothingTime,q3;
+                     6*references.joints.smoothingTime,q4];
 
 clear q1 q2 q3 q4;

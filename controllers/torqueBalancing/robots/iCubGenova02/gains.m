@@ -10,7 +10,7 @@ references.com.smoothingTime       = 5;
 
 sat.torque = 24;
 
-smoothingTimeTransitionDynamics    = 0.25;
+smoothingTimeTransitionDynamics    = 0.05;
 
 ROBOT_DOF_FOR_SIMULINK = eye(ROBOT_DOF);
 gain.qTildeMax              = 20*pi/180;

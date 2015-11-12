@@ -9,12 +9,13 @@ references.amplitudeOfOscillation  = 0.0;  %referenceParams(1) = amplitude of as
 references.frequencyOfOscillation  = 0.0;
 references.noOscillationTime       = 3;    % If DEMO_LEFT_AND_RIGHT = 1, the variable noOscillationTime is the time, in seconds, 
                                             % that the robot waits before starting the left-and-righ
+
 references.joints.smoothingTime    = 1.0;
 references.com.smoothingTime       = 5;
 
 sat.torque = 24;
 
-smoothingTimeTransitionDynamics    = 0.25;
+smoothingTimeTransitionDynamics    = 0.05;
 
 ROBOT_DOF_FOR_SIMULINK = eye(ROBOT_DOF);
 gain.qTildeMax              = 20*pi/180;
@@ -23,23 +24,23 @@ postures = 0;
 %%
 %           PARAMETERS FOR TWO FEET ONE GROUND
 if (sum(LEFT_RIGHT_FOOT_IN_CONTACT) == 2)
-    gain.PCOM                 = diag([50    50  50]);
-    gain.ICOM                 = diag([  0    0   0]);
-    gain.DCOM                 = 2*sqrt(gain.PCOM);
+    gain.PCOM                 = diag([100   100  100]);
+    gain.ICOM                 = diag([  0     0    0]);
+    gain.DCOM                 = 2*sqrt(gain.PCOM)/40;
 
     gain.PAngularMomentum     = 1 ;
 
     % Impadances acting in the null space of the desired contact forces 
 
-    impTorso            = [10   10   20
+    impTorso            = [40   40   20
                             0    0    0]; 
-    impArms             = [10   10    10    8   
+    impArms             = [20   20    20    8   
                             0    0     0    0   ];
                         
-    impLeftLeg          = [ 30   30   30    60     10  10
+    impLeftLeg          = [ 50   200   500    60     10  10
                              0    0    0     0      0   0]; 
 
-    impRightLeg         = [ 30   30   30    60     10  10
+    impRightLeg         = [ 50   100   30    60     10  10
                              0    0    0     0      0   0]; 
     
                          
