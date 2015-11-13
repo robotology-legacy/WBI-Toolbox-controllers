@@ -1,4 +1,4 @@
-function [CoMDes,qDes,constraints, currentState] = stateMachine(CoM_0, q0, CoM, t, references)
+function [CoMDes,qDes,constraints, currentState] = stateMachine(wrench_right,CoM_0, q0, CoM, t, references)
     %#codegen
     global state;
     global tSwitch;
@@ -47,9 +47,29 @@ function [CoMDes,qDes,constraints, currentState] = stateMachine(CoM_0, q0, CoM, 
                 qDes = references.joints.points(i,2:end)';
             end
         end
+        if t > references.joints.points(end,1) + tSwitch + references.DT
+            qDes        = q0;
+            state = 4;
+            tSwitch = t;
+        end
+    end
+    
+    if state == 4 
+        constraints = [1; 0]; %right foot is no longer a constraints
+        CoMDes(2)    =  references.com.states(state,2)'; %new reference for CoM
+%         qDes        =  references.joints.states(state,:)';
+        
+        if wrench_right(3) > references.wrench.threshold
+            state = 5;
+            tSwitch = t;
+        end
     end
 
-
+    if state == 5 
+        constraints = [1; 1]; %right foot is no longer a constraints
+        CoMDes(2)    =  references.com.states(state,2)'; %new reference for CoM
+    end
+    
     currentState = state;
     
     % if state == 3

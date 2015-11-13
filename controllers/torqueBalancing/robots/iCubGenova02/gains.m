@@ -116,4 +116,5 @@ fZmin                        = 10;
 % satisfies the inequality Aineq_f F(fo) < bineq_f
 reg.pinvTol     = 1e-5;
 reg.pinvDamp    = 0.01;
+reg.pinvDampVb  = 0.001;
 reg.HessianQP   = 1e-7;

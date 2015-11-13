@@ -1,6 +1,7 @@
-references.joints.smoothingTime    = 2.0;
-references.com.smoothingTime       = 2;
-sm.com.threshold   = 0.015;
+references.joints.smoothingTime    = 3.0;
+references.com.smoothingTime       = 3;
+sm.com.threshold   = 0.01;
+sm.wrench.threshold = 50;
 
 gain.PCOM                 = diag([50    70  50]);
 gain.ICOM                 = diag([  0    0   0]);
@@ -15,10 +16,10 @@ impTorso            = [10   10   20
 impArms             = [10   10    10    8   
                         0    0     0    0   ];
 
-impLeftLeg          = [ 30   30  200   200     10  10
+impLeftLeg          = [ 30   30   20   200     10  10
                          0    0    0     0      0   0]; 
 
-impRightLeg         = [ 60   70   30    60     35  50
+impRightLeg         = [ 30   50   30    60     35  50
                          0    0    0     0      0   0]; 
 
 
@@ -42,7 +43,9 @@ state = 0;
 
 sm.com.states      = [0,0.0,0.511;
                       0,0.0,0.511;
-                      0,0.0,0.511];
+                      0,0.0,0.511
+                      0,-0.09,0.511
+                      0,-0.09,0.511];
 
 sm.tBalancing      = 1;
 
