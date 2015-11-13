@@ -21,7 +21,7 @@ function [CoMDes,qDes,constraints, currentState,impedances] = stateMachine(wrenc
         CoMDes(2)    =  references.com.states(state,2)'; %new reference for CoM
         CoMError  = CoMDes - CoM;
         qDes      = references.joints.states(state,:)'; % new reference for q
-        if t > 20%norm(CoMError(2)) < references.com.threshold
+        if norm(CoMError(2)) < references.com.threshold
            state = 2; 
            tSwitch = t;
         end
