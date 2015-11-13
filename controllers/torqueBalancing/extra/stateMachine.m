@@ -18,8 +18,8 @@ function [CoMDes,qDes,constraints, currentState] = stateMachine(CoM_0, q0, CoM, 
     if state == 1 
         CoMDes(2)    =  references.com.states(state,2)'; %new reference for CoM
         CoMError  = CoMDes - CoM;
-%         qDes      = references.joints.states(state,:)'; % new reference for q
-        if norm(CoMError) < references.com.threshold
+        qDes      = references.joints.states(state,:)'; % new reference for q
+        if norm(CoMError(2)) < references.com.threshold
            state = 2; 
            tSwitch = t;
         end
@@ -29,7 +29,7 @@ function [CoMDes,qDes,constraints, currentState] = stateMachine(CoM_0, q0, CoM, 
     if state == 2 
         constraints = [1; 0]; %right foot is no longer a constraints
         CoMDes(2)    =  references.com.states(state,2)'; %new reference for CoM
-%         qDes        =  references.joints.states(state,:)';
+        qDes        =  references.joints.states(state,:)';
 
         if t > tSwitch + references.DT % yoga
             state = 3;
@@ -41,7 +41,7 @@ function [CoMDes,qDes,constraints, currentState] = stateMachine(CoM_0, q0, CoM, 
     if state == 3 
         constraints = [1; 0]; %right foot is no longer a constraints
         CoMDes(2)    =  references.com.states(state,2)'; %new reference for CoM
-%         qDes        =  references.joints.states(state,:)';
+        qDes        =  references.joints.states(state,:)';
         for i = 1: size(references.joints.points,1)-1
             if t > (references.joints.points(i,1) + tSwitch) && t <= (references.joints.points(i+1,1)+ tSwitch)
                 qDes = references.joints.points(i,2:end)';
