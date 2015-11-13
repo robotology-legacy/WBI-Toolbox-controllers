@@ -1,4 +1,4 @@
-function [CoMDes,qDes,constraints, currentState] = stateMachine(wrench_right,CoM_0, q0, CoM, t, references)
+function [CoMDes,qDes,constraints, currentState,impedances] = stateMachine(wrench_right,CoM_0, q0, CoM, t, references,gain)
     %#codegen
     global state;
     global tSwitch;
@@ -7,6 +7,8 @@ function [CoMDes,qDes,constraints, currentState] = stateMachine(wrench_right,CoM
     constraints = [1; 1];
     qDes        = q0;
 
+    impedances = gain.impedances(1,:);
+    
     %% Two feet balancing.
     if state == 0 
         if t > references.tBalancing %after tBalancing time start moving weight to the left
@@ -19,7 +21,7 @@ function [CoMDes,qDes,constraints, currentState] = stateMachine(wrench_right,CoM
         CoMDes(2)    =  references.com.states(state,2)'; %new reference for CoM
         CoMError  = CoMDes - CoM;
         qDes      = references.joints.states(state,:)'; % new reference for q
-        if norm(CoMError(2)) < references.com.threshold
+        if t > 20%norm(CoMError(2)) < references.com.threshold
            state = 2; 
            tSwitch = t;
         end
@@ -30,6 +32,7 @@ function [CoMDes,qDes,constraints, currentState] = stateMachine(wrench_right,CoM
         constraints = [1; 0]; %right foot is no longer a constraints
         CoMDes(2)    =  references.com.states(state,2)'; %new reference for CoM
         qDes        =  references.joints.states(state,:)';
+        impedances = gain.impedances(state,:);
 
         if t > tSwitch + references.DT % yoga
             state = 3;
@@ -42,6 +45,8 @@ function [CoMDes,qDes,constraints, currentState] = stateMachine(wrench_right,CoM
         constraints = [1; 0]; %right foot is no longer a constraints
         CoMDes(2)    =  references.com.states(state,2)'; %new reference for CoM
         qDes        =  references.joints.states(state,:)';
+        impedances = gain.impedances(state,:);
+
         for i = 1: size(references.joints.points,1)-1
             if t > (references.joints.points(i,1) + tSwitch) && t <= (references.joints.points(i+1,1)+ tSwitch)
                 qDes = references.joints.points(i,2:end)';
@@ -58,7 +63,8 @@ function [CoMDes,qDes,constraints, currentState] = stateMachine(wrench_right,CoM
         constraints = [1; 0]; %right foot is no longer a constraints
         CoMDes(2)    =  references.com.states(state,2)'; %new reference for CoM
 %         qDes        =  references.joints.states(state,:)';
-        
+        impedances = gain.impedances(state,:);
+
         if wrench_right(3) > references.wrench.threshold
             state = 5;
             tSwitch = t;
@@ -68,6 +74,7 @@ function [CoMDes,qDes,constraints, currentState] = stateMachine(wrench_right,CoM
     if state == 5 
         constraints = [1; 1]; %right foot is no longer a constraints
         CoMDes(2)    =  references.com.states(state,2)'; %new reference for CoM
+        impedances = gain.impedances(state,:);
     end
     
     currentState = state;
