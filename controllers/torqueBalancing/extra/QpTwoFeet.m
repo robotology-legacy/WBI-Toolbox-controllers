@@ -164,12 +164,14 @@ function Outputs(block)
         if USE_QPO_SOLVER == 1
             [desiredf0,~,exitFlag,iter,lambda,auxOutput] = qpOASES(HessianMatrixQP2Feet,gradientQP2Feet',ConstraintsMatrixQP2Feet,[],[],[],bVectorConstraintsQp2Feet');           
             if exitFlag ~= 0
-                disp('QP failed with');
-                exitFlag
-                iter
-                auxOutput
-                lambda
-                desiredf0 = zeros(6*2,1);
+%                 disp('QP failed with');
+%                 exitFlag
+%                 iter
+%                 auxOutput
+%                 lambda
+%                 desiredf0 = zeros(6*2,1);
+                exitFlag  = 1;
+                desiredf0 = - inv(HessianMatrixQP2Feet)*gradientQP2Feet';
             end
         else
             desiredf0 = - inv(HessianMatrixQP2Feet)*gradientQP2Feet';

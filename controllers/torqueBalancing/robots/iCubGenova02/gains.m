@@ -110,7 +110,7 @@ forceFrictionCoefficient     = 1;%1/3;
 torsionalFrictionCoefficient = 2/150;
 
 gain.footSize                = [ -0.1 0.1   ;    % xMin, xMax
-                                 -0.1 0.1  ];   % yMin, yMax    
+                                 -0.05 0.05  ];   % yMin, yMax    
 
 fZmin                        = 10;
 

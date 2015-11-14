@@ -62,7 +62,7 @@ function [CoMDes,qDes,constraints, currentState,impedances] = stateMachine(wrenc
     if state == 4 
         constraints = [1; 0]; %right foot is no longer a constraints
         CoMDes(2)    =  references.com.states(state,2)'; %new reference for CoM
-%         qDes        =  references.joints.states(state,:)';
+        qDes        =  references.joints.states(state,:)';
         impedances = gain.impedances(state,:);
 
         if wrench_right(3) > references.wrench.threshold
@@ -73,8 +73,10 @@ function [CoMDes,qDes,constraints, currentState,impedances] = stateMachine(wrenc
 
     if state == 5 
         constraints = [1; 1]; %right foot is no longer a constraints
-        CoMDes(2)    =  references.com.states(state,2)'; %new reference for CoM
         impedances = gain.impedances(state,:);
+        if t > tSwitch + references.DT
+            CoMDes(2)    =  references.com.states(state,2)'; %new reference for CoM
+        end
     end
     
     currentState = state;
