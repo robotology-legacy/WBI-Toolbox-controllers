@@ -8,7 +8,7 @@ references.noOscillationTime       = 3;    % If DEMO_LEFT_AND_RIGHT = 1, the var
 references.joints.smoothingTime    = 1.0;
 references.com.smoothingTime       = 5;
 
-sat.torque = 24;
+sat.torque = 34;
 
 smoothingTimeTransitionDynamics    = 0.05;
 
