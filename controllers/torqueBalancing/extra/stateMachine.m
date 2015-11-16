@@ -1,7 +1,8 @@
-function [CoMDes,qDes,constraints, currentState,impedances] = stateMachine(CoM_0, q0, CoM,qj, t, wrench_right, sm,gain)
+function [CoMDes,qDes,constraints, currentState,impedances,w_H_lr_upd] = stateMachine(CoM_0, q0, CoM,qj, t, wrench_right, poseLeftFoot,poseRightFoot,sm,gain)
     %#codegen
     global state;
     global tSwitch;
+    global w_H_lr;
     
     CoMDes      = CoM_0;
     constraints = [1; 1];
@@ -83,11 +84,14 @@ function [CoMDes,qDes,constraints, currentState,impedances] = stateMachine(CoM_0
         impedances = gain.impedances(state,:);
         if t > tSwitch + sm.DT
             CoMDes(2)    =  sm.com.states(state,2)'; %new reference for CoM
+            
+%             w_H_l         = homTranformFromAxisAngle(poseLeftFoot);
+            w_H_lr         = homTranformFromAxisAngle(poseRightFoot);
         end
     end
     
     currentState = state;
-    
+    w_H_lr_upd   = w_H_lr;
     % if state == 3
     %     stateVec = [0;0;1;0];
     %     qDes(end-11:end)      =  qDesRightFoot(2,end-11:end);

@@ -15,9 +15,7 @@ SMOOTH_DES_COM      = 1;    % If equal to one, the desired streamed values
                             % of the center of mass are smoothed internally 
 SMOOTH_DES_Q        = 1;    % If equal to one, the desired streamed values 
                             % of the postural tasks are smoothed internally 
-SMOOTH_CONSTRAINTS  = 1;    % If equal to one, the desired streamed values 
-                            % of the logic vector identifying the active 
-                            % constraints are smoothed internally 
+
 
 % PLEASE, use logical values (true or false) for the following variable
 
