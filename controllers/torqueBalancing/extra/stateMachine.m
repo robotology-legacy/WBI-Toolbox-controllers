@@ -83,8 +83,11 @@ function [CoMDes,qDes,constraints, currentState,impedances,w_H_lr_upd] = stateMa
         constraints = [1; 1]; %right foot is no longer a constraints
         impedances = gain.impedances(state,:);
         if t > tSwitch + sm.DT
-            CoMDes(2)    =  sm.com.states(state,2)'; %new reference for CoM
-            
+%             CoMDes(2)    =  sm.com.states(state,2)'; %new reference for CoM
+            CoMDes(1) = poseRightFoot(1);    
+            CoMDes(2) = poseRightFoot(2);
+
+
 %             w_H_l         = homTranformFromAxisAngle(poseLeftFoot);
             w_H_lr         = homTranformFromAxisAngle(poseRightFoot);
         end
