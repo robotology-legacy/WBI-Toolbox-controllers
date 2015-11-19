@@ -4,6 +4,10 @@ function [CoMDes,qDes,constraints, currentState,impedances,w_H_lr_upd] = stateMa
     global tSwitch;
     global w_H_lr;
     
+    if t == 0
+        w_H_lr = eye(4);
+    end
+    
     CoMDes      = CoM_0;
     constraints = [1; 1];
     qDes        = q0;
@@ -84,12 +88,13 @@ function [CoMDes,qDes,constraints, currentState,impedances,w_H_lr_upd] = stateMa
         impedances = gain.impedances(state,:);
         if t > tSwitch + sm.DT
 %             CoMDes(2)    =  sm.com.states(state,2)'; %new reference for CoM
-            CoMDes(1) = poseRightFoot(1);    
-            CoMDes(2) = poseRightFoot(2);
-
+%             CoMDes(1) = poseRightFoot(1);    
+%             CoMDes(2) = poseRightFoot(2);
 
 %             w_H_l         = homTranformFromAxisAngle(poseLeftFoot);
-            w_H_lr         = homTranformFromAxisAngle(poseRightFoot);
+%             if norm(CoM(1:2)-CoMDes(1:2)/2) < sm.com.threshold
+%                 w_H_lr         = homTranformFromAxisAngle(poseRightFoot);
+%             end
         end
     end
     

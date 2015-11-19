@@ -1,10 +1,5 @@
 ROBOT_DOF = 23;
 
-references.directionOfOscillation  = [0;0;0];
-references.amplitudeOfOscillation  = 0.0;  %referenceParams(1) = amplitude of ascillations in meters referenceParams(2) = frequency of ascillations in hertz
-references.frequencyOfOscillation  = 0.0;
-references.noOscillationTime       = 3;    % If DEMO_LEFT_AND_RIGHT = 1, the variable noOscillationTime is the time, in seconds, 
-                                            % that the robot waits before starting the left-and-righ
 references.joints.smoothingTime    = 1.0;
 references.com.smoothingTime       = 5;
 
@@ -46,9 +41,9 @@ if (sum(LEFT_RIGHT_FOOT_IN_CONTACT) == 2)
                         
     intLeftLeg          = [0   0    0    0    0  0]; 
 
-    intRightLeg         = [0   0     0  0    0  0];                        
-                         
-                        
+    intRightLeg         = [0   0     0  0    0  0];   
+    
+                                           
 end
 
 % PARAMETERS FOR ONLY ONE FOOT ONE GROUND

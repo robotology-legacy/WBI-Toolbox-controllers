@@ -1,15 +1,20 @@
-references.com.directionOfOscillation  = [0;0;0];
-references.com.amplitudeOfOscillation  = 0.0;  %referenceParams(1) = amplitude of ascillations in meters referenceParams(2) = frequency of ascillations in hertz
-references.com.frequencyOfOscillation  = 0.0;
+
+
 references.com.points                  = 0;
-references.com.noOscillationTime       = 15;    % that the robot waits before starting the left-and-righ
+references.com.noOscillationTime       = 0;    % that the robot waits before starting the left-and-righ
  
 references.joints.points               = 0;
 
-if (sum(LEFT_RIGHT_FOOT_IN_CONTACT) == 2)
-    references.com.directionOfOscillation  = [0;1;0];
-    references.com.amplitudeOfOscillation  = 0.05;
-    references.com.frequencyOfOscillation  = 0.5;
+if (sum(LEFT_RIGHT_FOOT_IN_CONTACT) == 2 )
+    if (DEMO_MOVEMENTS)
+        references.com.directionOfOscillation  = [0;1;0];
+        references.com.amplitudeOfOscillation  = 0.05;
+        references.com.frequencyOfOscillation  = 0.4;
+    else
+        references.com.directionOfOscillation  = [0;0;0];
+        references.com.amplitudeOfOscillation  = 0.0;  %referenceParams(1) = amplitude of ascillations in meters referenceParams(2) = frequency of ascillations in hertz
+        references.com.frequencyOfOscillation  = 0.0;
+    end
 else
 
     q1 = [-0.0790    0.2279    0.4519 ...   
