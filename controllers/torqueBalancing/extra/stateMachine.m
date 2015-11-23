@@ -59,31 +59,45 @@ function [CoMDes,qDes,constraints, currentState,impedances,w_H_lr_upd] = stateMa
         end
         if t > sm.joints.points(end,1) + tSwitch 
             qDes = sm.joints.points(end,2:end)';
-            impedances  = gain.impedances(state+1,:);
-            
-            qTileRightLeg = qj(end-5:end)-qDes(end-5:end);
-            
-%             norm(qTileRightLeg)*180/pi
-            if norm(qTileRightLeg)*180/pi < sm.joints.threshold && (t > sm.joints.points(end,1) + tSwitch + sm.joints.smoothingTime) 
+            if  (t > sm.joints.points(end,1) + tSwitch + sm.joints.smoothingTime) 
                 state   = 5;
                 tSwitch = t;
             end
         end
     end
     
+    %% PREPARING FOR SWITCHING
     if state == 5 
+        constraints = [1; 0]; %right foot is no longer a constraints
+        CoMDes(2)    =  sm.com.states(state,2)'; %new reference for CoM
+        qDes        =  sm.joints.states(state,:)';
+        impedances = gain.impedances(state,:);
+
+        qTileRightLeg = qj(end-5:end)-qDes(end-5:end);
+        
+        qTileLeftLeg = qj(end-11:end-6)-qDes(end-11:end-6);
+            
+%             norm(qTileRightLeg)*180/pi
+        if norm(qTileRightLeg)*180/pi < sm.joints.thresholdRL && norm(qTileLeftLeg)*180/pi < sm.joints.thresholdLL
+            state   = 6;
+            tSwitch = t;
+        end
+    end
+    %% LOOKING FOR A CONTACT
+    if state == 6 
         constraints = [1; 0]; %right foot is no longer a constraints
         CoMDes(2)   = sm.com.states(state,2)'; %new reference for CoM
         qDes        = sm.joints.states(state,:)';
         impedances  = gain.impedances(state,:);
 
         if wrench_right(3) > sm.wrench.threshold
-            state = 6;
+            state = 7;
             tSwitch = t;
         end
     end
 
-    if state == 6 
+    %% BACK TO TWO FEET BALANCING
+    if state == 7 
         constraints = [1; 1]; %right foot is no longer a constraints
         impedances = gain.impedances(state,:);
         if t > tSwitch + sm.DT
