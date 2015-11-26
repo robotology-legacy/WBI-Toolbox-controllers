@@ -10,7 +10,7 @@ if USE_SM
     smoothingTimeTransitionDynamics    = 0.02;
 
 
-    gain.PCOM              = diag([50    50  50]);
+    gain.PCOM              = diag([50    50  50]); 
     gain.ICOM              = diag([  0    0   0]);
     gain.DCOM              = 2*sqrt(gain.PCOM)*0;
 
@@ -18,12 +18,13 @@ if USE_SM
 
 
     % state == 1  TWO FEET BALANCING
-    % state == 2  COM TRANSITION TO LEFT 
+    % state == 2  COM TRANSITION TO LEFT FOOT
     % state == 3  LEFT FOOT BALANCING 
     % state == 4  YOGA LEFT FOOT  
     % state == 5  PREPARING FOR SWITCHING
     % state == 6  LOOKING FOR CONTACT 
-    % state == 7  BALANCING TWO FEET
+    % state == 7  TRANSITION TO INITIAL POSITION
+    % state == 8  COM TRANSITION TO RIGHT FOOT
 
 
     %                   %   TORSO  %%      LEFT ARM   %%      RIGHT ARM   %%         LEFT LEG            %%         RIGHT LEG           %% 
@@ -33,16 +34,16 @@ if USE_SM
                         30   30   30, 10   10    20   10, 10   10    20   10,100   90   20    20     10  10,100   50   30   100     25  25  % state == 4  YOGA LEFT FOOT 
                         30   30   30, 10   10    20   10, 10   10    20   10,200  250   20    20     10  10,220  550  220   200     65 300  % state == 5  PREPARING FOR SWITCHING 
                         30   30   30, 10   10    20   10, 10   10    20   10,100  350   20   200     10 100,220  550  220   200     65 300  % state == 6  LOOKING FOR CONTACT
-                        30   50   30, 10   10    20   10, 10   10    20   10, 30   30   20    20     10  10, 30   30   20    20     10  10];% state == 7  BALANCING TWO FEET 
-
+                        10   10   20, 10   10    10    8, 10   10    10    8, 30   50   60    30      5   5, 30   30   30    20      5   5  % state == 7  TRANSITION TO INITIAL POSITION 
+                        10   10   20, 10   10    10    8, 10   10    10    8, 30   50   60    30      5   5, 30   30   30    20      5   5];% state == 8  COM TRANSITION TO RIGHT FOOT
 end              
 %% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%                      
          
 %% %%%%%%%%%%%%%%%%    FINITE STATE MACHINE SPECIFIC PARAMETERS
 sm.com.threshold       = 0.005;
-sm.wrench.threshold    = 25;
+sm.wrench.threshold    = 50;
 sm.joints.thresholdRL  = 3;
-sm.joints.thresholdLL  = 3;
+sm.joints.thresholdLL  = 50;
 
 sm.stateAt0               = 1;
 
@@ -51,13 +52,14 @@ sm.waitingTimeAfterYoga   = 20;
 
 
 
-sm.com.states      = [0.0,  0.01,0.511;   %% CoM reference state 1
-                      0.0,  0.00,0.511;   %% CoM reference state 2
-                      0.0,  0.01,0.511;   %% CoM reference state 3
-                      0.0,  0.01,0.511;   %% CoM reference state 4
-                      0.0,  0.01,0.511;   %% CoM reference state 5
-                      0.0, -0.09,0.511    %% CoM reference state 6
-                      0.0, -0.09,0.511];  %% CoM reference state 7
+sm.com.states      = [0.0,  0.01,0.511;   %% state == 1  TWO FEET BALANCING
+                      0.0,  0.00,0.511;   %% state == 2  COM TRANSITION TO LEFT FOOT
+                      0.0,  0.01,0.511;   %% state == 3  LEFT FOOT BALANCING 
+                      0.0,  0.01,0.511;   %% state == 4  YOGA LEFT FOOT
+                      0.0,  0.01,0.511;   %% state == 5  PREPARING FOR SWITCHING
+                      0.0, -0.09,0.511;   %% state == 6  LOOKING FOR CONTACT 
+                      0.0, -0.09,0.511;   %% state == 7  TRANSITION INIT POSITION: THIS REFERENCE IS IGNORED
+                      0.0, -0.09,0.511];  %% state == 8  COM TRANSITION TO RIGHT FOOT: THIS REFERENCE IS IGNORED
 
 sm.tBalancing      = 0;
 
@@ -92,11 +94,12 @@ sm.joints.states = [[0.0864,0.0258,0.0152, ...                          %% state
                      0.0563,0.6789,0.3340,0.6214 ...                    %
                      0.0107,-0.0741,-0.0001,-0.0120,0.0252,0.1369,...   %
                      -0.0026,0.0225,0.0093,-0.0020,0.0027,-0.0277];     %   
-                    [0.0864,0.0258,0.0152, ...                          %% state == 7  BALANCING TWO FEET, THIS REFERENCE IS IGNORED 
+                     zeros(1,ROBOT_DOF);                                %% state == 7  TRANSITION INIT POSITION: THIS REFERENCE IS IGNORED
+                    [0.0864,0.0258,0.0152, ...                          %% state == 8  COM TRANSITION TO RIGHT FOOT
                      0.1253,0.8135,0.3051,0.7928 ...                    %
                      0.0563,0.6789,0.3340,0.6214 ...                    %
-                     0.0522,-0.2582,0.0014,-0.2129,-0.0944,0.1937,...   %
-                     0.0128,0.4367,0.0093,-0.1585,-0.0725,-0.2931]];    %
+                     0.0107,-0.0741,-0.0001,-0.0120,0.0252,0.1369,...   %
+                     -0.0026,0.0225,0.0093,-0.0020,0.0027,-0.0277]];     %                                 %                       
 
  
 q1 =        [-0.0790,0.2279, 0.4519, ...
@@ -147,16 +150,16 @@ q8 =        [-0.0852,-0.4273,0.0821,...
               
           
           
-sm.joints.points = [ 0,                                q1;
-                     references.joints.smoothingTime,  q2;
-                     2*references.joints.smoothingTime,q3;
-                     3*references.joints.smoothingTime,q4
-                     4*references.joints.smoothingTime,q5
-                     5*references.joints.smoothingTime,q6
-                     6*references.joints.smoothingTime,q7
-                     7*references.joints.smoothingTime,q8];
+% sm.joints.points = [ 0,                                q1;
+%                      references.joints.smoothingTime,  q2;
+%                      2*references.joints.smoothingTime,q3;
+%                      3*references.joints.smoothingTime,q4
+%                      4*references.joints.smoothingTime,q5
+%                      5*references.joints.smoothingTime,q6
+%                      6*references.joints.smoothingTime,q7
+%                      7*references.joints.smoothingTime,q8];
                  
-% sm.joints.points = [ references.joints.smoothingTime,q9];
+sm.joints.points = [references.joints.smoothingTime,sm.joints.states(5,:)];
 
 clear q1 q2 q3 q4;
 

@@ -28,20 +28,20 @@ if (sum(LEFT_RIGHT_FOOT_IN_CONTACT) == 2)
 
     % Impadances acting in the null space of the desired contact forces 
 
-    impTorso            = [   1    1    1
-                              0    0    0]*5; 
+    impTorso            = [  60   60   20
+                              0    0    0]*2; 
                           
-    impArms             = [ 1   1    1    1   
-                            0   0    0    0]*5;
+    impArms             = [ 1   5    5    5   
+                            0   0    0    0]*2;
                         
-    impLeftLeg          = [  5    5     5       50     100   5
+    impLeftLeg          = [  5    5     5       50     150   5
                              0    0     0        0       0   0]; 
 
     impRightLeg         = impLeftLeg;
 %                            [ 1    1     1       1       50   1
 %                             0    0     0        0      0   0]; 
     
-    dampTorso            = [  0    0    0]; 
+    dampTorso            = [ 0   0    0]; 
     dampArms             = [ 0   0    0    0];
                         
     dampLeftLeg          = [ 0    0     0       0      0*sqrt(impLeftLeg(1,5))   0]; 
@@ -134,12 +134,12 @@ forceFrictionCoefficient     = 1;%1/3;
 torsionalFrictionCoefficient = 2/150;
 
 gain.footSize               = [ -0.1 0.1   ;   % xMin, xMax
-                                 -0.1 0.1  ];   % yMin, yMax    
+                                -0.1 0.1  ];   % yMin, yMax    
 
 fZmin                        = 10;
 
 %% The QP solver will search a solution fo that 
 % satisfies the inequality Aineq_f F(fo) < bineq_f
 reg.pinvTol     = 1e-5;
-reg.pinvDamp    = 0.0001;
+reg.pinvDamp    = 0.01;
 reg.HessianQP   = 1e-7;

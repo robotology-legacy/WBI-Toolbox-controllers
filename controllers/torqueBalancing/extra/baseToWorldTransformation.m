@@ -1,4 +1,4 @@
-function w_H_b_updated = baseToWorldTransformation(poseLeftFoot,poseRightFoot,w_H_lr,w_H_b,constraints)
+function w_H_b_updated = baseToWorldTransformation(poseLeftFoot,poseRightFoot,w_H_lr,w_H_b,linkToComputeBase)
 %#codegen
 
     w_H_l         = homTranformFromAxisAngle(poseLeftFoot);
@@ -9,16 +9,13 @@ function w_H_b_updated = baseToWorldTransformation(poseLeftFoot,poseRightFoot,w_
 
     r_H_b         = w_H_r\w_H_b;
 
-    w_H_b_updated = w_H_lr*(constraints(1)*l_H_b + constraints(2)*(1-constraints(1))*r_H_b );
     
-%     w_H_b
-%     
-%     w_H_l
-%     
-%     w_H_lr
-%     
-%     constraints
-%     
-%     w_H_b_updated
+    if linkToComputeBase(1) == 1
+        w_H_b_updated = w_H_lr*l_H_b;
+    elseif linkToComputeBase(2) == 1
+        w_H_b_updated = w_H_lr*r_H_b;
+    else
+        w_H_b_updated = zeros(4);
+    end
     
 end

@@ -51,13 +51,13 @@ sm.waitingTimeAfterYoga   = 20;
 
 
 
-sm.com.states      = [0.0, -0.14,0.511;   %% CoM reference state 1
-                      0.0, -0.04,0.511;   %% CoM reference state 2
-                      0.0, -0.14,0.511;   %% CoM reference state 3
-                      0.0, -0.14,0.511;   %% CoM reference state 4
-                      0.0, -0.14,0.511;   %% CoM reference state 5
-                      0.0, -0.09,0.511;   %% CoM reference state 6
-                      0.0, -0.09,0.511];  %% CoM reference state 7
+sm.com.states      = [0.0, -0.00,0.511;   %% CoM reference state 1
+                      0.0, -0.00,0.511;   %% CoM reference state 2
+                      0.0, -0.00,0.511;   %% CoM reference state 3
+                      0.0, -0.00,0.511;   %% CoM reference state 4
+                      0.0, -0.00,0.511;   %% CoM reference state 5
+                      0.0,  0.09,0.511;   %% CoM reference state 6
+                      0.0,  0.09,0.511];  %% CoM reference state 7
 
 sm.tBalancing      = 0;
 
