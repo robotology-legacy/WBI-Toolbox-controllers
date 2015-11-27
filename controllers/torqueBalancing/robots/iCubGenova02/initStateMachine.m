@@ -3,7 +3,7 @@ if USE_SM
     reg.pinvDamp    = 0.1;
     sat.torque = 50;
 
-    references.joints.smoothingTime    = 5;
+    references.joints.smoothingTime    = 4;
     references.com.smoothingTime       = references.joints.smoothingTime;
     gain.SmoothingTimeImp              = references.joints.smoothingTime;  
 
@@ -38,7 +38,7 @@ if USE_SM
     gain.impedances  = [10   10   20, 10   10    10    8, 10   10    10    8, 30   30   20    20     10  10, 30   50   30    60      5   5  % state ==  1  TWO FEET BALANCING
                         10   10   20, 10   10    10    8, 10   10    10    8, 30   30   20    20     10  10, 30   50   30    60      5   5  % state ==  2  COM TRANSITION TO LEFT 
                         10   10   20, 10   10    10    8, 10   10    10    8, 30   30   20    20     10  10, 30   50   30    60      5   5  % state ==  3  LEFT FOOT BALANCING
-                        30   30   30, 10   10    20   10, 10   10    20   10,100   90   20    20     10  10,100   50   30   100     25  25  % state ==  4  YOGA LEFT FOOT 
+                        30   30   30, 12   12    20   10, 12   12    20   10,100   90   20    20     10  10,100   50   30   100     25  25  % state ==  4  YOGA LEFT FOOT 
                         30   30   30, 10   10    20   10, 10   10    20   10,200  250   20    20     10  10,220  550  220   200     65 300  % state ==  5  PREPARING FOR SWITCHING 
                         30   30   30, 10   10    20   10, 10   10    20   10,100  350   20   200     10 100,220  550  220   200     65 300  % state ==  6  LOOKING FOR CONTACT
                         10   10   20, 10   10    10    8, 10   10    10    8, 30   50   60    30      5   5, 30   30   30    20      5   5  % state ==  7  TRANSITION TO INITIAL POSITION 
@@ -56,6 +56,7 @@ sm.yogaAlsoOnRightFoot           = false;
 
 sm.com.threshold                 =   0.005;
 sm.wrench.threshold              = 50;
+sm.joints = struct;
 sm.joints.thresholdNotInContact  =  3;
 sm.joints.thresholdInContact     = 50;
 sm.joints.pauseTimeLastPostureL = 3;
@@ -68,7 +69,7 @@ sm.waitingTimeAfterYoga   = 20;
 
 
 
-sm.com.states      = [0.0,  0.01,0.511;   %% state ==  1  TWO FEET BALANCING
+sm.com.states      = [0.0,  0.01,0.511;   %% state ==  1  TWO FEET BALANCING NOT USED
                       0.0,  0.00,0.0;     %% state ==  2  COM TRANSITION TO LEFT FOOT: THIS REFERENCE IS USED AS A DELTA W.R.T. THE POSITION OF THE LEFT FOOT
                       0.0,  0.01,0.511;   %% state ==  3  LEFT FOOT BALANCING 
                       0.0,  0.01,0.511;   %% state ==  4  YOGA LEFT FOOT
@@ -192,8 +193,14 @@ q8 =        [-0.0852,-0.4273,0.0821,...
               0.2092, 0.6473,0.0006,-0.1741,-0.1044, 0.0700,...
               0.3514, 1.3107,1.3253,-0.0189, 0.6374,-0.0614];
               
+q9 =        [-0.0179    0.2145   -0.0016,...
+             -0.6480    1.6260    0.0006    0.8725, ...
+             -0.6480    0.8795   -0.0006    0.6076, ...
+               0.3835    0.3846   -0.0001   -0.2973   -0.0852    0.0311  ,...
+              0.2091    0.2971    0.0001   -0.1754   -0.0940,0.0597];
+
           
-          
+  
 sm.joints.pointsL =[ 0,                                q1;
                      references.joints.smoothingTime,  q2;
                      2*references.joints.smoothingTime,q3;
@@ -201,7 +208,8 @@ sm.joints.pointsL =[ 0,                                q1;
                      4*references.joints.smoothingTime,q5
                      5*references.joints.smoothingTime,q6
                      6*references.joints.smoothingTime,q7
-                     7*references.joints.smoothingTime,q8];
+                     7*references.joints.smoothingTime,q8
+                     8*references.joints.smoothingTime,q9];
                  
 % sm.joints.pointsL = [references.joints.smoothingTime,sm.joints.states(5,:)];
 
