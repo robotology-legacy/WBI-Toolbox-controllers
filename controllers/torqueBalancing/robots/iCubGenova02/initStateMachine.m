@@ -52,10 +52,14 @@ end
 %% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%                      
          
 %% %%%%%%%%%%%%%%%%    FINITE STATE MACHINE SPECIFIC PARAMETERS
+sm.yogaAlsoOnRightFoot           = false;
+
 sm.com.threshold                 =   0.005;
 sm.wrench.threshold              = 50;
 sm.joints.thresholdNotInContact  =  3;
 sm.joints.thresholdInContact     = 50;
+sm.joints.pauseTimeLastPostureL = 3;
+sm.joints.pauseTimeLastPostureR = 3;
 
 sm.stateAt0               = 1;
 
@@ -190,16 +194,16 @@ q8 =        [-0.0852,-0.4273,0.0821,...
               
           
           
-% sm.joints.points = [ 0,                                q1;
-%                      references.joints.smoothingTime,  q2;
-%                      2*references.joints.smoothingTime,q3;
-%                      3*references.joints.smoothingTime,q4
-%                      4*references.joints.smoothingTime,q5
-%                      5*references.joints.smoothingTime,q6
-%                      6*references.joints.smoothingTime,q7
-%                      7*references.joints.smoothingTime,q8];
+sm.joints.pointsL =[ 0,                                q1;
+                     references.joints.smoothingTime,  q2;
+                     2*references.joints.smoothingTime,q3;
+                     3*references.joints.smoothingTime,q4
+                     4*references.joints.smoothingTime,q5
+                     5*references.joints.smoothingTime,q6
+                     6*references.joints.smoothingTime,q7
+                     7*references.joints.smoothingTime,q8];
                  
-sm.joints.pointsL = [references.joints.smoothingTime,sm.joints.states(5,:)];
+% sm.joints.pointsL = [references.joints.smoothingTime,sm.joints.states(5,:)];
 
 sm.joints.pointsR = sm.joints.pointsL;
 

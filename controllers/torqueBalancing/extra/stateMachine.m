@@ -68,7 +68,7 @@ function [CoMDes,qDes,constraints, currentState,impedances,w_H_lr_upd,linkToComp
         end
         if t > sm.joints.pointsL(end,1) + tSwitch 
             qDes = sm.joints.pointsL(end,2:end)';
-            if  (t > sm.joints.pointsL(end,1) + tSwitch + sm.joints.smoothingTime) 
+            if  (t > (sm.joints.pointsL(end,1) + tSwitch + sm.joints.smoothingTime+sm.joints.pauseTimeLastPostureL))
                 state   = 5;
                 tSwitch = t;
             end
@@ -113,7 +113,7 @@ function [CoMDes,qDes,constraints, currentState,impedances,w_H_lr_upd,linkToComp
     if state == 7 
         constraints = [1; 1]; %right foot is no longer a constraints
         impedances = gain.impedances(state,:);
-        if norm(CoM(1:2)-CoMDes(1:2)) < sm.com.threshold
+        if ((norm(CoM(1:2)-CoMDes(1:2)) < sm.com.threshold) && sm.yogaAlsoOnRightFoot)
             w_H_lr         = homTranformFromAxisAngle(poseRightFoot);
             linkToComputeBase = [0 1];
             state = 8;
@@ -176,7 +176,7 @@ function [CoMDes,qDes,constraints, currentState,impedances,w_H_lr_upd,linkToComp
         end
         if t > sm.joints.pointsR(end,1) + tSwitch 
             qDes = sm.joints.pointsR(end,2:end)';
-            if  (t > sm.joints.pointsR(end,1) + tSwitch + sm.joints.smoothingTime) 
+            if  (t > sm.joints.pointsR(end,1) + tSwitch + sm.joints.smoothingTime + sm.joints.pauseTimeLastPostureR ) 
                 state   = 11;
                 tSwitch = t;
             end
