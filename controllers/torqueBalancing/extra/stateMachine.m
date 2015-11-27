@@ -24,7 +24,10 @@ function [CoMDes,qDes,constraints, currentState,impedances,w_H_lr_upd,linkToComp
 
     %% Left transition
     if state == 2 
-        CoMDes(2)    =  sm.com.states(state,2)'; %new reference for CoM
+%         CoMDes(2)    =  sm.com.states(state,2)'; %new reference for CoM
+        
+        CoMDes(1:2) = poseLeftFoot(1:2) + sm.com.states(state,1:2)';    
+        
         CoMError  = CoMDes - CoM;
         qDes      = sm.joints.states(state,:)'; % new reference for q
         
@@ -58,14 +61,14 @@ function [CoMDes,qDes,constraints, currentState,impedances,w_H_lr_upd,linkToComp
         qDes       =  sm.joints.states(state,:)';
         impedances = gain.impedances(state,:);
 
-        for i = 1: size(sm.joints.points,1)-1
-            if t > (sm.joints.points(i,1) + tSwitch) && t <= (sm.joints.points(i+1,1)+ tSwitch)
-                qDes = sm.joints.points(i,2:end)';
+        for i = 1: size(sm.joints.pointsL,1)-1
+            if t > (sm.joints.pointsL(i,1) + tSwitch) && t <= (sm.joints.pointsL(i+1,1)+ tSwitch)
+                qDes = sm.joints.pointsL(i,2:end)';
             end
         end
-        if t > sm.joints.points(end,1) + tSwitch 
-            qDes = sm.joints.points(end,2:end)';
-            if  (t > sm.joints.points(end,1) + tSwitch + sm.joints.smoothingTime) 
+        if t > sm.joints.pointsL(end,1) + tSwitch 
+            qDes = sm.joints.pointsL(end,2:end)';
+            if  (t > sm.joints.pointsL(end,1) + tSwitch + sm.joints.smoothingTime) 
                 state   = 5;
                 tSwitch = t;
             end
@@ -86,7 +89,7 @@ function [CoMDes,qDes,constraints, currentState,impedances,w_H_lr_upd,linkToComp
         qTileLeftLeg = qj(end-11:end-6)-qDes(end-11:end-6);
             
 %             norm(qTileRightLeg)*180/pi
-        if norm(qTileRightLeg)*180/pi < sm.joints.thresholdRL && norm(qTileLeftLeg)*180/pi < sm.joints.thresholdLL
+        if norm(qTileRightLeg)*180/pi < sm.joints.thresholdNotInContact && norm(qTileLeftLeg)*180/pi < sm.joints.thresholdInContact
             state   = 6;
             tSwitch = t;
         end
@@ -118,17 +121,110 @@ function [CoMDes,qDes,constraints, currentState,impedances,w_H_lr_upd,linkToComp
         end
     end
     
-     %% TRANSITION TO THE RIGHT FOOT
+%% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%    
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%    
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%    
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%    
+     
+%% TRANSITION TO THE RIGHT FOOT
     if state == 8 
         constraints = [1; 1]; %right foot is no longer a constraints
         impedances = gain.impedances(state,:);
         linkToComputeBase = [0 1];
         qDes       =  sm.joints.states(state,:)';
 
-        CoMDes(1) = poseRightFoot(1);    
-        CoMDes(2) = poseRightFoot(2);
+        CoMDes(1:2) = poseRightFoot(1:2) + sm.com.states(state,1:2)';    
+
+        CoMError  = CoMDes - CoM;
+        
+        if norm(CoMError(2)) < sm.com.threshold
+           state = 9; 
+           tSwitch = t;
+        end
 
     end
+    
+    
+     %% RIGHT FOOT BALANCING 
+    if state == 9
+        constraints = [0; 1]; %left foot is no longer a constraints
+        linkToComputeBase = [0 1];
+
+        CoMDes(1:2) = poseRightFoot(1:2) + sm.com.states(state,1:2)';    
+        qDes        = sm.joints.states(state,:)';
+        impedances  = gain.impedances(state,:);
+
+        if t > tSwitch + sm.DT % yoga
+            state   = 10;
+            tSwitch = t;
+        end
+    end
+    
+    %% YOGA RIGHT FOOT
+    if state == 10 
+        constraints = [0; 1]; %left foot is no longer a constraints
+        linkToComputeBase = [0 1];
+
+        CoMDes(1:2) = poseRightFoot(1:2) + sm.com.states(state,1:2)';    
+        qDes       =  sm.joints.states(state,:)';
+        impedances = gain.impedances(state,:);
+
+        for i = 1: size(sm.joints.pointsR,1)-1
+            if t > (sm.joints.pointsR(i,1) + tSwitch) && t <= (sm.joints.pointsR(i+1,1)+ tSwitch)
+                qDes = sm.joints.pointsR(i,2:end)';
+            end
+        end
+        if t > sm.joints.pointsR(end,1) + tSwitch 
+            qDes = sm.joints.pointsR(end,2:end)';
+            if  (t > sm.joints.pointsR(end,1) + tSwitch + sm.joints.smoothingTime) 
+                state   = 11;
+                tSwitch = t;
+            end
+        end
+    end
+    
+    %% PREPARING FOR SWITCHING
+    if state == 11 
+        constraints = [0; 1]; %left foot is no longer a constraints
+        linkToComputeBase = [0 1];
+
+        CoMDes(1:2) = poseRightFoot(1:2) + sm.com.states(state,1:2)';    
+        qDes        =  sm.joints.states(state,:)';
+        impedances = gain.impedances(state,:);
+
+        qTileRightLeg = qj(end-5:end)-qDes(end-5:end);
+        
+        qTileLeftLeg = qj(end-11:end-6)-qDes(end-11:end-6);
+            
+%             norm(qTileRightLeg)*180/pi
+        if norm(qTileRightLeg)*180/pi < sm.joints.thresholdInContact && norm(qTileLeftLeg)*180/pi < sm.joints.thresholdNotInContact
+            state   = 12;
+            tSwitch = t;
+        end
+    end
+    %% LOOKING FOR A CONTACT
+    if state == 12
+        constraints = [0; 1]; %left foot is no longer a constraints
+        linkToComputeBase = [0 1];
+
+        CoMDes(1:2) = poseRightFoot(1:2) + sm.com.states(state,1:2)';    
+        qDes        = sm.joints.states(state,:)';
+        impedances  = gain.impedances(state,:);
+
+        if wrench_leftFoot(3) > sm.wrench.threshold
+            state   = 13;
+            tSwitch = t;
+        end
+    end
+    
+    %% TRANSITION TO INITIAL POSITION
+    if state == 13
+        linkToComputeBase = [0 1];
+        constraints = [1; 1]; %right foot is no longer a constraints
+        impedances = gain.impedances(state,:);
+    end
+    
+    
     
     currentState = state;
     w_H_lr_upd   = w_H_lr;
