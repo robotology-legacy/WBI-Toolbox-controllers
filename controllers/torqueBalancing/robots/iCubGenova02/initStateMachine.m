@@ -208,8 +208,8 @@ sm.joints.pointsL =[ 0,                                q1;
                      4*references.joints.smoothingTime,q5
                      5*references.joints.smoothingTime,q6
                      6*references.joints.smoothingTime,q7
-                     7*references.joints.smoothingTime,q8
-                     8*references.joints.smoothingTime,q9];
+                     7*references.joints.smoothingTime,q8];
+%                      8*references.joints.smoothingTime,q9];
                  
 % sm.joints.pointsL = [references.joints.smoothingTime,sm.joints.states(5,:)];
 
