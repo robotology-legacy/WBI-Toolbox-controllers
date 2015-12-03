@@ -1,15 +1,13 @@
 ROBOT_DOF = 23;
 robotName = 'icubGazeboSim';
 ON_GAZEBO = true;
-references.directionOfOscillation  = [0;0;0];
-references.amplitudeOfOscillation  = 0.0;  %referenceParams(1) = amplitude of ascillations in meters referenceParams(2) = frequency of ascillations in hertz
-references.frequencyOfOscillation  = 0.0;
-references.noOscillationTime       = 3;    % If DEMO_LEFT_AND_RIGHT = 1, the variable noOscillationTime is the time, in seconds, 
-                                            % that the robot waits before starting the left-and-righ
+
+ROBOT_DOF = 23;
+
 references.joints.smoothingTime    = 1.0;
 references.com.smoothingTime       = 5;
 
-sat.torque = 24;
+sat.torque = 34;
 
 smoothingTimeTransitionDynamics    = 0.05;
 
@@ -47,9 +45,9 @@ if (sum(LEFT_RIGHT_FOOT_IN_CONTACT) == 2)
                         
     intLeftLeg          = [0   0    0    0    0  0]; 
 
-    intRightLeg         = [0   0     0  0    0  0];                        
-                         
-                        
+    intRightLeg         = [0   0     0  0    0  0];   
+    
+                                           
 end
 
 % PARAMETERS FOR ONLY ONE FOOT ONE GROUND
