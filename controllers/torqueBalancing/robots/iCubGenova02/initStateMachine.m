@@ -38,7 +38,7 @@ if USE_SM
     gain.impedances  = [10   10   20, 10   10    10    8, 10   10    10    8, 30   30   20    20     10  10, 30   50   30    60      5   5  % state ==  1  TWO FEET BALANCING
                         10   10   20, 10   10    10    8, 10   10    10    8, 30   30   20    20     10  10, 30   50   30    60      5   5  % state ==  2  COM TRANSITION TO LEFT 
                         10   10   20, 10   10    10    8, 10   10    10    8, 30   30   20    20     10  10, 30   50   30    60      5   5  % state ==  3  LEFT FOOT BALANCING
-                        30   30   30, 10   10    20   10, 10   10    20   10,100   90   20    20     10  10,100   50   30   100     25  25  % state ==  4  YOGA LEFT FOOT 
+                        30   60   30, 10   10    20   10, 10   10    20   10,100   90   20    20     10  10,100   50   30   100     25  25  % state ==  4  YOGA LEFT FOOT 
                         30   30   30, 10   10    20   10, 10   10    20   10,200  250   20    20     10  10,220  550  220   200     65 300  % state ==  5  PREPARING FOR SWITCHING 
                         30   30   30, 10   10    20   10, 10   10    20   10,100  350   20   200     10 100,220  550  220   200     65 300  % state ==  6  LOOKING FOR CONTACT
                         10   10   20, 10   10    10    8, 10   10    10    8, 30   50   60    30      5   5, 30   30   30    20      5   5  % state ==  7  TRANSITION TO INITIAL POSITION 
