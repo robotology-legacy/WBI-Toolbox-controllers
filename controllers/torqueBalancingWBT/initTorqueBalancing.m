@@ -4,9 +4,9 @@ clc;
 setenv('YARP_ROBOT_NAME','iCubGenova02');
 % setenv('YARP_ROBOT_NAME','icubGazeboSim');
 
-simulationTime    = inf;    % Simulation time in seconds
+simulationTime      = inf;    % Simulation time in seconds
 
-USE_QP_SOLVER    = 0;
+USE_QP_SOLVER       = 0;
 
 LEFT_RIGHT_FOOT_IN_CONTACT  = [1 1];
 

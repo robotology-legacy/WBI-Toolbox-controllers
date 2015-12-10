@@ -3,7 +3,7 @@ if USE_SM
     reg.pinvDamp    = 0.1;
     sat.torque = 50;
 
-    references.joints.smoothingTime    = 4;
+    references.joints.smoothingTime    = 3;
     references.com.smoothingTime       = references.joints.smoothingTime;
     gain.SmoothingTimeImp              = references.joints.smoothingTime;  
 
@@ -45,7 +45,7 @@ if USE_SM
                         10   10   20, 10   10    10    8, 10   10    10    8, 30   50   60    30      5   5, 30   30   30    20      5   5  % state ==  8  COM TRANSITION TO RIGHT FOOT
                         10   10   20, 10   10    10    8, 10   10    10    8, 30   50   30    60      5   5, 30   30   20    20     10  10  % state ==  9  RIGHT FOOT BALANCING
                         30   30   30, 10   10    20   10, 10   10    20   10,100   50   30   100     25  25,100   90   20    20     10  10  % state == 10  YOGA RIGHT FOOT 
-                        30   30   30, 10   10    20   10, 10   10    20   10,220  550  220   200     65 300,200  250   20    20     10  10  % state == 11  PREPARING FOR SWITCHING 
+                        30   30   30, 10   10    20   10, 10   10    20   10,220  550  220   200    100 300,200  250   20    20     10  10  % state == 11  PREPARING FOR SWITCHING 
                         30   30   30, 10   10    20   10, 10   10    20   10,220  550  220   200     65 300,100  350   20   200     10 100  % state == 12  LOOKING FOR CONTACT
                         10   10   20, 10   10    10    8, 10   10    10    8, 30   30   30    20      5   5, 30   50   60    30      5   5];% state == 13  TRANSITION TO INITIAL POSITION
 end              
@@ -123,28 +123,23 @@ sm.joints.states = [[0.0864,0.0258,0.0152, ...                          %% state
                      0.0563,0.6789,0.3340,0.6214 ...                    %
                      0.0107,-0.0741,-0.0001,-0.0120,0.0252,0.1369,...   %
                      -0.0026,0.0225,0.0093,-0.0020,0.0027,-0.0277];     % 
-                    [-0.0348,0.0779,0.0429, ...                         %% state == 9  COM TRANSITION TO RIGHT 
-                     -0.1493,0.8580,0.2437,0.8710 ...                   %
-                     -0.1493,0.8580,0.2437,0.8710 ...                   %
-                     0.0005,0.0793,-0.0014,-0.0051,0.0073,-0.1151, ...  %  
-                     -0.0015,-0.1109,-0.0001,0.0003,0.0160,0.1630];     %  
-                    [0.0864,0.0258,0.0152, ...                          %% state == 10  RIGHT FOOT BALANCING
+                    [0.0864,0.0258,0.0152, ...                          %% state == 9  RIGHT FOOT BALANCING
                      0.1253,0.8135,0.3051,0.7928 ...                    %    
                      0.0563,0.6789,0.3340,0.6214 ...                    %
                      0.0005,0.0793,-0.0014,-0.0051,0.0073,-0.1151, ...  %  
                      -0.0015,-0.1109,-0.0001,0.0003,0.0160,0.1630];     %  
-                     zeros(1,ROBOT_DOF);                                %% state == 11  YOGA RIGHT FOOT, THIS REFERENCE IS IGNORED  
-                    [-0.0348,0.0779,0.0429, ...                         %% state == 12  PREPARING FOR SWITCHING
+                     zeros(1,ROBOT_DOF);                                %% state == 10  YOGA RIGHT FOOT, THIS REFERENCE IS IGNORED  
+                    [-0.0348,0.0779,0.0429, ...                         %% state == 11  PREPARING FOR SWITCHING
                      -0.1493,0.8580,0.2437,0.8710 ...                   %
                      -0.1493,0.8580,0.2437,0.8710 ...                   %
                       0.0005,0.0793,-0.0014,-0.0051,0.0073,-0.1151, ... %  
                       -0.0015,-0.1109,-0.0001,0.0003,0.0160,0.1630];    %                                  %
-                    [0.0864,0.0258,0.0152, ...                          %% state == 13  LOOKING FOR CONTACT
+                    [0.0864,0.0258,0.0152, ...                          %% state == 12  LOOKING FOR CONTACT
                      0.1253,0.8135,0.3051,0.7928 ...                    %
                      0.0563,0.6789,0.3340,0.6214 ...                    %
                      -0.0026,0.0225,0.0093,-0.0020,0.0027,-0.0277,...   %
                      0.0107,-0.0741,-0.0001,-0.0120,0.0252,0.1369];     %   
-                    zeros(1,ROBOT_DOF)];                                %% state == 14  BALANCING TWO FEET, THIS REFERENCE IS IGNORED                     
+                    zeros(1,ROBOT_DOF)];                                %% state == 13  BALANCING TWO FEET, THIS REFERENCE IS IGNORED                     
 
  
 q1 =        [-0.0790,0.2279, 0.4519, ...

@@ -45,7 +45,7 @@ function [CoMDes,qDes,constraints, currentState,impedances,w_H_b] = ...
         impedances  = gain.impedances(state,:);
 
         if t > tSwitch + sm.DT % yoga
-            state = 4;
+            state   = 4;
             tSwitch = t;
         end
     end
@@ -110,7 +110,7 @@ function [CoMDes,qDes,constraints, currentState,impedances,w_H_b] = ...
     if state == 7 
         constraints = [1; 1]; %right foot is no longer a constraints
         impedances = gain.impedances(state,:);
-        if ((norm(l_sole_CoM(1:2)-CoMDes(1:2)) < sm.com.threshold) && sm.yogaAlsoOnRightFoot)
+        if ((norm(l_sole_CoM(1:2)-CoMDes(1:2)) < 2*sm.com.threshold) && sm.yogaAlsoOnRightFoot && (t > tSwitch + sm.tBalancing))
             w_H_r_sole_switch   = l_sole_H_b/r_sole_H_b;
             state               = 8;
             tSwitch             = t;
@@ -130,7 +130,7 @@ function [CoMDes,qDes,constraints, currentState,impedances,w_H_b] = ...
         impedances = gain.impedances(state,:);
         qDes       =  sm.joints.states(state,:)';
         
-              
+             
         CoMDes(1:2) = w_H_r_sole_switch(1:2,4) + sm.com.states(state,1:2)';    
 
         w_CoM = w_H_r_sole_switch*[r_sole_CoM;1];
@@ -207,7 +207,7 @@ function [CoMDes,qDes,constraints, currentState,impedances,w_H_b] = ...
         constraints = [0; 1]; %left foot is no longer a constraints
         w_H_b   =  w_H_r_sole_switch*r_sole_H_b;
 
-        CoMDes(1:2) = w_H_r_sole_switch(1:2,4) + sm.com.states(state,1:2)';    
+%         CoMDes(1:2) = w_H_r_sole_switch(1:2,4) + sm.com.states(state,1:2)';    
         qDes        = sm.joints.states(state,:)';
         impedances  = gain.impedances(state,:);
 
@@ -222,6 +222,9 @@ function [CoMDes,qDes,constraints, currentState,impedances,w_H_b] = ...
         w_H_b   =  w_H_r_sole_switch*r_sole_H_b;
         constraints = [1; 1]; %right foot is no longer a constraints
         impedances = gain.impedances(state,:);
+        if t > sm.tBalancing %after tBalancing time start moving weight to the left
+%            state = 2; 
+        end
     end 
     
     currentState = state;
