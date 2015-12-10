@@ -55,10 +55,10 @@ end
 sm.yogaAlsoOnRightFoot           = true;
 
 sm.com.threshold                 =   0.005;
-sm.wrench.threshold              = 50;
+sm.wrench.threshold              = 70;
 sm.joints = struct;
-sm.joints.thresholdNotInContact  =  3;
-sm.joints.thresholdInContact     = 50;
+sm.joints.thresholdNotInContact =  3;
+sm.joints.thresholdInContact    = 50;
 sm.joints.pauseTimeLastPostureL = 3;
 sm.joints.pauseTimeLastPostureR = 3;
 

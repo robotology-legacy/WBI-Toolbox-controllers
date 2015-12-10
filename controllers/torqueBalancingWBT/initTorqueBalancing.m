@@ -32,9 +32,8 @@ Ts                 = 0.01; %  Controller period [s]
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% DO NOT MODIFY THE FOLLOWING VARIABLES, THEY ARE AUTOMATICALLY 
 %% CHANGED WHEN SIMULATING THE ROBOT ON GAZEBO, i.e. YARP_ROBOT_NAME=icubGazeboSim
-robotName = 'icub';            
-ON_GAZEBO = false;
-localName = 'matlabTorqueBalancing';
+ON_GAZEBO     = false;
+WBT_modelName = 'matlabTorqueBalancing';
 
 run(strcat('robots/',getenv('YARP_ROBOT_NAME'),'/gains.m')); 
 addpath('extra/')
