@@ -1,8 +1,6 @@
 ROBOT_DOF = 23;
-robotName = 'icubGazeboSim';
 ON_GAZEBO = true;
-
-ROBOT_DOF = 23;
+WBT_wbiList = 'ROBOT_TORQUE_CONTROL_JOINTS_WITHOUT_PRONOSUP';
 
 references.joints.smoothingTime    = 1.0;
 references.com.smoothingTime       = 5;
