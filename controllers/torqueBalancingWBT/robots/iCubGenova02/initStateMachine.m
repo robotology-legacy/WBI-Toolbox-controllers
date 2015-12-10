@@ -52,7 +52,7 @@ end
 %% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%                      
          
 %% %%%%%%%%%%%%%%%%    FINITE STATE MACHINE SPECIFIC PARAMETERS
-sm.yogaAlsoOnRightFoot           = false;
+sm.yogaAlsoOnRightFoot           = true;
 
 sm.com.threshold                 =   0.005;
 sm.wrench.threshold              = 50;

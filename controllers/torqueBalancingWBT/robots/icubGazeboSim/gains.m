@@ -20,7 +20,7 @@ gain.SmoothingTimeImp  = 1;
 if (sum(LEFT_RIGHT_FOOT_IN_CONTACT) == 2)
     gain.PCOM                 = diag([50    50  50]);
     gain.ICOM                 = diag([  0    0   0]);
-    gain.DCOM                 = 2*sqrt(gain.PCOM)*0;
+    gain.DCOM                 = 2*sqrt(gain.PCOM)*0.5;
 
     gain.PAngularMomentum     = 1 ;
 

@@ -3,7 +3,7 @@ if USE_SM
     reg.pinvDamp    = 0.1;
     sat.torque = 50;
 
-    references.joints.smoothingTime    = 4;
+    references.joints.smoothingTime    = 8;
     references.com.smoothingTime       = references.joints.smoothingTime;
     gain.SmoothingTimeImp              = references.joints.smoothingTime;  
 
@@ -52,7 +52,7 @@ end
 %% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%                      
          
 %% %%%%%%%%%%%%%%%%    FINITE STATE MACHINE SPECIFIC PARAMETERS
-sm.yogaAlsoOnRightFoot           = false;
+sm.yogaAlsoOnRightFoot           = true;
 
 sm.com.threshold                 =   0.005;
 sm.wrench.threshold              = 50;
