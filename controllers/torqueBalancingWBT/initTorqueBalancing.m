@@ -4,9 +4,9 @@ clc;
 setenv('YARP_ROBOT_NAME','iCubGenova02');
 % setenv('YARP_ROBOT_NAME','icubGazeboSim');
 
-simulationTime    = inf;    % Simulation time in seconds
+simulationTime      = inf;    % Simulation time in seconds
 
-USE_QP_SOLVER    = 0;
+USE_QP_SOLVER       = 0;
 
 LEFT_RIGHT_FOOT_IN_CONTACT  = [1 1];
 
@@ -32,9 +32,8 @@ Ts                 = 0.01; %  Controller period [s]
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% DO NOT MODIFY THE FOLLOWING VARIABLES, THEY ARE AUTOMATICALLY 
 %% CHANGED WHEN SIMULATING THE ROBOT ON GAZEBO, i.e. YARP_ROBOT_NAME=icubGazeboSim
-robotName = 'icub';            
-ON_GAZEBO = false;
-localName = 'matlabTorqueBalancing';
+ON_GAZEBO     = false;
+WBT_modelName = 'matlabTorqueBalancing';
 
 run(strcat('robots/',getenv('YARP_ROBOT_NAME'),'/gains.m')); 
 addpath('extra/')
