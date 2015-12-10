@@ -1,7 +1,9 @@
-clear all;
+clear;% all;
 clc;
  
- setenv('YARP_ROBOT_NAME','icubGazeboSim');
+%  setenv('YARP_ROBOT_NAME','icubGazeboSim');
+ setenv('YARP_ROBOT_NAME','iCubGenova02');
+
  
  WBT_modelName = 'matlabTorqueBalancing';
  

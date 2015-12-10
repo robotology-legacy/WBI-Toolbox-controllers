@@ -22,7 +22,7 @@ LambdaJcMinv     =  (JcMinvJct + smoothReg)\JcMinv;
 
 Nj       = S'*(eye(ROBOT_DOF+6) - Jct*LambdaJcMinv)*S;
 
-invNj    = (Nj')/(Nj*Nj' + reg.pinvTol*eye(size(Nj,1)));  
+invNj    = (Nj')/(Nj*Nj' + reg.pinvDamp*eye(size(Nj,1)));  
 
 tauE     =  S'*Jct*(LambdaJcMinv*h - (JcMinvJct + smoothReg)\JcDNu);
 
