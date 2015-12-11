@@ -13,7 +13,7 @@ clc;
 
  LEFT_RIGHT_FOOT_IN_CONTACT  = [1 1];
 
- DEMO_MOVEMENTS   = 1;  % Either 0 or 1 
+ DEMO_MOVEMENTS    = 1;  % Either 0 or 1 
 
  % Controller period
  Ts                = 0.01; % [s]
@@ -24,9 +24,7 @@ clc;
  [ConstraintsMatrix,bVectorConstraints]= constraints(forceFrictionCoefficient,numberOfPoints,torsionalFrictionCoefficient,gain.footSize,fZmin);
 
 % Uncomment the following line if you want to sync Gazebo and simulink.
-
-%      setenv('YARP_CLOCK','/clock');
-      
+%      setenv('YARP_CLOCK','/clock');      
 % If you want to sync Gazebo and simulink,
 % you have to launch gazebo as follow:
 % 
