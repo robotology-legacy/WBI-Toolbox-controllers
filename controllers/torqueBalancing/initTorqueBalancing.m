@@ -1,8 +1,8 @@
 clear;% all;
 clc;
 
-% setenv('YARP_ROBOT_NAME','iCubGenova02');
-setenv('YARP_ROBOT_NAME','icubGazeboSim');
+setenv('YARP_ROBOT_NAME','iCubGenova02');
+% setenv('YARP_ROBOT_NAME','icubGazeboSim');
 
 simulationTime    = inf;    % Simulation time in seconds
 

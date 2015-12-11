@@ -3,7 +3,7 @@ if USE_SM
     reg.pinvDamp    = 0.1;
     sat.torque = 50;
 
-    references.joints.smoothingTime    = 3;
+    references.joints.smoothingTime    = 5;
     references.com.smoothingTime       = references.joints.smoothingTime;
     gain.SmoothingTimeImp              = references.joints.smoothingTime;  
 
@@ -38,15 +38,15 @@ if USE_SM
     gain.impedances  = [10   10   20, 10   10    10    8, 10   10    10    8, 30   30   20    20     10  10, 30   50   30    60      5   5  % state ==  1  TWO FEET BALANCING
                         10   10   20, 10   10    10    8, 10   10    10    8, 30   30   20    20     10  10, 30   50   30    60      5   5  % state ==  2  COM TRANSITION TO LEFT 
                         10   10   20, 10   10    10    8, 10   10    10    8, 30   30   20    20     10  10, 30   50   30    60      5   5  % state ==  3  LEFT FOOT BALANCING
-                        30   60   30, 10   10    20   10, 10   10    20   10,100   90   20    20     10  10,100   50   30   100     25  25  % state ==  4  YOGA LEFT FOOT 
-                        30   30   30, 10   10    20   10, 10   10    20   10,200  250   20    20     10  10,220  550  220   200     65 300  % state ==  5  PREPARING FOR SWITCHING 
+                        30   60   30, 10   10    10   10, 10   10    20   10,100   90   20    20     10  10,100   50   30   100     25  25  % state ==  4  YOGA LEFT FOOT 
+                        30   30   30,  5    5    10   10, 10   10    20   10,200  250   20    20     10  10,220  550  220   200     65 300  % state ==  5  PREPARING FOR SWITCHING 
                         30   30   30, 10   10    20   10, 10   10    20   10,100  350   20   200     10 100,220  550  220   200     65 300  % state ==  6  LOOKING FOR CONTACT
                         10   10   20, 10   10    10    8, 10   10    10    8, 30   50   60    30      5   5, 30   30   30    20      5   5  % state ==  7  TRANSITION TO INITIAL POSITION 
                         10   10   20, 10   10    10    8, 10   10    10    8, 30   50   60    30      5   5, 30   30   30    20      5   5  % state ==  8  COM TRANSITION TO RIGHT FOOT
                         10   10   20, 10   10    10    8, 10   10    10    8, 30   50   30    60      5   5, 30   30   20    20     10  10  % state ==  9  RIGHT FOOT BALANCING
-                        30   30   30, 10   10    20   10, 10   10    20   10,100   50   30   100     25  25,100   90   20    20     10  10  % state == 10  YOGA RIGHT FOOT 
-                        30   30   30, 10   10    20   10, 10   10    20   10,220  550  220   200    100 300,200  250   20    20     10  10  % state == 11  PREPARING FOR SWITCHING 
-                        30   30   30, 10   10    20   10, 10   10    20   10,220  550  220   200     65 300,100  350   20   200     10 100  % state == 12  LOOKING FOR CONTACT
+                        30   30   30, 10   10    10   10, 10   10    20   10,100   50   30   100     25  25,100   90   20    20     10  10  % state == 10  YOGA RIGHT FOOT 
+                        30   30   30, 10   10    10   10, 10   10    20   10,220  550  220   200     65 300,200  250   20    20     10  10  % state == 11  PREPARING FOR SWITCHING 
+                        30   30   30, 10   10    10   10, 10   10    20   10,220  550  220   200     65 300,100  350   20   200     10 100  % state == 12  LOOKING FOR CONTACT
                         10   10   20, 10   10    10    8, 10   10    10    8, 30   30   30    20      5   5, 30   50   60    30      5   5];% state == 13  TRANSITION TO INITIAL POSITION
 end              
 %% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%                      
@@ -200,13 +200,13 @@ q9 =        [-0.0179    0.2145   -0.0016,...
           
   
 sm.joints.pointsL =[ 0,                                q1;
-                     references.joints.smoothingTime,  q2;
-                     2*references.joints.smoothingTime,q3;
-                     3*references.joints.smoothingTime,q4;
-                     4*references.joints.smoothingTime,q5;
-                     5*references.joints.smoothingTime,q6;
-                     6*references.joints.smoothingTime,q7;
-                     7*references.joints.smoothingTime,q8];
+%                      references.joints.smoothingTime,  q2;
+%                      2*references.joints.smoothingTime,q3;
+%                      3*references.joints.smoothingTime,q4;
+%                      4*references.joints.smoothingTime,q5;
+%                      5*references.joints.smoothingTime,q6;
+%                      6*references.joints.smoothingTime,q7;
+                     1*references.joints.smoothingTime,q8];
 %                      8*references.joints.smoothingTime,q9];
                  
 % sm.joints.pointsL = [references.joints.smoothingTime,sm.joints.states(5,:)];

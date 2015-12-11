@@ -4,7 +4,7 @@ references.directionOfOscillation  = [0;0;0];
 references.amplitudeOfOscillation  =  0.0;          %referenceParams(1) = amplitude of ascillations in meters 
 references.frequencyOfOscillation  =  0.0;          %referenceParams(2) = frequency of ascillations in hertz
 
-references.noOscillationTime       = 0;    % If DEMO_MOVEMENTS = 1, the variable noOscillationTime is the time, in seconds, 
+references.noOscillationTime       = 2;    % If DEMO_MOVEMENTS = 1, the variable noOscillationTime is the time, in seconds, 
                                            % that the robot waits before starting the left-and-righ
                                        
 smoothingTimePostures = 3;
@@ -16,8 +16,14 @@ smoothingTimeJacobians            = 0.5;
 ROBOT_DOF_FOR_SIMULINK            = eye(ROBOT_DOF);
 gain.qTildeMax                    = 20*pi/180;
 
-gain.ikin.kp  = 15;
-gain.ikin.kd  = 2*sqrt(gain.ikin.kp);
+gain.ikin.com.kp  = 15;
+gain.ikin.com.kd  = 2*sqrt(gain.ikin.com.kp);
+
+gain.ikin.post.kp  = 15*ones(1,ROBOT_DOF);
+gain.ikin.post.kd  = 2*sqrt(gain.ikin.post.kp);
+
+gain.ikin.cons.kp  = 15;
+gain.ikin.cons.kd  = 2*sqrt(gain.ikin.cons.kp);
 
 %%
 % PARAMETERS FOR TWO FEET ONE GROUND
@@ -37,8 +43,8 @@ if (sum(LEFT_RIGHT_FOOT_IN_CONTACT) == 2)
 %  impRightLeg         = [2    2     2    1    1.5   1
 %                         0    0     0    0      0   0];
 
- impTorso            = [  10   10  7
-                          0    0   0]; 
+impTorso = [  20    5 10
+               0    0  0];  
     
  impArms             = [ 10   8    8   8    
                          0   0    0   0 ];
@@ -65,13 +71,18 @@ intArms              = [0   0    0    0  ];
                         
 intLeftLeg           = [0   0    0    0    0  0]; 
 
-intRightLeg          = [0   0    0    0    0  0];                        
-                         
+intRightLeg          = [0   0    0    0    0  0];       
+
+           
                          
     if (DEMO_MOVEMENTS == 1)
         references.directionOfOscillation  = [0;1;0];
-        references.amplitudeOfOscillation  = 0.03;  
-        references.frequencyOfOscillation  = 0.3;
+        references.amplitudeOfOscillation  = 0.04;  
+        references.frequencyOfOscillation  = 0.2;
+         impTorso = [  20    5 10
+                        0    0  0]; 
+         impArms  = [  8   6    6   6    
+                       0   0    0   0 ];
     end
 end
 
@@ -123,7 +134,7 @@ sat.integral              = 0;
 gain.integral             = [intTorso,intArms,intArms,intLeftLeg,intRightLeg];
 gain.impedances           = [impTorso(1,:),impArms(1,:),impArms(1,:),impLeftLeg(1,:),impRightLeg(1,:)];
 % gain.dampings           = 0*[dampTorso,dampArms,dampArms,dampLeftLeg,dampRightLeg];
-gain.dampings             = 0.15*ones(1,ROBOT_DOF);
+gain.dampings             = 0.0*ones(1,ROBOT_DOF);
 
 gain.increasingRatesImp   = [impTorso(2,:),impArms(2,:),impArms(2,:),impLeftLeg(2,:),impRightLeg(2,:)];
 sat.impedences            = [80   25    1400];
