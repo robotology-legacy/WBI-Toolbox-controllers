@@ -4,7 +4,7 @@ function w_H_root = fromBaseToWorldWithImu(imu_H_link,link_H_root,inertial)
 
 % See http://wiki.icub.org/images/8/82/XsensMtx.pdf page 11
 
-w_R_imu    = rotz(inertial(3))*roty(inertial(2))*rotx(inertial(1));
+w_R_imu    = rotz(inertial(3))*roty(inertial(2))*rotx(inertial(1)) * rotz(-180);
 
 imu_R_link = imu_H_link(1:3,1:3);
 
