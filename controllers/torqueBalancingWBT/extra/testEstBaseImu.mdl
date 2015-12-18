@@ -7,7 +7,7 @@ Model {
     NumRootInports	    0
     NumRootOutports	    0
     ParameterArgumentNames  ""
-    ComputedModelVersion    "1.6"
+    ComputedModelVersion    "1.20"
     NumModelReferences	    0
     NumTestPointedSignals   0
   }
@@ -52,11 +52,11 @@ Model {
 	$ObjectID		5
 	$ClassName		"Simulink.EditorInfo"
 	IsActive		[1]
-	ViewObjType		"SimulinkTopLevel"
-	LoadSaveID		"0"
+	ViewObjType		"SimulinkSubsys"
+	LoadSaveID		"10"
 	Extents			[1246.0, 600.0]
-	ZoomFactor		[1.391727493917275]
-	Offset			[-112.64510489510485, 111.94055944055944]
+	ZoomFactor		[1.0756302521008403]
+	Offset			[-8.015625, -231.90625]
       }
     }
   }
@@ -66,9 +66,9 @@ Model {
   ModifiedByFormat	  "%<Auto>"
   LastModifiedBy	  "DanielePucci"
   ModifiedDateFormat	  "%<Auto>"
-  LastModifiedDate	  "Fri Dec 18 08:08:30 2015"
-  RTWModifiedTimeStamp	  372326893
-  ModelVersionFormat	  "1.%<AutoIncrement:6>"
+  LastModifiedDate	  "Fri Dec 18 14:53:15 2015"
+  RTWModifiedTimeStamp	  372351179
+  ModelVersionFormat	  "1.%<AutoIncrement:20>"
   ConfigurationManager	  "none"
   SampleTimeColors	  off
   SampleTimeAnnotations	  off
@@ -931,7 +931,7 @@ Model {
   System {
     Name		    "testEstBaseImu"
     Location		    [0, 23, 1280, 796]
-    Open		    on
+    Open		    off
     ModelBrowserVisibility  off
     ModelBrowserWidth	    200
     ScreenColor		    "white"
@@ -944,7 +944,7 @@ Model {
     ShowPageBoundaries	    off
     ZoomFactor		    "139"
     ReportName		    "simulink-default.rpt"
-    SIDHighWatermark	    "95"
+    SIDHighWatermark	    "110"
     Block {
       BlockType		      Reference
       Name		      "Get Estimate"
@@ -971,7 +971,7 @@ Model {
       Ports		      []
       Position		      [-25, 134, 100, 171]
       ZOrder		      620
-      ForegroundColor	      "white"
+      ForegroundColor	      "[0.916667, 0.916667, 0.916667]"
       BackgroundColor	      "gray"
       ShowName		      off
       LibraryVersion	      "1.344"
@@ -2476,7 +2476,7 @@ Model {
       Name		      "w_H_root_link"
       SID		      "10"
       Ports		      [1, 1]
-      Position		      [160, 264, 400, 296]
+      Position		      [160, 264, 270, 296]
       ZOrder		      609
       ShowName		      off
       RequestExecContextInheritance off
@@ -2501,7 +2501,7 @@ Model {
       System {
 	Name			"w_H_root_link"
 	Location		[0, 23, 1280, 796]
-	Open			off
+	Open			on
 	ModelBrowserVisibility	off
 	ModelBrowserWidth	200
 	ScreenColor		"white"
@@ -2512,7 +2512,7 @@ Model {
 	TiledPaperMargins	[0.500000, 0.500000, 0.500000, 0.500000]
 	TiledPageScale		1
 	ShowPageBoundaries	off
-	ZoomFactor		"100"
+	ZoomFactor		"108"
 	Block {
 	  BlockType		  Inport
 	  Name			  "qj"
@@ -2563,7 +2563,7 @@ Model {
 	  SaturateOnIntegerOverflow off
 	  Port {
 	    PortNumber		    1
-	    Name		    "                                                   imu_H_link_name"
+	    Name		    "imu_H_link"
 	    RTWStorageClass	    "Auto"
 	    DataLoggingNameMode	    "SignalName"
 	  }
@@ -2583,7 +2583,7 @@ Model {
 	  SaturateOnIntegerOverflow off
 	  Port {
 	    PortNumber		    1
-	    Name		    "link_name_H_root_link"
+	    Name		    "link_H_root"
 	    RTWStorageClass	    "Auto"
 	    DataLoggingNameMode	    "SignalName"
 	  }
@@ -2592,7 +2592,7 @@ Model {
 	  BlockType		  Switch
 	  Name			  "Switch6"
 	  SID			  "17"
-	  Position		  [885, 80, 935, 120]
+	  Position		  [1000, 80, 1050, 120]
 	  ZOrder		  601
 	  ShowName		  off
 	  Criteria		  "u2 > Threshold"
@@ -2603,7 +2603,7 @@ Model {
 	  BlockType		  Constant
 	  Name			  "USE_IMU4EST_BASE"
 	  SID			  "18"
-	  Position		  [655, 90, 810, 110]
+	  Position		  [690, 90, 845, 110]
 	  ZOrder		  602
 	  ShowName		  off
 	  Value			  "CONFIG.USE_IMU4EST_BASE"
@@ -2612,8 +2612,8 @@ Model {
 	  BlockType		  SubSystem
 	  Name			  "fromImuToHomogeousTransformFCN"
 	  SID			  "19"
-	  Ports			  [1, 1]
-	  Position		  [160, -206, 455, -164]
+	  Ports			  [3, 1]
+	  Position		  [690, -40, 930, 20]
 	  ZOrder		  600
 	  ForegroundColor	  "red"
 	  BackgroundColor	  "yellow"
@@ -2625,13 +2625,6 @@ Model {
 	  RequestExecContextInheritance	off
 	  SFBlockType		  "MATLAB Function"
 	  Variant		  off
-	  Port {
-	    PortNumber		    1
-	    Name		    "w_H_imu"
-	    PropagatedSignals	    "w_H_imu"
-	    RTWStorageClass	    "Auto"
-	    DataLoggingNameMode	    "SignalName"
-	  }
 	  System {
 	    Name		    "fromImuToHomogeousTransformFCN"
 	    Location		    [219, 337, 814, 775]
@@ -2647,14 +2640,32 @@ Model {
 	    TiledPageScale	    1
 	    ShowPageBoundaries	    off
 	    ZoomFactor		    "100"
-	    SIDHighWatermark	    "110"
+	    SIDHighWatermark	    "112"
 	    SIDPrevWatermark	    "9"
+	    Block {
+	      BlockType		      Inport
+	      Name		      "imu_H_link"
+	      SID		      "19::112"
+	      Position		      [20, 101, 40, 119]
+	      ZOrder		      82
+	      IconDisplay	      "Port number"
+	    }
+	    Block {
+	      BlockType		      Inport
+	      Name		      "link_H_root"
+	      SID		      "19::111"
+	      Position		      [20, 136, 40, 154]
+	      ZOrder		      81
+	      Port		      "2"
+	      IconDisplay	      "Port number"
+	    }
 	    Block {
 	      BlockType		      Inport
 	      Name		      "inertial"
 	      SID		      "19::93"
-	      Position		      [20, 101, 40, 119]
+	      Position		      [20, 171, 40, 189]
 	      ZOrder		      69
+	      Port		      "3"
 	      IconDisplay	      "Port number"
 	    }
 	    Block {
@@ -2671,16 +2682,16 @@ Model {
 	      Name		      " SFunction "
 	      SID		      "19::78"
 	      Tag		      "Stateflow S-Function testEstBaseImu 1"
-	      Ports		      [1, 2]
-	      Position		      [180, 135, 230, 195]
+	      Ports		      [3, 2]
+	      Position		      [180, 135, 230, 215]
 	      ZOrder		      54
 	      FunctionName	      "sf_sfun"
-	      PortCounts	      "[1 2]"
+	      PortCounts	      "[3 2]"
 	      SFunctionDeploymentMode off
 	      EnableBusSupport	      on
 	      Port {
 		PortNumber		2
-		Name			"w_H_imu"
+		Name			"w_H_root"
 		RTWStorageClass		"Auto"
 		DataLoggingNameMode	"SignalName"
 	      }
@@ -2694,37 +2705,51 @@ Model {
 	    }
 	    Block {
 	      BlockType		      Outport
-	      Name		      "w_H_imu"
+	      Name		      "w_H_root"
 	      SID		      "19::106"
 	      Position		      [460, 101, 480, 119]
 	      ZOrder		      80
 	      IconDisplay	      "Port number"
 	    }
 	    Line {
-	      ZOrder		      1
-	      SrcBlock		      "inertial"
+	      ZOrder		      28
+	      SrcBlock		      "imu_H_link"
 	      SrcPort		      1
 	      DstBlock		      " SFunction "
 	      DstPort		      1
 	    }
 	    Line {
-	      Name		      "w_H_imu"
-	      ZOrder		      2
+	      ZOrder		      29
+	      SrcBlock		      "link_H_root"
+	      SrcPort		      1
+	      DstBlock		      " SFunction "
+	      DstPort		      2
+	    }
+	    Line {
+	      ZOrder		      30
+	      SrcBlock		      "inertial"
+	      SrcPort		      1
+	      DstBlock		      " SFunction "
+	      DstPort		      3
+	    }
+	    Line {
+	      Name		      "w_H_root"
+	      ZOrder		      31
 	      Labels		      [0, 0]
 	      SrcBlock		      " SFunction "
 	      SrcPort		      2
-	      DstBlock		      "w_H_imu"
+	      DstBlock		      "w_H_root"
 	      DstPort		      1
 	    }
 	    Line {
-	      ZOrder		      3
+	      ZOrder		      32
 	      SrcBlock		      " Demux "
 	      SrcPort		      1
 	      DstBlock		      " Terminator "
 	      DstPort		      1
 	    }
 	    Line {
-	      ZOrder		      4
+	      ZOrder		      33
 	      SrcBlock		      " SFunction "
 	      SrcPort		      1
 	      DstBlock		      " Demux "
@@ -2760,7 +2785,7 @@ Model {
 	  Name			  "inertial"
 	  SID			  "21"
 	  Ports			  [0, 1]
-	  Position		  [35, -209, 95, -161]
+	  Position		  [605, 3, 655, 17]
 	  ZOrder		  599
 	  ForegroundColor	  "[0.490196, 0.000000, 0.000000]"
 	  LibraryVersion	  "1.344"
@@ -2791,7 +2816,7 @@ Model {
 	  wbiList		  "WBT_wbiList"
 	  Port {
 	    PortNumber		    1
-	    Name		    "w_H_link_name"
+	    Name		    "w_H_link "
 	    RTWStorageClass	    "Auto"
 	    DataLoggingNameMode	    "SignalName"
 	  }
@@ -2814,24 +2839,10 @@ Model {
 	  wbiList		  "WBT_wbiList"
 	}
 	Block {
-	  BlockType		  Product
-	  Name			  "u1*u2*u3"
-	  SID			  "24"
-	  Ports			  [3, 1]
-	  Position		  [720, -68, 800, 8]
-	  ZOrder		  586
-	  Inputs		  "***"
-	  Multiplication	  "Matrix(*)"
-	  InputSameDT		  off
-	  OutDataTypeStr	  "Inherit: Inherit via internal rule"
-	  RndMeth		  "Floor"
-	  SaturateOnIntegerOverflow off
-	}
-	Block {
 	  BlockType		  Outport
-	  Name			  "w_H_imu * imu _H_link * link_H_root_link"
+	  Name			  "w_H_root"
 	  SID			  "25"
-	  Position		  [1110, 93, 1140, 107]
+	  Position		  [1100, 93, 1130, 107]
 	  ZOrder		  585
 	  IconDisplay		  "Port number"
 	}
@@ -2843,13 +2854,13 @@ Model {
 	  DstPort		  1
 	}
 	Line {
-	  Name			  "                                                   imu_H_link_name"
-	  ZOrder		  2
+	  Name			  "imu_H_link"
+	  ZOrder		  26
 	  Labels		  [0, 0]
 	  SrcBlock		  "Inv\\*"
 	  SrcPort		  1
-	  DstBlock		  "u1*u2*u3"
-	  DstPort		  2
+	  DstBlock		  "fromImuToHomogeousTransformFCN"
+	  DstPort		  1
 	}
 	Line {
 	  Name			  "w_H_imu"
@@ -2868,18 +2879,18 @@ Model {
 	  DstPort		  1
 	}
 	Line {
-	  Name			  "link_name_H_root_link"
+	  Name			  "link_H_root"
 	  ZOrder		  5
 	  Labels		  [-1, 0]
 	  SrcBlock		  "Inv\\*1"
 	  SrcPort		  1
 	  Points		  [118, 0]
 	  Branch {
-	    ZOrder		    6
-	    Labels		    [2, 1]
-	    Points		    [0, -120]
-	    DstBlock		    "u1*u2*u3"
-	    DstPort		    3
+	    ZOrder		    27
+	    Labels		    [1, 1]
+	    Points		    [0, -125]
+	    DstBlock		    "fromImuToHomogeousTransformFCN"
+	    DstPort		    2
 	  }
 	  Branch {
 	    ZOrder		    7
@@ -2888,7 +2899,7 @@ Model {
 	  }
 	}
 	Line {
-	  Name			  "w_H_link_name"
+	  Name			  "w_H_link "
 	  ZOrder		  8
 	  SrcBlock		  "link"
 	  SrcPort		  1
@@ -2912,23 +2923,13 @@ Model {
 	  SrcBlock		  "inertial"
 	  SrcPort		  1
 	  DstBlock		  "fromImuToHomogeousTransformFCN"
-	  DstPort		  1
-	}
-	Line {
-	  Name			  "w_H_imu"
-	  ZOrder		  12
-	  Labels		  [3, 1]
-	  SrcBlock		  "fromImuToHomogeousTransformFCN"
-	  SrcPort		  1
-	  Points		  [85, 0; 0, 130]
-	  DstBlock		  "u1*u2*u3"
-	  DstPort		  1
+	  DstPort		  3
 	}
 	Line {
 	  ZOrder		  13
 	  SrcBlock		  "Switch6"
 	  SrcPort		  1
-	  DstBlock		  "w_H_imu * imu _H_link * link_H_root_link"
+	  DstBlock		  "w_H_root"
 	  DstPort		  1
 	}
 	Line {
@@ -2939,10 +2940,10 @@ Model {
 	  DstPort		  2
 	}
 	Line {
-	  ZOrder		  15
-	  SrcBlock		  "u1*u2*u3"
+	  ZOrder		  24
+	  SrcBlock		  "fromImuToHomogeousTransformFCN"
 	  SrcPort		  1
-	  Points		  [51, 0; 0, 115]
+	  Points		  [30, 0; 0, 95]
 	  DstBlock		  "Switch6"
 	  DstPort		  1
 	}
@@ -2991,10 +2992,10 @@ Model {
     Block {
       BlockType		      SubSystem
       Name		      "w_H_root_link1"
-      SID		      "34"
+      SID		      "96"
       Ports		      [1, 1]
-      Position		      [160, 489, 400, 521]
-      ZOrder		      611
+      Position		      [165, 489, 275, 521]
+      ZOrder		      621
       ShowName		      off
       RequestExecContextInheritance off
       Variant		      off
@@ -3029,11 +3030,11 @@ Model {
 	TiledPaperMargins	[0.500000, 0.500000, 0.500000, 0.500000]
 	TiledPageScale		1
 	ShowPageBoundaries	off
-	ZoomFactor		"100"
+	ZoomFactor		"319"
 	Block {
 	  BlockType		  Inport
 	  Name			  "qj"
-	  SID			  "35"
+	  SID			  "97"
 	  Position		  [5, -38, 30, -22]
 	  ZOrder		  603
 	  IconDisplay		  "Port number"
@@ -3041,7 +3042,7 @@ Model {
 	Block {
 	  BlockType		  Constant
 	  Name			  "Constant2"
-	  SID			  "36"
+	  SID			  "98"
 	  Position		  [70, 95, 100, 125]
 	  ZOrder		  607
 	  ShowName		  off
@@ -3050,7 +3051,7 @@ Model {
 	Block {
 	  BlockType		  Constant
 	  Name			  "Constant5"
-	  SID			  "37"
+	  SID			  "99"
 	  Position		  [70, -75, 100, -45]
 	  ZOrder		  570
 	  ShowName		  off
@@ -3059,7 +3060,7 @@ Model {
 	Block {
 	  BlockType		  Constant
 	  Name			  "Constant6"
-	  SID			  "38"
+	  SID			  "100"
 	  Position		  [70, 10, 100, 40]
 	  ZOrder		  573
 	  ShowName		  off
@@ -3068,7 +3069,7 @@ Model {
 	Block {
 	  BlockType		  Product
 	  Name			  "Inv\\*"
-	  SID			  "39"
+	  SID			  "101"
 	  Ports			  [2, 1]
 	  Position		  [395, -60, 465, -5]
 	  ZOrder		  583
@@ -3080,7 +3081,7 @@ Model {
 	  SaturateOnIntegerOverflow off
 	  Port {
 	    PortNumber		    1
-	    Name		    "                                                   imu_H_link_name"
+	    Name		    "imu_H_link"
 	    RTWStorageClass	    "Auto"
 	    DataLoggingNameMode	    "SignalName"
 	  }
@@ -3088,7 +3089,7 @@ Model {
 	Block {
 	  BlockType		  Product
 	  Name			  "Inv\\*1"
-	  SID			  "40"
+	  SID			  "102"
 	  Ports			  [2, 1]
 	  Position		  [395, 89, 465, 136]
 	  ZOrder		  608
@@ -3100,7 +3101,7 @@ Model {
 	  SaturateOnIntegerOverflow off
 	  Port {
 	    PortNumber		    1
-	    Name		    "link_name_H_root_link"
+	    Name		    "link_H_root"
 	    RTWStorageClass	    "Auto"
 	    DataLoggingNameMode	    "SignalName"
 	  }
@@ -3108,8 +3109,8 @@ Model {
 	Block {
 	  BlockType		  Switch
 	  Name			  "Switch6"
-	  SID			  "41"
-	  Position		  [885, 80, 935, 120]
+	  SID			  "103"
+	  Position		  [1000, 80, 1050, 120]
 	  ZOrder		  601
 	  ShowName		  off
 	  Criteria		  "u2 > Threshold"
@@ -3119,8 +3120,8 @@ Model {
 	Block {
 	  BlockType		  Constant
 	  Name			  "USE_IMU4EST_BASE"
-	  SID			  "42"
-	  Position		  [655, 90, 810, 110]
+	  SID			  "104"
+	  Position		  [690, 90, 845, 110]
 	  ZOrder		  602
 	  ShowName		  off
 	  Value			  "CONFIG.USE_IMU4EST_BASE"
@@ -3128,9 +3129,9 @@ Model {
 	Block {
 	  BlockType		  SubSystem
 	  Name			  "fromImuToHomogeousTransformFCN"
-	  SID			  "43"
-	  Ports			  [1, 1]
-	  Position		  [160, -206, 455, -164]
+	  SID			  "105"
+	  Ports			  [3, 1]
+	  Position		  [690, -40, 930, 20]
 	  ZOrder		  600
 	  ForegroundColor	  "red"
 	  BackgroundColor	  "yellow"
@@ -3142,13 +3143,6 @@ Model {
 	  RequestExecContextInheritance	off
 	  SFBlockType		  "MATLAB Function"
 	  Variant		  off
-	  Port {
-	    PortNumber		    1
-	    Name		    "w_H_imu"
-	    PropagatedSignals	    "w_H_imu"
-	    RTWStorageClass	    "Auto"
-	    DataLoggingNameMode	    "SignalName"
-	  }
 	  System {
 	    Name		    "fromImuToHomogeousTransformFCN"
 	    Location		    [219, 337, 814, 775]
@@ -3164,20 +3158,38 @@ Model {
 	    TiledPageScale	    1
 	    ShowPageBoundaries	    off
 	    ZoomFactor		    "100"
-	    SIDHighWatermark	    "110"
+	    SIDHighWatermark	    "112"
 	    SIDPrevWatermark	    "9"
 	    Block {
 	      BlockType		      Inport
-	      Name		      "inertial"
-	      SID		      "43::93"
+	      Name		      "imu_H_link"
+	      SID		      "105::112"
 	      Position		      [20, 101, 40, 119]
+	      ZOrder		      82
+	      IconDisplay	      "Port number"
+	    }
+	    Block {
+	      BlockType		      Inport
+	      Name		      "link_H_root"
+	      SID		      "105::111"
+	      Position		      [20, 136, 40, 154]
+	      ZOrder		      81
+	      Port		      "2"
+	      IconDisplay	      "Port number"
+	    }
+	    Block {
+	      BlockType		      Inport
+	      Name		      "inertial"
+	      SID		      "105::93"
+	      Position		      [20, 171, 40, 189]
 	      ZOrder		      69
+	      Port		      "3"
 	      IconDisplay	      "Port number"
 	    }
 	    Block {
 	      BlockType		      Demux
 	      Name		      " Demux "
-	      SID		      "43::79"
+	      SID		      "105::79"
 	      Ports		      [1, 1]
 	      Position		      [270, 230, 320, 270]
 	      ZOrder		      55
@@ -3186,18 +3198,18 @@ Model {
 	    Block {
 	      BlockType		      S-Function
 	      Name		      " SFunction "
-	      SID		      "43::78"
+	      SID		      "105::78"
 	      Tag		      "Stateflow S-Function testEstBaseImu 2"
-	      Ports		      [1, 2]
-	      Position		      [180, 135, 230, 195]
+	      Ports		      [3, 2]
+	      Position		      [180, 135, 230, 215]
 	      ZOrder		      54
 	      FunctionName	      "sf_sfun"
-	      PortCounts	      "[1 2]"
+	      PortCounts	      "[3 2]"
 	      SFunctionDeploymentMode off
 	      EnableBusSupport	      on
 	      Port {
 		PortNumber		2
-		Name			"w_H_imu"
+		Name			"w_H_root"
 		RTWStorageClass		"Auto"
 		DataLoggingNameMode	"SignalName"
 	      }
@@ -3205,43 +3217,57 @@ Model {
 	    Block {
 	      BlockType		      Terminator
 	      Name		      " Terminator "
-	      SID		      "43::80"
+	      SID		      "105::80"
 	      Position		      [460, 241, 480, 259]
 	      ZOrder		      56
 	    }
 	    Block {
 	      BlockType		      Outport
-	      Name		      "w_H_imu"
-	      SID		      "43::106"
+	      Name		      "w_H_root"
+	      SID		      "105::106"
 	      Position		      [460, 101, 480, 119]
 	      ZOrder		      80
 	      IconDisplay	      "Port number"
 	    }
 	    Line {
 	      ZOrder		      1
-	      SrcBlock		      "inertial"
+	      SrcBlock		      "imu_H_link"
 	      SrcPort		      1
 	      DstBlock		      " SFunction "
 	      DstPort		      1
 	    }
 	    Line {
-	      Name		      "w_H_imu"
 	      ZOrder		      2
-	      Labels		      [0, 0]
-	      SrcBlock		      " SFunction "
-	      SrcPort		      2
-	      DstBlock		      "w_H_imu"
-	      DstPort		      1
+	      SrcBlock		      "link_H_root"
+	      SrcPort		      1
+	      DstBlock		      " SFunction "
+	      DstPort		      2
 	    }
 	    Line {
 	      ZOrder		      3
+	      SrcBlock		      "inertial"
+	      SrcPort		      1
+	      DstBlock		      " SFunction "
+	      DstPort		      3
+	    }
+	    Line {
+	      Name		      "w_H_root"
+	      ZOrder		      4
+	      Labels		      [0, 0]
+	      SrcBlock		      " SFunction "
+	      SrcPort		      2
+	      DstBlock		      "w_H_root"
+	      DstPort		      1
+	    }
+	    Line {
+	      ZOrder		      5
 	      SrcBlock		      " Demux "
 	      SrcPort		      1
 	      DstBlock		      " Terminator "
 	      DstPort		      1
 	    }
 	    Line {
-	      ZOrder		      4
+	      ZOrder		      6
 	      SrcBlock		      " SFunction "
 	      SrcPort		      1
 	      DstBlock		      " Demux "
@@ -3252,7 +3278,7 @@ Model {
 	Block {
 	  BlockType		  Reference
 	  Name			  "imu"
-	  SID			  "44"
+	  SID			  "106"
 	  Ports			  [2, 1]
 	  Position		  [130, -75, 295, -15]
 	  ZOrder		  569
@@ -3275,9 +3301,9 @@ Model {
 	Block {
 	  BlockType		  Reference
 	  Name			  "inertial"
-	  SID			  "45"
+	  SID			  "107"
 	  Ports			  [0, 1]
-	  Position		  [35, -209, 95, -161]
+	  Position		  [605, 3, 655, 17]
 	  ZOrder		  599
 	  ForegroundColor	  "[0.490196, 0.000000, 0.000000]"
 	  LibraryVersion	  "1.344"
@@ -3293,7 +3319,7 @@ Model {
 	Block {
 	  BlockType		  Reference
 	  Name			  "link"
-	  SID			  "46"
+	  SID			  "108"
 	  Ports			  [2, 1]
 	  Position		  [130, 10, 295, 70]
 	  ZOrder		  572
@@ -3308,7 +3334,7 @@ Model {
 	  wbiList		  "WBT_wbiList"
 	  Port {
 	    PortNumber		    1
-	    Name		    "w_H_link_name"
+	    Name		    "w_H_link "
 	    RTWStorageClass	    "Auto"
 	    DataLoggingNameMode	    "SignalName"
 	  }
@@ -3316,7 +3342,7 @@ Model {
 	Block {
 	  BlockType		  Reference
 	  Name			  "root_link"
-	  SID			  "47"
+	  SID			  "109"
 	  Ports			  [2, 1]
 	  Position		  [130, 95, 295, 155]
 	  ZOrder		  606
@@ -3331,24 +3357,10 @@ Model {
 	  wbiList		  "WBT_wbiList"
 	}
 	Block {
-	  BlockType		  Product
-	  Name			  "u1*u2*u3"
-	  SID			  "48"
-	  Ports			  [3, 1]
-	  Position		  [720, -68, 800, 8]
-	  ZOrder		  586
-	  Inputs		  "***"
-	  Multiplication	  "Matrix(*)"
-	  InputSameDT		  off
-	  OutDataTypeStr	  "Inherit: Inherit via internal rule"
-	  RndMeth		  "Floor"
-	  SaturateOnIntegerOverflow off
-	}
-	Block {
 	  BlockType		  Outport
-	  Name			  "w_H_imu * imu _H_link * link_H_root_link"
-	  SID			  "49"
-	  Position		  [1110, 93, 1140, 107]
+	  Name			  "w_H_root"
+	  SID			  "110"
+	  Position		  [1100, 93, 1130, 107]
 	  ZOrder		  585
 	  IconDisplay		  "Port number"
 	}
@@ -3360,13 +3372,13 @@ Model {
 	  DstPort		  1
 	}
 	Line {
-	  Name			  "                                                   imu_H_link_name"
+	  Name			  "imu_H_link"
 	  ZOrder		  2
 	  Labels		  [0, 0]
 	  SrcBlock		  "Inv\\*"
 	  SrcPort		  1
-	  DstBlock		  "u1*u2*u3"
-	  DstPort		  2
+	  DstBlock		  "fromImuToHomogeousTransformFCN"
+	  DstPort		  1
 	}
 	Line {
 	  Name			  "w_H_imu"
@@ -3385,18 +3397,18 @@ Model {
 	  DstPort		  1
 	}
 	Line {
-	  Name			  "link_name_H_root_link"
+	  Name			  "link_H_root"
 	  ZOrder		  5
-	  Labels		  [2, 1]
+	  Labels		  [-1, 0]
 	  SrcBlock		  "Inv\\*1"
 	  SrcPort		  1
-	  Points		  [0, 0; 118, 0]
+	  Points		  [118, 0]
 	  Branch {
 	    ZOrder		    6
-	    Labels		    [2, 1]
-	    Points		    [0, -120]
-	    DstBlock		    "u1*u2*u3"
-	    DstPort		    3
+	    Labels		    [1, 1]
+	    Points		    [0, -125]
+	    DstBlock		    "fromImuToHomogeousTransformFCN"
+	    DstPort		    2
 	  }
 	  Branch {
 	    ZOrder		    7
@@ -3405,7 +3417,7 @@ Model {
 	  }
 	}
 	Line {
-	  Name			  "w_H_link_name"
+	  Name			  "w_H_link "
 	  ZOrder		  8
 	  SrcBlock		  "link"
 	  SrcPort		  1
@@ -3429,75 +3441,65 @@ Model {
 	  SrcBlock		  "inertial"
 	  SrcPort		  1
 	  DstBlock		  "fromImuToHomogeousTransformFCN"
-	  DstPort		  1
+	  DstPort		  3
 	}
 	Line {
-	  Name			  "w_H_imu"
 	  ZOrder		  12
-	  Labels		  [3, 1]
-	  SrcBlock		  "fromImuToHomogeousTransformFCN"
+	  SrcBlock		  "Switch6"
 	  SrcPort		  1
-	  Points		  [85, 0; 0, 130]
-	  DstBlock		  "u1*u2*u3"
+	  DstBlock		  "w_H_root"
 	  DstPort		  1
 	}
 	Line {
 	  ZOrder		  13
-	  SrcBlock		  "Switch6"
-	  SrcPort		  1
-	  DstBlock		  "w_H_imu * imu _H_link * link_H_root_link"
-	  DstPort		  1
-	}
-	Line {
-	  ZOrder		  14
 	  SrcBlock		  "USE_IMU4EST_BASE"
 	  SrcPort		  1
 	  DstBlock		  "Switch6"
 	  DstPort		  2
 	}
 	Line {
-	  ZOrder		  15
-	  SrcBlock		  "u1*u2*u3"
+	  ZOrder		  14
+	  SrcBlock		  "fromImuToHomogeousTransformFCN"
 	  SrcPort		  1
-	  Points		  [51, 0; 0, 115]
+	  Points		  [30, 0; 0, 95]
 	  DstBlock		  "Switch6"
 	  DstPort		  1
 	}
 	Line {
-	  ZOrder		  16
+	  ZOrder		  15
 	  SrcBlock		  "Constant2"
 	  SrcPort		  1
 	  DstBlock		  "root_link"
 	  DstPort		  1
 	}
 	Line {
-	  ZOrder		  17
+	  ZOrder		  16
 	  SrcBlock		  "qj"
 	  SrcPort		  1
 	  Points		  [12, 0]
 	  Branch {
-	    ZOrder		    18
+	    ZOrder		    17
 	    Points		    [0, 85]
 	    Branch {
-	      ZOrder		      19
+	      ZOrder		      18
 	      Points		      [0, 85]
 	      DstBlock		      "root_link"
 	      DstPort		      2
 	    }
 	    Branch {
-	      ZOrder		      20
+	      ZOrder		      19
 	      DstBlock		      "link"
 	      DstPort		      2
 	    }
 	  }
 	  Branch {
-	    ZOrder		    21
+	    ZOrder		    20
 	    DstBlock		    "imu"
 	    DstPort		    2
 	  }
 	}
 	Line {
-	  ZOrder		  22
+	  ZOrder		  21
 	  SrcBlock		  "root_link"
 	  SrcPort		  1
 	  DstBlock		  "Inv\\*1"
@@ -3523,7 +3525,7 @@ Model {
 	  ZOrder		  5
 	  Points		  [0, 90]
 	  Branch {
-	    ZOrder		    7
+	    ZOrder		    47
 	    Points		    [0, 135]
 	    DstBlock		    "w_H_root_link1"
 	    DstPort		    1
@@ -3563,7 +3565,7 @@ Model {
       ZOrder		      10
       SrcBlock		      "w_H_root_link"
       SrcPort		      1
-      Points		      [150, 0]
+      Points		      [280, 0]
       Branch {
 	ZOrder			19
 	DstBlock		"Visualize\nhom transf1"
@@ -3576,10 +3578,10 @@ Model {
       }
     }
     Line {
-      ZOrder		      11
+      ZOrder		      48
       SrcBlock		      "w_H_root_link1"
       SrcPort		      1
-      Points		      [135, 0]
+      Points		      [260, 0]
       Branch {
 	ZOrder			25
 	DstBlock		"Sum1"
@@ -3636,7 +3638,7 @@ Stateflow {
     name		    "testEstBaseImu"
     created		    "18-Dec-2015 07:56:38"
     isLibrary		    0
-    firstTarget		    16
+    firstTarget		    20
     sfVersion		    80000006
   }
   chart {
@@ -3646,18 +3648,21 @@ Stateflow {
     viewLimits		    [0 156.75 0 153.75]
     screen		    [1 1 1280 1024 1.000677131425054]
     treeNode		    [0 3 0 0]
-    firstTransition	    7
-    firstJunction	    6
+    firstTransition	    9
+    firstJunction	    8
     viewObj		    2
+    visible		    1
     machine		    1
-    ssIdHighWaterMark	    80
+    subviewS {
+    }
+    ssIdHighWaterMark	    82
     decomposition	    CLUSTER_CHART
     type		    EML_CHART
     firstData		    4
     chartFileNumber	    1
     disableImplicitCasting  1
     eml {
-      name		      "fromImuToHomogeousTransformFCN"
+      name		      "fromBaseToWorldWithImuFCN"
     }
   }
   state {
@@ -3674,15 +3679,15 @@ Stateflow {
     decomposition	    CLUSTER_STATE
     eml {
       isEML		      1
-      script		      "function w_H_imu = fromImuToHomogeousTransformFCN(inertial)\n%#codegen\n \nw_H_imu = fromImuToHom"
-      "ogeousTransform(inertial);"
+      script		      "function w_H_root = fromBaseToWorldWithImuFCN(imu_H_link,link_H_root,inertial)\n%#codegen\n \nw_H"
+      "_root = fromBaseToWorldWithImu(imu_H_link,link_H_root,inertial);"
       editorLayout	      "100 M4x1[10 5 700 500]"
     }
   }
   data {
     id			    4
-    ssIdNumber		    65
-    name		    "inertial"
+    ssIdNumber		    82
+    name		    "imu_H_link"
     linkNode		    [2 0 5]
     scope		    INPUT_DATA
     machine		    1
@@ -3703,110 +3708,9 @@ Stateflow {
   }
   data {
     id			    5
-    ssIdNumber		    71
-    name		    "w_H_imu"
-    linkNode		    [2 4 0]
-    scope		    OUTPUT_DATA
-    machine		    1
-    props {
-      array {
-	size			"-1"
-      }
-      type {
-	method			SF_INHERITED_TYPE
-	primitive		SF_DOUBLE_TYPE
-	isSigned		1
-	wordLength		"16"
-      }
-      complexity	      SF_COMPLEX_INHERITED
-      frame		      SF_FRAME_NO
-    }
-    dataType		    "Inherit: Same as Simulink"
-  }
-  junction {
-    id			    6
-    position		    [23.5747 49.5747 7]
-    chart		    2
-    linkNode		    [2 0 0]
-    subviewer		    2
-    ssIdNumber		    3
-    type		    CONNECTIVE_JUNCTION
-  }
-  transition {
-    id			    7
-    labelString		    "{eML_blk_kernel();}"
-    labelPosition	    [36.125 25.875 102.544 14.964]
-    fontSize		    12
-    src {
-      intersection	      [0 0 1 0 23.5747 14.625 0 0]
-    }
-    dst {
-      id		      6
-      intersection	      [1 0 -1 0 23.5747 42.5747 0 0]
-    }
-    midPoint		    [23.5747 24.9468]
-    chart		    2
-    linkNode		    [2 0 0]
-    dataLimits		    [21.175 25.975 14.625 42.575]
-    subviewer		    2
-    drawStyle		    SMART
-    slide {
-      sticky		      BOTH_STICK
-    }
-    executionOrder	    1
-    ssIdNumber		    2
-  }
-  instance {
-    id			    8
-    name		    "w_H_root_link/fromImuToHomogeousTransformFCN"
-    machine		    1
-    chart		    2
-  }
-  chart {
-    id			    9
-    name		    "w_H_root_link1/fromImuToHomogeousTransformFCN"
-    windowPosition	    [326.89 491.339 161 328]
-    viewLimits		    [0 156.75 0 153.75]
-    screen		    [1 1 1280 1024 1.000677131425054]
-    treeNode		    [0 10 0 0]
-    firstTransition	    14
-    firstJunction	    13
-    viewObj		    9
-    machine		    1
-    ssIdHighWaterMark	    80
-    decomposition	    CLUSTER_CHART
-    type		    EML_CHART
-    firstData		    11
-    chartFileNumber	    2
-    disableImplicitCasting  1
-    eml {
-      name		      "fromImuToHomogeousTransformFCN"
-    }
-  }
-  state {
-    id			    10
-    labelString		    "eML_blk_kernel()"
-    position		    [18 64.5 118 66]
-    fontSize		    12
-    chart		    9
-    treeNode		    [9 0 0 0]
-    superState		    SUBCHART
-    subviewer		    9
-    ssIdNumber		    1
-    type		    FUNC_STATE
-    decomposition	    CLUSTER_STATE
-    eml {
-      isEML		      1
-      script		      "function w_H_imu = fromImuToHomogeousTransformFCN(inertial)\n%#codegen\n \nw_H_imu = fromImuToHom"
-      "ogeousTransform(inertial);"
-      editorLayout	      "100 M4x1[10 5 700 500]"
-    }
-  }
-  data {
-    id			    11
-    ssIdNumber		    65
-    name		    "inertial"
-    linkNode		    [9 0 12]
+    ssIdNumber		    81
+    name		    "link_H_root"
+    linkNode		    [2 4 6]
     scope		    INPUT_DATA
     machine		    1
     props {
@@ -3825,10 +3729,32 @@ Stateflow {
     dataType		    "Inherit: Same as Simulink"
   }
   data {
-    id			    12
+    id			    6
+    ssIdNumber		    65
+    name		    "inertial"
+    linkNode		    [2 5 7]
+    scope		    INPUT_DATA
+    machine		    1
+    props {
+      array {
+	size			"-1"
+      }
+      type {
+	method			SF_INHERITED_TYPE
+	primitive		SF_DOUBLE_TYPE
+	isSigned		1
+	wordLength		"16"
+      }
+      complexity	      SF_COMPLEX_INHERITED
+      frame		      SF_FRAME_INHERITED
+    }
+    dataType		    "Inherit: Same as Simulink"
+  }
+  data {
+    id			    7
     ssIdNumber		    71
-    name		    "w_H_imu"
-    linkNode		    [9 11 0]
+    name		    "w_H_root"
+    linkNode		    [2 6 0]
     scope		    OUTPUT_DATA
     machine		    1
     props {
@@ -3847,16 +3773,16 @@ Stateflow {
     dataType		    "Inherit: Same as Simulink"
   }
   junction {
-    id			    13
+    id			    8
     position		    [23.5747 49.5747 7]
-    chart		    9
-    linkNode		    [9 0 0]
-    subviewer		    9
+    chart		    2
+    linkNode		    [2 0 0]
+    subviewer		    2
     ssIdNumber		    3
     type		    CONNECTIVE_JUNCTION
   }
   transition {
-    id			    14
+    id			    9
     labelString		    "{eML_blk_kernel();}"
     labelPosition	    [36.125 25.875 102.544 14.964]
     fontSize		    12
@@ -3864,14 +3790,14 @@ Stateflow {
       intersection	      [0 0 1 0 23.5747 14.625 0 0]
     }
     dst {
-      id		      13
+      id		      8
       intersection	      [1 0 -1 0 23.5747 42.5747 0 0]
     }
     midPoint		    [23.5747 24.9468]
-    chart		    9
-    linkNode		    [9 0 0]
+    chart		    2
+    linkNode		    [2 0 0]
     dataLimits		    [21.175 25.975 14.625 42.575]
-    subviewer		    9
+    subviewer		    2
     drawStyle		    SMART
     slide {
       sticky		      BOTH_STICK
@@ -3880,13 +3806,182 @@ Stateflow {
     ssIdNumber		    2
   }
   instance {
+    id			    10
+    name		    "w_H_root_link/fromImuToHomogeousTransformFCN"
+    machine		    1
+    chart		    2
+  }
+  chart {
+    id			    11
+    name		    "w_H_root_link1/fromImuToHomogeousTransformFCN"
+    windowPosition	    [326.89 491.339 161 328]
+    viewLimits		    [0 156.75 0 153.75]
+    screen		    [1 1 1280 1024 1.000677131425054]
+    treeNode		    [0 12 0 0]
+    firstTransition	    18
+    firstJunction	    17
+    viewObj		    11
+    machine		    1
+    subviewS {
+    }
+    ssIdHighWaterMark	    82
+    decomposition	    CLUSTER_CHART
+    type		    EML_CHART
+    firstData		    13
+    chartFileNumber	    2
+    disableImplicitCasting  1
+    eml {
+      name		      "fromBaseToWorldWithImuFCN"
+    }
+  }
+  state {
+    id			    12
+    labelString		    "eML_blk_kernel()"
+    position		    [18 64.5 118 66]
+    fontSize		    12
+    chart		    11
+    treeNode		    [11 0 0 0]
+    superState		    SUBCHART
+    subviewer		    11
+    ssIdNumber		    1
+    type		    FUNC_STATE
+    decomposition	    CLUSTER_STATE
+    eml {
+      isEML		      1
+      script		      "function w_H_root = fromBaseToWorldWithImuFCN(imu_H_link,link_H_root,inertial)\n%#codegen\n \nw_H"
+      "_root = fromBaseToWorldWithImu(imu_H_link,link_H_root,inertial);"
+      editorLayout	      "100 M4x1[10 5 700 500]"
+    }
+  }
+  data {
+    id			    13
+    ssIdNumber		    82
+    name		    "imu_H_link"
+    linkNode		    [11 0 14]
+    scope		    INPUT_DATA
+    machine		    1
+    props {
+      array {
+	size			"-1"
+      }
+      type {
+	method			SF_INHERITED_TYPE
+	primitive		SF_DOUBLE_TYPE
+	isSigned		1
+	wordLength		"16"
+      }
+      complexity	      SF_COMPLEX_INHERITED
+      frame		      SF_FRAME_INHERITED
+    }
+    dataType		    "Inherit: Same as Simulink"
+  }
+  data {
+    id			    14
+    ssIdNumber		    81
+    name		    "link_H_root"
+    linkNode		    [11 13 15]
+    scope		    INPUT_DATA
+    machine		    1
+    props {
+      array {
+	size			"-1"
+      }
+      type {
+	method			SF_INHERITED_TYPE
+	primitive		SF_DOUBLE_TYPE
+	isSigned		1
+	wordLength		"16"
+      }
+      complexity	      SF_COMPLEX_INHERITED
+      frame		      SF_FRAME_INHERITED
+    }
+    dataType		    "Inherit: Same as Simulink"
+  }
+  data {
     id			    15
+    ssIdNumber		    65
+    name		    "inertial"
+    linkNode		    [11 14 16]
+    scope		    INPUT_DATA
+    machine		    1
+    props {
+      array {
+	size			"-1"
+      }
+      type {
+	method			SF_INHERITED_TYPE
+	primitive		SF_DOUBLE_TYPE
+	isSigned		1
+	wordLength		"16"
+      }
+      complexity	      SF_COMPLEX_INHERITED
+      frame		      SF_FRAME_INHERITED
+    }
+    dataType		    "Inherit: Same as Simulink"
+  }
+  data {
+    id			    16
+    ssIdNumber		    71
+    name		    "w_H_root"
+    linkNode		    [11 15 0]
+    scope		    OUTPUT_DATA
+    machine		    1
+    props {
+      array {
+	size			"-1"
+      }
+      type {
+	method			SF_INHERITED_TYPE
+	primitive		SF_DOUBLE_TYPE
+	isSigned		1
+	wordLength		"16"
+      }
+      complexity	      SF_COMPLEX_INHERITED
+      frame		      SF_FRAME_NO
+    }
+    dataType		    "Inherit: Same as Simulink"
+  }
+  junction {
+    id			    17
+    position		    [23.5747 49.5747 7]
+    chart		    11
+    linkNode		    [11 0 0]
+    subviewer		    11
+    ssIdNumber		    3
+    type		    CONNECTIVE_JUNCTION
+  }
+  transition {
+    id			    18
+    labelString		    "{eML_blk_kernel();}"
+    labelPosition	    [36.125 25.875 102.544 14.964]
+    fontSize		    12
+    src {
+      intersection	      [0 0 1 0 23.5747 14.625 0 0]
+    }
+    dst {
+      id		      17
+      intersection	      [1 0 -1 0 23.5747 42.5747 0 0]
+    }
+    midPoint		    [23.5747 24.9468]
+    chart		    11
+    linkNode		    [11 0 0]
+    dataLimits		    [21.175 25.975 14.625 42.575]
+    subviewer		    11
+    drawStyle		    SMART
+    slide {
+      sticky		      BOTH_STICK
+    }
+    executionOrder	    1
+    ssIdNumber		    2
+  }
+  instance {
+    id			    19
     name		    "w_H_root_link1/fromImuToHomogeousTransformFCN"
     machine		    1
-    chart		    9
+    chart		    11
   }
   target {
-    id			    16
+    id			    20
     name		    "sfun"
     description		    "Default Simulink S-Function Target."
     machine		    1
