@@ -15,7 +15,7 @@ gain.SmoothingTimeImp  = 1;
 
 %%
 %           PARAMETERS FOR TWO FEET ONE GROUND
-if (sum(LEFT_RIGHT_FOOT_IN_CONTACT) == 2)
+if (sum(CONFIG.LEFT_RIGHT_FOOT_IN_CONTACT) == 2)
     gain.PCOM                 = diag([50    50  50]);
     gain.ICOM                 = diag([  0    0   0]);
     gain.DCOM                 = 2*sqrt(gain.PCOM)*0;
@@ -48,7 +48,7 @@ end
 
 % PARAMETERS FOR ONLY ONE FOOT ONE GROUND
 
-if (sum(LEFT_RIGHT_FOOT_IN_CONTACT) == 1)
+if (sum(CONFIG.LEFT_RIGHT_FOOT_IN_CONTACT) == 1)
     %%
     gain.PCOM                 = diag([50   100  50]);
     gain.ICOM                 = diag([  0    0   0]);

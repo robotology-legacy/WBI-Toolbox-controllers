@@ -4,27 +4,30 @@ clc;
 setenv('YARP_ROBOT_NAME','iCubGenova02');
 % setenv('YARP_ROBOT_NAME','icubGazeboSim');
 
-simulationTime      = inf;    % Simulation time in seconds
+CONFIG.SIMULATION_TIME      = inf;    % Simulation time in seconds
 
-USE_QP_SOLVER       = 0;
+CONFIG.USE_QP_SOLVER       = 1;
 
-LEFT_RIGHT_FOOT_IN_CONTACT  = [1 1];
+CONFIG.USE_IMU4EST_BASE    = true;
 
-DEMO_MOVEMENTS      = false; % Either true or false 
 
-SMOOTH_DES_COM      = 1;    % If equal to one, the desired streamed values 
+CONFIG.LEFT_RIGHT_FOOT_IN_CONTACT  = [1 1];
+
+CONFIG.DEMO_MOVEMENTS      = false; % Either true or false 
+
+CONFIG.SMOOTH_DES_COM      = 1;    % If equal to one, the desired streamed values 
                             % of the center of mass are smoothed internally 
-SMOOTH_DES_Q        = 1;    % If equal to one, the desired streamed values 
+CONFIG.SMOOTH_DES_Q        = 1;    % If equal to one, the desired streamed values 
                             % of the postural tasks are smoothed internally 
 
 
 % PLEASE, use logical values (true or false) for the following variable
 
-USE_SM             = true;  % If equal to true, the (internal) state machine 
+CONFIG.USE_SM             = false;  % If equal to true, the (internal) state machine 
                             % will be used. The robot will switch from 2 feet 
                             % to 1 (left) foot
                            
-Ts                 = 0.01; %  Controller period [s]
+CONFIG.Ts                 = 0.01; %  Controller period [s]
 
 
 %% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -32,7 +35,7 @@ Ts                 = 0.01; %  Controller period [s]
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% DO NOT MODIFY THE FOLLOWING VARIABLES, THEY ARE AUTOMATICALLY 
 %% CHANGED WHEN SIMULATING THE ROBOT ON GAZEBO, i.e. YARP_ROBOT_NAME=icubGazeboSim
-ON_GAZEBO     = false;
+CONFIG.ON_GAZEBO     = false;
 WBT_modelName = 'matlabTorqueBalancing';
 
 run(strcat('robots/',getenv('YARP_ROBOT_NAME'),'/gains.m')); 

@@ -1,5 +1,5 @@
 %% OVERWRITING SOME OF THE PARAMETERS CONTAINED IN gains.m WHEN USING FSM
-if USE_SM
+if CONFIG.USE_SM
     reg.pinvDamp    = 0.1;
     sat.torque = 50;
 
