@@ -7,7 +7,7 @@ Model {
     NumRootInports	    0
     NumRootOutports	    0
     ParameterArgumentNames  ""
-    ComputedModelVersion    "1.24"
+    ComputedModelVersion    "1.26"
     NumModelReferences	    0
     NumTestPointedSignals   0
   }
@@ -66,9 +66,9 @@ Model {
   ModifiedByFormat	  "%<Auto>"
   LastModifiedBy	  "makaveli"
   ModifiedDateFormat	  "%<Auto>"
-  LastModifiedDate	  "Wed Dec 23 18:37:27 2015"
-  RTWModifiedTimeStamp	  372793912
-  ModelVersionFormat	  "1.%<AutoIncrement:24>"
+  LastModifiedDate	  "Mon Dec 28 08:39:18 2015"
+  RTWModifiedTimeStamp	  373192757
+  ModelVersionFormat	  "1.%<AutoIncrement:26>"
   ConfigurationManager	  "none"
   SampleTimeColors	  off
   SampleTimeAnnotations	  off
@@ -113,7 +113,7 @@ Model {
     $ObjectID		    6
     $ClassName		    "Simulink.SimulationData.ModelLoggingInfo"
     model_		    "player"
-    overrideMode_	    [0U]
+    overrideMode_	    [0.0]
     Array {
       Type		      "Cell"
       Dimension		      1
@@ -784,6 +784,21 @@ Model {
       OutputAfterFinalValue   "Extrapolation"
     }
     Block {
+      BlockType		      Gain
+      Gain		      "1"
+      Multiplication	      "Element-wise(K.*u)"
+      ParamMin		      "[]"
+      ParamMax		      "[]"
+      ParamDataTypeStr	      "Inherit: Same as input"
+      OutMin		      "[]"
+      OutMax		      "[]"
+      OutDataTypeStr	      "Inherit: Same as input"
+      LockScale		      off
+      RndMeth		      "Floor"
+      SaturateOnIntegerOverflow	on
+      SampleTime	      "-1"
+    }
+    Block {
       BlockType		      Scope
       DefaultConfigurationName "Simulink.scopes.TimeScopeBlockCfg"
       NumInputPorts	      "1"
@@ -806,7 +821,7 @@ Model {
     ShowPageBoundaries	    off
     ZoomFactor		    "100"
     ReportName		    "simulink-default.rpt"
-    SIDHighWatermark	    "15"
+    SIDHighWatermark	    "16"
     Block {
       BlockType		      Reference
       Name		      "Com"
@@ -815,7 +830,6 @@ Model {
       Position		      [490, 116, 575, 154]
       ZOrder		      28
       ForegroundColor	      "[0.490196, 0.000000, 0.000000]"
-      Commented		      "on"
       LibraryVersion	      "1.345"
       SourceBlock	      "WBToolboxLibrary/Utilities/Yarp Write"
       SourceType	      "YARP Write"
@@ -831,13 +845,23 @@ Model {
       Position		      [490, 196, 575, 234]
       ZOrder		      30
       ForegroundColor	      "[0.490196, 0.000000, 0.000000]"
-      Commented		      "on"
       LibraryVersion	      "1.345"
       SourceBlock	      "WBToolboxLibrary/Utilities/Yarp Write"
       SourceType	      "YARP Write"
       portName		      "constraintsPort"
       autoconnect	      on
       errorOnConnection	      on
+    }
+    Block {
+      BlockType		      Gain
+      Name		      "Gain"
+      SID		      "16"
+      Position		      [415, 270, 465, 300]
+      ZOrder		      42
+      Gain		      "pi/180"
+      ParamDataTypeStr	      "Inherit: Inherit via internal rule"
+      OutDataTypeStr	      "Inherit: Inherit via internal rule"
+      SaturateOnIntegerOverflow	off
     }
     Block {
       BlockType		      Reference
@@ -910,10 +934,29 @@ Model {
       Name		      "Scope2"
       SID		      "15"
       Ports		      [1]
-      Position		      [415, 299, 445, 331]
+      Position		      [415, 319, 445, 351]
       ZOrder		      40
-      ScopeSpecificationString "C++SS(StrPVP('SaveName','ScopeData'),StrPVP('SaveName','ScopeData2'),StrPVP('LimitData"
-      "Points','on'),StrPVP('DataFormat','Array'),StrPVP('Decimation','1'),StrPVP('BlockParamSampleInput','off'))"
+      ScopeSpecificationString "Simulink.scopes.TimeScopeBlockCfg('CurrentConfiguration', extmgr.ConfigurationSet(extm"
+      "gr.Configuration('Core','General UI',true),extmgr.Configuration('Core','Source UI',true),extmgr.Configuration('S"
+      "ources','WiredSimulink',true,'DataLoggingVariableName','ScopeData2','DataLoggingLimitDataPoints',true,'DataLoggi"
+      "ngSaveFormat','Array','DataLoggingDecimation','1','DataLoggingDecimateData',true),extmgr.Configuration('Visuals'"
+      ",'Time Domain',true,'SerializedDisplays',{struct('MinYLimReal','-88.79783','MaxYLimReal','65.29317','YLabelReal'"
+      ",'','MinYLimMag','0.00000','MaxYLimMag','88.79783','LegendVisibility','off','XGrid',true,'YGrid',true,'PlotMagPh"
+      "ase',false,'AxesColor',[0 0 0],'AxesTickColor',[0.686274509803922 0.686274509803922 0.686274509803922],'ColorOrd"
+      "er',[1 1 0.0666666666666667;0.0745098039215686 0.623529411764706 1;1 0.411764705882353 0.16078431372549;0.392156"
+      "862745098 0.831372549019608 0.0745098039215686;0.717647058823529 0.274509803921569 1;0.0588235294117647 1 1;1 0."
+      "0745098039215686 0.650980392156863],'Title','%<SignalLabel>','LinePropertiesCache',{{}},'UserDefinedChannelNames"
+      "',{{}},'NumLines',23,'LineNames',{{'qdes input:1','qdes input:2','qdes input:3','qdes input:4','qdes input:5','q"
+      "des input:6','qdes input:7','qdes input:8','qdes input:9','qdes input:10','qdes input:11','qdes input:12','qdes "
+      "input:13','qdes input:14','qdes input:15','qdes input:16','qdes input:17','qdes input:18','qdes input:19','qdes "
+      "input:20','qdes input:21','qdes input:22','qdes input:23'}},'ShowContent',true,'Placement',1)},'DisplayPropertyD"
+      "efaults',struct('MinYLimReal','-88.79783','MaxYLimReal','65.29317','YLabelReal','','MinYLimMag','0.00000','MaxYL"
+      "imMag','88.79783','LegendVisibility','off','XGrid',true,'YGrid',true,'PlotMagPhase',false,'AxesColor',[0 0 0],'A"
+      "xesTickColor',[0.686274509803922 0.686274509803922 0.686274509803922],'ColorOrder',[0.0745098039215686 0.6235294"
+      "11764706 1;1 0.411764705882353 0.16078431372549;1 1 0.0666666666666667;0.717647058823529 0.274509803921569 1;0.3"
+      "92156862745098 0.831372549019608 0.0745098039215686;0.0588235294117647 1 1;1 0.0745098039215686 0.65098039215686"
+      "3])),extmgr.Configuration('Tools','Plot Navigation',true),extmgr.Configuration('Tools','Measurements',true,'Vers"
+      "ion','2015b')),'Version','2015b')"
     }
     Block {
       BlockType		      Reference
@@ -959,7 +1002,6 @@ Model {
       Position		      [490, 266, 575, 304]
       ZOrder		      29
       ForegroundColor	      "[0.490196, 0.000000, 0.000000]"
-      Commented		      "on"
       LibraryVersion	      "1.345"
       SourceBlock	      "WBToolboxLibrary/Utilities/Yarp Write"
       SourceType	      "YARP Write"
@@ -1012,21 +1054,29 @@ Model {
       }
     }
     Line {
-      ZOrder		      7
+      ZOrder		      20
       SrcBlock		      "qdes input"
       SrcPort		      1
       Points		      [107, 0]
       Branch {
 	ZOrder			11
 	Points			[0, -30]
-	DstBlock		"qDes"
+	DstBlock		"Gain"
 	DstPort			1
       }
       Branch {
 	ZOrder			10
+	Points			[0, 20]
 	DstBlock		"Scope2"
 	DstPort			1
       }
+    }
+    Line {
+      ZOrder		      19
+      SrcBlock		      "Gain"
+      SrcPort		      1
+      DstBlock		      "qDes"
+      DstPort		      1
     }
   }
 }
