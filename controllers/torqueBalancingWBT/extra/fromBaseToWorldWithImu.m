@@ -1,10 +1,12 @@
-function w_H_root = fromBaseToWorldWithImu(imu_H_link,imu_H_link_0,link_H_root,inertial_0,inertial)
+function [w_H_root,w_R_link] = fromBaseToWorldWithImu(imu_H_link,imu_H_link_0,link_H_root,inertial_0,inertial)
 %#codegen
  
 
 % See http://wiki.icub.org/images/8/82/XsensMtx.pdf page 11
 
+
 w_R_imu      = rotz(inertial(3))*roty(inertial(2))*rotx(inertial(1));
+
 w_R_imu_0    = rotz(inertial_0(3))*roty(inertial_0(2))*rotx(inertial_0(1));
 
 imu_R_link   = imu_H_link(1:3,1:3);
