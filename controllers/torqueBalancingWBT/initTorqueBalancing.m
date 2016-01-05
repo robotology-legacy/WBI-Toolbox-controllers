@@ -8,7 +8,7 @@ CONFIG.SIMULATION_TIME      = inf;    % Simulation time in seconds
 
 CONFIG.USE_QP_SOLVER       = 1;
 
-CONFIG.USE_IMU4EST_BASE    = true;
+CONFIG.USE_IMU4EST_BASE    = false;
 
 
 CONFIG.LEFT_RIGHT_FOOT_IN_CONTACT  = [1 1];
@@ -23,7 +23,7 @@ CONFIG.SMOOTH_DES_Q        = 1;    % If equal to one, the desired streamed value
 
 % PLEASE, use logical values (true or false) for the following variable
 
-CONFIG.USE_SM             = false;  % If equal to true, the (internal) state machine 
+CONFIG.USE_SM             = true;  % If equal to true, the (internal) state machine 
                             % will be used. The robot will switch from 2 feet 
                             % to 1 (left) foot
                            

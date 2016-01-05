@@ -5,8 +5,8 @@ references.com.noOscillationTime       = 0;    % that the robot waits before sta
  
 references.joints.points               = 0;
 
-if (sum(LEFT_RIGHT_FOOT_IN_CONTACT) == 2 )
-    if (DEMO_MOVEMENTS)
+if (sum(CONFIG.LEFT_RIGHT_FOOT_IN_CONTACT) == 2 )
+    if (CONFIG.DEMO_MOVEMENTS)
         references.com.directionOfOscillation  = [0;1;0];
         references.com.amplitudeOfOscillation  = 0.05;
         references.com.frequencyOfOscillation  = 0.4;
