@@ -87,7 +87,7 @@ gain.integral            = [intTorso,intArms,intArms,intLeftLeg,intRightLeg];
 gain.impedances          = [impTorso(1,:),impArms(1,:),impArms(1,:),impLeftLeg(1,:),impRightLeg(1,:)];
 gain.dampings            = zeros(1,ROBOT_DOF);
 gain.increasingRatesImp  = [impTorso(2,:),impArms(2,:),impArms(2,:),impLeftLeg(2,:),impRightLeg(2,:)];
-sat.impedences            = [80   25    1400];
+sat.impedences           = [80   25    1400];
 
 if (size(gain.impedances,2) ~= ROBOT_DOF)
     error('Dimension mismatch between ROBOT_DOF and dimension of the variable impedences. Check these variables in the file gains.m');
@@ -112,6 +112,6 @@ fZmin                        = 10;
 %% The QP solver will search a solution fo that 
 % satisfies the inequality Aineq_f F(fo) < bineq_f
 reg.pinvTol     = 1e-5;
-reg.pinvDamp    = 0.01;
+reg.pinvDamp    = 0.1;
 reg.pinvDampVb  = 0.001;
 reg.HessianQP   = 1e-7;

@@ -1,6 +1,5 @@
 function [w_H_root,w_R_link] = fromBaseToWorldWithImu(imu_H_link,imu_H_link_0,link_H_root,inertial_0,inertial,CONFIG)
 %#codegen
- 
 
 % See http://wiki.icub.org/images/8/82/XsensMtx.pdf page 11
 
