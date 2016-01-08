@@ -1,9 +1,9 @@
 %% OVERWRITING SOME OF THE PARAMETERS CONTAINED IN gains.m WHEN USING FSM
 if CONFIG.USE_SM
-    reg.pinvDamp    = 0.1;
+    reg.pinvDamp    = 1;
     sat.torque = 50;
 
-    references.joints.smoothingTime    = 5;
+    references.joints.smoothingTime    = 3;
     references.com.smoothingTime       = references.joints.smoothingTime;
     gain.SmoothingTimeImp              = references.joints.smoothingTime;  
 
@@ -200,9 +200,9 @@ q9 =        [-0.0179    0.2145   -0.0016,...
           
   
 sm.joints.pointsL =[ 0,                                q1;
-                     1*references.joints.smoothingTime,  q2;
+                     1*references.joints.smoothingTime,q2;
                      2*references.joints.smoothingTime,q3;
-                     3*references.joints.smoothingTime,q4;
+                     3*references.joints.smoothingTime,q4
                      4*references.joints.smoothingTime,q5;
                      5*references.joints.smoothingTime,q6;
                      6*references.joints.smoothingTime,q7;

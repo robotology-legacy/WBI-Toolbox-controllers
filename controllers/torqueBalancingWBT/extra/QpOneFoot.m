@@ -55,7 +55,7 @@ block.InputPort(6).DirectFeedthrough = true;
 block.OutputPort(1).DatatypeID  = 0; % double
 block.OutputPort(1).Complexity  = 'Real';
 
-block.OutputPort(2).DatatypeID  = 8; % boolean
+block.OutputPort(2).DatatypeID  = 0; % double %8; % boolean
 block.OutputPort(2).Complexity  = 'Real';
 
 % Register parameters
@@ -179,7 +179,7 @@ function Outputs(block)
 %                 auxOutput
 %                 lambda
 %                 desiredf0 = zeros(6,1);
-                exitFlag  = 1;
+%                 exitFlag  = 1;
                 desiredf0 = - inv(HessianMatrixQP1Foot)*gradientQP1Foot';
            end
         else
@@ -189,7 +189,7 @@ function Outputs(block)
             desiredf0 = zeros(6,1);
     end
     block.OutputPort(1).Data = [desiredf0*LEFT_RIGHT_FOOT_IN_CONTACT(1);desiredf0*LEFT_RIGHT_FOOT_IN_CONTACT(2)]*abs(LEFT_RIGHT_FOOT_IN_CONTACT(2)-LEFT_RIGHT_FOOT_IN_CONTACT(1));
-    block.OutputPort(2).Data = (exitFlag == 0);
+    block.OutputPort(2).Data = exitFlag;
 %end Outputs
 
 

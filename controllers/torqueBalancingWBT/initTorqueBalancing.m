@@ -1,14 +1,12 @@
 clear;% all;
 clc;
 
-setenv('YARP_ROBOT_NAME','iCubGenova02');
-% setenv('YARP_ROBOT_NAME','icubGazeboSim');
+% setenv('YARP_ROBOT_NAME','iCubGenova02');
+setenv('YARP_ROBOT_NAME','icubGazeboSim');
 
-CONFIG.SIMULATION_TIME      = inf;    % Simulation time in seconds
+CONFIG.SIMULATION_TIME      = 10;    % Simulation time in seconds
 
 CONFIG.USE_QP_SOLVER       = 1;
-
-CONFIG.USE_IMU4EST_BASE    = false;
 
 
 CONFIG.LEFT_RIGHT_FOOT_IN_CONTACT  = [1 1];
@@ -19,7 +17,11 @@ CONFIG.SMOOTH_DES_COM      = 1;    % If equal to one, the desired streamed value
                             % of the center of mass are smoothed internally 
 CONFIG.SMOOTH_DES_Q        = 1;    % If equal to one, the desired streamed values 
                             % of the postural tasks are smoothed internally 
+                            
+CONFIG.USE_IMU4EST_BASE    = false;
 
+
+CONFIG.YAW_IMU_FILTER      = false;
 
 % PLEASE, use logical values (true or false) for the following variable
 

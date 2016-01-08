@@ -20,7 +20,7 @@ gain.SmoothingTimeImp  = 1;
 if (sum(CONFIG.LEFT_RIGHT_FOOT_IN_CONTACT) == 2)
     gain.PCOM                 = diag([50    50  50]);
     gain.ICOM                 = diag([  0    0   0]);
-    gain.DCOM                 = 2*sqrt(gain.PCOM)*0.5;
+    gain.DCOM                 = 2*sqrt(gain.PCOM);
 
     gain.PAngularMomentum     = 1 ;
 
@@ -87,7 +87,7 @@ end
 sat.integral              = 0;
 gain.integral            = [intTorso,intArms,intArms,intLeftLeg,intRightLeg];
 gain.impedances          = [impTorso(1,:),impArms(1,:),impArms(1,:),impLeftLeg(1,:),impRightLeg(1,:)];
-gain.dampings            = zeros(1,ROBOT_DOF);
+gain.dampings            = 2*sqrt(gain.impedances);
 gain.increasingRatesImp  = [impTorso(2,:),impArms(2,:),impArms(2,:),impLeftLeg(2,:),impRightLeg(2,:)];
 sat.impedences            = [80   25    1400];
 
@@ -106,8 +106,8 @@ numberOfPoints               = 4; % The friction cone is approximated by using l
 forceFrictionCoefficient     = 1;%1/3;  
 torsionalFrictionCoefficient = 2/150;
 
-gain.footSize                = [ -0.1 0.1   ;    % xMin, xMax
-                                 -0.1 0.1  ];   % yMin, yMax    
+gain.footSize                = [ -0.07 0.07   ;   % xMin, xMax
+                                 -0.03 0.03 ];  % yMin, yMax    
 
 fZmin                        = 10;
 
