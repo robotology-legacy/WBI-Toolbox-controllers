@@ -4,7 +4,7 @@ clc;
 % setenv('YARP_ROBOT_NAME','iCubGenova02');
 setenv('YARP_ROBOT_NAME','icubGazeboSim');
 
-CONFIG.SIMULATION_TIME      = 10;    % Simulation time in seconds
+CONFIG.SIMULATION_TIME      = inf;    % Simulation time in seconds
 
 CONFIG.USE_QP_SOLVER       = 1;
 
@@ -28,6 +28,8 @@ CONFIG.YAW_IMU_FILTER      = false;
 CONFIG.USE_SM             = true;  % If equal to true, the (internal) state machine 
                             % will be used. The robot will switch from 2 feet 
                             % to 1 (left) foot
+                            
+SM.SM_TYPE                = 'INTERNAL'; % or 'WALKING', or COORDINATOR
                            
 CONFIG.Ts                 = 0.01; %  Controller period [s]
 
@@ -47,9 +49,23 @@ addpath('extra/')
 
 robotSpecificReferences = fullfile('robots',getenv('YARP_ROBOT_NAME'),'initRefGen.m');
 run(robotSpecificReferences);
-robotSpecificFSM = fullfile('robots',getenv('YARP_ROBOT_NAME'),'initStateMachine.m');
-run(robotSpecificFSM);
 
+SM.SM.MASK.COORDINATOR = bin2dec('001');
+SM.SM.MASK.INTERNAL = bin2dec('010');
+SM.SM.MASK.WALKING = bin2dec('100');
+
+SM.SM_TYPE_BIN = SM.SM.MASK.COORDINATOR;
+robotSpecificFSM = fullfile('robots',getenv('YARP_ROBOT_NAME'),'initStateMachine.m');
+
+if strcmpi(SM.SM_TYPE, 'COORDINATOR')
+    SM.SM_TYPE_BIN = SM.SM.MASK.COORDINATOR;
+elseif strcmpi(SM.SM_TYPE, 'INTERNAL')
+    SM.SM_TYPE_BIN = SM.SM.MASK.INTERNAL;
+elseif strcmpi(SM.SM_TYPE, 'WALKING')
+    SM.SM_TYPE_BIN = SM.SM.MASK.WALKING;
+    robotSpecificFSM = fullfile('robots',getenv('YARP_ROBOT_NAME'),'initStateMachineWalking.m');
+end
+run(robotSpecificFSM);
 
 
 % If you want to sync Gazebo and simulink, 
