@@ -29,7 +29,7 @@ CONFIG.USE_SM             = true;  % If equal to true, the (internal) state mach
                             % will be used. The robot will switch from 2 feet 
                             % to 1 (left) foot
                             
-SM.SM_TYPE                = 'INTERNAL'; % or 'WALKING', or COORDINATOR
+SM.SM_TYPE                = 'YOGA'; % 'YOGA' or 'WALKING', or COORDINATOR
                            
 CONFIG.Ts                 = 0.01; %  Controller period [s]
 
@@ -51,7 +51,7 @@ robotSpecificReferences = fullfile('robots',getenv('YARP_ROBOT_NAME'),'initRefGe
 run(robotSpecificReferences);
 
 SM.SM.MASK.COORDINATOR = bin2dec('001');
-SM.SM.MASK.INTERNAL = bin2dec('010');
+SM.SM.MASK.YOGA = bin2dec('010');
 SM.SM.MASK.WALKING = bin2dec('100');
 
 SM.SM_TYPE_BIN = SM.SM.MASK.COORDINATOR;
@@ -59,8 +59,8 @@ robotSpecificFSM = fullfile('robots',getenv('YARP_ROBOT_NAME'),'initStateMachine
 
 if strcmpi(SM.SM_TYPE, 'COORDINATOR')
     SM.SM_TYPE_BIN = SM.SM.MASK.COORDINATOR;
-elseif strcmpi(SM.SM_TYPE, 'INTERNAL')
-    SM.SM_TYPE_BIN = SM.SM.MASK.INTERNAL;
+elseif strcmpi(SM.SM_TYPE, 'YOGA')
+    SM.SM_TYPE_BIN = SM.SM.MASK.YOGA;
 elseif strcmpi(SM.SM_TYPE, 'WALKING')
     SM.SM_TYPE_BIN = SM.SM.MASK.WALKING;
     robotSpecificFSM = fullfile('robots',getenv('YARP_ROBOT_NAME'),'initStateMachineWalking.m');

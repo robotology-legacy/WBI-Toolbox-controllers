@@ -7,7 +7,7 @@ Model {
     NumRootInports	    0
     NumRootOutports	    0
     ParameterArgumentNames  ""
-    ComputedModelVersion    "1.2738"
+    ComputedModelVersion    "1.2739"
     NumModelReferences	    0
     NumTestPointedSignals   0
   }
@@ -30,7 +30,7 @@ Model {
       $ObjectID		      2
       $ClassName	      "Simulink.WindowInfo"
       IsActive		      [1]
-      Location		      [0.0, 23.0, 1280.0, 721.0]
+      Location		      [0.0, 23.0, 1937.0, 925.0]
       Object {
 	$PropName		"ModelBrowserInfo"
 	$ObjectID		3
@@ -64,9 +64,9 @@ Model {
 	  IsActive		  [1]
 	  ViewObjType		  "SimulinkSubsys"
 	  LoadSaveID		  "2087"
-	  Extents		  [1246.0, 548.0]
-	  ZoomFactor		  [0.5752212389380531]
-	  Offset		  [-859.71778846153848, 2377.6615384615384]
+	  Extents		  [1903.0, 752.0]
+	  ZoomFactor		  [0.802660753880266]
+	  Offset		  [-962.08857044198908, 2386.558011049724]
 	}
 	PropName		"EditorsInfo"
       }
@@ -78,9 +78,9 @@ Model {
   ModifiedByFormat	  "%<Auto>"
   LastModifiedBy	  "makaveli"
   ModifiedDateFormat	  "%<Auto>"
-  LastModifiedDate	  "Sat Jan 09 11:37:46 2016"
-  RTWModifiedTimeStamp	  374240136
-  ModelVersionFormat	  "1.%<AutoIncrement:2738>"
+  LastModifiedDate	  "Mon Jan 11 10:04:21 2016"
+  RTWModifiedTimeStamp	  374407458
+  ModelVersionFormat	  "1.%<AutoIncrement:2739>"
   ConfigurationManager	  "none"
   SampleTimeColors	  off
   SampleTimeAnnotations	  on
@@ -1133,7 +1133,7 @@ Model {
       Variant		      off
       System {
 	Name			"DesValues"
-	Location		[0, 23, 1280, 744]
+	Location		[0, 23, 1937, 948]
 	Open			on
 	ModelBrowserVisibility	off
 	ModelBrowserWidth	200
@@ -1145,7 +1145,7 @@ Model {
 	TiledPaperMargins	[0.500000, 0.500000, 0.500000, 0.500000]
 	TiledPageScale		1
 	ShowPageBoundaries	off
-	ZoomFactor		"58"
+	ZoomFactor		"80"
 	Block {
 	  BlockType		  Reference
 	  Name			  "23-DoFs WBI to YARP7"
@@ -1372,22 +1372,6 @@ Model {
 	  ShowName		  off
 	  GotoTag		  "state"
 	  TagVisibility		  "global"
-	}
-	Block {
-	  BlockType		  Reference
-	  Name			  "Internal"
-	  SID			  "2909"
-	  Ports			  [1, 1]
-	  Position		  [-315, 2596, -255, 2624]
-	  ZOrder		  606
-	  LibraryVersion	  "1.358"
-	  SourceBlock		  "simulink/Logic and Bit\nOperations/Bitwise\nOperator"
-	  SourceType		  "Bitwise Operator"
-	  logicop		  "AND"
-	  UseBitMask		  on
-	  NumInputPorts		  "1"
-	  BitMask		  "SM.SM.MASK.INTERNAL"
-	  BitMaskRealWorld	  "Stored Integer"
 	}
 	Block {
 	  BlockType		  SubSystem
@@ -17217,6 +17201,22 @@ Model {
 	}
 	Block {
 	  BlockType		  Reference
+	  Name			  "Yoga"
+	  SID			  "2909"
+	  Ports			  [1, 1]
+	  Position		  [-315, 2596, -255, 2624]
+	  ZOrder		  606
+	  LibraryVersion	  "1.358"
+	  SourceBlock		  "simulink/Logic and Bit\nOperations/Bitwise\nOperator"
+	  SourceType		  "Bitwise Operator"
+	  logicop		  "AND"
+	  UseBitMask		  on
+	  NumInputPorts		  "1"
+	  BitMask		  "SM.SM.MASK.YOGA"
+	  BitMaskRealWorld	  "Stored Integer"
+	}
+	Block {
+	  BlockType		  Reference
 	  Name			  "contacts"
 	  SID			  "2250"
 	  Ports			  [0, 2]
@@ -18269,7 +18269,7 @@ Model {
 	    }
 	    Branch {
 	      ZOrder		      100
-	      DstBlock		      "Internal"
+	      DstBlock		      "Yoga"
 	      DstPort		      1
 	    }
 	  }
@@ -18596,7 +18596,7 @@ Model {
 	}
 	Line {
 	  ZOrder		  105
-	  SrcBlock		  "Internal"
+	  SrcBlock		  "Yoga"
 	  SrcPort		  1
 	  DstBlock		  "Compare\nTo Zero"
 	  DstPort		  1
