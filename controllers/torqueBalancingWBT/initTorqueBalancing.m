@@ -13,9 +13,9 @@ CONFIG.LEFT_RIGHT_FOOT_IN_CONTACT  = [1 1];
 
 CONFIG.DEMO_MOVEMENTS      = false; % Either true or false 
 
-CONFIG.SMOOTH_DES_COM      = 1;    % If equal to one, the desired streamed values 
+CONFIG.SMOOTH_DES_COM      = 0;    % If equal to one, the desired streamed values 
                             % of the center of mass are smoothed internally 
-CONFIG.SMOOTH_DES_Q        = 1;    % If equal to one, the desired streamed values 
+CONFIG.SMOOTH_DES_Q        = 0;    % If equal to one, the desired streamed values 
                             % of the postural tasks are smoothed internally 
                             
 CONFIG.USE_IMU4EST_BASE    = false;
@@ -25,7 +25,7 @@ CONFIG.YAW_IMU_FILTER      = false;
 
 % PLEASE, use logical values (true or false) for the following variable
                             
-SM.SM_TYPE                = 'WALKING'; % 'YOGA' or 'WALKING', or COORDINATOR
+SM.SM_TYPE                = 'YOGA'; % 'YOGA' or 'WALKING', or COORDINATOR
                            
 CONFIG.Ts                 = 0.01; %  Controller period [s]
 
@@ -61,8 +61,8 @@ elseif strcmpi(SM.SM_TYPE, 'YOGA')
 elseif strcmpi(SM.SM_TYPE, 'WALKING')
     SM.SM_TYPE_BIN = SM.SM.MASK.WALKING;
     robotSpecificFSM = fullfile('robots',getenv('YARP_ROBOT_NAME'),'initStateMachineWalking.m');
+    run(robotSpecificFSM);
 end
-run(robotSpecificFSM);
 
 
 % If you want to sync Gazebo and simulink, 

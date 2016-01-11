@@ -223,7 +223,9 @@ function [CoMDes,qDes,constraints, currentState,impedances,w_H_b] = ...
         constraints = [1; 1]; %right foot is no longer a constraints
         impedances = gain.impedances(state,:);
         if t > sm.tBalancing %after tBalancing time start moving weight to the left
-%            state = 2; 
+           if sm.yogaInLoop
+            state = 2; 
+           end
         end
     end 
     

@@ -1,16 +1,24 @@
 %% OVERWRITING SOME OF THE PARAMETERS CONTAINED IN gains.m WHEN USING FSM
 if strcmpi(SM.SM_TYPE, 'YOGA')
+    CONFIG.SMOOTH_DES_COM      = 1;    % If equal to one, the desired streamed values 
+                            % of the center of mass are smoothed internally 
+    CONFIG.SMOOTH_DES_Q        = 1;    % If equal to one, the desired streamed values 
+                            % of the postural tasks are smoothed internally 
+
     reg.pinvDamp = 1;
     sat.torque   = 50;
 
-    references.joints.smoothingTime    = 3;
+    gain.footSize  = [ -0.07  0.12   ;    % xMin, xMax
+                       -0.045 0.05 ];   % yMin, yMax  
+    
+    references.joints.smoothingTime    = 2 ;
     references.com.smoothingTime       = references.joints.smoothingTime;
     gain.SmoothingTimeImp              = references.joints.smoothingTime;  
 
     smoothingTimeTransitionDynamics    = 0.02;
 
 
-    gain.PCOM              = diag([30    30  30]); 
+    gain.PCOM              = diag([30    40  30]); 
     gain.ICOM              = diag([  0    0   0]);
     gain.DCOM              = 2*sqrt(gain.PCOM)*0;
 
@@ -53,9 +61,9 @@ end
          
 %% %%%%%%%%%%%%%%%%    FINITE STATE MACHINE SPECIFIC PARAMETERS
 sm.yogaAlsoOnRightFoot           = true;
-
-sm.com.threshold                 =   0.005;
-sm.wrench.threshold              = 70;
+sm.yogaInLoop                    = false;
+sm.com.threshold                 = 0.005;
+sm.wrench.threshold              = 30;
 sm.joints = struct;
 sm.joints.thresholdNotInContact =  3;
 sm.joints.thresholdInContact    = 50;
