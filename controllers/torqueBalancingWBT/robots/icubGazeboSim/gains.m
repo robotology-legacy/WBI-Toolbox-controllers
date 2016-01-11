@@ -1,5 +1,5 @@
 ROBOT_DOF = 23;
-ON_GAZEBO = true;
+CONFIG.ON_GAZEBO = true;
 WBT_wbiList = 'ROBOT_TORQUE_CONTROL_JOINTS_WITHOUT_PRONOSUP';
 
 references.joints.smoothingTime    = 1.0;
