@@ -1,8 +1,8 @@
 clear;% all;
 clc;
 
-% setenv('YARP_ROBOT_NAME','iCubGenova02');
-setenv('YARP_ROBOT_NAME','icubGazeboSim');
+setenv('YARP_ROBOT_NAME','iCubGenova02');
+% setenv('YARP_ROBOT_NAME','icubGazeboSim');
 
 CONFIG.SIMULATION_TIME      = inf;    % Simulation time in seconds
 
@@ -24,12 +24,8 @@ CONFIG.USE_IMU4EST_BASE    = false;
 CONFIG.YAW_IMU_FILTER      = false;
 
 % PLEASE, use logical values (true or false) for the following variable
-
-CONFIG.USE_SM             = true;  % If equal to true, the (internal) state machine 
-                            % will be used. The robot will switch from 2 feet 
-                            % to 1 (left) foot
                             
-SM.SM_TYPE                = 'YOGA'; % 'YOGA' or 'WALKING', or COORDINATOR
+SM.SM_TYPE                = 'WALKING'; % 'YOGA' or 'WALKING', or COORDINATOR
                            
 CONFIG.Ts                 = 0.01; %  Controller period [s]
 
@@ -56,6 +52,7 @@ SM.SM.MASK.WALKING = bin2dec('100');
 
 SM.SM_TYPE_BIN = SM.SM.MASK.COORDINATOR;
 robotSpecificFSM = fullfile('robots',getenv('YARP_ROBOT_NAME'),'initStateMachine.m');
+run(robotSpecificFSM);
 
 if strcmpi(SM.SM_TYPE, 'COORDINATOR')
     SM.SM_TYPE_BIN = SM.SM.MASK.COORDINATOR;

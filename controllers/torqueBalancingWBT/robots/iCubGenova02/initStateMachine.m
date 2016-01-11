@@ -1,7 +1,7 @@
 %% OVERWRITING SOME OF THE PARAMETERS CONTAINED IN gains.m WHEN USING FSM
-if CONFIG.USE_SM
-    reg.pinvDamp    = 1;
-    sat.torque = 50;
+if strcmpi(SM.SM_TYPE, 'YOGA')
+    reg.pinvDamp = 1;
+    sat.torque   = 50;
 
     references.joints.smoothingTime    = 3;
     references.com.smoothingTime       = references.joints.smoothingTime;

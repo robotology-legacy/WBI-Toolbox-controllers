@@ -1,5 +1,5 @@
 function [CoMDes,qDes,constraints, currentState,impedances,w_H_b] = ...
-    stateMachineWalking(CoM_0, q0, l_sole_CoM,r_sole_CoM, CoMIn, qIn, constraintsIn, wrench_rightFoot,wrench_leftFoot,l_sole_H_b, r_sole_H_b, sm,gain)
+    stateMachineWalking(CoM_0, q0, w_CoM, CoMIn, qIn, constraintsIn, wrench_rightFoot,wrench_leftFoot,l_sole_H_b, r_sole_H_b, sm,gain)
     %#codegen
     global state;
     
@@ -30,7 +30,7 @@ function [CoMDes,qDes,constraints, currentState,impedances,w_H_b] = ...
     
     if state == 1
         %waiting for com reference
-        if all(abs(CoM_0 - CoMIn) < eps)
+        if norm(CoM_0 - CoMIn) > eps
             state = 2;
         end
     elseif state == 2
@@ -39,7 +39,7 @@ function [CoMDes,qDes,constraints, currentState,impedances,w_H_b] = ...
         qDes   = qIn;
         impedances  = gain.impedances(state,:);
            
-        CoMError  = CoMDes - l_sole_CoM;
+        CoMError  = CoMDes - w_CoM;
         
         if ~any(constraintsIn - [1; 0]) ...
                 && norm(CoMError(2)) < sm.com.threshold
