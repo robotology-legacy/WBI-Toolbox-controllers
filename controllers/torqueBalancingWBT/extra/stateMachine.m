@@ -110,7 +110,7 @@ function [CoMDes,qDes,constraints, currentState,impedances,w_H_b] = ...
     if state == 7 
         constraints = [1; 1]; %right foot is no longer a constraints
         impedances = gain.impedances(state,:);
-        if ((norm(l_sole_CoM(1:2)-CoMDes(1:2)) < 2*sm.com.threshold) && sm.yogaAlsoOnRightFoot && (t > tSwitch + sm.tBalancing))
+        if ((norm(l_sole_CoM(1:2)-CoMDes(1:2)) < 3*sm.com.threshold) && sm.yogaAlsoOnRightFoot && (t > tSwitch + sm.tBalancing))
             w_H_r_sole_switch   = l_sole_H_b/r_sole_H_b;
             state               = 8;
             tSwitch             = t;

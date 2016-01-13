@@ -11,7 +11,7 @@ if strcmpi(SM.SM_TYPE, 'YOGA')
     gain.footSize  = [ -0.07  0.12   ;    % xMin, xMax
                        -0.045 0.05 ];   % yMin, yMax  
     
-    references.joints.smoothingTime    = 2 ;
+    references.joints.smoothingTime    = 3 ;
     references.com.smoothingTime       = references.joints.smoothingTime;
     gain.SmoothingTimeImp              = references.joints.smoothingTime;  
 
