@@ -39,7 +39,7 @@ CONFIG.ON_GAZEBO     = false;
 WBT_modelName = 'matlabTorqueBalancing';
 
 run(strcat('robots/',getenv('YARP_ROBOT_NAME'),'/gains.m')); 
-addpath('extra/')
+addpath('../utilityMatlabFunctions/')
 [ConstraintsMatrix,bVectorConstraints]= constraints(forceFrictionCoefficient,numberOfPoints,torsionalFrictionCoefficient,gain.footSize,fZmin);
 
 
