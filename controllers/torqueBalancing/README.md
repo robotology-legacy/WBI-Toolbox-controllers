@@ -6,6 +6,9 @@ A cost function penalizing high joint torques - that generate the feet forces - 
 
 For details see [iCub whole-body control through force regulation on rigid non-coplanar contacts](http://journal.frontiersin.org/article/10.3389/frobt.2015.00006/abstract)
 
+###Compatibility
+Matlab 2012b
+
 ###Launch procedure
 The procedure to run the torque balancing module is still quite elaborate.
 Users willing to use the module should follow this list.
