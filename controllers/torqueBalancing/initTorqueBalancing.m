@@ -1,4 +1,4 @@
-clear all;
+clear;
 clc;
 
 robotName = 'icubGazeboSim';            
@@ -10,7 +10,7 @@ USE_QP_SOLVER    = 0;
 
 LEFT_RIGHT_FOOT_IN_CONTACT  = [1 1];
 
-DEMO_MOVEMENTS         = 1;  % Either 0 or 1 
+DEMO_MOVEMENTS         = 0;  % Either 0 or 1 
 
  
 
@@ -23,11 +23,7 @@ addpath('extra/')
 [ConstraintsMatrix,bVectorConstraints]= constraints(forceFrictionCoefficient,numberOfPoints,torsionalFrictionCoefficient,gain.footSize,fZmin);
 
 
-% Uncomment the following line if you want to sync Gazebo and simulink.
-%
-% setenv('YARP_CLOCK','/clock');
-%
-% Remember that in this case, you have to launch gazebo as follow:
+% If you want to sync Gazebo and simulink, you have to launch gazebo as follow:
 % 
 % gazebo -slibgazebo_yarp_clock.so
 %
