@@ -104,6 +104,11 @@ numberOfPoints               = 4; % The friction cone is approximated by using l
 forceFrictionCoefficient     = 1;%1/3;  
 torsionalFrictionCoefficient = 2/150;
 
+%physical size of foot
+phys.footSize                = [ -0.065 0.13   ;    % xMin, xMax
+                                 -0.045 0.05  ];   % yMin, yMax    
+                      
+%foot size taken by the QP
 gain.footSize                = [ -0.1 0.1   ;    % xMin, xMax
                                  -0.1 0.1  ];   % yMin, yMax    
 

@@ -2,16 +2,16 @@ clear;% all;
 clc;
 
 setenv('YARP_ROBOT_NAME','iCubGenova02');
-% setenv('YARP_ROBOT_NAME','icubGazeboSim');
+setenv('YARP_ROBOT_NAME','icubGazeboSim');
 
 CONFIG.SIMULATION_TIME      = inf;    % Simulation time in seconds
 
-CONFIG.USE_QP_SOLVER       = 1;
+CONFIG.USE_QP_SOLVER       = 0;
 
 
 CONFIG.LEFT_RIGHT_FOOT_IN_CONTACT  = [1 1];
 
-CONFIG.DEMO_MOVEMENTS      = false; % Either true or false 
+CONFIG.DEMO_MOVEMENTS      = true; % Either true or false 
 
 CONFIG.SMOOTH_DES_COM      = 0;    % If equal to one, the desired streamed values 
                             % of the center of mass are smoothed internally 
@@ -25,7 +25,7 @@ CONFIG.YAW_IMU_FILTER      = false;
 
 % PLEASE, use logical values (true or false) for the following variable
                             
-SM.SM_TYPE                = 'YOGA'; % 'YOGA' or 'WALKING', or COORDINATOR
+SM.SM_TYPE                = 'COORDINATOR'; % 'YOGA' or 'WALKING', or COORDINATOR
                            
 CONFIG.Ts                 = 0.01; %  Controller period [s]
 
@@ -37,6 +37,9 @@ CONFIG.Ts                 = 0.01; %  Controller period [s]
 %% CHANGED WHEN SIMULATING THE ROBOT ON GAZEBO, i.e. YARP_ROBOT_NAME=icubGazeboSim
 CONFIG.ON_GAZEBO     = false;
 WBT_modelName = 'matlabTorqueBalancing';
+
+dump.left_wrench_port = '/wholeBodyDynamicsTree/left_foot/cartesianEndEffectorWrench:o';
+dump.right_wrench_port = '/wholeBodyDynamicsTree/right_foot/cartesianEndEffectorWrench:o';
 
 run(strcat('robots/',getenv('YARP_ROBOT_NAME'),'/gains.m')); 
 addpath('../utilityMatlabFunctions/')
