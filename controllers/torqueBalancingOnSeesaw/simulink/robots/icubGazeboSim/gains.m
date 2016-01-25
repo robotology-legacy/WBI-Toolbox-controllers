@@ -1,5 +1,5 @@
 ROBOT_DOF = 23;
-CONFIG.ON_GAZEBO = true;
+
 WBT_wbiList = 'ROBOT_TORQUE_CONTROL_JOINTS_WITHOUT_PRONOSUP';
 
 
@@ -34,7 +34,7 @@ end
 
 regs             = struct;
 regs.pinvTol     = 1e-5;
-regs.pinvDamp    = 1e-1;
+regs.pinvDamp    = 1e-2;
 regs.pinvDampA   = 1e-2;
 regs.pinvDampVb  = 1e-4;
 
@@ -71,7 +71,7 @@ gain.posturalDamp  = diag([ 1    1     1 ...
 TorqueMax          = 24;
 gain.thetaGain    = 100;
 gain.omegaGain    = 10;
-gain.xcomPGain    = diag([2.5, 30, 50]);%diag([2.5, 5, 100])%diag([2.5, 5, 5]);
+gain.xcomPGain    = diag([2.5, 50, 50]);%diag([2.5, 5, 100])%diag([2.5, 5, 5]);
 gain.xcomDGain    = 2*sqrt(gain.xcomPGain)*0;
 gain.Hw           = 1;
 gain.onSeesaw     = 1;
