@@ -87,7 +87,7 @@ end
 sat.integral              = 0;
 gain.integral            = [intTorso,intArms,intArms,intLeftLeg,intRightLeg];
 gain.impedances          = [impTorso(1,:),impArms(1,:),impArms(1,:),impLeftLeg(1,:),impRightLeg(1,:)];
-gain.dampings            = 2*sqrt(gain.impedances);
+gain.dampings            = 0*sqrt(gain.impedances);
 gain.increasingRatesImp  = [impTorso(2,:),impArms(2,:),impArms(2,:),impLeftLeg(2,:),impRightLeg(2,:)];
 sat.impedences            = [80   25    1400];
 

@@ -1,5 +1,5 @@
 %% OVERWRITING SOME OF THE PARAMETERS CONTAINED IN gains.m WHEN USING FSM
-if CONFIG.USE_SM
+if strcmpi(SM.SM_TYPE, 'YOGA')
     reg.pinvDamp    = 0.0001;
     sat.torque = 50;
 
@@ -56,7 +56,9 @@ end
          
 %% %%%%%%%%%%%%%%%%    FINITE STATE MACHINE SPECIFIC PARAMETERS
 sm.yogaAlsoOnRightFoot           = true;
-
+sm.jumpYoga                      = false;
+sm.demoOnlyRightFoot             = false;
+sm.yogaInLoop                    = true;
 sm.com.threshold                 =   0.005;
 sm.wrench.threshold              = 70;
 sm.joints = struct;
