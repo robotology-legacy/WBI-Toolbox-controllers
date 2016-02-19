@@ -2,6 +2,9 @@ ROBOT_DOF = 23;
 CONFIG.ON_GAZEBO = true;
 WBT_wbiList = 'ROBOT_TORQUE_CONTROL_JOINTS_WITHOUT_PRONOSUP';
 
+dump.left_wrench_port = '/icubGazeboSim/left_foot/analog:o';
+dump.right_wrench_port = '/icubGazeboSim/right_foot/analog:o';
+
 references.joints.smoothingTime    = 1.0;
 references.com.smoothingTime       = 5;
 
@@ -106,6 +109,10 @@ numberOfPoints               = 4; % The friction cone is approximated by using l
 forceFrictionCoefficient     = 1;%1/3;  
 torsionalFrictionCoefficient = 2/150;
 
+%physical size of foot
+phys.footSize                = [ -0.07 0.07   ;   % xMin, xMax
+                                 -0.03 0.03 ];  % yMin, yMax    
+                             
 gain.footSize                = [ -0.07 0.07   ;   % xMin, xMax
                                  -0.03 0.03 ];  % yMin, yMax    
 
