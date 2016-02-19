@@ -10,7 +10,9 @@ if strcmpi(SM.SM_TYPE, 'YOGA')
 
     gain.footSize  = [ -0.07  0.12   ;    % xMin, xMax
                        -0.045 0.05 ];   % yMin, yMax  
-    
+                   
+    forceFrictionCoefficient     = 1/3;%1/3;  
+
     references.joints.smoothingTime    = 5 ;
     references.com.smoothingTime       = references.joints.smoothingTime;
     gain.SmoothingTimeImp              = references.joints.smoothingTime;  
@@ -62,20 +64,20 @@ end
 %% %%%%%%%%%%%%%%%%    FINITE STATE MACHINE SPECIFIC PARAMETERS
 sm.jumpYoga                      = false;
 sm.demoOnlyRightFoot             = false;
-sm.yogaAlsoOnRightFoot           = true;
-sm.yogaInLoop                    = true;
+sm.yogaAlsoOnRightFoot           = false;
+sm.yogaInLoop                    = false;
 sm.com.threshold                 = 0.01;
 sm.wrench.threshold              = 30;
-sm.joints = struct;
-sm.joints.thresholdNotInContact =  3;
-sm.joints.thresholdInContact    = 50;
-sm.joints.pauseTimeLastPostureL = 3;
-sm.joints.pauseTimeLastPostureR = 3;
+sm.joints                        = struct;
+sm.joints.thresholdNotInContact  =  3;
+sm.joints.thresholdInContact     = 50;
+sm.joints.pauseTimeLastPostureL  = 3;
+sm.joints.pauseTimeLastPostureR  = 3;
 
-sm.stateAt0               = 1;
+sm.stateAt0                      = 1;
 
-sm.DT                     = 1;
-sm.waitingTimeAfterYoga   = 20;
+sm.DT                            = 1;
+sm.waitingTimeAfterYoga          = 0;
 
 
 
@@ -89,12 +91,12 @@ sm.com.states      = [0.0,  0.01,0.511;   %% state ==  1  TWO FEET BALANCING NOT
                       % FROM NOW ON, THE REFERENCE ARE ALWAYS DELTAS W.R.T.
                       % THE POSITION OF THE RIGHT FOOT
                       0.0,  0.00,0.0;   %% state ==  8  COM TRANSITION TO RIGHT FOOT
-                      0.0, -0.02,0.0;   %% state ==  9  RIGHT FOOT BALANCING 
-                      0.0, -0.02,0.0;   %% state == 10  YOGA RIGHT FOOT
+                      0.0, -0.03,0.0;   %% state ==  9  RIGHT FOOT BALANCING 
+                      0.0, -0.03,0.0;   %% state == 10  YOGA RIGHT FOOT
                       0.0, -0.02,0.0;   %% state == 11  PREPARING FOR SWITCHING
                       0.0, -0.02,0.0;   %% state == 12  LOOKING FOR CONTACT 
                       0.0,  0.00,0.0];  %% state == 13  TRANSITION INIT POSITION: THIS REFERENCE IS IGNORED
-sm.tBalancing      = 0.5;%inf;%0.5;
+sm.tBalancing      = 10;%inf;%0.5;
 
 
 sm.joints.states = [[0.0864,0.0258,0.0152, ...                          %% state == 1  TWO FEET BALANCING, THIS REFERENCE IS IGNORED 
@@ -211,12 +213,12 @@ q9 =        [-0.0179    0.2145   -0.0016,...
   
 sm.joints.pointsL =[ 0,                                q1;
                      1*references.joints.smoothingTime,q2;
-                     2*references.joints.smoothingTime,q3];
-%                      3*references.joints.smoothingTime,q4];
-%                      4*references.joints.smoothingTime,q5;
-%                      5*references.joints.smoothingTime,q6;
-%                       4*references.joints.smoothingTime,q7;
-%                       5*references.joints.smoothingTime,q8];
+                     2*references.joints.smoothingTime,q3;
+                     3*references.joints.smoothingTime,q4;
+                     4*references.joints.smoothingTime,q5;
+                     5*references.joints.smoothingTime,q6;
+                      6*references.joints.smoothingTime,q7;
+                      7*references.joints.smoothingTime,q8];
 %                      8*references.joints.smoothingTime,q9];
                  
 % sm.joints.pointsL = [references.joints.smoothingTime,sm.joints.states(5,:)];

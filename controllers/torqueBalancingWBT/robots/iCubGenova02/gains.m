@@ -1,5 +1,12 @@
 ROBOT_DOF = 23;
 
+CONFIG.LEFT_RIGHT_FOOT_IN_CONTACT  = [1 1];
+
+CONFIG.SMOOTH_DES_COM      = 0;    % If equal to one, the desired streamed values 
+                            % of the center of mass are smoothed internally 
+CONFIG.SMOOTH_DES_Q        = 0;    % If equal to one, the desired streamed values 
+                            % of the postural tasks are smoothed internally 
+                            
 references.joints.smoothingTime    = 1.0;
 references.com.smoothingTime       = 5;
 
@@ -101,16 +108,15 @@ end
 numberOfPoints               = 4; % The friction cone is approximated by using linear interpolation of the circle. 
                                   % So, numberOfPoints defines the number of points used to interpolate the circle in each cicle's quadrant 
 
-forceFrictionCoefficient     = 1;%1/3;  
+forceFrictionCoefficient     = 1/3;%1/3;  
 torsionalFrictionCoefficient = 2/150;
 
 %physical size of foot
 phys.footSize                = [ -0.065 0.13   ;    % xMin, xMax
                                  -0.045 0.05  ];   % yMin, yMax    
                       
-%foot size taken by the QP
-gain.footSize                = [ -0.1 0.1   ;    % xMin, xMax
-                                 -0.1 0.1  ];   % yMin, yMax    
+   gain.footSize  = [ -0.07  0.12   ;    % xMin, xMax
+                       -0.045 0.05 ];   % yMin, yMax   
 
 fZmin                        = 10;
 

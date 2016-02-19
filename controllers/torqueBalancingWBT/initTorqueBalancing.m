@@ -1,33 +1,21 @@
 clear;% all;
 clc;
 
-% setenv('YARP_ROBOT_NAME','iCubGenova02');
-setenv('YARP_ROBOT_NAME','icubGazeboSim');
+setenv('YARP_ROBOT_NAME','iCubGenova02');
+% setenv('YARP_ROBOT_NAME','icubGazeboSim');
 
-CONFIG.SIMULATION_TIME      = inf;    % Simulation time in seconds
+
+CONFIG.SIMULATION_TIME     = inf;    % Simulation time in seconds
+
+SM.SM_TYPE                 = 'COORDINATOR';   % 'YOGA' or 'WALKING', or COORDINATOR
 
 CONFIG.USE_QP_SOLVER       = 1;
-
-
-CONFIG.LEFT_RIGHT_FOOT_IN_CONTACT  = [1 1];
-
-CONFIG.DEMO_MOVEMENTS      = true; % Either true or false 
-
-CONFIG.SMOOTH_DES_COM      = 0;    % If equal to one, the desired streamed values 
-                            % of the center of mass are smoothed internally 
-CONFIG.SMOOTH_DES_Q        = 0;    % If equal to one, the desired streamed values 
-                            % of the postural tasks are smoothed internally 
                             
 CONFIG.USE_IMU4EST_BASE    = false;
-
-
 CONFIG.YAW_IMU_FILTER      = false;
-
-% PLEASE, use logical values (true or false) for the following variable
                             
-SM.SM_TYPE                = 'YOGA'; % 'YOGA' or 'WALKING', or COORDINATOR
                            
-CONFIG.Ts                 = 0.01; %  Controller period [s]
+CONFIG.Ts                  = 0.01; %  Controller period [s]
 
 
 %% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -36,7 +24,8 @@ CONFIG.Ts                 = 0.01; %  Controller period [s]
 %% DO NOT MODIFY THE FOLLOWING VARIABLES, THEY ARE AUTOMATICALLY 
 %% CHANGED WHEN SIMULATING THE ROBOT ON GAZEBO, i.e. YARP_ROBOT_NAME=icubGazeboSim
 CONFIG.ON_GAZEBO     = false;
-WBT_modelName = 'dani_matlabTorqueBalancing';
+WBT_modelName = 'matlabTorqueBalancing';
+baseToWorldRotationPort  = ['/' WBT_modelName '/floatingBaseRotationMatrix:i'];
 
 dump.left_wrench_port = '/wholeBodyDynamicsTree/left_foot/cartesianEndEffectorWrench:o';
 dump.right_wrench_port = '/wholeBodyDynamicsTree/right_foot/cartesianEndEffectorWrench:o';
