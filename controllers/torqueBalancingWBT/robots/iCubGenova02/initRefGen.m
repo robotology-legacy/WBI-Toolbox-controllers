@@ -9,8 +9,8 @@ references.joints.points               = 0;
 if (sum(CONFIG.LEFT_RIGHT_FOOT_IN_CONTACT) == 2 )
     if (CONFIG.DEMO_MOVEMENTS)
         references.com.directionOfOscillation  = [0;1;0];
-        references.com.amplitudeOfOscillation  = 0.05;
-        references.com.frequencyOfOscillation  = 0.4;
+        references.com.amplitudeOfOscillation  = 0.065;
+        references.com.frequencyOfOscillation  = 0.025;
     else
         references.com.directionOfOscillation  = [0;0;0];
         references.com.amplitudeOfOscillation  = 0.0;  %referenceParams(1) = amplitude of ascillations in meters referenceParams(2) = frequency of ascillations in hertz
