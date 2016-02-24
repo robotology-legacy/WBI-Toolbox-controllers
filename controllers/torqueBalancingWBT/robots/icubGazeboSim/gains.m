@@ -1,5 +1,6 @@
 ROBOT_DOF = 23;
 CONFIG.ON_GAZEBO = true;
+CONFIG.LEFT_RIGHT_FOOT_IN_CONTACT  = [1 1];
 WBT_wbiList = 'ROBOT_TORQUE_CONTROL_JOINTS_WITHOUT_PRONOSUP';
 
 dump.left_wrench_port = '/icubGazeboSim/left_foot/analog:o';
