@@ -35,6 +35,7 @@ if (sum(CONFIG.LEFT_RIGHT_FOOT_IN_CONTACT) == 2)
     gain.DCOM                 = 2*sqrt(gain.PCOM);
 
     gain.PAngularMomentum     = 1 ;
+    gain.DAngularMomentum     = 1 ;
 
     % Impadances acting in the null space of the desired contact forces 
 
@@ -69,6 +70,7 @@ if (sum(CONFIG.LEFT_RIGHT_FOOT_IN_CONTACT) == 1)
     gain.DCOM                 = diag([  0    0   0]);
 
     gain.PAngularMomentum     = 1 ;
+    gain.DAngularMomentum     = 1 ;
 
     % Impadances acting in the null space of the desired contact forces 
 
