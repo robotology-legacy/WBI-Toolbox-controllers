@@ -1,6 +1,14 @@
 ROBOT_DOF = 23;
 CONFIG.ON_GAZEBO = true;
+
 CONFIG.LEFT_RIGHT_FOOT_IN_CONTACT  = [1 1];
+
+CONFIG.SMOOTH_DES_COM      = 0;    % If equal to one, the desired streamed values 
+                            % of the center of mass are smoothed internally 
+
+CONFIG.SMOOTH_DES_Q        = 0;    % If equal to one, the desired streamed values 
+                            % of the postural tasks are smoothed internally 
+
 WBT_wbiList = 'ROBOT_TORQUE_CONTROL_JOINTS_WITHOUT_PRONOSUP';
 
 dump.left_wrench_port = '/icubGazeboSim/left_foot/analog:o';
@@ -89,10 +97,10 @@ if (sum(CONFIG.LEFT_RIGHT_FOOT_IN_CONTACT) == 1)
 end
 
 sat.integral              = 0;
-gain.integral            = [intTorso,intArms,intArms,intLeftLeg,intRightLeg];
-gain.impedances          = [impTorso(1,:),impArms(1,:),impArms(1,:),impLeftLeg(1,:),impRightLeg(1,:)];
-gain.dampings            = 0*sqrt(gain.impedances);
-gain.increasingRatesImp  = [impTorso(2,:),impArms(2,:),impArms(2,:),impLeftLeg(2,:),impRightLeg(2,:)];
+gain.integral             = [intTorso,intArms,intArms,intLeftLeg,intRightLeg];
+gain.impedances           = [impTorso(1,:),impArms(1,:),impArms(1,:),impLeftLeg(1,:),impRightLeg(1,:)];
+gain.dampings             = 0*sqrt(gain.impedances);
+gain.increasingRatesImp   = [impTorso(2,:),impArms(2,:),impArms(2,:),impLeftLeg(2,:),impRightLeg(2,:)];
 sat.impedences            = [80   25    1400];
 
 if (size(gain.impedances,2) ~= ROBOT_DOF)

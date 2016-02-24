@@ -1,15 +1,15 @@
 clear;% all;
 clc;
 
-setenv('YARP_ROBOT_NAME','iCubGenova02');
-% setenv('YARP_ROBOT_NAME','icubGazeboSim');
+% setenv('YARP_ROBOT_NAME','iCubGenova02');
+setenv('YARP_ROBOT_NAME','icubGazeboSim');
 
 
 CONFIG.SIMULATION_TIME     = inf;    % Simulation time in seconds
 
 SM.SM_TYPE                 = 'COORDINATOR';   % 'YOGA' or 'WALKING', or COORDINATOR
 
-CONFIG.USE_QP_SOLVER       = 1;
+CONFIG.USE_QP_SOLVER       = 0;
                             
 CONFIG.USE_IMU4EST_BASE    = false;
 CONFIG.YAW_IMU_FILTER      = false;
@@ -62,6 +62,6 @@ end
 % 
 % gazebo -slibgazebo_yarp_clock.so
 %
-% Also, open the subsystem "Synchronizer" in the simulonk model 
+% Also, open the subsystem "Synchronizer" in the simulink model 
 % "balancingOptTau.mdl" and comment the block "Real Time Syncronizer" and
 % uncomment the block "ySynchronizer".
