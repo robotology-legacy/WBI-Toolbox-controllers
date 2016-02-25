@@ -34,8 +34,8 @@ if (sum(CONFIG.LEFT_RIGHT_FOOT_IN_CONTACT) == 2)
     gain.ICOM                 = diag([  0    0   0]);
     gain.DCOM                 = 2*sqrt(gain.PCOM);
 
-    gain.PAngularMomentum     = 1 ;
-    gain.DAngularMomentum     = 1 ;
+    gain.PAngularMomentum     = 10 ;
+    gain.DAngularMomentum     = 2*sqrt(10);
 
     % Impadances acting in the null space of the desired contact forces 
 
@@ -132,6 +132,8 @@ fZmin                        = 10;
 %% The QP solver will search a solution fo that 
 % satisfies the inequality Aineq_f F(fo) < bineq_f
 reg.pinvTol     = 1e-5;
-reg.pinvDamp    = 0.01;
+%reg.pinvDamp    = 0.01;
+reg.pinvDamp    = 1e-6;
 reg.pinvDampVb  = 0.001;
+
 reg.HessianQP   = 1e-7;
