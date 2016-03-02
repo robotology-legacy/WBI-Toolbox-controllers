@@ -7,9 +7,9 @@ setenv('YARP_ROBOT_NAME','icubGazeboSim');
 
 CONFIG.SIMULATION_TIME     = inf;    % Simulation time in seconds
 
-SM.SM_TYPE                 = 'COORDINATOR';   % 'YOGA' or 'WALKING', or COORDINATOR
+SM.SM_TYPE                 = 'YOGA';   % 'YOGA' or 'WALKING', or COORDINATOR
 
-CONFIG.USE_QP_SOLVER       = 0;
+CONFIG.USE_QP_SOLVER       = 1;
                             
 CONFIG.USE_IMU4EST_BASE    = false;
 CONFIG.YAW_IMU_FILTER      = false;
