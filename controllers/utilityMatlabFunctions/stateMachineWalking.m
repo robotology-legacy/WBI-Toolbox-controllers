@@ -68,7 +68,8 @@ function [CoMDes,qDes,constraints, currentState,impedances,w_H_b] = ...
         qDes   = qIn;
         impedances  = gain.impedances(state,:);
         
-        if wrench_rightFoot(3) > sm.wrench.threshold
+        if wrench_rightFoot(3) > sm.wrench.threshold ...
+                && ~any(constraintsIn - [1; 1])
             state = 2;
         end
         
@@ -80,7 +81,8 @@ function [CoMDes,qDes,constraints, currentState,impedances,w_H_b] = ...
         qDes   = qIn;
         impedances  = gain.impedances(state,:);
         
-        if wrench_leftFoot(3) > sm.wrench.threshold
+        if wrench_leftFoot(3) > sm.wrench.threshold ...
+                && ~any(constraintsIn - [1; 1])
             state = 2;
         end
     end

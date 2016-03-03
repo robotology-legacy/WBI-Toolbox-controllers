@@ -1,13 +1,13 @@
 clear;% all;
 clc;
 
-% setenv('YARP_ROBOT_NAME','iCubGenova02');
-setenv('YARP_ROBOT_NAME','icubGazeboSim');
+setenv('YARP_ROBOT_NAME','iCubGenova02');
+% setenv('YARP_ROBOT_NAME','icubGazeboSim');
 
 
 CONFIG.SIMULATION_TIME     = inf;    % Simulation time in seconds
 
-SM.SM_TYPE                 = 'YOGA';   % 'YOGA' or 'WALKING', or COORDINATOR
+SM.SM_TYPE                 = 'WALKING';   % 'YOGA' or 'WALKING', or COORDINATOR
 
 CONFIG.USE_QP_SOLVER       = 1;
                             
