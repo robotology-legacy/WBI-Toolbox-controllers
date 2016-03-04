@@ -1,8 +1,8 @@
 ROBOT_DOF = 23;
 
 references.directionOfOscillation  = [0;0;0];
-references.amplitudeOfOscillation  = 0.0;          %referenceParams(1) = amplitude of ascillations in meters 
-references.frequencyOfOscillation  = 0.0;          %referenceParams(2) = frequency of ascillations in hertz
+references.amplitudeOfOscillation  =  0.0;          %referenceParams(1) = amplitude of ascillations in meters 
+references.frequencyOfOscillation  =  0.0;          %referenceParams(2) = frequency of ascillations in hertz
 
 references.noOscillationTime       = 0;    % If DEMO_MOVEMENTS = 1, the variable noOscillationTime is the time, in seconds, 
                                            % that the robot waits before starting the left-and-righ
@@ -16,7 +16,7 @@ smoothingTimeJacobians            = 0.5;
 ROBOT_DOF_FOR_SIMULINK            = eye(ROBOT_DOF);
 gain.qTildeMax                    = 20*pi/180;
 
-gain.ikin.kp  = 2.5;
+gain.ikin.kp  = 5;
 gain.ikin.kd  = 2*sqrt(gain.ikin.kp);
 
 %%
@@ -28,8 +28,8 @@ if (sum(LEFT_RIGHT_FOOT_IN_CONTACT) == 2)
  impTorso            = [  10   5   5
                           0    0   0]; 
     
- impArms             = [ 8   8    8   12   
-                         0   0    0    0];
+ impArms             = [ 8   8    8   12    
+                         0   0    0    0 ];
                         
  impLeftLeg          = [ 2   2    2     1    1.5   1
                          0   0    0     0      0   0]; 
@@ -40,7 +40,7 @@ if (sum(LEFT_RIGHT_FOOT_IN_CONTACT) == 2)
     
 dampTorso            = [  0    0    0];
 
-dampArms             = [ 0   0    0    0];
+dampArms             = [ 0   0    0    0 ];
                         
 dampLeftLeg          = [ 0    0     0       0      2*sqrt(impLeftLeg(1,5))   0]; 
 
@@ -138,7 +138,8 @@ fZmin                        = 10;
 % satisfies the inequality Aineq_f F(fo) < bineq_f
 reg.pinvTol     = 5e-6;
 reg.pinvDamp    = 5e-7;
-reg.HessianQP   = 1e-5;
+reg.HessianQP   = 0;
+reg.pinvDampVb  = 0.001;
 
 
 

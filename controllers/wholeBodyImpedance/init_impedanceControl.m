@@ -1,13 +1,16 @@
 %% icubGazeboSim
-ROBOT_DOF = 11;
-robotName = 'icub';
-localName = 'impedance';
-Ts        = 0.01;
+
+ROBOT_DOF   = 23;
+WBT_wbiList = 'ROBOT_TORQUE_CONTROL_JOINTS_WITHOUT_PRONOSUP';
+robotName   = 'icub';
+localName   = 'impedance';
+Ts          = 0.01;
+constraints = [1;1];
 
 KpTorso   = 0.5*ones(1,3);
 KpArms    = [0.1,0.1,0.1,0.1];
 KpLegs    = [0.5,0.5,0.5,0.5,0.5,0.5];
-Kp        = diag([KpTorso,KpArms,KpArms]);
+Kp        = diag([KpTorso,KpArms,KpArms,KpLegs,KpLegs]);
 
 if size(Kp,1) ~= ROBOT_DOF
     error('Dimension of Kp different from ROBOT_DOF')
