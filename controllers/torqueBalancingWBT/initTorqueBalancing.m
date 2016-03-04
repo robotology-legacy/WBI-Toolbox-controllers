@@ -1,4 +1,4 @@
-clear;% all;
+clear;
 clc;
 
 % setenv('YARP_ROBOT_NAME','iCubGenova02');
@@ -7,22 +7,24 @@ setenv('YARP_ROBOT_NAME','icubGazeboSim');
 
 CONFIG.SIMULATION_TIME     = inf;    % Simulation time in seconds
 
-SM.SM_TYPE                 = 'YOGA';   % 'YOGA' or 'WALKING', or COORDINATOR
+SM.SM_TYPE                 = 'COORDINATOR';   % 'YOGA' or 'WALKING', or COORDINATOR
 
 CONFIG.USE_QP_SOLVER       = 1;
                             
 CONFIG.USE_IMU4EST_BASE    = false;
 CONFIG.YAW_IMU_FILTER      = false;
                             
-                           
-CONFIG.Ts                  = 0.01; %  Controller period [s]
-
+                         
 
 %% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % CONFIGURATIONS COMPLETED: loading gains and parameters for the specific robot
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% DO NOT MODIFY THE FOLLOWING VARIABLES, THEY ARE AUTOMATICALLY 
-%% CHANGED WHEN SIMULATING THE ROBOT ON GAZEBO, i.e. YARP_ROBOT_NAME=icubGazeboSim
+%% CHANGED WHEN SIMULATING THE ROBOT ON GAZEBO, 
+%  i.e. YARP_ROBOT_NAME=icubGazeboSim
+
+CONFIG.Ts                  = 0.01; %  Controller period [s]
+
 CONFIG.ON_GAZEBO     = false;
 WBT_modelName = 'matlabTorqueBalancing';
 baseToWorldRotationPort  = ['/' WBT_modelName '/floatingBaseRotationMatrix:i'];
