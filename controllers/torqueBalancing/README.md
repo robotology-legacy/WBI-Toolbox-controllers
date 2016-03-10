@@ -6,12 +6,15 @@ A cost function penalizing high joint torques - that generate the feet forces - 
 
 For details see [iCub whole-body control through force regulation on rigid non-coplanar contacts](http://journal.frontiersin.org/article/10.3389/frobt.2015.00006/abstract)
 
+###Compatibility
+This Simulink model is compatible with Matlab 2012b or any later version.
+
 ###Launch procedure
 The procedure to run the torque balancing module is still quite elaborate.
 Users willing to use the module should follow this list.
 
 - Set the environmental variable YARP_ROBOT_NAME in the bashrc according to the robot one wants to use (e.g. icubGazeboSim for simulations, or iCubGenova01, iCubParis01, etc. for experiments).
-- (Simulation only) Launch gazebo. If you want to use the synchronization between controller and simulator to avoid real-time factor related problems, launch gazebo as follows: `gazebo -slibgazebo_yarp_clock.so` In this case, set the environmental variable `YARP_CLOCK=/clock` in the bashrc.
+- (Simulation only) Launch gazebo. If you want to use the synchronization between the controller and the simulator to avoid real-time factor related problems, launch gazebo as follows: `gazebo -slibgazebo_yarp_clock.so` 
 - Bring the robot in a suitable home position (e.g. `$ yarpmotorgui --from homePoseBalancingTwoFeet.ini` and then pressing the 'Home All' button)
 - (Robot Only) Launch `wholeBodyDynamicsTree` with the following parameters: `--autoconnect --assume_fixed l_foot_dh_frame`
 - (Robot Only) Execute the [sensors calibration script](https://github.com/robotology/codyco-modules/blob/master/src/scripts/twoFeetStandingIdleAndCalib.sh): `$ twoFeetStandingIdleAndCalib.sh`
