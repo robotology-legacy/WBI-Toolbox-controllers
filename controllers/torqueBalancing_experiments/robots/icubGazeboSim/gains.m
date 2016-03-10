@@ -25,7 +25,9 @@ ROBOT_DOF_FOR_SIMULINK = eye(ROBOT_DOF);
 gain.qTildeMax         = 20*pi/180;
 postures = 0;  
 
-gain.SmoothingTimeImp  = 1;  
+gain.SmoothingTimeImp  = 1; 
+gain.ikin.kp           = 5;
+gain.ikin.kd           = 2*sqrt(gain.ikin.kp);
 
 %%
 %           PARAMETERS FOR TWO FEET ONE GROUND
@@ -39,6 +41,7 @@ if (sum(CONFIG.LEFT_RIGHT_FOOT_IN_CONTACT) == 2)
 
     % Impadances acting in the null space of the desired contact forces 
 
+    
     impTorso            = [10   10   20
                             0    0    0]; 
     impArms             = [10   10    10    8   
@@ -49,6 +52,19 @@ if (sum(CONFIG.LEFT_RIGHT_FOOT_IN_CONTACT) == 2)
 
     impRightLeg         = [ 30   30   30    60     10  10
                              0    0    0     0      0   0]; 
+
+%%%% IMPEDANCES FOR JOINT SPACE CONTROLLER %%%%%
+%  impTorso            = [  10   5   5
+%                           0    0   0]; 
+%     
+%  impArms             = [ 8   8    8   12    
+%                          0   0    0    0 ];
+%                         
+%  impLeftLeg          = [ 2   2    2     1    1.5   1
+%                          0   0    0     0      0   0]; 
+% 
+%  impRightLeg         = [2    2     2    1    1.5   1
+%                         0    0     0    0      0   0];
     
                          
     intTorso            = [0   0    0]; 
@@ -133,7 +149,7 @@ fZmin                        = 10;
 % satisfies the inequality Aineq_f F(fo) < bineq_f
 reg.pinvTol     = 1e-5;
 
-%reg.pinvDamp    = 0.01;
+% reg.pinvDamp    = 0.01;
 reg.pinvDamp    = 1e-6;
 
 reg.pinvDampVb  = 0.001;
