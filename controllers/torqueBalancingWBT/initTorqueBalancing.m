@@ -1,8 +1,8 @@
 clear;% all;
 clc;
 
-setenv('YARP_ROBOT_NAME','iCubGenova02');
-% setenv('YARP_ROBOT_NAME','icubGazeboSim');
+% setenv('YARP_ROBOT_NAME','iCubGenova02');
+setenv('YARP_ROBOT_NAME','icubGazeboSim');
 
 
 CONFIG.SIMULATION_TIME     = inf;    % Simulation time in seconds
@@ -56,6 +56,21 @@ elseif strcmpi(SM.SM_TYPE, 'WALKING')
     run(robotSpecificFSM);
 end
 
+%% Loading walking trajectories
+WALKING_TRAJ_SRC_DIR = fullfile([getenv('CODYCO_SUPERBUILD_DIR') '/install/share/codyco/contexts/walkPlayer']);
+COM_DES_FILE         = [WALKING_TRAJ_SRC_DIR '/torqueBalancing_comTraj.txt'];
+QJ_DES_FILE          = [WALKING_TRAJ_SRC_DIR '/torqueBalancing_posturalTraj.txt'];
+CONSTRAINTS_DES_FILE = [WALKING_TRAJ_SRC_DIR '/torqueBalancing_constraints.txt'];
+
+COM_DES = importdata(COM_DES_FILE, '\t');
+COM_DES = str2num(cell2mat(COM_DES(1:end-1, 1)));
+COM_DES = timeseries(COM_DES, [0:0.010:0.010*(length(COM_DES)-1)]); 
+QJ_DES = importdata(QJ_DES_FILE, '\t');
+QJ_DES = str2num(cell2mat(QJ_DES(1:end-1, 1)));
+QJ_DES = timeseries(QJ_DES, [0:0.010:0.010*(length(QJ_DES)-1)]); 
+CONSTRAINTS_DES = importdata(CONSTRAINTS_DES_FILE,'\t');
+CONSTRAINTS_DES = str2num(cell2mat(CONSTRAINTS_DES(1:end-1, 1)));
+CONSTRAINTS_DES = timeseries(CONSTRAINTS_DES, [0:0.010:0.010*(length(CONSTRAINTS_DES)-1)]);
 
 % If you want to sync Gazebo and simulink, 
 % remember that you have to launch gazebo as follow:
