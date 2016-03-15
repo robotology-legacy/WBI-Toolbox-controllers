@@ -5,6 +5,7 @@ function [CoMDes,qDes,constraints, currentState,impedances,w_H_b] = ...
     
     global w_H_fixedLink;
     global fixedLink;
+    global counterTraj;
     
 %     w_H_fixedLink  = eye(4);
 %     
@@ -45,14 +46,14 @@ function [CoMDes,qDes,constraints, currentState,impedances,w_H_b] = ...
         
         if ~any(constraintsIn - [1; 0]) ...
                 && norm(CoMError(2)) < sm.com.threshold
-            constraints = [1; 0]; %right foot is no longer a constraints
+            constraints = [1; 0]; %right foot is no longer a constraint
             fixedLink = 1;
             w_H_fixedLink = w_H_b / l_sole_H_b;
             state = 3;
             
         elseif ~any(constraintsIn - [0; 1]) ...
                 && norm(CoMError(2)) < sm.com.threshold
-            constraints = [0; 1]; %left foot is no longer a constraints
+            constraints = [0; 1]; %left foot is no longer a constraint
             state = 4;
             
             fixedLink = 2;
@@ -86,5 +87,6 @@ function [CoMDes,qDes,constraints, currentState,impedances,w_H_b] = ...
             state = 2;
         end
     end
-       
+    
+    counterTraj = counterTraj + 1;
     currentState = state;

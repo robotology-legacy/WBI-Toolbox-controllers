@@ -63,14 +63,14 @@ QJ_DES_FILE          = [WALKING_TRAJ_SRC_DIR '/torqueBalancing_posturalTraj.txt'
 CONSTRAINTS_DES_FILE = [WALKING_TRAJ_SRC_DIR '/torqueBalancing_constraints.txt'];
 
 COM_DES = importdata(COM_DES_FILE, '\t');
-COM_DES = str2num(cell2mat(COM_DES(1:end-1, 1)));
-COM_DES = timeseries(COM_DES, [0:0.010:0.010*(length(COM_DES)-1)]); 
+COMDES = str2num(cell2mat(COM_DES(1:end-1, 1)));
+COM_DES = timeseries(COMDES, [0:0.010:0.010*(length(COMDES)-1)]); 
 QJ_DES = importdata(QJ_DES_FILE, '\t');
-QJ_DES = str2num(cell2mat(QJ_DES(1:end-1, 1)));
-QJ_DES = timeseries(QJ_DES, [0:0.010:0.010*(length(QJ_DES)-1)]); 
+QJDES = str2num(cell2mat(QJ_DES(1:end-1, 1)));
+QJ_DES = timeseries(QJDES, [0:0.010:0.010*(length(QJDES)-1)]); 
 CONSTRAINTS_DES = importdata(CONSTRAINTS_DES_FILE,'\t');
-CONSTRAINTS_DES = str2num(cell2mat(CONSTRAINTS_DES(1:end-1, 1)));
-CONSTRAINTS_DES = timeseries(CONSTRAINTS_DES, [0:0.010:0.010*(length(CONSTRAINTS_DES)-1)]);
+CONSTRAINTSDES = str2num(cell2mat(CONSTRAINTS_DES(1:end-1, 1)));
+CONSTRAINTS_DES = timeseries(CONSTRAINTSDES, [0:0.010:0.010*(length(CONSTRAINTSDES)-1)]);
 
 % If you want to sync Gazebo and simulink, 
 % remember that you have to launch gazebo as follow:
