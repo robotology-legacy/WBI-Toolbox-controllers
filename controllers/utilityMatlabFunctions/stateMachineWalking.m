@@ -1,11 +1,11 @@
-function [CoMDes,qDes,constraints, currentState,impedances,w_H_b] = ...
-    stateMachineWalking(connection,CoM_0, q0, w_CoM, CoMIn, qIn, constraintsIn, wrench_rightFoot,wrench_leftFoot,l_sole_H_b, r_sole_H_b, sm,gain)
+function [CoMDes,qDes,constraints, currentState,impedances,w_H_b,enableIncrement] = ...
+    stateMachineWalking(connection,CoM_0, q0, w_CoM, CoMIn, qIn, constraintsIn, wrench_rightFoot,wrench_leftFoot,l_sole_H_b, r_sole_H_b, sm,gain, time)
     %#codegen
     global state;
     
     global w_H_fixedLink;
     global fixedLink;
-    global counterTraj;
+%     global counterTraj;
     
 %     w_H_fixedLink  = eye(4);
 %     
@@ -42,8 +42,8 @@ function [CoMDes,qDes,constraints, currentState,impedances,w_H_b] = ...
         qDes   = qIn;
         impedances  = gain.impedances(state,:);
            
-        CoMError  = CoMDes - w_CoM;
-        
+%         CoMError  = CoMDes - w_CoM;
+        CoMError = w_CoM - CoMDes;
         if ~any(constraintsIn - [1; 0]) ...
                 && norm(CoMError(2)) < sm.com.threshold
             constraints = [1; 0]; %right foot is no longer a constraint
@@ -88,5 +88,9 @@ function [CoMDes,qDes,constraints, currentState,impedances,w_H_b] = ...
         end
     end
     
-    counterTraj = counterTraj + 1;
+%     counterTraj = counterTraj + 1;
+%     disp('From stateMachineWalking.m')
+%     disp('Counter Traj: '), disp(counterTraj);
+%     disp('at time: '), disp(time);
+    enableIncrement = 1;
     currentState = state;

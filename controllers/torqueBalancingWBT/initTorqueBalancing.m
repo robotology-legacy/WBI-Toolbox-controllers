@@ -15,7 +15,7 @@ CONFIG.USE_IMU4EST_BASE    = false;
 CONFIG.YAW_IMU_FILTER      = false;
                             
                            
-CONFIG.Ts                  = 0.01; %  Controller period [s]
+CONFIG.Ts                  = 0.005; %  Controller period [s]
 
 
 %% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -62,14 +62,20 @@ COM_DES_FILE         = [WALKING_TRAJ_SRC_DIR '/torqueBalancing_comTraj.txt'];
 QJ_DES_FILE          = [WALKING_TRAJ_SRC_DIR '/torqueBalancing_posturalTraj.txt'];
 CONSTRAINTS_DES_FILE = [WALKING_TRAJ_SRC_DIR '/torqueBalancing_constraints.txt'];
 
+init_index = 600;
 COM_DES = importdata(COM_DES_FILE, '\t');
 COMDES = str2num(cell2mat(COM_DES(1:end-1, 1)));
+COMDES = COMDES(init_index:end,:);
 COM_DES = timeseries(COMDES, [0:0.010:0.010*(length(COMDES)-1)]); 
+
 QJ_DES = importdata(QJ_DES_FILE, '\t');
 QJDES = str2num(cell2mat(QJ_DES(1:end-1, 1)));
+QJDES = QJDES(init_index:end,:);
 QJ_DES = timeseries(QJDES, [0:0.010:0.010*(length(QJDES)-1)]); 
+
 CONSTRAINTS_DES = importdata(CONSTRAINTS_DES_FILE,'\t');
 CONSTRAINTSDES = str2num(cell2mat(CONSTRAINTS_DES(1:end-1, 1)));
+CONSTRAINTSDES = CONSTRAINTSDES(init_index:end,:);
 CONSTRAINTS_DES = timeseries(CONSTRAINTSDES, [0:0.010:0.010*(length(CONSTRAINTSDES)-1)]);
 
 % If you want to sync Gazebo and simulink, 
