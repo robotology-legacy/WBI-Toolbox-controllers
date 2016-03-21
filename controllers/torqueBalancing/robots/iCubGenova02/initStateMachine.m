@@ -13,14 +13,14 @@ if strcmpi(SM.SM_TYPE, 'YOGA')
                    
     forceFrictionCoefficient     = 1/3;%1/3;  
 
-    references.joints.smoothingTime    = 5 ;
+    references.joints.smoothingTime    = 4 ;
     references.com.smoothingTime       = references.joints.smoothingTime;
     gain.SmoothingTimeImp              = references.joints.smoothingTime;  
 
     smoothingTimeTransitionDynamics    = 0.02;
 
 
-    gain.PCOM              = diag([30    40  30]); 
+    gain.PCOM              = diag([30    50  30]); 
     gain.ICOM              = diag([  0    0   0]);
     gain.DCOM              = 2*sqrt(gain.PCOM)*0;
 
@@ -82,10 +82,10 @@ sm.waitingTimeAfterYoga          = 0;
 
 
 sm.com.states      = [0.0,  0.01,0.511;   %% state ==  1  TWO FEET BALANCING NOT USED
-                      0.0, -0.01,0.0;     %% state ==  2  COM TRANSITION TO LEFT FOOT: THIS REFERENCE IS USED AS A DELTA W.R.T. THE POSITION OF THE LEFT FOOT
-                      0.0, -0.01,0.511;   %% state ==  3  LEFT FOOT BALANCING 
-                      0.0, -0.01,0.511;   %% state ==  4  YOGA LEFT FOOT
-                      0.0, -0.00,0.511;   %% state ==  5  PREPARING FOR SWITCHING
+                      0.0,  0.01,0.0;     %% state ==  2  COM TRANSITION TO LEFT FOOT: THIS REFERENCE IS USED AS A DELTA W.R.T. THE POSITION OF THE LEFT FOOT
+                      0.0,  0.00,0.511;   %% state ==  3  LEFT FOOT BALANCING 
+                      0.0,  0.00,0.511;   %% state ==  4  YOGA LEFT FOOT
+                      0.0,  0.00,0.511;   %% state ==  5  PREPARING FOR SWITCHING
                       0.0, -0.09,0.511;   %% state ==  6  LOOKING FOR CONTACT 
                       0.0, -0.09,0.511;   %% state ==  7  TRANSITION INIT POSITION: THIS REFERENCE IS IGNORED
                       % FROM NOW ON, THE REFERENCE ARE ALWAYS DELTAS W.R.T.
@@ -96,7 +96,7 @@ sm.com.states      = [0.0,  0.01,0.511;   %% state ==  1  TWO FEET BALANCING NOT
                       0.0, -0.02,0.0;   %% state == 11  PREPARING FOR SWITCHING
                       0.0, -0.02,0.0;   %% state == 12  LOOKING FOR CONTACT 
                       0.0,  0.00,0.0];  %% state == 13  TRANSITION INIT POSITION: THIS REFERENCE IS IGNORED
-sm.tBalancing      = 10;%inf;%0.5;
+sm.tBalancing      = 0;%inf;%0.5;
 
 
 sm.joints.states = [[0.0864,0.0258,0.0152, ...                          %% state == 1  TWO FEET BALANCING, THIS REFERENCE IS IGNORED 
