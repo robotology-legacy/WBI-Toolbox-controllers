@@ -9,7 +9,7 @@ CONFIG.SIMULATION_TIME     = inf;    % Simulation time in seconds
 
 SM.SM_TYPE                 = 'COORDINATOR';   % 'YOGA' or 'WALKING', or COORDINATOR
 
-CONFIG.USE_CENTR_ORIENT    = 0;
+CONFIG.USE_CENTR_ORIENT    = 1;
 CONFIG.USE_QP_SOLVER       = 0;
                             
 CONFIG.USE_IMU4EST_BASE    = false;

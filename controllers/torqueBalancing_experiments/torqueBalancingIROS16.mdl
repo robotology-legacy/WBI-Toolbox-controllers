@@ -6,7 +6,7 @@ Model {
     NumRootInports	    0
     NumRootOutports	    0
     ParameterArgumentNames  ""
-    ComputedModelVersion    "1.2886"
+    ComputedModelVersion    "1.2897"
     NumModelReferences	    0
     NumTestPointedSignals   0
   }
@@ -53,11 +53,11 @@ Model {
 	$ObjectID		5
 	$ClassName		"Simulink.EditorInfo"
 	IsActive		[1]
-	ViewObjType		"SimulinkTopLevel"
-	LoadSaveID		"0"
+	ViewObjType		"SimulinkSubsys"
+	LoadSaveID		"3088"
 	Extents			[1265.0, 597.0]
-	ZoomFactor		[0.63932584269662929]
-	Offset			[7.9266256590511688, 137.10193321616879]
+	ZoomFactor		[0.88]
+	Offset			[0.0, 0.0]
       }
     }
   }
@@ -67,9 +67,9 @@ Model {
   ModifiedByFormat	  "%<Auto>"
   LastModifiedBy	  "gnava"
   ModifiedDateFormat	  "%<Auto>"
-  LastModifiedDate	  "Tue Mar 08 16:49:45 2016"
-  RTWModifiedTimeStamp	  379356567
-  ModelVersionFormat	  "1.%<AutoIncrement:2886>"
+  LastModifiedDate	  "Wed Mar 16 13:46:16 2016"
+  RTWModifiedTimeStamp	  380036663
+  ModelVersionFormat	  "1.%<AutoIncrement:2897>"
   ConfigurationManager	  "none"
   SampleTimeColors	  off
   SampleTimeAnnotations	  off
@@ -1081,11 +1081,19 @@ Model {
     Block {
       BlockType		      Terminator
     }
+    Block {
+      BlockType		      ToFile
+      Filename		      "untitled.mat"
+      MatrixName	      "ans"
+      SaveFormat	      "Array"
+      Decimation	      "1"
+      SampleTime	      "-1"
+    }
   }
   System {
     Name		    "torqueBalancingIROS16"
     Location		    [65, 24, 1366, 768]
-    Open		    on
+    Open		    off
     ModelBrowserVisibility  off
     ModelBrowserWidth	    200
     ScreenColor		    "white"
@@ -1096,9 +1104,9 @@ Model {
     TiledPaperMargins	    [0.500000, 0.500000, 0.500000, 0.500000]
     TiledPageScale	    1
     ShowPageBoundaries	    off
-    ZoomFactor		    "63"
+    ZoomFactor		    "60"
     ReportName		    "simulink-default.rpt"
-    SIDHighWatermark	    "3107"
+    SIDHighWatermark	    "3108"
     Block {
       BlockType		      SubSystem
       Name		      "DesValues"
@@ -2677,7 +2685,7 @@ Model {
 	  System {
 	    Name		    "Linearized Centroidal Orientation"
 	    Location		    [65, 24, 1366, 768]
-	    Open		    off
+	    Open		    on
 	    ModelBrowserVisibility  off
 	    ModelBrowserWidth	    200
 	    ScreenColor		    "white"
@@ -3055,6 +3063,17 @@ Model {
 	      SaturateOnIntegerOverflow	off
 	    }
 	    Block {
+	      BlockType		      ToFile
+	      Name		      "To File"
+	      SID		      "3108"
+	      Ports		      [1]
+	      Position		      [585, 620, 645, 650]
+	      ZOrder		      81
+	      Commented		      on
+	      Filename		      "fixed_unstable.mat"
+	      MatrixName	      "norm_qjErr"
+	    }
+	    Block {
 	      BlockType		      SubSystem
 	      Name		      "l_sole_H_root_link"
 	      SID		      "3094"
@@ -3228,7 +3247,7 @@ Model {
 	      Position		      [550, 554, 580, 586]
 	      ZOrder		      78
 	      Floating		      off
-	      Location		      [66, 53, 1367, 767]
+	      Location		      [76, 81, 1357, 767]
 	      Open		      off
 	      NumInputPorts	      "1"
 	      List {
@@ -3246,6 +3265,9 @@ Model {
 		MarkerStyles		"none|none|none|none|none|none"
 	      }
 	      ShowLegends	      off
+	      TimeRange		      "181.4958309407971"
+	      YMin		      "1.553183187823533"
+	      YMax		      "1.607420999768214"
 	      SaveName		      "ScopeData4"
 	      DataFormat	      "StructureWithTime"
 	      LimitDataPoints	      off
@@ -3374,8 +3396,16 @@ Model {
 	    Line {
 	      SrcBlock		      "Sqrt"
 	      SrcPort		      1
-	      DstBlock		      "norm_qjErr"
-	      DstPort		      1
+	      Points		      [9, 0]
+	      Branch {
+		Points			[0, 65]
+		DstBlock		"To File"
+		DstPort			1
+	      }
+	      Branch {
+		DstBlock		"norm_qjErr"
+		DstPort			1
+	      }
 	    }
 	  }
 	}
@@ -18048,7 +18078,7 @@ Model {
 	TiledPaperMargins	[0.500000, 0.500000, 0.500000, 0.500000]
 	TiledPageScale		1
 	ShowPageBoundaries	off
-	ZoomFactor		"40"
+	ZoomFactor		"35"
 	Block {
 	  BlockType		  Inport
 	  Name			  "impedances"
@@ -20569,7 +20599,7 @@ Model {
       }
       System {
 	Name			"synchronizer"
-	Location		[55, -14, 1376, 778]
+	Location		[65, 24, 1366, 768]
 	Open			off
 	ModelBrowserVisibility	off
 	ModelBrowserWidth	200
@@ -20581,7 +20611,7 @@ Model {
 	TiledPaperMargins	[0.500000, 0.500000, 0.500000, 0.500000]
 	TiledPageScale		1
 	ShowPageBoundaries	off
-	ZoomFactor		"240"
+	ZoomFactor		"239"
 	Block {
 	  BlockType		  SubSystem
 	  Name			  "GAZEBO_SYNCHRONIZER"
@@ -24816,7 +24846,10 @@ Stateflow {
     firstTransition	    246
     firstJunction	    245
     viewObj		    202
+    visible		    1
     machine		    1
+    subviewS {
+    }
     ssIdHighWaterMark	    78
     decomposition	    CLUSTER_CHART
     type		    EML_CHART
