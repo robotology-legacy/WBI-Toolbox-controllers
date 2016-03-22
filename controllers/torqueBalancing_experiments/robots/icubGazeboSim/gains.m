@@ -150,7 +150,7 @@ fZmin                        = 10;
 reg.pinvTol     = 1e-5;
 
 % reg.pinvDamp    = 0.01;
-reg.pinvDamp    = 1e-6;
+reg.pinvDamp    = 0;
 
 reg.pinvDampVb  = 0.001;
 
