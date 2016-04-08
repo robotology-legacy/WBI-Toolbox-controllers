@@ -4,6 +4,7 @@ function [ tau ] = balancingControlSeeSaw(t, x,J_CoM,H,controlParams, model, rob
 
 robotDoFs = model.robot.dofs;
 % assert(robotDoFs <= 25)
+            
 
 [ seesaw_position, seesaw_vel, robotPos, robotVel] = state_partitioning(x, model.robot.dofs);
 

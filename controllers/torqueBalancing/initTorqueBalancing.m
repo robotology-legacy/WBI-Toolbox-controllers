@@ -1,20 +1,63 @@
 clear;
 clc;
 
-setenv('YARP_ROBOT_NAME','iCubGenova02');
-% setenv('YARP_ROBOT_NAME','icubGazeboSim');
+% If you are simulating the robot with Gazebo, 
+% remember that you have to launch Gazebo as follow:
+% 
+% gazebo -slibgazebo_yarp_clock.so
+% 
+% and set the environmental variable YARP_ROBOT_NAME = icubGazeboSim
+
+
+% setenv('YARP_ROBOT_NAME','iCubGenova02');
+setenv('YARP_ROBOT_NAME','icubGazeboSim');
 
 
 CONFIG.SIMULATION_TIME     = inf;    % Simulation time in seconds
 
-SM.SM_TYPE                 = 'YOGA';   % 'YOGA' or 'WALKING', or COORDINATOR
+SM.SM_TYPE                 = 'COORDINATOR';   % 'YOGA', 'WALKING', 'COORDINATOR'
 
 CONFIG.USE_QP_SOLVER       = 1;
                             
 CONFIG.USE_IMU4EST_BASE    = false;
 CONFIG.YAW_IMU_FILTER      = false;
-                            
                          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 %% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % CONFIGURATIONS COMPLETED: loading gains and parameters for the specific robot
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -22,25 +65,26 @@ CONFIG.YAW_IMU_FILTER      = false;
 %% CHANGED WHEN SIMULATING THE ROBOT ON GAZEBO, 
 %  i.e. YARP_ROBOT_NAME=icubGazeboSim
 
-CONFIG.Ts                  = 0.01; %  Controller period [s]
+CONFIG.Ts                = 0.01; %  Controller period [s]
 
-CONFIG.ON_GAZEBO     = false;
-WBT_modelName = 'matlabTorqueBalancing';
+CONFIG.ON_GAZEBO         = false;
+WBT_modelName            = 'matlabTorqueBalancing';
 baseToWorldRotationPort  = ['/' WBT_modelName '/floatingBaseRotationMatrix:i'];
 
-dump.left_wrench_port = '/wholeBodyDynamicsTree/left_foot/cartesianEndEffectorWrench:o';
-dump.right_wrench_port = '/wholeBodyDynamicsTree/right_foot/cartesianEndEffectorWrench:o';
+dump.left_wrench_port    = '/wholeBodyDynamicsTree/left_foot/cartesianEndEffectorWrench:o';
+dump.right_wrench_port   = '/wholeBodyDynamicsTree/right_foot/cartesianEndEffectorWrench:o';
 
 run(strcat('robots/',getenv('YARP_ROBOT_NAME'),'/gains.m')); 
 addpath('../utilityMatlabFunctions/')
 [ConstraintsMatrix,bVectorConstraints]= constraints(forceFrictionCoefficient,numberOfPoints,torsionalFrictionCoefficient,gain.footSize,fZmin);
 
-robotSpecificReferences = fullfile('robots',getenv('YARP_ROBOT_NAME'),'initRefGen.m');
+robotSpecificReferences  = fullfile('robots',getenv('YARP_ROBOT_NAME'),'initRefGen.m');
 run(robotSpecificReferences);
 
-SM.SM.MASK.COORDINATOR = bin2dec('001');
-SM.SM.MASK.YOGA = bin2dec('010');
-SM.SM.MASK.WALKING = bin2dec('100');
+SM.SM.MASK.COORDINATOR   = bin2dec('001');
+SM.SM.MASK.YOGA          = bin2dec('010');
+SM.SM.MASK.WALKING       = bin2dec('100');
+
 
 SM.SM_TYPE_BIN = SM.SM.MASK.COORDINATOR;
 robotSpecificFSM = fullfile('robots',getenv('YARP_ROBOT_NAME'),'initStateMachine.m');
@@ -57,11 +101,5 @@ elseif strcmpi(SM.SM_TYPE, 'WALKING')
 end
 
 
-% If you want to sync Gazebo and simulink, 
-% remember that you have to launch gazebo as follow:
-% 
-% gazebo -slibgazebo_yarp_clock.so
-%
-% Also, open the subsystem "Synchronizer" in the simulink model 
-% "balancingOptTau.mdl" and comment the block "Real Time Syncronizer" and
-% uncomment the block "ySynchronizer".
+
+

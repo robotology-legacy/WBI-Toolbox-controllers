@@ -1,12 +1,16 @@
 clear;
 setenv('YARP_ROBOT_NAME','icubGazeboSim');
 
-localName          = 'seesawBalancingController';
+localName               = 'seesawBalancingController';
 Ts = 0.01;
-seesawKind         = 2;
+seesawKind              = 2;
 
-seesaw_inertial    = '/seesaw/inertial';
-CONFIG.CONTROLKIND = 1;
+seesaw_inertial         = '/seesaw/inertial';
+CONFIG.CONTROLKIND      = 1;
+CONFIG.USE_IMU4EST_BASE = 0;
+
+CONFIG.USE_IMU4EST_BASE = false;
+CONFIG.YAW_IMU_FILTER   = false;
 
 %% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % CONFIGURATIONS COMPLETED: loading gains and parameters for the specific robot
