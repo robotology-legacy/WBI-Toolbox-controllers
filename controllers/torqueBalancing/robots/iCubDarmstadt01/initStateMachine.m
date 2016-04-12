@@ -5,10 +5,12 @@ if strcmpi(SM.SM_TYPE, 'YOGA')
     CONFIG.SMOOTH_DES_Q        = 1;    % If equal to one, the desired streamed values 
                             % of the postural tasks are smoothed internally 
 
-    reg.pinvDamp = 1;
-    sat.torque   = 50;
+    reg.pinvDamp    = 1;
+    reg.impedances  = 0.1;
+    reg.dampings    = 0;
+    sat.torque      = 50;
 
-    gain.footSize  = [ -0.07  0.12   ;    % xMin, xMax
+    gain.footSize  = [ -0.07  0.12 ;    % xMin, xMax
                        -0.045 0.05 ];   % yMin, yMax  
                    
     forceFrictionCoefficient     = 1/3;%1/3;  
@@ -55,15 +57,15 @@ if strcmpi(SM.SM_TYPE, 'YOGA')
                         10   10   20, 10   10    10    8, 10   10    10    8, 30   50   60    30      5   5, 30   30   30    20      5   5  % state ==  8  COM TRANSITION TO RIGHT FOOT
                         10   10   20, 10   10    10    8, 10   10    10    8, 30   50   30    60      5   5, 30   30   20    20     10  10  % state ==  9  RIGHT FOOT BALANCING
                         30   30   30, 10   10    10   10, 10   10    10   10,100   50   30   100     25  25,100   90   20    20     10  10  % state == 10  YOGA RIGHT FOOT 
-                        30   30   30, 10   10    10   10, 10   10    20   10,220  550  220   200     65 300,200  250   20    20     10  10  % state == 11  PREPARING FOR SWITCHING 
-                        30   30   30, 10   10    10   10, 10   10    20   10,220  550  220   200     65 300,100  350   20   200     10 100  % state == 12  LOOKING FOR CONTACT
-                        10   10   20, 10   10    10    8, 10   10    10    8, 30   30   30    20      5   5, 30   50   60    30      5   5];% state == 13  TRANSITION TO INITIAL POSITION
+                        30   30   30, 10   10    10   10, 10   10    10   10,100   50   30   100     25  25,100   90   20    20     10  10  % state == 11  PREPARING FOR SWITCHING 
+                        30   30   30, 10   10    10   10, 10   10    10   10,100   50   30   100     25  25,100   90   20    20     10  10  % state == 12  LOOKING FOR CONTACT
+                        30   30   30, 10   10    10   10, 10   10    10   10,100   50   30   100     25  25,100   90   20    20     10  10];% state == 13  TRANSITION TO INITIAL POSITION
 end              
 %% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%                      
          
 %% %%%%%%%%%%%%%%%%    FINITE STATE MACHINE SPECIFIC PARAMETERS
 sm.jumpYoga                      = false;
-sm.demoOnlyRightFoot             = false;
+sm.demoOnlyRightFoot             = true;
 sm.yogaAlsoOnRightFoot           = false;
 sm.yogaInLoop                    = false;
 sm.com.threshold                 = 0.01;
