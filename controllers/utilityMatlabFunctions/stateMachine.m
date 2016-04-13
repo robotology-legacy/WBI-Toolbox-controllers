@@ -235,10 +235,13 @@ function [CoMDes,qDes,constraints, currentState,impedances,w_H_b,jointsSmoothing
         impedances = gain.impedances(state,:);
         if t > sm.tBalancing %after tBalancing time start moving weight to the left
            if sm.yogaInLoop
-            state = 2; 
+              state = 2; 
+              if sm.demoOnlyRightFoot
+                 state = 8;
+              end
            end
         end
     end 
     
-    currentState = state;
+    currentState        = state;
     jointsSmoothingTime = sm.jointsSmoothingTimes(state);
