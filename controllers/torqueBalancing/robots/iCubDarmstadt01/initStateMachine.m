@@ -5,29 +5,31 @@ if strcmpi(SM.SM_TYPE, 'YOGA')
     CONFIG.SMOOTH_DES_Q        = 1;    % If equal to one, the desired streamed values 
                             % of the postural tasks are smoothed internally 
 
-    reg.pinvDamp    = 1;
-    reg.impedances  = 0.1;
-    reg.dampings    = 0;
-    sat.torque      = 50;
+    reg.pinvDamp               = 1;
+    reg.impedances             = 0.1;
+    reg.dampings               = 0;
+    reg.HessianQP              = 1e-4;
 
-    gain.footSize  = [ -0.07  0.12 ;    % xMin, xMax
-                       -0.045 0.05 ];   % yMin, yMax  
+    sat.torque                 = 50;
+
+    gain.footSize              = [ -0.07  0.12 ;    % xMin, xMax
+                                   -0.045 0.05 ];   % yMin, yMax  
                    
-    forceFrictionCoefficient     = 1/3;%1/3;  
+    forceFrictionCoefficient     = 1/3;  
 
-    references.joints.smoothingTime    = 4 ;
+    references.joints.smoothingTime    = 5 ;
     references.com.smoothingTime       = references.joints.smoothingTime;
     gain.SmoothingTimeImp              = references.joints.smoothingTime;  
 
     smoothingTimeTransitionDynamics    = 0.02;
 
 
-    gain.PCOM              = diag([30    50  30]); 
+    gain.PCOM              = diag([30    40  30]); 
     gain.ICOM              = diag([  0    0   0]);
     gain.DCOM              = 2*sqrt(gain.PCOM)*0;
 
     gain.PAngularMomentum  = 1 ;
-
+    gain.DAngularMomentum  = 2*sqrt(gain.PAngularMomentum);
 
     % state ==  1  TWO FEET BALANCING
     % state ==  2  COM TRANSITION TO LEFT FOOT

@@ -160,7 +160,7 @@ function Outputs(block)
         gradientQP2Feet            = block.InputPort(3).Data;
         ConstraintsMatrixQP2Feet   = block.InputPort(4).Data;
         bVectorConstraintsQp2Feet  = block.InputPort(5).Data;
-        USE_QPO_SOLVER                = block.InputPort(6).Data;
+        USE_QPO_SOLVER              = block.InputPort(6).Data;
         if USE_QPO_SOLVER == 1
             [desiredf0,~,exitFlag,iter,lambda,auxOutput] = qpOASES(HessianMatrixQP2Feet,gradientQP2Feet',ConstraintsMatrixQP2Feet,[],[],[],bVectorConstraintsQp2Feet');           
             if exitFlag ~= 0
