@@ -1,4 +1,4 @@
-function [CoMDes,qDes,constraints, currentState,impedances,w_H_b] = ...
+function [CoMDes,qDes,constraints, currentState,impedances,w_H_b,jointsSmoothingTime] = ...
     stateMachine(CoM_0, q0, l_sole_CoM,r_sole_CoM,qj, t, wrench_rightFoot,wrench_leftFoot,l_sole_H_b, r_sole_H_b, sm,gain)
     %#codegen
     global state;
@@ -12,7 +12,7 @@ function [CoMDes,qDes,constraints, currentState,impedances,w_H_b] = ...
     qDes        = q0;
 
     impedances = gain.impedances(1,:);
-    
+        
     %% Two feet balancing.
     if state == 1 
         if t > sm.tBalancing %after tBalancing time start moving weight to the left
@@ -25,7 +25,7 @@ function [CoMDes,qDes,constraints, currentState,impedances,w_H_b] = ...
         end
     end
 
-    %% Left transition
+    %% TRANSITION TO THE LEFT FOOT
     if state == 2 
 %         CoMDes(2)    =  sm.com.states(state,2)'; %new reference for CoM
         
@@ -34,13 +34,13 @@ function [CoMDes,qDes,constraints, currentState,impedances,w_H_b] = ...
         CoMError  = CoMDes - l_sole_CoM;
         qDes      = sm.joints.states(state,:)'; % new reference for q
         
-        if norm(CoMError(2)) < sm.com.threshold
+        if norm(CoMError(2)) < sm.com.threshold && wrench_rightFoot(3) < sm.wrench.thresholdContactOff
            state = 3; 
            tSwitch = t;
         end
     end
 
-    %% Left foot balancing
+    %% LEFT FOOT BALANCING 
     if state == 3 
         constraints = [1; 0]; %right foot is no longer a constraints
 %         constraints = [0; 1]; %left foot is no longer a constraints
@@ -108,7 +108,7 @@ function [CoMDes,qDes,constraints, currentState,impedances,w_H_b] = ...
         qDes        = sm.joints.states(state,:)';
         impedances  = gain.impedances(state,:);
 
-        if wrench_rightFoot(3) > sm.wrench.threshold
+        if wrench_rightFoot(3) > sm.wrench.thresholdContactOn
             state = 7;
             tSwitch = t;
         end
@@ -144,8 +144,8 @@ function [CoMDes,qDes,constraints, currentState,impedances,w_H_b] = ...
         w_CoM = w_H_r_sole_switch*[r_sole_CoM;1];
         
         CoMError  = CoMDes - w_CoM(1:3);
-        
-        if norm(CoMError(2)) < sm.com.threshold
+
+        if norm(CoMError(2)) < sm.com.threshold  && wrench_leftFoot(3) < sm.wrench.thresholdContactOff
            state = 9; 
            tSwitch = t;
         end
@@ -222,7 +222,7 @@ function [CoMDes,qDes,constraints, currentState,impedances,w_H_b] = ...
         qDes        = sm.joints.states(state,:)';
         impedances  = gain.impedances(state,:);
 
-        if wrench_leftFoot(3) > sm.wrench.threshold
+        if wrench_leftFoot(3) > sm.wrench.thresholdContactOn 
             state   = 13;
             tSwitch = t;
         end
@@ -241,3 +241,4 @@ function [CoMDes,qDes,constraints, currentState,impedances,w_H_b] = ...
     end 
     
     currentState = state;
+    jointsSmoothingTime = sm.jointsSmoothingTimes(state);

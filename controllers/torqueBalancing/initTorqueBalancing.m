@@ -19,7 +19,7 @@ SM.SM_TYPE                 = 'YOGA';   % 'YOGA', 'WALKING', 'COORDINATOR'
 
 CONFIG.USE_QP_SOLVER       = 1;
                             
-CONFIG.USE_IMU4EST_BASE    = true;
+CONFIG.USE_IMU4EST_BASE    = false;
 CONFIG.YAW_IMU_FILTER      = false;
                          
 
