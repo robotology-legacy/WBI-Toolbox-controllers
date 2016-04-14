@@ -31,7 +31,7 @@ function [tauModel,Sigma,NA,fHdotDesC1C2, ...
     Mbj             = M(1:6,7:end);
     % Mj              = M(7:end,7:end);
 
-    St              = [  zeros(6,ROBOT_DOF);
+    St              = [zeros(6,ROBOT_DOF);
                        eye(ROBOT_DOF,ROBOT_DOF)];
     grav            = [ zeros(2,1);
                        -m*gravAcc;

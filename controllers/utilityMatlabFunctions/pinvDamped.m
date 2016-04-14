@@ -1,3 +1,9 @@
-function pinvDampA = pinvDamped(A,reg)
-    pinvDampA = A'/(A*A' + reg*eye(size(A,1)));
+function pinvDampA = pinvDamped(A,regDamp)
+    [U,S,V] = svd(A*A');
+    for i=1:min(size(S))
+        if S(i,i) <= regDamp
+            S(i,i) = regDamp;
+        end
+    end
+    pinvDampA = A'/(U*S*V');
 end
