@@ -15,11 +15,11 @@ setenv('YARP_ROBOT_NAME','iCubDarmstadt01');
 
 CONFIG.SIMULATION_TIME     = inf;    % Simulation time in seconds
 
-SM.SM_TYPE                 = 'COORDINATOR';   % 'YOGA', 'WALKING', 'COORDINATOR'
+SM.SM_TYPE                 = 'YOGA';   % 'YOGA', 'WALKING', 'COORDINATOR'
 
 CONFIG.USE_QP_SOLVER       = 1;
                             
-CONFIG.USE_IMU4EST_BASE    = true;
+CONFIG.USE_IMU4EST_BASE    = false;
 CONFIG.YAW_IMU_FILTER      = false;
                          
 
