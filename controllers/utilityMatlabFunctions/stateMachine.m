@@ -74,7 +74,7 @@ function [CoMDes,qDes,constraints, currentState,impedances,w_H_b,jointsSmoothing
         end
         if t > sm.joints.pointsL(end,1) + tSwitch 
             qDes = sm.joints.pointsL(end,2:end)';
-            if  (t > (sm.joints.pointsL(end,1) + tSwitch + sm.joints.smoothingTime+sm.joints.pauseTimeLastPostureL))
+            if  (t > (sm.joints.pointsL(end,1) + tSwitch + sm.jointsSmoothingTimes(state)+sm.joints.pauseTimeLastPostureL))
                 state   = 5;
                 tSwitch = t;
             end
@@ -187,7 +187,7 @@ function [CoMDes,qDes,constraints, currentState,impedances,w_H_b,jointsSmoothing
         end
         if t > sm.joints.pointsR(end,1) + tSwitch 
             qDes = sm.joints.pointsR(end,2:end)';
-            if  (t > sm.joints.pointsR(end,1) + tSwitch + sm.joints.smoothingTime + sm.joints.pauseTimeLastPostureR ) 
+            if  (t > sm.joints.pointsR(end,1) + tSwitch + sm.jointsSmoothingTimes(state) + sm.joints.pauseTimeLastPostureR ) 
                 state   = 11;
                 tSwitch = t;
             end
