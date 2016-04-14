@@ -147,10 +147,11 @@ function SetInputPortSamplingMode(block, idx, fd)
 function Outputs(block)
     
     LEFT_RIGHT_FOOT_IN_CONTACT = block.InputPort(1).Data;
-    exitFlagQP2Feet             = 0;
-    f0OneFoot = zeros(6,1);
-    f02Feet = zeros(6*2,1);
-    USE_QPO_SOLVER              = block.InputPort(6).Data;
+    exitFlagQP2Feet            = 0;
+    exitFlagQPOneFoot          = 0; 
+    f0OneFoot                  = zeros(6,1);
+    f02Feet                    = zeros(6*2,1);
+    USE_QPO_SOLVER             = block.InputPort(6).Data;
 
     if sum(LEFT_RIGHT_FOOT_IN_CONTACT) > 1.98
         HessianMatrixQP2Feet       = block.InputPort(2).Data;

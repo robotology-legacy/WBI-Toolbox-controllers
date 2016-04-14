@@ -161,7 +161,7 @@ block.OutputPort(2).SamplingMode = fd;
 function Outputs(block)
     
     LEFT_RIGHT_FOOT_IN_CONTACT = block.InputPort(1).Data;
-    exitFlag                   = 0;
+    exitFlagQPOneFoot          = 0;
     
     if sum(LEFT_RIGHT_FOOT_IN_CONTACT) > 0.98 && sum(LEFT_RIGHT_FOOT_IN_CONTACT) < 1.02
         HessianMatrixQP1Foot       = block.InputPort(2).Data;
@@ -170,26 +170,19 @@ function Outputs(block)
         bVectorConstraintsQP1Foot  = block.InputPort(5).Data;
         USE_QPO_SOLVER             = block.InputPort(6).Data;
         if USE_QPO_SOLVER == 1
-            [desiredf0,~,exitFlag,iter,lambda,auxOutput] = qpOASES(HessianMatrixQP1Foot,gradientQP1Foot',ConstraintsMatrixQP1Foot,[],[],[],bVectorConstraintsQP1Foot');           
+            [f0OneFoot,~,exitFlagQPOneFoot,~,~,~] = qpOASES(HessianMatrixQP1Foot,gradientQP1Foot',ConstraintsMatrixQP1Foot,[],[],[],bVectorConstraintsQP1Foot');           
 
-           if exitFlag ~= 0
-%                 disp('QP failed with');
-%                 exitFlag
-%                 iter
-%                 auxOutput
-%                 lambda
-%                 desiredf0 = zeros(6,1);
-%                 exitFlag  = 1;
-                desiredf0 = - inv(HessianMatrixQP1Foot)*gradientQP1Foot';
+           if exitFlagQPOneFoot ~= 0
+                f0OneFoot = - inv(HessianMatrixQP1Foot)*gradientQP1Foot';
            end
         else
-            desiredf0 = - inv(HessianMatrixQP1Foot)*gradientQP1Foot';
+            f0OneFoot = - inv(HessianMatrixQP1Foot)*gradientQP1Foot';
         end
     else
-            desiredf0 = zeros(6,1);
+            f0OneFoot = zeros(6,1);
     end
-    block.OutputPort(1).Data = [desiredf0*LEFT_RIGHT_FOOT_IN_CONTACT(1);desiredf0*LEFT_RIGHT_FOOT_IN_CONTACT(2)]*abs(LEFT_RIGHT_FOOT_IN_CONTACT(2)-LEFT_RIGHT_FOOT_IN_CONTACT(1));
-    block.OutputPort(2).Data = exitFlag;
+    block.OutputPort(1).Data = [f0OneFoot*LEFT_RIGHT_FOOT_IN_CONTACT(1);f0OneFoot*LEFT_RIGHT_FOOT_IN_CONTACT(2)]*abs(LEFT_RIGHT_FOOT_IN_CONTACT(2)-LEFT_RIGHT_FOOT_IN_CONTACT(1));
+    block.OutputPort(2).Data = exitFlagQPOneFoot;
 %end Outputs
 
 

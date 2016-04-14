@@ -92,11 +92,11 @@ sm.jointsSmoothingTimes          = [2;   %% state ==  1  TWO FEET BALANCING
                                     4;   %% state ==  6  LOOKING FOR CONTACT 
                                     4;   %% state ==  7  TRANSITION INIT POSITION
                                     5;   %% state ==  8  COM TRANSITION TO RIGHT FOOT
-                                    3;   %% state ==  9  RIGHT FOOT BALANCING 
-                                    4;   %% state == 10  YOGA RIGHT FOOT
-                                    4;   %% state == 11  PREPARING FOR SWITCHING
-                                    4;   %% state == 12  LOOKING FOR CONTACT 
-                                    4];  %% state == 13  TRANSITION INIT POSITION
+                                    8;   %% state ==  9  RIGHT FOOT BALANCING 
+                                    5;   %% state == 10  YOGA RIGHT FOOT
+                                    5;   %% state == 11  PREPARING FOR SWITCHING
+                                    5;   %% state == 12  LOOKING FOR CONTACT 
+                                    3];  %% state == 13  TRANSITION INIT POSITION
 
 sm.com.states      = [0.0,  0.01,0.511;   %% state ==  1  TWO FEET BALANCING NOT USED
                       0.0,  0.01,0.0;     %% state ==  2  COM TRANSITION TO LEFT FOOT: THIS REFERENCE IS USED AS A DELTA W.R.T. THE POSITION OF THE LEFT FOOT
@@ -231,14 +231,14 @@ q9 =        [-0.0179    0.2145   -0.0016,...
           
   
 sm.joints.pointsL =[ 0,                                q1;
-                     1*references.joints.smoothingTime,q2;
-                     2*references.joints.smoothingTime,q3;
-                     3*references.joints.smoothingTime,q4;
-                     4*references.joints.smoothingTime,q5;
-                     5*references.joints.smoothingTime,q6;
-                     6*references.joints.smoothingTime,q7;
-                     7*references.joints.smoothingTime,q8];
-%                      8*references.joints.smoothingTime,q9];
+                     1*sm.jointsSmoothingTimes(10),q2;
+                     2*sm.jointsSmoothingTimes(10),q3;
+                     3*sm.jointsSmoothingTimes(10),q4;
+                     4*sm.jointsSmoothingTimes(10),q5;
+                     5*sm.jointsSmoothingTimes(10),q6;
+                     6*sm.jointsSmoothingTimes(10),q7;
+                     7*sm.jointsSmoothingTimes(10),q8];
+%                      8*sm.jointsSmoothingTimes(10),q9];
                  
 % sm.joints.pointsL = [references.joints.smoothingTime,sm.joints.states(5,:)];
 
