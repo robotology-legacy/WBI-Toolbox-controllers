@@ -1,7 +1,6 @@
 function [ConstraintsMatrix,bVectorConstraints] = constraints(staticFrictionCoefficient,numberOfPoints,torsionalFrictionCoefficient,footSize,fZmin)
-    %compute friction cones contraints
-
-    %approximation with straight lines
+    
+    %% Compute friction cones contraints approximation with straight lines
 
     %split the pi/2 angle into numberOfPoints - 1;
     segmentAngle = pi/2 / (numberOfPoints - 1);
@@ -40,16 +39,28 @@ function [ConstraintsMatrix,bVectorConstraints] = constraints(staticFrictionCoef
 
     end
 
-    ConstraintsMatrix = [ 0         , 0, -torsionalFrictionCoefficient,               0,               0,    1; 
-                          0         , 0, -torsionalFrictionCoefficient,               0,               0,   -1; 
-                          0         , 0,                            -1,               0,               0,    0;
-                          0         , 0,                 footSize(1,1),               0,               1,    0; 
-                          0         , 0,                -footSize(1,2),               0,              -1,    0; 
-                          0         , 0,                 footSize(2,1),              -1,               0,    0; 
-                          0         , 0,                -footSize(2,2),               1,               0,    0];
+    %% SOFT FINGER CONSTRAINT, POSITIVITY OF VERTICAL FORCE, AND COP 
+    %
+    %  Soft finger:                                 |torque_z|    < torsionalFrictionCoefficient*F_z
+    %  Positivity of vertical force:                     F_z      > fZmin
+    %  Center of pressure (CoP)    : dimMinFoot_y <  torque_x/F_z < dimMaxFoot_y
+    %                                dimMinFoot_x < -torque_y/F_z < dimMaxFoot_x
+    %
+    %  footSize  = [ dimMinFoot_x, dimMaxFoot_x
+    %                dimMinFoot_y, dimMaxFoot_y  ]
+    %
+    %
+    %                    F_x   F_y                            F_z       torque_x      torque_y      torque_z
+    ConstraintsMatrix = [ 0,    0, -torsionalFrictionCoefficient,           0,           0,            1;  %  torque_z     -  torsionalFrictionCoefficient*F_z < 0
+                          0,    0, -torsionalFrictionCoefficient,           0,           0,           -1;  % -torque_z     -  torsionalFrictionCoefficient*F_z < 0
+                          0,    0,                            -1,           0,           0,            0;  % -F_z                                              < -fZmin
+                          0,    0,                 footSize(1,1),           0,           1,            0;  %  torque_y     +  dimMinFoot_x*F_z                 < 0
+                          0,    0,                -footSize(1,2),           0,          -1,            0;  % -torque_y     -  dimMaxFoot_x*F_z                 < 0
+                          0,    0,                 footSize(2,1),          -1,           0,            0;  % -torque_x     +  dimMinFoot_y*F_z                 < 0
+                          0,    0,                -footSize(2,2),           1,           0,            0]; %  torque_x     -  dimMaxFoot_y*F_z                 < 0 
 
-    ConstraintsMatrix       =  [ Aineq ;
-                     ConstraintsMatrix ];     
+    ConstraintsMatrix  =  [ Aineq ;
+                            ConstraintsMatrix ];     
 
     bVectorConstraints = [zeros(size(Aineq,1), 1); zeros(7,1)];
 

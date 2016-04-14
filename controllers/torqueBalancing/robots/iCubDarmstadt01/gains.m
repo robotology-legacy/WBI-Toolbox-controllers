@@ -114,7 +114,7 @@ forceFrictionCoefficient     = 1/3;
 torsionalFrictionCoefficient = 2/150;
  
                       
-gain.footSize  = [ -0.07  0.12   ;    % xMin, xMax
+gain.footSize  = [ -0.07  0.12   ;  % xMin, xMax
                    -0.045 0.05 ];   % yMin, yMax   
 
 % gain.footSize                = [ -0.065 0.13   ;    % xMin, xMax

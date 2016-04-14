@@ -1,5 +1,6 @@
 function [CoMDes,qDes,constraints, currentState,impedances,w_H_b,jointsSmoothingTime] = ...
-    stateMachine(CoM_0, q0, l_sole_CoM,r_sole_CoM,qj, t, wrench_rightFoot,wrench_leftFoot,l_sole_H_b, r_sole_H_b, sm,gain)
+    stateMachine(CoM_0, q0, l_sole_CoM,r_sole_CoM,qj, t, ...
+                  wrench_rightFoot,wrench_leftFoot,l_sole_H_b, r_sole_H_b, sm,gain)
     %#codegen
     global state;
     global tSwitch;
@@ -30,7 +31,8 @@ function [CoMDes,qDes,constraints, currentState,impedances,w_H_b,jointsSmoothing
 %         CoMDes(2)    =  sm.com.states(state,2)'; %new reference for CoM
         
         CoMDes(1:2) = sm.com.states(state,1:2)';    
-        
+        impedances = gain.impedances(state,:);
+
         CoMError  = CoMDes - l_sole_CoM;
         qDes      = sm.joints.states(state,:)'; % new reference for q
         
