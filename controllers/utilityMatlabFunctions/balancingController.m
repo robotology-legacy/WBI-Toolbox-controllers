@@ -164,8 +164,8 @@ function [tauModel,Sigma,NA,f_HDot, ...
    
     SigmaNA         = Sigma*NA;
   
-    % The optimization problem 1) must find the redundancy of the external
-    % wrench to minimize joint torques. Recall that the contact wrench can 
+    % The optimization problem 1) seeks for the redundancy of the external
+    % wrench that minimize joint torques. Recall that the contact wrench can 
     % be written as:
     %
     % f = f_HDot + NA*f_0 
