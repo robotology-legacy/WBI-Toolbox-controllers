@@ -1,6 +1,22 @@
-clear;
-clc;
-
+%% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% /**
+%  * Copyright (C) 2016 CoDyCo
+%  * @author: Daniele Pucci
+%  * Permission is granted to copy, distribute, and/or modify this program
+%  * under the terms of the GNU General Public License, version 2 or any
+%  * later version published by the Free Software Foundation.
+%  *
+%  * A copy of the license can be found at
+%  * http://www.robotcub.org/icub/license/gpl.txt
+%  *
+%  * This program is distributed in the hope that it will be useful, but
+%  * WITHOUT ANY WARRANTY; without even the implied warranty of
+%  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General
+%  * Public License for more details
+%  */
+%% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+clear; clc;
+%% GENERAL SIMULATION INFO
 % If you are simulating the robot with Gazebo, 
 % remember that you have to launch Gazebo as follow:
 % 
@@ -9,52 +25,53 @@ clc;
 % and set the environmental variable YARP_ROBOT_NAME = icubGazeboSim.
 % To do this, you can uncomment the 
 
-
 % setenv('YARP_ROBOT_NAME','iCubGenova02');
-% setenv('YARP_ROBOT_NAME','icubGazeboSim');
-setenv('YARP_ROBOT_NAME','iCubDarmstadt01');
+% setenv('YARP_ROBOT_NAME','iCubDarmstadt01');
+  setenv('YARP_ROBOT_NAME','icubGazeboSim');
 
-CONFIG.SIMULATION_TIME     = inf;    % Simulation time in seconds
+% Simulation time in seconds
+CONFIG.SIMULATION_TIME     = inf;   
 
-SM.SM_TYPE                 = 'YOGA';   % 'YOGA', 'WALKING', 'COORDINATOR'
+%% PRELIMINARY CONFIGURATIONS 
+% SM.SM_TYPE: defines the kind of state machines that can be chosen.
+%
+% 'YOGA': the robot will perform the YOGA++ demo. The associated
+%         configuration parameters can be found under the folder
+%
+%         robots/YARP_ROBOT_NAME/initStateMachine.m
+%   
+% 'COORDINATOR': the robot can either stay still, or follow a
+%                center-of-mass trajectory, or follow references for the
+%                joints. The associated configuration parameters can be 
+%                found under the folder
+%
+%               robots/YARP_ROBOT_NAME/initRegGen.m
+% 
+% 'WALKING': under development.
+SM.SM_TYPE                 = 'COORDINATOR';   
 
+% CONFIG.USE_QP_SOLVER: if equal to 1, a QP solver is used to account for 
+% inequality constraints of contact wrenches
 CONFIG.USE_QP_SOLVER       = 1;
-                            
+
+% CONFIG.SCOPES: if set to true, visualizers for debugging is available
+CONFIG.SCOPES              = false;
+
+% CONFIG.USE_IMU4EST_BASE: if set to false, the base frame is estimated by 
+% assuming that either the left or the right foot stay stuck on the ground. 
+% Which foot the  controller uses depends on the contact forces acting on it. 
+% If set to true, the base orientation is estimated by using the IMU, while
+% the base position by assuming that the origin of either the right or the
+% left foot do not move. 
 CONFIG.USE_IMU4EST_BASE    = false;
+
+% CONFIG.CHECK_LIMITS: if set to true, the controller will stop as soon as 
+% any of the joint limit is touched. 
+CONFIG.CHECK_LIMITS        = false;
+
+% CONFIG.YAW_IMU_FILTER: under develompent. Leave it equal to false
 CONFIG.YAW_IMU_FILTER      = false;
-                         
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+          
 
 
 
@@ -75,11 +92,12 @@ baseToWorldRotationPort  = ['/' WBT_modelName '/floatingBaseRotationMatrix:i'];
 dump.left_wrench_port    = '/wholeBodyDynamicsTree/left_foot/cartesianEndEffectorWrench:o';
 dump.right_wrench_port   = '/wholeBodyDynamicsTree/right_foot/cartesianEndEffectorWrench:o';
 
-run(strcat('robots/',getenv('YARP_ROBOT_NAME'),'/gains.m')); 
+run(strcat('app/robots/',getenv('YARP_ROBOT_NAME'),'/gains.m')); 
+addpath('./src/')
 addpath('../utilityMatlabFunctions/')
 [ConstraintsMatrix,bVectorConstraints]= constraints(forceFrictionCoefficient,numberOfPoints,torsionalFrictionCoefficient,gain.footSize,fZmin);
 
-robotSpecificReferences  = fullfile('robots',getenv('YARP_ROBOT_NAME'),'initRefGen.m');
+robotSpecificReferences  = fullfile('app/robots',getenv('YARP_ROBOT_NAME'),'initRefGen.m');
 run(robotSpecificReferences);
 
 SM.SM.MASK.COORDINATOR   = bin2dec('001');
@@ -88,7 +106,7 @@ SM.SM.MASK.WALKING       = bin2dec('100');
 
 
 SM.SM_TYPE_BIN = SM.SM.MASK.COORDINATOR;
-robotSpecificFSM = fullfile('robots',getenv('YARP_ROBOT_NAME'),'initStateMachine.m');
+robotSpecificFSM = fullfile('app/robots',getenv('YARP_ROBOT_NAME'),'initStateMachine.m');
 run(robotSpecificFSM);
 
 if strcmpi(SM.SM_TYPE, 'COORDINATOR')

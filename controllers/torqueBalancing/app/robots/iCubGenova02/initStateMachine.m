@@ -232,15 +232,14 @@ q9 =        [-0.0179    0.2145   -0.0016,...
 
           
   
-sm.joints.pointsL =[ 0,                                q1;
-                     1*references.joints.smoothingTime,q2;
-                     2*references.joints.smoothingTime,q3;
-                     3*references.joints.smoothingTime,q4;
-                     4*references.joints.smoothingTime,q5;
-                     5*references.joints.smoothingTime,q6;
-                      6*references.joints.smoothingTime,q7;
-                      7*references.joints.smoothingTime,q8];
-%                      8*references.joints.smoothingTime,q9];
+sm.joints.pointsL =[ 0,                            q1;
+                     1*sm.jointsSmoothingTimes(10),q2;
+                     2*sm.jointsSmoothingTimes(10),q3;
+                     3*sm.jointsSmoothingTimes(10),q4;
+                     4*sm.jointsSmoothingTimes(10),q5;
+                     5*sm.jointsSmoothingTimes(10),q6;
+                     6*sm.jointsSmoothingTimes(10),q7;
+                     7*sm.jointsSmoothingTimes(10),q8];
                  
 % sm.joints.pointsL = [references.joints.smoothingTime,sm.joints.states(5,:)];
 

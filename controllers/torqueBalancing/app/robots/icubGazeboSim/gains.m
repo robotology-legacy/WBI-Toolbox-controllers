@@ -14,12 +14,11 @@ WBT_wbiList = 'ROBOT_TORQUE_CONTROL_JOINTS_WITHOUT_PRONOSUP';
 dump.left_wrench_port = '/icubGazeboSim/left_foot/analog:o';
 dump.right_wrench_port = '/icubGazeboSim/right_foot/analog:o';
 
-references.joints.smoothingTime    = 1.0;
-references.com.smoothingTime       = 5;
+references.smoothingTimeComAndJoints    = 3.0;
 
 sat.torque = 34;
 
-smoothingTimeTransitionDynamics    = 0.05;
+CONFIG.smoothingTimeTranDynamics    = 0.05;
 
 ROBOT_DOF_FOR_SIMULINK = eye(ROBOT_DOF);
 gain.qTildeMax         = 20*pi/180;
@@ -132,8 +131,8 @@ fZmin                        = 10;
 %% The QP solver will search a solution fo that 
 % satisfies the inequality Aineq_f F(fo) < bineq_f
 reg.pinvTol     = 1e-5;
-%reg.pinvDamp    = 0.01;
-reg.pinvDamp    = 1e-6;
-reg.pinvDampVb  = 0.001;
-
+reg.pinvDamp    = 0.01;
+reg.pinvDampVb  = 1e-7;
 reg.HessianQP   = 1e-7;
+reg.impedances  = 0.1;
+reg.dampings    = 0;

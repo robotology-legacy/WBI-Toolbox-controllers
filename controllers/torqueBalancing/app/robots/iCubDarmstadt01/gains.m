@@ -7,8 +7,7 @@ CONFIG.SMOOTH_DES_COM      = 0;    % If equal to one, the desired streamed value
 CONFIG.SMOOTH_DES_Q        = 0;    % If equal to one, the desired streamed values 
                             % of the postural tasks are smoothed internally 
                             
-references.joints.smoothingTime    = 1.0;
-references.com.smoothingTime       = 4;
+references.smoothingTimeComAndJoints    = 3.0;
 
 sat.torque = 34;
 
@@ -121,8 +120,6 @@ gain.footSize  = [ -0.07  0.12   ;  % xMin, xMax
 %                                  -0.04 0.04  ];   % yMin, yMax
 fZmin                        = 10;
 
-%% The QP solver will search a solution fo that 
-% satisfies the inequality Aineq_f F(fo) < bineq_f
 reg.pinvTol     = 1e-5;
 reg.pinvDamp    = 0.01;
 reg.pinvDampVb  = 0.001;
