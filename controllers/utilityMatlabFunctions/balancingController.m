@@ -128,7 +128,7 @@ function [tauModel,Sigma,NA,f_HDot, ...
     % wrench associated with the left foot (resp. right foot) is subject to
     % the following constraint:
     %
-    % constraintMatrixLeftFoot*l_sole_f_L < b
+    % constraintMatrixLeftFoot*l_sole_f_L < bVectorConstraints
     %
     % In this case, however, f_L is expressed w.r.t. the frame l_sole,
     % which is solidal to the left foot. Since the controller uses contact
@@ -172,11 +172,11 @@ function [tauModel,Sigma,NA,f_HDot, ...
     %
     % Then, the constraints on the contact wrench is of the form
     %
-    % ConstraintsMatrix2Feet*f < b,
+    % ConstraintsMatrix2Feet*f < bVectorConstraints,
     %
     % which in terms of f0 is:
     %
-    % ConstraintsMatrix2Feet*NA*f0 < b - ConstraintsMatrix2Feet*f_HDot
+    % ConstraintsMatrix2Feet*NA*f0 < bVectorConstraints - ConstraintsMatrix2Feet*f_HDot
     ConstraintsMatrixQP2Feet  = ConstraintsMatrix2Feet*NA;
     bVectorConstraintsQp2Feet = bVectorConstraints2Feet-ConstraintsMatrix2Feet*f_HDot;
     
