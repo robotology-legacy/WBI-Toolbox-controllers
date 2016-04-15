@@ -68,7 +68,7 @@ end
 %% %%%%%%%%%%%%%%%%    FINITE STATE MACHINE SPECIFIC PARAMETERS
 sm.jumpYoga                      = false;
 sm.demoOnlyRightFoot             = false;
-sm.yogaAlsoOnRightFoot           = false;
+sm.yogaAlsoOnRightFoot           = true;
 sm.yogaInLoop                    = false;
 sm.com.threshold                 = 0.01;
 sm.wrench.thresholdContactOn     =  25;     % Force threshole above which contact is considered stable

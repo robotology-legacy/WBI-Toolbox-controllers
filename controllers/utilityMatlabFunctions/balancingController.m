@@ -76,6 +76,7 @@ function [tauModel,Sigma,NA,f_HDot, ...
     pinvA           = pinv( A, reg.pinvTol)*constraints(1)*constraints(2)  ...
                     + [inv(AL);zeros(6)]*constraints(1)*(1-constraints(2)) ... 
                     + [zeros(6);inv(AR)]*constraints(2)*(1-constraints(1)); 
+                
     % Null space of the matrix A            
     NA              = (eye(12,12)-pinvA*A)*constraints(1)*constraints(2);
 
@@ -93,17 +94,16 @@ function [tauModel,Sigma,NA,f_HDot, ...
 
     
     PInv_JcMinvSt   = pinvDamped(JcMinvSt,reg.pinvDamp); 
-    % nullJcMinvSt = null space of PInv_JcMinvSt
+    % nullJcMinvSt  = null space of PInv_JcMinvSt
     nullJcMinvSt    = eye(ROBOT_DOF) - PInv_JcMinvSt*JcMinvSt;
 
     % Mbar is the mass matrix associated with the joint dynamics, i.e.
-    %
     Mbar            = Mj-Mbj'/Mb*Mbj;
 
     NLMbar          = nullJcMinvSt*Mbar;
     
-    % Adaptation of control gains for back compatibility with older version
-    % of the controller
+    % Adaptation of control gains for back compatibility with older
+    % versions of the controller
     impedances      = diag(impedances)*pinv(NLMbar,reg.pinvTol) + reg.impedances*eye(ROBOT_DOF);
     dampings        = diag(dampings)*pinv(NLMbar,reg.pinvTol)   + reg.dampings*eye(ROBOT_DOF); 
     
@@ -156,14 +156,32 @@ function [tauModel,Sigma,NA,f_HDot, ...
 
     % Contact wrenches realizing the desired rate-of-change of the robot
     % momentum HDotDes when standing on two feet. Note that f_HDot is
-    % different from zero only when both foot are in contact. 
+    % different from zero only when both foot are in contact, i.e. 
+    % constraints(1) = constraints(2) = 1. This because when the robot
+    % stands on one foot, the f_HDot is evaluated directly from the
+    % optimizer (see next section).
     f_HDot          = pinvA*(HDotDes - gravityWrench)*constraints(1)*constraints(2);
    
     SigmaNA         = Sigma*NA;
   
+    % The optimization problem 1) must find the redundancy of the external
+    % wrench to minimize joint torques. Recall that the contact wrench can 
+    % be written as:
+    %
+    % f = f_HDot + NA*f_0 
+    %
+    % Then, the constraints on the contact wrench is of the form
+    %
+    % ConstraintsMatrix2Feet*f < b,
+    %
+    % which in terms of f0 is:
+    %
+    % ConstraintsMatrix2Feet*NA*f0 < b - ConstraintsMatrix2Feet*f_HDot
     ConstraintsMatrixQP2Feet  = ConstraintsMatrix2Feet*NA;
     bVectorConstraintsQp2Feet = bVectorConstraints2Feet-ConstraintsMatrix2Feet*f_HDot;
     
+    % Evaluation of Hessian matrix and gradient vector for solving the
+    % optimization problem 1).
     HessianMatrixQP2Feet      = SigmaNA'*SigmaNA + eye(size(SigmaNA,2))*reg.HessianQP;
     gradientQP2Feet           = SigmaNA'*(tauModel + Sigma*f_HDot);
 

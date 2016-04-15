@@ -6,7 +6,8 @@ clc;
 % 
 % gazebo -slibgazebo_yarp_clock.so
 % 
-% and set the environmental variable YARP_ROBOT_NAME = icubGazeboSim
+% and set the environmental variable YARP_ROBOT_NAME = icubGazeboSim.
+% To do this, you can uncomment the 
 
 
 % setenv('YARP_ROBOT_NAME','iCubGenova02');
