@@ -67,14 +67,14 @@ end
          
 %% %%%%%%%%%%%%%%%%    FINITE STATE MACHINE SPECIFIC PARAMETERS
 sm.jumpYoga                      = false;
-sm.demoOnlyRightFoot             = true;
+sm.demoOnlyRightFoot             = false;
 sm.yogaAlsoOnRightFoot           = false;
 sm.yogaInLoop                    = false;
 sm.com.threshold                 = 0.01;
 sm.wrench.thresholdContactOn     =  25;     % Force threshole above which contact is considered stable
 sm.wrench.thresholdContactOff    =  85;     % Force threshole under which contact is considered off
 sm.joints                        = struct;
-sm.joints.thresholdNotInContact  =  7.5;    % Degrees
+sm.joints.thresholdNotInContact  =  5;    % Degrees
 sm.joints.thresholdInContact     = 50;      % Degrees
 sm.joints.pauseTimeLastPostureL  = 3;
 sm.joints.pauseTimeLastPostureR  = 3;
