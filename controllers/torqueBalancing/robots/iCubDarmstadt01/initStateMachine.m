@@ -23,7 +23,6 @@ if strcmpi(SM.SM_TYPE, 'YOGA')
     %Smoothing time for time-varying constraints
     CONFIG.smoothingTimeTranDynamics  = 0.02;
 
-
     gain.PCOM              = diag([10    50  10]); 
     gain.ICOM              = diag([  0    0   0]);
     gain.DCOM              = 2*sqrt(gain.PCOM)*0;
