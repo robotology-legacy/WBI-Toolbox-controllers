@@ -1,4 +1,4 @@
-clear all;
+clear;
 setenv('YARP_ROBOT_NAME','icubGazeboSim');
 
 localName               = 'seesawBalancingController';
@@ -20,8 +20,10 @@ CONFIG.TS               = 0.01;
 %% DO NOT MODIFY THE FOLLOWING VARIABLES, THEY ARE AUTOMATICALLY 
 %% CHANGED WHEN SIMULATING THE ROBOT ON GAZEBO, i.e. YARP_ROBOT_NAME=icubGazeboSim
 addpath('../../utilityMatlabFunctions/')
+addpath('./src')
+
 CONFIG.ON_GAZEBO     = false;
 WBT_modelName = 'matlabTorqueBalancing';
 
-run(strcat('robots/',getenv('YARP_ROBOT_NAME'),'/gains.m')); 
+run(strcat('app/robots/',getenv('YARP_ROBOT_NAME'),'/gains.m')); 
 [ConstraintsMatrix,bVectorConstraints]= constraints(forceFrictionCoefficient,numberOfPoints,torsionalFrictionCoefficient,gain.footSize,fZmin);
