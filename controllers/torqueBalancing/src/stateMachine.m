@@ -13,7 +13,7 @@ function [CoMDes,qDes,constraints, currentState,impedances,w_H_b,jointsSmoothing
 
     impedances = gain.impedances(1,:);
         
-    %% Two feet balancing.
+    %% TWO FEET BALANCING
     if state == 1 
         if t > sm.tBalancing %after tBalancing time start moving weight to the left
            state = 2;
@@ -100,6 +100,7 @@ function [CoMDes,qDes,constraints, currentState,impedances,w_H_b,jointsSmoothing
             tSwitch = t;
         end
     end
+    
     %% LOOKING FOR A CONTACT
     if state == 6 
         constraints = [1; 0]; %right foot is no longer a constraints
@@ -153,7 +154,6 @@ function [CoMDes,qDes,constraints, currentState,impedances,w_H_b,jointsSmoothing
 
     end
     
-    
      %% RIGHT FOOT BALANCING 
     if state == 9
         constraints = [0; 1]; %left foot is no longer a constraints
@@ -162,7 +162,6 @@ function [CoMDes,qDes,constraints, currentState,impedances,w_H_b,jointsSmoothing
         CoMDes(1:2) = w_H_r_sole_switch(1:2,4) + sm.com.states(state,1:2)';    
         qDes        = sm.joints.states(state,:)';
         impedances  = gain.impedances(state,:);
-
         if t > tSwitch + sm.DT % yoga
             state   = 10;
             tSwitch = t;
@@ -214,6 +213,7 @@ function [CoMDes,qDes,constraints, currentState,impedances,w_H_b,jointsSmoothing
             tSwitch = t;
         end
     end
+    
     %% LOOKING FOR A CONTACT
     if state == 12
         constraints = [0; 1]; %left foot is no longer a constraints

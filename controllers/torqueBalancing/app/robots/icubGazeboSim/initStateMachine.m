@@ -12,8 +12,8 @@ if strcmpi(SM.SM_TYPE, 'YOGA')
 
     sat.torque                 = 60;
 
-    gain.footSize              = [ -0.07  0.12 ;    % xMin, xMax
-                                   -0.045 0.05 ];   % yMin, yMax  
+    gain.footSize              = [ -0.05  0.05 ;    % xMin, xMax
+                                   -0.01  0.01 ];   % yMin, yMax  
                    
     forceFrictionCoefficient     = 1/3;  
     
