@@ -50,10 +50,6 @@ CONFIG.SIMULATION_TIME     = inf;
 % 'WALKING': under development.
 SM.SM_TYPE                 = 'YOGA';   
 
-% CONFIG.USE_QP_SOLVER: if set to true, a QP solver is used to account for 
-% inequality constraints of contact wrenches
-CONFIG.USE_QP_SOLVER       = true;
-
 % CONFIG.SCOPES: if set to true, visualizers for debugging is available
 CONFIG.SCOPES              = false;
 
@@ -82,6 +78,10 @@ CONFIG.YAW_IMU_FILTER      = false;
 %% DO NOT MODIFY THE FOLLOWING VARIABLES, THEY ARE AUTOMATICALLY 
 %% CHANGED WHEN SIMULATING THE ROBOT ON GAZEBO, 
 %  i.e. YARP_ROBOT_NAME=icubGazeboSim
+
+% CONFIG.USE_QP_SOLVER: if set to true, a QP solver is used to account for 
+% inequality constraints of contact wrenches
+CONFIG.USE_QP_SOLVER     = true; 
 
 CONFIG.Ts                = 0.01; %  Controller period [s]
 
