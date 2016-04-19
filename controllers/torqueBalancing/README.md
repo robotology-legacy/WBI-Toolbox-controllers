@@ -15,7 +15,7 @@ Users willing to use the module should follow this list.
 
 - Set the environmental variable YARP_ROBOT_NAME in the bashrc according to the robot one wants to use (e.g. icubGazeboSim for simulations, or iCubGenova01, iCubParis01, etc. for experiments).
 - (Simulation only) Launch gazebo. If you want to use the synchronization between the controller and the simulator to avoid real-time factor related problems, launch gazebo as follows: `gazebo -slibgazebo_yarp_clock.so` 
-- Bring the robot in a suitable home position (e.g. `$ yarpmotorgui --from homePoseBalancingTwoFeet.ini` and then pressing the 'Home All' button)
+- Bring the robot in a suitable home position (e.g. `$ yarpmotorgui --from homePoseBalancingLegsZero.ini` and then pressing the 'Home All' button)
 -  Launch `wholeBodyDynamicsTree` with the following parameters: wholeBodyDynamicsTree --autoconnect --robot icubGazeboSim --robot icubGazeboSim
 - Execute the [sensors calibration script](https://github.com/robotology/codyco-modules/blob/master/src/scripts/twoFeetStandingIdleAndCalib.sh): `$ twoFeetStandingIdleAndCalib.sh`
 - Set the working directory of MATLAB to the directory containing the `torqueBalncing.mdl` model. 
