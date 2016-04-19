@@ -7,7 +7,6 @@ function [CoMDes,qDes,constraints, currentState,impedances,w_H_b,jointsSmoothing
     global w_H_r_sole_switch;
     
     w_H_b       = l_sole_H_b;
-    
     CoMDes      = CoM_0;
     constraints = [1; 1];
     qDes        = q0;
@@ -88,8 +87,8 @@ function [CoMDes,qDes,constraints, currentState,impedances,w_H_b,jointsSmoothing
         constraints = [1; 0]; %right foot is no longer a constraints
 %         constraints = [0; 1]; %left foot is no longer a constraints
 
-        CoMDes(2)    =  sm.com.states(state,2)'; %new reference for CoM
-        qDes        =  sm.joints.states(state,:)';
+        CoMDes(2)  =  sm.com.states(state,2)'; %new reference for CoM
+        qDes       =  sm.joints.states(state,:)';
         impedances = gain.impedances(state,:);
 
         qTileRightLeg = qj(end-5:end)-qDes(end-5:end);

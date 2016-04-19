@@ -48,11 +48,11 @@ CONFIG.SIMULATION_TIME     = inf;
 %               robots/YARP_ROBOT_NAME/initRegGen.m
 % 
 % 'WALKING': under development.
-SM.SM_TYPE                 = 'COORDINATOR';   
+SM.SM_TYPE                 = 'YOGA';   
 
-% CONFIG.USE_QP_SOLVER: if equal to 1, a QP solver is used to account for 
+% CONFIG.USE_QP_SOLVER: if set to true, a QP solver is used to account for 
 % inequality constraints of contact wrenches
-CONFIG.USE_QP_SOLVER       = 1;
+CONFIG.USE_QP_SOLVER       = true;
 
 % CONFIG.SCOPES: if set to true, visualizers for debugging is available
 CONFIG.SCOPES              = false;

@@ -69,7 +69,7 @@ function [tauModel,Sigma,NA,f_HDot, ...
     
     % Desired acceleration for the center of mass
     xDDcomStar      = desired_x_dx_ddx_CoM(:,3) - gainsPCOM*(xcom - desired_x_dx_ddx_CoM(:,1)) - gainsICOM*intErrorCoM - gainsDCOM*(xDcom - desired_x_dx_ddx_CoM(:,2));
-    
+   
     % Application point of the contact force on the right foot w.r.t. CoM
     Pr              = pos_rightFoot - xcom; 
     
@@ -170,7 +170,7 @@ function [tauModel,Sigma,NA,f_HDot, ...
     
     % Desired rate-of-change of the robot momentum
     HDotDes         = [ m*xDDcomStar ;
-                        -gain.DAngularMomentum*H(4:end)-gain.PAngularMomentum*intHw]; 
+                        -gain.DAngularMomentum*H(4:end)-gain.PAngularMomentum*intHw];
 
     % Contact wrenches realizing the desired rate-of-change of the robot
     % momentum HDotDes when standing on two feet. Note that f_HDot is

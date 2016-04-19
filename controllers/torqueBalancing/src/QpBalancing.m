@@ -59,7 +59,7 @@ block.OutputPort(3).Dimensions       = 12;        % f0 One foot
 block.OutputPort(4).Dimensions       = 1;         % Exit flag QP 1 foot
 
 for i=1:block.NumInputPorts
-    block.InputPort(i).DatatypeID  = 0;  % double
+    block.InputPort(i).DatatypeID  = -1;          % 'inherited', see http://www.mathworks.com/help/simulink/slref/simulink.blockdata.html#f29-108672
     block.InputPort(i).Complexity  = 'Real';
     block.InputPort(i).DirectFeedthrough = true;
 end
@@ -171,33 +171,37 @@ function Outputs(block)
     f02Feet                    = zeros(6*2,1);
     USE_QPO_SOLVER             = block.InputPort(6).Data;
 
-    if sum(LEFT_RIGHT_FOOT_IN_CONTACT) > 1.98
+    if sum(LEFT_RIGHT_FOOT_IN_CONTACT) > 1.99
         HessianMatrixQP2Feet       = block.InputPort(2).Data;
         gradientQP2Feet            = block.InputPort(3).Data;
         ConstraintsMatrixQP2Feet   = block.InputPort(4).Data;
         bVectorConstraintsQp2Feet  = block.InputPort(5).Data;
-        if USE_QPO_SOLVER == 1
+        if USE_QPO_SOLVER 
             [f02Feet,~,exitFlagQP2Feet,~,~,~] = qpOASES(HessianMatrixQP2Feet,gradientQP2Feet',ConstraintsMatrixQP2Feet,[],[],[],bVectorConstraintsQp2Feet');           
             if exitFlagQP2Feet ~= 0
                 f02Feet = - inv(HessianMatrixQP2Feet)*gradientQP2Feet';
             end
         else
+            exitFlagQP2Feet            = 1;
+            exitFlagQPOneFoot          = 1; 
             f02Feet = - inv(HessianMatrixQP2Feet)*gradientQP2Feet';
         end
             
-    elseif sum(LEFT_RIGHT_FOOT_IN_CONTACT) > 0.98 && sum(LEFT_RIGHT_FOOT_IN_CONTACT) < 1.02
+    elseif sum(LEFT_RIGHT_FOOT_IN_CONTACT) > 0.99 && sum(LEFT_RIGHT_FOOT_IN_CONTACT) < 1.01
         HessianMatrixQP1Foot       = block.InputPort(7).Data;
         gradientQP1Foot            = block.InputPort(8).Data;
         ConstraintsMatrixQP1Foot   = block.InputPort(9).Data;
         bVectorConstraintsQP1Foot  = block.InputPort(10).Data;
 
-        if USE_QPO_SOLVER == 1
+        if USE_QPO_SOLVER 
             [f0OneFoot,~,exitFlagQPOneFoot,~,~,~] = qpOASES(HessianMatrixQP1Foot,gradientQP1Foot',ConstraintsMatrixQP1Foot,[],[],[],bVectorConstraintsQP1Foot');           
 
            if exitFlagQPOneFoot ~= 0
                 f0OneFoot = - inv(HessianMatrixQP1Foot)*gradientQP1Foot';
            end
         else
+            exitFlagQP2Feet            = 1;
+            exitFlagQPOneFoot          = 1; 
             f0OneFoot = - inv(HessianMatrixQP1Foot)*gradientQP1Foot';
         end
     end
