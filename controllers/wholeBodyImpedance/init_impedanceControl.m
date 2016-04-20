@@ -1,4 +1,5 @@
 %% icubGazeboSim
+setenv('YARP_ROBOT_NAME','iCubGenova01');
 
 ROBOT_DOF   = 23;
 WBT_wbiList = 'ROBOT_TORQUE_CONTROL_JOINTS_WITHOUT_PRONOSUP';
