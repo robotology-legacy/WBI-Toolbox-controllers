@@ -1,14 +1,17 @@
-function tau = balancingControlSeeSaw(t, x,ConstraintsMatrix,bVectorConstraints,J_CoM,H,controlParams, model, robot,reg,CONFIG,gain)
-    
+function [fNoQp,f_HDot,NA,tauModel,Sigmaf_HDot,SigmaNA,...
+          HessianMatrixQP2Feet,gradientQP2Feet,ConstraintsMatrixQP2Feet,bVectorConstraintsQp2Feet] = ...
+          balancingControlSeeSaw(t, x,ConstraintsMatrix,bVectorConstraints,J_CoM,H,controlParams,...
+                                 model, robot,reg,CONFIG,gain,ROBOT_DOF)
     %BALANCINGCONTROL Summary of this function goes here
     %   Detailed explanation goes here
 
-    robotDoFs = model.robot.dofs;
-    tau            = zeros(robotDoFs,1);
-
-    % assert(robotDoFs <= 25)
-
-    [ seesaw_pose, seesaw_vel, robotPos, robotVel] = state_partitioning(x, model.robot.dofs);
+    robotDoFs      = size(ROBOT_DOF,1);
+    fNoQp          = zeros(12,1);
+    tauModel       = zeros(robotDoFs,1);
+    Sigmaf_HDot    = zeros(robotDoFs,1);
+    SigmaNA        = zeros(robotDoFs,12);
+    
+    [ seesaw_pose, seesaw_vel, robotPos, robotVel] = state_partitioning(x, robotDoFs);
 
     w_R_s          = rotationFromQuaternion(seesaw_pose(1:4));
     s_omega_s      = seesaw_vel(1:3);
@@ -24,6 +27,8 @@ function tau = balancingControlSeeSaw(t, x,ConstraintsMatrix,bVectorConstraints,
     w_p_com        = robot.fwdkin.w_p_com;
     w_p_l_sole     = robot.fwdkin.w_H_l_sole(1:3,4);
     w_p_r_sole     = robot.fwdkin.w_H_r_sole(1:3,4);
+    w_R_l_sole     = robot.fwdkin.w_H_l_sole(1:3,1:3);
+    w_R_r_sole     = robot.fwdkin.w_H_l_sole(1:3,1:3);
 
     selector       = [zeros(6, robotDoFs); eye(robotDoFs)];
 
@@ -74,41 +79,38 @@ function tau = balancingControlSeeSaw(t, x,ConstraintsMatrix,bVectorConstraints,
     Omega_1        = zeros(3);
     Omega_2        = zeros(3);        
     A              =  CentroidalMat;
-              
-    if seesaw.kind == 1 %Spherical seesaw
-        Theta      = eye(3) + Sf(r_s) * seesaw.iota* Sf(r_s)';
-        Iota_r     = eye(3) + seesaw.iota*norm(r_s)^2;
-
-        Omega_0    = seesaw.iota + (1/det(Theta))*seesaw.iota*Sf(r_s)*Iota_r*Sf(r_s)*seesaw.iota;
-
-        Omega_1    = (1/det(Theta))*seesaw.iota*Theta*Sf(r_s)*(Sf(dr_s) * s_omega_s - Sf(s_omega_s)^2 * r_s - g_s) ...
-                         -Omega_0*Sf(s_omega_s)*seesaw.invIota*s_omega_s;
-
-        Omega_2    = [-seesaw.iota*Theta*Sf(r_s)/det(Theta),Omega_0]*1/seesaw.mass;
-        A          = [CentroidalMat];
-        CentroidalRhs  = Hdot_desired - gravityWrench;
-    end
-        
-    if seesaw.kind == 2 %Semicylindrical seesaw
-            
-            lambda1        = seesaw.delta*seesaw.iota(1,1)*(seesaw.rho*s_omega_s(1)^2 -gravityAcc(3))/(1 + seesaw.iota(1,1)*norm(r_s)^2);
-
-            Omega_2Bar     = [(seesaw.delta*w_R_s*e2-seesaw.rho*e2)',e1'];
-            lambda2        = seesaw.iota(1,1)/(seesaw.mass*(1 + seesaw.iota(1,1)*norm(r_s)^2));
-
-            Omega_1        = - e1*lambda1*w_R_s(3,2);
-
-            Omega_2        =  e1*lambda2*Omega_2Bar*blkdiag(w_R_s,w_R_s);
-    end
-
+    
     pinvA          = pinv(A);
     NA             = pinvA * A;
     NA             = eye(size(NA)) - NA;
 
     q              = robotPos(8:end);
     qref           = controlParams.references.qDes;
+              
+    if seesaw.kind == 1 %Spherical seesaw
+        Theta          = eye(3) + Sf(r_s) * seesaw.iota* Sf(r_s)';
+        Iota_r         = eye(3) + seesaw.iota*norm(r_s)^2;
 
-    if CONFIG.CONTROLKIND == 1
+        Omega_0        = seesaw.iota + (1/det(Theta))*seesaw.iota*Sf(r_s)*Iota_r*Sf(r_s)*seesaw.iota;
+
+        Omega_1        = (1/det(Theta))*seesaw.iota*Theta*Sf(r_s)*(Sf(dr_s) * s_omega_s - Sf(s_omega_s)^2 * r_s - g_s) ...
+                         -Omega_0*Sf(s_omega_s)*seesaw.invIota*s_omega_s;
+
+        Omega_2        = [-seesaw.iota*Theta*Sf(r_s)/det(Theta),Omega_0]*1/seesaw.mass;
+        
+    elseif seesaw.kind == 2 %Semicylindrical seesaw
+            
+        lambda1        = seesaw.delta*seesaw.iota(1,1)*(seesaw.rho*s_omega_s(1)^2 -gravityAcc(3))/(1 + seesaw.iota(1,1)*norm(r_s)^2);
+
+        Omega_2Bar     = [(seesaw.delta*w_R_s*e2-seesaw.rho*e2)',e1'];
+        lambda2        = seesaw.iota(1,1)/(seesaw.mass*(1 + seesaw.iota(1,1)*norm(r_s)^2));
+
+        Omega_1        = - e1*lambda1*w_R_s(3,2);
+
+        Omega_2        =  e1*lambda2*Omega_2Bar*blkdiag(w_R_s,w_R_s);
+    end
+
+%     if CONFIG.CONTROLKIND == 1
         f_HDot         = pinvA* (Hdot_desired - gravityWrench);
 
         F              = blkdiag(w_R_s, w_R_s, w_R_s, w_R_s)*Delta* Omega_2* blkdiag(s_R_w,s_R_w) * As + J / M * J';
@@ -125,30 +127,27 @@ function tau = balancingControlSeeSaw(t, x,ConstraintsMatrix,bVectorConstraints,
 
         Sigma          = -LambdaPinv *F - NullLambda*JjBar;
         SigmaNA        = Sigma*NA; 
-        pinvSigmaNA    = pinvDamped(SigmaNA,reg.pinvDamp);
+        pinvSigmaNA    = pinvDamped(SigmaNA,reg.pinvDamp*1e-4);
 
         f0             = -pinvSigmaNA*(tauModel + Sigma*f_HDot);
 
-        tau            = tauModel + Sigma*f_HDot + SigmaNA*f0;
-    end
+        Sigmaf_HDot    = Sigma*f_HDot;
+        
+        fNoQp          = f_HDot  + NA*f0;
+        
+        constraintMatrixLeftFoot  = ConstraintsMatrix * blkdiag(w_R_l_sole',w_R_l_sole');
+        constraintMatrixRightFoot = ConstraintsMatrix * blkdiag(w_R_r_sole',w_R_r_sole');
+        ConstraintsMatrix2Feet    = blkdiag(constraintMatrixLeftFoot,constraintMatrixRightFoot);
+        bVectorConstraints2Feet   = [bVectorConstraints;bVectorConstraints];
+        
+        ConstraintsMatrixQP2Feet  = ConstraintsMatrix2Feet*NA;
+        bVectorConstraintsQp2Feet = bVectorConstraints2Feet-ConstraintsMatrix2Feet*f_HDot;
+    
+        HessianMatrixQP2Feet      = SigmaNA'*SigmaNA + eye(size(SigmaNA,2))*reg.HessianQP;
+        gradientQP2Feet           = SigmaNA'*(tauModel + Sigma*f_HDot);
+
+   
+%     end
 end
 
 
-
-    
-%             constraintMatrixLeftFoot  = ConstraintsMatrix * blkdiag(w_R_l_sole',w_R_l_sole');
-%         constraintMatrixRightFoot = ConstraintsMatrix * blkdiag(w_R_r_sole',w_R_r_sole');
-%         ConstraintsMatrix2Feet    = blkdiag(constraintMatrixLeftFoot,constraintMatrixRightFoot);
-%         bVectorConstraints2Feet   = [bVectorConstraints;bVectorConstraints];
-%     
-% 
-%         ConstraintsMatrix2Feet    = blkdiag(CL,CR);
-%         bVectorConstraints2Feet   = [bVectorConstraints;bVectorConstraints];
-% 
-%         ConstraintsMatrixQP2Feet  = ConstraintsMatrix2Feet*NA;
-%         bVectorConstraintsQp2Feet = bVectorConstraints2Feet-ConstraintsMatrix2Feet*f_HDot;
-%     
-%         % Evaluation of Hessian matrix and gradient vector for solving the
-%         % optimization problem 1).
-%         HessianMatrixQP2Feet      = SigmaNA'*SigmaNA + eye(size(SigmaNA,2))*reg.HessianQP;
-%         gradientQP2Feet           = SigmaNA'*(tauModel + Sigma*f_HDot);

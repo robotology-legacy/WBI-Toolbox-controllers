@@ -11,6 +11,8 @@ CONFIG.USE_IMU4EST_BASE = 0;
 
 CONFIG.USE_IMU4EST_BASE = false;
 CONFIG.YAW_IMU_FILTER   = false;
+CONFIG.USE_QP_SOLVER    = true;
+CONFIG.SCOPES           = true;
 
 CONFIG.TS               = 0.01;
 
