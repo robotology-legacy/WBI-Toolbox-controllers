@@ -1,9 +1,7 @@
 ROBOT_DOF = 23;
-CONFIG.ON_GAZEBO = true;
-WBT_wbiList = 'ROBOT_TORQUE_CONTROL_JOINTS_WITHOUT_PRONOSUP';
 
-references.joints.smoothingTime    = 1.0;
-references.com.smoothingTime       = 5;
+
+WBT_wbiList = 'ROBOT_TORQUE_CONTROL_JOINTS_WITHOUT_PRONOSUP';
 
 sat.torque = 34;
 
@@ -17,14 +15,17 @@ model.robot.dofs = ROBOT_DOF;
 model.robot.lFootCentreDistance =  0.11;
 model.robot.rFootCentreDistance = -0.11;
     
-seesaw           = struct;
-seesaw.h         = 0.1;
-seesaw.rho       = 0.362;%0.175;%0.362; % init value 0.362
-seesaw.delta     = seesaw.rho - seesaw.h + 0.002;
-seesaw.inertia   = diag([7.6698599e-02, 3.7876787e-02, 1.0893139e-01]);
-seesaw.mass      = 4.2;
-seesaw.top       = 0.002;% seesaw.delta - (seesaw.rho - seesaw.h) ;
-seesaw.kind      = seesawKind;
+seesaw                          =  struct;
+seesaw.h                        =  0.1;
+seesaw.rho                      =  0.362;%0.175;%0.362; % init value 0.362
+seesaw.delta                    =  seesaw.rho - seesaw.h + 0.002;
+seesaw.inertia                  =  diag([7.6698599e-02, 3.7876787e-02, 1.0893139e-01]);
+seesaw.mass                     =  4.2;
+seesaw.top                      =  0.002;% seesaw.delta - (seesaw.rho - seesaw.h) ;
+seesaw.kind                     =  seesawKind;
+seesaw.lFootCentreDistance      =  0.1;
+seesaw.rFootCentreDistance      = -0.1;
+
 switch seesaw.kind
     case 1 %Spherical seesaw
         seesaw.iota      = seesaw.mass*inv(seesaw.inertia);

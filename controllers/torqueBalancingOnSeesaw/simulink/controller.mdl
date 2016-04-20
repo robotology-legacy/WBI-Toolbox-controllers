@@ -7,7 +7,7 @@ Model {
     NumRootInports	    0
     NumRootOutports	    0
     ParameterArgumentNames  ""
-    ComputedModelVersion    "1.595"
+    ComputedModelVersion    "1.610"
     NumModelReferences	    0
     NumTestPointedSignals   0
   }
@@ -20,7 +20,7 @@ Model {
   MinMaxOverflowArchiveMode "Overwrite"
   FPTRunName		  "Run 1"
   MaxMDLFileLineLength	  120
-  InitFcn		  "initTrqBalancingSeeSaw;\n"
+  InitFcn		  "cd(fileparts(which(bdroot)));\ninitTrqBalancingSeeSaw;\n"
   Object {
     $PropName		    "BdWindowsInfo"
     $ObjectID		    1
@@ -30,7 +30,7 @@ Model {
       $ObjectID		      2
       $ClassName	      "Simulink.WindowInfo"
       IsActive		      [1]
-      Location		      [23.0, 669.0, 1253.0, 754.0]
+      Location		      [25.0, 41.0, 2472.0, 1326.0]
       Object {
 	$PropName		"ModelBrowserInfo"
 	$ObjectID		3
@@ -53,11 +53,11 @@ Model {
 	Object {
 	  $ObjectID		  5
 	  IsActive		  [1]
-	  ViewObjType		  "SimulinkSubsys"
-	  LoadSaveID		  "67"
-	  Extents		  [1219.0, 581.0]
-	  ZoomFactor		  [0.54482758620689653]
-	  Offset		  [-501.20253164556971, -267.69620253164555]
+	  ViewObjType		  "SimulinkTopLevel"
+	  LoadSaveID		  "0"
+	  Extents		  [2438.0, 1153.0]
+	  ZoomFactor		  [1.75]
+	  Offset		  [-113.3658308531742, 75.150476190476184]
 	}
 	Object {
 	  $ObjectID		  6
@@ -82,9 +82,9 @@ Model {
 	  IsActive		  [0]
 	  ViewObjType		  "SimulinkSubsys"
 	  LoadSaveID		  "478"
-	  Extents		  [1246.0, 600.0]
-	  ZoomFactor		  [2.3650485436893205]
-	  Offset		  [-175.91954022988506, -102.84729064039408]
+	  Extents		  [1253.0, 635.0]
+	  ZoomFactor		  [2.3650485436893196]
+	  Offset		  [-175.91954022988511, -102.84729064039411]
 	}
 	Object {
 	  $ObjectID		  9
@@ -114,9 +114,9 @@ Model {
   ModifiedByFormat	  "%<Auto>"
   LastModifiedBy	  "DanielePucci"
   ModifiedDateFormat	  "%<Auto>"
-  LastModifiedDate	  "Tue Apr 19 18:17:03 2016"
-  RTWModifiedTimeStamp	  382198953
-  ModelVersionFormat	  "1.%<AutoIncrement:595>"
+  LastModifiedDate	  "Wed Apr 20 11:44:34 2016"
+  RTWModifiedTimeStamp	  383053472
+  ModelVersionFormat	  "1.%<AutoIncrement:610>"
   ConfigurationManager	  "none"
   SampleTimeColors	  off
   SampleTimeAnnotations	  off
@@ -1072,8 +1072,8 @@ Model {
   }
   System {
     Name		    "controller"
-    Location		    [23, 669, 1276, 1423]
-    Open		    off
+    Location		    [25, 41, 2497, 1367]
+    Open		    on
     ModelBrowserVisibility  off
     ModelBrowserWidth	    200
     ScreenColor		    "white"
@@ -1084,7 +1084,7 @@ Model {
     TiledPaperMargins	    [0.500000, 0.500000, 0.500000, 0.500000]
     TiledPageScale	    1
     ShowPageBoundaries	    off
-    ZoomFactor		    "106"
+    ZoomFactor		    "175"
     ReportName		    "simulink-default.rpt"
     SIDHighWatermark	    "486"
     Block {
@@ -1100,7 +1100,7 @@ Model {
       Name		      "CoM and qj\nat t = 0"
       SID		      "99"
       Ports		      [2, 2]
-      Position		      [265, 286, 410, 344]
+      Position		      [250, 286, 395, 344]
       ZOrder		      78
       ShowName		      off
       Priority		      "2"
@@ -1108,7 +1108,7 @@ Model {
       Variant		      off
       System {
 	Name			"CoM and qj\nat t = 0"
-	Location		[0, 23, 1280, 796]
+	Location		[20, 223, 1794, 1319]
 	Open			on
 	ModelBrowserVisibility	off
 	ModelBrowserWidth	200
@@ -1543,7 +1543,7 @@ Model {
       BlockType		      Constant
       Name		      "Constant"
       SID		      "89"
-      Position		      [425, 347, 515, 373]
+      Position		      [425, 352, 515, 368]
       ZOrder		      77
       ShowName		      off
       Value		      "eye(ROBOT_DOF)"
@@ -1552,7 +1552,7 @@ Model {
       BlockType		      Constant
       Name		      "Constant1"
       SID		      "422"
-      Position		      [185, 285, 235, 315]
+      Position		      [155, 285, 205, 315]
       ZOrder		      585
       ShowName		      off
       Value		      "0"
@@ -1561,7 +1561,7 @@ Model {
       BlockType		      Constant
       Name		      "Constant2"
       SID		      "476"
-      Position		      [435, 232, 515, 248]
+      Position		      [425, 232, 520, 248]
       ZOrder		      590
       ShowName		      off
       Value		      "ConstraintsMatrix"
@@ -1580,7 +1580,7 @@ Model {
       Name		      "Dump and visualize"
       SID		      "187"
       Ports		      [3]
-      Position		      [930, 473, 1010, 607]
+      Position		      [1175, 573, 1255, 707]
       ZOrder		      313
       Commented		      "on"
       RequestExecContextInheritance off
@@ -3936,8 +3936,8 @@ Model {
       }
       System {
 	Name			"Dynamics quantities"
-	Location		[23, 669, 1276, 1423]
-	Open			on
+	Location		[25, 41, 2497, 1367]
+	Open			off
 	ModelBrowserVisibility	off
 	ModelBrowserWidth	200
 	ScreenColor		"white"
@@ -3948,7 +3948,7 @@ Model {
 	TiledPaperMargins	[0.500000, 0.500000, 0.500000, 0.500000]
 	TiledPageScale		1
 	ShowPageBoundaries	off
-	ZoomFactor		"54"
+	ZoomFactor		"111"
 	Block {
 	  BlockType		  Inport
 	  Name			  "w_H_b"
@@ -4205,7 +4205,7 @@ Model {
 	  Variant		  off
 	  System {
 	    Name		    "xCom"
-	    Location		    [5, 31, 2426, 1314]
+	    Location		    [25, 41, 2497, 1367]
 	    Open		    off
 	    ModelBrowserVisibility  off
 	    ModelBrowserWidth	    200
@@ -4217,7 +4217,7 @@ Model {
 	    TiledPaperMargins	    [0.500000, 0.500000, 0.500000, 0.500000]
 	    TiledPageScale	    1
 	    ShowPageBoundaries	    off
-	    ZoomFactor		    "590"
+	    ZoomFactor		    "603"
 	    Block {
 	      BlockType		      Inport
 	      Name		      "w_H_b"
@@ -4271,7 +4271,7 @@ Model {
 	    }
 	    Block {
 	      BlockType		      Outport
-	      Name		      "xCom"
+	      Name		      "w_p_com"
 	      SID		      "416"
 	      Position		      [385, 253, 415, 267]
 	      ZOrder		      583
@@ -4289,7 +4289,7 @@ Model {
 	      ZOrder		      2
 	      SrcBlock		      "CoM6D -> \nCoMXYZ2"
 	      SrcPort		      1
-	      DstBlock		      "xCom"
+	      DstBlock		      "w_p_com"
 	      DstPort		      1
 	    }
 	    Line {
@@ -4311,7 +4311,7 @@ Model {
 	}
 	Block {
 	  BlockType		  Outport
-	  Name			  "J"
+	  Name			  "J(q) "
 	  SID			  "75"
 	  Position		  [975, 348, 1005, 362]
 	  ZOrder		  80
@@ -4319,9 +4319,9 @@ Model {
 	}
 	Block {
 	  BlockType		  Outport
-	  Name			  "JCoM"
+	  Name			  "J_com"
 	  SID			  "120"
-	  Position		  [820, -82, 850, -68]
+	  Position		  [975, -82, 1005, -68]
 	  ZOrder		  353
 	  Port			  "2"
 	  IconDisplay		  "Port number"
@@ -4330,52 +4330,52 @@ Model {
 	  BlockType		  Outport
 	  Name			  "JdotNudot"
 	  SID			  "76"
-	  Position		  [950, 123, 980, 137]
+	  Position		  [975, 123, 1005, 137]
 	  ZOrder		  81
 	  Port			  "3"
 	  IconDisplay		  "Port number"
 	}
 	Block {
 	  BlockType		  Outport
-	  Name			  "M"
+	  Name			  "M(q)"
 	  SID			  "77"
-	  Position		  [820, 463, 850, 477]
+	  Position		  [975, 463, 1005, 477]
 	  ZOrder		  82
 	  Port			  "4"
 	  IconDisplay		  "Port number"
 	}
 	Block {
 	  BlockType		  Outport
-	  Name			  "biasForces"
+	  Name			  "C(q,nu)+g(q)"
 	  SID			  "78"
-	  Position		  [795, 613, 825, 627]
+	  Position		  [975, 613, 1005, 627]
 	  ZOrder		  83
 	  Port			  "5"
 	  IconDisplay		  "Port number"
 	}
 	Block {
 	  BlockType		  Outport
-	  Name			  "ComFwd"
+	  Name			  "w_p_com"
 	  SID			  "79"
-	  Position		  [750, 13, 780, 27]
+	  Position		  [975, 13, 1005, 27]
 	  ZOrder		  84
 	  Port			  "6"
 	  IconDisplay		  "Port number"
 	}
 	Block {
 	  BlockType		  Outport
-	  Name			  "lFootFwd"
+	  Name			  "w_H_l_sole"
 	  SID			  "80"
-	  Position		  [820, -227, 850, -213]
+	  Position		  [975, -227, 1005, -213]
 	  ZOrder		  85
 	  Port			  "7"
 	  IconDisplay		  "Port number"
 	}
 	Block {
 	  BlockType		  Outport
-	  Name			  "rFootFwd"
+	  Name			  "w_H_r_sole"
 	  SID			  "81"
-	  Position		  [825, -162, 855, -148]
+	  Position		  [975, -162, 1005, -148]
 	  ZOrder		  86
 	  Port			  "8"
 	  IconDisplay		  "Port number"
@@ -4384,7 +4384,7 @@ Model {
 	  BlockType		  Outport
 	  Name			  "H(q,dq)"
 	  SID			  "164"
-	  Position		  [860, 723, 890, 737]
+	  Position		  [975, 723, 1005, 737]
 	  ZOrder		  355
 	  Port			  "9"
 	  IconDisplay		  "Port number"
@@ -4393,7 +4393,7 @@ Model {
 	  ZOrder		  144
 	  SrcBlock		  "Get Bias Forces"
 	  SrcPort		  1
-	  DstBlock		  "biasForces"
+	  DstBlock		  "C(q,nu)+g(q)"
 	  DstPort		  1
 	}
 	Line {
@@ -4415,28 +4415,28 @@ Model {
 	  ZOrder		  195
 	  SrcBlock		  "l_sole"
 	  SrcPort		  1
-	  DstBlock		  "lFootFwd"
+	  DstBlock		  "w_H_l_sole"
 	  DstPort		  1
 	}
 	Line {
 	  ZOrder		  182
 	  SrcBlock		  "xCom"
 	  SrcPort		  1
-	  DstBlock		  "ComFwd"
+	  DstBlock		  "w_p_com"
 	  DstPort		  1
 	}
 	Line {
 	  ZOrder		  196
 	  SrcBlock		  "r_sole"
 	  SrcPort		  1
-	  DstBlock		  "rFootFwd"
+	  DstBlock		  "w_H_r_sole"
 	  DstPort		  1
 	}
 	Line {
 	  ZOrder		  62
 	  SrcBlock		  "Matrix\nConcatenate"
 	  SrcPort		  1
-	  DstBlock		  "J"
+	  DstBlock		  "J(q) "
 	  DstPort		  1
 	}
 	Line {
@@ -4451,7 +4451,7 @@ Model {
 	  ZOrder		  189
 	  SrcBlock		  "Jacobian com"
 	  SrcPort		  1
-	  DstBlock		  "JCoM"
+	  DstBlock		  "J_com"
 	  DstPort		  1
 	}
 	Line {
@@ -4748,7 +4748,7 @@ Model {
 	  ZOrder		  145
 	  SrcBlock		  "Mass Matrix"
 	  SrcPort		  1
-	  DstBlock		  "M"
+	  DstBlock		  "M(q)"
 	  DstPort		  1
 	}
 	Line {
@@ -4773,7 +4773,7 @@ Model {
       Name		      "Saturation"
       SID		      "183"
       Ports		      [1, 1]
-      Position		      [685, 375, 715, 405]
+      Position		      [945, 375, 975, 405]
       ZOrder		      84
       ShowName		      off
       InputPortMap	      "u0"
@@ -4785,7 +4785,7 @@ Model {
       Name		      "Selector"
       SID		      "252"
       Ports		      [1, 1]
-      Position		      [866, 395, 904, 435]
+      Position		      [1106, 395, 1144, 435]
       ZOrder		      315
       BlockRotation	      270
       BlockMirror	      on
@@ -4802,7 +4802,7 @@ Model {
       Name		      "Selector1"
       SID		      "254"
       Ports		      [1, 1]
-      Position		      [695, 521, 735, 559]
+      Position		      [895, 621, 935, 659]
       ZOrder		      317
       Commented		      "on"
       InputPortWidth	      "7"
@@ -4815,7 +4815,7 @@ Model {
       Name		      "Set References"
       SID		      "424"
       Ports		      [1]
-      Position		      [745, 375, 820, 405]
+      Position		      [1000, 375, 1075, 405]
       ZOrder		      587
       BackgroundColor	      "[0.827500, 0.576500, 0.603900]"
       ShowName		      off
@@ -4849,7 +4849,7 @@ Model {
       }
       System {
 	Name			"Subsystem"
-	Location		[0, 23, 1280, 796]
+	Location		[20, 223, 1794, 1319]
 	Open			on
 	ModelBrowserVisibility	off
 	ModelBrowserWidth	200
@@ -6622,7 +6622,7 @@ Model {
       Name		      "Sum"
       SID		      "255"
       Ports		      [2, 1]
-      Position		      [800, 530, 820, 550]
+      Position		      [1000, 630, 1020, 650]
       ZOrder		      318
       ShowName		      off
       Commented		      "on"
@@ -6637,7 +6637,7 @@ Model {
       Name		      "controllerMatFcN"
       SID		      "3"
       Ports		      [17, 1]
-      Position		      [535, 145, 645, 635]
+      Position		      [535, 145, 835, 635]
       ZOrder		      24
       ShowName		      off
       LibraryVersion	      "1.32"
@@ -6763,7 +6763,7 @@ Model {
 	}
 	Block {
 	  BlockType		  Inport
-	  Name			  "Mass"
+	  Name			  "M"
 	  SID			  "3::61"
 	  Position		  [20, 496, 40, 514]
 	  ZOrder		  50
@@ -6781,7 +6781,7 @@ Model {
 	}
 	Block {
 	  BlockType		  Inport
-	  Name			  "robotCoM"
+	  Name			  "w_p_com"
 	  SID			  "3::63"
 	  Position		  [20, 566, 40, 584]
 	  ZOrder		  52
@@ -6790,7 +6790,7 @@ Model {
 	}
 	Block {
 	  BlockType		  Inport
-	  Name			  "robotLeftFoot"
+	  Name			  "w_H_l_sole"
 	  SID			  "3::64"
 	  Position		  [20, 606, 40, 624]
 	  ZOrder		  53
@@ -6799,7 +6799,7 @@ Model {
 	}
 	Block {
 	  BlockType		  Inport
-	  Name			  "robotRightFoot"
+	  Name			  "w_H_r_sole"
 	  SID			  "3::65"
 	  Position		  [20, 641, 40, 659]
 	  ZOrder		  54
@@ -6938,7 +6938,7 @@ Model {
 	}
 	Line {
 	  ZOrder		  1547
-	  SrcBlock		  "Mass"
+	  SrcBlock		  "M"
 	  SrcPort		  1
 	  DstBlock		  " SFunction "
 	  DstPort		  12
@@ -6952,21 +6952,21 @@ Model {
 	}
 	Line {
 	  ZOrder		  1549
-	  SrcBlock		  "robotCoM"
+	  SrcBlock		  "w_p_com"
 	  SrcPort		  1
 	  DstBlock		  " SFunction "
 	  DstPort		  14
 	}
 	Line {
 	  ZOrder		  1550
-	  SrcBlock		  "robotLeftFoot"
+	  SrcBlock		  "w_H_l_sole"
 	  SrcPort		  1
 	  DstBlock		  " SFunction "
 	  DstPort		  15
 	}
 	Line {
 	  ZOrder		  1551
-	  SrcBlock		  "robotRightFoot"
+	  SrcBlock		  "w_H_r_sole"
 	  SrcPort		  1
 	  DstBlock		  " SFunction "
 	  DstPort		  16
@@ -7037,7 +7037,7 @@ Model {
       }
       System {
 	Name			"synchronizer"
-	Location		[0, 23, 1280, 796]
+	Location		[20, 223, 1794, 1319]
 	Open			on
 	ModelBrowserVisibility	off
 	ModelBrowserWidth	200
@@ -7061,7 +7061,7 @@ Model {
 	  Variant		  off
 	  System {
 	    Name		    "GAZEBO_SYNCHRONIZER"
-	    Location		    [0, 23, 1280, 796]
+	    Location		    [20, 223, 1794, 1319]
 	    Open		    on
 	    ModelBrowserVisibility  off
 	    ModelBrowserWidth	    200
@@ -7136,7 +7136,7 @@ Model {
 	  Variant		  off
 	  System {
 	    Name		    "REAL_TIME_SYNC"
-	    Location		    [0, 23, 1280, 796]
+	    Location		    [20, 223, 1794, 1319]
 	    Open		    on
 	    ModelBrowserVisibility  off
 	    ModelBrowserWidth	    200
@@ -7236,17 +7236,17 @@ Model {
       ZOrder		      174
       SrcBlock		      "CoM and qj\nat t = 0"
       SrcPort		      1
-      Points		      [7, 0]
+      Points		      [10, 0]
       Branch {
-	ZOrder			433
-	Points			[0, -175; 463, 0]
-	DstBlock		"Selector"
-	DstPort			1
-      }
-      Branch {
-	ZOrder			430
+	ZOrder			472
 	DstBlock		"controllerMatFcN"
 	DstPort			6
+      }
+      Branch {
+	ZOrder			433
+	Points			[0, -214; 715, 0]
+	DstBlock		"Selector"
+	DstPort			1
       }
     }
     Line {
@@ -7316,7 +7316,7 @@ Model {
       }
       Branch {
 	ZOrder			283
-	Points			[0, 100; 427, 0; 0, -100]
+	Points			[0, 100]
 	DstBlock		"Selector1"
 	DstPort			1
       }
@@ -7353,10 +7353,10 @@ Model {
       ZOrder		      30
       SrcBlock		      "controllerMatFcN"
       SrcPort		      1
-      Points		      [17, 0]
+      Points		      [85, 0]
       Branch {
 	ZOrder			223
-	Points			[0, 105]
+	Points			[0, 205]
 	DstBlock		"Dump and visualize"
 	DstPort			1
       }
@@ -7370,10 +7370,10 @@ Model {
       ZOrder		      224
       SrcBlock		      "Selector"
       SrcPort		      1
-      Points		      [0, 145]
+      Points		      [0, 245]
       Branch {
-	ZOrder			230
-	Points			[-75, 0]
+	ZOrder			469
+	Points			[-115, 0]
 	DstBlock		"Sum"
 	DstPort			2
       }
@@ -7478,7 +7478,7 @@ Stateflow {
     chartFileNumber	    1
     disableImplicitCasting  1
     eml {
-      name		      "fcn"
+      name		      "balancingControlSeeSawFCN"
     }
   }
   state {
@@ -7495,20 +7495,19 @@ Stateflow {
     decomposition	    CLUSTER_STATE
     eml {
       isEML		      1
-      script		      " function tau = fcn(t, x0,x,ConstraintsMatrix,bVectorConstraints, ...\n    gain, reg, ...\n    xc"
-      "omRef, qdesRef,  ...\n    seesaw, ROBOT_DOF,...\n    J, J_CoM, JdotNu, Mass, genBiasForces, robotCoM, robotLeftF"
-      "oot, robotRightFoot,H,CONFIG)\n%#codegen\n\npersistent lFootCentreDistance rFootCentreDistance;\n\ntau          "
-      "             = zeros(size(ROBOT_DOF, 1), 1);\nrobot                     = struct;\nrobot.dofs                = s"
-      "ize(ROBOT_DOF, 1);\n\nif isempty(lFootCentreDistance)\n    lFootCentreDistance   =  0.1;%robotLeftFoot(2);\n    "
-      "rFootCentreDistance   = -0.1;%robotRightFoot(2);\nend\n\nrobotWBM.Mass             = Mass;\nrobotWBM.J          "
-      "      = J;\nrobotWBM.JdotNu           = JdotNu;\nrobotWBM.genBiasForces    = genBiasForces;\nrobotWBM.fwdkin.com"
-      "       = robotCoM;\nrobotWBM.fwdkin.l_sole    = robotLeftFoot(1:3,4);\nrobotWBM.fwdkin.r_sole    = robotRightFoo"
-      "t(1:3,4);\nrobotWBM.fwdkin.RotMl_sole= robotLeftFoot(1:3,1:3);\nrobotWBM.fwdkin.RotMr_sole= robotRightFoot(1:3,1"
-      ":3);\n\nrobot.lFootCentreDistance = lFootCentreDistance;\nrobot.rFootCentreDistance = rFootCentreDistance;\n\nco"
-      "ntrolParams.gains                = gain;\ncontrolParams.references.qDes      = qdesRef;\ncontrolParams.reference"
-      "s.xcomDes   = xcomRef(:,1);\ncontrolParams.references.DxcomDes  = xcomRef(:,2);\ncontrolParams.references.DDxcom"
-      "Des = xcomRef(:,3);\n\nmodel = struct('robot', robot, 'seesaw', seesaw);\n\ntau(:) = balancingControlSeeSaw(t, x"
-      ",ConstraintsMatrix,bVectorConstraints,J_CoM,H,controlParams, model, robotWBM,reg,CONFIG,gain);\n "
+      script		      " function tau = balancingControlSeeSawFCN(t, x0,x,ConstraintsMatrix,bVectorConstraints, gain, reg"
+      ", ...\n                                          xcomRef, qdesRef, seesaw, ROBOT_DOF,...\n                      "
+      "                    J, J_CoM, JdotNu, M, genBiasForces, w_p_com, w_H_l_sole, w_H_r_sole,H,CONFIG)\n%#codegen\n\n"
+      "\ntau                                = zeros(size(ROBOT_DOF, 1), 1);\nrobot                              = struc"
+      "t;\nrobot.dofs                         = size(ROBOT_DOF, 1);\n\nrobot.M                            = M;\nrobot.J"
+      "                            = J;\nrobot.JdotNu                       = JdotNu;\nrobot.genBiasForces             "
+      "   = genBiasForces;\nrobot.fwdkin.w_p_com               = w_p_com;\nrobot.fwdkin.w_H_l_sole            = w_H_l_s"
+      "ole;\nrobot.fwdkin.w_H_r_sole            = w_H_r_sole;\n      \nrobot.lFootCentreDistance          = seesaw.lFoo"
+      "tCentreDistance;\nrobot.rFootCentreDistance          = seesaw.rFootCentreDistance;\n\ncontrolParams.gains       "
+      "         = gain;\ncontrolParams.references.qDes      = qdesRef;\ncontrolParams.references.xcomDes   = xcomRef(:,"
+      "1);\ncontrolParams.references.DxcomDes  = xcomRef(:,2);\ncontrolParams.references.DDxcomDes = xcomRef(:,3);\n\nm"
+      "odel = struct('robot', robot, 'seesaw', seesaw);\n\ntau(:) = balancingControlSeeSaw(t, x,ConstraintsMatrix,bVect"
+      "orConstraints,J_CoM,H,controlParams, model, robot,reg,CONFIG,gain);\n "
       editorLayout	      "100 M4x1[10 5 700 500]"
     }
   }
@@ -7846,7 +7845,7 @@ Stateflow {
   data {
     id			    19
     ssIdNumber		    44
-    name		    "Mass"
+    name		    "M"
     linkNode		    [2 18 20]
     scope		    INPUT_DATA
     machine		    1
@@ -7890,7 +7889,7 @@ Stateflow {
   data {
     id			    21
     ssIdNumber		    46
-    name		    "robotCoM"
+    name		    "w_p_com"
     linkNode		    [2 20 22]
     scope		    INPUT_DATA
     machine		    1
@@ -7912,7 +7911,7 @@ Stateflow {
   data {
     id			    22
     ssIdNumber		    47
-    name		    "robotLeftFoot"
+    name		    "w_H_l_sole"
     linkNode		    [2 21 23]
     scope		    INPUT_DATA
     machine		    1
@@ -7934,7 +7933,7 @@ Stateflow {
   data {
     id			    23
     ssIdNumber		    48
-    name		    "robotRightFoot"
+    name		    "w_H_r_sole"
     linkNode		    [2 22 24]
     scope		    INPUT_DATA
     machine		    1

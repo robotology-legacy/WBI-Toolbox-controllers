@@ -1,4 +1,5 @@
 ROBOT_DOF = 23;
+CONFIG.ON_GAZEBO     = true;
 
 WBT_wbiList = 'ROBOT_TORQUE_CONTROL_JOINTS_WITHOUT_PRONOSUP';
 
@@ -23,6 +24,9 @@ seesaw.inertia   = diag([7.6698599e-02, 3.7876787e-02, 1.0893139e-01]);
 seesaw.mass      = 4.2;
 seesaw.top       = 0.002;% seesaw.delta - (seesaw.rho - seesaw.h) ;
 seesaw.kind      = seesawKind;
+seesaw.lFootCentreDistance      =  0.1;
+seesaw.rFootCentreDistance      = -0.1;
+
 switch seesaw.kind
     case 1 %Spherical seesaw
         seesaw.iota      = seesaw.mass*inv(seesaw.inertia);

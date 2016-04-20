@@ -1,3 +1,5 @@
+WBT_wbiList = 'ROBOT_TORQUE_CONTROL_JOINTS_WITHOUT_PRONOSUP';
+
 ROBOT_DOF = 23;
 
 CONFIG.LEFT_RIGHT_FOOT_IN_CONTACT  = [1 1];
@@ -7,12 +9,11 @@ CONFIG.SMOOTH_DES_COM      = 0;    % If equal to one, the desired streamed value
 CONFIG.SMOOTH_DES_Q        = 0;    % If equal to one, the desired streamed values 
                             % of the postural tasks are smoothed internally 
                             
-references.joints.smoothingTime    = 1.0;
-references.com.smoothingTime       = 5;
+references.smoothingTimeComAndJoints    = 3.0;
 
 sat.torque = 34;
 
-smoothingTimeTransitionDynamics    = 0.05;
+CONFIG.smoothingTimeTranDynamics    = 0.05;
 
 ROBOT_DOF_FOR_SIMULINK = eye(ROBOT_DOF);
 gain.qTildeMax         = 20*pi/180;
@@ -23,24 +24,24 @@ gain.SmoothingTimeImp  = 1;
 %%
 %           PARAMETERS FOR TWO FEET ONE GROUND
 if (sum(CONFIG.LEFT_RIGHT_FOOT_IN_CONTACT) == 2)
-    gain.PCOM                 = diag([ 25   25  25]);
+    gain.PCOM                 = diag([50    50  50]);
     gain.ICOM                 = diag([  0    0   0]);
     gain.DCOM                 = 2*sqrt(gain.PCOM)*0;
 
-    gain.PAngularMomentum     = 1 ;
-    gain.DAngularMomentum     = 1 ;
+    gain.PAngularMomentum     = 5 ;
+    gain.DAngularMomentum     = 2*sqrt(gain.PAngularMomentum);
 
     % Impadances acting in the null space of the desired contact forces 
 
-    impTorso            = [40   40   40
+    impTorso            = [10   10   20
                             0    0    0]; 
-    impArms             = [15   15    20   12   
+    impArms             = [10   10    10    8   
                             0    0     0    0   ];
                         
-    impLeftLeg          = [ 35   10   60   700      0  10
+    impLeftLeg          = [ 30   30   30    60     10  10
                              0    0    0     0      0   0]; 
 
-    impRightLeg         = [ 35   10   60   700      0  10
+    impRightLeg         = [ 30   30   30    60     10  10
                              0    0    0     0      0   0]; 
     
                          
@@ -58,7 +59,7 @@ end
 
 if (sum(CONFIG.LEFT_RIGHT_FOOT_IN_CONTACT) == 1)
     %%
-    gain.PCOM                 = diag([120  140 120]);
+    gain.PCOM                 = diag([50   100  50]);
     gain.ICOM                 = diag([  0    0   0]);
     gain.DCOM                 = diag([  0    0   0]);
 
@@ -75,17 +76,17 @@ if (sum(CONFIG.LEFT_RIGHT_FOOT_IN_CONTACT) == 1)
 
     intRightLeg         = [0   0    0    0    0  0];  
     
-    scalingImp          = 1;
+    scalingImp          = 1.5;
     
-    impTorso            = [20   20   20
+    impTorso            = [20   20   30
                             0    0    0]*scalingImp; 
-    impArms             = [13   17    13    5     
+    impArms             = [15   15    15    8   
                             0    0     0    0   ]*scalingImp;
                         
-    impLeftLeg          = [ 70   70   65   300      0   0
+    impLeftLeg          = [ 30   30   30   120     10  10
                              0    0    0     0      0   0]*scalingImp; 
 
-    impRightLeg         = [ 20   20   20    10      0    0
+    impRightLeg         = [ 30   30   30    60     10  10
                              0    0    0     0      0   0]*scalingImp; 
                             
 %%    
@@ -128,5 +129,7 @@ fZmin                        = 10;
 % satisfies the inequality Aineq_f F(fo) < bineq_f
 reg.pinvTol     = 1e-5;
 reg.pinvDamp    = 0.01;
-reg.pinvDampVb  = 0.001;
+reg.pinvDampVb  = 1e-7;
 reg.HessianQP   = 1e-7;
+reg.impedances  = 0.1;
+reg.dampings    = 0;
