@@ -26,9 +26,9 @@ clear; clc;
 % To do this, you can uncomment the 
 
 % setenv('YARP_ROBOT_NAME','iCubGenova01');
-% setenv('YARP_ROBOT_NAME','iCubGenova02');
+setenv('YARP_ROBOT_NAME','iCubGenova02');
 % setenv('YARP_ROBOT_NAME','iCubDarmstadt01');
-setenv('YARP_ROBOT_NAME','icubGazeboSim');
+% setenv('YARP_ROBOT_NAME','icubGazeboSim');
 
 % Simulation time in seconds
 CONFIG.SIMULATION_TIME     = inf;   
@@ -52,7 +52,7 @@ CONFIG.SIMULATION_TIME     = inf;
 SM.SM_TYPE                 = 'YOGA';   
 
 % CONFIG.SCOPES: if set to true, visualizers for debugging is available
-CONFIG.SCOPES              = false;
+CONFIG.SCOPES              = true;
 
 % CONFIG.USE_IMU4EST_BASE: if set to false, the base frame is estimated by 
 % assuming that either the left or the right foot stay stuck on the ground. 
