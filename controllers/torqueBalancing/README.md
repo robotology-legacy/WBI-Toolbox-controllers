@@ -7,7 +7,7 @@ A cost function penalizing high joint torques - that generate the feet forces - 
 For details see [iCub whole-body control through force regulation on rigid non-coplanar contacts](http://journal.frontiersin.org/article/10.3389/frobt.2015.00006/abstract)
 
 ###Compatibility
-This Simulink model is compatible with Matlab 2012b or any later version.
+The Simulink models are  compatible with Matlab R2012b and R2015b. Also, the controller is tested in simulation by using Gazebo 7.0. Older versions of Gazebo may lead to scarse, or unstable, control performances.
 
 ###Launch procedure
 The procedure to run the torque balancing module is still quite elaborate.
