@@ -2,7 +2,7 @@ function dotNu_ikin   = Ikin_AccelerationRef_generator(JFeet, JCoM, JPosture, dJ
 
 %setup parameters
 n_joints  = length(JCoM(1,7:end));
-PINV_TOL  = 5e-7;  
+PINV_TOL  = 1e-8;  
 
 % null space projectors for primary and secondary task
 NullFeet   = eye(6+n_joints) - pinv(JFeet,PINV_TOL)*JFeet;

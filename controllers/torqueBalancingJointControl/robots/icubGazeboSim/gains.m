@@ -7,14 +7,15 @@ sat.torque                         = 34;
 gain.qTildeMax                     = 20*pi/180; 
 
 % Feet gains for inverse kinematics
-gain.ikin.kpfeet                 = 5;
+gain.ikin.kpfeet                 = 10;
 gain.ikin.kdfeet                 = 2*sqrt(gain.ikin.kpfeet);
 
 %% PARAMETERS FOR TWO FEET ON THE GROUND
 if (sum(CONFIG.LEFT_RIGHT_FOOT_IN_CONTACT) == 2)
 
-gain.ikin.kp                 = diag([50   100  50]);
-gain.ikin.kd                 = 2*sqrt(gain.ikin.kp);        
+%gain.ikin.kp               = diag([50   100  50]);
+ gain.ikin.kp               = 10;
+ gain.ikin.kd               = 2*sqrt(gain.ikin.kp);        
     
 % Impedances acting in the null space of the desired contact forces 
 
@@ -45,10 +46,11 @@ impRightLeg         = [ 30   30   30   60  10  10];
                                
 end
 
-gain.impedances           = [impTorso,impArms,impArms,impLeftLeg,impRightLeg];
-gain.dampings             = 0*sqrt(gain.impedances);
-gain.ikin.impedances      = gain.impedances;
-gain.ikin.dampings        = 2*sqrt(gain.ikin.impedances);
+ gain.impedances           = [impTorso,impArms,impArms,impLeftLeg,impRightLeg];
+ gain.dampings             = 0*sqrt(gain.impedances);
+%gain.ikin.impedances      = gain.impedances;
+ gain.ikin.impedances      = 10;
+ gain.ikin.dampings        = sqrt(gain.ikin.impedances);
 
 if (size(gain.impedances) ~= ROBOT_DOF)
     error('Dimension mismatch between ROBOT_DOF and dimension of the variable impedences. Check these variables in the file gains.m');
@@ -72,6 +74,6 @@ gain.footSize                = [ -0.07 0.07   ;   % xMin, xMax
 fZmin                        = 10;
 
 %% Regulation terms 
-reg.pinvTol     = 1e-6;
+reg.pinvTol     = 1e-8;
 reg.pinvDamp    = 1e-6;
 reg.pinvDampVb  = 0.001;
