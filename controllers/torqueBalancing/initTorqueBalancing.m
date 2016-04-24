@@ -51,8 +51,14 @@ CONFIG.SIMULATION_TIME     = inf;
 % 'WALKING': under development.
 SM.SM_TYPE                 = 'YOGA';   
 
-% CONFIG.SCOPES: if set to true, visualizers for debugging is available
-CONFIG.SCOPES              = false;
+% CONFIG.SCOPES: if set to true, all visualizers for debugging are active
+CONFIG.SCOPES.ALL          = false;
+% You can also activate only some specific debugging scope
+CONFIG.SCOPES.BASE_EST_IMU = false;
+CONFIG.SCOPES.EXTWRENCHES  = false;
+CONFIG.SCOPES.GAIN_SCHE_INFO=false;
+CONFIG.SCOPES.MAIN         = false;
+CONFIG.SCOPES.QP           = false;
 
 % CONFIG.USE_IMU4EST_BASE: if set to false, the base frame is estimated by 
 % assuming that either the left or the right foot stay stuck on the ground. 
@@ -78,7 +84,6 @@ CONFIG.YAW_IMU_FILTER      = false;
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% DO NOT MODIFY THE FOLLOWING VARIABLES, THEY ARE AUTOMATICALLY 
 %% CHANGED WHEN SIMULATING THE ROBOT ON GAZEBO, 
-
 WBT_modelName            = 'matlabTorqueBalancing';
 
 
