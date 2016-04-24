@@ -1,6 +1,6 @@
-function [fNoQp,f_HDot,NA,tauModel,Sigmaf_HDot,SigmaNA,...
+function [comError,fNoQp,f_HDot,NA,tauModel,Sigmaf_HDot,SigmaNA,...
           HessianMatrixQP2Feet,gradientQP2Feet,ConstraintsMatrixQP2Feet,bVectorConstraintsQp2Feet] = ...
-          balancingControlSeeSaw(t, x,ConstraintsMatrix,bVectorConstraints,J_CoM,H,controlParams,...
+          balancingControlSeeSaw(t, x,ConstraintsMatrix,bVectorConstraints,J_CoM,H,intHw,controlParams,...
                                  model, robot,reg,CONFIG,gain,ROBOT_DOF)
     %BALANCINGCONTROL Summary of this function goes here
     %   Detailed explanation goes here
@@ -44,16 +44,17 @@ function [fNoQp,f_HDot,NA,tauModel,Sigmaf_HDot,SigmaNA,...
     e1             = [1;0;0];
     e2             = [0;1;0];
     e3             = [0;0;1];
-
-    r_w            = seesaw.delta * w_R_s * e3 - seesaw.rho * e3 ; %vector between com and contact point in world frame
+    
+    %vector between com and contact point in world frame
+    r_w            = seesaw.delta * w_R_s * e3 - seesaw.rho * e3 ; 
     s_R_w          = w_R_s';
     g_s            = s_R_w * gravityAcc; %gravity in the seesaw frame
     r_s            = s_R_w * r_w; %r_w in seesaw frame
     % omega_s        = s_R_w * omega_w; %omega in seesaw frame
     dr_s           = seesaw.rho * Sf(s_omega_s) * s_R_w * e3; %derivative of r_s
 
-    s_s_l          = [0; model.robot.lFootCentreDistance; model.seesaw.top];
-    s_s_r          = [0; model.robot.rFootCentreDistance; model.seesaw.top];
+    s_s_l          = [0; model.robot.lFootDistanceCenter; model.seesaw.top];
+    s_s_r          = [0; model.robot.rFootDistanceCenter; model.seesaw.top];
 
     w_s_l          = w_R_s * s_s_l;
     w_s_r          = w_R_s * s_s_r;
@@ -66,11 +67,11 @@ function [fNoQp,f_HDot,NA,tauModel,Sigmaf_HDot,SigmaNA,...
     xDcom          = J_CoM(1:3,:)*robotVel;
 
     xDDcomStar     = controlParams.references.DDxcomDes + ...
-                     controlParams.gains.xcomPGain * (controlParams.references.xcomDes(1:3)  - w_p_com(1:3)) + ...
-                     controlParams.gains.xcomDGain * (controlParams.references.DxcomDes(1:3) - xDcom);
+                     controlParams.gain.xcomPGain * (controlParams.references.xcomDes(1:3)  - w_p_com(1:3)) + ...
+                     controlParams.gain.xcomDGain * (controlParams.references.DxcomDes(1:3) - xDcom);
 
     Hdot_desired   = [ M(1,1)*xDDcomStar; 
-                       -controlParams.gains.Hw*H(4:6)];
+                       -controlParams.gain.DAngularMomentum*H(4:end)-controlParams.gain.PAngularMomentum*intHw];
 
     CentroidalMat  = [eye(3), zeros(3), eye(3), zeros(3);
                       Sf(w_p_l_sole-w_p_com), eye(3), Sf(w_p_r_sole-w_p_com), eye(3)];
@@ -116,7 +117,7 @@ function [fNoQp,f_HDot,NA,tauModel,Sigmaf_HDot,SigmaNA,...
         F              = blkdiag(w_R_s, w_R_s, w_R_s, w_R_s)*Delta* Omega_2* blkdiag(s_R_w,s_R_w) * As + J / M * J';
 
         hjBar          = genBiasForces(7:end) - M(7:robotDoFs+6,1:6)/M(1:6,1:6)*genBiasForces(1:6) ...
-                         - controlParams.gains.posturalProp * (q - qref) - controlParams.gains.posturalDamp * robotVel(7:end);
+                         - controlParams.gain.posturalProp * (q - qref) - controlParams.gain.posturalDamp * robotVel(7:end);
                      
         JjBar          = J(:,7:end)'-M(7:robotDoFs+6,1:6)/M(1:6,1:6)* J(:,1:6)';
 
@@ -146,7 +147,7 @@ function [fNoQp,f_HDot,NA,tauModel,Sigmaf_HDot,SigmaNA,...
         HessianMatrixQP2Feet      = SigmaNA'*SigmaNA + eye(size(SigmaNA,2))*reg.HessianQP;
         gradientQP2Feet           = SigmaNA'*(tauModel + Sigma*f_HDot);
 
-   
+        comError                  = controlParams.references.xcomDes(1:3)  - w_p_com(1:3);
 %     end
 end
 

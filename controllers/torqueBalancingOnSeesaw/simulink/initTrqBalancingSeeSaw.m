@@ -9,7 +9,8 @@ seesaw_inertial         = '/seesaw/inertial';
 CONFIG.CONTROLKIND      = 1;
 CONFIG.USE_IMU4EST_BASE = 0;
 
-CONFIG.USE_IMU4EST_BASE = false;
+CONFIG.USE_ROBOT_IMU4SEESAW = false;
+
 CONFIG.YAW_IMU_FILTER   = false;
 CONFIG.USE_QP_SOLVER    = true;
 CONFIG.SCOPES           = true;
@@ -21,11 +22,15 @@ CONFIG.TS               = 0.01;
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% DO NOT MODIFY THE FOLLOWING VARIABLES, THEY ARE AUTOMATICALLY 
 %% CHANGED WHEN SIMULATING THE ROBOT ON GAZEBO, i.e. YARP_ROBOT_NAME=icubGazeboSim
+WBT_modelName = 'matlabTorqueBalancingSeesaw';
+
 addpath('../../utilityMatlabFunctions/')
 addpath('./src')
 
 CONFIG.ON_GAZEBO     = false;
-WBT_modelName = 'matlabTorqueBalancing';
+
+PORTS.IMU       = '/icub/inertial';
+
 
 run(strcat('app/robots/',getenv('YARP_ROBOT_NAME'),'/gains.m')); 
 [ConstraintsMatrix,bVectorConstraints]= constraints(forceFrictionCoefficient,numberOfPoints,torsionalFrictionCoefficient,gain.footSize,fZmin);
