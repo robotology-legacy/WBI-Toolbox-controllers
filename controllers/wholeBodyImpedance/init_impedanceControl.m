@@ -24,7 +24,7 @@ MOVING    = 0;
 AMPLS     = 15*ones(1,ROBOT_DOF);
 FREQS     = 0.25*ones(1,ROBOT_DOF);
 
-if MOVING == 1
+if MOVING == 0
     simulationTime = inf;%5/FREQS(1);
 else
     simulationTime = inf;
