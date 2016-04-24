@@ -1,5 +1,7 @@
 ROBOT_DOF = 23;
 CONFIG.ON_GAZEBO = true;
+PORTS.IMU = '/icubGazeboSim/inertial';
+
 
 CONFIG.LEFT_RIGHT_FOOT_IN_CONTACT  = [1 1];
 

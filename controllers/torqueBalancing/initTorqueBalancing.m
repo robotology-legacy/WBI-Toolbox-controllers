@@ -78,16 +78,27 @@ CONFIG.YAW_IMU_FILTER      = false;
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% DO NOT MODIFY THE FOLLOWING VARIABLES, THEY ARE AUTOMATICALLY 
 %% CHANGED WHEN SIMULATING THE ROBOT ON GAZEBO, 
-%  i.e. YARP_ROBOT_NAME=icubGazeboSim
+
+WBT_modelName            = 'matlabTorqueBalancing';
+
 
 % CONFIG.USE_QP_SOLVER: if set to true, a QP solver is used to account for 
 % inequality constraints of contact wrenches
+
+PORTS.IMU       = '/icub/inertial';
+
+PORTS.COM_DES   = ['/' WBT_modelName '/comDes:i'];
+
+PORTS.Q_DES     = ['/' WBT_modelName '/qDes:i'];
+
+PORTS.WBDT_LEFTLEG_EE  = '/wholeBodyDynamicsTree/left_leg/cartesianEndEffectorWrench:o';
+PORTS.WBDT_RIGHTLEG_EE = '/wholeBodyDynamicsTree/right_leg/cartesianEndEffectorWrench:o';
+
 CONFIG.USE_QP_SOLVER     = true; 
 
 CONFIG.Ts                = 0.01; %  Controller period [s]
 
 CONFIG.ON_GAZEBO         = false;
-WBT_modelName            = 'matlabTorqueBalancing';
 baseToWorldRotationPort  = ['/' WBT_modelName '/floatingBaseRotationMatrix:i'];
 
 dump.left_wrench_port    = '/wholeBodyDynamicsTree/left_foot/cartesianEndEffectorWrench:o';
