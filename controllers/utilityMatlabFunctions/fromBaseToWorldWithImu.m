@@ -1,13 +1,13 @@
 function [w_H_root,w_R_link] = fromBaseToWorldWithImu(imu_H_link,imu_H_link_0,link_H_root,inertial_0,inertial,CONFIG)
 %#codegen
 
-% See http://wiki.icub.org/images/8/82/XsensMtx.pdf page 11
-
+% Converting the inertial values from grad into rad
 inertial     = (inertial   * pi)/180;
 inertial_0   = (inertial_0 * pi)/180;
 
+% Composing the rotation matrix:
+% See http://wiki.icub.org/images/8/82/XsensMtx.pdf page 12
 w_R_imu      = rotz(inertial(3))*roty(inertial(2))*rotx(inertial(1));
-
 w_R_imu_0    = rotz(inertial_0(3))*roty(inertial_0(2))*rotx(inertial_0(1));
 
 imu_R_link   = imu_H_link(1:3,1:3);
