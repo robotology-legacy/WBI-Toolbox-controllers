@@ -87,13 +87,14 @@ gain.posturalDamp  = diag([ 1    1     1 ...
 gain.PAngularMomentum  = 0.25 ;
 gain.DAngularMomentum  = 2*sqrt(gain.PAngularMomentum);
 
-gain.thetaGain    = 100;
-gain.omegaGain    = 10;
-gain.xcomPGain    = diag([10, 10, 10]);
-gain.xcomDGain    = 2*sqrt(gain.xcomPGain)*0;
+gain.thetaGain         = 100;
+gain.omegaGain         = 10;
+gain.comPGain          = diag([10, 10, 10]);
+gain.comDGain          = 2*sqrt(gain.comPGain)*0;
 
-gain.onSeesaw     = 1;
-gain.ssawControl  = 0;
+
+gain.seesawKP          = 1;
+gain.seesawKD          = 2*sqrt(gain.seesawKP)*0;
 
 
 % Friction cone parameters

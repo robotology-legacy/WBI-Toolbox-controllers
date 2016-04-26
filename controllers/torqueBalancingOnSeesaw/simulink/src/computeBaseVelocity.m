@@ -14,7 +14,8 @@ function w_v_base  = computeBaseVelocity(J_l_sole, w_H_l_sole,dq_j, s_omega_s, m
 
     w_s_l          = w_R_s * s_s_l;
 
-    w_v_l_sole     = [Sf(w_r - w_s_l)*w_omega_s; w_omega_s];
+    w_v_l_sole     = [Sf(w_r - w_s_l)*w_omega_s; 
+                                      w_omega_s  ];
 
     w_v_base       = J_l_sole(1:6,1:6)\(w_v_l_sole - J_l_sole(1:6,7:end)*dq_j);
 end
