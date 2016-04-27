@@ -118,34 +118,16 @@ function [comError,fNoQp,f_HDot,NA,tauModel,Sigmaf_HDot,SigmaNA,...
     
         f_HDot         = pinvA* (Hdot_desired - gravityWrench);
 
-        F              = blkdiag(w_R_s, w_R_s, w_R_s, w_R_s)*Delta* Omega_2* blkdiag(s_R_w,s_R_w) * As + J / M * J';
-
-        hjBar          = genBiasForces(7:end) - M(7:robotDoFs+6,1:6)/M(1:6,1:6)*genBiasForces(1:6) ...
-                         - controlParams.gain.posturalProp * (q - qref) - controlParams.gain.posturalDamp * robotVel(7:end);
-
-        JjBar          = J(:,7:end)'-M(7:robotDoFs+6,1:6)/M(1:6,1:6)* J(:,1:6)';
-
-        tauModel       = LambdaPinv * (J / M * genBiasForces ...
-                       + blkdiag(w_R_s, w_R_s, w_R_s, w_R_s) * (Delta * Omega_1 ...
-                       + DeltaDot * s_omega_s + blkdiag(Sf(s_omega_s),Sf(s_omega_s),Sf(s_omega_s),Sf(s_omega_s)) * Delta * s_omega_s) ...
-                       - JdotNu) + NullLambda*hjBar;
-
-        Sigma          = -LambdaPinv *F - NullLambda*JjBar;
-        SigmaNA        = Sigma*NA; 
-
-        f0             = -pinvDamped(SigmaNA,reg.pinvDamp*1e-4)*(tauModel + Sigma*f_HDot);
-
-        Sigmaf_HDot    = Sigma*f_HDot;
-
-        fNoQp          = f_HDot  + NA*f0;
+        
 
     elseif CONFIG.CONTROLKIND == 2
 
         A              =  [CentroidalMat;
                            -lambda2*Omega_2Bar*As];
 
-        pinvA          = pinvDamped(A,reg.pinvDamp);
-        
+%         pinvA          = pinvDamped(A,reg.pinvDampA);
+
+        pinvA          = pinv(A);
         NA             = pinvA * A;
         NA             = eye(size(NA)) - NA;
         
@@ -156,29 +138,7 @@ function [comError,fNoQp,f_HDot,NA,tauModel,Sigmaf_HDot,SigmaNA,...
                           -gain.seesawKP*theta-gain.seesawKD*thetaDot];
         
         f_HDot         = pinvA* (desiredDyn - [gravityWrench;0]);
-
-        F              = blkdiag(w_R_s, w_R_s, w_R_s, w_R_s)*Delta* Omega_2* blkdiag(s_R_w,s_R_w) * As + J / M * J';
-
-        hjBar          = genBiasForces(7:end) - M(7:robotDoFs+6,1:6)/M(1:6,1:6)*genBiasForces(1:6) ...
-                         - controlParams.gain.posturalProp * (q - qref) - controlParams.gain.posturalDamp * robotVel(7:end);
-
-        JjBar          = J(:,7:end)'-M(7:robotDoFs+6,1:6)/M(1:6,1:6)* J(:,1:6)';
-
-        tauModel       = LambdaPinv * (J / M * genBiasForces ...
-                       + blkdiag(w_R_s, w_R_s, w_R_s, w_R_s) * (Delta * Omega_1 ...
-                       + DeltaDot * s_omega_s + blkdiag(Sf(s_omega_s),Sf(s_omega_s),Sf(s_omega_s),Sf(s_omega_s)) * Delta * s_omega_s) ...
-                       - JdotNu) + NullLambda*hjBar;
-
-        Sigma          = -LambdaPinv *F - NullLambda*JjBar;
-        SigmaNA        = Sigma*NA; 
-
-        f0             = -pinvDamped(SigmaNA,reg.pinvDamp*1e-4)*(tauModel + Sigma*f_HDot);
-
-        Sigmaf_HDot    = Sigma*f_HDot;
-
-        fNoQp          = f_HDot  + NA*f0;
-
-        
+      
     else
         fNoQp          = zeros(12,1);
         tauModel       = zeros(robotDoFs,1);
@@ -188,7 +148,27 @@ function [comError,fNoQp,f_HDot,NA,tauModel,Sigmaf_HDot,SigmaNA,...
         Sigma          = zeros(robotDoFs,12);
         f_HDot         = zeros(12,1); 
     end
-    
+    F              = blkdiag(w_R_s, w_R_s, w_R_s, w_R_s)*Delta* Omega_2* blkdiag(s_R_w,s_R_w) * As + J / M * J';
+
+    hjBar          = genBiasForces(7:end) - M(7:robotDoFs+6,1:6)/M(1:6,1:6)*genBiasForces(1:6) ...
+                     - controlParams.gain.posturalProp * (q - qref) - controlParams.gain.posturalDamp * robotVel(7:end);
+
+    JjBar          = J(:,7:end)'-M(7:robotDoFs+6,1:6)/M(1:6,1:6)* J(:,1:6)';
+
+    tauModel       = LambdaPinv * (J / M * genBiasForces ...
+                   + blkdiag(w_R_s, w_R_s, w_R_s, w_R_s) * (Delta * Omega_1 ...
+                   + DeltaDot * s_omega_s + blkdiag(Sf(s_omega_s),Sf(s_omega_s),Sf(s_omega_s),Sf(s_omega_s)) * Delta * s_omega_s) ...
+                   - JdotNu) + NullLambda*hjBar;
+
+    Sigma          = -LambdaPinv *F - NullLambda*JjBar;
+    SigmaNA        = Sigma*NA; 
+
+    f0             = -pinvDamped(SigmaNA,reg.pinvDamp*1e-4)*(tauModel + Sigma*f_HDot);
+
+    Sigmaf_HDot    = Sigma*f_HDot;
+
+    fNoQp          = f_HDot  + NA*f0;
+        
     constraintMatrixLeftFoot  = ConstraintsMatrix * blkdiag(w_R_l_sole',w_R_l_sole');
     constraintMatrixRightFoot = ConstraintsMatrix * blkdiag(w_R_r_sole',w_R_r_sole');
     ConstraintsMatrix2Feet    = blkdiag(constraintMatrixLeftFoot,constraintMatrixRightFoot);

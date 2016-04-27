@@ -6,7 +6,7 @@ Ts = 0.01;
 seesawKind              = 2;
 
 seesaw_inertial         = '/seesaw/inertial';
-CONFIG.CONTROLKIND      = 1;
+CONFIG.CONTROLKIND      = 2;
 
 CONFIG.USE_ROBOT_IMU4SEESAW = false;
 

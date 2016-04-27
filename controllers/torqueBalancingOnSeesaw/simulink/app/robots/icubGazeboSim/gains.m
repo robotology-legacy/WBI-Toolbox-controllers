@@ -51,8 +51,9 @@ end
 reg             = struct;
 reg.pinvTol     = 1e-5;
 reg.pinvDamp    = 1e-3;
+reg.pinvDampA   = 1e-3;
 reg.pinvDampVb  = 1e-4;
-reg.HessianQP   = 1e-7;
+reg.HessianQP   = 1e-3;
 model.seesaw    = seesaw;
 %    
 % INERTIA TENSOR:
