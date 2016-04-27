@@ -67,7 +67,7 @@ end
 %% %%%%%%%%%%%%%%%%    FINITE STATE MACHINE SPECIFIC PARAMETERS
 sm.jumpYoga                      = false;
 sm.demoOnlyRightFoot             = false;
-sm.yogaAlsoOnRightFoot           = true;
+sm.yogaAlsoOnRightFoot           = false;
 sm.yogaInLoop                    = false;
 sm.com.threshold                 = 0.01;
 sm.wrench.thresholdContactOn     =  25;     % Force threshole above which contact is considered stable
@@ -85,17 +85,17 @@ sm.waitingTimeAfterYoga          = 0;
 
 sm.jointsSmoothingTimes          = [5;   %% state ==  1  TWO FEET BALANCING
                                          %%
-                                    5;   %% state ==  2  COM TRANSITION TO LEFT FOOT
-                                    3;   %% state ==  3  LEFT FOOT BALANCING 
-                                    7;   %% state ==  4  YOGA LEFT FOOT
-                                    10;  %% state ==  5  PREPARING FOR SWITCHING
+                                    4;   %% state ==  2  COM TRANSITION TO LEFT FOOT
+                                    2;   %% state ==  3  LEFT FOOT BALANCING 
+                                    3;   %% state ==  4  YOGA LEFT FOOT
+                                    7;   %% state ==  5  PREPARING FOR SWITCHING
                                     5;   %% state ==  6  LOOKING FOR CONTACT 
                                          %%
                                     4;   %% state ==  7  TRANSITION INIT POSITION
                                          %%
-                                    5;   %% state ==  8  COM TRANSITION TO RIGHT FOOT
+                                    4;   %% state ==  8  COM TRANSITION TO RIGHT FOOT
                                     3;   %% state ==  9  RIGHT FOOT BALANCING 
-                                    4;   %% state == 10  YOGA RIGHT FOOT
+                                    3;   %% state == 10  YOGA RIGHT FOOT
                                     5;   %% state == 11  PREPARING FOR SWITCHING
                                     5;   %% state == 12  LOOKING FOR CONTACT 
                                          %%
@@ -287,25 +287,25 @@ sm.joints.pointsL =[ 0,                            q1;
                      4*sm.jointsSmoothingTimes(10),q5;
                      5*sm.jointsSmoothingTimes(10),q6;
                      6*sm.jointsSmoothingTimes(10),q7;
-                     7*sm.jointsSmoothingTimes(10),q8;
-                     8*sm.jointsSmoothingTimes(10),q9;
-                     9*sm.jointsSmoothingTimes(10),q10;
-                    10*sm.jointsSmoothingTimes(10),q11;
-                    11*sm.jointsSmoothingTimes(10),q12;
-                    12*sm.jointsSmoothingTimes(10),q13;
-                    13*sm.jointsSmoothingTimes(10),q14;
-                    14*sm.jointsSmoothingTimes(10),q15;
-                    15*sm.jointsSmoothingTimes(10),q16;
-                    16*sm.jointsSmoothingTimes(10),q17;
-                    17*sm.jointsSmoothingTimes(10),q10;
-                    18*sm.jointsSmoothingTimes(10),q11;
-                    19*sm.jointsSmoothingTimes(10),q12;
-                    20*sm.jointsSmoothingTimes(10),q13;
-                    21*sm.jointsSmoothingTimes(10),q14;
-                    22*sm.jointsSmoothingTimes(10),q15;
-                    23*sm.jointsSmoothingTimes(10),q16;
-                    24*sm.jointsSmoothingTimes(10),q17;
-                    25*sm.jointsSmoothingTimes(10),q8];
+                     7*sm.jointsSmoothingTimes(10),q8];
+%                      8*sm.jointsSmoothingTimes(10),q9;
+%                      9*sm.jointsSmoothingTimes(10),q10;
+%                     10*sm.jointsSmoothingTimes(10),q11;
+%                     11*sm.jointsSmoothingTimes(10),q12;
+%                     12*sm.jointsSmoothingTimes(10),q13;
+%                     13*sm.jointsSmoothingTimes(10),q14;
+%                     14*sm.jointsSmoothingTimes(10),q15;
+%                     15*sm.jointsSmoothingTimes(10),q16;
+%                     16*sm.jointsSmoothingTimes(10),q17;
+%                     17*sm.jointsSmoothingTimes(10),q10;
+%                     18*sm.jointsSmoothingTimes(10),q11;
+%                     19*sm.jointsSmoothingTimes(10),q12;
+%                     20*sm.jointsSmoothingTimes(10),q13;
+%                     21*sm.jointsSmoothingTimes(10),q14;
+%                     22*sm.jointsSmoothingTimes(10),q15;
+%                     23*sm.jointsSmoothingTimes(10),q16;
+%                     24*sm.jointsSmoothingTimes(10),q17;
+%                     25*sm.jointsSmoothingTimes(10),q8];
                  
 % sm.joints.pointsL = [references.joints.smoothingTime,sm.joints.states(5,:)];
 
