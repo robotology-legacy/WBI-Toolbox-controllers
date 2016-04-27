@@ -13,7 +13,7 @@ new WB-Toolbox models are:
 
 ## torqueBalancing
 This simulink model controls the robot using a momentum-based balancing control.
-The user can find the full description here: [torqueBalancing README](https://github.com/robotology-playground/WBI-Toolbox-controllers/tree/torqueBalancingJointControl/controllers/torqueBalancing/README.md)
+The user can find the full description here: [torqueBalancing README](controllers/torqueBalancing/README.md)
 
 ## torqueBalancingJc
 This controller stabilizes the robot directly in the joint space, without considering the centroidal dynamics. 
