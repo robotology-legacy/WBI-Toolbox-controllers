@@ -97,8 +97,9 @@ elseif state == 4
 %             enableIncrement = 1;
 %             state = 2;
 %         end
-        if norm(qj_right_leg - qDes_right_leg) > 0.3
-            disp('Increasing integral gain for joint 0');
+        if norm(qj_right_leg - qDes_right_leg) > 0.36
+            disp('Error right leg: '), disp(norm(qj_right_leg - qDes_right_leg));
+%             disp('Increasing integral gain for joint 0');
 %             gain.integral(18) = gain.integral(18) + 5;
         end
         if norm(qj_right_leg - qDes_right_leg) < 0.1
