@@ -1,5 +1,8 @@
 %% icubGazeboSim
-setenv('YARP_ROBOT_NAME','iCubGenova01');
+% setenv('YARP_ROBOT_NAME','iCubGenova01');
+setenv('YARP_ROBOT_NAME','iCubDarmstadt01');
+
+PORTS.WBD = '/wholeBodyDynamicsTree/left_leg/Torques:o';
 
 ROBOT_DOF   = 23;
 WBT_wbiList = 'ROBOT_TORQUE_CONTROL_JOINTS_WITHOUT_PRONOSUP';
