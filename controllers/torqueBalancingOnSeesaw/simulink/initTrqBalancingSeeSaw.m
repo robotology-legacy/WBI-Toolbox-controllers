@@ -6,7 +6,7 @@ Ts = 0.01;
 seesawKind              = 2;
 
 seesaw_inertial         = '/seesaw/inertial';
-CONFIG.CONTROLKIND      = 2;
+CONFIG.CONTROLKIND      = 3;
 
 CONFIG.USE_ROBOT_IMU4SEESAW = false;
 
@@ -15,6 +15,8 @@ CONFIG.USE_QP_SOLVER    = true;
 CONFIG.SCOPES           = true;
 
 CONFIG.TS               = 0.01;
+
+CONFIG.CONSIDERSEESAWDYN  = 1; 
 
 %% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % CONFIGURATIONS COMPLETED: loading gains and parameters for the specific robot

@@ -6,8 +6,6 @@ PORTS.IMU   = '/icubGazeboSim/inertial';
 
 WBT_wbiList = 'ROBOT_TORQUE_CONTROL_JOINTS_WITHOUT_PRONOSUP';
 
-
-
 sat.torque = 34;
 
 
@@ -49,11 +47,11 @@ switch seesaw.kind
 end
 
 reg             = struct;
-reg.pinvTol     = 1e-5;
-reg.pinvDamp    = 1e-3;
-reg.pinvDampA   = 1e-3;
-reg.pinvDampVb  = 1e-4;
-reg.HessianQP   = 1e-3;
+reg.pinvTol     = 1e-7;
+reg.pinvDamp    = 1e-7;
+reg.pinvDampA   = 1e-7;
+reg.pinvDampVb  = 1e-7;
+reg.HessianQP   = 1e-5;
 model.seesaw    = seesaw;
 %    
 % INERTIA TENSOR:
@@ -74,29 +72,35 @@ noOscillationTime        = 0; % If DEMO_LEFT_AND_RIGHT = 1, the variable noOscil
                                % that the robot waits before starting the left-and-righ
 
 %%Gains and references
-gain.posturalProp  = diag([10   50    10 ...
-                             12   12   12      12      ...
-                             12   12   12      12     ...
-                            35    0    30      35     55   0,...
-                            35    0    30      35     55   0]);
+gain.posturalProp  = diag([ 1   1   1   ...
+                            1   1   1   1     ...
+                            1   1   1   1     ...
+                            1   1   1   1     1     1,...
+                            1   1   1   1     1     1]);
+                        
 gain.posturalDamp  = diag([ 1    1     1 ...
                              1    1     1       1       ...
                              1    1     1       1       ...
                              1    1     1       1      1   1,...
                              1    1     1       1      1   1])*0;
                          
-gain.PAngularMomentum  = 0.25 ;
+% gain.PAngularMomentum  = 0.25 ;
+% gain.DAngularMomentum  = 2*sqrt(gain.PAngularMomentum);
+
+gain.PAngularMomentum  = 0 ;
 gain.DAngularMomentum  = 2*sqrt(gain.PAngularMomentum);
 
-gain.thetaGain         = 100;
-gain.omegaGain         = 10;
-gain.comPGain          = diag([10, 10, 10]);
-gain.comDGain          = 2*sqrt(gain.comPGain)*0;
+gain.PCOM                 = diag([  1    1   1]);
+gain.DCOM                 = 2*sqrt(gain.PCOM);
+gain.ICOM                 = diag([  0    0   0]);
 
 
-gain.seesawKP          = 1;
-gain.seesawKD          = 2*sqrt(gain.seesawKP)*0;
+gain.seesawKP          = 0.1;
+gain.seesawKD          = 2*sqrt(gain.seesawKP);
 
+
+reg.impedances             = 0.1;
+reg.dampings               = 0;
 
 % Friction cone parameters
 numberOfPoints               = 4; % The friction cone is approximated by using linear interpolation of the circle. 
@@ -106,12 +110,10 @@ forceFrictionCoefficient     = 1;%1/3;
 torsionalFrictionCoefficient = 2/150;
 
 %physical size of foot
-phys.footSize                = [ -0.07 0.07   ;   % xMin, xMax
-                                 -0.03 0.03 ];  % yMin, yMax    
                              
 gain.footSize                = [ -0.07 0.07   ;   % xMin, xMax
                                  -0.03 0.03 ];  % yMin, yMax    
 
-fZmin                        = 10;
+fZmin                        = 20;
 
 

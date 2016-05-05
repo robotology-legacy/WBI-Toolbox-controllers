@@ -5,8 +5,9 @@ function [comError,fNoQp,f_HDot,NA,tauModel,Sigmaf_HDot,SigmaNA,...
     %BALANCINGCONTROL Summary of this function goes here
     %   Detailed explanation goes here
 
+    persistent w_p_com_total_0;
 
-    
+                   
     robotDoFs      = size(ROBOT_DOF,1);
 
     
@@ -22,11 +23,26 @@ function [comError,fNoQp,f_HDot,NA,tauModel,Sigmaf_HDot,SigmaNA,...
     JdotNu         = robot.JdotNu;
     J              = robot.J; 
     M              = robot.M;
+    mR             = M(1,1);
+    mS             = model.seesaw.mass;
+    mT             = mR + mS;
+    % The mass matrix is partitioned as:
+    %
+    %   M = [ Mb,  Mbj
+    %         Mbj',Mj  ];  Mb \in R^{6x6}, Mbj \in R^{6x6+nDof}, Mj \in R^{nDofxnDof}
+    Mb              = M(1:6,1:6);
+    Mbj             = M(1:6,7:end);
+    Mj              = M(7:end,7:end);
+
+    St              = [zeros(6,robotDoFs);
+                       eye(robotDoFs,robotDoFs)];
+  
+                   
     genBiasForces  = robot.genBiasForces;
     
     gravityWrench  = [M(1,1)*gravityAcc; zeros(3,1)];
 
-    w_p_com        = robot.fwdkin.w_p_com;
+    w_p_com_R      = robot.fwdkin.w_p_com;
     w_p_l_sole     = robot.fwdkin.w_H_l_sole(1:3,4);
     w_p_r_sole     = robot.fwdkin.w_H_r_sole(1:3,4);
     w_R_l_sole     = robot.fwdkin.w_H_l_sole(1:3,1:3);
@@ -61,22 +77,25 @@ function [comError,fNoQp,f_HDot,NA,tauModel,Sigmaf_HDot,SigmaNA,...
     w_s_l          = w_R_s * s_s_l;
     w_s_r          = w_R_s * s_s_r;
 
+    
+    w_p_com_s      = w_p_l_sole - w_s_l;
+        
     As             = [ eye(3), zeros(3), eye(3), zeros(3); ...
                        Sf(w_s_l), eye(3), Sf(w_s_r), eye(3)];
 
     Delta          = [Sf(r_s - s_s_l); eye(3); Sf(r_s - s_s_r); eye(3)];
     DeltaDot       = [eye(3); zeros(3); eye(3); zeros(3)] * Sf(dr_s);
-    xDcom          = J_CoM(1:3,:)*robotVel;
+    w_v_com_R      = J_CoM(1:3,:)*robotVel;
 
     xDDcomStar     = controlParams.references.DDxcomDes + ...
-                     controlParams.gain.comPGain * (controlParams.references.xcomDes(1:3)  - w_p_com(1:3)) + ...
-                     controlParams.gain.comDGain * (controlParams.references.DxcomDes(1:3) - xDcom);
+                     controlParams.gain.PCOM * (controlParams.references.xcomDes(1:3)  - w_p_com_R(1:3)) + ...
+                     controlParams.gain.DCOM * (controlParams.references.DxcomDes(1:3) - w_v_com_R);
 
-    Hdot_desired   = [ M(1,1)*xDDcomStar; 
+    Hdot_desired   = [ mR*xDDcomStar; 
                        -controlParams.gain.DAngularMomentum*H(4:end)-controlParams.gain.PAngularMomentum*intHw];
 
     CentroidalMat  = [eye(3), zeros(3), eye(3), zeros(3);
-                      Sf(w_p_l_sole-w_p_com), eye(3), Sf(w_p_r_sole-w_p_com), eye(3)];
+                      Sf(w_p_l_sole-w_p_com_R), eye(3), Sf(w_p_r_sole-w_p_com_R), eye(3)];
               
 
     Omega_1        = zeros(3);
@@ -108,6 +127,9 @@ function [comError,fNoQp,f_HDot,NA,tauModel,Sigmaf_HDot,SigmaNA,...
 
         Omega_2        =  e1*lambda2*Omega_2Bar*blkdiag(w_R_s,w_R_s);
     end
+    
+    comError           = controlParams.references.xcomDes(1:3)  - w_p_com_R(1:3);
+
 
     if CONFIG.CONTROLKIND == 1
         A              =  CentroidalMat;
@@ -138,7 +160,46 @@ function [comError,fNoQp,f_HDot,NA,tauModel,Sigmaf_HDot,SigmaNA,...
                           -gain.seesawKP*theta-gain.seesawKD*thetaDot];
         
         f_HDot         = pinvA* (desiredDyn - [gravityWrench;0]);
+        
+    elseif CONFIG.CONTROLKIND == 3
+        
+        w_p_com_total  =  (mS*w_p_com_s + mR*w_p_com_R)/(mR+mS);
+        if isempty(w_p_com_total_0)
+            w_p_com_total_0 = w_p_com_total;
+        end
+           
+        w_v_com_s      = Sf(r_w)*w_omega_s;
+        
+        w_v_com_total  =  (mS*w_v_com_s + mR*w_v_com_R)/(mR+mS);
+
+        Theta          = eye(3) + Sf(r_s) * seesaw.iota* Sf(r_s)';
+
+        w_F_c1         =  (w_R_s/Theta)*(mS*Sf(dr_s)*s_omega_s -mS*g_s-mS*Sf(s_omega_s)^2*r_s);
+        
+        AL             =  -(w_R_s/Theta)*[-s_R_w,mS*Sf(r_s)*seesaw.iota*s_R_w]*As;
+        
+        
+        A              =  [AL;
+                           CentroidalMat(4:6,:)];
+
+%         pinvA          = pinvDamped(A,reg.pinvDampA);
+        pinvA          = pinv(A);
+
+
+        NA             = pinvA * A;
+        NA             = eye(size(NA)) - NA;
+        
+        desiredDyn     = Hdot_desired;
+        desiredDyn(1:3) ...
+                       = -mT*(controlParams.gain.PCOM * (w_p_com_total-w_p_com_total_0) ...
+                             +controlParams.gain.DCOM *  w_v_com_total);
+        
+        f_HDot         = pinvA* (desiredDyn - [mT*gravityAcc+w_F_c1;zeros(3,1)]);
       
+%         desDynError    = norm(desiredDyn - (A*f_HDot + [mT*gravityAcc+w_F_c1;zeros(3,1)]))
+        
+        comError       = w_p_com_total_0  - w_p_com_total;
+
     else
         fNoQp          = zeros(12,1);
         tauModel       = zeros(robotDoFs,1);
@@ -148,17 +209,36 @@ function [comError,fNoQp,f_HDot,NA,tauModel,Sigmaf_HDot,SigmaNA,...
         Sigma          = zeros(robotDoFs,12);
         f_HDot         = zeros(12,1); 
     end
-    F              = blkdiag(w_R_s, w_R_s, w_R_s, w_R_s)*Delta* Omega_2* blkdiag(s_R_w,s_R_w) * As + J / M * J';
+    F               = J / M * J' + ...
+                      CONFIG.CONSIDERSEESAWDYN*blkdiag(w_R_s,w_R_s,w_R_s,w_R_s)*Delta*Omega_2* blkdiag(s_R_w,s_R_w)* As;
 
+    
+    JcMinv          = J/M;
+    JcMinvSt        = JcMinv*St;
+
+    
+    PInv_JcMinvSt   = pinvDamped(JcMinvSt,reg.pinvDamp); 
+    % nullJcMinvSt  = null space of PInv_JcMinvSt
+    nullJcMinvSt    = eye(robotDoFs) - PInv_JcMinvSt*JcMinvSt;
+    
+    % Mbar is the mass matrix associated with the joint dynamics, i.e.
+    Mbar            = Mj-Mbj'/Mb*Mbj;
+
+    NLMbar          = nullJcMinvSt*Mbar;
+    
+    % Adaptation of control gains for back compatibility with older
+    % versions of the controller
+    impedances      = controlParams.gain.posturalProp;%*pinv(NLMbar,reg.pinvTol) + reg.impedances*eye(robotDoFs);
+    dampings        = controlParams.gain.posturalDamp;%*pinv(NLMbar,reg.pinvTol) + reg.dampings*eye(robotDoFs); 
+    
     hjBar          = genBiasForces(7:end) - M(7:robotDoFs+6,1:6)/M(1:6,1:6)*genBiasForces(1:6) ...
-                     - controlParams.gain.posturalProp * (q - qref) - controlParams.gain.posturalDamp * robotVel(7:end);
+                     -  impedances* (q - qref) -  dampings * robotVel(7:end);
 
     JjBar          = J(:,7:end)'-M(7:robotDoFs+6,1:6)/M(1:6,1:6)* J(:,1:6)';
 
-    tauModel       = LambdaPinv * (J / M * genBiasForces ...
-                   + blkdiag(w_R_s, w_R_s, w_R_s, w_R_s) * (Delta * Omega_1 ...
-                   + DeltaDot * s_omega_s + blkdiag(Sf(s_omega_s),Sf(s_omega_s),Sf(s_omega_s),Sf(s_omega_s)) * Delta * s_omega_s) ...
-                   - JdotNu) + NullLambda*hjBar;
+    tauModel       = LambdaPinv * (J / M * genBiasForces - JdotNu ...
+                   + CONFIG.CONSIDERSEESAWDYN*blkdiag(w_R_s, w_R_s, w_R_s, w_R_s) *(Delta * Omega_1 + DeltaDot * s_omega_s + blkdiag(Sf(s_omega_s),Sf(s_omega_s),Sf(s_omega_s),Sf(s_omega_s)) * Delta * s_omega_s)) ...
+                   + NullLambda*hjBar;
 
     Sigma          = -LambdaPinv *F - NullLambda*JjBar;
     SigmaNA        = Sigma*NA; 
@@ -180,7 +260,6 @@ function [comError,fNoQp,f_HDot,NA,tauModel,Sigmaf_HDot,SigmaNA,...
     HessianMatrixQP2Feet      = SigmaNA'*SigmaNA + eye(size(SigmaNA,2))*reg.HessianQP;
     gradientQP2Feet           = SigmaNA'*(tauModel + Sigma*f_HDot);
     
-    comError                  = controlParams.references.xcomDes(1:3)  - w_p_com(1:3);
 
 end
 

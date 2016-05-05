@@ -15,7 +15,7 @@ function [Qs,w_H_l_sole] = computeRotTransFromLsole2World(inertialSeesaw,seesaw)
     % s_s_l = positionOfLeftFoot - seesawCoM w.r.t. seesaw frame
     s_s_l     = [0;  seesaw.lFootDistanceCenter; seesaw.top];
 
-    % OC = originOfWorld - contactPointSeesaw
+    % OC = centerOfRotationSeesaw - originOfWorld 
     OC = [ 0;
           -seesaw.rho*inertialSeesaw(1);
            seesaw.rho]; 
