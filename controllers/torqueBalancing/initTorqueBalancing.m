@@ -106,9 +106,6 @@ CONFIG.Ts                = 0.01; %  Controller period [s]
 CONFIG.ON_GAZEBO         = false;
 baseToWorldRotationPort  = ['/' WBT_modelName '/floatingBaseRotationMatrix:i'];
 
-dump.left_wrench_port    = '/wholeBodyDynamicsTree/left_foot/cartesianEndEffectorWrench:o';
-dump.right_wrench_port   = '/wholeBodyDynamicsTree/right_foot/cartesianEndEffectorWrench:o';
-
 run(strcat('app/robots/',getenv('YARP_ROBOT_NAME'),'/gains.m')); 
 addpath('./src/')
 addpath('../utilityMatlabFunctions/')
