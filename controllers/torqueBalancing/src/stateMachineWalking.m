@@ -1,10 +1,17 @@
 function [CoMDes,qDes,constraints, currentState,impedances,w_H_b] = ...
     stateMachineWalking(connection,CoM_0, q0, w_CoM, CoMIn, qIn, constraintsIn, wrench_rightFoot,wrench_leftFoot,l_sole_H_b, r_sole_H_b, sm,gain)
     %#codegen
-    global state;
+        
+    persistent state;
+    persistent fixedLink;
+    persistent w_H_fixedLink;
     
-    global w_H_fixedLink;
-    global fixedLink;
+    if isempty(state) || isempty(fixedLink) || isempty(w_H_fixedLink) 
+        state         = sm.stateAt0;
+        fixedLink     = 1;
+        w_H_fixedLink = eye(4);
+    end
+    
     
 %     w_H_fixedLink  = eye(4);
 %     
