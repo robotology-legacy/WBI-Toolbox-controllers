@@ -71,7 +71,7 @@ sm.yogaAlsoOnRightFoot           = true;
 sm.yogaInLoop                    = false;
 sm.com.threshold                 = 0.01;
 sm.wrench.thresholdContactOn     =  25;     % Force threshole above which contact is considered stable
-sm.wrench.thresholdContactOff    =  85;     % Force threshole under which contact is considered off
+sm.wrench.thresholdContactOff    =  60;     % Force threshole under which contact is considered off
 sm.joints                        = struct;
 sm.joints.thresholdNotInContact  =  5;    % Degrees
 sm.joints.thresholdInContact     = 50;      % Degrees
@@ -83,23 +83,23 @@ sm.stateAt0                      = 1;
 sm.DT                            = 1;
 sm.waitingTimeAfterYoga          = 0;
 
-sm.jointsSmoothingTimes          = [5;   %% state ==  1  TWO FEET BALANCING
+sm.jointsSmoothingTimes          = [1;   %% state ==  1  TWO FEET BALANCING
                                          %%
-                                    5;   %% state ==  2  COM TRANSITION TO LEFT FOOT
-                                    3;   %% state ==  3  LEFT FOOT BALANCING 
-                                    4;   %% state ==  4  YOGA LEFT FOOT
+                                    2;   %% state ==  2  COM TRANSITION TO LEFT FOOT
+                                    2;   %% state ==  3  LEFT FOOT BALANCING 
+                                    3;   %% state ==  4  YOGA LEFT FOOT
                                     5;   %% state ==  5  PREPARING FOR SWITCHING
-                                    5;   %% state ==  6  LOOKING FOR CONTACT 
+                                    4;   %% state ==  6  LOOKING FOR CONTACT 
                                          %%
-                                    4;   %% state ==  7  TRANSITION INIT POSITION
+                                    6;   %% state ==  7  TRANSITION INIT POSITION
                                          %%
-                                    5;   %% state ==  8  COM TRANSITION TO RIGHT FOOT
-                                    3;   %% state ==  9  RIGHT FOOT BALANCING 
-                                    4;   %% state == 10  YOGA RIGHT FOOT
+                                    6;   %% state ==  8  COM TRANSITION TO RIGHT FOOT
+                                    2;   %% state ==  9  RIGHT FOOT BALANCING 
+                                    3;   %% state == 10  YOGA RIGHT FOOT
                                     5;   %% state == 11  PREPARING FOR SWITCHING
                                     5;   %% state == 12  LOOKING FOR CONTACT 
                                          %%
-                                    4];  %% state == 13  TRANSITION INIT POSITION
+                                    6];  %% state == 13  TRANSITION INIT POSITION
 
 sm.com.states      = [0.0,  0.01,0.511;   %% state ==  1  TWO FEET BALANCING NOT USED
                       0.0,  0.01,0.0;     %% state ==  2  COM TRANSITION TO LEFT FOOT: THIS REFERENCE IS USED AS A DELTA W.R.T. THE POSITION OF THE LEFT FOOT
@@ -184,53 +184,53 @@ q2 =        [-0.0790,0.2279, 0.4519, ...
              -1.1621,0.6663, 0.4965, 0.9947, ...
              -1.0717,1.2904,-0.2493, 1.0948, ...
               0.2092,0.2960, 0.0006,-0.1741,-0.1044,0.0700, ... 
-              0.3714,0.9599, 1.3253,-1.6594, 0.6374,-0.0614];
+              0.3714,0.9599, 1.3253,-1.6594, 0.5,-0.0614];
           
 q3 =        [-0.0852,-0.4273,0.0821,...
               0.1391, 1.4585,0.2464, 0.3042, ...
              -0.4181, 1.6800,0.7373, 0.3031, ...
               0.2092,0.2960, 0.0006,-0.1741,-0.1044,0.0700, ...
-              0.3714,0.9599, 1.3253,-1.6594, 0.6374,-0.0614];
+              0.3714,0.9599, 1.3253,-1.6594, 0.5,-0.0614];
           
 q4 =        [-0.0852,-0.4273,0.0821,...
               0.1391, 1.4585,0.2464, 0.3042, ...
              -0.4181, 1.6800,0.7373, 0.3031, ...
               0.2092, 0.3473,0.0006,-0.1741,-0.1044, 0.0700,...
-              0.3514, 1.3107,1.3253,-0.0189, 0.6374,-0.0614];
+              0.3514, 1.3107,1.3253,-0.189, 0.5,-0.0614];
           
 q5 =        [-0.0790,-0.1273, 0.4519, ...
              -1.1621,0.6663, 0.4965, 0.9947, ...
              -1.0717,1.2904,-0.2493, 1.0948, ...
               0.2092, 0.3473,0.0006,-0.1741,-0.1044, 0.0700,...
-              0.3514, 1.3107,1.3253,-0.0189, 0.6374,-0.0614];
+              0.3514, 1.3107,1.3253,-0.0189, 0.5,-0.0614];
           
 q6 =        [-0.0852,-0.4273,0.0821,...
               0.1391, 1.4585,0.2464, 0.3042, ...
              -0.4181, 1.6800,0.7373, 0.3031, ...
               0.2092, 0.3473,0.0006,-0.1741,-0.1044, 0.0700,...
-              0.3514, 1.3107,1.3253,-0.0189, 0.6374,-0.0614];
+              0.3514, 1.3107,1.3253,-0.189, 0.5,-0.0614];
           
 q7 =        [-0.0852,-0.4273,0.0821,...
               0.1391, 1.4585,0.2464, 0.3042, ...
              -0.4181, 1.6800,0.7373, 0.3031, ...
               0.2092, 0.3473,0.0006,-0.1741,-0.1044, 0.0700,...
-              0.3514, 1.3107,1.3253, -1.6217, 0.6374,-0.0614];
+              0.3514, 1.3107,1.3253, -1.6217, 0.5,-0.0614];
           
 q8 =        [-0.0852,-0.4273,0.0821,...
               0.1391, 1.4585,0.2464, 0.3042, ...
              -0.4181, 1.6800,0.7373, 0.3031, ...
               0.2092, 0.3473,0.0006,-0.1741,-0.1044, 0.0700,...
-              0.3514, 1.3107,1.3253,-0.0189, 0.6374,-0.0614];
+              0.3514, 1.3107,1.3253,-0.189, 0.5,-0.0614];
           
   
 sm.joints.pointsL =[ 0,                            q1;
-                     1*sm.jointsSmoothingTimes(10),q2;
-                     2*sm.jointsSmoothingTimes(10),q3;
-                     3*sm.jointsSmoothingTimes(10),q4;
-                     4*sm.jointsSmoothingTimes(10),q5;
-                     5*sm.jointsSmoothingTimes(10),q6;
-                     6*sm.jointsSmoothingTimes(10),q7;
-                     7*sm.jointsSmoothingTimes(10),q8];
+                     1*sm.jointsSmoothingTimes(4),q2;
+                     2*sm.jointsSmoothingTimes(4),q3;
+                     3*sm.jointsSmoothingTimes(4),q4;
+                     4*sm.jointsSmoothingTimes(4),q5;
+                     5*sm.jointsSmoothingTimes(4),q6;
+                     6*sm.jointsSmoothingTimes(4),q7;
+                     7*sm.jointsSmoothingTimes(4),q8];
                  
 sm.joints.pointsR = sm.joints.pointsL;
 
