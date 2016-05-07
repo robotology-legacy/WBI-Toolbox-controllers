@@ -7,7 +7,7 @@ Model {
     NumRootInports	    0
     NumRootOutports	    0
     ParameterArgumentNames  ""
-    ComputedModelVersion    "1.204"
+    ComputedModelVersion    "1.220"
     NumModelReferences	    0
     NumTestPointedSignals   0
   }
@@ -30,7 +30,7 @@ Model {
       $ObjectID		      2
       $ClassName	      "Simulink.WindowInfo"
       IsActive		      [1]
-      Location		      [0.0, 23.0, 1280.0, 773.0]
+      Location		      [0.0, 23.0, 1905.0, 1035.0]
       Object {
 	$PropName		"ModelBrowserInfo"
 	$ObjectID		3
@@ -52,11 +52,11 @@ Model {
 	$ObjectID		5
 	$ClassName		"Simulink.EditorInfo"
 	IsActive		[1]
-	ViewObjType		"SimulinkSubsys"
-	LoadSaveID		"182"
-	Extents			[1246.0, 600.0]
-	ZoomFactor		[1.25]
-	Offset			[-363.78376311188805, -147.19510489510486]
+	ViewObjType		"SimulinkTopLevel"
+	LoadSaveID		"0"
+	Extents			[1871.0, 862.0]
+	ZoomFactor		[1.2444622632053723]
+	Offset			[53.750161082474165, 132.16567332474227]
       }
     }
   }
@@ -66,9 +66,9 @@ Model {
   ModifiedByFormat	  "%<Auto>"
   LastModifiedBy	  "DanielePucci"
   ModifiedDateFormat	  "%<Auto>"
-  LastModifiedDate	  "Wed May 04 17:31:29 2016"
-  RTWModifiedTimeStamp	  384283889
-  ModelVersionFormat	  "1.%<AutoIncrement:204>"
+  LastModifiedDate	  "Sat May 07 10:09:29 2016"
+  RTWModifiedTimeStamp	  384516568
+  ModelVersionFormat	  "1.%<AutoIncrement:220>"
   ConfigurationManager	  "none"
   SampleTimeColors	  off
   SampleTimeAnnotations	  off
@@ -170,7 +170,7 @@ Model {
 	  $ObjectID		  8
 	  Version		  "1.12.1"
 	  StartTime		  "0.0"
-	  StopTime		  "simulationTime"
+	  StopTime		  "CONFIG.SIMULATION_TIME"
 	  AbsTol		  "auto"
 	  FixedStep		  "Ts"
 	  InitialStep		  "auto"
@@ -774,14 +774,6 @@ Model {
       Interpolate	      on
     }
     Block {
-      BlockType		      Mux
-      Inputs		      "4"
-      DisplayOption	      "none"
-      UseBusObject	      off
-      BusObject		      "BusObject"
-      NonVirtualBus	      off
-    }
-    Block {
       BlockType		      Outport
       Port		      "1"
       OutMin		      "[]"
@@ -887,7 +879,7 @@ Model {
   }
   System {
     Name		    "impedanceControl2012b"
-    Location		    [0, 23, 1280, 796]
+    Location		    [0, 23, 1905, 1058]
     Open		    off
     ModelBrowserVisibility  off
     ModelBrowserWidth	    200
@@ -899,41 +891,14 @@ Model {
     TiledPaperMargins	    [0.500000, 0.500000, 0.500000, 0.500000]
     TiledPageScale	    1
     ShowPageBoundaries	    off
-    ZoomFactor		    "81"
+    ZoomFactor		    "124"
     ReportName		    "simulink-default.rpt"
-    SIDHighWatermark	    "205"
-    Block {
-      BlockType		      Constant
-      Name		      "Constant"
-      SID		      "176"
-      Position		      [165, 542, 230, 558]
-      ZOrder		      593
-      ShowName		      off
-      Value		      "zeros(6,1)"
-    }
-    Block {
-      BlockType		      Constant
-      Name		      "Constant1"
-      SID		      "177"
-      Position		      [165, 492, 230, 508]
-      ZOrder		      594
-      ShowName		      off
-      Value		      "eye(4)"
-    }
-    Block {
-      BlockType		      Constant
-      Name		      "Constant2"
-      SID		      "178"
-      Position		      [110, 567, 230, 583]
-      ZOrder		      595
-      ShowName		      off
-      Value		      "zeros(ROBOT_DOF,1)"
-    }
+    SIDHighWatermark	    "233"
     Block {
       BlockType		      Gain
       Name		      "Gain"
       SID		      "11"
-      Position		      [255, 275, 310, 305]
+      Position		      [275, 445, 330, 475]
       ZOrder		      19
       ShowName		      off
       Gain		      "180/pi"
@@ -951,7 +916,7 @@ Model {
       BlockType		      Gain
       Name		      "Gain1"
       SID		      "14"
-      Position		      [955, 170, 1010, 200]
+      Position		      [975, 380, 1030, 410]
       ZOrder		      22
       ShowName		      off
       Gain		      "Kp"
@@ -970,7 +935,7 @@ Model {
       BlockType		      Gain
       Name		      "Gain2"
       SID		      "20"
-      Position		      [790, 200, 845, 230]
+      Position		      [805, 315, 860, 345]
       ZOrder		      26
       ShowName		      off
       Gain		      "Kd"
@@ -980,7 +945,7 @@ Model {
       SaturateOnIntegerOverflow	off
       Port {
 	PortNumber		1
-	Name			"Kd(qDref - qD)"
+	Name			"                                                                             Kd(qDref - qD)"
 	RTWStorageClass		"Auto"
 	DataLoggingNameMode	"SignalName"
       }
@@ -989,7 +954,7 @@ Model {
       BlockType		      Gain
       Name		      "Gain4"
       SID		      "84"
-      Position		      [705, 522, 805, 558]
+      Position		      [590, 522, 690, 558]
       ZOrder		      169
       ShowName		      off
       Gain		      "GRAV_COMP"
@@ -998,7 +963,7 @@ Model {
       SaturateOnIntegerOverflow	off
       Port {
 	PortNumber		1
-	Name			"gravityTorques joints"
+	Name			"                                                                 gravityTorques "
 	RTWStorageClass		"Auto"
 	DataLoggingNameMode	"SignalName"
       }
@@ -1007,7 +972,7 @@ Model {
       BlockType		      Gain
       Name		      "Gain5"
       SID		      "87"
-      Position		      [510, 210, 565, 240]
+      Position		      [550, 330, 605, 360]
       ZOrder		      172
       ShowName		      off
       Gain		      "180/pi"
@@ -1023,34 +988,13 @@ Model {
     }
     Block {
       BlockType		      Reference
-      Name		      "Get Bias Forces"
-      SID		      "170"
-      Ports		      [4, 1]
-      Position		      [270, 487, 410, 588]
-      ZOrder		      589
-      LibraryVersion	      "1.348"
-      SourceBlock	      "WBToolboxLibrary/wholeBodyModel/Dynamics/Get Bias Forces"
-      SourceType	      "Get Generalized Bias Forces"
-      robotName		      "WBT_robotName"
-      localName		      "WBT_modelName"
-      wbiFile		      "WBT_wbiFilename"
-      wbiList		      "WBT_wbiList"
-      explicitGravity	      off
-      Port {
-	PortNumber		1
-	Name			"gravityTorques floating base"
-	RTWStorageClass		"Auto"
-	DataLoggingNameMode	"SignalName"
-      }
-    }
-    Block {
-      BlockType		      Reference
       Name		      "Get Estimate"
       SID		      "138"
       Ports		      [0, 1]
-      Position		      [20, 272, 100, 308]
+      Position		      [65, 442, 145, 478]
       ZOrder		      384
       BackgroundColor	      "[0.513700, 0.851000, 0.670600]"
+      ShowName		      off
       LibraryVersion	      "1.348"
       SourceBlock	      "WBToolboxLibrary/wholeBodyStates/Get Estimate"
       SourceType	      "Get Estimate"
@@ -1065,7 +1009,7 @@ Model {
       Name		      "Get Estimate1"
       SID		      "150"
       Ports		      [0, 1]
-      Position		      [390, 207, 470, 243]
+      Position		      [445, 332, 520, 358]
       ZOrder		      385
       BackgroundColor	      "[0.513700, 0.674500, 1.000000]"
       ShowName		      off
@@ -1083,7 +1027,7 @@ Model {
       Name		      "Get Estimate2"
       SID		      "171"
       Ports		      [0, 1]
-      Position		      [1140, 412, 1220, 448]
+      Position		      [1160, 617, 1240, 653]
       ZOrder		      590
       BackgroundColor	      "[0.827500, 0.576500, 0.603900]"
       ShowName		      off
@@ -1103,22 +1047,11 @@ Model {
       }
     }
     Block {
-      BlockType		      Mux
-      Name		      "Mux1"
-      SID		      "86"
-      Ports		      [2, 1]
-      Position		      [1270, 38, 1275, 67]
-      ZOrder		      171
-      ShowName		      off
-      Inputs		      "2"
-      DisplayOption	      "bar"
-    }
-    Block {
       BlockType		      Reference
       Name		      "Real Time Synchronizer"
       SID		      "174"
       Ports		      []
-      Position		      [828, -46, 953, -9]
+      Position		      [658, 204, 783, 241]
       ZOrder		      591
       ForegroundColor	      "[0.916667, 0.916667, 0.916667]"
       BackgroundColor	      "gray"
@@ -1129,24 +1062,11 @@ Model {
       period		      "0.01"
     }
     Block {
-      BlockType		      Selector
-      Name		      "Selector1"
-      SID		      "23"
-      Ports		      [1, 1]
-      Position		      [615, 521, 655, 559]
-      ZOrder		      137
-      ShowName		      off
-      InputPortWidth	      "ROBOT_DOF+6"
-      IndexOptions	      "Index vector (dialog)"
-      Indices		      "[7:ROBOT_DOF+6]"
-      OutputSizes	      "1"
-    }
-    Block {
       BlockType		      Reference
       Name		      "Set References"
       SID		      "137"
       Ports		      [1]
-      Position		      [1440, 160, 1515, 210]
+      Position		      [1460, 340, 1535, 390]
       ZOrder		      383
       BackgroundColor	      "[0.827500, 0.576500, 0.603900]"
       ShowName		      off
@@ -1164,10 +1084,10 @@ Model {
       Name		      "Sum"
       SID		      "13"
       Ports		      [2, 1]
-      Position		      [865, 77, 890, 133]
+      Position		      [710, 374, 740, 416]
       ZOrder		      21
       ShowName		      off
-      Inputs		      "|+-"
+      Inputs		      "+-"
       InputSameDT	      off
       OutDataTypeStr	      "Inherit: Inherit via internal rule"
       SaturateOnIntegerOverflow	off
@@ -1177,26 +1097,20 @@ Model {
       Name		      "Sum1"
       SID		      "19"
       Ports		      [4, 1]
-      Position		      [1100, 111, 1135, 259]
+      Position		      [1130, 228, 1205, 497]
       ZOrder		      25
       ShowName		      off
-      Inputs		      "|++++"
+      Inputs		      "++++"
       InputSameDT	      off
       OutDataTypeStr	      "Inherit: Inherit via internal rule"
       SaturateOnIntegerOverflow	off
-      Port {
-	PortNumber		1
-	Name			"torqueDesired"
-	RTWStorageClass		"Auto"
-	DataLoggingNameMode	"SignalName"
-      }
     }
     Block {
       BlockType		      Sum
       Name		      "Sum2"
       SID		      "49"
       Ports		      [2, 1]
-      Position		      [1260, 355, 1280, 375]
+      Position		      [1280, 560, 1300, 580]
       ZOrder		      147
       ShowName		      off
       IconShape		      "round"
@@ -1216,10 +1130,10 @@ Model {
       Name		      "Sum3"
       SID		      "97"
       Ports		      [2, 1]
-      Position		      [705, 197, 735, 233]
+      Position		      [710, 314, 740, 356]
       ZOrder		      174
       ShowName		      off
-      Inputs		      "|+-"
+      Inputs		      "+-"
       InputSameDT	      off
       OutDataTypeStr	      "Inherit: Inherit via internal rule"
       SaturateOnIntegerOverflow	off
@@ -1229,7 +1143,7 @@ Model {
       Name		      "Torque info"
       SID		      "50"
       Ports		      [3]
-      Position		      [1455, 291, 1500, 379]
+      Position		      [1490, 496, 1535, 584]
       ZOrder		      148
       NumInputPorts	      "3"
       Open		      off
@@ -1240,8 +1154,8 @@ Model {
       MaxDataPoints	      5000
       SaveToWorkspace	      off
       SaveName		      ScopeData
-      YMin		      -14.76573~-27.1847~-25.60004
-      YMax		      19.18639~43.5242~29.54513
+      YMin		      -21.44461~-19.61447~-13.10734
+      YMax		      11.35993~15.15122~14.85076
       SampleInput	      off
       SampleTime	      -1
       ZoomMode		      on
@@ -1254,37 +1168,6 @@ Model {
 	axes2			"%<SignalLabel>"
 	axes3			"%<SignalLabel>"
       }
-      Location		      [1 95 1281 776]
-    }
-    Block {
-      BlockType		      Scope
-      Name		      "Tracking info"
-      SID		      "80"
-      Ports		      [2]
-      Position		      [1455, 30, 1500, 130]
-      ZOrder		      164
-      NumInputPorts	      "2"
-      Open		      off
-      TimeRange		      20
-      TickLabels	      OneTimeTick
-      ShowLegends	      on
-      LimitDataPoints	      off
-      MaxDataPoints	      5000
-      SaveToWorkspace	      off
-      SaveName		      ScopeData3
-      YMin		      -65.50412~-21.92946
-      YMax		      79.53709~20.97556
-      SampleInput	      off
-      SampleTime	      -1
-      ZoomMode		      on
-      Grid		      on
-      DataFormat	      Array
-      Decimation	      1
-      List {
-	ListType		AxesTitles
-	axes1			"%<SignalLabel>"
-	axes2			"%<SignalLabel>"
-      }
       List {
 	ListType		ScopeGraphics
 	FigureColor		"[0.156862745098039 0.156862745098039 0.156862745098039]"
@@ -1295,21 +1178,21 @@ Model {
 	LineWidths		"[0.5 0.5 0.5 0.5 0.5 0.5]"
 	MarkerStyles		"none|none|none|none|none|none"
       }
-      Location		      [1 95 1281 772]
+      Location		      [1 95 1281 776]
     }
     Block {
       BlockType		      SubSystem
       Name		      "WholeBodyDebug"
       SID		      "182"
       Ports		      [3]
-      Position		      [1420, 222, 1515, 278]
+      Position		      [1440, 409, 1535, 481]
       ZOrder		      -31
       ShowName		      off
       RequestExecContextInheritance off
       Variant		      off
       System {
 	Name			"WholeBodyDebug"
-	Location		[0, 23, 1280, 796]
+	Location		[0, 23, 1699, 966]
 	Open			off
 	ModelBrowserVisibility	off
 	ModelBrowserWidth	200
@@ -1321,7 +1204,7 @@ Model {
 	TiledPaperMargins	[0.500000, 0.500000, 0.500000, 0.500000]
 	TiledPageScale		1
 	ShowPageBoundaries	off
-	ZoomFactor		"125"
+	ZoomFactor		"202"
 	Block {
 	  BlockType		  Inport
 	  Name			  "torqueDesired"
@@ -1334,7 +1217,7 @@ Model {
 	  BlockType		  Inport
 	  Name			  "torqueMeasured"
 	  SID			  "184"
-	  Position		  [-5, 58, 25, 72]
+	  Position		  [-5, 48, 25, 62]
 	  ZOrder		  600
 	  Port			  "2"
 	  IconDisplay		  "Port number"
@@ -1343,7 +1226,7 @@ Model {
 	  BlockType		  Inport
 	  Name			  "torqueError"
 	  SID			  "185"
-	  Position		  [5, 203, 35, 217]
+	  Position		  [5, 173, 35, 187]
 	  ZOrder		  601
 	  Port			  "3"
 	  IconDisplay		  "Port number"
@@ -1400,7 +1283,7 @@ Model {
 	  Name			  "23-DoFs WBI to YARP1"
 	  SID			  "180"
 	  Ports			  [1, 5]
-	  Position		  [70, 26, 180, 104]
+	  Position		  [70, 16, 180, 94]
 	  ZOrder		  597
 	  BackgroundColor	  "lightBlue"
 	  DropShadow		  on
@@ -1447,7 +1330,7 @@ Model {
 	  Name			  "23-DoFs WBI to YARP2"
 	  SID			  "181"
 	  Ports			  [1, 5]
-	  Position		  [70, 171, 180, 249]
+	  Position		  [70, 141, 180, 219]
 	  ZOrder		  598
 	  BackgroundColor	  "lightBlue"
 	  DropShadow		  on
@@ -1521,14 +1404,24 @@ Model {
 	    axes4		    "%<SignalLabel>"
 	    axes5		    "%<SignalLabel>"
 	  }
-	  Location		  [15 100 1279 790]
+	  List {
+	    ListType		    ScopeGraphics
+	    FigureColor		    "[0.156862745098039 0.156862745098039 0.156862745098039]"
+	    AxesColor		    "[0 0 0]"
+	    AxesTickColor	    "[0.686274509803922 0.686274509803922 0.686274509803922]"
+	    LineColors		    "[1 1 0;1 0 1;0 1 1;1 0 0;0 1 0;0 0 1]"
+	    LineStyles		    "-|-|-|-|-|-"
+	    LineWidths		    "[0.5 0.5 0.5 0.5 0.5 0.5]"
+	    MarkerStyles	    "none|none|none|none|none|none"
+	  }
+	  Location		  [15 380 1279 1070]
 	}
 	Block {
 	  BlockType		  Scope
 	  Name			  "torqueError visual"
 	  SID			  "205"
 	  Ports			  [5]
-	  Position		  [325, 174, 355, 246]
+	  Position		  [325, 144, 355, 216]
 	  ZOrder		  621
 	  NumInputPorts		  "5"
 	  Open			  off
@@ -1539,8 +1432,8 @@ Model {
 	  MaxDataPoints		  5000
 	  SaveToWorkspace	  off
 	  SaveName		  ScopeData2
-	  YMin			  -9.89491~-7.02726~-7.07871~-27.1847~-15.50626
-	  YMax			  9.10619~5.3592~5.18343~43.5242~15.13714
+	  YMin			  -7.08425~-4.97693~-3.5332~-16.73555~-12.17767
+	  YMax			  8.27674~5.03969~3.19051~15.10315~14.3876
 	  SampleInput		  off
 	  SampleTime		  -1
 	  ZoomMode		  on
@@ -1565,14 +1458,14 @@ Model {
 	    LineWidths		    "[0.5 0.5 0.5 0.5 0.5 0.5]"
 	    MarkerStyles	    "none|none|none|none|none|none"
 	  }
-	  Location		  [15 100 1279 790]
+	  Location		  [15 380 1279 1070]
 	}
 	Block {
 	  BlockType		  Scope
 	  Name			  "torqueMeasured visual"
 	  SID			  "202"
 	  Ports			  [5]
-	  Position		  [325, 29, 355, 101]
+	  Position		  [325, 19, 355, 91]
 	  ZOrder		  618
 	  NumInputPorts		  "5"
 	  Open			  off
@@ -1599,7 +1492,17 @@ Model {
 	    axes4		    "%<SignalLabel>"
 	    axes5		    "%<SignalLabel>"
 	  }
-	  Location		  [15 100 1279 790]
+	  List {
+	    ListType		    ScopeGraphics
+	    FigureColor		    "[0.156862745098039 0.156862745098039 0.156862745098039]"
+	    AxesColor		    "[0 0 0]"
+	    AxesTickColor	    "[0.686274509803922 0.686274509803922 0.686274509803922]"
+	    LineColors		    "[1 1 0;1 0 1;0 1 1;1 0 0;0 1 0;0 0 1]"
+	    LineStyles		    "-|-|-|-|-|-"
+	    LineWidths		    "[0.5 0.5 0.5 0.5 0.5 0.5]"
+	    MarkerStyles	    "none|none|none|none|none|none"
+	  }
+	  Location		  [15 380 1279 1070]
 	}
 	Line {
 	  SrcBlock		  "torqueMeasured"
@@ -1748,70 +1651,18 @@ Model {
       MaskHideContents	      off
     }
     Block {
-      BlockType		      Scope
-      Name		      "feedForward"
-      SID		      "85"
-      Ports		      [2]
-      Position		      [1455, 473, 1500, 562]
-      ZOrder		      170
-      NumInputPorts	      "2"
-      Open		      off
-      TimeRange		      70
-      TickLabels	      OneTimeTick
-      ShowLegends	      on
-      LimitDataPoints	      off
-      MaxDataPoints	      5000
-      SaveToWorkspace	      off
-      SaveName		      ScopeData1
-      YMin		      -5~-5
-      YMax		      4~5
-      SampleInput	      off
-      SampleTime	      -1
-      ZoomMode		      on
-      Grid		      on
-      DataFormat	      Array
-      Decimation	      1
-      List {
-	ListType		AxesTitles
-	axes1			"%<SignalLabel>"
-	axes2			"%<SignalLabel>"
-      }
-      List {
-	ListType		ScopeGraphics
-	FigureColor		"[0.156862745098039 0.156862745098039 0.156862745098039]"
-	AxesColor		"[0 0 0]"
-	AxesTickColor		"[0.686274509803922 0.686274509803922 0.686274509803922]"
-	LineColors		"[1 1 0;1 0 1;0 1 1;1 0 0;0 1 0;0 0 1]"
-	LineStyles		"-|-|-|-|-|-"
-	LineWidths		"[0.5 0.5 0.5 0.5 0.5 0.5]"
-	MarkerStyles		"none|none|none|none|none|none"
-      }
-      Location		      [7 83 955 760]
-    }
-    Block {
       BlockType		      SubSystem
-      Name		      "references"
-      SID		      "88"
-      Ports		      [1, 3]
-      Position		      [205, 20, 365, 180]
-      ZOrder		      173
+      Name		      "compute gravity torques"
+      SID		      "226"
+      Ports		      [1, 1]
+      Position		      [225, 510, 380, 570]
+      ZOrder		      -36
+      ShowName		      off
       RequestExecContextInheritance off
       Variant		      off
-      Port {
-	PortNumber		1
-	Name			"qRef"
-	RTWStorageClass		"Auto"
-	DataLoggingNameMode	"SignalName"
-      }
-      Port {
-	PortNumber		3
-	Name			"Mj*qDDref"
-	RTWStorageClass		"Auto"
-	DataLoggingNameMode	"SignalName"
-      }
       System {
-	Name			"references"
-	Location		[0, 24, 1280, 768]
+	Name			"compute gravity torques"
+	Location		[0, 23, 1905, 1058]
 	Open			off
 	ModelBrowserVisibility	off
 	ModelBrowserWidth	200
@@ -1823,7 +1674,200 @@ Model {
 	TiledPaperMargins	[0.500000, 0.500000, 0.500000, 0.500000]
 	TiledPageScale		1
 	ShowPageBoundaries	off
-	ZoomFactor		"100"
+	ZoomFactor		"308"
+	Block {
+	  BlockType		  Inport
+	  Name			  "joint angles"
+	  SID			  "227"
+	  Position		  [20, 267, 65, 283]
+	  ZOrder		  596
+	  NamePlacement		  "alternate"
+	  IconDisplay		  "Port number"
+	}
+	Block {
+	  BlockType		  Constant
+	  Name			  "Constant"
+	  SID			  "176"
+	  Position		  [75, 292, 140, 308]
+	  ZOrder		  593
+	  ShowName		  off
+	  Value			  "zeros(6,1)"
+	}
+	Block {
+	  BlockType		  Constant
+	  Name			  "Constant1"
+	  SID			  "177"
+	  Position		  [75, 242, 140, 258]
+	  ZOrder		  594
+	  ShowName		  off
+	  Value			  "eye(4)"
+	}
+	Block {
+	  BlockType		  Constant
+	  Name			  "Constant2"
+	  SID			  "178"
+	  Position		  [20, 317, 140, 333]
+	  ZOrder		  595
+	  ShowName		  off
+	  Value			  "zeros(ROBOT_DOF,1)"
+	}
+	Block {
+	  BlockType		  Reference
+	  Name			  "Get Bias Forces"
+	  SID			  "170"
+	  Ports			  [4, 1]
+	  Position		  [180, 237, 320, 338]
+	  ZOrder		  589
+	  LibraryVersion	  "1.348"
+	  SourceBlock		  "WBToolboxLibrary/wholeBodyModel/Dynamics/Get Bias Forces"
+	  SourceType		  "Get Generalized Bias Forces"
+	  robotName		  "WBT_robotName"
+	  localName		  "WBT_modelName"
+	  wbiFile		  "WBT_wbiFilename"
+	  wbiList		  "WBT_wbiList"
+	  explicitGravity	  off
+	  Port {
+	    PortNumber		    1
+	    Name		    "gravityTorques floating base"
+	    RTWStorageClass	    "Auto"
+	    DataLoggingNameMode	    "SignalName"
+	  }
+	}
+	Block {
+	  BlockType		  Selector
+	  Name			  "Selector1"
+	  SID			  "23"
+	  Ports			  [1, 1]
+	  Position		  [460, 271, 500, 309]
+	  ZOrder		  137
+	  ShowName		  off
+	  InputPortWidth	  "ROBOT_DOF+6"
+	  IndexOptions		  "Index vector (dialog)"
+	  Indices		  "[7:ROBOT_DOF+6]"
+	  OutputSizes		  "1"
+	}
+	Block {
+	  BlockType		  Outport
+	  Name			  "gravity torques"
+	  SID			  "228"
+	  Position		  [565, 283, 595, 297]
+	  ZOrder		  597
+	  IconDisplay		  "Port number"
+	}
+	Line {
+	  SrcBlock		  "Selector1"
+	  SrcPort		  1
+	  DstBlock		  "gravity torques"
+	  DstPort		  1
+	}
+	Line {
+	  SrcBlock		  "Constant1"
+	  SrcPort		  1
+	  DstBlock		  "Get Bias Forces"
+	  DstPort		  1
+	}
+	Line {
+	  SrcBlock		  "Constant2"
+	  SrcPort		  1
+	  DstBlock		  "Get Bias Forces"
+	  DstPort		  4
+	}
+	Line {
+	  SrcBlock		  "joint angles"
+	  SrcPort		  1
+	  DstBlock		  "Get Bias Forces"
+	  DstPort		  2
+	}
+	Line {
+	  SrcBlock		  "Constant"
+	  SrcPort		  1
+	  DstBlock		  "Get Bias Forces"
+	  DstPort		  3
+	}
+	Line {
+	  Name			  "gravityTorques floating base"
+	  Labels		  [1, 1]
+	  SrcBlock		  "Get Bias Forces"
+	  SrcPort		  1
+	  DstBlock		  "Selector1"
+	  DstPort		  1
+	}
+      }
+      RTWSystemCode	      "Auto"
+      MinAlgLoopOccurrences   off
+      PropExecContextOutsideSubsystem off
+      FunctionWithSeparateData off
+      Opaque		      off
+      MaskHideContents	      off
+    }
+    Block {
+      BlockType		      Scope
+      Name		      "gravityTorques"
+      SID		      "233"
+      Ports		      [1]
+      Position		      [1490, 651, 1535, 739]
+      ZOrder		      626
+      Open		      off
+      TimeRange		      20
+      TickLabels	      OneTimeTick
+      ShowLegends	      on
+      LimitDataPoints	      off
+      MaxDataPoints	      5000
+      SaveToWorkspace	      off
+      SaveName		      ScopeData1
+      YMin		      -21.44461
+      YMax		      11.35993
+      SampleInput	      off
+      SampleTime	      -1
+      ZoomMode		      on
+      Grid		      on
+      DataFormat	      Array
+      Decimation	      1
+      List {
+	ListType		AxesTitles
+	axes1			"%<SignalLabel>"
+      }
+      Location		      [1 95 1281 776]
+    }
+    Block {
+      BlockType		      SubSystem
+      Name		      "references"
+      SID		      "88"
+      Ports		      [1, 3]
+      Position		      [225, 231, 380, 419]
+      ZOrder		      173
+      ShowName		      off
+      RequestExecContextInheritance off
+      Variant		      off
+      Port {
+	PortNumber		1
+	Name			"                                                                                                             "
+	"                                                                                                                     "
+	"                                                    Mj*qDDref"
+	RTWStorageClass		"Auto"
+	DataLoggingNameMode	"SignalName"
+      }
+      Port {
+	PortNumber		3
+	Name			"qRef"
+	RTWStorageClass		"Auto"
+	DataLoggingNameMode	"SignalName"
+      }
+      System {
+	Name			"references"
+	Location		[0, 23, 1905, 1058]
+	Open			off
+	ModelBrowserVisibility	off
+	ModelBrowserWidth	200
+	ScreenColor		"white"
+	PaperOrientation	"landscape"
+	PaperPositionMode	"auto"
+	PaperType		"usletter"
+	PaperUnits		"inches"
+	TiledPaperMargins	[0.500000, 0.500000, 0.500000, 0.500000]
+	TiledPageScale		1
+	ShowPageBoundaries	off
+	ZoomFactor		"156"
 	Block {
 	  BlockType		  Inport
 	  Name			  "qjRad"
@@ -2014,7 +2058,7 @@ Model {
 	    TiledPageScale	    1
 	    ShowPageBoundaries	    off
 	    ZoomFactor		    "100"
-	    SIDHighWatermark	    "205"
+	    SIDHighWatermark	    "233"
 	    Block {
 	      BlockType		      Inport
 	      Name		      "M"
@@ -2323,15 +2367,15 @@ Model {
 	}
 	Block {
 	  BlockType		  Outport
-	  Name			  "Agrad*sin(wt) + q(0)"
-	  SID			  "89"
-	  Position		  [910, 33, 940, 47]
-	  ZOrder		  164
+	  Name			  "Mj*qdDDot"
+	  SID			  "96"
+	  Position		  [930, 493, 960, 507]
+	  ZOrder		  170
 	  IconDisplay		  "Port number"
 	}
 	Block {
 	  BlockType		  Outport
-	  Name			  "Agrad*w*cos(wt)"
+	  Name			  "qdDot"
 	  SID			  "93"
 	  Position		  [725, 133, 755, 147]
 	  ZOrder		  167
@@ -2340,10 +2384,10 @@ Model {
 	}
 	Block {
 	  BlockType		  Outport
-	  Name			  "Mj*[-Arad*w^2*sin(wt)]"
-	  SID			  "96"
-	  Position		  [930, 493, 960, 507]
-	  ZOrder		  170
+	  Name			  " qd"
+	  SID			  "89"
+	  Position		  [910, 33, 940, 47]
+	  ZOrder		  164
 	  Port			  "3"
 	  IconDisplay		  "Port number"
 	}
@@ -2384,7 +2428,7 @@ Model {
 	  }
 	  Branch {
 	    Points		    [0, -35]
-	    DstBlock		    "Agrad*w*cos(wt)"
+	    DstBlock		    "qdDot"
 	    DstPort		    1
 	  }
 	}
@@ -2397,7 +2441,7 @@ Model {
 	Line {
 	  SrcBlock		  "Product"
 	  SrcPort		  1
-	  DstBlock		  "Mj*[-Arad*w^2*sin(wt)]"
+	  DstBlock		  "Mj*qdDDot"
 	  DstPort		  1
 	}
 	Line {
@@ -2459,7 +2503,7 @@ Model {
 	Line {
 	  SrcBlock		  "Sum"
 	  SrcPort		  1
-	  DstBlock		  "Agrad*sin(wt) + q(0)"
+	  DstBlock		  " qd"
 	  DstPort		  1
 	}
 	Line {
@@ -2492,70 +2536,40 @@ Model {
       Name		      "q"
       SrcBlock		      "Gain"
       SrcPort		      1
-      Points		      [446, 0; 0, -165]
-      Branch {
-	Labels			[2, 1]
-	Points			[0, -65]
-	DstBlock		"Mux1"
-	DstPort			2
-      }
-      Branch {
-	DstBlock		"Sum"
-	DstPort			2
-      }
+      Points		      [353, 0; 0, -55]
+      DstBlock		      "Sum"
+      DstPort		      2
     }
     Line {
       SrcBlock		      "Sum"
       SrcPort		      1
-      Points		      [15, 0]
-      Branch {
-	Points			[0, 80]
-	DstBlock		"Gain1"
-	DstPort			1
-      }
-      Branch {
-	DstBlock		"Tracking info"
-	DstPort			2
-      }
+      DstBlock		      "Gain1"
+      DstPort		      1
     }
     Line {
       Name		      "Kp(qref - q)"
-      Labels		      [-1, 0]
+      Labels		      [-1, 1]
       SrcBlock		      "Gain1"
+      SrcPort		      1
+      DstBlock		      "Sum1"
+      DstPort		      3
+    }
+    Line {
+      Name		      "                                                                             Kd(qDref - qD)"
+      Labels		      [1, 1]
+      SrcBlock		      "Gain2"
       SrcPort		      1
       DstBlock		      "Sum1"
       DstPort		      2
     }
     Line {
-      Name		      "Kd(qDref - qD)"
-      SrcBlock		      "Gain2"
-      SrcPort		      1
-      Points		      [61, 0]
-      Branch {
-	Labels			[1, 0]
-	Points			[0, 280]
-	DstBlock		"feedForward"
-	DstPort			1
-      }
-      Branch {
-	DstBlock		"Sum1"
-	DstPort			3
-      }
-    }
-    Line {
-      Name		      "torqueDesired"
-      Labels		      [-1, 0]
       SrcBlock		      "Sum1"
       SrcPort		      1
-      Points		      [130, 0]
+      Points		      [80, 0]
       Branch {
-	DstBlock		"Set References"
-	DstPort			1
-      }
-      Branch {
-	Points			[0, 45]
+	Points			[0, 55]
 	Branch {
-	  Points		  [0, 75]
+	  Points		  [0, 90]
 	  Branch {
 	    DstBlock		    "Sum2"
 	    DstPort		    1
@@ -2570,45 +2584,29 @@ Model {
 	  DstPort		  1
 	}
       }
-    }
-    Line {
-      SrcBlock		      "Constant"
-      SrcPort		      1
-      DstBlock		      "Get Bias Forces"
-      DstPort		      3
-    }
-    Line {
-      Name		      "gravityTorques floating base"
-      Labels		      [1, 1]
-      SrcBlock		      "Get Bias Forces"
-      SrcPort		      1
-      DstBlock		      "Selector1"
-      DstPort		      1
+      Branch {
+	DstBlock		"Set References"
+	DstPort			1
+      }
     }
     Line {
       SrcBlock		      "Get Estimate"
       SrcPort		      1
-      Points		      [32, 0]
+      Points		      [7, 0]
+      Branch {
+	Points			[0, 80]
+	DstBlock		"compute gravity torques"
+	DstPort			1
+      }
       Branch {
 	DstBlock		"Gain"
 	DstPort			1
       }
       Branch {
-	Points			[0, -190]
+	Points			[0, -135]
 	DstBlock		"references"
 	DstPort			1
       }
-      Branch {
-	Points			[0, 235]
-	DstBlock		"Get Bias Forces"
-	DstPort			2
-      }
-    }
-    Line {
-      SrcBlock		      "Selector1"
-      SrcPort		      1
-      DstBlock		      "Gain4"
-      DstPort		      1
     }
     Line {
       Name		      "torqueMeasured"
@@ -2618,7 +2616,7 @@ Model {
       Branch {
 	Points			[85, 0; 0, -95]
 	Branch {
-	  Points		  [0, -85]
+	  Points		  [0, -95]
 	  DstBlock		  "WholeBodyDebug"
 	  DstPort		  2
 	}
@@ -2640,7 +2638,7 @@ Model {
       SrcPort		      1
       Points		      [105, 0]
       Branch {
-	Points			[0, -95]
+	Points			[0, -100]
 	DstBlock		"WholeBodyDebug"
 	DstPort			3
       }
@@ -2650,26 +2648,11 @@ Model {
       }
     }
     Line {
-      SrcBlock		      "Mux1"
-      SrcPort		      1
-      DstBlock		      "Tracking info"
-      DstPort		      1
-    }
-    Line {
       Name		      "qRef"
       SrcBlock		      "references"
-      SrcPort		      1
-      Points		      [417, 0]
-      Branch {
-	Labels			[1, 1]
-	DstBlock		"Mux1"
-	DstPort			1
-      }
-      Branch {
-	Points			[0, 60]
-	DstBlock		"Sum"
-	DstPort			1
-      }
+      SrcPort		      3
+      DstBlock		      "Sum"
+      DstPort		      1
     }
     Line {
       Name		      "qDot"
@@ -2682,44 +2665,41 @@ Model {
     Line {
       SrcBlock		      "Sum3"
       SrcPort		      1
+      Points		      [23, 0; 0, -5]
       DstBlock		      "Gain2"
       DstPort		      1
     }
     Line {
       SrcBlock		      "references"
       SrcPort		      2
-      Points		      [231, 0; 0, 115]
       DstBlock		      "Sum3"
       DstPort		      1
     }
     Line {
-      Name		      "Mj*qDDref"
+      Name		      "                                                                                                   "
+      "                                                                                                                "
+      "                                                                   Mj*qDDref"
       Labels		      [1, 1]
       SrcBlock		      "references"
-      SrcPort		      3
+      SrcPort		      1
       DstBlock		      "Sum1"
       DstPort		      1
     }
     Line {
-      SrcBlock		      "Constant1"
-      SrcPort		      1
-      DstBlock		      "Get Bias Forces"
-      DstPort		      1
-    }
-    Line {
-      Name		      "gravityTorques joints"
-      Labels		      [0, 0]
+      Name		      "                                                                 gravityTorques "
       SrcBlock		      "Gain4"
       SrcPort		      1
-      Points		      [66, 0]
+      Points		      [201, 0]
       Branch {
-	Points			[0, -295]
+	Labels			[2, 1]
+	Points			[0, -80]
 	DstBlock		"Sum1"
 	DstPort			4
       }
       Branch {
-	DstBlock		"feedForward"
-	DstPort			2
+	Points			[0, 155]
+	DstBlock		"gravityTorques"
+	DstPort			1
       }
     }
     Line {
@@ -2729,10 +2709,10 @@ Model {
       DstPort		      1
     }
     Line {
-      SrcBlock		      "Constant2"
+      SrcBlock		      "compute gravity torques"
       SrcPort		      1
-      DstBlock		      "Get Bias Forces"
-      DstPort		      4
+      DstBlock		      "Gain4"
+      DstPort		      1
     }
   }
 }

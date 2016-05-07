@@ -1,32 +1,52 @@
-%% icubGazeboSim
+%% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% /**
+%  * Copyright (C) 2016 CoDyCo
+%  * @author: Daniele Pucci
+%  * Permission is granted to copy, distribute, and/or modify this program
+%  * under the terms of the GNU General Public License, version 2 or any
+%  * later version published by the Free Software Foundation.
+%  *
+%  * A copy of the license can be found at
+%  * http://www.robotcub.org/icub/license/gpl.txt
+%  *
+%  * This program is distributed in the hope that it will be useful, but
+%  * WITHOUT ANY WARRANTY; without even the implied warranty of
+%  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General
+%  * Public License for more details
+%  */
+%% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+clear; clc;
+%% GENERAL SIMULATION INFO
+% If you are simulating the robot with Gazebo, 
+% remember that you have to launch Gazebo as follow:
+% 
+% gazebo -slibgazebo_yarp_clock.so
+% 
+% and set the environmental variable YARP_ROBOT_NAME = icubGazeboSim.
+% To do this, you can uncomment the 
+
 % setenv('YARP_ROBOT_NAME','iCubGenova01');
+% setenv('YARP_ROBOT_NAME','iCubGenova02');
 setenv('YARP_ROBOT_NAME','iCubDarmstadt01');
+% setenv('YARP_ROBOT_NAME','icubGazeboSim');
 
-ROBOT_DOF   = 23;
-WBT_wbiList = 'ROBOT_TORQUE_CONTROL_JOINTS_WITHOUT_PRONOSUP';
-robotName   = 'icub';
-localName   = 'impedance';
-Ts          = 0.01;
-constraints = [1;1];
-
-KpTorso   = 0.1*ones(1,3);
-KpArms    = [0.1,0.1,0.1,0.1];
-KpLegs    = [0.1,0.1,0.1,0.1,0.1,0.1];
-Kp        = diag([KpTorso,KpArms,KpArms,KpLegs,KpLegs])/100;
-
-if size(Kp,1) ~= ROBOT_DOF
-    error('Dimension of Kp different from ROBOT_DOF')
-end
-
-Kd        = 2*sqrt(Kp)*0;
+% Simulation time in seconds
+CONFIG.SIMULATION_TIME     = inf;   
 
 GRAV_COMP = 1;
-MOVING    = 1;
-AMPLS     = 15*ones(1,ROBOT_DOF);
-FREQS     = 0.25*ones(1,ROBOT_DOF);
 
-if MOVING == 0
-    simulationTime = inf;%5/FREQS(1);
-else
-    simulationTime = inf;
-end
+MOVING    = 1;
+
+
+%% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% CONFIGURATIONS COMPLETED: loading gains and parameters for the specific robot
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% DO NOT MODIFY THE FOLLOWING VARIABLES, THEY ARE AUTOMATICALLY 
+%% CHANGED WHEN SIMULATING THE ROBOT ON GAZEBO, 
+WBT_modelName            = 'impedanceControl';
+
+run(strcat('app/robots/',getenv('YARP_ROBOT_NAME'),'/gains.m')); 
+
+
+
+
