@@ -1,13 +1,12 @@
-ROBOT_DOF   = 23;
-WBT_wbiList = 'ROBOT_TORQUE_CONTROL_JOINTS_WITHOUT_PRONOSUP';
+ROBOT_DOF   = 11;
+WBT_wbiList = 'ROBOT_UPPER_BODY';
 robotName   = 'icub';
 Ts          = 0.01;
-constraints = [1;1];
 
-KpTorso   = 0.1*ones(1,3);
+KpTorso   = 0.0*ones(1,3);
 KpArms    = [0.1,0.1,0.1,0.1];
 KpLegs    = [0.1,0.1,0.1,0.1,0.1,0.1];
-Kp        = diag([KpTorso,KpArms,KpArms,KpLegs,KpLegs])/100;
+Kp        = diag([KpTorso,KpArms,KpArms]);
 
 if size(Kp,1) ~= ROBOT_DOF
     error('Dimension of Kp different from ROBOT_DOF')
