@@ -36,10 +36,17 @@ function [CoMDes,qDes,constraints, currentState,impedances,w_H_b,jointsSmoothing
     if state == 2 
         w_H_b      =  w_H_fixedLink * l_sole_H_b;
 
-        CoMDes(1:2) = sm.com.states(state,1:2)';    
+        % Set the center of mass projection onto the x-y plane to be
+        % coincident to the origin of the left foot (l_sole) plus a
+        % configurable delta
+        CoMDes     = [w_H_fixedLink(1:2,4);CoM_0(3)] + sm.com.states(state,:)';         
+        
         impedances = gain.impedances(state,:);
 
-        CoMError  = CoMDes - l_sole_CoM;
+        fixed_link_CoMDes = w_H_fixedLink\[CoMDes;1];
+        
+        CoMError  = fixed_link_CoMDes(1:3) - l_sole_CoM(1:3);
+        
         qDes      = sm.joints.states(state,:)'; % new reference for q
         
         if norm(CoMError(2)) < sm.com.threshold && wrench_rightFoot(3) < sm.wrench.thresholdContactOff
@@ -52,10 +59,14 @@ function [CoMDes,qDes,constraints, currentState,impedances,w_H_b,jointsSmoothing
     if state == 3 
         w_H_b      =  w_H_fixedLink * l_sole_H_b;
 
+        % Set the center of mass projection onto the x-y plane to be
+        % coincident to the origin of the left foot (l_sole) plus a
+        % configurable delta
+                CoMDes     = [w_H_fixedLink(1:2,4);CoM_0(3)] + sm.com.states(state,:)';         
+ 
+        
         constraints = [1; 0]; %right foot is no longer a constraints
-%         constraints = [0; 1]; %left foot is no longer a constraints
 
-        CoMDes(2)   = sm.com.states(state,2)'; %new reference for CoM
         qDes        = sm.joints.states(state,:)';
         impedances  = gain.impedances(state,:);
 
@@ -71,9 +82,15 @@ function [CoMDes,qDes,constraints, currentState,impedances,w_H_b,jointsSmoothing
     %% YOGA LEFT FOOT
     if state == 4 
         w_H_b      =  w_H_fixedLink * l_sole_H_b;
+
+
+        % Set the center of mass projection onto the x-y plane to be
+        % coincident to the origin of the left foot (l_sole) plus a
+        % configurable delta
+        CoMDes     = [w_H_fixedLink(1:2,4);CoM_0(3)] + sm.com.states(state,:)';         
+        
         constraints = [1; 0]; %right foot is no longer a constraints
 
-        CoMDes(2)  =  sm.com.states(state,2)'; %new reference for CoM
         qDes       =  sm.joints.states(state,:)';
         impedances = gain.impedances(state,:);
 
@@ -94,10 +111,14 @@ function [CoMDes,qDes,constraints, currentState,impedances,w_H_b,jointsSmoothing
     %% PREPARING FOR SWITCHING
     if state == 5 
         w_H_b      =  w_H_fixedLink * l_sole_H_b;
+
+        % Set the center of mass projection onto the x-y plane to be
+        % coincident to the origin of the left foot (l_sole) plus a
+        % configurable delta
+                CoMDes     = [w_H_fixedLink(1:2,4);CoM_0(3)] + sm.com.states(state,:)';         
         
         constraints = [1; 0]; %right foot is no longer a constraints
 
-        CoMDes(2)  =  sm.com.states(state,2)'; %new reference for CoM
         qDes       =  sm.joints.states(state,:)';
         impedances = gain.impedances(state,:);
 
@@ -114,10 +135,14 @@ function [CoMDes,qDes,constraints, currentState,impedances,w_H_b,jointsSmoothing
     %% LOOKING FOR A CONTACT
     if state == 6 
         w_H_b      =  w_H_fixedLink * l_sole_H_b;
+
+        % Set the center of mass projection onto the x-y plane to be
+        % coincident to the origin of the left foot (l_sole) plus a
+        % configurable delta
+        CoMDes     = [w_H_fixedLink(1:2,4);CoM_0(3)] + sm.com.states(state,:)';         
         
         constraints = [1; 0]; %right foot is no longer a constraints
 
-        CoMDes(2)   = sm.com.states(state,2)'; %new reference for CoM
         qDes        = sm.joints.states(state,:)';
         impedances  = gain.impedances(state,:);
 
@@ -131,6 +156,8 @@ function [CoMDes,qDes,constraints, currentState,impedances,w_H_b,jointsSmoothing
     if state == 7 
         w_H_b      =  w_H_fixedLink * l_sole_H_b;
         
+        % Setting CoMDes here is not necessary since it will be stramed the
+        % initial center of mass, i.e. CoM_0 (see on the top of this file) 
         constraints = [1; 1]; %right foot is no longer a constraints
         impedances = gain.impedances(state,:);
         if ((norm(l_sole_CoM(1:2)-CoMDes(1:2)) < 10*sm.com.threshold) && sm.yogaAlsoOnRightFoot && (t > tSwitch + sm.tBalancing))
@@ -150,15 +177,18 @@ function [CoMDes,qDes,constraints, currentState,impedances,w_H_b,jointsSmoothing
         constraints = [1; 1]; %right foot is no longer a constraints
         w_H_b   =  w_H_fixedLink*r_sole_H_b;
 
+
+        % Set the center of mass projection onto the x-y plane to be
+        % coincident to the origin of the left foot (l_sole) plus a
+        % configurable delta
+        CoMDes     = [w_H_fixedLink(1:2,4);CoM_0(3)] + sm.com.states(state,:)';         
+
+        fixed_link_CoMDes = w_H_fixedLink\[CoMDes;1];
+        
+        CoMError  = fixed_link_CoMDes(1:3) - r_sole_CoM(1:3);
+        
         impedances = gain.impedances(state,:);
         qDes       =  sm.joints.states(state,:)';
-        
-             
-        CoMDes(1:2) = w_H_fixedLink(1:2,4) + sm.com.states(state,1:2)';    
-
-        w_CoM = w_H_fixedLink*[r_sole_CoM;1];
-        
-        CoMError  = CoMDes - w_CoM(1:3);
 
         if norm(CoMError(2)) < sm.com.threshold  && wrench_leftFoot(3) < sm.wrench.thresholdContactOff
            state = 9; 
@@ -172,7 +202,7 @@ function [CoMDes,qDes,constraints, currentState,impedances,w_H_b,jointsSmoothing
         constraints = [0; 1]; %left foot is no longer a constraints
         w_H_b   =  w_H_fixedLink*r_sole_H_b;
 
-        CoMDes(1:2) = w_H_fixedLink(1:2,4) + sm.com.states(state,1:2)';    
+        CoMDes     = [w_H_fixedLink(1:2,4);CoM_0(3)] + sm.com.states(state,:)';         
         qDes        = sm.joints.states(state,:)';
         impedances  = gain.impedances(state,:);
         if t > tSwitch + sm.DT % yoga
@@ -189,7 +219,7 @@ function [CoMDes,qDes,constraints, currentState,impedances,w_H_b,jointsSmoothing
         constraints = [0; 1]; %left foot is no longer a constraints
         w_H_b   =  w_H_fixedLink*r_sole_H_b;
 
-        CoMDes(1:2) = w_H_fixedLink(1:2,4) + sm.com.states(state,1:2)';    
+        CoMDes     = [w_H_fixedLink(1:2,4);CoM_0(3)] + sm.com.states(state,:)';         
         qDes        =  sm.joints.states(state,:)';
         impedances  = gain.impedances(state,:);
 
@@ -212,7 +242,7 @@ function [CoMDes,qDes,constraints, currentState,impedances,w_H_b,jointsSmoothing
         constraints = [0; 1]; %left foot is no longer a constraints
         w_H_b   =  w_H_fixedLink*r_sole_H_b;
 
-        CoMDes(1:2) = w_H_fixedLink(1:2,4) + sm.com.states(state,1:2)';    
+        CoMDes     = [w_H_fixedLink(1:2,4);CoM_0(3)] + sm.com.states(state,:)';         
         qDes        =  sm.joints.states(state,:)';
         impedances = gain.impedances(state,:);
 
@@ -231,7 +261,7 @@ function [CoMDes,qDes,constraints, currentState,impedances,w_H_b,jointsSmoothing
         constraints = [0; 1]; %left foot is no longer a constraints
         w_H_b   =  w_H_fixedLink*r_sole_H_b;
 
-%         CoMDes(1:2) = w_H_fixedLink(1:2,4) + sm.com.states(state,1:2)';    
+        CoMDes     = [w_H_fixedLink(1:2,4);CoM_0(3)] + sm.com.states(state,:)';         
         qDes        = sm.joints.states(state,:)';
         impedances  = gain.impedances(state,:);
 

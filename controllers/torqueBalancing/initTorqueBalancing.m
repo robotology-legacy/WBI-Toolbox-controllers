@@ -52,7 +52,7 @@ CONFIG.SIMULATION_TIME     = inf;
 SM.SM_TYPE                 = 'YOGA';   
 
 % CONFIG.SCOPES: if set to true, all visualizers for debugging are active
-CONFIG.SCOPES.ALL          = false;
+CONFIG.SCOPES.ALL          = true;
 % You can also activate only some specific debugging scopes
 CONFIG.SCOPES.BASE_EST_IMU = false;
 CONFIG.SCOPES.EXTWRENCHES  = false;
@@ -60,13 +60,6 @@ CONFIG.SCOPES.GAIN_SCHE_INFO=false;
 CONFIG.SCOPES.MAIN         = false;
 CONFIG.SCOPES.QP           = false;
 
-% CONFIG.USE_IMU4EST_BASE: if set to false, the base frame is estimated by 
-% assuming that either the left or the right foot stay stuck on the ground. 
-% Which foot the  controller uses depends on the contact forces acting on it. 
-% If set to true, the base orientation is estimated by using the IMU, while
-% the base position by assuming that the origin of either the right or the
-% left foot do not move. 
-CONFIG.USE_IMU4EST_BASE    = false;
 
 % CONFIG.CHECK_LIMITS: if set to true, the controller will stop as soon as 
 % any of the joint limit is touched. 
@@ -76,7 +69,7 @@ CONFIG.CHECK_LIMITS        = false;
 CONFIG.YAW_IMU_FILTER      = false;
           
 
-
+CONFIG.ONSOFTCARPET        = false;
 
 
 %% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -86,6 +79,13 @@ CONFIG.YAW_IMU_FILTER      = false;
 %% CHANGED WHEN SIMULATING THE ROBOT ON GAZEBO, 
 WBT_modelName            = 'matlabTorqueBalancing';
 
+% CONFIG.USE_IMU4EST_BASE: if set to false, the base frame is estimated by 
+% assuming that either the left or the right foot stay stuck on the ground. 
+% Which foot the  controller uses depends on the contact forces acting on it. 
+% If set to true, the base orientation is estimated by using the IMU, while
+% the base position by assuming that the origin of either the right or the
+% left foot do not move. 
+CONFIG.USE_IMU4EST_BASE    = false;
 
 % CONFIG.USE_QP_SOLVER: if set to true, a QP solver is used to account for 
 % inequality constraints of contact wrenches
