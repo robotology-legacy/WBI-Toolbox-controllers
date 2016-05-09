@@ -6,7 +6,7 @@ Ts          = 0.01;
 KpTorso   = 0.0*ones(1,3);
 KpArms    = [0.1,0.1,0.1,0.1];
 KpLegs    = [0.1,0.1,0.1,0.1,0.1,0.1];
-Kp        = diag([KpTorso,KpArms,KpArms]);
+Kp        = diag([KpTorso,KpArms,KpArms])*0;
 
 if size(Kp,1) ~= ROBOT_DOF
     error('Dimension of Kp different from ROBOT_DOF')
