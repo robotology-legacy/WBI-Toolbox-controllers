@@ -7,7 +7,7 @@ Model {
     NumRootInports	    0
     NumRootOutports	    0
     ParameterArgumentNames  ""
-    ComputedModelVersion    "1.18"
+    ComputedModelVersion    "1.19"
     NumModelReferences	    0
     NumTestPointedSignals   0
   }
@@ -55,8 +55,8 @@ Model {
 	ViewObjType		"SimulinkTopLevel"
 	LoadSaveID		"0"
 	Extents			[980.0, 347.0]
-	ZoomFactor		[1.1753086419753087]
-	Offset			[83.08823529411768, -30.620798319327719]
+	ZoomFactor		[2.5729729729729729]
+	Offset			[89.558823529411768, 49.568277310924373]
       }
     }
   }
@@ -66,9 +66,9 @@ Model {
   ModifiedByFormat	  "%<Auto>"
   LastModifiedBy	  "DanielePucci"
   ModifiedDateFormat	  "%<Auto>"
-  LastModifiedDate	  "Fri Apr 15 11:08:56 2016"
-  RTWModifiedTimeStamp	  382619336
-  ModelVersionFormat	  "1.%<AutoIncrement:18>"
+  LastModifiedDate	  "Mon May 09 12:00:36 2016"
+  RTWModifiedTimeStamp	  384696036
+  ModelVersionFormat	  "1.%<AutoIncrement:19>"
   ConfigurationManager	  "none"
   SampleTimeColors	  off
   SampleTimeAnnotations	  off
@@ -758,57 +758,9 @@ Model {
     TiledPaperMargins	    [0.500000, 0.500000, 0.500000, 0.500000]
     TiledPageScale	    1
     ShowPageBoundaries	    off
-    ZoomFactor		    "118"
+    ZoomFactor		    "257"
     ReportName		    "simulink-default.rpt"
     SIDHighWatermark	    "17"
-    Block {
-      BlockType		      Reference
-      Name		      "23-DoFs WBI to YARP7"
-      SID		      "14"
-      Ports		      [1, 5]
-      Position		      [595, 58, 705, 162]
-      ZOrder		      513
-      BackgroundColor	      "lightBlue"
-      DropShadow	      on
-      ShowName		      off
-      LibraryVersion	      "1.348"
-      SourceBlock	      "WBToolboxLibrary/Utilities/23-DoFs WBI to YARP"
-      SourceType	      ""
-      Port {
-	PortNumber		1
-	Name			"torso"
-	RTWStorageClass		"Auto"
-	DataLoggingNameMode	"SignalName"
-      }
-      Port {
-	PortNumber		2
-	Name			"left_arm"
-	PropagatedSignals	"leftArm"
-	RTWStorageClass		"Auto"
-	DataLoggingNameMode	"SignalName"
-      }
-      Port {
-	PortNumber		3
-	Name			"right_arm"
-	PropagatedSignals	"rightArm"
-	RTWStorageClass		"Auto"
-	DataLoggingNameMode	"SignalName"
-      }
-      Port {
-	PortNumber		4
-	Name			"left_leg"
-	PropagatedSignals	"leftLeg"
-	RTWStorageClass		"Auto"
-	DataLoggingNameMode	"SignalName"
-      }
-      Port {
-	PortNumber		5
-	Name			"right_leg"
-	PropagatedSignals	"rightLeg"
-	RTWStorageClass		"Auto"
-	DataLoggingNameMode	"SignalName"
-      }
-    }
     Block {
       BlockType		      Constant
       Name		      "Constant"
@@ -817,24 +769,6 @@ Model {
       ZOrder		      33
       ShowName		      off
       Value		      "0"
-    }
-    Block {
-      BlockType		      Reference
-      Name		      "Get Estimate"
-      SID		      "13"
-      Ports		      [0, 1]
-      Position		      [485, 92, 565, 128]
-      ZOrder		      54
-      BackgroundColor	      "[0.827500, 0.576500, 0.603900]"
-      ShowName		      off
-      LibraryVersion	      "1.348"
-      SourceBlock	      "WBToolboxLibrary/wholeBodyStates/Get Estimate"
-      SourceType	      "Get Estimate"
-      estimateType	      "Joints Torque"
-      robotName		      "WBT_robotName"
-      localName		      "WBT_modelName"
-      wbiFile		      "WBT_wbiFilename"
-      wbiList		      "WBT_wbiList"
     }
     Block {
       BlockType		      Scope
@@ -852,8 +786,8 @@ Model {
       MaxDataPoints	      5000
       SaveToWorkspace	      off
       SaveName		      ScopeData1
-      YMin		      -0.27073~-5
-      YMax		      0.28409~5
+      YMin		      -0.58146~-5
+      YMax		      0.55477~5
       SampleInput	      off
       SampleTime	      -1
       ZoomMode		      on
@@ -865,17 +799,7 @@ Model {
 	axes1			"%<SignalLabel>"
 	axes2			"%<SignalLabel>"
       }
-      List {
-	ListType		ScopeGraphics
-	FigureColor		"[0.156862745098039 0.156862745098039 0.156862745098039]"
-	AxesColor		"[0 0 0]"
-	AxesTickColor		"[0.686274509803922 0.686274509803922 0.686274509803922]"
-	LineColors		"[1 1 0;1 0 1;0 1 1;1 0 0;0 1 0;0 0 1]"
-	LineStyles		"-|-|-|-|-|-"
-	LineWidths		"[0.5 0.5 0.5 0.5 0.5 0.5]"
-	MarkerStyles		"none|none|none|none|none|none"
-      }
-      Location		      [1 95 1281 795]
+      Location		      [1 203 1654 1075]
     }
     Block {
       BlockType		      Reference
@@ -887,7 +811,7 @@ Model {
       ForegroundColor	      "[0.916667, 0.916667, 0.916667]"
       BackgroundColor	      "gray"
       ShowName		      off
-      LibraryVersion	      "1.348"
+      LibraryVersion	      "1.355"
       SourceBlock	      "WBToolboxLibrary/Utilities/Real Time Synchronizer"
       SourceType	      "Real Time Synchronizer"
       period		      "0.01"
@@ -914,7 +838,7 @@ Model {
       ZOrder		      515
       ForegroundColor	      "[0.490196, 0.000000, 0.000000]"
       ShowName		      off
-      LibraryVersion	      "1.348"
+      LibraryVersion	      "1.355"
       SourceBlock	      "WBToolboxLibrary/Utilities/Yarp Read"
       SourceType	      "YARP Read"
       portName		      "'/icub/inertial'"
@@ -929,50 +853,6 @@ Model {
 	RTWStorageClass		"Auto"
 	DataLoggingNameMode	"SignalName"
       }
-    }
-    Block {
-      BlockType		      Scope
-      Name		      "tau"
-      SID		      "15"
-      Ports		      [5]
-      Position		      [800, 55, 905, 165]
-      ZOrder		      512
-      NumInputPorts	      "5"
-      Open		      off
-      TimeRange		      14
-      TickLabels	      OneTimeTick
-      ShowLegends	      on
-      LimitDataPoints	      off
-      MaxDataPoints	      5000
-      SaveToWorkspace	      off
-      SaveName		      ScopeData1
-      YMin		      -58.64434~-21.39097~-21.52762~-81.43596~-94.54214
-      YMax		      46.53013~21.42382~22.63023~161.15223~80.75083
-      SampleInput	      off
-      SampleTime	      -1
-      ZoomMode		      on
-      Grid		      on
-      DataFormat	      StructureWithTime
-      Decimation	      1
-      List {
-	ListType		AxesTitles
-	axes1			"%<SignalLabel>"
-	axes2			"%<SignalLabel>"
-	axes3			"%<SignalLabel>"
-	axes4			"%<SignalLabel>"
-	axes5			"%<SignalLabel>"
-      }
-      List {
-	ListType		ScopeGraphics
-	FigureColor		"[0.156862745098039 0.156862745098039 0.156862745098039]"
-	AxesColor		"[0 0 0]"
-	AxesTickColor		"[0.686274509803922 0.686274509803922 0.686274509803922]"
-	LineColors		"[1 1 0;1 0 1;0 1 1;1 0 0;0 1 0;0 0 1]"
-	LineStyles		"-|-|-|-|-|-"
-	LineWidths		"[0.5 0.5 0.5 0.5 0.5 0.5]"
-	MarkerStyles		"none|none|none|none|none|none"
-      }
-      Location		      [1 95 1281 795]
     }
     Line {
       Name		      "EE_Wrench"
@@ -993,52 +873,6 @@ Model {
       SrcPort		      1
       DstBlock		      "IMU"
       DstPort		      2
-    }
-    Line {
-      Name		      "right_leg"
-      Labels		      [1, 1]
-      SrcBlock		      "23-DoFs WBI to YARP7"
-      SrcPort		      5
-      DstBlock		      "tau"
-      DstPort		      5
-    }
-    Line {
-      Name		      "torso"
-      Labels		      [1, 1]
-      SrcBlock		      "23-DoFs WBI to YARP7"
-      SrcPort		      1
-      DstBlock		      "tau"
-      DstPort		      1
-    }
-    Line {
-      Name		      "left_arm"
-      Labels		      [1, 1]
-      SrcBlock		      "23-DoFs WBI to YARP7"
-      SrcPort		      2
-      DstBlock		      "tau"
-      DstPort		      2
-    }
-    Line {
-      Name		      "left_leg"
-      Labels		      [1, 1]
-      SrcBlock		      "23-DoFs WBI to YARP7"
-      SrcPort		      4
-      DstBlock		      "tau"
-      DstPort		      4
-    }
-    Line {
-      Name		      "right_arm"
-      Labels		      [1, 1]
-      SrcBlock		      "23-DoFs WBI to YARP7"
-      SrcPort		      3
-      DstBlock		      "tau"
-      DstPort		      3
-    }
-    Line {
-      SrcBlock		      "Get Estimate"
-      SrcPort		      1
-      DstBlock		      "23-DoFs WBI to YARP7"
-      DstPort		      1
     }
   }
 }
