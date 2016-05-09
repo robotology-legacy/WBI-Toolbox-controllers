@@ -276,7 +276,7 @@ function [CoMDes,qDes,constraints, currentState,impedances,w_H_b,jointsSmoothing
         w_H_b   =  w_H_fixedLink*r_sole_H_b;
         constraints = [1; 1]; %right foot is no longer a constraints
         impedances = gain.impedances(state,:);
-        if t > sm.tBalancing %after tBalancing time start moving weight to the left
+        if t - tSwitch> sm.tBalancing %after tBalancing time start moving weight to the left
            if sm.yogaInLoop
               state = 2; 
               w_H_fixedLink   = w_H_fixedLink*r_sole_H_b/l_sole_H_b;
