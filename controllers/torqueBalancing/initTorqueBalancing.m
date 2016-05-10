@@ -66,7 +66,7 @@ CONFIG.SCOPES.QP           = false;
 CONFIG.CHECK_LIMITS        = false;
 
 % CONFIG.YAW_IMU_FILTER: under develompent. Leave it equal to false
-CONFIG.YAW_IMU_FILTER      = false;
+CONFIG.YAW_IMU_FILTER      = true;
           
 
 CONFIG.ONSOFTCARPET        = false;
@@ -85,7 +85,7 @@ WBT_modelName            = 'matlabTorqueBalancing';
 % If set to true, the base orientation is estimated by using the IMU, while
 % the base position by assuming that the origin of either the right or the
 % left foot do not move. 
-CONFIG.USE_IMU4EST_BASE    = false;
+CONFIG.USE_IMU4EST_BASE    = true;
 
 % CONFIG.USE_QP_SOLVER: if set to true, a QP solver is used to account for 
 % inequality constraints of contact wrenches
