@@ -228,7 +228,7 @@ function [tauModel,Sigma,NA,f_HDot, ...
     % Unconstrained solution for the problem 1)
     f0                        = -pinvDamped(SigmaNA,reg.pinvDamp*1e-5)*(tauModel + Sigma*f_HDot);
     % Unconstrained contact wrenches
-    f                         = f_HDot + NA*f0; 
+    f                         = pinvA*(HDotDes - gravityWrench) + NA*f0*constraints(1)*constraints(2); 
     % Error on the center of mass
     errorCoM                  = xcom - desired_x_dx_ddx_CoM(:,1);
 end
