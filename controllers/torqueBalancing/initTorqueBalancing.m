@@ -69,7 +69,7 @@ CONFIG.CHECK_LIMITS        = false;
 CONFIG.YAW_IMU_FILTER      = false;
           
 
-CONFIG.ONSOFTCARPET        = true;
+CONFIG.ONSOFTCARPET        = false;
 
 
 %% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
