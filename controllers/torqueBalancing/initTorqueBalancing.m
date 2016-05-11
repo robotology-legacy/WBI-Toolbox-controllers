@@ -65,9 +65,6 @@ CONFIG.SCOPES.QP           = false;
 % any of the joint limit is touched. 
 CONFIG.CHECK_LIMITS        = false;
 
-% CONFIG.YAW_IMU_FILTER: under develompent. Leave it equal to false
-CONFIG.YAW_IMU_FILTER      = true;
-          
 
 CONFIG.ONSOFTCARPET        = false;
 
@@ -79,13 +76,18 @@ CONFIG.ONSOFTCARPET        = false;
 %% CHANGED WHEN SIMULATING THE ROBOT ON GAZEBO, 
 WBT_modelName            = 'matlabTorqueBalancing';
 
+
 % CONFIG.USE_IMU4EST_BASE: if set to false, the base frame is estimated by 
 % assuming that either the left or the right foot stay stuck on the ground. 
 % Which foot the  controller uses depends on the contact forces acting on it. 
 % If set to true, the base orientation is estimated by using the IMU, while
 % the base position by assuming that the origin of either the right or the
 % left foot do not move. 
-CONFIG.USE_IMU4EST_BASE    = true;
+CONFIG.USE_IMU4EST_BASE    = false;
+
+% CONFIG.YAW_IMU_FILTER: under develompent. Leave it equal to false
+CONFIG.YAW_IMU_FILTER      = false;
+CONFIG.PITCH_IMU_FILTER    = false;
 
 % CONFIG.USE_QP_SOLVER: if set to true, a QP solver is used to account for 
 % inequality constraints of contact wrenches
