@@ -7,7 +7,7 @@ Model {
     NumRootInports	    0
     NumRootOutports	    0
     ParameterArgumentNames  ""
-    ComputedModelVersion    "1.741"
+    ComputedModelVersion    "1.746"
     NumModelReferences	    0
     NumTestPointedSignals   0
   }
@@ -52,7 +52,7 @@ Model {
 	Dimension		2
 	Object {
 	  $ObjectID		  5
-	  IsActive		  [1]
+	  IsActive		  [0]
 	  ViewObjType		  "SimulinkTopLevel"
 	  LoadSaveID		  "0"
 	  Extents		  [1764.0, 833.0]
@@ -61,12 +61,12 @@ Model {
 	}
 	Object {
 	  $ObjectID		  6
-	  IsActive		  [0]
+	  IsActive		  [1]
 	  ViewObjType		  "SimulinkSubsys"
 	  LoadSaveID		  "12"
-	  Extents		  [1246.0, 600.0]
-	  ZoomFactor		  [0.89558823529411768]
-	  Offset		  [99.367816091954069, 127.52463054187194]
+	  Extents		  [1764.0, 833.0]
+	  ZoomFactor		  [1.276470588235294]
+	  Offset		  [104.0322580645161, 137.20967741935482]
 	}
 	PropName		"EditorsInfo"
       }
@@ -78,9 +78,9 @@ Model {
   ModifiedByFormat	  "%<Auto>"
   LastModifiedBy	  "DanielePucci"
   ModifiedDateFormat	  "%<Auto>"
-  LastModifiedDate	  "Fri May 06 16:39:58 2016"
-  RTWModifiedTimeStamp	  384354653
-  ModelVersionFormat	  "1.%<AutoIncrement:741>"
+  LastModifiedDate	  "Wed May 11 16:10:12 2016"
+  RTWModifiedTimeStamp	  384883797
+  ModelVersionFormat	  "1.%<AutoIncrement:746>"
   ConfigurationManager	  "none"
   SampleTimeColors	  off
   SampleTimeAnnotations	  off
@@ -1055,7 +1055,7 @@ Model {
     ShowPageBoundaries	    off
     ZoomFactor		    "92"
     ReportName		    "simulink-default.rpt"
-    SIDHighWatermark	    "699"
+    SIDHighWatermark	    "700"
     Block {
       BlockType		      Sum
       Name		      "Add2"
@@ -1080,8 +1080,8 @@ Model {
       BlockType		      SubSystem
       Name		      "CoM and qj\nat t = 0"
       SID		      "99"
-      Ports		      [2, 2]
-      Position		      [245, 280, 390, 380]
+      Ports		      [3, 2]
+      Position		      [245, 275, 390, 375]
       ZOrder		      78
       ShowName		      off
       Priority		      "2"
@@ -1089,7 +1089,7 @@ Model {
       Variant		      off
       System {
 	Name			"CoM and qj\nat t = 0"
-	Location		[654, 133, 2475, 1410]
+	Location		[0, 23, 1798, 1029]
 	Open			off
 	ModelBrowserVisibility	off
 	ModelBrowserWidth	200
@@ -1101,7 +1101,7 @@ Model {
 	TiledPaperMargins	[0.500000, 0.500000, 0.500000, 0.500000]
 	TiledPageScale		1
 	ShowPageBoundaries	off
-	ZoomFactor		"255"
+	ZoomFactor		"252"
 	Block {
 	  BlockType		  Inport
 	  Name			  "x2D"
@@ -1114,9 +1114,18 @@ Model {
 	  BlockType		  Inport
 	  Name			  "CoM(t)"
 	  SID			  "427"
-	  Position		  [0, 173, 30, 187]
+	  Position		  [35, 203, 65, 217]
 	  ZOrder		  586
 	  Port			  "2"
+	  IconDisplay		  "Port number"
+	}
+	Block {
+	  BlockType		  Inport
+	  Name			  "qj"
+	  SID			  "700"
+	  Position		  [55, 393, 85, 407]
+	  ZOrder		  589
+	  Port			  "3"
 	  IconDisplay		  "Port number"
 	}
 	Block {
@@ -1155,25 +1164,6 @@ Model {
 	  ShowName		  off
 	}
 	Block {
-	  BlockType		  Reference
-	  Name			  "Get Estimate"
-	  SID			  "425"
-	  Ports			  [0, 1]
-	  Position		  [20, 382, 100, 418]
-	  ZOrder		  583
-	  BackgroundColor	  "[0.513700, 0.851000, 0.670600]"
-	  ShowName		  off
-	  LibraryVersion	  "1.348"
-	  SourceBlock		  "WBToolboxLibrary/wholeBodyStates/Get Estimate"
-	  SourceType		  "Get Estimate"
-	  ContentPreviewEnabled	  off
-	  estimateType		  "Joints Position"
-	  robotName		  "WBT_robotName"
-	  localName		  "WBT_modelName"
-	  wbiFile		  "WBT_wbiFilename"
-	  wbiList		  "WBT_wbiList"
-	}
-	Block {
 	  BlockType		  Reshape
 	  Name			  "Reshape"
 	  SID			  "121"
@@ -1189,10 +1179,10 @@ Model {
 	  Name			  "holder\n"
 	  SID			  "426"
 	  Ports			  [1, 1]
-	  Position		  [125, 377, 185, 423]
+	  Position		  [165, 377, 225, 423]
 	  ZOrder		  585
 	  BackgroundColor	  "[0.537255, 0.721569, 1.000000]"
-	  LibraryVersion	  "1.348"
+	  LibraryVersion	  "1.355"
 	  SourceBlock		  "WBToolboxLibrary/Utilities/holder\n"
 	  SourceType		  "Holder"
 	  ContentPreviewEnabled	  off
@@ -1209,10 +1199,11 @@ Model {
 	  Name			  "holder\n1"
 	  SID			  "429"
 	  Ports			  [1, 1]
-	  Position		  [80, 157, 140, 203]
+	  Position		  [100, 197, 160, 223]
 	  ZOrder		  588
 	  BackgroundColor	  "[0.537255, 0.721569, 1.000000]"
-	  LibraryVersion	  "1.348"
+	  ShowName		  off
+	  LibraryVersion	  "1.355"
 	  SourceBlock		  "WBToolboxLibrary/Utilities/holder\n"
 	  SourceType		  "Holder"
 	  ContentPreviewEnabled	  off
@@ -1439,8 +1430,8 @@ Model {
 	  IconDisplay		  "Port number"
 	}
 	Line {
-	  ZOrder		  85
-	  SrcBlock		  "Get Estimate"
+	  ZOrder		  96
+	  SrcBlock		  "qj"
 	  SrcPort		  1
 	  DstBlock		  "holder\n"
 	  DstPort		  1
@@ -1458,7 +1449,6 @@ Model {
 	  ZOrder		  86
 	  SrcBlock		  "holder\n1"
 	  SrcPort		  1
-	  Points		  [10, 0; 0, 30]
 	  DstBlock		  "trajectoryGeneratorCoM"
 	  DstPort		  1
 	}
@@ -1533,7 +1523,7 @@ Model {
       BlockType		      Constant
       Name		      "Constant1"
       SID		      "422"
-      Position		      [155, 290, 205, 320]
+      Position		      [155, 275, 205, 305]
       ZOrder		      585
       ShowName		      off
       Value		      "0"
@@ -1683,7 +1673,7 @@ Model {
 	  ZOrder		  512
 	  BackgroundColor	  "lightBlue"
 	  DropShadow		  on
-	  LibraryVersion	  "1.348"
+	  LibraryVersion	  "1.355"
 	  SourceBlock		  "WBToolboxLibrary/Utilities/23-DoFs WBI to YARP"
 	  SourceType		  ""
 	  ContentPreviewEnabled	  off
@@ -1731,7 +1721,7 @@ Model {
 	  ZOrder		  513
 	  BackgroundColor	  "lightBlue"
 	  DropShadow		  on
-	  LibraryVersion	  "1.348"
+	  LibraryVersion	  "1.355"
 	  SourceBlock		  "WBToolboxLibrary/Utilities/23-DoFs WBI to YARP"
 	  SourceType		  ""
 	  ContentPreviewEnabled	  off
@@ -1779,7 +1769,7 @@ Model {
 	  ZOrder		  514
 	  BackgroundColor	  "lightBlue"
 	  DropShadow		  on
-	  LibraryVersion	  "1.348"
+	  LibraryVersion	  "1.355"
 	  SourceBlock		  "WBToolboxLibrary/Utilities/23-DoFs WBI to YARP"
 	  SourceType		  ""
 	  ContentPreviewEnabled	  off
@@ -1827,7 +1817,7 @@ Model {
 	  ZOrder		  515
 	  BackgroundColor	  "lightBlue"
 	  DropShadow		  on
-	  LibraryVersion	  "1.348"
+	  LibraryVersion	  "1.355"
 	  SourceBlock		  "WBToolboxLibrary/Utilities/23-DoFs WBI to YARP"
 	  SourceType		  ""
 	  ContentPreviewEnabled	  off
@@ -1875,7 +1865,7 @@ Model {
 	  ZOrder		  516
 	  BackgroundColor	  "lightBlue"
 	  DropShadow		  on
-	  LibraryVersion	  "1.348"
+	  LibraryVersion	  "1.355"
 	  SourceBlock		  "WBToolboxLibrary/Utilities/23-DoFs WBI to YARP"
 	  SourceType		  ""
 	  ContentPreviewEnabled	  off
@@ -1923,7 +1913,7 @@ Model {
 	  ZOrder		  511
 	  BackgroundColor	  "lightBlue"
 	  DropShadow		  on
-	  LibraryVersion	  "1.348"
+	  LibraryVersion	  "1.355"
 	  SourceBlock		  "WBToolboxLibrary/Utilities/23-DoFs WBI to YARP"
 	  SourceType		  ""
 	  ContentPreviewEnabled	  off
@@ -2071,7 +2061,7 @@ Model {
 	  ZOrder		  509
 	  BackgroundColor	  "[0.827500, 0.576500, 0.603900]"
 	  ShowName		  off
-	  LibraryVersion	  "1.348"
+	  LibraryVersion	  "1.355"
 	  SourceBlock		  "WBToolboxLibrary/wholeBodyStates/Get Estimate"
 	  SourceType		  "Get Estimate"
 	  ContentPreviewEnabled	  off
@@ -2090,7 +2080,7 @@ Model {
 	  ZOrder		  510
 	  BackgroundColor	  "[0.513700, 0.851000, 0.670600]"
 	  ShowName		  off
-	  LibraryVersion	  "1.348"
+	  LibraryVersion	  "1.355"
 	  SourceBlock		  "WBToolboxLibrary/wholeBodyStates/Get Estimate"
 	  SourceType		  "Get Estimate"
 	  ContentPreviewEnabled	  off
@@ -2220,7 +2210,7 @@ Model {
 	  ZOrder		  517
 	  ForegroundColor	  "[0.490196, 0.000000, 0.000000]"
 	  Commented		  "on"
-	  LibraryVersion	  "1.348"
+	  LibraryVersion	  "1.355"
 	  SourceBlock		  "WBToolboxLibrary/Utilities/Yarp Write"
 	  SourceType		  "YARP Write"
 	  portName		  "'/oneFootBalancing/comInfo:o'"
@@ -3700,7 +3690,7 @@ Model {
 	  Ports			  [4, 1]
 	  Position		  [600, 696, 785, 759]
 	  ZOrder		  587
-	  LibraryVersion	  "1.348"
+	  LibraryVersion	  "1.355"
 	  SourceBlock		  "WBToolboxLibrary/wholeBodyModel/Dynamics/Centroidal Momentum"
 	  SourceType		  "Centroidal Momentum"
 	  ContentPreviewEnabled	  off
@@ -3743,7 +3733,7 @@ Model {
 	  Position		  [600, 70, 765, 165]
 	  ZOrder		  595
 	  ShowName		  off
-	  LibraryVersion	  "1.348"
+	  LibraryVersion	  "1.355"
 	  SourceBlock		  "WBToolboxLibrary/wholeBodyModel/Jacobians/DotJ Nu"
 	  SourceType		  "DotJ Nu"
 	  ContentPreviewEnabled	  off
@@ -3760,7 +3750,7 @@ Model {
 	  Ports			  [4, 1]
 	  Position		  [600, 175, 765, 270]
 	  ZOrder		  596
-	  LibraryVersion	  "1.348"
+	  LibraryVersion	  "1.355"
 	  SourceBlock		  "WBToolboxLibrary/wholeBodyModel/Jacobians/DotJ Nu"
 	  SourceType		  "DotJ Nu"
 	  ContentPreviewEnabled	  off
@@ -3777,7 +3767,7 @@ Model {
 	  Ports			  [4, 1]
 	  Position		  [600, 567, 740, 668]
 	  ZOrder		  586
-	  LibraryVersion	  "1.348"
+	  LibraryVersion	  "1.355"
 	  SourceBlock		  "WBToolboxLibrary/wholeBodyModel/Dynamics/Get Bias Forces"
 	  SourceType		  "Get Generalized Bias Forces"
 	  ContentPreviewEnabled	  off
@@ -3795,7 +3785,7 @@ Model {
 	  Position		  [600, -105, 765, -50]
 	  ZOrder		  598
 	  ShowName		  off
-	  LibraryVersion	  "1.348"
+	  LibraryVersion	  "1.355"
 	  SourceBlock		  "WBToolboxLibrary/wholeBodyModel/Jacobians/Jacobian"
 	  SourceType		  "Jacobian"
 	  ContentPreviewEnabled	  off
@@ -3813,7 +3803,7 @@ Model {
 	  Position		  [600, 295, 765, 350]
 	  ZOrder		  593
 	  ShowName		  off
-	  LibraryVersion	  "1.348"
+	  LibraryVersion	  "1.355"
 	  SourceBlock		  "WBToolboxLibrary/wholeBodyModel/Jacobians/Jacobian"
 	  SourceType		  "Jacobian"
 	  ContentPreviewEnabled	  off
@@ -3831,7 +3821,7 @@ Model {
 	  Position		  [600, 360, 765, 415]
 	  ZOrder		  594
 	  ShowName		  off
-	  LibraryVersion	  "1.348"
+	  LibraryVersion	  "1.355"
 	  SourceBlock		  "WBToolboxLibrary/wholeBodyModel/Jacobians/Jacobian"
 	  SourceType		  "Jacobian"
 	  ContentPreviewEnabled	  off
@@ -3848,7 +3838,7 @@ Model {
 	  Ports			  [2, 1]
 	  Position		  [600, 434, 740, 501]
 	  ZOrder		  585
-	  LibraryVersion	  "1.348"
+	  LibraryVersion	  "1.355"
 	  SourceBlock		  "WBToolboxLibrary/wholeBodyModel/Dynamics/Mass Matrix"
 	  SourceType		  "Mass Matrix"
 	  ContentPreviewEnabled	  off
@@ -3883,7 +3873,7 @@ Model {
 	  Position		  [600, -242, 760, -198]
 	  ZOrder		  599
 	  ShowName		  off
-	  LibraryVersion	  "1.348"
+	  LibraryVersion	  "1.355"
 	  SourceBlock		  "WBToolboxLibrary/wholeBodyModel/Kinematics/Forward Kinematics"
 	  SourceType		  "Forward Kinematics"
 	  ContentPreviewEnabled	  off
@@ -3901,7 +3891,7 @@ Model {
 	  Position		  [600, -175, 760, -135]
 	  ZOrder		  600
 	  ShowName		  off
-	  LibraryVersion	  "1.348"
+	  LibraryVersion	  "1.355"
 	  SourceBlock		  "WBToolboxLibrary/wholeBodyModel/Kinematics/Forward Kinematics"
 	  SourceType		  "Forward Kinematics"
 	  ContentPreviewEnabled	  off
@@ -3977,7 +3967,7 @@ Model {
 	      Ports		      [2, 1]
 	      Position		      [115, 230, 280, 290]
 	      ZOrder		      578
-	      LibraryVersion	      "1.348"
+	      LibraryVersion	      "1.355"
 	      SourceBlock	      "WBToolboxLibrary/wholeBodyModel/Kinematics/Forward Kinematics"
 	      SourceType	      "Forward Kinematics"
 	      ContentPreviewEnabled   off
@@ -4851,7 +4841,7 @@ Model {
       Name		      "Saturation"
       SID		      "183"
       Ports		      [1, 1]
-      Position		      [1540, 670, 1570, 700]
+      Position		      [1540, 715, 1570, 745]
       ZOrder		      84
       ShowName		      off
       InputPortMap	      "u0"
@@ -4863,11 +4853,11 @@ Model {
       Name		      "Set References"
       SID		      "424"
       Ports		      [1]
-      Position		      [1590, 670, 1665, 700]
+      Position		      [1590, 715, 1665, 745]
       ZOrder		      587
       BackgroundColor	      "[0.827500, 0.576500, 0.603900]"
       ShowName		      off
-      LibraryVersion	      "1.348"
+      LibraryVersion	      "1.355"
       SourceBlock	      "WBToolboxLibrary/wholeBodyActuators/Set References"
       SourceType	      "Set References"
       ContentPreviewEnabled   off
@@ -4897,7 +4887,7 @@ Model {
       }
       System {
 	Name			"Subsystem"
-	Location		[0, 23, 1280, 796]
+	Location		[0, 23, 1798, 1029]
 	Open			on
 	ModelBrowserVisibility	off
 	ModelBrowserWidth	200
@@ -4909,7 +4899,7 @@ Model {
 	TiledPaperMargins	[0.500000, 0.500000, 0.500000, 0.500000]
 	TiledPageScale		1
 	ShowPageBoundaries	off
-	ZoomFactor		"90"
+	ZoomFactor		"128"
 	Block {
 	  BlockType		  Reference
 	  Name			  "23-DoFs WBI to YARP"
@@ -4919,7 +4909,7 @@ Model {
 	  ZOrder		  690
 	  BackgroundColor	  "lightBlue"
 	  DropShadow		  on
-	  LibraryVersion	  "1.348"
+	  LibraryVersion	  "1.355"
 	  SourceBlock		  "WBToolboxLibrary/Utilities/23-DoFs WBI to YARP"
 	  SourceType		  ""
 	  ContentPreviewEnabled	  off
@@ -4948,7 +4938,7 @@ Model {
 	  Name			  "CoM6D -> \nCoMXYZ5"
 	  SID			  "685"
 	  Ports			  [1, 1]
-	  Position		  [1040, 576, 1080, 594]
+	  Position		  [1040, 586, 1080, 604]
 	  ZOrder		  692
 	  ShowName		  off
 	  InputPortWidth	  "6"
@@ -4967,7 +4957,7 @@ Model {
 	  Name			  "CoM6D -> \nCoMXYZ6"
 	  SID			  "686"
 	  Ports			  [1, 1]
-	  Position		  [1040, 601, 1080, 619]
+	  Position		  [1040, 621, 1080, 639]
 	  ZOrder		  693
 	  ShowName		  off
 	  InputPortWidth	  "6"
@@ -4985,7 +4975,7 @@ Model {
 	  BlockType		  Constant
 	  Name			  "Constant"
 	  SID			  "695"
-	  Position		  [480, 607, 540, 623]
+	  Position		  [255, 587, 315, 603]
 	  ZOrder		  697
 	  ShowName		  off
 	  Value			  "zeros(2,1)"
@@ -5011,7 +5001,7 @@ Model {
 	  ZOrder		  670
 	  BackgroundColor	  "[0.513700, 0.674500, 1.000000]"
 	  ShowName		  off
-	  LibraryVersion	  "1.348"
+	  LibraryVersion	  "1.355"
 	  SourceBlock		  "WBToolboxLibrary/wholeBodyStates/Get Estimate"
 	  SourceType		  "Get Estimate"
 	  ContentPreviewEnabled	  off
@@ -5385,7 +5375,7 @@ Model {
 	      Position		      [70, 20, 235, 75]
 	      ZOrder		      671
 	      ShowName		      off
-	      LibraryVersion	      "1.348"
+	      LibraryVersion	      "1.355"
 	      SourceBlock	      "WBToolboxLibrary/wholeBodyModel/Jacobians/Jacobian"
 	      SourceType	      "Jacobian"
 	      ContentPreviewEnabled   off
@@ -5567,7 +5557,7 @@ Model {
 	      Position		      [70, 88, 235, 132]
 	      ZOrder		      672
 	      ShowName		      off
-	      LibraryVersion	      "1.348"
+	      LibraryVersion	      "1.355"
 	      SourceBlock	      "WBToolboxLibrary/wholeBodyModel/Kinematics/Forward Kinematics"
 	      SourceType	      "Forward Kinematics"
 	      ContentPreviewEnabled   off
@@ -5736,7 +5726,7 @@ Model {
 	  }
 	  System {
 	    Name		    "rpySeesaw and qj"
-	    Location		    [0, 23, 1280, 796]
+	    Location		    [0, 23, 1798, 1029]
 	    Open		    off
 	    ModelBrowserVisibility  off
 	    ModelBrowserWidth	    200
@@ -5748,7 +5738,7 @@ Model {
 	    TiledPaperMargins	    [0.500000, 0.500000, 0.500000, 0.500000]
 	    TiledPageScale	    1
 	    ShowPageBoundaries	    off
-	    ZoomFactor		    "191"
+	    ZoomFactor		    "273"
 	    Block {
 	      BlockType		      Selector
 	      Name		      "CoM6D -> \nCoMXYZ1"
@@ -5773,7 +5763,7 @@ Model {
 	      Name		      "CoM6D -> \nCoMXYZ2"
 	      SID		      "668"
 	      Ports		      [1, 1]
-	      Position		      [610, 156, 650, 174]
+	      Position		      [610, 151, 650, 169]
 	      ZOrder		      699
 	      ShowName		      off
 	      InputPortWidth	      "12"
@@ -5834,7 +5824,7 @@ Model {
 	      ZOrder		      691
 	      BackgroundColor	      "[0.513700, 0.851000, 0.670600]"
 	      ShowName		      off
-	      LibraryVersion	      "1.348"
+	      LibraryVersion	      "1.355"
 	      SourceBlock	      "WBToolboxLibrary/wholeBodyStates/Get Estimate"
 	      SourceType	      "Get Estimate"
 	      ContentPreviewEnabled   off
@@ -5892,7 +5882,7 @@ Model {
 	      Position		      [345, 38, 395, 52]
 	      ZOrder		      697
 	      ForegroundColor	      "[0.490196, 0.000000, 0.000000]"
-	      LibraryVersion	      "1.348"
+	      LibraryVersion	      "1.355"
 	      SourceBlock	      "WBToolboxLibrary/Utilities/Yarp Read"
 	      SourceType	      "YARP Read"
 	      portName		      "PORTS.IMU"
@@ -5910,7 +5900,7 @@ Model {
 	      Position		      [255, 213, 305, 227]
 	      ZOrder		      656
 	      ForegroundColor	      "[0.490196, 0.000000, 0.000000]"
-	      LibraryVersion	      "1.348"
+	      LibraryVersion	      "1.355"
 	      SourceBlock	      "WBToolboxLibrary/Utilities/Yarp Read"
 	      SourceType	      "YARP Read"
 	      portName		      "seesaw_inertial"
@@ -5957,7 +5947,7 @@ Model {
 	      Name		      "rpy seesaw"
 	      SID		      "671"
 	      Ports		      [3]
-	      Position		      [800, 140, 830, 230]
+	      Position		      [800, 145, 830, 235]
 	      ZOrder		      702
 	      ScopeSpecificationString "Simulink.scopes.TimeScopeBlockCfg('CurrentConfiguration', extmgr.ConfigurationSet(ext"
 	      "mgr.Configuration('Core','General UI',true),extmgr.Configuration('Core','Source UI',true),extmgr.Configuration("
@@ -6022,7 +6012,7 @@ Model {
 	      }
 	      System {
 		Name			"w_H_root_link4"
-		Location		[0, 23, 1280, 796]
+		Location		[0, 23, 1798, 1029]
 		Open			off
 		ModelBrowserVisibility	off
 		ModelBrowserWidth	200
@@ -6034,7 +6024,7 @@ Model {
 		TiledPaperMargins	[0.500000, 0.500000, 0.500000, 0.500000]
 		TiledPageScale		1
 		ShowPageBoundaries	off
-		ZoomFactor		"111"
+		ZoomFactor		"159"
 		Block {
 		  BlockType		  Inport
 		  Name			  "qj"
@@ -6310,7 +6300,7 @@ Model {
 		  ZOrder		  610
 		  BackgroundColor	  "[0.537255, 0.721569, 1.000000]"
 		  ShowName		  off
-		  LibraryVersion	  "1.348"
+		  LibraryVersion	  "1.355"
 		  SourceBlock		  "WBToolboxLibrary/Utilities/holder\n"
 		  SourceType		  "Holder"
 		  ContentPreviewEnabled	  off
@@ -6324,7 +6314,7 @@ Model {
 		  ZOrder		  611
 		  BackgroundColor	  "[0.537255, 0.721569, 1.000000]"
 		  ShowName		  off
-		  LibraryVersion	  "1.348"
+		  LibraryVersion	  "1.355"
 		  SourceBlock		  "WBToolboxLibrary/Utilities/holder\n"
 		  SourceType		  "Holder"
 		  ContentPreviewEnabled	  off
@@ -6336,7 +6326,7 @@ Model {
 		  Ports			  [2, 1]
 		  Position		  [130, -75, 295, -15]
 		  ZOrder		  569
-		  LibraryVersion	  "1.348"
+		  LibraryVersion	  "1.355"
 		  SourceBlock		  "WBToolboxLibrary/wholeBodyModel/Kinematics/Forward Kinematics"
 		  SourceType		  "Forward Kinematics"
 		  ContentPreviewEnabled	  off
@@ -6353,7 +6343,7 @@ Model {
 		  Ports			  [2, 1]
 		  Position		  [130, 10, 295, 70]
 		  ZOrder		  572
-		  LibraryVersion	  "1.348"
+		  LibraryVersion	  "1.355"
 		  SourceBlock		  "WBToolboxLibrary/wholeBodyModel/Kinematics/Forward Kinematics"
 		  SourceType		  "Forward Kinematics"
 		  ContentPreviewEnabled	  off
@@ -6376,7 +6366,7 @@ Model {
 		  Ports			  [2, 1]
 		  Position		  [130, 95, 295, 155]
 		  ZOrder		  606
-		  LibraryVersion	  "1.348"
+		  LibraryVersion	  "1.355"
 		  SourceBlock		  "WBToolboxLibrary/wholeBodyModel/Kinematics/Forward Kinematics"
 		  SourceType		  "Forward Kinematics"
 		  ContentPreviewEnabled	  off
@@ -6606,7 +6596,7 @@ Model {
 	      }
 	      Branch {
 		ZOrder			959
-		Points			[0, 80]
+		Points			[0, 75]
 		DstBlock		"CoM6D -> \nCoMXYZ2"
 		DstPort			1
 	      }
@@ -6659,15 +6649,14 @@ Model {
 	      SrcPort		      1
 	      Points		      [13, 0]
 	      Branch {
-		ZOrder			971
-		Points			[0, 20]
+		ZOrder			1044
+		Points			[0, 25]
 		DstBlock		"Sum"
 		DstPort			1
 	      }
 	      Branch {
 		ZOrder			964
-		Labels			[2, 1]
-		Points			[0, -10]
+		Labels			[1, 1]
 		DstBlock		"rpy seesaw"
 		DstPort			1
 	      }
@@ -6675,9 +6664,10 @@ Model {
 	    Line {
 	      Name		      "error"
 	      ZOrder		      962
-	      Labels		      [1, 1]
+	      Labels		      [2, 1]
 	      SrcBlock		      "Sum"
 	      SrcPort		      1
+	      Points		      [43, 0; 0, 5]
 	      DstBlock		      "rpy seesaw"
 	      DstPort		      2
 	    }
@@ -6686,9 +6676,9 @@ Model {
 	      ZOrder		      961
 	      SrcBlock		      "CoM6D -> \nCoMXYZ1"
 	      SrcPort		      1
-	      Points		      [40, 0; 0, -5]
+	      Points		      [40, 0]
 	      Branch {
-		ZOrder			974
+		ZOrder			1043
 		DstBlock		"Sum"
 		DstPort			2
 	      }
@@ -6750,7 +6740,7 @@ Model {
 	  }
 	  System {
 	    Name		    "w_H_root_link1"
-	    Location		    [0, 23, 1280, 796]
+	    Location		    [0, 23, 1798, 1029]
 	    Open		    off
 	    ModelBrowserVisibility  off
 	    ModelBrowserWidth	    200
@@ -6762,7 +6752,7 @@ Model {
 	    TiledPaperMargins	    [0.500000, 0.500000, 0.500000, 0.500000]
 	    TiledPageScale	    1
 	    ShowPageBoundaries	    off
-	    ZoomFactor		    "164"
+	    ZoomFactor		    "234"
 	    Block {
 	      BlockType		      Inport
 	      Name		      "qj"
@@ -6816,7 +6806,7 @@ Model {
 	      Ports		      [2, 1]
 	      Position		      [130, 10, 295, 70]
 	      ZOrder		      572
-	      LibraryVersion	      "1.348"
+	      LibraryVersion	      "1.355"
 	      SourceBlock	      "WBToolboxLibrary/wholeBodyModel/Kinematics/Forward Kinematics"
 	      SourceType	      "Forward Kinematics"
 	      ContentPreviewEnabled   off
@@ -6839,7 +6829,7 @@ Model {
 	      Ports		      [2, 1]
 	      Position		      [130, 95, 295, 155]
 	      ZOrder		      606
-	      LibraryVersion	      "1.348"
+	      LibraryVersion	      "1.355"
 	      SourceBlock	      "WBToolboxLibrary/wholeBodyModel/Kinematics/Forward Kinematics"
 	      SourceType	      "Forward Kinematics"
 	      ContentPreviewEnabled   off
@@ -7095,10 +7085,10 @@ Model {
 	  Branch {
 	    ZOrder		    1019
 	    Labels		    [0, 0]
-	    Points		    [0, 20]
+	    Points		    [0, 30]
 	    Branch {
 	      ZOrder		      1018
-	      Points		      [0, 25]
+	      Points		      [0, 35]
 	      DstBlock		      "CoM6D -> \nCoMXYZ6"
 	      DstPort		      1
 	    }
@@ -7229,7 +7219,6 @@ Model {
 	  Labels		  [1, 0]
 	  SrcBlock		  "CoM6D -> \nCoMXYZ5"
 	  SrcPort		  1
-	  Points		  [5, 0]
 	  DstBlock		  "Vb "
 	  DstPort		  1
 	}
@@ -7239,7 +7228,6 @@ Model {
 	  Labels		  [1, 1]
 	  SrcBlock		  "CoM6D -> \nCoMXYZ6"
 	  SrcPort		  1
-	  Points		  [5, 0]
 	  DstBlock		  "Vb "
 	  DstPort		  2
 	}
@@ -7280,7 +7268,6 @@ Model {
 	  ZOrder		  1137
 	  SrcBlock		  "Constant"
 	  SrcPort		  1
-	  Points		  [15, 0; 0, -20]
 	  DstBlock		  "Mux2"
 	  DstPort		  2
 	}
@@ -7922,7 +7909,7 @@ Model {
       ZOrder		      584
       BackgroundColor	      "[0.537255, 0.721569, 1.000000]"
       ShowName		      off
-      LibraryVersion	      "1.348"
+      LibraryVersion	      "1.355"
       SourceBlock	      "WBToolboxLibrary/Utilities/holder\n"
       SourceType	      "Holder"
       ContentPreviewEnabled   off
@@ -7976,7 +7963,7 @@ Model {
 	  Ports			  [4, 1]
 	  Position		  [915, 71, 1100, 134]
 	  ZOrder		  73
-	  LibraryVersion	  "1.348"
+	  LibraryVersion	  "1.355"
 	  SourceBlock		  "WBToolboxLibrary/wholeBodyModel/Dynamics/Centroidal Momentum"
 	  SourceType		  "Centroidal Momentum"
 	  ContentPreviewEnabled	  off
@@ -7992,7 +7979,7 @@ Model {
 	  Ports			  [2, 1]
 	  Position		  [360, 285, 520, 340]
 	  ZOrder		  40
-	  LibraryVersion	  "1.348"
+	  LibraryVersion	  "1.355"
 	  SourceBlock		  "WBToolboxLibrary/wholeBodyModel/Jacobians/Jacobian"
 	  SourceType		  "Jacobian"
 	  ContentPreviewEnabled	  off
@@ -8362,7 +8349,7 @@ Model {
 	      Ports		      [2, 1]
 	      Position		      [130, 20, 295, 80]
 	      ZOrder		      569
-	      LibraryVersion	      "1.348"
+	      LibraryVersion	      "1.355"
 	      SourceBlock	      "WBToolboxLibrary/wholeBodyModel/Kinematics/Forward Kinematics"
 	      SourceType	      "Forward Kinematics"
 	      ContentPreviewEnabled   off
@@ -8379,7 +8366,7 @@ Model {
 	      Ports		      [2, 1]
 	      Position		      [130, 105, 295, 165]
 	      ZOrder		      572
-	      LibraryVersion	      "1.348"
+	      LibraryVersion	      "1.355"
 	      SourceBlock	      "WBToolboxLibrary/wholeBodyModel/Kinematics/Forward Kinematics"
 	      SourceType	      "Forward Kinematics"
 	      ContentPreviewEnabled   off
@@ -8646,7 +8633,7 @@ Model {
 	      ZOrder		      539
 	      ForegroundColor	      "[0.490196, 0.000000, 0.000000]"
 	      ShowName		      off
-	      LibraryVersion	      "1.348"
+	      LibraryVersion	      "1.355"
 	      SourceBlock	      "WBToolboxLibrary/Utilities/Simulator Synchronizer"
 	      SourceType	      "Simulator Synchronizer"
 	      period		      "CONFIG.TS"
@@ -8722,7 +8709,7 @@ Model {
 	      ForegroundColor	      "[0.916667, 0.916667, 0.916667]"
 	      BackgroundColor	      "gray"
 	      ShowName		      off
-	      LibraryVersion	      "1.348"
+	      LibraryVersion	      "1.355"
 	      SourceBlock	      "WBToolboxLibrary/Utilities/Real Time Synchronizer"
 	      SourceType	      "Real Time Synchronizer"
 	      period		      "CONFIG.TS"
@@ -8794,24 +8781,20 @@ Model {
       Points		      [14, 0]
       Branch {
 	ZOrder			732
-	Points			[0, -5]
-	Branch {
-	  ZOrder		  583
-	  Points		  [0, -304; 688, 0; 0, 139]
-	  DstBlock		  "Dump and visualize"
-	  DstPort		  6
-	}
-	Branch {
-	  ZOrder		  582
-	  DstBlock		  "balancingControlSeeSawFCN"
-	  DstPort		  7
-	}
-      }
-      Branch {
-	ZOrder			589
-	Points			[0, 480]
+	Points			[0, 485]
 	DstBlock		"integralOf Hw"
 	DstPort			1
+      }
+      Branch {
+	ZOrder			583
+	Points			[0, -304; 688, 0; 0, 139]
+	DstBlock		"Dump and visualize"
+	DstPort			6
+      }
+      Branch {
+	ZOrder			582
+	DstBlock		"balancingControlSeeSawFCN"
+	DstPort			7
       }
     }
     Line {
@@ -8860,17 +8843,17 @@ Model {
       ZOrder		      182
       SrcBlock		      "Dynamics quantities"
       SrcPort		      6
-      Points		      [34, 0]
+      Points		      [23, 0]
       Branch {
-	ZOrder			644
-	Points			[0, -310]
-	DstBlock		"CoM and qj\nat t = 0"
-	DstPort			2
-      }
-      Branch {
-	ZOrder			390
+	ZOrder			780
 	DstBlock		"balancingControlSeeSawFCN"
 	DstPort			14
+      }
+      Branch {
+	ZOrder			644
+	Points			[0, -340]
+	DstBlock		"CoM and qj\nat t = 0"
+	DstPort			2
       }
     }
     Line {
@@ -8920,17 +8903,26 @@ Model {
       ZOrder		      286
       SrcBlock		      "Subsystem"
       SrcPort		      3
-      Points		      [59, 0; 0, 400]
+      Points		      [59, 0; 0, 140]
       Branch {
-	ZOrder			586
-	Points			[0, 230]
-	DstBlock		"integralOf Hw"
-	DstPort			2
+	ZOrder			783
+	Points			[0, 260]
+	Branch {
+	  ZOrder		  586
+	  Points		  [0, 230]
+	  DstBlock		  "integralOf Hw"
+	  DstPort		  2
+	}
+	Branch {
+	  ZOrder		  585
+	  DstBlock		  "Dynamics quantities"
+	  DstPort		  2
+	}
       }
       Branch {
-	ZOrder			585
-	DstBlock		"Dynamics quantities"
-	DstPort			2
+	ZOrder			782
+	DstBlock		"CoM and qj\nat t = 0"
+	DstPort			3
       }
     }
     Line {
@@ -8966,10 +8958,10 @@ Model {
       ZOrder		      710
       SrcBlock		      "QP"
       SrcPort		      2
-      Points		      [289, 0; 0, -45]
+      Points		      [289, 0]
       Branch {
-	ZOrder			593
-	Points			[0, -650]
+	ZOrder			779
+	Points			[0, -695]
 	DstBlock		"Dump and visualize"
 	DstPort			1
       }
@@ -8992,15 +8984,16 @@ Model {
       SrcPort		      1
       Points		      [21, 0]
       Branch {
-	ZOrder			731
-	Points			[0, -281; 1047, 0; 0, 131]
-	DstBlock		"Dump and visualize"
-	DstPort			5
-      }
-      Branch {
-	ZOrder			529
+	ZOrder			784
+	Points			[0, 5]
 	DstBlock		"balancingControlSeeSawFCN"
 	DstPort			6
+      }
+      Branch {
+	ZOrder			731
+	Points			[0, -276; 1047, 0; 0, 131]
+	DstBlock		"Dump and visualize"
+	DstPort			5
       }
     }
     Line {
@@ -9131,10 +9124,7 @@ Stateflow {
     firstTransition	    38
     firstJunction	    37
     viewObj		    2
-    visible		    1
     machine		    1
-    subviewS {
-    }
     ssIdHighWaterMark	    67
     decomposition	    CLUSTER_CHART
     type		    EML_CHART
@@ -9956,7 +9946,10 @@ Stateflow {
     firstTransition	    47
     firstJunction	    46
     viewObj		    40
+    visible		    1
     machine		    1
+    subviewS {
+    }
     ssIdHighWaterMark	    9
     decomposition	    CLUSTER_CHART
     type		    EML_CHART
@@ -10118,7 +10111,10 @@ Stateflow {
     firstTransition	    59
     firstJunction	    58
     viewObj		    49
+    visible		    1
     machine		    1
+    subviewS {
+    }
     ssIdHighWaterMark	    14
     decomposition	    CLUSTER_CHART
     type		    EML_CHART
