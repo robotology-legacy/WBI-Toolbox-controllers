@@ -293,7 +293,7 @@ if CONFIG.ONSOFTCARPET && strcmpi(SM.SM_TYPE, 'YOGA')
                         25    25   5];% state == 13  TRANSITION TO INITIAL POSITION
                     
     gain.ICOM        = gain.PCOM*0;
-    gain.DCOM        = 2*sqrt(gain.PCOM)/20;
+    gain.DCOM        = 2*sqrt(gain.PCOM)/7;
 
     CONFIG.USE_IMU4EST_BASE    = true;
     CONFIG.YAW_IMU_FILTER      = true;

@@ -66,7 +66,7 @@ CONFIG.SCOPES.QP           = false;
 CONFIG.CHECK_LIMITS        = false;
 
 
-CONFIG.ONSOFTCARPET        = false;
+CONFIG.ONSOFTCARPET        = true;
 
 
 %% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
