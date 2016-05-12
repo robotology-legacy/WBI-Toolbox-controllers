@@ -1,4 +1,4 @@
-function [w_H_root,wImu_R_link] = fromBaseToWorldWithImu(imu_H_link,imu_H_link_0,link_H_root,inertial_0,inertial,CONFIG)
+function [w_H_root,wImu_R_link] = fromBaseToWorldWithImu(imu_H_link,imu_H_link_0,link_H_root,inertial_0,inertial,neck,CONFIG)
 %#codegen
 
 % Converting the inertial values from grad into rad
@@ -38,5 +38,9 @@ wImu_H_link_0   = [wImu_R_link_0, zeros(3,1)
                     zeros(1,3),       1     ];
 
 wImu_H_root     = wImu_H_link*link_H_root;
+
+%correcting neck movements
+wImu_H_wImuAssumingNeckToZero = correctIMU(neck);
+wImu_H_root = wImu_H_wImuAssumingNeckToZero * wImu_H_root;
 
 w_H_root        = wImu_H_link_0\wImu_H_root;

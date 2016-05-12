@@ -88,6 +88,7 @@ CONFIG.USE_IMU4EST_BASE    = false;
 % CONFIG.YAW_IMU_FILTER: under develompent. Leave it equal to false
 CONFIG.YAW_IMU_FILTER      = true;
 CONFIG.PITCH_IMU_FILTER    = true;
+CONFIG.CORRECT_NECK_IMU    = false;
 
 % CONFIG.USE_QP_SOLVER: if set to true, a QP solver is used to account for 
 % inequality constraints of contact wrenches

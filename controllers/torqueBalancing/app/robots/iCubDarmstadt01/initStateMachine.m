@@ -84,8 +84,8 @@ sm.demoOnlyRightFoot             = false;
 sm.yogaAlsoOnRightFoot           = true;
 sm.yogaInLoop                    = true;
 sm.com.threshold                 = 0.01;
-sm.wrench.thresholdContactOn     =  25;     % Force threshole above which contact is considered stable
-sm.wrench.thresholdContactOff    =  80;     % Force threshole under which contact is considered off
+sm.wrench.thresholdContactOn     =  50;     % Force threshole above which contact is considered stable
+sm.wrench.thresholdContactOff    = 100;     % Force threshole under which contact is considered off
 sm.joints                        = struct;
 sm.joints.thresholdNotInContact  =  5;    % Degrees
 sm.joints.thresholdInContact     = 50;      % Degrees
@@ -101,7 +101,7 @@ sm.jointsSmoothingTimes          = [1;   %% state ==  1  TWO FEET BALANCING
                                          %%
                                     4;   %% state ==  2  COM TRANSITION TO LEFT FOOT
                                     5;   %% state ==  3  LEFT FOOT BALANCING 
-                                    5;   %% state ==  4  YOGA LEFT FOOT
+                                    4;   %% state ==  4  YOGA LEFT FOOT
                                     5;   %% state ==  5  PREPARING FOR SWITCHING
                                     4;   %% state ==  6  LOOKING FOR CONTACT 
                                          %%
@@ -109,7 +109,7 @@ sm.jointsSmoothingTimes          = [1;   %% state ==  1  TWO FEET BALANCING
                                          %%
                                     4;   %% state ==  8  COM TRANSITION TO RIGHT FOOT
                                     5;   %% state ==  9  RIGHT FOOT BALANCING 
-                                    5;   %% state == 10  YOGA RIGHT FOOT
+                                    4;   %% state == 10  YOGA RIGHT FOOT
                                     5;   %% state == 11  PREPARING FOR SWITCHING
                                     4;   %% state == 12  LOOKING FOR CONTACT 
                                          %%
@@ -121,7 +121,7 @@ sm.com.states      = [0.0,  0.01,0.0;   %% state ==  1  TWO FEET BALANCING NOT U
                       0.0,  0.01,0.0;   %% state ==  4  YOGA LEFT FOOT
                       0.0,  0.00,0.0;   %% state ==  5  PREPARING FOR SWITCHING
                       0.0, -0.09,0.0;   %% state ==  6  LOOKING FOR CONTACT 
-                      0.0, -0.09,0.0;   %% state ==  7  TRANSITION INIT POSITION: THIS REFERENCE IS IGNORED
+                      0.0,  0.00,0.0;   %% state ==  7  TRANSITION INIT POSITION: DELTAS W.R.T. CoM_0
                       % FROM NOW ON, THE REFERENCE ARE ALWAYS DELTAS W.R.T.
                       % THE POSITION OF THE RIGHT FOOT
                       0.0,  0.00,0.0;   %% state ==  8  COM TRANSITION TO RIGHT FOOT
@@ -254,8 +254,8 @@ if CONFIG.ONSOFTCARPET && strcmpi(SM.SM_TYPE, 'YOGA')
                         10   10   20, 10   10    10    8, 10   10    10    8, 30   50   30    60      0   0, 30   30   20    20    100 100  % state ==  3  LEFT FOOT BALANCING
                         30   30   30, 10   10    10   10, 10   10    10   10,100  200  100   400      0   0,100   50   30   100    100 100  % state ==  4  YOGA LEFT FOOT 
                         30   30   30, 10   10    10   10, 10   10    10   10,100  200  100   400      0   0,100   50   30   100    100 100  % state ==  5  PREPARING FOR SWITCHING 
-                        30   30   30, 10   10    10   10, 10   10    10   10,100  200  100   400      0   0,100   50   30   100      0   0  % state ==  6  LOOKING FOR CONTACT
-                        30   30   30, 10   10    10   10, 10   10    10   10,100  200  100   400      0   0,100   50   30   100      0   0  % state ==  7  TRANSITION TO INITIAL POSITION 
+                        30   30   30, 10   10    10   10, 10   10    10   10,100  200  100   400      0   0,100   50   30   100    100 100  % state ==  6  LOOKING FOR CONTACT
+                        30   30   30, 10   10    10   10, 10   10    10   10,100  200  100   400      0   0,100   50   30   100    100 100  % state ==  7  TRANSITION TO INITIAL POSITION 
                         10   10   20, 10   10    10    8, 10   10    10    8, 30   50   60    30    100 100, 30   30   30    20    100 100  % state ==  8  COM TRANSITION TO RIGHT FOOT
                         10   10   20, 10   10    10    8, 10   10    10    8, 30   50   30    60    100 100, 30   30   20    20    100 100  % state ==  9  RIGHT FOOT BALANCING
                         30   30   30, 10   10    10   10, 10   10    10   10,100   50   30   100    100 100,100  200  100   400    100 100  % state == 10  YOGA RIGHT FOOT 
@@ -268,8 +268,8 @@ if CONFIG.ONSOFTCARPET && strcmpi(SM.SM_TYPE, 'YOGA')
                         25    25   5  % state ==  3  LEFT FOOT BALANCING
                         30    15   5  % state ==  4  YOGA LEFT FOOT 
                         25    25   5  % state ==  5  PREPARING FOR SWITCHING 
-                        25     5   5  % state ==  6  LOOKING FOR CONTACT
-                        25     5   5  % state ==  7  TRANSITION TO INITIAL POSITION 
+                        40     5   5  % state ==  6  LOOKING FOR CONTACT
+                        40     5   5  % state ==  7  TRANSITION TO INITIAL POSITION 
                         25    25   5  % state ==  8  COM TRANSITION TO RIGHT FOOT
                         25    25   5  % state ==  9  RIGHT FOOT BALANCING
                         25    15   5  % state == 10  YOGA RIGHT FOOT 
@@ -299,13 +299,13 @@ if CONFIG.ONSOFTCARPET && strcmpi(SM.SM_TYPE, 'YOGA')
                                          %%
                                     6];  %% state == 13  TRANSITION INIT POSITION
 
-    sm.com.states      = [0.011,  0.01,0.0;   %% state ==  1  TWO FEET BALANCING NOT USED
-                          0.011,  0.00,0.0;   %% state ==  2  COM TRANSITION TO LEFT FOOT: THIS REFERENCE IS USED AS A DELTA W.R.T. THE POSITION OF THE LEFT FOOT
-                          0.011,  0.00,0.0;   %% state ==  3  LEFT FOOT BALANCING 
-                          0.011,  0.015,0.0;   %% state ==  4  YOGA LEFT FOOT
-                          0.011,  0.00,0.0;   %% state ==  5  PREPARING FOR SWITCHING
-                          0.011, -0.09,0.0;   %% state ==  6  LOOKING FOR CONTACT 
-                          0.011, -0.09,0.0;   %% state ==  7  TRANSITION INIT POSITION: THIS REFERENCE IS IGNORED
+    sm.com.states      = [0.005, 0.01,0.0;   %% state ==  1  TWO FEET BALANCING NOT USED
+                          0.005, 0.00,0.0;   %% state ==  2  COM TRANSITION TO LEFT FOOT: THIS REFERENCE IS USED AS A DELTA W.R.T. THE POSITION OF THE LEFT FOOT
+                          0.005, 0.00,0.0;   %% state ==  3  LEFT FOOT BALANCING 
+                          0.005, 0.015,0.0;   %% state ==  4  YOGA LEFT FOOT
+                          0.005, 0.00,0.0;   %% state ==  5  PREPARING FOR SWITCHING
+                          0.01, -0.09,0.0;   %% state ==  6  LOOKING FOR CONTACT 
+                          0.01,  0.0 ,0.0;   %% state ==  7  TRANSITION INIT POSITION: DELTAS W.R.T. CoM_0
                           % FROM NOW ON, THE REFERENCE ARE ALWAYS DELTAS W.R.T.
                           % THE POSITION OF THE RIGHT FOOT
                           0.0,  0.00,0.0;   %% state ==  8  COM TRANSITION TO RIGHT FOOT
@@ -318,13 +318,14 @@ if CONFIG.ONSOFTCARPET && strcmpi(SM.SM_TYPE, 'YOGA')
     CONFIG.USE_IMU4EST_BASE    = true;
     CONFIG.YAW_IMU_FILTER      = true;
     CONFIG.PITCH_IMU_FILTER    = true;
+    CONFIG.CORRECT_NECK_IMU    = true;
     
     sm.jumpYoga                = false;
     sm.demoOnlyRightFoot       = false;
     sm.yogaAlsoOnRightFoot     = false;
     sm.yogaInLoop              = false;
     sm.com.threshold           = 0.01;
-    sm.tBalancing      = 1;
+    sm.tBalancing              = 1;
     
     if sm.demoOnlyRightFoot
         sm.wrench.thresholdContactOff    = 120; 
@@ -334,7 +335,7 @@ if CONFIG.ONSOFTCARPET && strcmpi(SM.SM_TYPE, 'YOGA')
         sm.wrench.thresholdContactOn     = 50;     % Force threshole above which contact is considered stable
     end
     
-    sm.joints.pointsL =[ 0,                            q1;
+    sm.joints.pointsL =[ 0,                           q1;
                          1*sm.jointsSmoothingTimes(4),q2;
                          2*sm.jointsSmoothingTimes(4),q3;];
 

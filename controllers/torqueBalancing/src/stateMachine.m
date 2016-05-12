@@ -166,10 +166,12 @@ function [w_H_b, CoMDes,qDes,constraints,impedances,kpCom,kdCom,currentState,joi
     
     %% TRANSITION TO INITIAL POSITION
     if state == 7 
-        w_H_b      =  w_H_fixedLink * l_sole_H_b;
+        w_H_b       =  w_H_fixedLink * l_sole_H_b;
         
-        % Setting CoMDes here is not necessary since it will be stramed the
-        % initial center of mass, i.e. CoM_0 (see on the top of this file) 
+        
+        CoMDes      = CoM_0 + sm.com.states(state,:)';         
+
+        
         constraints = [1; 1]; %right foot is no longer a constraints
         impedances = gain.impedances(state,:);
         kpCom       = gain.PCOM(state,:);   
