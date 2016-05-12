@@ -140,8 +140,6 @@ function [comError,fNoQp,f_HDot,NA,tauModel,Sigmaf_HDot,SigmaNA,...
     
         f_HDot         = pinvA* (Hdot_desired - gravityWrench);
 
-        
-
     elseif CONFIG.CONTROLKIND == 2
 
         A              =  [CentroidalMat;

@@ -23,10 +23,10 @@ rollPitchYaw_link   = rollPitchYawFromRotation(wImu_R_link);
 rollPitchYawFiltered_link = rollPitchYaw_link;
 
 if CONFIG.YAW_IMU_FILTER
-    rollPitchYawFiltered_link(3) = rollPitchYaw_link_0(3);
+    rollPitchYawFiltered_link(3) = 0;
 end
 if CONFIG.PITCH_IMU_FILTER
-    rollPitchYawFiltered_link(2) = rollPitchYaw_link_0(2);
+    rollPitchYawFiltered_link(2) = 0;
 end
 
 wImu_R_link         = rotz(rollPitchYawFiltered_link(3))*roty(rollPitchYawFiltered_link(2))*rotx(rollPitchYawFiltered_link(1));
