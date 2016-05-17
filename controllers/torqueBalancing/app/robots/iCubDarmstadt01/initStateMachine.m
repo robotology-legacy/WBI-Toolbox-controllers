@@ -37,8 +37,8 @@ if strcmpi(SM.SM_TYPE, 'YOGA')
                         50    50  10  % state == 12  LOOKING FOR CONTACT
                         50    50  10];% state == 13  TRANSITION TO INITIAL POSITION
     gain.PCOM  =  gain.PCOM;
-    gain.ICOM              = gain.PCOM*0;
-    gain.DCOM              = 2*sqrt(gain.PCOM)/20;
+    gain.ICOM  = gain.PCOM*0;
+    gain.DCOM  = 2*sqrt(gain.PCOM)/20;
 
     gain.PAngularMomentum  = 0.25 ;
     gain.DAngularMomentum  = 2*sqrt(gain.PAngularMomentum);
@@ -82,7 +82,7 @@ if strcmpi(SM.SM_TYPE, 'YOGA')
 sm.jumpYoga                      = false;
 sm.demoOnlyRightFoot             = false;
 sm.yogaAlsoOnRightFoot           = true;
-sm.yogaInLoop                    = true;
+sm.yogaInLoop                    = false;
 sm.com.threshold                 = 0.01;
 sm.wrench.thresholdContactOn     =  50;     % Force threshole above which contact is considered stable
 sm.wrench.thresholdContactOff    = 100;     % Force threshole under which contact is considered off
@@ -126,7 +126,7 @@ sm.com.states      = [0.0,  0.01,0.0;   %% state ==  1  TWO FEET BALANCING NOT U
                       % THE POSITION OF THE RIGHT FOOT
                       0.0,  0.00,0.0;   %% state ==  8  COM TRANSITION TO RIGHT FOOT
                       0.0,  0.00,0.0;   %% state ==  9  RIGHT FOOT BALANCING 
-                      0.0, -0.00,0.0;   %% state == 10  YOGA RIGHT FOOT
+                      0.0, -0.01,0.0;   %% state == 10  YOGA RIGHT FOOT
                       0.0, -0.00,0.0;   %% state == 11  PREPARING FOR SWITCHING
                       0.0,  0.09,0.0;   %% state == 12  LOOKING FOR CONTACT 
                       0.0,  0.00,0.0];  %% state == 13  TRANSITION INIT POSITION: THIS REFERENCE IS IGNORED
@@ -267,7 +267,7 @@ if CONFIG.ONSOFTCARPET && strcmpi(SM.SM_TYPE, 'YOGA')
                         25    25   5  % state ==  2  COM TRANSITION TO LEFT 
                         25    25   5  % state ==  3  LEFT FOOT BALANCING
                         30    15   5  % state ==  4  YOGA LEFT FOOT 
-                        25    25   5  % state ==  5  PREPARING FOR SWITCHING 
+                        30    15   5  % state ==  5  PREPARING FOR SWITCHING 
                         40    25   5  % state ==  6  LOOKING FOR CONTACT
                         40     5   5  % state ==  7  TRANSITION TO INITIAL POSITION 
                         25    25   5  % state ==  8  COM TRANSITION TO RIGHT FOOT
@@ -304,8 +304,8 @@ if CONFIG.ONSOFTCARPET && strcmpi(SM.SM_TYPE, 'YOGA')
                           0.01, 0.00,0.0;   %% state ==  3  LEFT FOOT BALANCING 
                           0.01, 0.015,0.0;   %% state ==  4  YOGA LEFT FOOT
                           0.01, 0.00,0.0;   %% state ==  5  PREPARING FOR SWITCHING
-                          0.01, -0.09,0.0;   %% state ==  6  LOOKING FOR CONTACT 
-                          0.01,  0.0 ,0.0;   %% state ==  7  TRANSITION INIT POSITION: DELTAS W.R.T. CoM_0
+                          0.015, -0.09,0.0;   %% state ==  6  LOOKING FOR CONTACT 
+                          0.015,  0.0 ,0.0;   %% state ==  7  TRANSITION INIT POSITION: DELTAS W.R.T. CoM_0
                           % FROM NOW ON, THE REFERENCE ARE ALWAYS DELTAS W.R.T.
                           % THE POSITION OF THE RIGHT FOOT
                           0.0,  0.00,0.0;   %% state ==  8  COM TRANSITION TO RIGHT FOOT
@@ -326,8 +326,8 @@ if CONFIG.ONSOFTCARPET && strcmpi(SM.SM_TYPE, 'YOGA')
     sm.yogaInLoop              = false;
     sm.com.threshold           = 0.01;
     sm.tBalancing              = 1;
-    sm.joints.thresholdNotInContact  =  15;    % Degrees
-    sm.joints.thresholdInContact     =  15;    % Degrees
+    sm.joints.thresholdNotInContact  =  7;    % Degrees
+    sm.joints.thresholdInContact     =  7;    % Degrees
 
     if sm.demoOnlyRightFoot
         sm.wrench.thresholdContactOff    = 120; 

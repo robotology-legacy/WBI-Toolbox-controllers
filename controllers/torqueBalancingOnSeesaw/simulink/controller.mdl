@@ -7,7 +7,7 @@ Model {
     NumRootInports	    0
     NumRootOutports	    0
     ParameterArgumentNames  ""
-    ComputedModelVersion    "1.764"
+    ComputedModelVersion    "1.767"
     NumModelReferences	    0
     NumTestPointedSignals   0
   }
@@ -52,12 +52,12 @@ Model {
 	Dimension		3
 	Object {
 	  $ObjectID		  5
-	  IsActive		  [0]
+	  IsActive		  [1]
 	  ViewObjType		  "SimulinkTopLevel"
 	  LoadSaveID		  "0"
 	  Extents		  [1764.0, 833.0]
-	  ZoomFactor		  [0.91685649202733488]
-	  Offset		  [-191.98260869565217, -30.269565217391175]
+	  ZoomFactor		  [0.92316513761467889]
+	  Offset		  [-185.40869565217395, -30.165217391304338]
 	}
 	Object {
 	  $ObjectID		  6
@@ -65,17 +65,17 @@ Model {
 	  ViewObjType		  "SimulinkSubsys"
 	  LoadSaveID		  "12"
 	  Extents		  [1764.0, 833.0]
-	  ZoomFactor		  [1.276470588235294]
-	  Offset		  [104.0322580645161, 136.20967741935482]
+	  ZoomFactor		  [1.0]
+	  Offset		  [-176.40092165898614, 39.545161290322653]
 	}
 	Object {
 	  $ObjectID		  7
-	  IsActive		  [1]
+	  IsActive		  [0]
 	  ViewObjType		  "SimulinkSubsys"
-	  LoadSaveID		  "651"
+	  LoadSaveID		  "647"
 	  Extents		  [1764.0, 833.0]
-	  ZoomFactor		  [1.5876309283948495]
-	  Offset		  [-3.8181703629034018, -149.84056829637109]
+	  ZoomFactor		  [2.683541857881262]
+	  Offset		  [241.32988911290323, -41.205330141129025]
 	}
 	PropName		"EditorsInfo"
       }
@@ -87,9 +87,9 @@ Model {
   ModifiedByFormat	  "%<Auto>"
   LastModifiedBy	  "DanielePucci"
   ModifiedDateFormat	  "%<Auto>"
-  LastModifiedDate	  "Thu May 12 23:19:31 2016"
-  RTWModifiedTimeStamp	  384991391
-  ModelVersionFormat	  "1.%<AutoIncrement:764>"
+  LastModifiedDate	  "Fri May 13 11:20:31 2016"
+  RTWModifiedTimeStamp	  385039158
+  ModelVersionFormat	  "1.%<AutoIncrement:767>"
   ConfigurationManager	  "none"
   SampleTimeColors	  off
   SampleTimeAnnotations	  off
@@ -1064,7 +1064,7 @@ Model {
     ShowPageBoundaries	    off
     ZoomFactor		    "92"
     ReportName		    "simulink-default.rpt"
-    SIDHighWatermark	    "774"
+    SIDHighWatermark	    "784"
     Block {
       BlockType		      Sum
       Name		      "Add2"
@@ -4878,7 +4878,7 @@ Model {
 	TiledPaperMargins	[0.500000, 0.500000, 0.500000, 0.500000]
 	TiledPageScale		1
 	ShowPageBoundaries	off
-	ZoomFactor		"128"
+	ZoomFactor		"100"
 	Block {
 	  BlockType		  Reference
 	  Name			  "23-DoFs WBI to YARP"
@@ -6675,7 +6675,7 @@ Model {
 	  System {
 	    Name		    "rpySeesaw and qj"
 	    Location		    [0, 23, 1798, 1029]
-	    Open		    off
+	    Open		    on
 	    ModelBrowserVisibility  off
 	    ModelBrowserWidth	    200
 	    ScreenColor		    "white"
@@ -6962,7 +6962,7 @@ Model {
 	      System {
 		Name			"w_H_root_link4"
 		Location		[0, 23, 1798, 1029]
-		Open			on
+		Open			off
 		ModelBrowserVisibility	off
 		ModelBrowserWidth	200
 		ScreenColor		"white"
@@ -10147,7 +10147,7 @@ Model {
       ZOrder		      594
       SrcBlock		      "balancingControlSeeSawFCN"
       SrcPort		      1
-      Points		      [62, 0; 0, -45]
+      Points		      [48, 0; 0, -45]
       DstBlock		      "Dump and visualize"
       DstPort		      2
     }
@@ -12110,8 +12110,6 @@ Stateflow {
     viewObj		    95
     visible		    1
     machine		    1
-    subviewS {
-    }
     ssIdHighWaterMark	    88
     decomposition	    CLUSTER_CHART
     type		    EML_CHART
@@ -12139,7 +12137,8 @@ Stateflow {
       script		      "function inertialSeesaw = fromBaseToWorldWithImuFCN(imu_H_link,imu_H_link_0,link_H_root,inertial_"
       "0,inertial,neck,CONFIG)\n%#codegen\n\n [~,w_R_link] = fromBaseToWorldWithImuSeesaw(imu_H_link,imu_H_link_0,link_"
       "H_root,inertial_0,inertial,neck,CONFIG);\n \n rollPitchYaw_link   = rollPitchYawFromRotation(w_R_link);\n\n s_om"
-      "ega_seesaw = \n \n inertialSeesaw = [rollPitchYaw_link*(180/pi);zeros(3,1); s_omega_seesaw; zeros(3,1)];"
+      "ega_seesaw = zeros(3,1);\n \n inertialSeesaw = [rollPitchYaw_link*(180/pi);zeros(3,1); s_omega_seesaw; zeros(3,1"
+      ")];"
       editorLayout	      "100 M4x1[10 5 700 500]"
     }
   }

@@ -5,7 +5,7 @@ PORTS.IMU   = '/icub/inertial';
 
 WBT_wbiList = 'ROBOT_TORQUE_CONTROL_JOINTS_WITHOUT_PRONOSUP';
 
-sat.torque = 12;
+sat.torque = 6;
 
 
 ROBOT_DOF_FOR_SIMULINK = eye(ROBOT_DOF);
@@ -36,6 +36,9 @@ seesaw.kind      = seesawKind;
 seesaw.lFootDistanceCenter      =  0.07;
 seesaw.rFootDistanceCenter      = -0.07;
 
+seesaw.lFootDistanceCenter      =  0.1025;
+seesaw.rFootDistanceCenter      = -0.1025;
+
 switch seesaw.kind
     case 1 %Spherical seesaw
         seesaw.iota      = seesaw.mass*inv(seesaw.inertia);
@@ -50,6 +53,7 @@ reg.pinvTol     = 1e-7;
 
 reg.pinvDamp    = 1e-2;
 reg.pinvDampA   = 1e-7;
+reg.pinvDampA   = 1e-4;
 reg.HessianQP   = 1e-5;
 model.seesaw    = seesaw;
 %    
@@ -78,7 +82,7 @@ gain.posturalDamp  = gain.posturalProp*0;
 gain.PAngularMomentum  = 0 ;
 gain.DAngularMomentum  = 1;
 
-gain.PCOM                 = diag([  10    20   20]);
+gain.PCOM                 = diag([  10    25   20]);
 gain.DCOM                 = 2*sqrt(gain.PCOM)/10;
 gain.ICOM                 = diag([  0    0   0]);
 
