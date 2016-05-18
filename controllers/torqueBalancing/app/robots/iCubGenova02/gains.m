@@ -7,7 +7,7 @@ CONFIG.SMOOTH_DES_COM      = 0;    % If equal to one, the desired streamed value
 CONFIG.SMOOTH_DES_Q        = 0;    % If equal to one, the desired streamed values 
                             % of the postural tasks are smoothed internally 
                             
-references.smoothingTimeComAndJoints    = 3.0;
+references.smoothingTimeMinJerkComDesQDes    = 3.0;
 
 sat.torque = 34;
 

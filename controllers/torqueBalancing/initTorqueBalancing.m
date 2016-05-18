@@ -27,8 +27,8 @@ clear; clc;
 
 % setenv('YARP_ROBOT_NAME','iCubGenova01');
 % setenv('YARP_ROBOT_NAME','iCubGenova02');
-setenv('YARP_ROBOT_NAME','iCubDarmstadt01');
-% setenv('YARP_ROBOT_NAME','icubGazeboSim');
+% setenv('YARP_ROBOT_NAME','iCubDarmstadt01');
+setenv('YARP_ROBOT_NAME','icubGazeboSim');
 
 % Simulation time in seconds
 CONFIG.SIMULATION_TIME     = inf;   
@@ -52,7 +52,7 @@ CONFIG.SIMULATION_TIME     = inf;
 SM.SM_TYPE                 = 'YOGA';   
 
 % CONFIG.SCOPES: if set to true, all visualizers for debugging are active
-CONFIG.SCOPES.ALL          = true;
+CONFIG.SCOPES.ALL          = false;
 % You can also activate only some specific debugging scopes
 CONFIG.SCOPES.BASE_EST_IMU = false;
 CONFIG.SCOPES.EXTWRENCHES  = false;
@@ -64,10 +64,6 @@ CONFIG.SCOPES.QP           = false;
 % CONFIG.CHECK_LIMITS: if set to true, the controller will stop as soon as 
 % any of the joint limit is touched. 
 CONFIG.CHECK_LIMITS        = false;
-
-
-CONFIG.ONSOFTCARPET        = true
-;
 
 
 %% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -86,10 +82,28 @@ WBT_modelName            = 'matlabTorqueBalancing';
 % left foot do not move. 
 CONFIG.USE_IMU4EST_BASE    = false;
 
-% CONFIG.YAW_IMU_FILTER: under develompent. Leave it equal to false
+% CONFIG.YAW_IMU_FILTER and CONFIG.PITCH_IMU_FILTER: when the flag
+% CONFIG.USE_IMU4EST_BASE = true, then the orientation of the floating base is
+% estimated as explained above. However, the foot is usually perpendicular
+% to gravity when the robot stands on flat surfaces, and rotation about the
+% gravity axis may be de to the IMU drift in estimating this angle. Hence,
+% when either of the flags CONFIG.YAW_IMU_FILTER or CONFIG.PITCH_IMU_FILTER
+% is set to true, then the yaw and/or pitch angles of the contact foot are
+% ignored and kept equal to the initial values.
 CONFIG.YAW_IMU_FILTER      = true;
 CONFIG.PITCH_IMU_FILTER    = true;
-CONFIG.CORRECT_NECK_IMU    = false;
+
+% CONFIG.CORRECT_NECK_IMU: when set euqal to true, the kineamtics from the
+% IMU and the contact foot is corrected by using the neck angles. If it set
+% equal to false, recall that the neck is assumed to be in (0,0,0)
+CONFIG.CORRECT_NECK_IMU    = true;
+
+
+% CONFIG.ONSOFTCARPET: the third year CoDyCo review meeting consisted also
+% of a validation scenarion in which the robot had to balance on a soft
+% carpet. Hence, when CONFIG.ONSOFTCARPET = true, other sets of gains are
+% loaded for the postural and CoM.
+CONFIG.ONSOFTCARPET        = false;
 
 % CONFIG.USE_QP_SOLVER: if set to true, a QP solver is used to account for 
 % inequality constraints of contact wrenches

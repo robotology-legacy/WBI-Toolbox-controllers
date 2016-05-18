@@ -79,7 +79,7 @@ function [w_H_b, CoMDes,qDes,constraints,impedances,kpCom,kdCom,currentState,joi
         if t > tSwitch + sm.DT % yoga
             state   = 4;
             tSwitch = t;
-            if sm.jumpYoga
+            if sm.skipYoga
                 state   = 5;
             end
         end
@@ -228,7 +228,7 @@ function [w_H_b, CoMDes,qDes,constraints,impedances,kpCom,kdCom,currentState,joi
         if t > tSwitch + sm.DT % yoga
             state   = 10;
             tSwitch = t;
-            if sm.jumpYoga
+            if sm.skipYoga
                 state   = 11;
             end
         end

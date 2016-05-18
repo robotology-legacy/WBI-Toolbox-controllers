@@ -16,7 +16,7 @@ WBT_wbiList = 'ROBOT_TORQUE_CONTROL_JOINTS_WITHOUT_PRONOSUP';
 dump.left_wrench_port = '/icubGazeboSim/left_foot/analog:o';
 dump.right_wrench_port = '/icubGazeboSim/right_foot/analog:o';
 
-references.smoothingTimeComAndJoints    = 3.0;
+references.smoothingTimeMinJerkComDesQDes    = 3.0;
 
 sat.torque = 34;
 

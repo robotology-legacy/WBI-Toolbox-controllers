@@ -18,14 +18,27 @@ if strcmpi(SM.SM_TYPE, 'YOGA')
     forceFrictionCoefficient     = 1/3;  
     
     %Smoothing time for time varying impedances
-    gain.SmoothingTimeImp              = 2;  
+    gain.SmoothingTimeGainScheduling              = 2;  
 
     %Smoothing time for time-varying constraints
     CONFIG.smoothingTimeTranDynamics  = 0.02;
 
-    gain.PCOM              = diag([10    50  10]); 
-    gain.ICOM              = diag([  0    0   0]);
-    gain.DCOM              = 2*sqrt(gain.PCOM);
+    gain.PCOM     =    [10    50  10  % state ==  1  TWO FEET BALANCING
+                        10    50  10  % state ==  2  COM TRANSITION TO LEFT 
+                        10    50  10  % state ==  3  LEFT FOOT BALANCING
+                        10    50  10  % state ==  4  YOGA LEFT FOOT 
+                        10    50  10  % state ==  5  PREPARING FOR SWITCHING 
+                        10    50  10  % state ==  6  LOOKING FOR CONTACT
+                        10    50  10  % state ==  7  TRANSITION TO INITIAL POSITION 
+                        10    50  10  % state ==  8  COM TRANSITION TO RIGHT FOOT
+                        10    50  10  % state ==  9  RIGHT FOOT BALANCING
+                        10    50  10  % state == 10  YOGA RIGHT FOOT 
+                        10    50  10  % state == 11  PREPARING FOR SWITCHING 
+                        10    50  10  % state == 12  LOOKING FOR CONTACT
+                        10    50  10];% state == 13  TRANSITION TO INITIAL POSITION
+    gain.PCOM  =  gain.PCOM;
+    gain.ICOM  = gain.PCOM*0;
+    gain.DCOM  = 2*sqrt(gain.PCOM);
 
     gain.PAngularMomentum  = 0.25 ;
     gain.DAngularMomentum  = 2*sqrt(gain.PAngularMomentum);
@@ -65,7 +78,7 @@ end
 %% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%                      
          
 %% %%%%%%%%%%%%%%%%    FINITE STATE MACHINE SPECIFIC PARAMETERS
-sm.jumpYoga                      = false;
+sm.skipYoga                      = false;
 sm.demoOnlyRightFoot             = false;
 sm.yogaAlsoOnRightFoot           = true;
 sm.yogaInLoop                    = false;
