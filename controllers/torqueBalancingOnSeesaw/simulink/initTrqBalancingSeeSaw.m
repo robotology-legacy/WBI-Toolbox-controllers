@@ -1,19 +1,16 @@
 clear;
-setenv('YARP_ROBOT_NAME','icubGazeboSim');
+% setenv('YARP_ROBOT_NAME','icubGazeboSim');
+setenv('YARP_ROBOT_NAME','iCubDarmstadt01');
 
 localName               = 'seesawBalancingController';
 Ts = 0.01;
-seesawKind              = 2;
 
 seesaw_inertial         = '/seesaw/inertial';
-CONFIG.CONTROLKIND      = 3;
+CONFIG.CONTROLKIND      = 1;
 
-CONFIG.USE_ROBOT_IMU4SEESAW = false;
-
-CONFIG.YAW_IMU_FILTER   = false;
 CONFIG.USE_QP_SOLVER    = true;
 CONFIG.SCOPES           = true;
-
+CONFIG.CORRECT_NECK_IMU = true;
 CONFIG.TS               = 0.01;
 
 CONFIG.CONSIDERSEESAWDYN  = 1; 
@@ -32,6 +29,13 @@ CONFIG.ON_GAZEBO     = false;
 
 PORTS.IMU       = '/icub/inertial';
 
+seesawKind              = 2;
 
 run(strcat('app/robots/',getenv('YARP_ROBOT_NAME'),'/gains.m')); 
 [ConstraintsMatrix,bVectorConstraints]= constraints(forceFrictionCoefficient,numberOfPoints,torsionalFrictionCoefficient,gain.footSize,fZmin);
+
+CONFIG.USE_ROBOT_IMU4SEESAW = true;
+
+CONFIG.YAW_IMU_FILTER   = true;
+
+CONFIG.PITCH_IMU_FILTER = true;

@@ -1,12 +1,11 @@
 ROBOT_DOF = 23;
-CONFIG.ON_GAZEBO     = true;
 
-PORTS.IMU   = '/icubGazeboSim/inertial';
+PORTS.IMU   = '/icub/inertial';
 
 
 WBT_wbiList = 'ROBOT_TORQUE_CONTROL_JOINTS_WITHOUT_PRONOSUP';
 
-sat.torque = 34;
+sat.torque = 6;
 
 
 ROBOT_DOF_FOR_SIMULINK = eye(ROBOT_DOF);
@@ -34,8 +33,11 @@ seesaw.mass      = 4.2;
 seesaw.top       = 0.002;% seesaw.delta - (seesaw.rho - seesaw.h) ;
 
 seesaw.kind      = seesawKind;
-seesaw.lFootDistanceCenter      =  0.1;
-seesaw.rFootDistanceCenter      = -0.1;
+seesaw.lFootDistanceCenter      =  0.07;
+seesaw.rFootDistanceCenter      = -0.07;
+
+seesaw.lFootDistanceCenter      =  0.1025;
+seesaw.rFootDistanceCenter      = -0.1025;
 
 switch seesaw.kind
     case 1 %Spherical seesaw
@@ -51,6 +53,7 @@ reg.pinvTol     = 1e-7;
 
 reg.pinvDamp    = 1e-2;
 reg.pinvDampA   = 1e-7;
+reg.pinvDampA   = 1e-4;
 reg.HessianQP   = 1e-5;
 model.seesaw    = seesaw;
 %    
@@ -72,19 +75,15 @@ noOscillationTime        = 0; % If DEMO_LEFT_AND_RIGHT = 1, the variable noOscil
                                % that the robot waits before starting the left-and-righ
 
 %%Gains and references
-gain.posturalProp  = diag([ 1   1   1   ...
-                            1   1   1   1     ...
-                            1   1   1   1     ...
-                            1   1   1   1     1     1,...
-                            1   1   1   1     1     1]);
+gain.posturalProp  = diag([ 10   10   20, 10   10    10    8, 10   10    10    8, 30   30   20    20    0 0, 30   50   30    60    0 0]);
                         
 gain.posturalDamp  = gain.posturalProp*0;
 
 gain.PAngularMomentum  = 0 ;
 gain.DAngularMomentum  = 1;
 
-gain.PCOM                 = diag([  1    1   1]);
-gain.DCOM                 = 2*sqrt(gain.PCOM)/50;
+gain.PCOM                 = diag([  10    25   20]);
+gain.DCOM                 = 2*sqrt(gain.PCOM)/10;
 gain.ICOM                 = diag([  0    0   0]);
 
 

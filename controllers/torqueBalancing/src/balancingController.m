@@ -17,12 +17,12 @@
 %% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 function [tauModel,Sigma,NA,f_HDot, ...
-              HessianMatrixQP1Foot,gradientQP1Foot,ConstraintsMatrixQP1Foot,bVectorConstraintsQp1Foot,...
-              HessianMatrixQP2Feet,gradientQP2Feet,ConstraintsMatrixQP2Feet,bVectorConstraintsQp2Feet,...
-              errorCoM,qTilde,f]    =  ...
+          HessianMatrixQP1Foot,gradientQP1Foot,ConstraintsMatrixQP1Foot,bVectorConstraintsQp1Foot,...
+          HessianMatrixQP2Feet,gradientQP2Feet,ConstraintsMatrixQP2Feet,bVectorConstraintsQp2Feet,...
+          errorCoM,qTilde,f]    =  ...
               balancingController(constraints,ROBOT_DOF_FOR_SIMULINK,ConstraintsMatrix,bVectorConstraints,...
               q,qDes,v, M, h , H,intHw,w_H_l_sole, w_H_r_sole, JL,JR, dJLv,dJRv, xcom,J_CoM, desired_x_dx_ddx_CoM,...
-              impedances,intErrorCoM,ki_int_qtilde,reg,gain)
+              gainsPCOM,gainsDCOM,impedances,intErrorCoM,ki_int_qtilde,reg,gain)
     %BALANCING CONTROLLER
 
     %% DEFINITION OF CONTROL AND DYNAMIC VARIABLES
@@ -32,9 +32,8 @@ function [tauModel,Sigma,NA,f_HDot, ...
     pos_rightFoot   = w_H_r_sole(1:3,4);
     w_R_r_sole      = w_H_r_sole(1:3,1:3);
 
-    gainsPCOM       = gain.PCOM;
-    gainsICOM       = gain.ICOM;
-    gainsDCOM       = gain.DCOM;
+    
+    gainsICOM       = zeros(3,1);
     dampings        = gain.dampings;
 
     ROBOT_DOF       = size(ROBOT_DOF_FOR_SIMULINK,1);
@@ -68,7 +67,7 @@ function [tauModel,Sigma,NA,f_HDot, ...
     qTilde          =  q-qDes;
     
     % Desired acceleration for the center of mass
-    xDDcomStar      = desired_x_dx_ddx_CoM(:,3) - gainsPCOM*(xcom - desired_x_dx_ddx_CoM(:,1)) - gainsICOM*intErrorCoM - gainsDCOM*(xDcom - desired_x_dx_ddx_CoM(:,2));
+    xDDcomStar      = desired_x_dx_ddx_CoM(:,3) - gainsPCOM.*(xcom - desired_x_dx_ddx_CoM(:,1)) - gainsICOM.*intErrorCoM - gainsDCOM.*(xDcom - desired_x_dx_ddx_CoM(:,2));
    
     % Application point of the contact force on the right foot w.r.t. CoM
     Pr              = pos_rightFoot - xcom; 
@@ -228,7 +227,7 @@ function [tauModel,Sigma,NA,f_HDot, ...
     % Unconstrained solution for the problem 1)
     f0                        = -pinvDamped(SigmaNA,reg.pinvDamp*1e-5)*(tauModel + Sigma*f_HDot);
     % Unconstrained contact wrenches
-    f                         = f_HDot + NA*f0; 
+    f                         = zeros(12,1);%pinvA*(HDotDes - gravityWrench) + NA*f0*constraints(1)*constraints(2); 
     % Error on the center of mass
     errorCoM                  = xcom - desired_x_dx_ddx_CoM(:,1);
 end

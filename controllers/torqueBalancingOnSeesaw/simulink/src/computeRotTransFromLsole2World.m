@@ -11,18 +11,18 @@ function [Qs,w_H_l_sole] = computeRotTransFromLsole2World(inertialSeesaw,seesaw)
     w_R_s  = rotz(inertialSeesaw(3))*roty(inertialSeesaw(2))*rotx(inertialSeesaw(1));
     % Quaternion associated with w_R_s
     Qs     = quaternionFromRotationMatrix(w_R_s);
-
-    % s_s_l = positionOfLeftFoot - seesawCoM w.r.t. seesaw frame
+ 
+    % s_s_l = positionOfLeftFoot - seesawCoM      w.r.t. seesaw frame
     s_s_l     = [0;  seesaw.lFootDistanceCenter; seesaw.top];
 
     % OC = centerOfRotationSeesaw - originOfWorld 
     OC = [ 0;
           -seesaw.rho*inertialSeesaw(1);
-           seesaw.rho]; 
+           seesaw.rho];
 
     % CL = positionOfLeftFoot - centerOfRotationSeesaw w.r.t. world frame
 
-    CL = w_R_s*(s_s_l-seesaw.delta*e3);    
+    CL = w_R_s*(s_s_l-seesaw.delta*e3);   
 
     % P_l = positionOfLeftFoot w.r.t. world frame
     P_l = OC + CL;
