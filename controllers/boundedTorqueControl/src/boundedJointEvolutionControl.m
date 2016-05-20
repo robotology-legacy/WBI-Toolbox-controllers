@@ -83,11 +83,13 @@ function [r, e, tau, ksi_tilda] = boundedJointEvolutionControl(ROBOT_DOF, model,
     tau = g - J_ksi\ (model.Kp * ksi_tilda + model.Kd * ksi_tildad + model.Ki * intKsi_tilda);
 
     % %Gravity compensation, including M*ksi_rdd and C*ksi_d
-    % J_ksi = diag(delta .* (1 - tanh(ksi).^2));
-    % J_ksid = diag( - 2 * delta .* tanh(ksi) .* (1 - tanh(ksi).^2) .* ksid);
-    % tau = M * J_ksi * ksi_rdd + (M * J_ksid + C * J_ksi) * ksi_rd + g - J_ksi' \ model.Kp * ksi_tilda - J_ksi' \ model.Kd * ksi_tildad - J_ksi' \ model.Ki * intKsi_tilda;
+    J_ksi = diag(delta .* (1 - tanh(ksi).^2));
+    J_ksid = diag( - 2 * delta .* tanh(ksi) .* (1 - tanh(ksi).^2) .* ksid);
+    J_ksi_r = diag(delta .* (1 - tanh(ksi_r).^2));
+    Jd_ksi_r = diag(- 2 * delta .* tanh(ksi_r) .* ( 1 - tanh(ksi_r).^2) .* ksi_rd);
+    tau = M * J_ksi_r * ksi_rdd + M * Jd_ksi_r * ksi_rd + C + g - J_ksi' \ model.Kp * ksi_tilda - J_ksi' \ model.Kd * ksi_tildad - J_ksi' \ model.Ki * intKsi_tilda;
 
-
+    
     %Gravity compensation, no variable change to ksi
     % tau = M * rdd + C * rd + g - J_ksi' \ model.Kp * e - J_ksi' \ model.Kd * ed;
 end

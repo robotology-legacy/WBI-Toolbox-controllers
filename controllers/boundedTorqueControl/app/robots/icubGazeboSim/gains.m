@@ -3,10 +3,10 @@ CONFIG.ON_GAZEBO = true;
 
 
 %Control gains
-K = 15;
+K = 3;
 model.Kp = K * eye(ROBOT_DOF);
-model.Kd = 0.05;
-model.Ki = 1 * model.Kp;
+model.Kd = 0.1;
+model.Ki = 0*0.5 * model.Kd;
 
 %knee joint limits [-2.1817,0.4014]
 model.qo = (-2.1817+0.4014)/2;
@@ -17,10 +17,10 @@ model.delta = (0.4014+2.1817)/2;
 
 %1. ramped reference trajectory, towards max or min joint limit
 % model.trajectory = 1;
-model.rmin = -1; %-2.1817 * 0.9; %minimum reference position
+model.rmin = -2.1817 * 0.9; %minimum reference position
 model.rmax = 0.4014 - 0.1; %maximum reference position
-model.p = -1; %-1; %ramp ratio, if negative go towards minimum
-model.r0 = -0.2; %initial reference position
+model.p = 1; %-1; %ramp ratio, if negative go towards minimum
+model.r0 = model.rmax; %-0.2; %initial reference position
 
 
 %2. sinusoidal reference trajectory
@@ -35,9 +35,9 @@ model.trajectory = 1;
 %% External Torque parameters
 %Apply an external torque Text at the motor, in the interval of time
 %from TextIniTime to TextEndTime.
-model.Text = 0*20 * model.p;
-model.TextIniTime = 2;
-model.TextEndTime = 2.5;
+model.Text = 0*10 * model.p;
+model.TextIniTime = 4;
+model.TextEndTime = 4.5;
 
 
 
