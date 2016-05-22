@@ -7,7 +7,7 @@ Model {
     NumRootInports	    0
     NumRootOutports	    0
     ParameterArgumentNames  ""
-    ComputedModelVersion    "1.3075"
+    ComputedModelVersion    "1.3076"
     NumModelReferences	    0
     NumTestPointedSignals   0
   }
@@ -52,7 +52,7 @@ Model {
 	Dimension		2
 	Object {
 	  $ObjectID		  5
-	  IsActive		  [1]
+	  IsActive		  [0]
 	  ViewObjType		  "SimulinkTopLevel"
 	  LoadSaveID		  "0"
 	  Extents		  [1246.0, 600.0]
@@ -61,7 +61,7 @@ Model {
 	}
 	Object {
 	  $ObjectID		  6
-	  IsActive		  [0]
+	  IsActive		  [1]
 	  ViewObjType		  "SimulinkSubsys"
 	  LoadSaveID		  "2087"
 	  Extents		  [1246.0, 600.0]
@@ -78,9 +78,9 @@ Model {
   ModifiedByFormat	  "%<Auto>"
   LastModifiedBy	  "DanielePucci"
   ModifiedDateFormat	  "%<Auto>"
-  LastModifiedDate	  "Sun May 22 12:57:19 2016"
-  RTWModifiedTimeStamp	  385822540
-  ModelVersionFormat	  "1.%<AutoIncrement:3075>"
+  LastModifiedDate	  "Sun May 22 13:47:04 2016"
+  RTWModifiedTimeStamp	  385824796
+  ModelVersionFormat	  "1.%<AutoIncrement:3076>"
   ConfigurationManager	  "none"
   SampleTimeColors	  off
   SampleTimeAnnotations	  off
@@ -4479,7 +4479,7 @@ Model {
 	      BlockType		      Constant
 	      Name		      "Constant1"
 	      SID		      "2170"
-	      Position		      [425, 239, 480, 251]
+	      Position		      [425, 234, 480, 246]
 	      ZOrder		      543
 	      ShowName		      off
 	      Value		      "zeros(6,1)"
@@ -4553,7 +4553,7 @@ Model {
 	      Name		      "Mux2"
 	      SID		      "2178"
 	      Ports		      [2, 1]
-	      Position		      [505, 216, 510, 254]
+	      Position		      [505, 218, 510, 247]
 	      ZOrder		      542
 	      ShowName		      off
 	      Inputs		      "2"
@@ -12096,7 +12096,7 @@ Model {
 	      BlockType		      Outport
 	      Name		      "impedances"
 	      SID		      "2237"
-	      Position		      [655, 300, 690, 320]
+	      Position		      [655, 295, 690, 315]
 	      ZOrder		      545
 	      Port		      "4"
 	      IconDisplay	      "Port number"
@@ -12150,7 +12150,7 @@ Model {
 	      BlockType		      Outport
 	      Name		      "kdCom"
 	      SID		      "3318"
-	      Position		      [655, 370, 690, 390]
+	      Position		      [655, 375, 690, 395]
 	      ZOrder		      691
 	      Port		      "10"
 	      IconDisplay	      "Port number"
@@ -12159,7 +12159,7 @@ Model {
 	      BlockType		      Outport
 	      Name		      "w_H_b"
 	      SID		      "2241"
-	      Position		      [625, 182, 655, 198]
+	      Position		      [625, 187, 655, 203]
 	      ZOrder		      578
 	      Port		      "11"
 	      IconDisplay	      "Port number"
@@ -12271,6 +12271,7 @@ Model {
 	      }
 	      Branch {
 		ZOrder			22
+		Labels			[0, 0]
 		DstBlock		"nu"
 		DstPort			3
 	      }
@@ -12298,17 +12299,17 @@ Model {
 	      ZOrder		      28
 	      SrcBlock		      "stateMachineFCN"
 	      SrcPort		      1
-	      Points		      [0, -5; 178, 0]
+	      Points		      [178, 0]
 	      Branch {
-		ZOrder			29
-		Points			[0, 75]
-		DstBlock		"nu"
-		DstPort			2
-	      }
-	      Branch {
-		ZOrder			30
+		ZOrder			90
 		DstBlock		"w_H_b"
 		DstPort			1
+	      }
+	      Branch {
+		ZOrder			29
+		Points			[0, 70]
+		DstBlock		"nu"
+		DstPort			2
 	      }
 	    }
 	    Line {
@@ -17418,10 +17419,6 @@ Model {
 	  }
 	}
 	Line {
-	  FontName		  "Helvetica"
-	  FontSize		  9
-	  FontWeight		  "normal"
-	  FontAngle		  "normal"
 	  ZOrder		  97
 	  SrcBlock		  "YARP READ w_H_b"
 	  SrcPort		  1
@@ -17429,10 +17426,6 @@ Model {
 	  DstPort		  1
 	}
 	Line {
-	  FontName		  "Helvetica"
-	  FontSize		  9
-	  FontWeight		  "normal"
-	  FontAngle		  "normal"
 	  ZOrder		  98
 	  SrcBlock		  "MATLAB Function"
 	  SrcPort		  1
@@ -17441,10 +17434,6 @@ Model {
 	  DstPort		  1
 	}
 	Line {
-	  FontName		  "Helvetica"
-	  FontSize		  9
-	  FontWeight		  "normal"
-	  FontAngle		  "normal"
 	  ZOrder		  99
 	  SrcBlock		  "Selector2"
 	  SrcPort		  1
@@ -17480,10 +17469,6 @@ Model {
 	  }
 	}
 	Line {
-	  FontName		  "Helvetica"
-	  FontSize		  9
-	  FontWeight		  "normal"
-	  FontAngle		  "normal"
 	  ZOrder		  104
 	  SrcBlock		  "YARP READ w_H_b"
 	  SrcPort		  2
@@ -17492,10 +17477,6 @@ Model {
 	  DstPort		  2
 	}
 	Line {
-	  FontName		  "Helvetica"
-	  FontSize		  9
-	  FontWeight		  "normal"
-	  FontAngle		  "normal"
 	  ZOrder		  105
 	  SrcBlock		  "MATLAB Function"
 	  SrcPort		  2
@@ -17572,10 +17553,6 @@ Model {
 	}
 	Line {
 	  Name			  "CoMRefs"
-	  FontName		  "Helvetica"
-	  FontSize		  9
-	  FontWeight		  "normal"
-	  FontAngle		  "normal"
 	  ZOrder		  188
 	  Labels		  [1, 1]
 	  SrcBlock		  "Demux"
@@ -17609,10 +17586,6 @@ Model {
 	}
 	Line {
 	  Name			  "qDes"
-	  FontName		  "Helvetica"
-	  FontSize		  9
-	  FontWeight		  "normal"
-	  FontAngle		  "normal"
 	  ZOrder		  189
 	  Labels		  [1, 1]
 	  SrcBlock		  "Demux"
@@ -25322,8 +25295,6 @@ Stateflow {
     firstJunction	    34
     viewObj		    28
     machine		    1
-    subviewS {
-    }
     ssIdHighWaterMark	    7
     decomposition	    CLUSTER_CHART
     type		    EML_CHART
@@ -27755,7 +27726,10 @@ Stateflow {
     firstTransition	    177
     firstJunction	    176
     viewObj		    153
+    visible		    1
     machine		    1
+    subviewS {
+    }
     ssIdHighWaterMark	    83
     decomposition	    CLUSTER_CHART
     type		    EML_CHART
