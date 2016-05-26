@@ -39,7 +39,8 @@ CONFIG.SIMULATION_TIME     = inf;
 %% DO NOT MODIFY THE FOLLOWING VARIABLES, THEY ARE AUTOMATICALLY 
 %% CHANGED WHEN SIMULATING THE ROBOT ON GAZEBO, 
 
-WBT_wbiList   = 'SINGLE_JOINT';
+% WBT_wbiList   = 'SINGLE_JOINT';
+WBT_wbiList = 'ROBOT_TORQUE_CONTROL_1JOINT';
 WBT_modelName = 'impedance';
 
 CONFIG.Ts                = 0.01; %  Controller period [s]

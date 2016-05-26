@@ -7,7 +7,7 @@ Model {
     NumRootInports	    0
     NumRootOutports	    0
     ParameterArgumentNames  ""
-    ComputedModelVersion    "1.470"
+    ComputedModelVersion    "1.473"
     NumModelReferences	    0
     NumTestPointedSignals   0
   }
@@ -66,7 +66,7 @@ Model {
 	  LoadSaveID		  "41"
 	  Extents		  [1273.0, 593.0]
 	  ZoomFactor		  [0.8]
-	  Offset		  [-336.46392903962374, -101.05596537652468]
+	  Offset		  [-292.90916981501294, -54.5]
 	}
 	PropName		"EditorsInfo"
       }
@@ -78,9 +78,9 @@ Model {
   ModifiedByFormat	  "%<Auto>"
   LastModifiedBy	  "marie"
   ModifiedDateFormat	  "%<Auto>"
-  LastModifiedDate	  "Fri May 20 14:46:24 2016"
-  RTWModifiedTimeStamp	  385656384
-  ModelVersionFormat	  "1.%<AutoIncrement:470>"
+  LastModifiedDate	  "Thu May 26 13:58:01 2016"
+  RTWModifiedTimeStamp	  386171881
+  ModelVersionFormat	  "1.%<AutoIncrement:473>"
   ConfigurationManager	  "none"
   SampleTimeColors	  off
   SampleTimeAnnotations	  off
@@ -952,7 +952,7 @@ Model {
     ShowPageBoundaries	    off
     ZoomFactor		    "84"
     ReportName		    "simulink-default.rpt"
-    SIDHighWatermark	    "284"
+    SIDHighWatermark	    "286"
     Block {
       BlockType		      Sum
       Name		      "Add"
@@ -1076,7 +1076,7 @@ Model {
 	TiledPageScale		1
 	ShowPageBoundaries	off
 	ZoomFactor		"100"
-	SIDHighWatermark	"284"
+	SIDHighWatermark	"286"
 	Block {
 	  BlockType		  Inport
 	  Name			  "t"
@@ -1432,7 +1432,7 @@ Model {
 	TiledPageScale		1
 	ShowPageBoundaries	off
 	ZoomFactor		"100"
-	SIDHighWatermark	"284"
+	SIDHighWatermark	"286"
 	Block {
 	  BlockType		  Inport
 	  Name			  "qmin"
@@ -1765,7 +1765,7 @@ Model {
 	TiledPageScale		1
 	ShowPageBoundaries	off
 	ZoomFactor		"100"
-	SIDHighWatermark	"284"
+	SIDHighWatermark	"286"
 	Block {
 	  BlockType		  Inport
 	  Name			  "t"
@@ -1856,8 +1856,8 @@ Model {
       BlockType		      SubSystem
       Name		      "get h (0 vb)"
       SID		      "41"
-      Ports		      [3, 3]
-      Position		      [860, 704, 935, 766]
+      Ports		      [2, 3]
+      Position		      [860, 703, 935, 767]
       ZOrder		      750
       ShowName		      off
       RequestExecContextInheritance off
@@ -1887,20 +1887,11 @@ Model {
 	}
 	Block {
 	  BlockType		  Inport
-	  Name			  "dqj"
-	  SID			  "43"
-	  Position		  [-40, 158, -10, 172]
-	  ZOrder		  709
-	  Port			  "2"
-	  IconDisplay		  "Port number"
-	}
-	Block {
-	  BlockType		  Inport
 	  Name			  "J_xid"
 	  SID			  "255"
 	  Position		  [-40, 543, -10, 557]
 	  ZOrder		  737
-	  Port			  "3"
+	  Port			  "2"
 	  IconDisplay		  "Port number"
 	}
 	Block {
@@ -2179,25 +2170,25 @@ Model {
 	  }
 	}
 	Line {
-	  SrcBlock		  "dqj"
-	  SrcPort		  1
-	  Points		  [248, 0]
-	  Branch {
-	    Points		    [270, 0; 0, -55]
-	    DstBlock		    "Get Bias Forces1"
-	    DstPort		    4
-	  }
-	  Branch {
-	    Points		    [0, 165]
-	    DstBlock		    "Gain1"
-	    DstPort		    1
-	  }
-	}
-	Line {
 	  SrcBlock		  "J_xid"
 	  SrcPort		  1
-	  DstBlock		  "Get Bias Forces3"
-	  DstPort		  4
+	  Points		  [225, 0]
+	  Branch {
+	    Points		    [0, -220]
+	    Branch {
+	      DstBlock		      "Gain1"
+	      DstPort		      1
+	    }
+	    Branch {
+	      Points		      [0, -220]
+	      DstBlock		      "Get Bias Forces1"
+	      DstPort		      4
+	    }
+	  }
+	  Branch {
+	    DstBlock		    "Get Bias Forces3"
+	    DstPort		    4
+	  }
 	}
       }
       RTWSystemCode	      "Auto"
@@ -2248,7 +2239,7 @@ Model {
 	TiledPageScale		1
 	ShowPageBoundaries	off
 	ZoomFactor		"100"
-	SIDHighWatermark	"284"
+	SIDHighWatermark	"286"
 	Block {
 	  BlockType		  Inport
 	  Name			  "qmin"
@@ -2396,7 +2387,17 @@ Model {
 	axes3			"%<SignalLabel>"
 	axes4			"%<SignalLabel>"
       }
-      Location		      [60 109 730 774]
+      List {
+	ListType		ScopeGraphics
+	FigureColor		"[0.156862745098039 0.156862745098039 0.156862745098039]"
+	AxesColor		"[0 0 0]"
+	AxesTickColor		"[0.686274509803922 0.686274509803922 0.686274509803922]"
+	LineColors		"[1 1 0;1 0 1;0 1 1;1 0 0;0 1 0;0 0 1]"
+	LineStyles		"-|-|-|-|-|-"
+	LineWidths		"[0.5 0.5 0.5 0.5 0.5 0.5]"
+	MarkerStyles		"none|none|none|none|none|none"
+      }
+      Location		      [75 144 745 809]
     }
     Block {
       BlockType		      Gain
@@ -2622,7 +2623,7 @@ Model {
       Branch {
 	Points			[0, 40]
 	Branch {
-	  Points		  [0, 60]
+	  Points		  [0, 65]
 	  DstBlock		  "get h (0 vb)"
 	  DstPort		  1
 	}
@@ -2635,16 +2636,9 @@ Model {
     Line {
       SrcBlock		      "Get Estimate5"
       SrcPort		      1
-      Points		      [88, 0]
-      Branch {
-	Points			[0, -100]
-	DstBlock		"boundedTorqueControlFCN"
-	DstPort			4
-      }
-      Branch {
-	DstBlock		"get h (0 vb)"
-	DstPort			2
-      }
+      Points		      [88, 0; 0, -100]
+      DstBlock		      "boundedTorqueControlFCN"
+      DstPort		      4
     }
     Line {
       SrcBlock		      "Get M"
@@ -2821,9 +2815,9 @@ Model {
     Line {
       SrcBlock		      "getJ_xidFCN"
       SrcPort		      1
-      Points		      [114, 0; 0, -95]
+      Points		      [114, 0; 0, -100]
       DstBlock		      "get h (0 vb)"
-      DstPort		      3
+      DstPort		      2
     }
     Line {
       SrcBlock		      "get h (0 vb)"
@@ -2884,8 +2878,8 @@ Stateflow {
     eml {
       isEML		      1
       script		      "function [r, e, tau, ksi_tilda] = boundedJointEvolutionControlFCN(ROBOT_DOF, model, qmin, qmax, q"
-      ", qd, M, h, g, C, refTrajectory, intKsi_tilda)\n\n\n[r, e, tau, ksi_tilda] = boundedJointEvolutionControl(ROBOT_"
-      "DOF, model, qmin, qmax, q, qd, M, h, g, C, refTrajectory, intKsi_tilda);\n\n\n"
+      ", qd, M, h, g, C, refTrajectory, intKsi_tilda)\n\n\n[~, ~, r, e, tau, ksi_tilda] = boundedJointEvolutionControl("
+      "ROBOT_DOF, model, qmin, qmax, q, qd, M, h, g, C, refTrajectory, intKsi_tilda);\n\n\n"
       editorLayout	      "100 M4x1[10 5 700 500]"
     }
   }

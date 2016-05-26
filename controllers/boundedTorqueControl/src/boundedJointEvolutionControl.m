@@ -16,7 +16,7 @@
 %  */
 %% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-function [r, e, tau, ksi_tilda] = boundedJointEvolutionControl(ROBOT_DOF, model, qmin, qmax, q, qd, M, h, g, C, refTrajectory, intKsi_tilda)
+function [ksi, ksid, r, e, tau, ksi_tilda] = boundedJointEvolutionControl(ROBOT_DOF, model, qmin, qmax, q, qd, M, h, g, C, refTrajectory, intKsi_tilda)
     %Computed torque control
 
     %Input:
@@ -75,8 +75,8 @@ function [r, e, tau, ksi_tilda] = boundedJointEvolutionControl(ROBOT_DOF, model,
     %% Control schemes: uncomment the one you wish to use
 
     % %Computed torque
-    % ksiddstar = ksi_rdd - model.Kp * ksi_tilda - model.Kd * ksi_tildad - model.Ki * intKsi_tilda;
-    % tau = M * ksiddstar + h; % h = g + C * qd;
+%     ksiddstar = ksi_rdd - model.KpCTC * ksi_tilda - model.KdCTC * ksi_tildad - model.KiCTC * intKsi_tilda;
+%     tau = M * ksiddstar + h; % h = g + C * qd;
 
     % %Gravity compensation, neglecting M*ksi_rdd and C*ksi_d
     J_ksi = diag(delta .* (1 - tanh(ksi).^2));
@@ -87,7 +87,7 @@ function [r, e, tau, ksi_tilda] = boundedJointEvolutionControl(ROBOT_DOF, model,
     J_ksid = diag( - 2 * delta .* tanh(ksi) .* (1 - tanh(ksi).^2) .* ksid);
     J_ksi_r = diag(delta .* (1 - tanh(ksi_r).^2));
     Jd_ksi_r = diag(- 2 * delta .* tanh(ksi_r) .* ( 1 - tanh(ksi_r).^2) .* ksi_rd);
-    tau = M * J_ksi_r * ksi_rdd + M * Jd_ksi_r * ksi_rd + C + g - J_ksi' \ model.Kp * ksi_tilda - J_ksi' \ model.Kd * ksi_tildad - J_ksi' \ model.Ki * intKsi_tilda;
+%     tau = M * J_ksi_r * ksi_rdd + M * Jd_ksi_r * ksi_rd + C + g - J_ksi' \ model.Kp * ksi_tilda - J_ksi' \ model.Kd * ksi_tildad - J_ksi' \ model.Ki * intKsi_tilda;
 
     
     %Gravity compensation, no variable change to ksi
