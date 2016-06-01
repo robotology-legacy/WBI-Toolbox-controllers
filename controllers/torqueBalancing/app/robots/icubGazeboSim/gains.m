@@ -26,7 +26,8 @@ ROBOT_DOF_FOR_SIMULINK = eye(ROBOT_DOF);
 gain.qTildeMax         = 20*pi/180;
 postures = 0;  
 
-gain.SmoothingTimeImp  = 1;  
+gain.SmoothingTimeImp  = 1; 
+gain.SmoothingTimeGainScheduling = 0.02;
 
 %%
 %           PARAMETERS FOR TWO FEET ONE GROUND
