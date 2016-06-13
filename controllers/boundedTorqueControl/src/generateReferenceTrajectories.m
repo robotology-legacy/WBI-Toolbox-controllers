@@ -46,5 +46,5 @@ function refTrajectory  = generateReferenceTrajectories(t, model)
             r = 0; rd = 0; rdd = 0;
     end
 
-    refTrajectory = [r; rd; rdd];
+    refTrajectory = [r, rd, rdd];
 end

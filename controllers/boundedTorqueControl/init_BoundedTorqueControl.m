@@ -40,10 +40,10 @@ CONFIG.SIMULATION_TIME     = inf;
 %% CHANGED WHEN SIMULATING THE ROBOT ON GAZEBO, 
 
 % WBT_wbiList   = 'SINGLE_JOINT';
-WBT_wbiList = 'ROBOT_TORQUE_CONTROL_1JOINT';
+WBT_wbiList   = 'ROBOT_TORQUE_CONTROL_1JOINT';
 WBT_modelName = 'impedance';
 
-CONFIG.Ts                = 0.01; %  Controller period [s]
+CONFIG.Ts     = 0.01; %  Controller period [s]
 
 run(strcat('app/robots/',getenv('YARP_ROBOT_NAME'),'/gains.m')); 
 addpath('./src/')

@@ -1,12 +1,12 @@
 ROBOT_DOF = 1;
+ROBOT_DOF_SIM = eye(ROBOT_DOF);
 CONFIG.ON_GAZEBO = true;
 
 
 %Control gains
 K = 3.5;
-model.Kp = K * eye(ROBOT_DOF);
-model.Kd = 0.05;
-model.Ki = 0* 0.5 * model.Kd;
+model.Kp = K * ones(ROBOT_DOF,1);
+model.Kd = 2*sqrt(model.Kp);
 
 % %Control gains for computed torque control
 % %Uncomment if using this control
@@ -16,7 +16,7 @@ model.Ki = 0* 0.5 * model.Kd;
 % model.KiCTC = 1 * model.KdCTC;
 
 %knee joint limits [-2.1817,0.4014]
-model.qo = (-2.1817+0.4014)/2;
+model.qo    = (-2.1817+0.4014)/2;
 model.delta = (0.4014+2.1817)/2;
 
 
