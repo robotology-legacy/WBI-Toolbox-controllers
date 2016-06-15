@@ -16,7 +16,7 @@
 %  */
 %% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-function [xi, xiDot, jointReference, jointError, tau, xiTilde] =  boundedJointEvolutionControl(model, qmin, qmax, jointPositions, jointVelocities, M, g, CJXiDotDes, refTrajectory, intKsi_tilda)
+function [xi, xiDot, jointReference, jointError, tau, xiTilde] =  boundedJointEvolutionControl(model, qmin, qmax, jointPositions, jointVelocities, M, g, CJXiDotDes,CrDot,  refTrajectory, intKsi_tilda)
     %Computed torque control
 
     [jointReference,jointReferenceDot,jointReferenceDDot]       = getReferences(refTrajectory);
@@ -34,6 +34,11 @@ function [xi, xiDot, jointReference, jointError, tau, xiTilde] =  boundedJointEv
 
     tau                  = g + M*J*xiDDotDes + (M*JDot*xiDotDes + CJXiDotDes) - model.Kp.*xiTilde - model.Kd.*xiTildeDot; 
     
-    jointError           = jointPositions - jointReference;
-    
+    jointError           = jointPositions  - jointReference;
+
+    if model.noVariableChange
+        jointErrorDot    = jointVelocities - jointReferenceDot; 
+        tau              = g + M*jointReferenceDDot + CrDot - model.Kp.*jointError - model.Kd.*jointErrorDot; 
+    end
+        
 end
