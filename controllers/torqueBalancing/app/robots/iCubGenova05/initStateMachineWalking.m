@@ -17,10 +17,10 @@ if strcmpi(SM.SM_TYPE, 'WALKING')
     gain.PAngularMomentum  = 1 ;
 
     %                   %   TORSO  %%      LEFT ARM   %%      RIGHT ARM   %%         LEFT LEG            %%         RIGHT LEG           %% 
-    gain.impedances  = [10   10   20, 10   10    10    8, 10   10    10    8, 30   30   20    20     10  10, 30   50   30    60      5   5    % state ==  1  WATING FOR REFERENCES
-                        10   10   20, 10   10    10    8, 10   10    10    8, 30   30   20    20     10  10, 30   50   30    60      5   5    % state ==  2  TWO FEET BALANCING
-                        10   10   20, 10   10    10    8, 10   10    10    8, 30   30   20    20     10  10, 30   50   30    60      5   5    % state ==  3  LEFT FOOT BALANCING
-                        10   10   20, 10   10    10    8, 10   10    10    8, 30   50   30    60      5   5, 30   30   20    20     10  10];  % state ==  4  RIGHT FOOT BALANCING
+    gain.impedances  = [10   10   20, 10   10    10    8 0, 10   10    10    8 0, 30   30   20    20     10  10, 30   50   30    60      5   5    % state ==  1  WATING FOR REFERENCES
+                        10   10   20, 10   10    10    8 0, 10   10    10    8 0, 30   30   20    20     10  10, 30   50   30    60      5   5    % state ==  2  TWO FEET BALANCING
+                        10   10   20, 10   10    10    8 0, 10   10    10    8 0, 30   30   20    20     10  10, 30   50   30    60      5   5    % state ==  3  LEFT FOOT BALANCING
+                        10   10   20, 10   10    10    8 0, 10   10    10    8 0, 30   50   30    60      5   5, 30   30   20    20     10  10];  % state ==  4  RIGHT FOOT BALANCING
                         
 
 gain.dampings           = 0.0*sqrt(gain.impedances(4,:));
