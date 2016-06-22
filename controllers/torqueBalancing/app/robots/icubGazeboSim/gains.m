@@ -136,6 +136,6 @@ fZmin                        = 10;
 reg.pinvTol     = 1e-5;
 reg.pinvDamp    = 0.01;
 reg.pinvDampVb  = 1e-7;
-reg.HessianQP   = 1e-7;
+reg.HessianQP   = 1e-5;
 reg.impedances  = 0.1;
 reg.dampings    = 0;
