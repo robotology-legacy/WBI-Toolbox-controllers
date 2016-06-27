@@ -34,7 +34,7 @@ gain.SmoothingTimeGainScheduling = 0.02;
 if (sum(CONFIG.LEFT_RIGHT_FOOT_IN_CONTACT) == 2)
     gain.PCOM                 = diag([50    50  50]);
     gain.ICOM                 = diag([  0    0   0]);
-    gain.DCOM                 = 2*sqrt(gain.PCOM);
+    gain.DCOM                 = 0*sqrt(gain.PCOM);
 
     gain.PAngularMomentum     = 10 ;
     gain.DAngularMomentum     = 2*sqrt(gain.PAngularMomentum);
