@@ -20,7 +20,7 @@
 %r, rd, rdd: reference trajectory
 %knee joint limits -2.1817:0.4014
 
-function refTrajectory  = generateReferenceTrajectories(t, model)
+function refTrajectory  = generateReferenceTrajectories(qMin,qMax,t, model)
     switch model.trajectory
         case 1
             %Ramped reference trajectory towards minimum/maximum joint limit
@@ -38,13 +38,14 @@ function refTrajectory  = generateReferenceTrajectories(t, model)
 
         case 2
             %Sinusoidal reference trajectory
-            r = model.rAmplitude * sin(model.rFrequency * t) + model.rbias;
-            rd = model.rFrequency * model.rAmplitude * cos(model.rFrequency * t);
-            rdd = - model.rFrequency^2 * model.rAmplitude * sin(model.rFrequency * t);
+            amplitude  = ((qMax-qMin)/2)/model.ratioAmplitude;
+            r          =    amplitude * sin( 2 * pi * model.rFrequency * t) + (qMax+qMin)/2;
+            rd         =    2 * pi * model.rFrequency * amplitude * cos(2 * pi * model.rFrequency * t);
+            rdd        = - (2 * pi * model.rFrequency)^2 * amplitude * sin(2 * pi * model.rFrequency * t);
 
         otherwise
             r = 0; rd = 0; rdd = 0;
     end
 
-    refTrajectory = [r, rd, rdd];
+    refTrajectory = ones(length(qMin),1)*[r, rd, rdd];
 end

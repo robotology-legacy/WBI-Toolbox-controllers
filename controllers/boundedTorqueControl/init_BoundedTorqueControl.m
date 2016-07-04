@@ -28,16 +28,18 @@ clear; clc;
 % setenv('YARP_ROBOT_NAME','iCubGenova01');
 % setenv('YARP_ROBOT_NAME','iCubGenova02');
 % setenv('YARP_ROBOT_NAME','iCubDarmstadt01');
-setenv('YARP_ROBOT_NAME','icubGazeboSim');
+% setenv('YARP_ROBOT_NAME','icubGazeboSim');
+setenv('YARP_ROBOT_NAME','iCubGenova05');
 
 % Simulation time in seconds
-CONFIG.SIMULATION_TIME     = inf;   
+CONFIG.SIMULATION_TIME     = 50;   
 
 %% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % CONFIGURATIONS COMPLETED: loading gains and parameters for the specific robot
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% DO NOT MODIFY THE FOLLOWING VARIABLES, THEY ARE AUTOMATICALLY 
 %% CHANGED WHEN SIMULATING THE ROBOT ON GAZEBO, 
+CONFIG.ON_GAZEBO = false;
 
 % WBT_wbiList   = 'SINGLE_JOINT';
 WBT_wbiList   = 'ROBOT_TORQUE_CONTROL_1JOINT';
@@ -49,5 +51,4 @@ run(strcat('app/robots/',getenv('YARP_ROBOT_NAME'),'/gains.m'));
 addpath('./src/')
 addpath('../utilityMatlabFunctions/')
 
-CONFIG.ON_GAZEBO = false;
 

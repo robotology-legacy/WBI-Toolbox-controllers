@@ -123,7 +123,7 @@ function [tauModel,Sigma,NA,f_HDot, ...
     % versions of the controller
     impedances      = diag(impedances)*pinv(NLMbar,reg.pinvTol) + reg.impedances*eye(ROBOT_DOF);
     dampings        = diag(dampings)*pinv(NLMbar,reg.pinvTol)   + reg.dampings*eye(ROBOT_DOF); 
-    
+  
     %% QP PARAMETERS FOR TWO FEET STANDING
     % In the case the robot stands on two feet, the control objective is 
     % the minimization of the joint torques through the redundancy of the 
@@ -180,7 +180,7 @@ function [tauModel,Sigma,NA,f_HDot, ...
     f_HDot          = pinvA*(HDotDes - gravityWrench)*constraints(1)*constraints(2);
    
     SigmaNA         = Sigma*NA;
-  
+   
     % The optimization problem 1) seeks for the redundancy of the external
     % wrench that minimize joint torques. Recall that the contact wrench can 
     % be written as:

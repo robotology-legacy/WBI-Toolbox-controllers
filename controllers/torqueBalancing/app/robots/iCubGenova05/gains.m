@@ -1,4 +1,4 @@
-ROBOT_DOF = 23;
+ROBOT_DOF = 25;
 
 PORTS.WBDT_LEFTLEG_EE  = '/wholeBodyDynamics/left_leg/cartesianEndEffectorWrench:o';
 PORTS.WBDT_RIGHTLEG_EE = '/wholeBodyDynamics/right_leg/cartesianEndEffectorWrench:o';
@@ -37,8 +37,8 @@ if (sum(CONFIG.LEFT_RIGHT_FOOT_IN_CONTACT) == 2)
 
     impTorso            = [10   10   20
                             0    0    0]; 
-    impArms             = [10   10    10    8   
-                            0    0     0    0   ];
+    impArms             = [10   10    10    8  0 
+                            0    0     0    0  0 ];
                         
     impLeftLeg          = [ 30   30   30    60     10  10
                              0    0    0     0      0   0]; 
@@ -48,7 +48,7 @@ if (sum(CONFIG.LEFT_RIGHT_FOOT_IN_CONTACT) == 2)
     
                          
     intTorso            = [0   0    0]; 
-    intArms             = [0   0    0    0  ];
+    intArms             = [0   0    0    0  0];
                         
     intLeftLeg          = [0   0    0    0    0  0]; 
 
@@ -72,7 +72,7 @@ if (sum(CONFIG.LEFT_RIGHT_FOOT_IN_CONTACT) == 1)
 
     
     intTorso            = [0   0    0]; 
-    intArms             = [0   0    0    0  ];
+    intArms             = [0   0    0    0  0];
                         
     intLeftLeg          = [0   0    0    0    0  0]; 
 
@@ -82,8 +82,8 @@ if (sum(CONFIG.LEFT_RIGHT_FOOT_IN_CONTACT) == 1)
     
     impTorso            = [20   20   30
                             0    0    0]*scalingImp; 
-    impArms             = [15   15    15    8   
-                            0    0     0    0   ]*scalingImp;
+    impArms             = [15   15    15    8  0 
+                            0    0     0    0  0 ]*scalingImp;
                         
     impLeftLeg          = [ 30   30   30   120     10  10
                              0    0    0     0      0   0]*scalingImp; 

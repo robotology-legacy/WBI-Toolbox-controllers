@@ -1,13 +1,12 @@
 ROBOT_DOF = 1;
 ROBOT_DOF_SIM = eye(ROBOT_DOF);
-CONFIG.ON_GAZEBO = true;
 
-model.noVariableChange = true;
+model.variableChange = true;
 
 %Control gains
-K = 2;
+K = 5;
 model.Kp = K * ones(ROBOT_DOF,1);
-model.Kd = 2*sqrt(model.Kp);
+model.Kd = 2*sqrt(model.Kp)/4;
 
 % %Control gains for computed torque control
 % %Uncomment if using this control
@@ -33,8 +32,8 @@ model.r0 = model.rmax; %-0.2; -10.36 * pi/180; % %initial reference position
 
 %2. sinusoidal reference trajectory
 % model.trajectory = 2;
-model.ratioAmplitude = 1.1; % 0.95;
-model.rFrequency     = 0.1;
+model.ratioAmplitude = 3e5; % 0.95;
+model.rFrequency     = 0.2;
 model.rbias          = model.qo;
 
 %choose which trajectory from the above
@@ -43,7 +42,7 @@ model.trajectory = 2;
 %% External Torque parameters
 %Apply an external torque Text at the motor, in the interval of time
 %from TextIniTime to TextEndTime.
-model.Text = 20 * model.p;
+model.Text = 0 * model.p;
 model.TextIniTime = 5;
 model.TextEndTime = 5.5;
 

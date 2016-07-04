@@ -1,4 +1,4 @@
-ROBOT_DOF = 23;
+ROBOT_DOF = 25;
 CONFIG.ON_GAZEBO = true;
 PORTS.IMU = '/icubGazeboSim/inertial';
 
@@ -11,7 +11,7 @@ CONFIG.SMOOTH_DES_COM      = 0;    % If equal to one, the desired streamed value
 CONFIG.SMOOTH_DES_Q        = 0;    % If equal to one, the desired streamed values 
                             % of the postural tasks are smoothed internally 
 
-WBT_wbiList = 'ROBOT_TORQUE_CONTROL_JOINTS_WITHOUT_PRONOSUP';
+WBT_wbiList = 'ROBOT_TORQUE_CONTROL_JOINTS';
 
 dump.left_wrench_port = '/icubGazeboSim/left_foot/analog:o';
 dump.right_wrench_port = '/icubGazeboSim/right_foot/analog:o';
@@ -34,7 +34,7 @@ gain.SmoothingTimeGainScheduling = 0.02;
 if (sum(CONFIG.LEFT_RIGHT_FOOT_IN_CONTACT) == 2)
     gain.PCOM                 = diag([50    50  50]);
     gain.ICOM                 = diag([  0    0   0]);
-    gain.DCOM                 = 2*sqrt(gain.PCOM);
+    gain.DCOM                 = 0*sqrt(gain.PCOM);
 
     gain.PAngularMomentum     = 10 ;
     gain.DAngularMomentum     = 2*sqrt(gain.PAngularMomentum);
@@ -43,8 +43,8 @@ if (sum(CONFIG.LEFT_RIGHT_FOOT_IN_CONTACT) == 2)
 
     impTorso            = [10   10   20
                             0    0    0]; 
-    impArms             = [10   10    10    8   
-                            0    0     0    0   ];
+    impArms             = [10   10    10    8  0 
+                            0    0     0    0  0 ];
                         
     impLeftLeg          = [ 30   30   30    60     10  10
                              0    0    0     0      0   0]; 
@@ -54,7 +54,7 @@ if (sum(CONFIG.LEFT_RIGHT_FOOT_IN_CONTACT) == 2)
     
                          
     intTorso            = [0   0    0]; 
-    intArms             = [0   0    0    0  ];
+    intArms             = [0   0    0    0  0];
                         
     intLeftLeg          = [0   0    0    0    0  0]; 
 
@@ -78,7 +78,7 @@ if (sum(CONFIG.LEFT_RIGHT_FOOT_IN_CONTACT) == 1)
 
     
     intTorso            = [0   0    0]; 
-    intArms             = [0   0    0    0  ];
+    intArms             = [0   0    0    0  0];
                         
     intLeftLeg          = [0   0    0    0    0  0]; 
 
@@ -88,8 +88,8 @@ if (sum(CONFIG.LEFT_RIGHT_FOOT_IN_CONTACT) == 1)
     
     impTorso            = [20   20   30
                             0    0    0]*scalingImp; 
-    impArms             = [15   15    15    8   
-                            0    0     0    0   ]*scalingImp;
+    impArms             = [15   15    15    8   0
+                            0    0     0    0   0 ]*scalingImp;
                         
     impLeftLeg          = [ 30   30   30   120     10  10
                              0    0    0     0      0   0]*scalingImp; 
@@ -136,6 +136,6 @@ fZmin                        = 10;
 reg.pinvTol     = 1e-5;
 reg.pinvDamp    = 0.01;
 reg.pinvDampVb  = 1e-7;
-reg.HessianQP   = 1e-7;
+reg.HessianQP   = 1e-5;
 reg.impedances  = 0.1;
 reg.dampings    = 0;
