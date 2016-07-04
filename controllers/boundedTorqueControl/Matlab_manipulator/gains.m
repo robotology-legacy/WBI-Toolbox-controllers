@@ -50,17 +50,17 @@ r = model.r0;
 
 %2. sinusoidal reference trajectory
 % model.trajectory = 2;
-model.rAmplitude = [0; model.delta] * 0.85;
+model.rAmplitude = [0; model.delta] * 1.1; %0.85;
 model.rFrequency = [0; pi/4];
 model.rbias = [model.r0(1); model.qo(2)];
 
 %choose which trajectory from the above
-model.trajectory = 2;
+model.trajectory = 1;
 
 %% External Torque parameters
 %Apply an external torque Text at the motor, in the interval of time
 %from TextIniTime to TextEndTime.
-model.Text = 25 * model.p;
+model.Text = 25 * model.p*0;
 model.TextIniTime = 10;
 model.TextEndTime = 10.5;
 

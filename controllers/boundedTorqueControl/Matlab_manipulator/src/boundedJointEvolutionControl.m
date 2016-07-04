@@ -34,6 +34,10 @@ function [xi, xiDot, jointReference, jointError, tau, xiTilde] =  boundedJointEv
 
     tau                  = g + M*J*xiDDotDes + (M*JDot*xiDotDes + CJXiDotDes) - model.Kp*xiTilde - model.Kd*xiTildeDot; 
     
+    %max motor torque
+    tauMax = 150 * ones(2,1);
+    tau = sign(tau) .* min(abs(tau), tauMax);
+    
     jointError           = jointPositions - jointReference;
     
 end
