@@ -1,12 +1,15 @@
+%eventually, in homePose set hip pitch to 35, knee pitch to -45
+
+
 ROBOT_DOF = 1;
 ROBOT_DOF_SIM = eye(ROBOT_DOF);
 
-model.variableChange = true;
+model.variableChange = false;
 
 %Control gains
-K = 5;
+K = 20; %sinusoid 20;
 model.Kp = K * ones(ROBOT_DOF,1);
-model.Kd = 2*sqrt(model.Kp)/4;
+model.Kd = 0; %2*sqrt(model.Kp);
 
 % %Control gains for computed torque control
 % %Uncomment if using this control
@@ -16,24 +19,24 @@ model.Kd = 2*sqrt(model.Kp)/4;
 % model.KiCTC = 1 * model.KdCTC;
 
 %knee joint limits [-2.1817,0.4014]
-model.qo    = (-2.1817+0.4014)/2;
-model.delta = (0.4014+2.1817)/2;
+model.qo    = (-1.7453 + 0)/2; %(-2.1817+0.4014)/2;
+model.delta = (0 - 1.7453)/2; %(0.4014+2.1817)/2;
 
 
 %% Trajectory parameters
 
 %1. ramped reference trajectory, towards max or min joint limit
 % model.trajectory = 1;
-model.rmin = -2.1817 * 0.9; %minimum reference position
-model.rmax = 0.4014 - 0.1; %maximum reference position
-model.p = 1; %-1; %ramp ratio, if negative go towards minimum
-model.r0 = model.rmax; %-0.2; -10.36 * pi/180; % %initial reference position
+model.rmin = -1.7453 * 0.92; %-2.1817 * 0.9; %minimum reference position
+model.rmax = 0 - 0.05;% 0.25; %0.4014 - 0.1; %maximum reference position
+model.p = -1; %-1; %ramp ratio, if negative go towards minimum
+model.r0 = model.rmin; %model.rmax; %-0.2; -10.36 * pi/180; % %initial reference position
 
 
 %2. sinusoidal reference trajectory
 % model.trajectory = 2;
-model.ratioAmplitude = 3e5; % 0.95;
-model.rFrequency     = 0.2;
+model.ratioAmplitude = 1.15; %3e5; % 0.95;
+model.rFrequency     = 0.5; %0.2;
 model.rbias          = model.qo;
 
 %choose which trajectory from the above

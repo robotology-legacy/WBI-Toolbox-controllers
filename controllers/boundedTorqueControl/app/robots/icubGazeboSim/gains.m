@@ -2,12 +2,12 @@ ROBOT_DOF = 1;
 ROBOT_DOF_SIM = eye(ROBOT_DOF);
 CONFIG.ON_GAZEBO = true;
 
-model.noVariableChange = true;
+model.variableChange = false;
 
 %Control gains
 K = 2;
 model.Kp = K * ones(ROBOT_DOF,1);
-model.Kd = 2*sqrt(model.Kp);
+model.Kd = 0.25 * 2*sqrt(model.Kp);
 
 % %Control gains for computed torque control
 % %Uncomment if using this control
@@ -25,8 +25,8 @@ model.delta = (0.4014+2.1817)/2;
 
 %1. ramped reference trajectory, towards max or min joint limit
 % model.trajectory = 1;
-model.rmin = -2.1817 * 0.9; %minimum reference position
-model.rmax = 0.4014 - 0.1; %maximum reference position
+model.rmin = -1.7453; %-2.1817 * 0.9; %minimum reference position
+model.rmax = 0 - 0.1;%0.4014 - 0.1; %maximum reference position
 model.p = 1; %-1; %ramp ratio, if negative go towards minimum
 model.r0 = model.rmax; %-0.2; -10.36 * pi/180; % %initial reference position
 
@@ -38,12 +38,12 @@ model.rFrequency     = 0.1;
 model.rbias          = model.qo;
 
 %choose which trajectory from the above
-model.trajectory = 2;
+model.trajectory = 1;
 
 %% External Torque parameters
 %Apply an external torque Text at the motor, in the interval of time
 %from TextIniTime to TextEndTime.
-model.Text = 20 * model.p;
+model.Text = 0*20 * model.p;
 model.TextIniTime = 5;
 model.TextEndTime = 5.5;
 
