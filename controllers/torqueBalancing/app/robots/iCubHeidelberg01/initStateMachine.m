@@ -82,6 +82,7 @@ if strcmpi(SM.SM_TYPE, 'YOGA')
 %% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%                      
          
 %% %%%%%%%%%%%%%%%%    FINITE STATE MACHINE SPECIFIC PARAMETERS
+sm.yogaExtended                  = true;
 sm.skipYoga                      = false;
 sm.demoOnlyRightFoot             = false;
 sm.yogaAlsoOnRightFoot           = true;
@@ -104,7 +105,7 @@ sm.jointsSmoothingTimes          = [1;   %% state ==  1  TWO FEET BALANCING
                                          %%
                                     1;   %% state ==  2  COM TRANSITION TO LEFT FOOT
                                     1;   %% state ==  3  LEFT FOOT BALANCING 
-                                    0.9;   %% state ==  4  YOGA LEFT FOOT
+                                    3;   %% state ==  4  YOGA LEFT FOOT
                                     2;   %% state ==  5  PREPARING FOR SWITCHING
                                     2;   %% state ==  6  LOOKING FOR CONTACT 
                                          %%
@@ -112,7 +113,7 @@ sm.jointsSmoothingTimes          = [1;   %% state ==  1  TWO FEET BALANCING
                                          %%
                                     1;   %% state ==  8  COM TRANSITION TO RIGHT FOOT
                                     1;   %% state ==  9  RIGHT FOOT BALANCING 
-                                    0.9;   %% state == 10  YOGA RIGHT FOOT
+                                    3;   %% state == 10  YOGA RIGHT FOOT
                                     3;   %% state == 11  PREPARING FOR SWITCHING
                                     2;   %% state == 12  LOOKING FOR CONTACT 
                                          %%
