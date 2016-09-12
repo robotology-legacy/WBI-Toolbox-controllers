@@ -1,24 +1,30 @@
 ROBOT_DOF = 15;
 
+% comment if on real robot
+% CONFIG.ON_GAZEBO = true;
+
 CONFIG.LEFT_RIGHT_FOOT_IN_CONTACT  = [1 1];
 
 CONFIG.SMOOTH_DES_COM      = 0;    % If equal to one, the desired streamed values 
                             % of the center of mass are smoothed internally 
 CONFIG.SMOOTH_DES_Q        = 0;    % If equal to one, the desired streamed values 
                             % of the postural tasks are smoothed internally 
-                            
+
+references.smoothingTimeMinJerkComDesQDes    = 3.0;    
+                        
 references.joints.smoothingTime    = 1.0;
 references.com.smoothingTime       = 5;
 
 sat.torque = 34;
 
-smoothingTimeTransitionDynamics    = 0.05;
+CONFIG.smoothingTimeTranDynamics    = 0.05;
 
 ROBOT_DOF_FOR_SIMULINK = eye(ROBOT_DOF);
 gain.qTildeMax         = 20*pi/180;
 postures = 0;  
 
-gain.SmoothingTimeImp  = 1;  
+gain.SmoothingTimeImp  = 1; 
+gain.SmoothingTimeGainScheduling = 0.02;
 
 %%
 %           PARAMETERS FOR TWO FEET ONE GROUND
@@ -28,18 +34,18 @@ if (sum(CONFIG.LEFT_RIGHT_FOOT_IN_CONTACT) == 2)
     gain.DCOM                 = 2*sqrt(gain.PCOM)*0;
 
     gain.PAngularMomentum     = 1 ;
-    gain.DAngularMomentum     = 1 ;
+    gain.DAngularMomentum     = 2*sqrt(gain.PAngularMomentum);
 
     % Impadances acting in the null space of the desired contact forces 
 
-     impTorso            = [   60    60   10
-                               0     0    0]*5; 
+    impTorso            = [10   10   20
+                            0    0    0]; 
                         
-    impLeftLeg          = [ 35   20    30     150     50   0
-                             0    0     0       0      0   0]; 
+    impLeftLeg          = [ 30   30   30    60     10  10
+                             0    0    0     0      0   0]; 
 
-    impRightLeg         = [35   20    30      150     50   0
-                            0    0     0        0      0   0]; 
+    impRightLeg         = [ 30   30   30    60     10  10
+                             0    0    0     0      0   0]; 
     
                          
     intTorso            = [0   0    0]; 
@@ -71,15 +77,17 @@ if (sum(CONFIG.LEFT_RIGHT_FOOT_IN_CONTACT) == 1)
 
     intRightLeg         = [0   0    0    0    0  0];  
     
-    impTorso            = [  20    30   20
-                              0     0    0]*5; 
+    scalingImp          = 1.5;
+    
+    impTorso            = [20   20   30
+                            0    0    0]*scalingImp; 
+                        
+    impLeftLeg          = [ 30   30   30   120     10  10
+                             0    0    0     0      0   0]*scalingImp; 
 
-    impLeftLeg          = [ 100   70  65      30     20  20
-                             0    0   0       0      0   0]; 
-
-    impRightLeg         = [ 30   30  30      30     40   40
-                             0    0   0       0      0   0];
-
+    impRightLeg         = [ 30   30   30    60     10  10
+                             0    0    0     0      0   0]*scalingImp; 
+                            
 %%    
 end
 
@@ -122,3 +130,5 @@ reg.pinvTol     = 1e-5;
 reg.pinvDamp    = 0.01;
 reg.pinvDampVb  = 0.001;
 reg.HessianQP   = 1e-7;
+reg.impedances  = 0.1;
+reg.dampings    = 0;
