@@ -82,7 +82,7 @@ if strcmpi(SM.SM_TYPE, 'YOGA')
 %% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%                      
          
 %% %%%%%%%%%%%%%%%%    FINITE STATE MACHINE SPECIFIC PARAMETERS
-sm.yogaExtended                  = true;
+sm.yogaExtended                  = false;
 sm.skipYoga                      = false;
 sm.demoOnlyRightFoot             = false;
 sm.yogaAlsoOnRightFoot           = true;
@@ -146,7 +146,7 @@ sm.joints.states = [[0.0864,0.0258,0.0152, ...                          %% state
                     [0.0864,0.0258,0.0152, ...                          %% state == 3  LEFT FOOT BALANCING
                      -0.0015,-0.1109,-0.0001,0.0003,0.0160,0.1630, ...  %  
                      0.0005,0.0793,-0.0014,-0.0051,0.0073,-0.1151];     % 
-                    [0.0864,0.0258,0.0152, ...                          %% state == 4  YOGA LEFT FOOT, THIS REFERENCE IS IGNORED
+                    [0.0864,0.0258,0.0152, ...                          %% state == 4  YOGA LEFT FOOT, THIS REFERENCE IS IGNORED 
                      0.0522,-0.2582,0.0014,-0.2129,-0.0944,0.1937,...   %
                      0.0128,0.4367,0.0093,-0.1585,-0.0725,-0.2931];     %
                     [-0.0348,0.0779,0.0429, ...                         %% state == 5  PREPARING FOR SWITCHING
@@ -395,10 +395,6 @@ sm.joints.pointsR = sm.joints.pointsL;
 					 
 for i = 1:size(sm.joints.pointsR,1)				
 	sm.joints.pointsR(i,2:4)          = [sm.joints.pointsR(i,2) -sm.joints.pointsR(i,3) -sm.joints.pointsR(i,4)];
-	
-	rightArm                           =  sm.joints.pointsR(i,end-15:end-12);
-	sm.joints.pointsR(i,end-15:end-12) =  sm.joints.pointsR(i,end-19:end-16);
-	sm.joints.pointsR(i,end-19:end-16) =  rightArm;
 	
 	rightLeg                          =  sm.joints.pointsR(i,end-5:end);
 	sm.joints.pointsR(i,end-5:end)    =  sm.joints.pointsR(i,end-11:end-6);
