@@ -64,20 +64,20 @@ if strcmpi(SM.SM_TYPE, 'YOGA')
     % state == 13  TRANSITION TO INITIAL POSITION
 
 
-    %                   %   TORSO  %%      LEFT ARM   %%      RIGHT ARM   %%         LEFT LEG            %%         RIGHT LEG           %% 
-    gain.impedances  = [10   10   20, 30   30   20    20    100 100, 30   50   30    60    100 100  % state ==  1  TWO FEET BALANCING
-                        10   10   20, 30   30   20    20    100 100, 30   50   30    60    100 100  % state ==  2  COM TRANSITION TO LEFT 
-                        10   10   20, 30   50   30    60    100 100, 30   30   20    20    100 100  % state ==  3  LEFT FOOT BALANCING
-                        30   30   30,100  200  100   400    100 100,100   50   30   100    100 100  % state ==  4  YOGA LEFT FOOT 
-                        30   30   30,200  250   20    20     10  10,220  550  220   200     65 300  % state ==  5  PREPARING FOR SWITCHING 
-                        30   30   30,100  350   20   200     10 100,220  550  220   200     65 300  % state ==  6  LOOKING FOR CONTACT
-                        10   10   20, 30   50   60    30      5   5, 30   30   30    20      5   5  % state ==  7  TRANSITION TO INITIAL POSITION 
-                        10   10   20, 30   50   60    30    100 100, 30   30   30    20    100 100  % state ==  8  COM TRANSITION TO RIGHT FOOT
-                        10   10   20, 30   50   30    60    100 100, 30   30   20    20    100 100  % state ==  9  RIGHT FOOT BALANCING
-                        30   30   30,100   50   30   100    100 100,100  200  100   400    100 100  % state == 10  YOGA RIGHT FOOT 
-                        30   30   30,220  550  220   200     65 300,200  250   20    20     10  10  % state == 11  PREPARING FOR SWITCHING 
-                        30   30   30,220  550  220   200     65 300,100  350   20   200     10 100  % state == 12  LOOKING FOR CONTACT
-                        30   30   30,100   50   30   100    100 100,100  200   20   400    100 100];% state == 13  TRANSITION TO INITIAL POSITION
+    %                   %   TORSO  %%      LEFT LEG            %%         RIGHT LEG           %% 
+    gain.impedances  = [60   60   20, 30   30   20    20    100 100, 30   50   30    60    100 100  % state ==  1  TWO FEET BALANCING
+                        60   60   20, 30   30   20    20    100 100, 30   50   30    60    100 100  % state ==  2  COM TRANSITION TO LEFT 
+                        60   60   20, 30   50   30    60    100 100, 30   30   20    20    100 100  % state ==  3  LEFT FOOT BALANCING
+                        60   60   30,100  200  100   400    100 100,100   50   30   100    100 100  % state ==  4  YOGA LEFT FOOT 
+                        60   60   30,200  250   20    20     10  10,220  550  220   200     65 300  % state ==  5  PREPARING FOR SWITCHING 
+                        60   60   30,100  350   20   200     10 100,220  550  220   200     65 300  % state ==  6  LOOKING FOR CONTACT
+                        60   60   20, 30   50   60    30      5   5, 30   30   30    20      5   5  % state ==  7  TRANSITION TO INITIAL POSITION 
+                        60   60   20, 30   50   60    30    100 100, 30   30   30    20    100 100  % state ==  8  COM TRANSITION TO RIGHT FOOT
+                        60   60   20, 30   50   30    60    100 100, 30   30   20    20    100 100  % state ==  9  RIGHT FOOT BALANCING
+                        50   50   30,100   50   30   100    100 100, 50  100  100   400    100 100  % state == 10  YOGA RIGHT FOOT 
+                        50   50   30,220  550  220   200     65 300,200  250   20    20     10  10  % state == 11  PREPARING FOR SWITCHING 
+                        60   60   30,220  550  220   200     65 300,100  350   20   200     10 100  % state == 12  LOOKING FOR CONTACT
+                        60   60   30,100   50   30   100    100 100,100  200   20   400    100 100];% state == 13  TRANSITION TO INITIAL POSITION
  end              
 %% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%                      
          
@@ -93,31 +93,31 @@ sm.wrench.thresholdContactOff    = 100;     % Force threshole under which contac
 sm.joints                        = struct;
 sm.joints.thresholdNotInContact  =  5;    % Degrees
 sm.joints.thresholdInContact     = 50;      % Degrees
-sm.joints.pauseTimeLastPostureL  = 10;
-sm.joints.pauseTimeLastPostureR  = 10;
+sm.joints.pauseTimeLastPostureL  = 0.5;
+sm.joints.pauseTimeLastPostureR  = 0.5;
 
 sm.stateAt0                      = 1;
 
 sm.DT                            = 1;
 sm.waitingTimeAfterYoga          = 0;
 
-sm.jointsSmoothingTimes          = [1;   %% state ==  1  TWO FEET BALANCING
+sm.jointsSmoothingTimes          = [2;   %% state ==  1  TWO FEET BALANCING
                                          %%
-                                    1;   %% state ==  2  COM TRANSITION TO LEFT FOOT
-                                    1;   %% state ==  3  LEFT FOOT BALANCING 
-                                    3;   %% state ==  4  YOGA LEFT FOOT
-                                    2;   %% state ==  5  PREPARING FOR SWITCHING
-                                    2;   %% state ==  6  LOOKING FOR CONTACT 
+                                    2;   %% state ==  2  COM TRANSITION TO LEFT FOOT
+                                    2;   %% state ==  3  LEFT FOOT BALANCING 
+                                    2;   %% state ==  4  YOGA LEFT FOOT
+                                    4;   %% state ==  5  PREPARING FOR SWITCHING
+                                    4;   %% state ==  6  LOOKING FOR CONTACT 
                                          %%
-                                    1;   %% state ==  7  TRANSITION INIT POSITION
+                                    2;   %% state ==  7  TRANSITION INIT POSITION
                                          %%
-                                    1;   %% state ==  8  COM TRANSITION TO RIGHT FOOT
-                                    1;   %% state ==  9  RIGHT FOOT BALANCING 
-                                    3;   %% state == 10  YOGA RIGHT FOOT
-                                    3;   %% state == 11  PREPARING FOR SWITCHING
-                                    2;   %% state == 12  LOOKING FOR CONTACT 
+                                    2;   %% state ==  8  COM TRANSITION TO RIGHT FOOT
+                                    2;   %% state ==  9  RIGHT FOOT BALANCING 
+                                    2;   %% state == 10  YOGA RIGHT FOOT
+                                    4;   %% state == 11  PREPARING FOR SWITCHING
+                                    4;   %% state == 12  LOOKING FOR CONTACT 
                                          %%
-                                    1];  %% state == 13  TRANSITION INIT POSITION
+                                    2];  %% state == 13  TRANSITION INIT POSITION
 
 sm.com.states      = [0.0,  0.01,0.0;   %% state ==  1  TWO FEET BALANCING NOT USED
                       0.0,  0.00,0.0;   %% state ==  2  COM TRANSITION TO LEFT FOOT: THIS REFERENCE IS USED AS A DELTA W.R.T. THE POSITION OF THE LEFT FOOT
@@ -130,8 +130,8 @@ sm.com.states      = [0.0,  0.01,0.0;   %% state ==  1  TWO FEET BALANCING NOT U
                       % THE POSITION OF THE RIGHT FOOT
                       0.0,  0.00,0.0;   %% state ==  8  COM TRANSITION TO RIGHT FOOT
                       0.0,  0.00,0.0;   %% state ==  9  RIGHT FOOT BALANCING 
-                      0.0, -0.015,0.0;  %% state == 10  YOGA RIGHT FOOT
-                      0.0, -0.00,0.0;   %% state == 11  PREPARING FOR SWITCHING
+                      0.0, -0.00,0.0;  %% state == 10  YOGA RIGHT FOOT
+                      0.0,  0.01,0.0;   %% state == 11  PREPARING FOR SWITCHING
                       0.0,  0.09,0.0;   %% state == 12  LOOKING FOR CONTACT 
                       0.0,  0.00,0.0];  %% state == 13  TRANSITION INIT POSITION: THIS REFERENCE IS IGNORED
 sm.tBalancing      = 1; %0.5;
@@ -253,7 +253,7 @@ sm.joints.pointsL =[ 0,                            q1;
                      4*sm.jointsSmoothingTimes(10),q5;
                      5*sm.jointsSmoothingTimes(10),q6;
                      6*sm.jointsSmoothingTimes(10),q7;
-                     15*sm.jointsSmoothingTimes(10),q8];
+                     7*sm.jointsSmoothingTimes(10),q8];
 
 if sm.yogaExtended
     sm.joints.pointsL =[ 0,                            q1;
@@ -358,7 +358,7 @@ if CONFIG.ONSOFTCARPET && strcmpi(SM.SM_TYPE, 'YOGA')
     CONFIG.CORRECT_NECK_IMU    = true;
     
     sm.jumpYoga                = false;
-    sm.demoOnlyRightFoot       = false;
+    sm.demoOnlyRightFoot       = true;
     sm.yogaAlsoOnRightFoot     = false;
     sm.yogaInLoop              = false;
     sm.com.threshold           = 0.01;
