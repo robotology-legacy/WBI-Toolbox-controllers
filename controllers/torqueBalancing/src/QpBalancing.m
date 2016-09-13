@@ -39,23 +39,23 @@ block.SetPreCompOutPortInfoToDynamic;
 
 % Definition of port sizes for QP 2 feet
 block.InputPort(1).Dimensions        = [ 1  2];   % LEFT_RIGHT_FOOT_IN_CONTACT
-block.InputPort(2).Dimensions        = [12 12];   % HessianMatrixQP2Feet               
-block.InputPort(3).Dimensions        = [ 1 12];   % gradientQP2Feet
-block.InputPort(4).Dimensions        = [38 12];   % ConstraintsMatrixQP2Feet 
+block.InputPort(2).Dimensions        = [ 8  8];   % HessianMatrixQP2Feet               
+block.InputPort(3).Dimensions        = [ 1  8];   % gradientQP2Feet
+block.InputPort(4).Dimensions        = [38  8];   % ConstraintsMatrixQP2Feet 
 block.InputPort(5).Dimensions        = [ 1 38];   % bVectorConstraintsQp2Feet 
 block.InputPort(6).Dimensions        = 1 ;        % USE_QP_SOLVER
 % Definition of port sizes for QP 1 foot
-block.InputPort(7).Dimensions        = [ 6  6];   % HessianMatrixQP1Foot              
-block.InputPort(8).Dimensions        = [ 1  6];   % gradientQP1Foot
-block.InputPort(9).Dimensions        = [19  6];   % ConstraintsMatrixQP1Foot
+block.InputPort(7).Dimensions        = [ 4  4];   % HessianMatrixQP1Foot              
+block.InputPort(8).Dimensions        = [ 1  4];   % gradientQP1Foot
+block.InputPort(9).Dimensions        = [19  4];   % ConstraintsMatrixQP1Foot
 block.InputPort(10).Dimensions       = [ 1 19];   % bVectorConstraintsQp1Foot
 
 % Override output port properties
-block.OutputPort(1).Dimensions       = 12;        % f0 Two Feet
+block.OutputPort(1).Dimensions       = 8;        % f0 Two Feet
 block.OutputPort(2).Dimensions       = 1;         % Exit flag QP 2 Feet
 
 % Override output port properties
-block.OutputPort(3).Dimensions       = 12;        % f0 One foot     
+block.OutputPort(3).Dimensions       = 8;        % f0 One foot     
 
 for i=1:block.NumInputPorts
     block.InputPort(i).DatatypeID  = -1;          % 'inherited', see http://www.mathworks.com/help/simulink/slref/simulink.blockdata.html#f29-108672

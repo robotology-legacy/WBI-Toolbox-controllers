@@ -261,4 +261,10 @@ for i = 1:size(sm.joints.pointsR,1)
 end	 
 
 
+if CONFIG.ONSOFTCARPET
+    gain.ONSOFTCARPET = 1;
+else
+    gain.ONSOFTCARPET = 0;
+end
+
 clear q1 q2 q3 q4;

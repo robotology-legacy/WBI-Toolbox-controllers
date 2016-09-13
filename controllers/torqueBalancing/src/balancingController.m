@@ -21,10 +21,38 @@ function [tauModel,Sigma,NA,f_HDot, ...
           HessianMatrixQP2Feet,gradientQP2Feet,ConstraintsMatrixQP2Feet,bVectorConstraintsQp2Feet,...
           errorCoM,qTilde,f]    =  ...
               balancingController(constraints,ROBOT_DOF_FOR_SIMULINK,ConstraintsMatrix,bVectorConstraints,...
-              q,qDes,v, M, h , H,intHw,w_H_l_sole, w_H_r_sole, JL,JR, dJLv,dJRv, xcom,J_CoM, desired_x_dx_ddx_CoM,...
+              q,qDes,v, M, h , H,intHw,w_H_l_sole, w_H_r_sole, JLin,JRin, dJLvIn,dJRvIn, xcom,J_CoM, desired_x_dx_ddx_CoM,...
               gainsPCOM,gainsDCOM,impedances,intErrorCoM,ki_int_qtilde,reg,gain)
     %BALANCING CONTROLLER
 
+%    if gain.ONSOFTCARPET == 1
+       e3     = [0;0;1];
+       % Modify Jacobians to take into account Floor Compliance
+       iL     = w_H_l_sole(1:3,1); 
+       jL     = w_H_l_sole(1:3,2); 
+       nL     = w_H_l_sole(1:3,3); 
+       iR     = w_H_r_sole(1:3,1); 
+       jR     = w_H_r_sole(1:3,2); 
+       nR     = w_H_r_sole(1:3,3); 
+       HL     = [iL',zeros(1,3);
+                 jL',zeros(1,3);
+                 e3',zeros(1,3);
+                 zeros(1,3),nL'];
+       HR     = [iR',zeros(1,3);
+                 jR',zeros(1,3);
+                 e3',zeros(1,3);
+                 zeros(1,3),nR'];
+       JL     = HL*JLin;
+       JR     = HR*JRin;
+       dJLv   = HL*dJLvIn;
+       dJRv   = HR*dJRvIn;
+ %   else
+ %      JL     = JLin;
+ %      JR     = JRin;
+  %     dJLv   = dJLvIn;
+  %     dJRv   = dJRvIn;
+  %  end
+    
     %% DEFINITION OF CONTROL AND DYNAMIC VARIABLES
     pos_leftFoot   = w_H_l_sole(1:3,4);
     w_R_l_sole     = w_H_l_sole(1:3,1:3);
@@ -89,13 +117,18 @@ function [tauModel,Sigma,NA,f_HDot, ...
     AR              = [ eye(3), zeros(3);
                         Sf(Pr), eye(3) ];
 
-    A               = [ AL, AR];                  % dot(H) = mg + A*f
+    %A               = [ AL, AR];                  % dot(H) = mg + A*f
+    %pinvA           = pinv( A, reg.pinvTol)*constraints(1)*constraints(2)  ...
+    %                + [inv(AL);zeros(6)]*constraints(1)*(1-constraints(2)) ... 
+    %                + [zeros(6);inv(AR)]*constraints(2)*(1-constraints(1)); 
+                
+    A               = [ AL*HL', AR*HR'];                  % dot(H) = mg + A*f
     pinvA           = pinv( A, reg.pinvTol)*constraints(1)*constraints(2)  ...
-                    + [inv(AL);zeros(6)]*constraints(1)*(1-constraints(2)) ... 
-                    + [zeros(6);inv(AR)]*constraints(2)*(1-constraints(1)); 
+                    + [pinv(AL*HL');zeros(4,6)]*constraints(1)*(1-constraints(2)) ... 
+                    + [zeros(4,6);pinv(AR*HR')]*constraints(2)*(1-constraints(1)); 
                 
     % Null space of the matrix A            
-    NA              = (eye(12,12)-pinvA*A)*constraints(1)*constraints(2);
+    NA              = (eye(size(A,2),size(A,2))-pinvA*A)*constraints(1)*constraints(2);
 
     % Time varying contact jacobian
     Jc              = [ JL*constraints(1)  ;      
@@ -156,8 +189,8 @@ function [tauModel,Sigma,NA,f_HDot, ...
     % constraintMatrixLeftFoot = ConstraintsMatrix*w_R_l_sole
     %
     % The same hold for the right foot
-    constraintMatrixLeftFoot  = ConstraintsMatrix * blkdiag(w_R_l_sole',w_R_l_sole');
-    constraintMatrixRightFoot = ConstraintsMatrix * blkdiag(w_R_r_sole',w_R_r_sole');
+    constraintMatrixLeftFoot  = ConstraintsMatrix * blkdiag(w_R_l_sole',w_R_l_sole')*HL';
+    constraintMatrixRightFoot = ConstraintsMatrix * blkdiag(w_R_r_sole',w_R_r_sole')*HR';
     ConstraintsMatrix2Feet    = blkdiag(constraintMatrixLeftFoot,constraintMatrixRightFoot);
     bVectorConstraints2Feet   = [bVectorConstraints;bVectorConstraints];
     
@@ -219,7 +252,7 @@ function [tauModel,Sigma,NA,f_HDot, ...
                                 constraints(2) * (1 - constraints(1)) * constraintMatrixRightFoot;
     bVectorConstraintsQp1Foot = bVectorConstraints;
 
-    A1Foot                    = AL*constraints(1)*(1-constraints(2)) + AR*constraints(2)*(1-constraints(1));
+    A1Foot                    = AL*HL'*constraints(1)*(1-constraints(2)) + AR*HR'*constraints(2)*(1-constraints(1));
     HessianMatrixQP1Foot      = A1Foot'*A1Foot + eye(size(A1Foot,2))*reg.HessianQP;
     gradientQP1Foot           = -A1Foot'*(HDotDes - gravityWrench);
 
@@ -227,7 +260,7 @@ function [tauModel,Sigma,NA,f_HDot, ...
     % Unconstrained solution for the problem 1)
     f0                        = -pinvDamped(SigmaNA,reg.pinvDamp*1e-5)*(tauModel + Sigma*f_HDot);
     % Unconstrained contact wrenches
-    f                         = zeros(12,1);%pinvA*(HDotDes - gravityWrench) + NA*f0*constraints(1)*constraints(2); 
+    f                         = zeros(8,1);%pinvA*(HDotDes - gravityWrench) + NA*f0*constraints(1)*constraints(2); 
     % Error on the center of mass
     errorCoM                  = xcom - desired_x_dx_ddx_CoM(:,1);
 end
