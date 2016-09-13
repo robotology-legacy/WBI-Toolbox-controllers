@@ -263,6 +263,7 @@ end
 
 if CONFIG.ONSOFTCARPET
     gain.ONSOFTCARPET = 1;
+    gain.floorImpedance = (1/3)*1e8;
 else
     gain.ONSOFTCARPET = 0;
 end

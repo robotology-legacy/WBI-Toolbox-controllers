@@ -46,6 +46,12 @@ function [tauModel,Sigma,NA,f_HDot, ...
        JR     = HR*JRin;
        dJLv   = HL*dJLvIn;
        dJRv   = HR*dJRvIn;
+       l      = gain.footSize(1,2)-gain.footSize(1,1);
+       d      = gain.footSize(2,2)-gain.footSize(2,1);
+       LL     = d^2*(jL*jL') + l^2*(iL*iL');
+       RR     = d^2*(jR*jR') + l^2*(iR*iR');
+       wLcomp = [zeros(3,1);(gain.floorImpedance*l*d/12)*abs(nL'*e3)*Sf(e3)*LL*e3];
+       wRcomp = [zeros(3,1);(gain.floorImpedance*l*d/12)*abs(nR'*e3)*Sf(e3)*RR*e3];
  %   else
  %      JL     = JLin;
  %      JR     = JRin;
@@ -195,6 +201,7 @@ function [tauModel,Sigma,NA,f_HDot, ...
     bVectorConstraints2Feet   = [bVectorConstraints;bVectorConstraints];
     
     % Terms used in Eq. 0)
+    h               = h - JLin'*wLcomp*constraints(1) - JRin'*wLcomp*constraints(2);
     tauModel        = PInv_JcMinvSt*(JcMinv*h - JcDv) + nullJcMinvSt*(h(7:end) - Mbj'/Mb*h(1:6) ...
                        -impedances*NLMbar*qTilde  -ki_int_qtilde -dampings*NLMbar*qD);
     
@@ -203,7 +210,7 @@ function [tauModel,Sigma,NA,f_HDot, ...
     % Desired rate-of-change of the robot momentum
     HDotDes         = [ m*xDDcomStar ;
                         -gain.DAngularMomentum*H(4:end)-gain.PAngularMomentum*intHw];
-
+    HDotDes         = HDotDes - wLcomp - wRcomp;
     % Contact wrenches realizing the desired rate-of-change of the robot
     % momentum HDotDes when standing on two feet. Note that f_HDot is
     % different from zero only when both foot are in contact, i.e. 

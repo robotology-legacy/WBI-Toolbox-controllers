@@ -105,7 +105,7 @@ CONFIG.CORRECT_NECK_IMU    = true;
 % of a validation scenarion in which the robot had to balance on a soft
 % carpet. Hence, when CONFIG.ONSOFTCARPET = true, other sets of gains are
 % loaded for the postural and CoM.
-CONFIG.ONSOFTCARPET        = false;
+CONFIG.ONSOFTCARPET        = true;
 
 % CONFIG.USE_QP_SOLVER: if set to true, a QP solver is used to account for 
 % inequality constraints of contact wrenches
