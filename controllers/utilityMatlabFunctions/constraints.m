@@ -1,4 +1,4 @@
-function [ConstraintsMatrix,bVectorConstraints] = constraints(staticFrictionCoefficient,numberOfPoints,torsionalFrictionCoefficient,footSize,fZmin)
+function [ConstraintsMatrix,bVectorConstraints] = constraints(staticFrictionCoefficient,numberOfPoints,torsionalFrictionCoefficient,footSize,fZmin,CONFIG)
     
     %% Compute friction cones contraints approximation with straight lines
 
@@ -59,6 +59,13 @@ function [ConstraintsMatrix,bVectorConstraints] = constraints(staticFrictionCoef
                           0,    0,                 footSize(2,1),          -1,           0,            0;  % -torque_x     +  dimMinFoot_y*F_z                 < 0
                           0,    0,                -footSize(2,2),           1,           0,            0]; %  torque_x     -  dimMaxFoot_y*F_z                 < 0 
 
+    if CONFIG.ONSOFTCARPET    
+        ConstraintsMatrix = [ 0,    0, -torsionalFrictionCoefficient,           0,           0,            1;  %  torque_z     -  torsionalFrictionCoefficient*F_z < 0
+                              0,    0, -torsionalFrictionCoefficient,           0,           0,           -1;  % -torque_z     -  torsionalFrictionCoefficient*F_z < 0
+                              0,    0,                            -1,           0,           0,            0]; % -F_z                                              < 0 
+
+    end
+                      
     ConstraintsMatrix  =  [ Aineq ;
                             ConstraintsMatrix ];     
 
