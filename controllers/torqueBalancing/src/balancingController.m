@@ -19,7 +19,7 @@
 function [tauModel,Sigma,NA,f_HDot, ...
           HessianMatrixQP1Foot,gradientQP1Foot,ConstraintsMatrixQP1Foot,bVectorConstraintsQp1Foot,...
           HessianMatrixQP2Feet,gradientQP2Feet,ConstraintsMatrixQP2Feet,bVectorConstraintsQp2Feet,...
-          errorCoM,qTilde,f]    =  ...
+          errorCoM,qTilde,f,errorHDot]    =  ...
               balancingController(constraints,ROBOT_DOF_FOR_SIMULINK,ConstraintsMatrix,bVectorConstraints,...
               q,qDes,v, M, h , H,intHw,w_H_l_sole, w_H_r_sole, JLin,JRin, dJLvIn,dJRvIn, xcom,J_CoM, desired_x_dx_ddx_CoM,...
               gainsPCOM,gainsDCOM,impedances,intErrorCoM,ki_int_qtilde,reg,gain)
@@ -31,9 +31,11 @@ function [tauModel,Sigma,NA,f_HDot, ...
        iL     = w_H_l_sole(1:3,1); 
        jL     = w_H_l_sole(1:3,2); 
        nL     = w_H_l_sole(1:3,3); 
+       
        iR     = w_H_r_sole(1:3,1); 
        jR     = w_H_r_sole(1:3,2); 
        nR     = w_H_r_sole(1:3,3); 
+       
        HL     = [iL',zeros(1,3);
                  jL',zeros(1,3);
                  e3',zeros(1,3);
@@ -42,6 +44,7 @@ function [tauModel,Sigma,NA,f_HDot, ...
                  jR',zeros(1,3);
                  e3',zeros(1,3);
                  zeros(1,3),nR'];
+             
        JL     = HL*JLin;
        JR     = HR*JRin;
        dJLv   = HL*dJLvIn;
@@ -50,8 +53,10 @@ function [tauModel,Sigma,NA,f_HDot, ...
        d      = gain.footSize(2,2)-gain.footSize(2,1);
        LL     = d^2*(jL*jL') + l^2*(iL*iL');
        RR     = d^2*(jR*jR') + l^2*(iR*iR');
-       wLcomp = [zeros(3,1);(gain.floorImpedance*l*d/12)*abs(nL'*e3)*Sf(e3)*LL*e3];
-       wRcomp = [zeros(3,1);(gain.floorImpedance*l*d/12)*abs(nR'*e3)*Sf(e3)*RR*e3];
+       ML     = (gain.floorImpedance*l*d/12)*abs(nL'*e3)*Sf(e3)*LL*e3;
+       MR     = (gain.floorImpedance*l*d/12)*abs(nR'*e3)*Sf(e3)*RR*e3;
+       wLcomp = [zeros(3,1);ML];
+       wRcomp = [zeros(3,1);MR];
  %   else
  %      JL     = JLin;
  %      JR     = JRin;
@@ -88,8 +93,8 @@ function [tauModel,Sigma,NA,f_HDot, ...
     St              = [zeros(6,ROBOT_DOF);
                        eye(ROBOT_DOF,ROBOT_DOF)];
     gravityWrench   = [ zeros(2,1);
-                       -m*gravAcc;
-                        zeros(3,1)];
+                       -m*gravAcc];
+                     %   zeros(3,1)];
 
     % Velocity of the center of mass
     xDcom           = J_CoM(1:3,:)*v;
@@ -118,10 +123,8 @@ function [tauModel,Sigma,NA,f_HDot, ...
     % where  f_L and f_R are the contact wrenches acting on the left and
     % right foot, respectively, and f = [f_L;f_R].
     
-    AL              = [ eye(3),zeros(3);
-                        Sf(Pl),  eye(3)];
-    AR              = [ eye(3), zeros(3);
-                        Sf(Pr), eye(3) ];
+    AL              = [ eye(3),zeros(3)];
+    AR              = [ eye(3), zeros(3)];
 
     %A               = [ AL, AR];                  % dot(H) = mg + A*f
     %pinvA           = pinv( A, reg.pinvTol)*constraints(1)*constraints(2)  ...
@@ -129,9 +132,9 @@ function [tauModel,Sigma,NA,f_HDot, ...
     %                + [zeros(6);inv(AR)]*constraints(2)*(1-constraints(1)); 
                 
     A               = [ AL*HL', AR*HR'];                  % dot(H) = mg + A*f
-    pinvA           = pinv( A, reg.pinvTol)*constraints(1)*constraints(2)  ...
-                    + [pinv(AL*HL');zeros(4,6)]*constraints(1)*(1-constraints(2)) ... 
-                    + [zeros(4,6);pinv(AR*HR')]*constraints(2)*(1-constraints(1)); 
+    pinvA           = pinvDamped( A, reg.pinvDampA)*constraints(1)*constraints(2)  ...
+                    + [pinvDamped(AL*HL', reg.pinvDampA);zeros(4,3)]*constraints(1)*(1-constraints(2)) ... 
+                    + [zeros(4,3);pinvDamped(AR*HR', reg.pinvDampA)]*constraints(2)*(1-constraints(1)); 
                 
     % Null space of the matrix A            
     NA              = (eye(size(A,2),size(A,2))-pinvA*A)*constraints(1)*constraints(2);
@@ -201,16 +204,15 @@ function [tauModel,Sigma,NA,f_HDot, ...
     bVectorConstraints2Feet   = [bVectorConstraints;bVectorConstraints];
     
     % Terms used in Eq. 0)
-    h               = h - JLin'*wLcomp*constraints(1) - JRin'*wLcomp*constraints(2);
+    h               = h;% - JLin'*wLcomp*constraints(1) - JRin'*wRcomp*constraints(2);
     tauModel        = PInv_JcMinvSt*(JcMinv*h - JcDv) + nullJcMinvSt*(h(7:end) - Mbj'/Mb*h(1:6) ...
                        -impedances*NLMbar*qTilde  -ki_int_qtilde -dampings*NLMbar*qD);
     
     Sigma           = -(PInv_JcMinvSt*JcMinvJct + nullJcMinvSt*JBar);
     
     % Desired rate-of-change of the robot momentum
-    HDotDes         = [ m*xDDcomStar ;
-                        -gain.DAngularMomentum*H(4:end)-gain.PAngularMomentum*intHw];
-    HDotDes         = HDotDes - wLcomp - wRcomp;
+    HDotDes         = [ m*xDDcomStar] ;
+                     %   -gain.DAngularMomentum*H(4:end)-gain.PAngularMomentum*intHw];
     % Contact wrenches realizing the desired rate-of-change of the robot
     % momentum HDotDes when standing on two feet. Note that f_HDot is
     % different from zero only when both foot are in contact, i.e. 
@@ -219,6 +221,8 @@ function [tauModel,Sigma,NA,f_HDot, ...
     % optimizer (see next section).
     f_HDot          = pinvA*(HDotDes - gravityWrench)*constraints(1)*constraints(2);
    
+    
+    
     SigmaNA         = Sigma*NA;
    
     % The optimization problem 1) seeks for the redundancy of the external
@@ -270,5 +274,9 @@ function [tauModel,Sigma,NA,f_HDot, ...
     f                         = zeros(8,1);%pinvA*(HDotDes - gravityWrench) + NA*f0*constraints(1)*constraints(2); 
     % Error on the center of mass
     errorCoM                  = xcom - desired_x_dx_ddx_CoM(:,1);
+    % Error in HDot
+    errorHDot                 = (HDotDes - (A*f_HDot+gravityWrench));
+    
+    termMultTau               = ((((J/M)*J')\J)/M))
 end
 

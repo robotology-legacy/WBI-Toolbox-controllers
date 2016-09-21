@@ -162,14 +162,17 @@ function SetInputPortSamplingMode(block, idx, fd)
 %%
 
 function Outputs(block)
-
+    persistent f0;
+    if isempty(f0) 
+         f0 = zeros(8,1);
+    end
 
     CONTACT_THRESHOLD = 0.1;
     
     LEFT_RIGHT_FOOT_IN_CONTACT = block.InputPort(1).Data;
     exitFlagQP                 = 0;
-    f0OneFoot                  = zeros(6,1);
-    f02Feet                    = zeros(6*2,1);
+    f0OneFoot                  = zeros(4,1);
+    f02Feet                    = zeros(4*2,1);
     USE_QPO_SOLVER             = block.InputPort(6).Data;
 
     if sum(LEFT_RIGHT_FOOT_IN_CONTACT) > (2 - CONTACT_THRESHOLD)
@@ -177,11 +180,14 @@ function Outputs(block)
         gradientQP2Feet            = block.InputPort(3).Data;
         ConstraintsMatrixQP2Feet   = block.InputPort(4).Data;
         bVectorConstraintsQp2Feet  = block.InputPort(5).Data;
+
         if USE_QPO_SOLVER 
             [f02Feet,~,exitFlagQP,~,~,~] = qpOASES(HessianMatrixQP2Feet,gradientQP2Feet',ConstraintsMatrixQP2Feet,[],[],[],bVectorConstraintsQp2Feet');           
             if exitFlagQP ~= 0
-                f02Feet = - inv(HessianMatrixQP2Feet)*gradientQP2Feet';
+               % f02Feet = - inv(HessianMatrixQP2Feet)*gradientQP2Feet';
+               f02Feet = f0;
             end
+            f0 = f02Feet;
         else
             exitFlagQP                 = 1;
             f02Feet = - inv(HessianMatrixQP2Feet)*gradientQP2Feet';
@@ -195,7 +201,7 @@ function Outputs(block)
 
         if USE_QPO_SOLVER 
             [f0OneFoot,~,exitFlagQP,~,~,~] = qpOASES(HessianMatrixQP1Foot,gradientQP1Foot',ConstraintsMatrixQP1Foot,[],[],[],bVectorConstraintsQP1Foot');           
-
+            
            if exitFlagQP ~= 0
                 f0OneFoot = - inv(HessianMatrixQP1Foot)*gradientQP1Foot';
            end
