@@ -1,7 +1,6 @@
-ROBOT_DOF = 23;
+WBT_wbiList = 'ROBOT_TORQUE_CONTROL_JOINTS_WITHOUT_PRONOSUP';
 
-PORTS.WBDT_LEFTLEG_EE  = '/wholeBodyDynamics/left_leg/cartesianEndEffectorWrench:o';
-PORTS.WBDT_RIGHTLEG_EE = '/wholeBodyDynamics/right_leg/cartesianEndEffectorWrench:o';
+ROBOT_DOF = 23;
 
 CONFIG.LEFT_RIGHT_FOOT_IN_CONTACT  = [1 1];
 
@@ -10,7 +9,7 @@ CONFIG.SMOOTH_DES_COM      = 0;    % If equal to one, the desired streamed value
 CONFIG.SMOOTH_DES_Q        = 0;    % If equal to one, the desired streamed values 
                             % of the postural tasks are smoothed internally 
                             
-references.smoothingTimeMinJerkComDesQDes    = 3.0;
+references.smoothingTimeComAndJoints    = 3.0;
 
 sat.torque = 34;
 

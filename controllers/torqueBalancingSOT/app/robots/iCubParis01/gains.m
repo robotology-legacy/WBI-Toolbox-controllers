@@ -1,8 +1,5 @@
 ROBOT_DOF = 23;
 
-PORTS.WBDT_LEFTLEG_EE  = '/wholeBodyDynamics/left_leg/cartesianEndEffectorWrench:o';
-PORTS.WBDT_RIGHTLEG_EE = '/wholeBodyDynamics/right_leg/cartesianEndEffectorWrench:o';
-
 CONFIG.LEFT_RIGHT_FOOT_IN_CONTACT  = [1 1];
 
 CONFIG.SMOOTH_DES_COM      = 0;    % If equal to one, the desired streamed values 
@@ -10,11 +7,12 @@ CONFIG.SMOOTH_DES_COM      = 0;    % If equal to one, the desired streamed value
 CONFIG.SMOOTH_DES_Q        = 0;    % If equal to one, the desired streamed values 
                             % of the postural tasks are smoothed internally 
                             
-references.smoothingTimeMinJerkComDesQDes    = 3.0;
+references.joints.smoothingTime    = 1.0;
+references.com.smoothingTime       = 5;
 
 sat.torque = 34;
 
-CONFIG.smoothingTimeTranDynamics    = 0.05;
+smoothingTimeTransitionDynamics    = 0.05;
 
 ROBOT_DOF_FOR_SIMULINK = eye(ROBOT_DOF);
 gain.qTildeMax         = 20*pi/180;
@@ -29,8 +27,8 @@ if (sum(CONFIG.LEFT_RIGHT_FOOT_IN_CONTACT) == 2)
     gain.ICOM                 = diag([  0    0   0]);
     gain.DCOM                 = 2*sqrt(gain.PCOM)*0;
 
-    gain.PAngularMomentum     = 5 ;
-    gain.DAngularMomentum     = 2*sqrt(gain.PAngularMomentum);
+    gain.PAngularMomentum     = 1 ;
+    gain.DAngularMomentum     = 1 ;
 
     % Impadances acting in the null space of the desired contact forces 
 
@@ -130,7 +128,5 @@ fZmin                        = 10;
 % satisfies the inequality Aineq_f F(fo) < bineq_f
 reg.pinvTol     = 1e-5;
 reg.pinvDamp    = 0.01;
-reg.pinvDampVb  = 1e-7;
+reg.pinvDampVb  = 0.001;
 reg.HessianQP   = 1e-7;
-reg.impedances  = 0.1;
-reg.dampings    = 0;

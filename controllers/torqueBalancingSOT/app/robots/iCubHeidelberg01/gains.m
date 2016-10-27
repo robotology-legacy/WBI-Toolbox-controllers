@@ -1,7 +1,7 @@
-ROBOT_DOF = 23;
+ROBOT_DOF = 15;
 
-PORTS.WBDT_LEFTLEG_EE  = '/wholeBodyDynamics/left_leg/cartesianEndEffectorWrench:o';
-PORTS.WBDT_RIGHTLEG_EE = '/wholeBodyDynamics/right_leg/cartesianEndEffectorWrench:o';
+% comment if on real robot
+% CONFIG.ON_GAZEBO = true;
 
 CONFIG.LEFT_RIGHT_FOOT_IN_CONTACT  = [1 1];
 
@@ -9,8 +9,11 @@ CONFIG.SMOOTH_DES_COM      = 0;    % If equal to one, the desired streamed value
                             % of the center of mass are smoothed internally 
 CONFIG.SMOOTH_DES_Q        = 0;    % If equal to one, the desired streamed values 
                             % of the postural tasks are smoothed internally 
-                            
-references.smoothingTimeMinJerkComDesQDes    = 3.0;
+
+references.smoothingTimeMinJerkComDesQDes    = 3.0;    
+                        
+references.joints.smoothingTime    = 1.0;
+references.com.smoothingTime       = 5;
 
 sat.torque = 34;
 
@@ -20,7 +23,8 @@ ROBOT_DOF_FOR_SIMULINK = eye(ROBOT_DOF);
 gain.qTildeMax         = 20*pi/180;
 postures = 0;  
 
-gain.SmoothingTimeImp  = 1;  
+gain.SmoothingTimeImp  = 1; 
+gain.SmoothingTimeGainScheduling = 0.02;
 
 %%
 %           PARAMETERS FOR TWO FEET ONE GROUND
@@ -29,15 +33,13 @@ if (sum(CONFIG.LEFT_RIGHT_FOOT_IN_CONTACT) == 2)
     gain.ICOM                 = diag([  0    0   0]);
     gain.DCOM                 = 2*sqrt(gain.PCOM)*0;
 
-    gain.PAngularMomentum     = 5 ;
+    gain.PAngularMomentum     = 1 ;
     gain.DAngularMomentum     = 2*sqrt(gain.PAngularMomentum);
 
     % Impadances acting in the null space of the desired contact forces 
 
     impTorso            = [10   10   20
                             0    0    0]; 
-    impArms             = [10   10    10    8   
-                            0    0     0    0   ];
                         
     impLeftLeg          = [ 30   30   30    60     10  10
                              0    0    0     0      0   0]; 
@@ -47,11 +49,10 @@ if (sum(CONFIG.LEFT_RIGHT_FOOT_IN_CONTACT) == 2)
     
                          
     intTorso            = [0   0    0]; 
-    intArms             = [0   0    0    0  ];
                         
     intLeftLeg          = [0   0    0    0    0  0]; 
 
-    intRightLeg         = [0   0     0  0    0  0];   
+    intRightLeg         = [0   0    0    0    0  0];  
     
                                            
 end
@@ -70,8 +71,7 @@ if (sum(CONFIG.LEFT_RIGHT_FOOT_IN_CONTACT) == 1)
     % Impadances acting in the null space of the desired contact forces 
 
     
-    intTorso            = [0   0    0]; 
-    intArms             = [0   0    0    0  ];
+      intTorso            = [0   0    0]; 
                         
     intLeftLeg          = [0   0    0    0    0  0]; 
 
@@ -81,8 +81,6 @@ if (sum(CONFIG.LEFT_RIGHT_FOOT_IN_CONTACT) == 1)
     
     impTorso            = [20   20   30
                             0    0    0]*scalingImp; 
-    impArms             = [15   15    15    8   
-                            0    0     0    0   ]*scalingImp;
                         
     impLeftLeg          = [ 30   30   30   120     10  10
                              0    0    0     0      0   0]*scalingImp; 
@@ -94,10 +92,10 @@ if (sum(CONFIG.LEFT_RIGHT_FOOT_IN_CONTACT) == 1)
 end
 
 sat.integral              = 0;
-gain.integral            = [intTorso,intArms,intArms,intLeftLeg,intRightLeg];
-gain.impedances          = [impTorso(1,:),impArms(1,:),impArms(1,:),impLeftLeg(1,:),impRightLeg(1,:)];
-gain.dampings            = zeros(1,ROBOT_DOF);
-gain.increasingRatesImp  = [impTorso(2,:),impArms(2,:),impArms(2,:),impLeftLeg(2,:),impRightLeg(2,:)];
+gain.integral             = [intTorso,intLeftLeg,intRightLeg];
+gain.impedances           = [impTorso(1,:),impLeftLeg(1,:),impRightLeg(1,:)];
+gain.dampings             = zeros(1,ROBOT_DOF);
+gain.increasingRatesImp   = [impTorso(2,:),impLeftLeg(2,:),impRightLeg(2,:)];
 sat.impedences            = [80   25    1400];
 
 if (size(gain.impedances,2) ~= ROBOT_DOF)
@@ -130,7 +128,7 @@ fZmin                        = 10;
 % satisfies the inequality Aineq_f F(fo) < bineq_f
 reg.pinvTol     = 1e-5;
 reg.pinvDamp    = 0.01;
-reg.pinvDampVb  = 1e-7;
+reg.pinvDampVb  = 0.001;
 reg.HessianQP   = 1e-7;
 reg.impedances  = 0.1;
 reg.dampings    = 0;

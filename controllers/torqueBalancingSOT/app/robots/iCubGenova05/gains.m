@@ -7,6 +7,7 @@ CONFIG.LEFT_RIGHT_FOOT_IN_CONTACT  = [1 1];
 
 CONFIG.SMOOTH_DES_COM      = 0;    % If equal to one, the desired streamed values 
                             % of the center of mass are smoothed internally 
+                            
 CONFIG.SMOOTH_DES_Q        = 0;    % If equal to one, the desired streamed values 
                             % of the postural tasks are smoothed internally 
                             
@@ -29,7 +30,7 @@ if (sum(CONFIG.LEFT_RIGHT_FOOT_IN_CONTACT) == 2)
     gain.ICOM                 = diag([  0    0   0]);
     gain.DCOM                 = 2*sqrt(gain.PCOM)*0;
 
-    gain.PAngularMomentum     = 5 ;
+    gain.PAngularMomentum     = 1 ;
     gain.DAngularMomentum     = 2*sqrt(gain.PAngularMomentum);
 
     % Impadances acting in the null space of the desired contact forces 
@@ -93,12 +94,12 @@ if (sum(CONFIG.LEFT_RIGHT_FOOT_IN_CONTACT) == 1)
 %%    
 end
 
-sat.integral              = 0;
+sat.integral             = 0;
 gain.integral            = [intTorso,intArms,intArms,intLeftLeg,intRightLeg];
 gain.impedances          = [impTorso(1,:),impArms(1,:),impArms(1,:),impLeftLeg(1,:),impRightLeg(1,:)];
 gain.dampings            = zeros(1,ROBOT_DOF);
 gain.increasingRatesImp  = [impTorso(2,:),impArms(2,:),impArms(2,:),impLeftLeg(2,:),impRightLeg(2,:)];
-sat.impedences            = [80   25    1400];
+sat.impedences           = [80   25    1400];
 
 if (size(gain.impedances,2) ~= ROBOT_DOF)
     error('Dimension mismatch between ROBOT_DOF and dimension of the variable impedences. Check these variables in the file gains.m');
@@ -114,23 +115,18 @@ numberOfPoints               = 4; % The friction cone is approximated by using l
 
 forceFrictionCoefficient     = 1/3;  
 torsionalFrictionCoefficient = 2/150;
-
-%physical size of foot
-phys.footSize                = [ -0.065 0.13   ;    % xMin, xMax
-                                 -0.045 0.05  ];   % yMin, yMax    
+ 
                       
-   gain.footSize  = [ -0.07  0.12   ;    % xMin, xMax
-                       -0.045 0.05 ];   % yMin, yMax   
+gain.footSize  = [ -0.07  0.12   ;  % xMin, xMax
+                   -0.045 0.05 ];   % yMin, yMax   
 
 % gain.footSize                = [ -0.065 0.13   ;    % xMin, xMax
 %                                  -0.04 0.04  ];   % yMin, yMax
 fZmin                        = 10;
 
-%% The QP solver will search a solution fo that 
-% satisfies the inequality Aineq_f F(fo) < bineq_f
 reg.pinvTol     = 1e-5;
 reg.pinvDamp    = 0.01;
-reg.pinvDampVb  = 1e-7;
+reg.pinvDampVb  = 0.001;
 reg.HessianQP   = 1e-7;
 reg.impedances  = 0.1;
 reg.dampings    = 0;
