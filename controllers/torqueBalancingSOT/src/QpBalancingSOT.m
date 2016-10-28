@@ -16,18 +16,18 @@
 %  */
 %% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-function QpTwoFeet(block)
+function QpBalancingSOT(block)
 
 setup(block);
 
 function setup(block)
     
-block.NumInputPorts  = 6; 
+block.NumInputPorts  = 8; 
 block.NumOutputPorts = 3; 
 
 % Setup port properties to be inherited or dynamic
 block.SetPreCompInpPortInfoToDynamic;
-block.SetPreCompOutPortInfoToDynamic;
+%block.SetPreCompOutPortInfoToDynamic;
 % block.SetPreCompInpPortInfoToInherited;
 % block.SetPreCompOutPortInfoToInherited;
 
@@ -38,17 +38,14 @@ block.SetPreCompOutPortInfoToDynamic;
 
 
 % Definition of port sizes for QP 2 feet
-block.InputPort(1).Dimensions        = [ 1  2];   % LEFT_RIGHT_FOOT_IN_CONTACT
-block.InputPort(2).Dimensions        = [12 12];   % HessianMatrixQP2Feet               
-block.InputPort(3).Dimensions        = [ 1 12];   % gradientQP2Feet
-block.InputPort(4).Dimensions        = [38 12];   % ConstraintsMatrixQP2Feet 
-block.InputPort(5).Dimensions        = [ 1 38];   % bVectorConstraintsQp2Feet 
-block.InputPort(6).Dimensions        = 1 ;        % USE_QP_SOLVER
-% Definition of port sizes for QP 1 foot
-block.InputPort(7).Dimensions        = [ 6  6];   % HessianMatrixQP1Foot              
-block.InputPort(8).Dimensions        = [ 1  6];   % gradientQP1Foot
-block.InputPort(9).Dimensions        = [19  6];   % ConstraintsMatrixQP1Foot
-block.InputPort(10).Dimensions       = [ 1 19];   % bVectorConstraintsQp1Foot
+%block.InputPort(1).Dimensions        = -1;   % LEFT_RIGHT_FOOT_IN_CONTACT
+%block.InputPort(2).Dimensions        = -1;   % HessianMatrixQP2Feet               
+%block.InputPort(3).Dimensions        = -1;   % gradientQP2Feet
+%block.InputPort(4).Dimensions        = -1;   % ConstraintsMatrixQP2Feet 
+%block.InputPort(5).Dimensions        = -1;   % bVectorConstraintsQp2Feet 
+%block.InputPort(6).Dimensions        = -1;   % USE_QP_SOLVER
+%block.InputPort(7).Dimensions        = -1;   % bVectorConstraintsQp2Feet 
+%block.InputPort(8).Dimensions        = -1;   % USE_QP_SOLVER
 
 % Override output port properties
 block.OutputPort(1).Dimensions       = 12;        % f0 Two Feet
@@ -106,6 +103,7 @@ block.RegBlockMethod('Outputs', @Outputs);     % Required
 % block.RegBlockMethod('Update', @Update);
 % block.RegBlockMethod('Derivatives', @Derivatives);
 block.RegBlockMethod('Terminate', @Terminate); % Required    
+block.RegBlockMethod('SetInputPortDimensions', @SetInputPortDimensions);
 
 %end setup
 
@@ -206,20 +204,21 @@ function Outputs(block)
     else
         exitFlagQP           = -10;
     end
-    block.OutputPort(1).Data = f02Feet;
-    block.OutputPort(2).Data = exitFlagQP;
+    block.OutputPort(1).Data = zeros(12,1);
+    block.OutputPort(2).Data = 1;
     
-    block.OutputPort(3).Data = [f0OneFoot*LEFT_RIGHT_FOOT_IN_CONTACT(1);
-                                f0OneFoot*LEFT_RIGHT_FOOT_IN_CONTACT(2)]*abs(LEFT_RIGHT_FOOT_IN_CONTACT(2)-LEFT_RIGHT_FOOT_IN_CONTACT(1));
+    block.OutputPort(3).Data = zeros(12,1);
     
 %end Outputs
 
 
 function Terminate(block)
 
+
 %end Terminate
 
+function SetInputPortDimensions(s, port, dimsInfo)
+disp(strcat('SetInputDimensions for port ', num2str(port), ' with dim ' , num2str(dimsInfo)));
 
-
-
+s.InputPort(port).Dimensions = dimsInfo;
 
