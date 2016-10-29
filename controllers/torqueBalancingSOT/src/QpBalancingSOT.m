@@ -23,36 +23,23 @@ setup(block);
 function setup(block)
     
 block.NumInputPorts  = 8; 
-block.NumOutputPorts = 3; 
+block.NumOutputPorts = 4; 
 
-% Setup port properties to be inherited or dynamic
+% Setup port properties to be  dynamic
 block.SetPreCompInpPortInfoToDynamic;
-%block.SetPreCompOutPortInfoToDynamic;
-% block.SetPreCompInpPortInfoToInherited;
-% block.SetPreCompOutPortInfoToInherited;
-
-% %1 % [quadTerm;linTerm] (12x12;1x12):(13x12)               
-% %2 % [Aineq,bineq]             
-% %3 % [Aeq,beq]                   
-% %4 % [x0;lb;ub]                  
+block.SetPreCompOutPortInfoToDynamic;
 
 
 % Definition of port sizes for QP 2 feet
-%block.InputPort(1).Dimensions        = -1;   % LEFT_RIGHT_FOOT_IN_CONTACT
-%block.InputPort(2).Dimensions        = -1;   % HessianMatrixQP2Feet               
-%block.InputPort(3).Dimensions        = -1;   % gradientQP2Feet
-%block.InputPort(4).Dimensions        = -1;   % ConstraintsMatrixQP2Feet 
-%block.InputPort(5).Dimensions        = -1;   % bVectorConstraintsQp2Feet 
-%block.InputPort(6).Dimensions        = -1;   % USE_QP_SOLVER
-%block.InputPort(7).Dimensions        = -1;   % bVectorConstraintsQp2Feet 
-%block.InputPort(8).Dimensions        = -1;   % USE_QP_SOLVER
+%block.InputPort(1).Dimensions        = -1;  It does not copile if the
+%input port dimension is dynamic and the input is a matrix. Leave it
+%commented
 
 % Override output port properties
-block.OutputPort(1).Dimensions       = 12;        % f0 Two Feet
-block.OutputPort(2).Dimensions       = 1;         % Exit flag QP 2 Feet
-
-% Override output port properties
-block.OutputPort(3).Dimensions       = 12;        % f0 One foot     
+block.OutputPort(1).Dimensions       = block.DialogPrm(1).Data; % f0 Two Feet
+block.OutputPort(2).Dimensions       = 6;                       % Exit flag QP 2 Feet
+block.OutputPort(3).Dimensions       = 6;                       % f0 One foot     
+block.OutputPort(4).Dimensions       = 1;                       % f0 One foot     
 
 for i=1:block.NumInputPorts
     block.InputPort(i).DatatypeID  = -1;          % 'inherited', see http://www.mathworks.com/help/simulink/slref/simulink.blockdata.html#f29-108672
@@ -67,7 +54,7 @@ end
 
 
 % Register parameters
-block.NumDialogPrms     = 0;
+block.NumDialogPrms     = 1;
 
 % Register sample times
 %  [0 offset]            : Continuous sample time
@@ -99,11 +86,13 @@ block.SimStateCompliance = 'DefaultSimState';
 % block.RegBlockMethod('InitializeConditions', @InitializeConditions);
 % block.RegBlockMethod('Start', @Start);
 block.RegBlockMethod('SetInputPortSamplingMode',@SetInputPortSamplingMode);
+
 block.RegBlockMethod('Outputs', @Outputs);     % Required
 % block.RegBlockMethod('Update', @Update);
 % block.RegBlockMethod('Derivatives', @Derivatives);
 block.RegBlockMethod('Terminate', @Terminate); % Required    
 block.RegBlockMethod('SetInputPortDimensions', @SetInputPortDimensions);
+block.RegBlockMethod('SetOutputPortDimensions',@SetOutputPortDimensions);
 
 %end setup
 
@@ -166,15 +155,11 @@ function Outputs(block)
     
     LEFT_RIGHT_FOOT_IN_CONTACT = block.InputPort(1).Data;
     exitFlagQP                 = 0;
-    f0OneFoot                  = zeros(6,1);
-    f02Feet                    = zeros(6*2,1);
-    USE_QPO_SOLVER             = block.InputPort(6).Data;
-
+    HessianMatrixQP2Feet       = block.InputPort(2).Data;
+    gradientQP2Feet            = block.InputPort(3).Data;
+    ConstraintsMatrixQP2Feet   = block.InputPort(4).Data;
+    bVectorConstraintsQp2Feet  = block.InputPort(5).Data;
     if sum(LEFT_RIGHT_FOOT_IN_CONTACT) > (2 - CONTACT_THRESHOLD)
-        HessianMatrixQP2Feet       = block.InputPort(2).Data;
-        gradientQP2Feet            = block.InputPort(3).Data;
-        ConstraintsMatrixQP2Feet   = block.InputPort(4).Data;
-        bVectorConstraintsQp2Feet  = block.InputPort(5).Data;
         if USE_QPO_SOLVER 
             [f02Feet,~,exitFlagQP,~,~,~] = qpOASES(HessianMatrixQP2Feet,gradientQP2Feet',ConstraintsMatrixQP2Feet,[],[],[],bVectorConstraintsQp2Feet');           
             if exitFlagQP ~= 0
@@ -186,10 +171,6 @@ function Outputs(block)
         end
             
     elseif sum(LEFT_RIGHT_FOOT_IN_CONTACT) > (1 - CONTACT_THRESHOLD) 
-        HessianMatrixQP1Foot       = block.InputPort(7).Data;
-        gradientQP1Foot            = block.InputPort(8).Data;
-        ConstraintsMatrixQP1Foot   = block.InputPort(9).Data;
-        bVectorConstraintsQP1Foot  = block.InputPort(10).Data;
 
         if USE_QPO_SOLVER 
             [f0OneFoot,~,exitFlagQP,~,~,~] = qpOASES(HessianMatrixQP1Foot,gradientQP1Foot',ConstraintsMatrixQP1Foot,[],[],[],bVectorConstraintsQP1Foot');           
@@ -204,10 +185,10 @@ function Outputs(block)
     else
         exitFlagQP           = -10;
     end
-    block.OutputPort(1).Data = zeros(12,1);
-    block.OutputPort(2).Data = 1;
-    
-    block.OutputPort(3).Data = zeros(12,1);
+    block.OutputPort(1).Data = zeros(block.DialogPrm(1).Data,0);
+    block.OutputPort(2).Data = zeros(6,0);
+    block.OutputPort(3).Data = zeros(6,0);
+    block.OutputPort(4).Data = exitFlagQP;
     
 %end Outputs
 
@@ -217,8 +198,10 @@ function Terminate(block)
 
 %end Terminate
 
+function SetOutputPortDimensions(s, port, dimsInfo)
+    s.OutputPort(port).Dimensions = dimsInfo;
+    
 function SetInputPortDimensions(s, port, dimsInfo)
-disp(strcat('SetInputDimensions for port ', num2str(port), ' with dim ' , num2str(dimsInfo)));
+    s.InputPort(port).Dimensions = dimsInfo;
 
-s.InputPort(port).Dimensions = dimsInfo;
 

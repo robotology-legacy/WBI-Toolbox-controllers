@@ -118,8 +118,8 @@ function [hessianMatrixQP,biasVectorQP,constraintQPLeftFoot,constraintQPRightFoo
     hessianMatrixQP      = (S' * B)' * S' * B ;
     biasVectorQP         = (S' * B)' * tauFeedback;
     
-    constraintQPEq     = jacobians*inv(massMatrix)*B;
-    bVectorQPEq        = desiredTaskAcc - jacobiansDotNu +  jacobians*inv(massMatrix)*biasTorques; 
+    constraintQPEq     = jacobians*(massMatrix\B);
+    bVectorQPEq        = desiredTaskAcc - jacobiansDotNu +  (jacobians/massMatrix)*biasTorques; 
     
     % Update constraint matrices. The constraint matrix for the inequality
     % constraints in the problem 1) is built up startin from the constraint
