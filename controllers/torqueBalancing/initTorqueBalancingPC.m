@@ -50,7 +50,7 @@ CONFIG.SIMULATION_TIME     = inf;
 %               robots/YARP_ROBOT_NAME/initRegGen.m
 % 
 % 'WALKING': under development.
-SM.SM_TYPE                 = 'YOGA';
+SM.SM_TYPE                 = 'COORDINATOR';
 
 % CONFIG.SCOPES: if set to true, all visualizers for debugging are active
 CONFIG.SCOPES.ALL          = false;
@@ -154,8 +154,11 @@ end
 
 [ConstraintsMatrix,bVectorConstraints]= constraints(forceFrictionCoefficient,numberOfPoints,torsionalFrictionCoefficient,gain.footSize,fZmin);
 
+%% %%%%%%%%%%%%%%%%%%%%%
 load('data.mat')
 SIMULATION_TIME = time(end);
-ts = 0.01;
+ts         =   0.01;
+link2_corr =  -9.8;
+PORTS.WBDT_CHAIR = '/chair/FT_sensor/analog:o/torque';
 
 
