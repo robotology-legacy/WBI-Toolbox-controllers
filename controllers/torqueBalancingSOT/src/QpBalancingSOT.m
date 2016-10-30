@@ -152,42 +152,107 @@ function Outputs(block)
 
 
     CONTACT_THRESHOLD = 0.1;
+    unboundedConstant = 1e10;
     
     LEFT_RIGHT_FOOT_IN_CONTACT = block.InputPort(1).Data;
-    exitFlagQP                 = 0;
-    HessianMatrixQP2Feet       = block.InputPort(2).Data;
-    gradientQP2Feet            = block.InputPort(3).Data;
-    ConstraintsMatrixQP2Feet   = block.InputPort(4).Data;
-    bVectorConstraintsQp2Feet  = block.InputPort(5).Data;
-    if sum(LEFT_RIGHT_FOOT_IN_CONTACT) > (2 - CONTACT_THRESHOLD)
-        if USE_QPO_SOLVER 
-            [f02Feet,~,exitFlagQP,~,~,~] = qpOASES(HessianMatrixQP2Feet,gradientQP2Feet',ConstraintsMatrixQP2Feet,[],[],[],bVectorConstraintsQp2Feet');           
-            if exitFlagQP ~= 0
-                f02Feet = - inv(HessianMatrixQP2Feet)*gradientQP2Feet';
-            end
-        else
-            exitFlagQP                 = 1;
-            f02Feet = - inv(HessianMatrixQP2Feet)*gradientQP2Feet';
-        end
-            
-    elseif sum(LEFT_RIGHT_FOOT_IN_CONTACT) > (1 - CONTACT_THRESHOLD) 
-
-        if USE_QPO_SOLVER 
-            [f0OneFoot,~,exitFlagQP,~,~,~] = qpOASES(HessianMatrixQP1Foot,gradientQP1Foot',ConstraintsMatrixQP1Foot,[],[],[],bVectorConstraintsQP1Foot');           
-
-           if exitFlagQP ~= 0
-                f0OneFoot = - inv(HessianMatrixQP1Foot)*gradientQP1Foot';
-           end
-        else
-            exitFlagQP= 1;
-            f0OneFoot = - inv(HessianMatrixQP1Foot)*gradientQP1Foot';
-        end
+    hessianMatrixQP            = block.InputPort(2).Data;
+    biasVectorQP               = block.InputPort(3).Data;
+    constraintMatrixLeftFoot   = block.InputPort(4).Data;
+    constraintMatrixRightFoot  = block.InputPort(5).Data;
+    constraintMatrixEq         = block.InputPort(6).Data;
+    upperBoundEqConstraints    = block.InputPort(7).Data;
+    upperBoundFeetConstratins  = block.InputPort(8).Data;
+    nDof                       = block.DialogPrm(1).Data;
+    
+    
+    % What follows aims at defining the hessian matrix H, the bias
+    % vector g, and the constraint matrix A for the formalism of qpOases,ie
+    %
+    %
+    % min (1/2) x'*H*x + x'*g
+    % s.t.
+    %     lbA < A*x < ubA
+    %
+    % For further information, see
+    % 
+    % http://www.coin-or.org/qpOASES/doc/3.0/manual.pdf
+    %
+    % 
+    
+    % Only left foot is in contact
+    if LEFT_RIGHT_FOOT_IN_CONTACT(1) > (1 - CONTACT_THRESHOLD) && LEFT_RIGHT_FOOT_IN_CONTACT(2) < CONTACT_THRESHOLD
+        % In this case, 
+        % 
+        % x = [jointTorques
+        %      contactWrenchLeftFoot]
+        %
+        
+        SL                         = [eye(nDof),     zeros(nDof,6)  
+                                      zeros(6,nDof),     eye(6)
+                                      zeros(6,nDof),    zeros(6)  ];
+        H = SL'*hessianMatrixQP*SL;
+        g = SL'*biasVectorQP;
+        
+        A    = [zeros(length(upperBoundFeetConstratins),nDof),constraintMatrixLeftFoot,zeros(length(upperBoundFeetConstratins),12);
+                constraintMatrixEq];
+        ubA  = [upperBoundFeetConstratins;
+                upperBoundEqConstraints];
+        lbA  = [-unboundedConstant*ones(upperBoundFeetConstratins,1);
+                upperBoundEqConstraints];
+           
+    % Only right foot is in contact
+    elseif LEFT_RIGHT_FOOT_IN_CONTACT(2) > (1 - CONTACT_THRESHOLD) && LEFT_RIGHT_FOOT_IN_CONTACT(1) < CONTACT_THRESHOLD
+        % In this case, 
+        % 
+        % x = [jointTorques
+        %      contactWrenchRightFoot]
+        
+        %
+        SR                         = [eye(nDof),     zeros(nDof,6)  
+                                      zeros(6,nDof),     zeros(6)
+                                      zeros(6,nDof),    eye(6)  ];
+        H = SR'*hessianMatrixQP*SR;
+        g = SR'*biasVectorQP;
+        
+        A    = [zeros(length(upperBoundFeetConstratins),nDof),zeros(length(upperBoundFeetConstratins),12),constraintMatrixRightFoot;
+                constraintMatrixEq];
+        ubA  = [upperBoundFeetConstratins;
+                upperBoundEqConstraints];
+        lbA  = [-unboundedConstant*ones(upperBoundFeetConstratins,1);
+                upperBoundEqConstraints];
+    
+    %Both feet in contact
+    elseif norm(LEFT_RIGHT_FOOT_IN_CONTACT) > 2 - CONTACT_THRESHOLD
+        H    = hessianMatrixQP;
+        g    = biasVectorQP; 
+        
+        A    = [zeros(length(upperBoundFeetConstratins),nDof),constraintMatrixLeftFoot,zeros(length(upperBoundFeetConstratins),12);
+                zeros(length(upperBoundFeetConstratins),nDof),zeros(length(upperBoundFeetConstratins),12),constraintMatrixRightFoot;
+                constraintMatrixEq];
+        ubA  = [upperBoundFeetConstratins;
+                upperBoundFeetConstratins;
+                upperBoundEqConstraints];
+        lbA  = [-unboundedConstant*ones(upperBoundFeetConstratins,1);
+                -unboundedConstant*ones(upperBoundFeetConstratins,1);
+                upperBoundEqConstraints];
     else
-        exitFlagQP           = -10;
+        H    = hessianMatrixQP;
+        g    = biasVectorQP; 
+        ubA  = [];
+        lbA  = [];
     end
-    block.OutputPort(1).Data = zeros(block.DialogPrm(1).Data,0);
-    block.OutputPort(2).Data = zeros(6,0);
-    block.OutputPort(3).Data = zeros(6,0);
+    
+    [u,~,exitFlagQP,~,~,~] = qpOASES(H,g,A,[],[],lbA,ubA);           
+
+    block.OutputPort(1).Data = u(1:nDof);
+    block.OutputPort(2).Data = u(nDof+1:nDof+6)*LEFT_RIGHT_FOOT_IN_CONTACT(1);
+    block.OutputPort(3).Data = u(nDof+1:nDof+6)*LEFT_RIGHT_FOOT_IN_CONTACT(2);
+
+    %Both feet in contact
+    if norm(LEFT_RIGHT_FOOT_IN_CONTACT) > 2 - CONTACT_THRESHOLD
+        block.OutputPort(3).Data = u(nDof+7:nDof+12);
+    end
+
     block.OutputPort(4).Data = exitFlagQP;
     
 %end Outputs

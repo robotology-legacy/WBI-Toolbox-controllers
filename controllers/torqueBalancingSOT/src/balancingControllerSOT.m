@@ -16,7 +16,7 @@
 %  */
 %% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-function [hessianMatrixQP,biasVectorQP,constraintQPLeftFoot,constraintQPRightFoot,constraintQPEq, bVectorQPEq] = ...
+function [hessianMatrix,biasVector,constraintMatrixLeftFoot,constraintMatrixRightFoot,constraintMatrixEq, upperBoundEqConstraints] = ...
                                         balancingControllerSOT(constraints,ROBOT_DOF_FOR_SIMULINK,ConstraintsMatrix,...
                                                                jointAngles,desiredJointAngles, massMatrix, biasTorques, gravityTorques, jacobians, jacobiansDotNu, robotVelocity, poseLeftFoot, poseRightFoot, desiredTaskAcc,impedances)
           
@@ -115,11 +115,11 @@ function [hessianMatrixQP,biasVectorQP,constraintQPLeftFoot,constraintQPRightFoo
     B                  = [S,contactjJacobians']; 
     tauFeedback        = diag(impedances)*(jointAngles-desiredJointAngles);% + diag(damping)*robotVelocity(7:end);
 
-    hessianMatrixQP      = (S' * B)' * S' * B ;
-    biasVectorQP         = (S' * B)' * tauFeedback;
+    hessianMatrix      = (S' * B)' * S' * B ;
+    biasVector         = (S' * B)' * tauFeedback;
     
-    constraintQPEq     = jacobians*(massMatrix\B);
-    bVectorQPEq        = desiredTaskAcc - jacobiansDotNu +  (jacobians/massMatrix)*biasTorques; 
+    constraintMatrixEq     = jacobians*(massMatrix\B);
+    upperBoundEqConstraints        = desiredTaskAcc - jacobiansDotNu +  (jacobians/massMatrix)*biasTorques; 
     
     % Update constraint matrices. The constraint matrix for the inequality
     % constraints in the problem 1) is built up startin from the constraint
@@ -139,8 +139,8 @@ function [hessianMatrixQP,biasVectorQP,constraintQPLeftFoot,constraintQPRightFoo
     %
     % The same hold for the right foot
     
-    constraintQPLeftFoot  = ConstraintsMatrix * blkdiag(poseLeftFoot(1:3,1:3)' ,poseLeftFoot(1:3,1:3)');
-    constraintQPRightFoot = ConstraintsMatrix * blkdiag(poseRightFoot(1:3,1:3)',poseRightFoot(1:3,1:3)');
+    constraintMatrixLeftFoot  = ConstraintsMatrix * blkdiag(poseLeftFoot(1:3,1:3)' ,poseLeftFoot(1:3,1:3)');
+    constraintMatrixRightFoot = ConstraintsMatrix * blkdiag(poseRightFoot(1:3,1:3)',poseRightFoot(1:3,1:3)');
     
     
 

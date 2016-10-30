@@ -152,6 +152,6 @@ elseif strcmpi(SM.SM_TYPE, 'WALKING')
     run(robotSpecificFSM);
 end
 
-[ConstraintsFeetMatrix,bVectorFeetConstraints]= constraints(forceFrictionCoefficient,numberOfPoints,torsionalFrictionCoefficient,gain.footSize,fZmin);
+[ConstraintsFeetMatrix,upperBoundFeetConstratins]= constraints(forceFrictionCoefficient,numberOfPoints,torsionalFrictionCoefficient,gain.footSize,fZmin);
 
 
