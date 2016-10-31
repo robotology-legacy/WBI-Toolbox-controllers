@@ -3,6 +3,14 @@ CONFIG.ON_GAZEBO = true;
 PORTS.IMU = '/icubGazeboSim/inertial';
 
 
+gain.rootPD      = [0 0];
+
+gain.lFoot.posPD = [zeros(3,1),zeros(3,1)];
+gain.lFoot.rotPD = [0,0];
+
+gain.rFoot.posPD = [zeros(3,1),zeros(3,1)];
+gain.rFoot.rotPD = [0,0];
+
 CONFIG.LEFT_RIGHT_FOOT_IN_CONTACT  = [1 1];
 
 CONFIG.SMOOTH_DES_COM      = 0;    % If equal to one, the desired streamed values 
