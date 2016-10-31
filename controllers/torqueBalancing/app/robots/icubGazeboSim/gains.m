@@ -32,11 +32,11 @@ gain.SmoothingTimeGainScheduling = 0.02;
 %%
 %           PARAMETERS FOR TWO FEET ONE GROUND
 if (sum(CONFIG.LEFT_RIGHT_FOOT_IN_CONTACT) == 2)
-    gain.PCOM                 = diag([50    50  50]);
+    gain.PCOM                 = diag([50    50  50])/10;
     gain.ICOM                 = diag([  0    0   0]);
     gain.DCOM                 = 0*sqrt(gain.PCOM);
 
-    gain.PAngularMomentum     = 10 ;
+    gain.PAngularMomentum     = 10/10 ;
     gain.DAngularMomentum     = 2*sqrt(gain.PAngularMomentum);
 
     % Impadances acting in the null space of the desired contact forces 
@@ -102,7 +102,7 @@ end
 
 sat.integral              = 0;
 gain.integral             = [intTorso,intArms,intArms,intLeftLeg,intRightLeg];
-gain.impedances           = [impTorso(1,:),impArms(1,:),impArms(1,:),impLeftLeg(1,:),impRightLeg(1,:)];
+gain.impedances           = [impTorso(1,:),impArms(1,:),impArms(1,:),impLeftLeg(1,:),impRightLeg(1,:)]/10;
 gain.dampings             = 0*sqrt(gain.impedances);
 gain.increasingRatesImp   = [impTorso(2,:),impArms(2,:),impArms(2,:),impLeftLeg(2,:),impRightLeg(2,:)];
 sat.impedences            = [80   25    1400];

@@ -50,10 +50,10 @@ CONFIG.SIMULATION_TIME     = inf;
 %               robots/YARP_ROBOT_NAME/initRegGen.m
 % 
 % 'WALKING': under development.
-SM.SM_TYPE                 = 'YOGA';
+SM.SM_TYPE                 = 'COORDINATOR';
 
 % CONFIG.SCOPES: if set to true, all visualizers for debugging are active
-CONFIG.SCOPES.ALL          = false;
+CONFIG.SCOPES.ALL          = true;
 % You can also activate only some specific debugging scopes
 CONFIG.SCOPES.BASE_EST_IMU = false;
 CONFIG.SCOPES.EXTWRENCHES  = false;
@@ -118,7 +118,7 @@ PORTS.Q_DES     = ['/' WBT_modelName '/qDes:i'];
 PORTS.WBDT_LEFTLEG_EE  = '/wholeBodyDynamicsTree/left_leg/cartesianEndEffectorWrench:o';
 PORTS.WBDT_RIGHTLEG_EE = '/wholeBodyDynamicsTree/right_leg/cartesianEndEffectorWrench:o';
 
-CONFIG.USE_QP_SOLVER     = true; 
+CONFIG.USE_QP_SOLVER     = false; 
 
 CONFIG.Ts                = 0.01; %  Controller period [s]
 
@@ -154,4 +154,23 @@ end
 
 [ConstraintsMatrix,bVectorConstraints]= constraints(forceFrictionCoefficient,numberOfPoints,torsionalFrictionCoefficient,gain.footSize,fZmin);
 
+%%
+link2_corr =  -9.8;
+PORTS.WBDT_CHAIR = '/chair/FT_sensor/analog:o/forceTorque';
 
+% Rx = rotx(0.000000);
+% Ry = roty(0.095787);
+% Rz = rotz(3.127805);
+% 
+% Rfoot   = Rx*Ry*Rz;
+% posFoot = [-0.034718;-0.009841;0.372784];
+
+Rx = rotx(0.0);
+Ry = roty(0.0);
+Rz = rotz(3.14);
+
+Rfoot   = Rx*Ry*Rz;
+posFoot = [-0.035;0.0;0.4];
+
+gazebo_H_base  = [Rfoot posFoot; 0 0 0 1];
+gazebo_H_chair = [eye(3),[0;0;0.165]; 0 0 0 1];

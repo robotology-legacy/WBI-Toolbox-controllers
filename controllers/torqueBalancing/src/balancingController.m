@@ -22,7 +22,7 @@ function [tauModel,Sigma,NA,f_HDot, ...
           errorCoM,qTilde,f]    =  ...
               balancingController(constraints,ROBOT_DOF_FOR_SIMULINK,ConstraintsMatrix,bVectorConstraints,...
               q,qDes,v, M, h , H,intHw,w_H_l_sole, w_H_r_sole, JL,JR, dJLv,dJRv, xcom,J_CoM, desired_x_dx_ddx_CoM,...
-              gainsPCOM,gainsDCOM,impedances,intErrorCoM,ki_int_qtilde,reg,gain)
+              gainsPCOM,gainsDCOM,impedances,intErrorCoM,ki_int_qtilde,reg,gain,f_ext)
     %BALANCING CONTROLLER
 
     %% DEFINITION OF CONTROL AND DYNAMIC VARIABLES
@@ -162,7 +162,7 @@ function [tauModel,Sigma,NA,f_HDot, ...
     bVectorConstraints2Feet   = [bVectorConstraints;bVectorConstraints];
     
     % Terms used in Eq. 0)
-    tauModel        = PInv_JcMinvSt*(JcMinv*h - JcDv) + nullJcMinvSt*(h(7:end) - Mbj'/Mb*h(1:6) ...
+    tauModel        = PInv_JcMinvSt*(JcMinv*(h-f_ext) - JcDv) + nullJcMinvSt*(h(7:end) - Mbj'/Mb*h(1:6) ...
                        -impedances*NLMbar*qTilde  -ki_int_qtilde -dampings*NLMbar*qD);
     
     Sigma           = -(PInv_JcMinvSt*JcMinvJct + nullJcMinvSt*JBar);
@@ -177,7 +177,7 @@ function [tauModel,Sigma,NA,f_HDot, ...
     % constraints(1) = constraints(2) = 1. This because when the robot
     % stands on one foot, the f_HDot is evaluated directly from the
     % optimizer (see next section).
-    f_HDot          = pinvA*(HDotDes - gravityWrench)*constraints(1)*constraints(2);
+    f_HDot          = pinvA*(HDotDes - gravityWrench - f_ext(1:6))*constraints(1)*constraints(2);
    
     SigmaNA         = Sigma*NA;
    

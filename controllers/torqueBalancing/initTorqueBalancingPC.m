@@ -159,6 +159,22 @@ load('data.mat')
 SIMULATION_TIME = time(end);
 ts         =   0.01;
 link2_corr =  -9.8;
-PORTS.WBDT_CHAIR = '/chair/FT_sensor/analog:o/torque';
+PORTS.WBDT_CHAIR = '/chair/FT_sensor/analog:o/forceTorque';
 
+% Rx = rotx(0.000000);
+% Ry = roty(0.095787);
+% Rz = rotz(3.127805);
+% 
+% Rfoot   = Rx*Ry*Rz;
+% posFoot = [-0.034718;-0.009841;0.372784];
+
+Rx = rotx(0.0);
+Ry = roty(0.0);
+Rz = rotz(3.14);
+
+Rfoot   = Rx*Ry*Rz;
+posFoot = [-0.035;0.0;0.4];
+
+gazebo_H_base  = [Rfoot posFoot; 0 0 0 1];
+gazebo_H_chair = [eye(3),[0;0;0.165]; 0 0 0 1];
 
