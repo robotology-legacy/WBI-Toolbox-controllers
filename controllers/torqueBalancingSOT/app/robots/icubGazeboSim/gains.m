@@ -3,13 +3,13 @@ CONFIG.ON_GAZEBO = true;
 PORTS.IMU = '/icubGazeboSim/inertial';
 
 
-gain.rootPD      = [0 0];
+gain.rootPD      = [10 2*sqrt(1)];
 
-gain.lFoot.posPD = [zeros(3,1),zeros(3,1)];
-gain.lFoot.rotPD = [0,0];
+gain.lFoot.posPD = [10*ones(3,1),2*sqrt(ones(3,1))];
+gain.lFoot.rotPD = [10,2];
 
-gain.rFoot.posPD = [zeros(3,1),zeros(3,1)];
-gain.rFoot.rotPD = [0,0];
+gain.rFoot.posPD = [10*ones(3,1),2*sqrt(ones(3,1))];
+gain.rFoot.rotPD = [10,2];
 
 CONFIG.LEFT_RIGHT_FOOT_IN_CONTACT  = [1 1];
 

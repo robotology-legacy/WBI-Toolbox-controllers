@@ -15,7 +15,7 @@ if strcmpi(SM.SM_TYPE, 'YOGA')
     gain.footSize              = [ -0.05  0.10 ;    % xMin, xMax
                                    -0.025 0.025];   % yMin, yMax  
                    
-    forceFrictionCoefficient     = 1/3;  
+    forceFrictionCoefficient     = 1/4;  
     
     %Smoothing time for time varying impedances
     gain.SmoothingTimeGainScheduling              = 2;  
@@ -74,6 +74,7 @@ if strcmpi(SM.SM_TYPE, 'YOGA')
                         30   30   30, 10   10    10   10 0, 10   10    10   10 0, 30   50   30    60     50  50, 30   50  300    60     50  50  % state == 11  PREPARING FOR SWITCHING 
                         10   30   20, 10   10    10    8 0, 10   10    10    8 0, 30   50   30    60     50  50, 30   50   30    60     50  50  % state == 12  LOOKING FOR CONTACT
                         10   30   20, 10   10    10    8 0, 10   10    10    8 0, 30   50   30    60     50  50, 30   50   30    60     50  50];% state == 13  TRANSITION TO INITIAL POSITION
+    
 end              
 %% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%                      
          
@@ -129,7 +130,7 @@ sm.com.states      = [0.0,  0.01,0.0;   %% state ==  1  TWO FEET BALANCING NOT U
                       0.0, -0.00,0.0;   %% state == 11  PREPARING FOR SWITCHING
                       0.0,  0.09,0.0;   %% state == 12  LOOKING FOR CONTACT 
                       0.0,  0.00,0.0];  %% state == 13  TRANSITION INIT POSITION: THIS REFERENCE IS IGNORED
-sm.tBalancing      = 0;%inf;%0.5;
+sm.tBalancing      = 10;%inf;%0.5;
 
 
 sm.joints.states = [[0.0864,0.0258,0.0152, ...                          %% state == 1  TWO FEET BALANCING, THIS REFERENCE IS IGNORED 
