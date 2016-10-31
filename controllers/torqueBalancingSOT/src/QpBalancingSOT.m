@@ -152,7 +152,7 @@ function Outputs(block)
 
 
     CONTACT_THRESHOLD = 0.1;
-    unboundedConstant = 1e10;
+    unboundedConstant = 1e12;
     
     LEFT_RIGHT_FOOT_IN_CONTACT = block.InputPort(1).Data;
     hessianMatrixQP            = block.InputPort(2).Data;
@@ -161,7 +161,7 @@ function Outputs(block)
     constraintMatrixRightFoot  = block.InputPort(5).Data;
     constraintMatrixEq         = block.InputPort(6).Data;
     upperBoundEqConstraints    = block.InputPort(7).Data;
-    upperBoundFeetConstratins  = block.InputPort(8).Data;
+    upperBoundFeetConstraints  = block.InputPort(8).Data;
     nDof                       = block.DialogPrm(1).Data;
     
     
@@ -193,11 +193,11 @@ function Outputs(block)
         H = SL'*hessianMatrixQP*SL;
         g = SL'*biasVectorQP;
         
-        A    = [zeros(length(upperBoundFeetConstratins),nDof),constraintMatrixLeftFoot,zeros(length(upperBoundFeetConstratins),12);
+        A    = [zeros(length(upperBoundFeetConstraints),nDof),constraintMatrixLeftFoot,zeros(length(upperBoundFeetConstraints),12);
                 constraintMatrixEq];
-        ubA  = [upperBoundFeetConstratins;
+        ubA  = [upperBoundFeetConstraints;
                 upperBoundEqConstraints];
-        lbA  = [-unboundedConstant*ones(upperBoundFeetConstratins,1);
+        lbA  = [-unboundedConstant*ones(upperBoundFeetConstraints,1);
                 upperBoundEqConstraints];
            
     % Only right foot is in contact
@@ -214,11 +214,11 @@ function Outputs(block)
         H = SR'*hessianMatrixQP*SR;
         g = SR'*biasVectorQP;
         
-        A    = [zeros(length(upperBoundFeetConstratins),nDof),zeros(length(upperBoundFeetConstratins),12),constraintMatrixRightFoot;
+        A    = [zeros(length(upperBoundFeetConstraints),nDof),zeros(length(upperBoundFeetConstraints),12),constraintMatrixRightFoot;
                 constraintMatrixEq];
-        ubA  = [upperBoundFeetConstratins;
+        ubA  = [upperBoundFeetConstraints;
                 upperBoundEqConstraints];
-        lbA  = [-unboundedConstant*ones(upperBoundFeetConstratins,1);
+        lbA  = [-unboundedConstant*ones(upperBoundFeetConstraints,1);
                 upperBoundEqConstraints];
     
     %Both feet in contact
@@ -226,14 +226,14 @@ function Outputs(block)
         H    = hessianMatrixQP;
         g    = biasVectorQP; 
         
-        A    = [zeros(length(upperBoundFeetConstratins),nDof),constraintMatrixLeftFoot,zeros(length(upperBoundFeetConstratins),6);
-                zeros(length(upperBoundFeetConstratins),nDof),zeros(length(upperBoundFeetConstratins),6),constraintMatrixRightFoot;
+        A    = [zeros(length(upperBoundFeetConstraints),nDof),constraintMatrixLeftFoot,zeros(length(upperBoundFeetConstraints),6);
+                zeros(length(upperBoundFeetConstraints),nDof),zeros(length(upperBoundFeetConstraints),6),constraintMatrixRightFoot;
                 constraintMatrixEq];
-        ubA  = [upperBoundFeetConstratins;
-                upperBoundFeetConstratins;
+        ubA  = [upperBoundFeetConstraints;
+                upperBoundFeetConstraints;
                 upperBoundEqConstraints];
-        lbA  = [-unboundedConstant*ones(length(upperBoundFeetConstratins),1);
-                -unboundedConstant*ones(length(upperBoundFeetConstratins),1);
+        lbA  = [-unboundedConstant*ones(length(upperBoundFeetConstraints),1);
+                -unboundedConstant*ones(length(upperBoundFeetConstraints),1);
                 upperBoundEqConstraints];
     else
         H    = hessianMatrixQP;
@@ -249,7 +249,7 @@ function Outputs(block)
     block.OutputPort(3).Data = u(nDof+1:nDof+6)*LEFT_RIGHT_FOOT_IN_CONTACT(2);
 
     %Both feet in contact
-    if norm(LEFT_RIGHT_FOOT_IN_CONTACT) > 2 - CONTACT_THRESHOLD
+    if sum(LEFT_RIGHT_FOOT_IN_CONTACT) > 2 - CONTACT_THRESHOLD
         block.OutputPort(3).Data = u(nDof+7:nDof+12);
     end
 

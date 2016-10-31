@@ -70,8 +70,8 @@ function [hessianMatrix,biasVector,constraintMatrixLeftFoot,constraintMatrixRigh
     %
     %  5) J := [J_G;
     %           J_B;
-    %           J_R;
-    %           J_L];
+    %           J_L;
+    %           J_R];
     %
     % Therefore, the acceleration of the outputs i-iv stuck together are:
     %
@@ -105,21 +105,21 @@ function [hessianMatrix,biasVector,constraintMatrixLeftFoot,constraintMatrixRigh
     %% IMPLEMENTATION
     
     
-    ROBOT_DOF          = size(ROBOT_DOF_FOR_SIMULINK,1);
-    S                  = [zeros(6,ROBOT_DOF);
-                          eye(ROBOT_DOF,ROBOT_DOF)];
+    ROBOT_DOF                 = size(ROBOT_DOF_FOR_SIMULINK,1);
+    S                         = [zeros(6,ROBOT_DOF);
+                                 eye(ROBOT_DOF,ROBOT_DOF)];
     
-    contactjJacobians  = [jacobians(end-11:end-6,:)*constraints(1);
-                          jacobians(end- 5:end,  :)*constraints(2)];
+    contactJacobians          = [jacobians(end-11:end-6,:)*constraints(1);
+                                 jacobians(end- 5:end,  :)*constraints(2)];
                    
-    B                  = [S,contactjJacobians']; 
-    tauFeedback        = diag(impedances)*(jointAngles-desJointAngles);% + diag(damping)*robotVelocity(7:end);
+    B                         = [S,contactJacobians']; 
+    tauFeedback               = diag(impedances)*(jointAngles-desJointAngles);% + diag(damping)*robotVelocity(7:end);
 
-    hessianMatrix      = (S' * B)' * S' * B ;
-    biasVector         = (S' * B)' * tauFeedback;
+    hessianMatrix             = (S' * B)' * S' * B ;
+    biasVector                = (S' * B)' * tauFeedback;
     
-    constraintMatrixEq     = jacobians*(massMatrix\B);
-    upperBoundEqConstraints        = desiredTaskAcc - jacobiansDotNu +  (jacobians/massMatrix)*biasTorques; 
+    constraintMatrixEq        = jacobians*(massMatrix\B);
+    upperBoundEqConstraints   = desiredTaskAcc - jacobiansDotNu +  (jacobians/massMatrix)*biasTorques; 
     
     % Update constraint matrices. The constraint matrix for the inequality
     % constraints in the problem 1) is built up startin from the constraint
