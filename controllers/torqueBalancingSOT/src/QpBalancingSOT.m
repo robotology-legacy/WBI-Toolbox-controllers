@@ -222,18 +222,18 @@ function Outputs(block)
                 upperBoundEqConstraints];
     
     %Both feet in contact
-    elseif norm(LEFT_RIGHT_FOOT_IN_CONTACT) > 2 - CONTACT_THRESHOLD
+    elseif sum(LEFT_RIGHT_FOOT_IN_CONTACT) > 2 - CONTACT_THRESHOLD
         H    = hessianMatrixQP;
         g    = biasVectorQP; 
         
-        A    = [zeros(length(upperBoundFeetConstratins),nDof),constraintMatrixLeftFoot,zeros(length(upperBoundFeetConstratins),12);
-                zeros(length(upperBoundFeetConstratins),nDof),zeros(length(upperBoundFeetConstratins),12),constraintMatrixRightFoot;
+        A    = [zeros(length(upperBoundFeetConstratins),nDof),constraintMatrixLeftFoot,zeros(length(upperBoundFeetConstratins),6);
+                zeros(length(upperBoundFeetConstratins),nDof),zeros(length(upperBoundFeetConstratins),6),constraintMatrixRightFoot;
                 constraintMatrixEq];
         ubA  = [upperBoundFeetConstratins;
                 upperBoundFeetConstratins;
                 upperBoundEqConstraints];
-        lbA  = [-unboundedConstant*ones(upperBoundFeetConstratins,1);
-                -unboundedConstant*ones(upperBoundFeetConstratins,1);
+        lbA  = [-unboundedConstant*ones(length(upperBoundFeetConstratins),1);
+                -unboundedConstant*ones(length(upperBoundFeetConstratins),1);
                 upperBoundEqConstraints];
     else
         H    = hessianMatrixQP;
