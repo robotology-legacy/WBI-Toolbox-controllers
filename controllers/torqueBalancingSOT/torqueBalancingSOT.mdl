@@ -7,7 +7,7 @@ Model {
     NumRootInports	    0
     NumRootOutports	    0
     ParameterArgumentNames  ""
-    ComputedModelVersion    "1.3193"
+    ComputedModelVersion    "1.3194"
     NumModelReferences	    0
     NumTestPointedSignals   0
   }
@@ -52,11 +52,11 @@ Model {
 	$ObjectID		5
 	$ClassName		"Simulink.EditorInfo"
 	IsActive		[1]
-	ViewObjType		"SimulinkSubsys"
-	LoadSaveID		"3794"
+	ViewObjType		"SimulinkTopLevel"
+	LoadSaveID		"0"
 	Extents			[1246.0, 600.0]
-	ZoomFactor		[0.67452830188679247]
-	Offset			[-105.89354785839157, -5.7552447552447461]
+	ZoomFactor		[0.54894433781190022]
+	Offset			[107.67482517482426, 99.117872413640086]
       }
     }
   }
@@ -66,9 +66,9 @@ Model {
   ModifiedByFormat	  "%<Auto>"
   LastModifiedBy	  "DanielePucci"
   ModifiedDateFormat	  "%<Auto>"
-  LastModifiedDate	  "Mon Oct 31 16:46:11 2016"
-  RTWModifiedTimeStamp	  399833135
-  ModelVersionFormat	  "1.%<AutoIncrement:3193>"
+  LastModifiedDate	  "Mon Oct 31 16:52:17 2016"
+  RTWModifiedTimeStamp	  399833214
+  ModelVersionFormat	  "1.%<AutoIncrement:3194>"
   ConfigurationManager	  "none"
   SampleTimeColors	  off
   SampleTimeAnnotations	  off
@@ -1040,7 +1040,7 @@ Model {
   System {
     Name		    "torqueBalancingSOT"
     Location		    [0, 23, 1280, 796]
-    Open		    off
+    Open		    on
     ModelBrowserVisibility  off
     ModelBrowserWidth	    200
     ScreenColor		    "white"
@@ -24108,14 +24108,14 @@ Model {
       Name		      "Generator task acceleration"
       SID		      "3794"
       Ports		      [8, 1]
-      Position		      [1085, 886, 1265, 1029]
+      Position		      [1085, 876, 1265, 1019]
       ZOrder		      697
       RequestExecContextInheritance off
       Variant		      off
       System {
 	Name			"Generator task acceleration"
 	Location		[0, 23, 1280, 796]
-	Open			on
+	Open			off
 	ModelBrowserVisibility	off
 	ModelBrowserWidth	200
 	ScreenColor		"white"
@@ -27296,7 +27296,7 @@ Model {
       Name		      "controller_QP"
       SID		      "2355"
       Ports		      [13, 3]
-      Position		      [1290, 157, 1665, 1043]
+      Position		      [1310, 157, 1685, 1043]
       ZOrder		      542
       RequestExecContextInheritance off
       Variant		      off
@@ -28923,7 +28923,7 @@ Model {
       ZOrder		      118
       SrcBlock		      "controller_QP"
       SrcPort		      1
-      Points		      [88, 0]
+      Points		      [79, 0]
       Branch {
 	ZOrder			278
 	Points			[0, 695]
@@ -28952,7 +28952,7 @@ Model {
 	Points			[403, 0]
 	Branch {
 	  ZOrder		  176
-	  Points		  [0, 95]
+	  Points		  [0, 85]
 	  DstBlock		  "Generator task acceleration"
 	  DstPort		  5
 	}
@@ -28976,7 +28976,7 @@ Model {
       ZOrder		      16
       SrcBlock		      "DesValues"
       SrcPort		      6
-      Points		      [195, 0; 0, 225]
+      Points		      [195, 0; 0, 215]
       DstBlock		      "Generator task acceleration"
       DstPort		      6
     }
@@ -29010,7 +29010,7 @@ Model {
 	Points			[0, -45; 240, 0]
 	Branch {
 	  ZOrder		  248
-	  Points		  [0, 670]
+	  Points		  [0, 660]
 	  DstBlock		  "Generator task acceleration"
 	  DstPort		  2
 	}
@@ -29041,17 +29041,27 @@ Model {
       ZOrder		      28
       SrcBlock		      "DesValues"
       SrcPort		      9
-      Points		      [771, 0]
+      Points		      [509, 0]
       Branch {
-	ZOrder			280
-	Points			[0, -80]
-	DstBlock		"controller_QP"
-	DstPort			13
+	ZOrder			283
+	Points			[262, 0]
+	Branch {
+	  ZOrder		  280
+	  Points		  [0, -80]
+	  DstBlock		  "controller_QP"
+	  DstPort		  13
+	}
+	Branch {
+	  ZOrder		  124
+	  DstBlock		  "Dump and visualize"
+	  DstPort		  5
+	}
       }
       Branch {
-	ZOrder			124
-	DstBlock		"Dump and visualize"
-	DstPort			5
+	ZOrder			282
+	Points			[0, -100]
+	DstBlock		"Generator task acceleration"
+	DstPort			8
       }
     }
     Line {
@@ -29094,7 +29104,7 @@ Model {
 	  Points		  [255, 0]
 	  Branch {
 	    ZOrder		    245
-	    Points		    [0, 615]
+	    Points		    [0, 605]
 	    DstBlock		    "Generator task acceleration"
 	    DstPort		    3
 	  }
@@ -29126,7 +29136,7 @@ Model {
       Points		      [61, 0]
       Branch {
 	ZOrder			243
-	Points			[0, 305]
+	Points			[0, 295]
 	DstBlock		"Generator task acceleration"
 	DstPort			1
       }
@@ -29150,7 +29160,7 @@ Model {
       Points		      [23, 0]
       Branch {
 	ZOrder			244
-	Points			[0, 210]
+	Points			[0, 200]
 	DstBlock		"Generator task acceleration"
 	DstPort			4
       }
@@ -29164,7 +29174,7 @@ Model {
       ZOrder		      157
       SrcBlock		      "Generator task acceleration"
       SrcPort		      1
-      Points		      [0, -10]
+      Points		      [0, 0]
       DstBlock		      "controller_QP"
       DstPort		      12
     }
@@ -29172,7 +29182,7 @@ Model {
       ZOrder		      155
       SrcBlock		      "controller_QP"
       SrcPort		      2
-      Points		      [79, 0; 0, 425]
+      Points		      [59, 0; 0, 425]
       DstBlock		      "Dump and visualize"
       DstPort		      2
     }
@@ -29180,7 +29190,7 @@ Model {
       ZOrder		      156
       SrcBlock		      "controller_QP"
       SrcPort		      3
-      Points		      [55, 0; 0, 155]
+      Points		      [35, 0; 0, 155]
       DstBlock		      "Dump and visualize"
       DstPort		      3
     }
@@ -29188,7 +29198,6 @@ Model {
       ZOrder		      209
       SrcBlock		      "DesValues"
       SrcPort		      8
-      Points		      [157, 0; 0, 10]
       DstBlock		      "Generator task acceleration"
       DstPort		      7
     }
