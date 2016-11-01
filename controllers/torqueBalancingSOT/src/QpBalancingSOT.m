@@ -154,7 +154,7 @@ function Outputs(block)
     CONTACT_THRESHOLD = 0.1;
     unboundedConstant = 1e12;
     
-    regHessian        = 1e-3;
+    regHessian        = 1e-6;
     
     LEFT_RIGHT_FOOT_IN_CONTACT = block.InputPort(1).Data;
     hessianMatrixQP            = block.InputPort(2).Data;
