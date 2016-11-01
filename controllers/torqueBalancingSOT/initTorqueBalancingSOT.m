@@ -62,6 +62,8 @@ CONFIG.SCOPES.MAIN         = false;
 CONFIG.SCOPES.QP           = false;
 
 
+CONFIG.USE_CENTROIDALDYN   = true;
+
 % CONFIG.CHECK_LIMITS: if set to true, the controller will stop as soon as 
 % any of the joint limit is touched. 
 CONFIG.CHECK_LIMITS        = false;

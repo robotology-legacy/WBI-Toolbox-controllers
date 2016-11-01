@@ -53,6 +53,7 @@ for i =1:block.NumOutputPorts
 end
 
 
+
 % Register parameters
 block.NumDialogPrms     = 1;
 
@@ -150,9 +151,10 @@ function SetInputPortSamplingMode(block, idx, fd)
 
 function Outputs(block)
 
-
     CONTACT_THRESHOLD = 0.1;
     unboundedConstant = 1e12;
+    
+    regHessian        = 1e-3;
     
     LEFT_RIGHT_FOOT_IN_CONTACT = block.InputPort(1).Data;
     hessianMatrixQP            = block.InputPort(2).Data;
@@ -164,6 +166,12 @@ function Outputs(block)
     upperBoundFeetConstraints  = block.InputPort(8).Data;
     nDof                       = block.DialogPrm(1).Data;
     
+    
+    persistent uPrevious;
+
+    if isempty(uPrevious) 
+        uPrevious       = zeros(nDof,1);
+    end 
     
     % What follows aims at defining the hessian matrix H, the bias
     % vector g, and the constraint matrix A for the formalism of qpOases,ie
@@ -208,9 +216,9 @@ function Outputs(block)
         %      contactWrenchRightFoot]
         
         %
-        SR                         = [eye(nDof),     zeros(nDof,6)  
-                                      zeros(6,nDof),     zeros(6)
-                                      zeros(6,nDof),    eye(6)  ];
+        SR   = [eye(nDof),     zeros(nDof,6)  
+                zeros(6,nDof),     zeros(6)
+                zeros(6,nDof),    eye(6)  ];
         H = SR'*hessianMatrixQP*SR;
         g = SR'*biasVectorQP;
         
@@ -241,8 +249,14 @@ function Outputs(block)
         ubA  = [];
         lbA  = [];
     end
+    H = H + eye(size(H,1))*regHessian;
+    [u,~,exitFlagQP,~,~,~] = qpOASES(H,g,A,[],[],lbA,ubA);     
     
-    [u,~,exitFlagQP,~,~,~] = qpOASES(H,g,A,[],[],lbA,ubA);           
+    if exitFlagQP ~= 0 
+        u         = uPrevious;
+    else
+        uPrevious = u;
+    end
 
     block.OutputPort(1).Data = u(1:nDof);
     block.OutputPort(2).Data = u(nDof+1:nDof+6)*LEFT_RIGHT_FOOT_IN_CONTACT(1);

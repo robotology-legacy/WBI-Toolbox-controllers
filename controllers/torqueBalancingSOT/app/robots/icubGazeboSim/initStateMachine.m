@@ -36,7 +36,7 @@ if strcmpi(SM.SM_TYPE, 'YOGA')
                         10    50  10  % state == 11  PREPARING FOR SWITCHING 
                         10    50  10  % state == 12  LOOKING FOR CONTACT
                         10    50  10];% state == 13  TRANSITION TO INITIAL POSITION
-    gain.PCOM  =  gain.PCOM;
+    gain.PCOM  = gain.PCOM;
     gain.ICOM  = gain.PCOM*0;
     gain.DCOM  = 2*sqrt(gain.PCOM);
 
@@ -78,6 +78,9 @@ if strcmpi(SM.SM_TYPE, 'YOGA')
 end              
 %% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%                      
          
+gain.dampings   = sqrt(gain.impedances(1,:));
+
+
 %% %%%%%%%%%%%%%%%%    FINITE STATE MACHINE SPECIFIC PARAMETERS
 sm.skipYoga                      = false;
 sm.demoOnlyRightFoot             = false;
