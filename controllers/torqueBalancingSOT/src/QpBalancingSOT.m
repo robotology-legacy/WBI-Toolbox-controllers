@@ -201,11 +201,11 @@ function Outputs(block)
         H = SL'*hessianMatrixQP*SL;
         g = SL'*biasVectorQP;
         
-        A    = [zeros(length(upperBoundFeetConstraints),nDof),constraintMatrixLeftFoot,zeros(length(upperBoundFeetConstraints),12);
-                constraintMatrixEq];
+        A    = [zeros(length(upperBoundFeetConstraints),nDof),constraintMatrixLeftFoot;
+                constraintMatrixEq*SL];
         ubA  = [upperBoundFeetConstraints;
                 upperBoundEqConstraints];
-        lbA  = [-unboundedConstant*ones(upperBoundFeetConstraints,1);
+        lbA  = [-unboundedConstant*ones(length(upperBoundFeetConstraints),1);
                 upperBoundEqConstraints];
            
     % Only right foot is in contact
@@ -222,11 +222,11 @@ function Outputs(block)
         H = SR'*hessianMatrixQP*SR;
         g = SR'*biasVectorQP;
         
-        A    = [zeros(length(upperBoundFeetConstraints),nDof),zeros(length(upperBoundFeetConstraints),12),constraintMatrixRightFoot;
-                constraintMatrixEq];
+        A    = [zeros(length(upperBoundFeetConstraints),nDof),constraintMatrixRightFoot;
+                constraintMatrixEq*SR];
         ubA  = [upperBoundFeetConstraints;
                 upperBoundEqConstraints];
-        lbA  = [-unboundedConstant*ones(upperBoundFeetConstraints,1);
+        lbA  = [-unboundedConstant*ones(length(upperBoundFeetConstraints),1);
                 upperBoundEqConstraints];
     
     %Both feet in contact

@@ -64,8 +64,8 @@ if strcmpi(SM.SM_TYPE, 'YOGA')
     gain.impedances  = [10   30   20, 10   10    10    8 0, 10   10    10    8 0, 30   50   30    60     50  50, 30   50   30    60     50  50  % state ==  1  TWO FEET BALANCING
                         10   30   20, 10   10    10    8 0, 10   10    10    8 0, 30   50   30    60     50  50, 30   50   30    60     50  50  % state ==  2  COM TRANSITION TO LEFT 
                         10   30   20, 10   10    10    8 0, 10   10    10    8 0, 30   50   30    60     50  50, 30   50   30    60     50  50  % state ==  3  LEFT FOOT BALANCING
-                        30   30   30, 10   10    10   10 0, 10   10    10   10 0, 50   50  250   200     50  50, 50   50   50    50     50  50  % state ==  4  YOGA LEFT FOOT 
-                        30   30   30, 10   10    10   10 0, 10   10    10   10 0, 30   50  300    60     50  50, 30   50   30    60     50  50  % state ==  5  PREPARING FOR SWITCHING 
+                        10   30   20, 10   10    10    8 0, 10   10    10    8 0, 30   50   30    60     50  50, 30   50   30    60     50  50  % state ==  4  YOGA LEFT FOOT 
+                        10   30   20, 10   10    10    8 0, 10   10    10    8 0, 30   50   30    60     50  50, 30   50   30    60     50  50  % state ==  5  PREPARING FOR SWITCHING 
                         10   30   20, 10   10    10    8 0, 10   10    10    8 0, 30   50   30    60     50  50, 30   50   30    60     50  50  % state ==  6  LOOKING FOR CONTACT
                         10   30   20, 10   10    10    8 0, 10   10    10    8 0, 30   50   30    60     50  50, 30   50   30    60     50  50  % state ==  7  TRANSITION TO INITIAL POSITION 
                         10   30   20, 10   10    10    8 0, 10   10    10    8 0, 30   50   30    60     50  50, 30   50   30    60     50  50  % state ==  8  COM TRANSITION TO RIGHT FOOT
@@ -133,7 +133,7 @@ sm.com.states      = [0.0,  0.01,0.0;   %% state ==  1  TWO FEET BALANCING NOT U
                       0.0, -0.00,0.0;   %% state == 11  PREPARING FOR SWITCHING
                       0.0,  0.09,0.0;   %% state == 12  LOOKING FOR CONTACT 
                       0.0,  0.00,0.0];  %% state == 13  TRANSITION INIT POSITION: THIS REFERENCE IS IGNORED
-sm.tBalancing      = 10;%inf;%0.5;
+sm.tBalancing      = 0.5;%inf;%0.5;
 
 
 sm.joints.states = [[0.0864,0.0258,0.0152, ...                          %% state == 1  TWO FEET BALANCING, THIS REFERENCE IS IGNORED 
