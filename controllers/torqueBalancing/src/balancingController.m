@@ -22,7 +22,7 @@ function [tauModel,Sigma,NA,f_HDot, ...
           errorCoM,qTilde,f]    =  ...
               balancingController(constraints,ROBOT_DOF_FOR_SIMULINK,ConstraintsMatrix,bVectorConstraints,...
               q,qDes,v, M, h , H,intHw,w_H_l_sole, w_H_r_sole, JL,JR, dJLv,dJRv, xcom,J_CoM, desired_x_dx_ddx_CoM,...
-              gainsPCOM,gainsDCOM,impedances,intErrorCoM,ki_int_qtilde,reg,gain,f_ext)
+              gainsPCOM,gainsDCOM,impedances,intErrorCoM,ki_int_qtilde,reg,gain,f_ext,f_ext_mom,JLup,JRup,dJLup,dJRup)
     %BALANCING CONTROLLER
 
     %% DEFINITION OF CONTROL AND DYNAMIC VARIABLES
@@ -99,10 +99,14 @@ function [tauModel,Sigma,NA,f_HDot, ...
 
     % Time varying contact jacobian
     Jc              = [ JL*constraints(1)  ;      
-                        JR*constraints(2) ];
+                        JR*constraints(2)];
+%                         JLup;
+%                         JRup];
     % Time varying dot(J)*nu
     JcDv            = [dJLv*constraints(1) ;      
                        dJRv*constraints(2)];
+%                         dJLup;
+%                         dJRup];
 
     JcMinv          = Jc/M;
     JcMinvSt        = JcMinv*St;
@@ -177,7 +181,7 @@ function [tauModel,Sigma,NA,f_HDot, ...
     % constraints(1) = constraints(2) = 1. This because when the robot
     % stands on one foot, the f_HDot is evaluated directly from the
     % optimizer (see next section).
-    f_HDot          = pinvA*(HDotDes - gravityWrench - f_ext(1:6))*constraints(1)*constraints(2);
+    f_HDot          = pinvA*(HDotDes - gravityWrench -f_ext_mom)*constraints(1)*constraints(2);
    
     SigmaNA         = Sigma*NA;
    
