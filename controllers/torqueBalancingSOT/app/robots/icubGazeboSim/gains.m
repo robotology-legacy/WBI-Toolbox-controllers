@@ -8,8 +8,8 @@ gain.rootPD      = [20 2*sqrt(1)];
 gain.lFoot.posPD = [20*ones(3,1),2*sqrt(ones(3,1))];
 gain.lFoot.rotPD = [20,2];
 
-gain.rFoot.posPD = [30*ones(3,1),2*sqrt(ones(3,1))];
-gain.rFoot.rotPD = [30,2];
+gain.rFoot.posPD = [50*ones(3,1),2*sqrt(ones(3,1))];
+gain.rFoot.rotPD = [50,10];
 
 CONFIG.LEFT_RIGHT_FOOT_IN_CONTACT  = [1 1];
 
