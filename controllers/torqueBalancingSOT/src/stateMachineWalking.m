@@ -1,5 +1,5 @@
 function [CoMDes,qDes,constraints, currentState,impedances,w_H_b] = ...
-    stateMachineWalking(connection,CoM_0, q0, w_CoM, CoMIn, qIn, constraintsIn, wrench_rightFoot,wrench_leftFoot,l_sole_H_b, r_sole_H_b, sm,gain)
+    stateMachineWalking(wrench_rightFoot,wrench_leftFoot,CoM_0, q0, l_sole_CoM,r_sole_CoM,qj, t, l_sole_H_b, r_sole_H_b, sm,gain)
     %#codegen
         
     persistent state;
@@ -21,6 +21,8 @@ function [CoMDes,qDes,constraints, currentState,impedances,w_H_b] = ...
     constraints = [1; 1];
     qDes        = q0;
 
+    constraintsIn = ones(2,1);
+    
     impedances = gain.impedances(1,:);
     
     %% STATES
@@ -39,16 +41,15 @@ function [CoMDes,qDes,constraints, currentState,impedances,w_H_b] = ...
         %waiting for com reference
             CoMDes      = CoM_0;
 
-        if norm(CoM_0 - CoMIn) > eps && connection
+        if norm(CoM_0 - l_sole_CoM) > eps 
             state = 2;
         end
     elseif state == 2
         
-        CoMDes = CoMIn;
-        qDes   = qIn;
+        CoMDes = l_sole_CoM;
         impedances  = gain.impedances(state,:);
            
-        CoMError  = CoMDes - w_CoM;
+        CoMError  = zeros(3,1);% CoMDes - w_CoM;
         
         if ~any(constraintsIn - [1; 0]) ...
                 && norm(CoMError(2)) < sm.com.threshold
@@ -71,8 +72,7 @@ function [CoMDes,qDes,constraints, currentState,impedances,w_H_b] = ...
         % Left foot balancing
         constraints = [1; 0];
         
-        CoMDes = CoMIn;
-        qDes   = qIn;
+        CoMDes = l_sole_CoM;
         impedances  = gain.impedances(state,:);
         
         if wrench_rightFoot(3) > sm.wrench.thresholdContactOn
@@ -83,8 +83,7 @@ function [CoMDes,qDes,constraints, currentState,impedances,w_H_b] = ...
         % Right foot balancing
         constraints = [0; 1];
         
-        CoMDes = CoMIn;
-        qDes   = qIn;
+        CoMDes = l_sole_CoM;
         impedances  = gain.impedances(state,:);
         
         if wrench_leftFoot(3) > sm.wrench.thresholdContactOn

@@ -205,14 +205,14 @@ function Outputs(block)
         g = SL'*biasVectorQP;
         
         A    = [zeros(length(upperBoundFeetConstraints),nDof),constraintMatrixLeftFoot;
-                constraintMatrixEq*SL];
-               % eye(nDof),zeros(nDof,6)];
+                constraintMatrixEq*SL%];
+                eye(nDof),zeros(nDof,6)];
         ubA  = [upperBoundFeetConstraints;
-                upperBoundEqConstraints];
-             %   torqueDotMax*Ts+uPrevious(1:nDof)];
+                upperBoundEqConstraints%];
+                torqueDotMax*Ts+uPrevious(1:nDof)];
         lbA  = [-unboundedConstant*ones(length(upperBoundFeetConstraints),1);
-                upperBoundEqConstraints];
-              %  -torqueDotMax*Ts+uPrevious(1:nDof)];
+                upperBoundEqConstraints%];
+                -torqueDotMax*Ts+uPrevious(1:nDof)];
            
     % Only right foot is in contact
     elseif LEFT_RIGHT_FOOT_IN_CONTACT(2) > (1 - CONTACT_THRESHOLD) && LEFT_RIGHT_FOOT_IN_CONTACT(1) < CONTACT_THRESHOLD
@@ -229,14 +229,14 @@ function Outputs(block)
         g = SR'*biasVectorQP;
         
         A    = [zeros(length(upperBoundFeetConstraints),nDof),constraintMatrixRightFoot;
-                constraintMatrixEq*SR];
-              %  eye(nDof),zeros(nDof,6)];
+                constraintMatrixEq*SR%];
+                eye(nDof),zeros(nDof,6)];
         ubA  = [upperBoundFeetConstraints;
-                upperBoundEqConstraints];
-             %   torqueDotMax*Ts+uPrevious(1:nDof)];
+                upperBoundEqConstraints%];
+                torqueDotMax*Ts+uPrevious(1:nDof)];
         lbA  = [-unboundedConstant*ones(length(upperBoundFeetConstraints),1);
-                upperBoundEqConstraints];
-            %    -torqueDotMax*Ts+uPrevious(1:nDof)];
+                upperBoundEqConstraints%];
+               -torqueDotMax*Ts+uPrevious(1:nDof)];
     
     %Both feet in contact
     elseif sum(LEFT_RIGHT_FOOT_IN_CONTACT) > 2 - CONTACT_THRESHOLD
@@ -245,16 +245,16 @@ function Outputs(block)
         
         A    = [zeros(length(upperBoundFeetConstraints),nDof),constraintMatrixLeftFoot,zeros(length(upperBoundFeetConstraints),6);
                 zeros(length(upperBoundFeetConstraints),nDof),zeros(length(upperBoundFeetConstraints),6),constraintMatrixRightFoot;
-                constraintMatrixEq];
-           %     eye(nDof),zeros(nDof,12)];
+                constraintMatrixEq%];
+                eye(nDof),zeros(nDof,12)];
         ubA  = [upperBoundFeetConstraints;
                 upperBoundFeetConstraints;
-                upperBoundEqConstraints];
-         %       torqueDotMax*Ts+uPrevious(1:nDof)];
+                upperBoundEqConstraints%];
+                 torqueDotMax*Ts+uPrevious(1:nDof)];
         lbA  = [-unboundedConstant*ones(length(upperBoundFeetConstraints),1);
                 -unboundedConstant*ones(length(upperBoundFeetConstraints),1);
-                 upperBoundEqConstraints];
-             %   -torqueDotMax*Ts+uPrevious(1:nDof)];
+                 upperBoundEqConstraints%];
+                 -torqueDotMax*Ts+uPrevious(1:nDof)];
     else
         H    = hessianMatrixQP;
         g    = biasVectorQP; 
