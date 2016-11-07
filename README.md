@@ -6,12 +6,14 @@ description of each balancing controller and the README links.
 ## Available models 
 
 All the models implemented with the old WBI-Toolbox are in the [legacy](controllers/legacy) folder. The
-new WB-Toolbox models are:
+new [WB-Toolbox](https://github.com/robotology/WB-Toolbox) models are:
 
 - [torqueBalancing](#torquebalancing)
 - [torqueBalancing_experiments](#torquebalancing_experiments)
 - [torqueBalancingOnSeesaw](#torquebalancingonseesaw)
 - [wholeBodyImpedanceControl](#wholebodyimpedancecontrol)
+
+Check the documentation in [WB-Toolbox](https://github.com/robotology/WB-Toolbox) for installation of the Simulink toolbox.
 
 ### torqueBalancing
 This simulink model controls the robot using a momentum-based balancing control.
