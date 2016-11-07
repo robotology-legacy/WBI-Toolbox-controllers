@@ -1,6 +1,6 @@
 function [w_H_b, CoMDes,qDes,constraints,impedances,kpCom,kdCom,currentState,jointsSmoothingTime] = ...
-    stateMachine(CoM_0, q0, l_sole_CoM,r_sole_CoM,qj, t, ...
-                  wrench_rightFoot,wrench_leftFoot,l_sole_H_b, r_sole_H_b, sm,gain)
+          stateMachine(CoM_0, q0, l_sole_CoM,r_sole_CoM,qj, t, ...
+                       wrench_rightFoot,wrench_leftFoot,l_sole_H_b, r_sole_H_b, sm,gain)
     %#codegen
     persistent state;
     persistent tSwitch;
@@ -317,11 +317,7 @@ function [w_H_b, CoMDes,qDes,constraints,impedances,kpCom,kdCom,currentState,joi
     end 
     
     %% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-    
     currentState        = state;
     jointsSmoothingTime = sm.jointsSmoothingTimes(state);
-    
-    
-    
     
    

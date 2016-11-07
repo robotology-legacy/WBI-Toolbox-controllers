@@ -15,7 +15,7 @@ if strcmpi(SM.SM_TYPE, 'YOGA')
     gain.footSize              = [ -0.05  0.10 ;    % xMin, xMax
                                    -0.025 0.025];   % yMin, yMax  
                    
-    forceFrictionCoefficient     = 1/3;  
+    forceFrictionCoefficient   = 1/3;  
     
     %Smoothing time for time varying impedances
     gain.SmoothingTimeGainScheduling              = 2;  

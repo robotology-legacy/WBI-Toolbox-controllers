@@ -25,11 +25,7 @@ clear; clc;
 % and set the environmental variable YARP_ROBOT_NAME = icubGazeboSim.
 % To do this, you can uncomment the 
 
-% setenv('YARP_ROBOT_NAME','iCubGenova01');
-% setenv('YARP_ROBOT_NAME','iCubGenova02');
-% setenv('YARP_ROBOT_NAME','iCubDarmstadt01');
 setenv('YARP_ROBOT_NAME','icubGazeboSim');
-% setenv('YARP_ROBOT_NAME','iCubGenova05');
 
 % Simulation time in seconds
 CONFIG.SIMULATION_TIME     = inf;   
@@ -61,11 +57,9 @@ CONFIG.SCOPES.GAIN_SCHE_INFO=false;
 CONFIG.SCOPES.MAIN         = false;
 CONFIG.SCOPES.QP           = false;
 
-
 % CONFIG.CHECK_LIMITS: if set to true, the controller will stop as soon as 
 % any of the joint limit is touched. 
 CONFIG.CHECK_LIMITS        = false;
-
 
 %% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % CONFIGURATIONS COMPLETED: loading gains and parameters for the specific robot
@@ -73,7 +67,6 @@ CONFIG.CHECK_LIMITS        = false;
 %% DO NOT MODIFY THE FOLLOWING VARIABLES, THEY ARE AUTOMATICALLY 
 %% CHANGED WHEN SIMULATING THE ROBOT ON GAZEBO, 
 WBT_modelName            = 'matlabTorqueBalancing';
-
 
 % CONFIG.USE_IMU4EST_BASE: if set to false, the base frame is estimated by 
 % assuming that either the left or the right foot stay stuck on the ground. 
@@ -98,7 +91,6 @@ CONFIG.PITCH_IMU_FILTER    = true;
 % IMU and the contact foot is corrected by using the neck angles. If it set
 % equal to false, recall that the neck is assumed to be in (0,0,0)
 CONFIG.CORRECT_NECK_IMU    = true;
-
 
 % CONFIG.ONSOFTCARPET: the third year CoDyCo review meeting consisted also
 % of a validation scenarion in which the robot had to balance on a soft
@@ -129,7 +121,6 @@ run(strcat('app/robots/',getenv('YARP_ROBOT_NAME'),'/gains.m'));
 addpath('./src/')
 addpath('../utilityMatlabFunctions/')
 
-
 robotSpecificReferences  = fullfile('app/robots',getenv('YARP_ROBOT_NAME'),'initRefGen.m');
 run(robotSpecificReferences);
 
@@ -154,27 +145,17 @@ end
 
 [ConstraintsMatrix,bVectorConstraints]= constraints(forceFrictionCoefficient,numberOfPoints,torsionalFrictionCoefficient,gain.footSize,fZmin);
 
-%% %%%%%%%%%%%%%%%%%%%%%
-load('data.mat')
-SIMULATION_TIME = time(end);
-ts         =   0.01;
-link2_corr =  -9.8;
-PORTS.WBDT_CHAIR = '/chair/FT_sensor/analog:o/forceTorque';
+%% FRAMES AND PARAMETERS %%
+PORTS.WBDT_CHAIR  = '/chair/FT_sensor/analog:o/forceTorque';
 
-% Rx = rotx(0.000000);
-% Ry = roty(0.095787);
-% Rz = rotz(3.127805);
-% 
-% Rfoot   = Rx*Ry*Rz;
-% posFoot = [-0.034718;-0.009841;0.372784];
+gazebo_R_base     = [-0.9992    0.0016   -0.0400;
+                     -0.0016   -1.0000   -0.0001;
+                     -0.0400         0    0.9992];
+             
+gazebo_pos_base   = [-0.07; -0.001; 0.4 ];
 
-Rx = rotx(0.0);
-Ry = roty(0.0);
-Rz = rotz(3.14);
-
-Rfoot   = Rx*Ry*Rz;
-posFoot = [-0.035;0.0;0.4];
-
-gazebo_H_base  = [Rfoot posFoot; 0 0 0 1];
-gazebo_H_chair = [eye(3),[0;0;0.165]; 0 0 0 1];
+gazebo_H_base     = [gazebo_R_base gazebo_pos_base; 0 0 0 1];
+gazebo_H_sensor   = [eye(3),[0;0;0.205]; 0 0 0 1];
+gazebo_H_Lcontact = [eye(3),[0; 0.083;0.2175];  0 0 0 1];
+gazebo_H_Rcontact = [eye(3),[0;-0.083;0.2175];  0 0 0 1];
 

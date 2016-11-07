@@ -15,7 +15,6 @@
 %  * Public License for more details
 %  */
 %% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
 function QpTwoFeet(block)
 
 setup(block);
@@ -35,7 +34,6 @@ block.SetPreCompOutPortInfoToDynamic;
 % %2 % [Aineq,bineq]             
 % %3 % [Aeq,beq]                   
 % %4 % [x0;lb;ub]                  
-
 
 % Definition of port sizes for QP 2 feet
 block.InputPort(1).Dimensions        = [ 1  2];   % LEFT_RIGHT_FOOT_IN_CONTACT
@@ -135,9 +133,7 @@ function SetInputPortSamplingMode(block, idx, fd)
 %%
 % function InitializeConditions(block)
 
-
 % end InitializeConditions
-
 
 %%
 %% Start:
@@ -148,7 +144,7 @@ function SetInputPortSamplingMode(block, idx, fd)
 %%   C-MEX counterpart: mdlStart
 %%
 % function Start(block)
-% 
+
 % block.Dwork(1).Data = 0;
 
 %endfunction
@@ -163,8 +159,7 @@ function SetInputPortSamplingMode(block, idx, fd)
 
 function Outputs(block)
 
-
-    CONTACT_THRESHOLD = 0.1;
+    CONTACT_THRESHOLD          = 0.1;
     
     LEFT_RIGHT_FOOT_IN_CONTACT = block.InputPort(1).Data;
     exitFlagQP                 = 0;
@@ -218,8 +213,4 @@ function Outputs(block)
 function Terminate(block)
 
 %end Terminate
-
-
-
-
 

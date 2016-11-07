@@ -15,14 +15,14 @@
 %  * Public License for more details
 %  */
 %% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
 function [tauModel,Sigma,NA,f_HDot, ...
           HessianMatrixQP1Foot,gradientQP1Foot,ConstraintsMatrixQP1Foot,bVectorConstraintsQp1Foot,...
           HessianMatrixQP2Feet,gradientQP2Feet,ConstraintsMatrixQP2Feet,bVectorConstraintsQp2Feet,...
-          errorCoM,qTilde,f]    =  ...
+          errorCoM,qTilde,f]  =  ...
               balancingController(constraints,ROBOT_DOF_FOR_SIMULINK,ConstraintsMatrix,bVectorConstraints,...
-              q,qDes,v, M, h , H,intHw,w_H_l_sole, w_H_r_sole, JL,JR, dJLv,dJRv, xcom,J_CoM, desired_x_dx_ddx_CoM,...
-              gainsPCOM,gainsDCOM,impedances,intErrorCoM,ki_int_qtilde,reg,gain,f_ext,f_ext_mom,JLup,JRup,dJLup,dJRup)
+              q,qDes,v,M,h,H,intHw,w_H_l_sole,w_H_r_sole,JL,JR,dJLv,dJRv,xcom,J_CoM,desired_x_dx_ddx_CoM,...
+              gainsPCOM,gainsDCOM,impedances,intErrorCoM,ki_int_qtilde,reg,gain)
+          
     %BALANCING CONTROLLER
 
     %% DEFINITION OF CONTROL AND DYNAMIC VARIABLES
@@ -31,13 +31,11 @@ function [tauModel,Sigma,NA,f_HDot, ...
 
     pos_rightFoot   = w_H_r_sole(1:3,4);
     w_R_r_sole      = w_H_r_sole(1:3,1:3);
-
     
     gainsICOM       = zeros(3,1);
     dampings        = gain.dampings;
 
     ROBOT_DOF       = size(ROBOT_DOF_FOR_SIMULINK,1);
-
     gravAcc         = 9.81;
     
     % Mass of the robot.
@@ -56,7 +54,7 @@ function [tauModel,Sigma,NA,f_HDot, ...
     gravityWrench   = [ zeros(2,1);
                        -m*gravAcc;
                         zeros(3,1)];
-
+                    
     % Velocity of the center of mass
     xDcom           = J_CoM(1:3,:)*v;
     
@@ -67,7 +65,8 @@ function [tauModel,Sigma,NA,f_HDot, ...
     qTilde          =  q-qDes;
     
     % Desired acceleration for the center of mass
-    xDDcomStar      = desired_x_dx_ddx_CoM(:,3) - gainsPCOM.*(xcom - desired_x_dx_ddx_CoM(:,1)) - gainsICOM.*intErrorCoM - gainsDCOM.*(xDcom - desired_x_dx_ddx_CoM(:,2));
+    xDDcomStar      = desired_x_dx_ddx_CoM(:,3) - gainsPCOM.*(xcom - desired_x_dx_ddx_CoM(:,1)) - gainsICOM.*intErrorCoM ...
+                      - gainsDCOM.*(xDcom - desired_x_dx_ddx_CoM(:,2));
    
     % Application point of the contact force on the right foot w.r.t. CoM
     Pr              = pos_rightFoot - xcom; 
@@ -86,10 +85,11 @@ function [tauModel,Sigma,NA,f_HDot, ...
     
     AL              = [ eye(3),zeros(3);
                         Sf(Pl),  eye(3)];
-    AR              = [ eye(3), zeros(3);
-                        Sf(Pr), eye(3) ];
+    AR              = [ eye(3),zeros(3);
+                        Sf(Pr),  eye(3)];
+                    
+    A               = [AL, AR];                  % dot(H) = mg + A*f
 
-    A               = [ AL, AR];                  % dot(H) = mg + A*f
     pinvA           = pinv( A, reg.pinvTol)*constraints(1)*constraints(2)  ...
                     + [inv(AL);zeros(6)]*constraints(1)*(1-constraints(2)) ... 
                     + [zeros(6);inv(AR)]*constraints(2)*(1-constraints(1)); 
@@ -98,29 +98,25 @@ function [tauModel,Sigma,NA,f_HDot, ...
     NA              = (eye(12,12)-pinvA*A)*constraints(1)*constraints(2);
 
     % Time varying contact jacobian
-    Jc              = [ JL*constraints(1)  ;      
+    Jc              = [ JL*constraints(1);      
                         JR*constraints(2)];
-%                         JLup;
-%                         JRup];
+
     % Time varying dot(J)*nu
-    JcDv            = [dJLv*constraints(1) ;      
+    JcDv            = [dJLv*constraints(1);      
                        dJRv*constraints(2)];
-%                         dJLup;
-%                         dJRup];
 
     JcMinv          = Jc/M;
     JcMinvSt        = JcMinv*St;
     JcMinvJct       = JcMinv*transpose(Jc);
     JBar            = transpose(Jc(:,7:end)) - Mbj'/Mb*transpose(Jc(:,1:6)); % multiplier of f in tau0
 
-    
     PInv_JcMinvSt   = pinvDamped(JcMinvSt,reg.pinvDamp); 
+    
     % nullJcMinvSt  = null space of PInv_JcMinvSt
     nullJcMinvSt    = eye(ROBOT_DOF) - PInv_JcMinvSt*JcMinvSt;
 
     % Mbar is the mass matrix associated with the joint dynamics, i.e.
     Mbar            = Mj-Mbj'/Mb*Mbj;
-
     NLMbar          = nullJcMinvSt*Mbar;
     
     % Adaptation of control gains for back compatibility with older
@@ -166,8 +162,8 @@ function [tauModel,Sigma,NA,f_HDot, ...
     bVectorConstraints2Feet   = [bVectorConstraints;bVectorConstraints];
     
     % Terms used in Eq. 0)
-    tauModel        = PInv_JcMinvSt*(JcMinv*(h-f_ext) - JcDv) + nullJcMinvSt*(h(7:end) - Mbj'/Mb*h(1:6) ...
-                       -impedances*NLMbar*qTilde  -ki_int_qtilde -dampings*NLMbar*qD);
+    tauModel        = PInv_JcMinvSt*(JcMinv*h - JcDv) + nullJcMinvSt*(h(7:end)- Mbj'/Mb*h(1:6) ...
+                      -impedances*NLMbar*qTilde  -ki_int_qtilde -dampings*NLMbar*qD);
     
     Sigma           = -(PInv_JcMinvSt*JcMinvJct + nullJcMinvSt*JBar);
     
@@ -181,8 +177,8 @@ function [tauModel,Sigma,NA,f_HDot, ...
     % constraints(1) = constraints(2) = 1. This because when the robot
     % stands on one foot, the f_HDot is evaluated directly from the
     % optimizer (see next section).
-    f_HDot          = pinvA*(HDotDes - gravityWrench -f_ext_mom)*constraints(1)*constraints(2);
-   
+    f_HDot          = pinvA*(HDotDes - gravityWrench)*constraints(1)*constraints(2);
+  
     SigmaNA         = Sigma*NA;
    
     % The optimization problem 1) seeks for the redundancy of the external
@@ -223,13 +219,13 @@ function [tauModel,Sigma,NA,f_HDot, ...
                                 constraints(2) * (1 - constraints(1)) * constraintMatrixRightFoot;
     bVectorConstraintsQp1Foot = bVectorConstraints;
 
-    A1Foot                    = AL*constraints(1)*(1-constraints(2)) + AR*constraints(2)*(1-constraints(1));
-    HessianMatrixQP1Foot      = A1Foot'*A1Foot + eye(size(A1Foot,2))*reg.HessianQP;
+    A1Foot                    =  AL*constraints(1)*(1-constraints(2)) + AR*constraints(2)*(1-constraints(1));
+    HessianMatrixQP1Foot      =  A1Foot'*A1Foot + eye(size(A1Foot,2))*reg.HessianQP;
     gradientQP1Foot           = -A1Foot'*(HDotDes - gravityWrench);
 
     %% DEBUG DIAGNOSTICS
     % Unconstrained solution for the problem 1)
-    f0                        = -pinvDamped(SigmaNA,reg.pinvDamp*1e-5)*(tauModel + Sigma*f_HDot);
+%   f0                        = -pinvDamped(SigmaNA,reg.pinvDamp*1e-5)*(tauModel + Sigma*f_HDot);
     % Unconstrained contact wrenches
     f                         = zeros(12,1);%pinvA*(HDotDes - gravityWrench) + NA*f0*constraints(1)*constraints(2); 
     % Error on the center of mass

@@ -29,7 +29,7 @@ end
 %% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%                      
          
 %% %%%%%%%%%%%%%%%%    FINITE STATE MACHINE SPECIFIC PARAMETERS
-sm.com.threshold                 =   0.005;
+sm.com.threshold                 = 0.005;
 sm.wrench.threshold              = 70;
 sm.joints = struct;
 sm.joints.thresholdNotInContact =  3;

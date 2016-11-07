@@ -17,7 +17,7 @@ Users willing to use the module should follow this list.
 - (Simulation only) Launch yarpserver.
 - (Simulation only) Launch gazebo. If you want to use the synchronization between the controller and the simulator to avoid real-time factor related problems, launch gazebo as follows: `gazebo -slibgazebo_yarp_clock.so` 
 - Bring the robot in a suitable home position (e.g. `$ yarpmotorgui --from homePoseBalancingLegsZero.ini` and then press on the 'Home All' button)
--  Launch `wholeBodyDynamicsTree` as follows: `$ wholeBodyDynamicsTree --autoconnect --robot YARP_ROBOT_NAME_VALUE`
+- Launch `wholeBodyDynamicsTree` as follows: `$ wholeBodyDynamicsTree --autoconnect --robot YARP_ROBOT_NAME_VALUE`
 - Execute the [sensors calibration script](https://github.com/robotology/codyco-modules/blob/master/src/scripts/twoFeetStandingIdleAndCalib.sh): `$ twoFeetStandingIdleAndCalib.sh`
 - Open the simulink model `torqueBalancing.mdl` or `torqueBalancing2012b.mdl`.
 - Run the module 

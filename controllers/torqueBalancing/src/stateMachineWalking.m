@@ -1,5 +1,6 @@
 function [CoMDes,qDes,constraints, currentState,impedances,w_H_b] = ...
-    stateMachineWalking(connection,CoM_0, q0, w_CoM, CoMIn, qIn, constraintsIn, wrench_rightFoot,wrench_leftFoot,l_sole_H_b, r_sole_H_b, sm,gain)
+         stateMachineWalking(connection,CoM_0, q0, w_CoM, CoMIn, qIn, constraintsIn, wrench_rightFoot,wrench_leftFoot,...
+         l_sole_H_b, r_sole_H_b, sm,gain)
     %#codegen
         
     persistent state;
