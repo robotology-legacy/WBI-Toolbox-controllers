@@ -20,7 +20,7 @@ function [hessianMatrix,biasVector,constraintMatrixLeftFoot,constraintMatrixRigh
                                         balancingControllerSOT(constraints,ROBOT_DOF_FOR_SIMULINK,ConstraintsMatrix,...
                                                                jointAngles,desJointAngles, massMatrix, biasTorques, ...
                                                                gravityTorques, jacobians, jacobiansDotNu, robotVelocity,...
-                                                               poseLeftFoot, poseRightFoot, desiredTaskAcc,impedances,dampings)
+                                                               poseLeftFoot, poseRightFoot, desiredTaskAcc,impedances,dampings,gain,CONFIG)
           
     %% BALANCING CONTROLLER
     %
@@ -102,10 +102,10 @@ function [hessianMatrix,biasVector,constraintMatrixLeftFoot,constraintMatrixRigh
     %               Cu < b
     %               JDot * nu + J * inv(M) * (Bu - h) = aTaskDes
     %               tauFeedback = kp * qTilde + kd * qTildeDot
+    %
     % and aTaskDes such that the output functions i-iv are stabilized
     % towards desired values.
     %% IMPLEMENTATION
-    
     
     ROBOT_DOF                 = size(ROBOT_DOF_FOR_SIMULINK,1);
     S                         = [zeros(6,ROBOT_DOF);
@@ -118,8 +118,36 @@ function [hessianMatrix,biasVector,constraintMatrixLeftFoot,constraintMatrixRigh
     tauFeedback               = diag(impedances)*(jointAngles-desJointAngles)...
                                 + diag(dampings)*robotVelocity(7:end);
 
-    hessianMatrix             = (S' * B)' * S' * B ;
-    biasVector                = (S' * B)' * tauFeedback;
+    if CONFIG.QP.USE_STRICT_TASK_PRIORITIES
+        hessianMatrix             = (S' * B)' * S' * B ;
+        biasVector                = (S' * B)' * tauFeedback;
+    
+    else
+        % In this case, the optimization problem 11) is changed, and the equality
+        % constraint 
+        %
+        % 12a) aStar + J * inv(M) * Bu  = 0 
+        % 12b) aStar = JDot * nu  - aTaskDes - J * inv(M) * h
+        %
+        % is put in the const function, i.e.
+        %
+        % 11) u* = argmin (1/2)*wP*|S^t * Bu + tauFeedback|^2 + (1/2)*wT*|aStar + J * inv(M) * Bu|^2
+        %           s.t.
+        %               Cu < b
+        %               tauFeedback = kp * qTilde + kd * qTildeDot
+        %
+        
+        
+        aStar = jacobiansDotNu  - desiredTaskAcc - (jacobians / massMatrix) * biasTorques;
+        
+        hessianMatrix             = gain.weightPostural*(S' * B)' * S' * B ...
+                                  + gain.weightTasks*((jacobians / massMatrix) * B)' * (jacobians / massMatrix) * B;
+                              
+        biasVector                = gain.weightPostural*(S' * B)' * tauFeedback...
+                                  + gain.weightTasks*((jacobians / massMatrix) * B)'*aStar;
+        
+    end
+    
     
     constraintMatrixEq        = jacobians*(massMatrix\B);
     upperBoundEqConstraints   = desiredTaskAcc - jacobiansDotNu +  (jacobians/massMatrix)*biasTorques; 

@@ -26,9 +26,9 @@ clear; clc;
 % To do this, you can uncomment the 
 
 % setenv('YARP_ROBOT_NAME','iCubGenova01');
-setenv('YARP_ROBOT_NAME','iCubGenova02');
+% setenv('YARP_ROBOT_NAME','iCubGenova02');
 % setenv('YARP_ROBOT_NAME','iCubDarmstadt01');
-% setenv('YARP_ROBOT_NAME','icubGazeboSim');
+setenv('YARP_ROBOT_NAME','icubGazeboSim');
 % setenv('YARP_ROBOT_NAME','iCubGenova05');
 
 % Simulation time in seconds
@@ -50,16 +50,16 @@ CONFIG.SIMULATION_TIME     = inf;
 %               robots/YARP_ROBOT_NAME/initRegGen.m
 % 
 % 'WALKING': under development.
-SM.SM_TYPE                 = 'YOGA';
+SM.SM_TYPE                   = 'YOGA';
 
 % CONFIG.SCOPES: if set to true, all visualizers for debugging are active
-CONFIG.SCOPES.ALL          = true;
+CONFIG.SCOPES.ALL            = true;
 % You can also activate only some specific debugging scopes
-CONFIG.SCOPES.BASE_EST_IMU = false;
-CONFIG.SCOPES.EXTWRENCHES  = false;
-CONFIG.SCOPES.GAIN_SCHE_INFO=false;
-CONFIG.SCOPES.MAIN         = false;
-CONFIG.SCOPES.QP           = false;
+CONFIG.SCOPES.BASE_EST_IMU   = false;
+CONFIG.SCOPES.EXTWRENCHES    = false;
+CONFIG.SCOPES.GAIN_SCHE_INFO = false;
+CONFIG.SCOPES.MAIN           = false;
+CONFIG.SCOPES.QP             = false;
 
 
 CONFIG.USE_CENTROIDALDYN   = true;
@@ -68,6 +68,10 @@ CONFIG.USE_CENTROIDALDYN   = true;
 % any of the joint limit is touched. 
 CONFIG.CHECK_LIMITS        = false;
 
+
+CONFIG.QP.USE_CONTINUITY_CONSTRAINTS = false;
+
+CONFIG.QP.USE_STRICT_TASK_PRIORITIES = false;
 
 %% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % CONFIGURATIONS COMPLETED: loading gains and parameters for the specific robot
