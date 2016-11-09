@@ -125,6 +125,13 @@ gain.footSize                = [ -0.07 0.07   ;   % xMin, xMax
    
 fZmin                        = 10;
 
+gain.legSize                  = [ -0.025  0.025 ;        % xMin, xMax
+                                  -0.005  0.005];        % yMin, yMax 
+                                       
+addpath('../../../../utilityMatlabFunctions/')
+[ConstraintsMatrixLegs,bVectorConstraintsLegs] = constraints...
+(forceFrictionCoefficient,numberOfPoints,torsionalFrictionCoefficient,gain.legSize,fZmin);
+
 %% The QP solver will search a solution fo that 
 % satisfies the inequality Aineq_f F(fo) < bineq_f
 reg.pinvTol     = 1e-5;

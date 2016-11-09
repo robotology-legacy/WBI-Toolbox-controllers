@@ -19,6 +19,8 @@ if strcmpi(SM.SM_TYPE, 'CHAIR')
      reg.dampings    = 0;
      
      %% Contact constraints                                  
+     phys.legSize              = [ -0.025  0.025 ;        % xMin, xMax
+                                   -0.005  0.005];        % yMin, yMax 
      gain.legSize              = [ -0.025  0.025 ;        % xMin, xMax
                                    -0.005  0.005];        % yMin, yMax 
                                        

@@ -56,7 +56,7 @@ CONFIG.SIMULATION_TIME = inf;
 %
 % 'WALKING': under development.
 %
-SM.SM_TYPE                    = 'CHAIR';
+SM.SM_TYPE                    = 'YOGA';
 
 % CONFIG.SCOPES: if set to true, all visualizers for debugging are active
 CONFIG.SCOPES.ALL             = true;
