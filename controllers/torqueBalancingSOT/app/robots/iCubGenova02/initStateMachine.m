@@ -34,12 +34,9 @@ if strcmpi(SM.SM_TYPE, 'YOGA')
                         10    50  10  % state ==  9  PREPARING FOR SWITCHING 
                         10    50  10  % state == 10  LOOKING FOR CONTACT
                         10    50  10];% state == 11  TRANSITION TO INITIAL POSITION
-    gain.PCOM  = gain.PCOM;
+    gain.PCOM  = gain.PCOM/10;
     gain.ICOM  = gain.PCOM*0;
-    gain.DCOM  = 2*sqrt(gain.PCOM);
-
-    gain.PAngularMomentum  = 0.25 ;
-    gain.DAngularMomentum  = 2*sqrt(gain.PAngularMomentum);
+    gain.DCOM  = sqrt(gain.PCOM)/10;
 
     % state ==  1  TWO FEET BALANCING
     % state ==  2  COM TRANSITION TO LEFT FOOT
@@ -69,13 +66,13 @@ if strcmpi(SM.SM_TYPE, 'YOGA')
                         20   30   20, 12   12    12   12, 12   12    12   12, 30   50   30    60     50  50, 30   50   30    60     50  50  % state == 10  LOOKING FOR CONTACT
                         20   30   20, 12   12    12   12, 12   12    12   12, 30   50   30    60     50  50, 30   50   30    60     50  50];% state == 11  TRANSITION TO INITIAL POSITION
                     
-    gain.rootPD      = [5 2];
+    gain.rootPD      = [5 0];
 
-    gain.lFoot.posPD = [25*ones(3,1),2*sqrt(ones(3,1))];
-    gain.lFoot.rotPD = [25,2];
+    gain.lFoot.posPD = [5*ones(3,1),0*sqrt(ones(3,1))];
+    gain.lFoot.rotPD = [5,0];
 
-    gain.rFoot.posPD = [25*ones(3,1),2*sqrt(ones(3,1))];
-    gain.rFoot.rotPD = [25,2];
+    gain.rFoot.posPD = [5*ones(3,1),0*sqrt(ones(3,1))];
+    gain.rFoot.rotPD = [5,0];
 
     
 end              
@@ -84,9 +81,11 @@ end
 gain.weightPostural = 0.1;
 gain.weightTasks    = 100;
 gain.impedances(:,14:end)     = gain.impedances(:,14:end)/5;
-gain.dampings       = sqrt(gain.impedances(1,:));
+gain.dampings       = sqrt(gain.impedances(1,:))/10;
 
 sat.torqueDot       = 100*ones(ROBOT_DOF,1);
+
+sat.torque          =2;
 
 %% %%%%%%%%%%%%%%%%    FINITE STATE MACHINE SPECIFIC PARAMETERS
 sm.skipYoga                      = true;
@@ -161,7 +160,7 @@ sm.origin.rightFoot =[0.0,  0.00, 0.0;   %% state ==  1  TWO FEET BALANCING NOT 
                       0.0,  0.00, 0.0;   %% state == 10  LOOKING FOR CONTACT          : THIS REFERENCE IS IGNORED
                       0.0,  0.00, 0.0];  %% state == 11  TRANSITION INIT POSITION     : THIS REFERENCE IS IGNORED    
                   
-sm.tBalancing      = 0.5;%inf;%0.5;
+sm.tBalancing      = 5;%inf;%0.5;
 
 
 sm.joints.states = [[0.0864,0.0258,0.0152, ...                          %% state == 1  TWO FEET BALANCING, THIS REFERENCE IS IGNORED 

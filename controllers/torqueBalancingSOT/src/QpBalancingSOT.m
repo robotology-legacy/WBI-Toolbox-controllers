@@ -178,9 +178,7 @@ function Outputs(block)
     
     persistent uPrevious;
 
-    if isempty(uPrevious) 
-        uPrevious       = [torqueAt0;zeros(12,1)];
-    end 
+    
     
     % What follows aims at defining the hessian matrix H, the bias
     % vector g, and the constraint matrix A for the formalism of qpOases,ie
@@ -282,12 +280,17 @@ function Outputs(block)
     end
     
     H = H + eye(size(H,1))*regHessian;
+    H = (H + H')/2;
     [u,~,exitFlagQP,~,~,~] = qpOASES(H,g,A,[],[],lbA,ubA);     
     
     if exitFlagQP ~= 0 
         u         = uPrevious;
     else
-        uPrevious = u;
+        if isempty(uPrevious) 
+            uPrevious       = -H\g;
+        else  
+            uPrevious = u;
+        end
     end
 
     block.OutputPort(1).Data = u(1:nDof);
