@@ -31,7 +31,7 @@ PORTS.IMU       = '/icub/inertial';
 
 seesawKind              = 2;
 
-run(strcat('app/robots/',getenv('YARP_ROBOT_NAME'),'/gains.m')); 
+run(strcat('app/robots/',getenv('YARP_ROBOT_NAME'),'/initGains.m')); 
 [ConstraintsMatrix,bVectorConstraints]= constraints(forceFrictionCoefficient,numberOfPoints,torsionalFrictionCoefficient,gain.footSize,fZmin);
 
 CONFIG.USE_ROBOT_IMU4SEESAW = true;
