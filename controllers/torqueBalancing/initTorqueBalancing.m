@@ -146,7 +146,10 @@ run(robotSpecificFSM);
 %% iCub on a chair
 icubChair                     = 0;
 PORTS.WBDT_CHAIR              = '/chair/FT_sensor/analog:o/forceTorque';
+robotSpecificFSM              = fullfile('app/robots',getenv('YARP_ROBOT_NAME'),'initStateMachineChair.m');
+run(robotSpecificFSM);
 
+%% Define which simulation will be performed
 if strcmpi(SM.SM_TYPE, 'COORDINATOR')
     SM.SM_TYPE_BIN = SM.SM.MASK.COORDINATOR;
 elseif strcmpi(SM.SM_TYPE, 'YOGA')
@@ -157,8 +160,6 @@ elseif strcmpi(SM.SM_TYPE, 'WALKING')
     run(robotSpecificFSM);
 elseif strcmpi(SM.SM_TYPE, 'CHAIR')
     SM.SM_TYPE_BIN   = SM.SM.MASK.CHAIR;
-    robotSpecificFSM = fullfile('app/robots',getenv('YARP_ROBOT_NAME'),'initStateMachineChair.m');
-    run(robotSpecificFSM);
     icubChair = 1;
 end
 
