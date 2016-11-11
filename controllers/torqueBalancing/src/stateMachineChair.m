@@ -1,5 +1,5 @@
-function [w_H_b,constraints,impedances,kpCom,kdCom,currentState,jointsSmoothingTime] = ...
-          stateMachineChair(r_sole_H_b,l_sole_H_b,r_leg_H_b,l_leg_H_b,t,gain,sm)
+function [w_H_b,constraints,impedances,kpCom,kdCom,currentState,jointsSmoothingTime,qjDes,CoM_Des] = ...
+          stateMachineChair(qjRef,CoM_0,l_sole_H_b,l_leg_H_b,t,gain,sm,ROBOT_DOF_FOR_SIMULINK,Lwrench,Rwrench)
       
     persistent state;
     persistent tSwitch;
@@ -15,7 +15,9 @@ function [w_H_b,constraints,impedances,kpCom,kdCom,currentState,jointsSmoothingT
     w_H_b       = eye(4);
     impedances  = gain.impedances(1,:);
     kpCom       = gain.PCOM(1,:);   
-    kdCom       = gain.DCOM(1,:);   
+    kdCom       = gain.DCOM(1,:);
+    qjDes       = qjRef;
+    CoM_Des     = CoM_0;
 
     %% BALANCING ON THE LEGS
     if state == 1 
@@ -30,13 +32,34 @@ function [w_H_b,constraints,impedances,kpCom,kdCom,currentState,jointsSmoothingT
     %% COM TRANSITION
     if state == 2 
         
+        w_H_b      =  w_H_fixedLink * l_leg_H_b;
+                               
+        qjDes([18 19 21 22]) = sm.joints.statesChair(state-1,[1 2 3 4]);
+        qjDes([12 13 15 16]) = sm.joints.statesChair(state-1,[1 2 3 4]);
+        qjDes([8 9 10 11])   = sm.joints.statesChair(state-1,[5 6 7 8]);
+        qjDes([4 5 6 7])     = sm.joints.statesChair(state-1,[5 6 7 8]);
+        qjDes(1)             = sm.joints.statesChair(state-1,9);
+        CoM_Des              = sm.CoM.statesChair(state-1,:)';
+        
+        if Lwrench(3) > sm.LwrenchTreshold &&  Rwrench(3) > sm.RwrenchTreshold
+           
+            state = 3;
+            w_H_fixedLink   = w_H_fixedLink*l_leg_H_b/l_sole_H_b;
+        end
         
     end
 
     %% LOOKING FOR CONTACT
     if state == 3 
         
-        
+        w_H_b      =  w_H_fixedLink * l_sole_H_b;
+         
+        qjDes([18 19 21 22]) = sm.joints.statesChair(state-1,[1 2 3 4]);
+        qjDes([12 13 15 16]) = sm.joints.statesChair(state-1,[1 2 3 4]);
+        qjDes([8 9 10 11])   = sm.joints.statesChair(state-1,[5 6 7 8]);
+        qjDes([4 5 6 7])     = sm.joints.statesChair(state-1,[5 6 7 8]);
+        qjDes(1)             = sm.joints.statesChair(state-1,9);
+        CoM_Des              = sm.CoM.statesChair(state-1,:)';
     end
     
     %% TWO FEET BALANCING

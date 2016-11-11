@@ -56,7 +56,7 @@ CONFIG.SIMULATION_TIME = inf;
 %
 % 'WALKING': under development.
 %
-SM.SM_TYPE                    = 'YOGA';
+SM.SM_TYPE                    = 'CHAIR';
 
 % CONFIG.SCOPES: if set to true, all visualizers for debugging are active
 CONFIG.SCOPES.ALL             = true;
@@ -163,5 +163,7 @@ elseif strcmpi(SM.SM_TYPE, 'CHAIR')
 end
 
 %% Contact constraints
-[ConstraintsMatrix,bVectorConstraints] = constraints(forceFrictionCoefficient,numberOfPoints,torsionalFrictionCoefficient,gain.footSize,fZmin);
-
+% feet
+[ConstraintsMatrix,bVectorConstraints]         = constraints(forceFrictionCoefficient,numberOfPoints,torsionalFrictionCoefficient,gain.footSize,fZmin);
+% legs
+[ConstraintsMatrixLegs,bVectorConstraintsLegs] = constraints(forceFrictionCoefficient,numberOfPoints,torsionalFrictionCoefficient,gain.legSize,fZmin);
