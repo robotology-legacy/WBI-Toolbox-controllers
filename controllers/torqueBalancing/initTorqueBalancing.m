@@ -32,7 +32,7 @@ clear; clc;
 % setenv('YARP_ROBOT_NAME','iCubGenova05');
 
 % Simulation time in seconds
-CONFIG.SIMULATION_TIME = inf;   
+CONFIG.SIMULATION_TIME = 10;   
 
 %% PRELIMINARY CONFIGURATIONS 
 % SM.SM_TYPE: defines the kind of state machines that can be chosen.
