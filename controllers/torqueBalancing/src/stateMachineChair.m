@@ -4,6 +4,7 @@ function [w_H_b,constraints,impedances,kpCom,kdCom,currentState,jointsSmoothingT
     persistent state;
     persistent tSwitch;
     persistent w_H_fixedLink;
+    persistent tInitState3;
 
     if isempty(state) || isempty(tSwitch) || isempty(w_H_fixedLink) 
         state         = sm.stateAt0;
@@ -18,6 +19,7 @@ function [w_H_b,constraints,impedances,kpCom,kdCom,currentState,jointsSmoothingT
     kdCom       = gain.DCOM(1,:);
     qjDes       = qjRef;
     CoM_Des     = CoM_0;
+    tInitState3 = 0;
 
     %% BALANCING ON THE LEGS
     if state == 1 
@@ -43,8 +45,9 @@ function [w_H_b,constraints,impedances,kpCom,kdCom,currentState,jointsSmoothingT
         
         if Lwrench(3) > sm.LwrenchTreshold(state-1) &&  Rwrench(3) > sm.RwrenchTreshold(state-1)
            
-            state = 3;
+            state           = 3;
             w_H_fixedLink   = w_H_fixedLink*l_leg_H_b/l_sole_H_b;
+            tInitState3     = t;
         end
         
     end
@@ -60,8 +63,9 @@ function [w_H_b,constraints,impedances,kpCom,kdCom,currentState,jointsSmoothingT
         qjDes([4 5 6 7])     = sm.joints.statesChair(state-1,[5 6 7 8]);
         qjDes(1)             = sm.joints.statesChair(state-1,9);
         CoM_Des              = sm.CoM.statesChair(state-1,:)';
+        tDelta               = t-tInitState3;
         
-        if Lwrench(3) > sm.LwrenchTreshold(state-1) &&  Rwrench(3) > sm.RwrenchTreshold(state-1) 
+        if Lwrench(3) > sm.LwrenchTreshold(state-1) &&  Rwrench(3) > sm.RwrenchTreshold(state-1) && tDelta > 1
             
             state = 4;
         end

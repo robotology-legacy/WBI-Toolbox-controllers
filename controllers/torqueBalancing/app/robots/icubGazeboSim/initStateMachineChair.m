@@ -58,7 +58,7 @@ sm.joints.statesChair = [1.5402   0.1594    -1.7365   -0.2814    -1.6455   0.192
                       
 sm.CoM.statesChair    = [0.1069 -0.0861  0.1616;   % state ==  2  COM TRANSITION
                          0.1269 -0.0861  0.2816;   % state ==  3  LOOKING FOR CONTACT
-                         0.1269 -0.1061  0.451];   % state ==  4  TWO FEET BALANCING 
+                         0.1269 -0.1061  0.321];   % state ==  4  TWO FEET BALANCING 
                      
 sm.LwrenchTreshold    = [60;    % state ==  2  COM TRANSITION
                          120];  % state ==  3  LOOKING FOR CONTACT
