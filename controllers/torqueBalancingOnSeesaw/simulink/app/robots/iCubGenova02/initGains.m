@@ -2,10 +2,12 @@ ROBOT_DOF = 23;
 
 PORTS.IMU   = '/icub/inertial';
 
+CONFIG.SEESAW_WITH_VERTICAL_BORDER = 1; %new seesaw kind
+CONFIG.SEESAW_HAS_IMU = 0; %seesaw has mounted IMU
 
 WBT_wbiList = 'ROBOT_TORQUE_CONTROL_JOINTS_WITHOUT_PRONOSUP';
 
-sat.torque = 6;
+sat.torque = 12;
 
 
 ROBOT_DOF_FOR_SIMULINK = eye(ROBOT_DOF);
@@ -17,18 +19,26 @@ model.robot.dofs = ROBOT_DOF;
 seesaw           = struct;
 % Height of the seesaw
 %  ____________
+% |           |  |
 %  *          *  |
 %   *        *   | h
 %     *    *     |
 %       **       |
 seesaw.h         = 0.1;
+if CONFIG.SEESAW_WITH_VERTICAL_BORDER == 1
+    seesaw.h = seesaw.h + 0.05;
+end
 
 %Radius of the seesaw
 seesaw.rho       = 0.362;
 % Distance beteewn the center of rotation and the center of mass
-seesaw.delta     = seesaw.rho - seesaw.h + 0.002;
+% seesaw.delta     = seesaw.rho - seesaw.h + 0.002;
+seesaw.delta     = seesaw.rho - seesaw.h - 0.02;
 seesaw.inertia   = diag([7.6698599e-02, 3.7876787e-02, 1.0893139e-01]);
 seesaw.mass      = 4.2;
+if CONFIG.SEESAW_HAS_IMU == 1
+    seesaw.mass = seesaw.mass + 0.7;
+end
 
 seesaw.top       = 0.002;% seesaw.delta - (seesaw.rho - seesaw.h) ;
 
@@ -38,6 +48,9 @@ seesaw.rFootDistanceCenter      = -0.07;
 
 seesaw.lFootDistanceCenter      =  0.1025;
 seesaw.rFootDistanceCenter      = -0.1025;
+
+seesaw.lFootDistanceCenter      =  0.18;
+seesaw.rFootDistanceCenter      = -0.18;
 
 switch seesaw.kind
     case 1 %Spherical seesaw
@@ -82,9 +95,11 @@ gain.posturalDamp  = gain.posturalProp*0;
 gain.PAngularMomentum  = 0 ;
 gain.DAngularMomentum  = 1;
 
-gain.PCOM                 = diag([  10    25   20]);
+gain.PCOM                 = diag([  10   50   20]);
 gain.DCOM                 = 2*sqrt(gain.PCOM)/10;
 gain.ICOM                 = diag([  0    0   0]);
+
+gain.P_SATURATION        = 0.30;
 
 
 gain.seesawKP          = 0.1;

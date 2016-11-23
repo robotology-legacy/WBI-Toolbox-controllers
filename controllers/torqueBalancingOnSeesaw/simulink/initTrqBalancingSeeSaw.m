@@ -1,6 +1,6 @@
 clear;
 % setenv('YARP_ROBOT_NAME','icubGazeboSim');
-setenv('YARP_ROBOT_NAME','iCubDarmstadt01');
+setenv('YARP_ROBOT_NAME','iCubGenova02');
 
 localName               = 'seesawBalancingController';
 Ts = 0.01;
