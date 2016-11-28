@@ -160,6 +160,35 @@ function [comError,fNoQp,f_HDot,NA,tauModel,Sigmaf_HDot,SigmaNA,...
         
         f_HDot         = pinvA* (desiredDyn - [gravityWrench;0]);
         
+    elseif CONFIG.CONTROLKIND == 4
+
+        Ar              =  CentroidalMat;
+        Aseesaw         = -lambda2*Omega_2Bar*As;
+
+%         pinvAr          = pinvDamped(Ar,reg.pinvDampA);
+%         pinvAs          = pinvDamped(As,reg.pinvDampA);
+
+        pinvAr          = pinv(Ar,0.0001);
+        pinvAseesaw     = pinv(Aseesaw,0.0001);
+
+        NAr             = pinvAr * Ar;
+        NAr             = eye(size(NAr)) - NAr;
+        NAs             = pinvAseesaw * Aseesaw;
+        NAs             = eye(size(NAs)) - NAs;
+
+        NA              = NAr*NAs;
+        
+        theta           = atan2(w_R_s(3,2),w_R_s(2,2))*180/pi;
+        thetaDot        = w_omega_s(1)*180/pi;
+        
+        desiredDyn_r    =  Hdot_desired; 
+        desiredDyn_s    = -gain.seesawKP*theta-gain.seesawKD*thetaDot;
+        
+        f_HDot_r        = pinvAr* (desiredDyn_r - gravityWrench);
+        f_HDot_s        = pinv(Aseesaw*NAr,0.0001)*(desiredDyn_s -Aseesaw*f_HDot_r);
+
+        f_HDot          = f_HDot_r + NAr*f_HDot_s;
+
     elseif CONFIG.CONTROLKIND == 3
         
         w_p_com_total  =  (mS*w_p_com_s + mR*w_p_com_R)/(mR+mS);

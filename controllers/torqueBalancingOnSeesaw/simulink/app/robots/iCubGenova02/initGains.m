@@ -105,6 +105,51 @@ gain.P_SATURATION        = 0.30;
 gain.seesawKP          = 0.1;
 gain.seesawKD          = 2*sqrt(gain.seesawKP);
 
+%% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+if  CONFIG.CONTROLKIND == 2   
+    
+    gain.posturalProp  = diag([ 10   10   20, 10   10    10    8, 10   10    10    8, 30   30   20    20    0 0, 30   50   30    60    0 0]);
+                        
+    gain.posturalDamp  = gain.posturalProp*0;
+
+    gain.PAngularMomentum  = 0 ;
+    gain.DAngularMomentum  = 1;
+
+    gain.PCOM                 = diag([  10   50   20])/10;
+    gain.DCOM                 = 2*sqrt(gain.PCOM)/40;
+    gain.ICOM                 = diag([  0    0   0]);
+
+    gain.P_SATURATION        = 0.30;
+
+
+    gain.seesawKP          = 0.1/10;
+    gain.seesawKD          = 2*sqrt(gain.seesawKP)/10;
+
+elseif  CONFIG.CONTROLKIND == 4   
+    
+    gain.posturalProp  = diag([ 10   10   20, 10   10    10    8, 10   10    10    8, 30   30   20    20    0 0, 30   50   30    60    0 0]);
+                        
+    gain.posturalDamp  = gain.posturalProp*0;
+
+    gain.PAngularMomentum  = 0 ;
+    gain.DAngularMomentum  = 1;
+
+    gain.PCOM                 = diag([  10   50   20])/5;
+    gain.DCOM                 = 2*sqrt(gain.PCOM)/40;
+    gain.ICOM                 = diag([  0    0   0]);
+
+    gain.P_SATURATION        = 0.30;
+
+    gain.seesawKP          = 0.1;
+    gain.seesawKD          = 2*sqrt(gain.seesawKP)/2;
+    
+    reg.pinvTol            = 1e-7;
+    reg.pinvDamp           = 1e-2;
+    reg.pinvDampA          = 1e-7;
+    reg.pinvDampA          = 1e-4;
+    reg.HessianQP          = 1e-5;
+
+end
 
 reg.impedances             = 0.1;
 reg.dampings               = 0;

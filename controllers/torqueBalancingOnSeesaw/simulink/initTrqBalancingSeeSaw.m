@@ -6,7 +6,7 @@ localName               = 'seesawBalancingController';
 Ts = 0.01;
 
 seesaw_inertial         = '/seesaw/inertial';
-CONFIG.CONTROLKIND      = 1;
+CONFIG.CONTROLKIND      = 4;
 
 CONFIG.USE_QP_SOLVER    = true;
 CONFIG.SCOPES           = true;
