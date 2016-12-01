@@ -1,7 +1,7 @@
 ROBOT_DOF = 23;
 CONFIG.ON_GAZEBO     = true;
 
-PORTS.IMU   = '/icubGazeboSim/inertial';
+PORTS.IMU   = '/icubSim/inertial';
 
 
 WBT_wbiList = 'ROBOT_TORQUE_CONTROL_JOINTS_WITHOUT_PRONOSUP';
