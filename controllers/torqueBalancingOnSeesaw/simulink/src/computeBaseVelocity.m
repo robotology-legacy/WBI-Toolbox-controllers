@@ -1,6 +1,5 @@
 function w_v_base  = computeBaseVelocity(J_l_sole, w_H_l_sole,dq_j, s_omega_s, model)
 %#codegen
-
     s_omega_s      = s_omega_s * (pi/180);
 
     w_R_s          = w_H_l_sole(1:3,1:3);
