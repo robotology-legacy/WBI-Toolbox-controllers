@@ -45,14 +45,15 @@ end
 
 seesaw.top                      = 0.002; % seesaw.delta - (seesaw.rho - seesaw.h) ;
 seesaw.kind                     = seesawKind;
-seesaw.lFootDistanceCenter      =  0.07;
-seesaw.rFootDistanceCenter      = -0.07;
+
+% seesaw.lFootDistanceCenter      =  0.07;
+% seesaw.rFootDistanceCenter      = -0.07;
 
 seesaw.lFootDistanceCenter      =  0.1025;
 seesaw.rFootDistanceCenter      = -0.1025;
 
-seesaw.lFootDistanceCenter      =  0.18;
-seesaw.rFootDistanceCenter      = -0.18;
+% seesaw.lFootDistanceCenter      =  0.18;
+% seesaw.rFootDistanceCenter      = -0.18;
 
 switch seesaw.kind
     
@@ -78,7 +79,7 @@ model.seesaw    = seesaw;
 % variables
 
 directionOfOscillation   = [0;1;0];
-referenceParams          = [0.00 0.1];  %referenceParams(1) = amplitude of ascillations in meters referenceParams(2) = frequency of ascillations in hertz
+referenceParams          = [0.0 0.25];  %referenceParams(1) = amplitude of ascillations in meters referenceParams(2) = frequency of ascillations in hertz
 
 noOscillationTime        = 0;  % If DEMO_LEFT_AND_RIGHT = 1, the variable noOscillationTime is the time, in seconds, 
                                % that the robot waits before starting the left-and-righ
@@ -111,6 +112,7 @@ reg.pinvTol            = 1e-7;
 reg.pinvDamp           = 1e-1;
 reg.pinvDampA          = 1e-4;
 reg.HessianQP          = 1e-5;
+reg.pinvDampVb         = 1e-3;
 
 %% OTHER CONTROLLERS (DIFFERENT FROM 1)
 if  CONFIG.CONTROLKIND == 2   
@@ -138,30 +140,30 @@ elseif  CONFIG.CONTROLKIND == 3
     gain.PAngularMomentum  = 0 ;
     gain.DAngularMomentum  = 1;
 
-    gain.PCOM              = diag([  10   50   20]);
-    gain.DCOM              = 2*sqrt(gain.PCOM)/10;
+    gain.PCOM              = diag([  10   50   20])/5;
+    gain.DCOM              = 2*sqrt(gain.PCOM)/20;
     gain.ICOM              = diag([  0    0   0]);
 
     gain.P_SATURATION      = 0.30;
 
-    gain.seesawKP          = 0.1;
-    gain.seesawKD          = 2*sqrt(gain.seesawKP);
+    gain.seesawKP          =  0.1;
+    gain.seesawKD          =  2*sqrt(gain.seesawKP);
     
 elseif  CONFIG.CONTROLKIND == 4   
     
     gain.posturalProp      = diag([ 10   10   20, 10   10    10    8, 10   10    10    8, 30   30   20    20    0 0, 30   50   30    60    0 0]);                       
     gain.posturalDamp      = gain.posturalProp*0;
 
-    gain.PAngularMomentum  = 5 ;
-    gain.DAngularMomentum  = 2*sqrt(5);
+    gain.PAngularMomentum  = 10 ;
+    gain.DAngularMomentum  = 2*sqrt(gain.PAngularMomentum);
 
-    gain.PCOM              = diag([20   50   20]);
+    gain.PCOM              = diag([20   50   20])/2;
     gain.DCOM              = 2*sqrt(gain.PCOM)/10;
     gain.ICOM              = diag([  0    0   0]);
 
     gain.P_SATURATION      = 0.30;
 
-    gain.seesawKP          = 1;
+    gain.seesawKP          = 10;
     gain.seesawKD          = 20; %2*sqrt(gain.seesawKP)*4;
     
     gain.seesawKP_passive  = 10;
@@ -169,20 +171,21 @@ elseif  CONFIG.CONTROLKIND == 4
     gain.seesawKLambda     = 0.5;
     
     reg.pinvTol            = 1e-4;
-    reg.pinvDamp           = 0.01;
+    reg.pinvDamp           = 1e-2;
     reg.pinvDampA          = 1e-7;
     reg.pinvDampA          = 1e-4;
     reg.HessianQP          = 1e-5;
+    reg.pinvDampVb         = 1e-2;
 
   elseif  CONFIG.CONTROLKIND == 5   
     
     gain.posturalProp      = diag([ 10   10   20, 10   10    10    8, 10   10    10    8, 30   30   20    20    0 0, 30   50   30    60    0 0]);                       
     gain.posturalDamp      = gain.posturalProp*0;
 
-    gain.PAngularMomentum  = 0 ;
+    gain.PAngularMomentum  = 1 ;
     gain.DAngularMomentum  = 1;
 
-    gain.PCOM              = diag([  10   50   20])/5;
+    gain.PCOM              = diag([10   50   20]);
     gain.DCOM              = 2*sqrt(gain.PCOM)/20;
     gain.ICOM              = diag([  0    0   0]);
 
@@ -194,7 +197,7 @@ elseif  CONFIG.CONTROLKIND == 4
     gain.seesawKP_passive  = 0.1;
     gain.seesawKD_passive  = 2*sqrt(gain.seesawKP);
     
-    reg.pinvTol            = 1e-7;
+    reg.pinvTol            = 1e-3;
     reg.pinvDamp           = 1e-2;
     reg.pinvDampA          = 1e-7;
     reg.pinvDampA          = 1e-4;

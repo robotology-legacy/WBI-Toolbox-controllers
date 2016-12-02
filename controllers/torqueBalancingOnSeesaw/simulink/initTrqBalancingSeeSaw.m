@@ -3,18 +3,22 @@ clear;
 % setenv('YARP_ROBOT_NAME','icubGazeboSim');
 setenv('YARP_ROBOT_NAME','iCubGenova02');
 
-localName                 = 'seesawBalancingController';
-Ts                        = 0.01;
+localName                  = 'seesawBalancingController';
+Ts                         = 0.01;
 
-seesaw_inertial           = '/seesaw/inertial';
-CONFIG.CONTROLKIND        = 4;
+seesaw_inertial            = '/seesaw/inertial';
+CONFIG.CONTROLKIND         = 4;
 
-CONFIG.USE_QP_SOLVER      = true;
-CONFIG.SCOPES             = true;
-CONFIG.CORRECT_NECK_IMU   = true;
-CONFIG.TS                 = 0.01;
+CONFIG.USE_QP_SOLVER       = true;
+CONFIG.SCOPES              = true;
+CONFIG.CORRECT_NECK_IMU    = true;
+CONFIG.TS                  = 0.01;
 
-CONFIG.CONSIDERSEESAWDYN  = 1; 
+CONFIG.CONSIDERSEESAWDYN   = 1; 
+
+% Used for the new integral of angular momentum estimation
+LEFT_RIGHT_FOOT_IN_CONTACT = [1;1];
+CONFIG.USE_IMU4EST_BASE    = true;
 
 %% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % CONFIGURATIONS COMPLETED: loading gains and parameters for the specific robot

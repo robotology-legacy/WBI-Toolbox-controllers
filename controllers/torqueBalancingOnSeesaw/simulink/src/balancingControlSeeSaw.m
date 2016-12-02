@@ -11,7 +11,7 @@ function [comError,fNoQp,f_HDot,NA,tauModel,Sigmaf_HDot,SigmaNA,...
 
     robotDoFs      = size(ROBOT_DOF,1);
 
-    [ seesaw_pose, seesaw_vel, robotPos, robotVel] = state_partitioning(x, robotDoFs);
+    [seesaw_pose, seesaw_vel, robotPos, robotVel] = state_partitioning(x, robotDoFs);
 
     q              = robotPos(8:end);
     qref           = controlParams.references.qDes;
@@ -90,7 +90,7 @@ function [comError,fNoQp,f_HDot,NA,tauModel,Sigmaf_HDot,SigmaNA,...
     frequency              = 0.5;
     
     if isempty(theta0)
-        theta0 = 0; %atan2(w_R_s(3,2),w_R_s(2,2));
+        theta0 = atan2(w_R_s(3,2),w_R_s(2,2));
     end
     
     theta_seesaw_des       = theta0 + amplitude*sin(2*pi*frequency*t); 
@@ -181,7 +181,7 @@ function [comError,fNoQp,f_HDot,NA,tauModel,Sigmaf_HDot,SigmaNA,...
             w_p_com_total_0 = w_p_com_total;
         end
            
-        w_v_com_s      = Sf(r_w)*w_omega_s;
+        w_v_com_s      =  Sf(r_w)*w_omega_s;
         w_v_com_total  =  (mS*w_v_com_s + mR*w_v_com_R)/(mR+mS);
 
         Theta          =  eye(3) + Sf(r_s) * seesaw.iota* Sf(r_s)';
@@ -293,12 +293,10 @@ function [comError,fNoQp,f_HDot,NA,tauModel,Sigmaf_HDot,SigmaNA,...
     %% Other parameters
     F                  = J / M * J' + ...
                          CONFIG.CONSIDERSEESAWDYN*blkdiag(w_R_s,w_R_s,w_R_s,w_R_s)*Delta*Omega_2* blkdiag(s_R_w,s_R_w)* As;
-
     
     JcMinv             = J/M;
     JcMinvSt           = JcMinv*St;
-
-    
+   
     PInv_JcMinvSt      = pinvDamped(JcMinvSt,reg.pinvDamp); 
     % nullJcMinvSt     = null space of PInv_JcMinvSt
     nullJcMinvSt       = eye(robotDoFs) - PInv_JcMinvSt*JcMinvSt;
