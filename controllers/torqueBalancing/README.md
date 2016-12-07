@@ -26,7 +26,7 @@ Users willing to use the module should follow this list.
 ###Configuration file
 At start, the module calls the initialization file initTorqueBalancing.m. Once open, this file contains some configuration variables.
 ####General section
-- `robotName : name of the robot to connect to, i.e. 'icubGazeboSim' for simulations, or 'icub' for experiments`
+- `robotName : port prefix of the robot to connect to, i.e. 'icubSim' for simulations, or 'icub' for experiments`
 - `localName`: module name. Ports will be opened with this name. Default to `matlabTorqueBalancing`
 - `simulationTime`: time of the simulation/experiment
 - `USE_QP_SOLVER`: if 1, then a QP will be used to generate torques. If 0, classical pseudo-inverse are used

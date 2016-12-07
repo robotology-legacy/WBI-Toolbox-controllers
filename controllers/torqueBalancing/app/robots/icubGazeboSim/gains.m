@@ -1,6 +1,6 @@
 ROBOT_DOF = 25;
 CONFIG.ON_GAZEBO = true;
-PORTS.IMU = '/icubGazeboSim/inertial';
+PORTS.IMU = '/icubSim/inertial';
 
 
 CONFIG.LEFT_RIGHT_FOOT_IN_CONTACT  = [1 1];
@@ -13,8 +13,8 @@ CONFIG.SMOOTH_DES_Q        = 0;    % If equal to one, the desired streamed value
 
 WBT_wbiList = 'ROBOT_TORQUE_CONTROL_JOINTS';
 
-dump.left_wrench_port = '/icubGazeboSim/left_foot/analog:o';
-dump.right_wrench_port = '/icubGazeboSim/right_foot/analog:o';
+dump.left_wrench_port = '/icubSim/left_foot/analog:o';
+dump.right_wrench_port = '/icubSim/right_foot/analog:o';
 
 references.smoothingTimeMinJerkComDesQDes    = 3.0;
 
