@@ -53,7 +53,7 @@ CONFIG.SIMULATION_TIME     = inf;
 SM.SM_TYPE                 = 'YOGA';
 
 % CONFIG.SCOPES: if set to true, all visualizers for debugging are active
-CONFIG.SCOPES.ALL          = true;
+CONFIG.SCOPES.ALL          = false;
 % You can also activate only some specific debugging scopes
 CONFIG.SCOPES.BASE_EST_IMU = false;
 CONFIG.SCOPES.EXTWRENCHES  = false;
