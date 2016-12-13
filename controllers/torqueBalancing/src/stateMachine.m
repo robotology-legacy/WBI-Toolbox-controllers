@@ -24,7 +24,7 @@ function [w_H_b, CoMDes,qDes,constraints,impedances,kpCom,kdCom,currentState,joi
     if state == 1 
         w_H_b      =  w_H_fixedLink * l_sole_H_b;
 
-        if t > sm.tBalancing %after tBalancing time start moving weight to the left
+        if t > sm.tBalancing && ~sm.demoOnlyBalancing %after tBalancing time start moving weight to the left
            state = 2;
            if sm.demoOnlyRightFoot
                 w_H_fixedLink   = w_H_fixedLink*l_sole_H_b/r_sole_H_b;

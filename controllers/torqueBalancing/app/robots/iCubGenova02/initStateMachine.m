@@ -78,24 +78,27 @@ if strcmpi(SM.SM_TYPE, 'YOGA')
 %% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%                      
          
 %% %%%%%%%%%%%%%%%%    FINITE STATE MACHINE SPECIFIC PARAMETERS
+sm.demoOnlyBalancing             = false;
 sm.yogaExtended                  = true;
 sm.skipYoga                      = false;
 sm.demoOnlyRightFoot             = false;
 sm.yogaAlsoOnRightFoot           = false;
 sm.yogaInLoop                    = false;
+
+sm.stateAt0                      = 1;
 sm.com.threshold                 = 0.01;
 sm.wrench.thresholdContactOn     =  50;     % Force threshole above which contact is considered stable
 sm.wrench.thresholdContactOff    = 100;     % Force threshole under which contact is considered off
 sm.joints                        = struct;
-sm.joints.thresholdNotInContact  =  5;    % Degrees
+sm.joints.thresholdNotInContact  =  5;      % Degrees
 sm.joints.thresholdInContact     = 50;      % Degrees
 sm.joints.pauseTimeLastPostureL  = 10;
 sm.joints.pauseTimeLastPostureR  = 10;
 
-sm.stateAt0                      = 1;
-
 sm.DT                            = 1;
 sm.waitingTimeAfterYoga          = 0;
+sm.tBalancing                    = 1; 
+
 
 sm.jointsSmoothingTimes          = [1;   %% state ==  1  TWO FEET BALANCING
                                          %%
@@ -130,7 +133,6 @@ sm.com.states      = [0.0,  0.01,0.0;   %% state ==  1  TWO FEET BALANCING NOT U
                       0.0, -0.00,0.0;   %% state == 11  PREPARING FOR SWITCHING
                       0.0,  0.09,0.0;   %% state == 12  LOOKING FOR CONTACT 
                       0.0,  0.00,0.0];  %% state == 13  TRANSITION INIT POSITION: THIS REFERENCE IS IGNORED
-sm.tBalancing      = 1; %0.5;
 
 
 sm.joints.states = [[0.0864,0.0258,0.0152, ...                          %% state == 1  TWO FEET BALANCING, THIS REFERENCE IS IGNORED 
