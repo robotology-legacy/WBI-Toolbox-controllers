@@ -14,9 +14,7 @@
 
    `gazebo_chair`
 
-### To run the simulation, just run the torqueBalancing controller as usual. In the initialization file, there will be the new option 
-    "CHAIR" as long as the old ones "YOGA" and "COORDINATOR".
+- To run the simulation, just run the torqueBalancing controller as usual. In the initialization file, there will be the new option "CHAIR" as long as the old ones "YOGA" and "COORDINATOR".
 
 
-### All the demos "CHAIR", "YOGA" and "COORDINATOR" should be still available without conflicts 
-    (BUT with the right gazebo world for each demo). 
+- All the demos "CHAIR", "YOGA" and "COORDINATOR" should be still available without conflicts (BUT with the right gazebo world for each demo). 
