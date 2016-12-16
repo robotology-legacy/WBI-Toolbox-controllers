@@ -70,10 +70,10 @@ if strcmpi(SM.SM_TYPE, 'YOGA')
                         10   30   20, 10   10    10    8, 10   10    10    8, 30   50   60    30      5   5, 30   30   30    20      5   5  % state ==  7  TRANSITION TO INITIAL POSITION 
                         10   30   20, 10   10    10    8, 10   10    10    8, 30   50   60    30    100 100, 30   30   30    20    100 100  % state ==  8  COM TRANSITION TO RIGHT FOOT
                         10   30   20, 10   10    10    8, 10   10    10    8, 30   50   30    60    100 100, 30   30   20    20    100 100  % state ==  9  RIGHT FOOT BALANCING
-                        30   30   30, 10   10    10   10, 10   10    10   10,100   50   30   100    100 100,100  200  100   400    100 100  % state == 10  YOGA RIGHT FOOT 
+                        30   30   30, 10   10    10   10, 10   10    10   10,100   50   30   100    100 100,100  200  100   100     10  10  % state == 10  YOGA RIGHT FOOT 
                         30   30   30, 10   10    10   10, 10   10    10   10,220  550  220   200     65 300,200  250   20    20     10  10  % state == 11  PREPARING FOR SWITCHING 
                         30   30   30, 10   10    10   10, 10   10    10   10,220  550  220   200     65 300,100  350   20   200     10 100  % state == 12  LOOKING FOR CONTACT
-                        30   30   30, 10   10    10   10, 10   10    10   10,100   50   30   100    100 100,100  200   20   400    100 100];% state == 13  TRANSITION TO INITIAL POSITION
+                        30   30   30, 10   10    10   10, 10   10    10   10,220  550  220   200     65 300,100  350   20   200     10 100];% state == 13  TRANSITION TO INITIAL POSITION
  end              
 %% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%                      
          
@@ -82,7 +82,7 @@ sm.demoOnlyBalancing             = false;
 sm.yogaExtended                  = true;
 sm.skipYoga                      = false;
 sm.demoOnlyRightFoot             = false;
-sm.yogaAlsoOnRightFoot           = false;
+sm.yogaAlsoOnRightFoot           = true;
 sm.yogaInLoop                    = false;
 
 sm.stateAt0                      = 1;
@@ -97,14 +97,14 @@ sm.joints.pauseTimeLastPostureR  = 10;
 
 sm.DT                            = 1;
 sm.waitingTimeAfterYoga          = 0;
-sm.tBalancing                    = 10; 
+sm.tBalancing                    = 1; 
 
 
 sm.jointsSmoothingTimes          = [1;   %% state ==  1  TWO FEET BALANCING
                                          %%
                                     1;   %% state ==  2  COM TRANSITION TO LEFT FOOT
                                     1;   %% state ==  3  LEFT FOOT BALANCING 
-                                    3;   %% state ==  4  YOGA LEFT FOOT
+                                    1.2; %% state ==  4  YOGA LEFT FOOT
                                     2;   %% state ==  5  PREPARING FOR SWITCHING
                                     2;   %% state ==  6  LOOKING FOR CONTACT 
                                          %%
@@ -112,11 +112,11 @@ sm.jointsSmoothingTimes          = [1;   %% state ==  1  TWO FEET BALANCING
                                          %%
                                     1;   %% state ==  8  COM TRANSITION TO RIGHT FOOT
                                     1;   %% state ==  9  RIGHT FOOT BALANCING 
-                                    3;   %% state == 10  YOGA RIGHT FOOT
-                                    3;   %% state == 11  PREPARING FOR SWITCHING
-                                    2;   %% state == 12  LOOKING FOR CONTACT 
+                                    1.2; %% state == 10  YOGA RIGHT FOOT
+                                    2;   %% state == 11  PREPARING FOR SWITCHING
+                                    5;   %% state == 12  LOOKING FOR CONTACT 
                                          %%
-                                    1];  %% state == 13  TRANSITION INIT POSITION
+                                    10];  %% state == 13  TRANSITION INIT POSITION
 
 sm.com.states      = [0.0,  0.01,0.0;   %% state ==  1  TWO FEET BALANCING NOT USED
                       0.0,  0.00,0.0;   %% state ==  2  COM TRANSITION TO LEFT FOOT: THIS REFERENCE IS USED AS A DELTA W.R.T. THE POSITION OF THE LEFT FOOT
