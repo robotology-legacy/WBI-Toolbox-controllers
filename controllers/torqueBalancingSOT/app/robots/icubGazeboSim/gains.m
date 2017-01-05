@@ -1,6 +1,6 @@
 ROBOT_DOF = 25;
 CONFIG.ON_GAZEBO = true;
-PORTS.IMU = '/icubGazeboSim/inertial';
+PORTS.IMU = '/icubSim/inertial';
 
 
 gain.rootPD      = [20 2*sqrt(1)];
