@@ -56,6 +56,18 @@ It is possible to send the impedance resting position as a reference to the stre
 In case you want to cite the content of this module please refer to [iCub whole-body control through force regulation on rigid non-coplanar contacts](http://journal.frontiersin.org/article/10.3389/frobt.2015.00006/abstract) and use the following bibtex entry:
 
 ```
+@INPROCEEDINGS{Nava_etal2016, 
+author={G. Nava and F. Romano and F. Nori and D. Pucci}, 
+booktitle={2016 IEEE/RSJ International Conference on Intelligent Robots and Systems (IROS)}, 
+title={Stability analysis and design of momentum-based controllers for humanoid robots}, 
+year={2016}, 
+pages={680-687}, 
+keywords={Lyapunov methods;asymptotic stability;closed loop systems;control system synthesis;humanoid robots;legged locomotion;linearisation techniques;momentum;robust control;Lyapunov analysis;balancing controller design;closed loop system asymptotic stability;iCub humanoid robot;linearized system joint space;momentum-based controller design;robust controllers;stability analysis;unstable zero dynamics;walking controller design;Acceleration;Asymptotic stability;Humanoid robots;Legged locomotion;Robot kinematics;Stability analysis}, 
+doi={10.1109/IROS.2016.7759126}, 
+month={Oct},}
+```
+
+```
  @article{Nori_etal2015,
  author="Nori, F. and Traversaro, S. and Eljaik, J. and Romano, F. and Del Prete, A. and Pucci, D.",
  title="iCub whole-body control through force regulation on rigid non-coplanar contacts",
