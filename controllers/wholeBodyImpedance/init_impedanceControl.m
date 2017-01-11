@@ -26,8 +26,8 @@ clear; clc;
 % To do this, you can uncomment the 
 
 % setenv('YARP_ROBOT_NAME','iCubGenova01');
-% setenv('YARP_ROBOT_NAME','iCubGenova02');
-setenv('YARP_ROBOT_NAME','iCubDarmstadt01');
+setenv('YARP_ROBOT_NAME','iCubGenova02');
+% setenv('YARP_ROBOT_NAME','iCubDarmstadt01');
 % setenv('YARP_ROBOT_NAME','icubGazeboSim');
 
 % Simulation time in seconds
