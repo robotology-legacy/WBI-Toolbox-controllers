@@ -152,7 +152,7 @@ sm.origin.leftFoot = [0.0,  0.00, 0.0;   %% state ==  1  TWO FEET BALANCING NOT 
                                     
 sm.origin.rightFoot =[0.0,  0.00, 0.0;   %% state ==  1  TWO FEET BALANCING NOT USED  : THIS REFERENCE IS IGNORED
                       0.0,  0.00, 0.0;   %% state ==  2  COM TRANSITION TO LEFT FOOT  : THIS REFERENCE IS IGNORED
-                      0.0, -0.13, 0.01;  %% state ==  3  LEFT FOOT BALANCING          
+                      0.0, -0.13, 0.05;  %% state ==  3  LEFT FOOT BALANCING          
                       0.0,  0.00, 0.0;   %% state ==  4  PREPARING FOR SWITCHING      
                       0.0,  0.00, 0.0;   %% state ==  5  LOOKING FOR CONTACT          
                       0.0,  0.00, 0.0;   %% state ==  6  TRANSITION INIT POSITION     : THIS REFERENCE IS IGNORED
