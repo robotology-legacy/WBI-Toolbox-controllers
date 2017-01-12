@@ -1,8 +1,7 @@
 Model {
   Name			  "torqueBalancing2012b"
   Version		  8.0
-  MdlSubVersion		  0
-  SavedCharacterEncoding  "US-ASCII"
+  SavedCharacterEncoding  "UTF-8"
   GraphicalInterface {
     NumRootInports	    0
     NumRootOutports	    0
@@ -30,7 +29,7 @@ Model {
       $ObjectID		      2
       $ClassName	      "Simulink.WindowInfo"
       IsActive		      [1]
-      Location		      [0.0, 23.0, 1280.0, 773.0]
+      Location		      [65.0, 14.0, 1280.0, 764.0]
       Object {
 	$PropName		"ModelBrowserInfo"
 	$ObjectID		3
@@ -54,9 +53,9 @@ Model {
 	IsActive		[1]
 	ViewObjType		"SimulinkTopLevel"
 	LoadSaveID		"0"
-	Extents			[1246.0, 600.0]
+	Extents			[1226.0, 571.0]
 	ZoomFactor		[0.57719475277497478]
-	Offset			[63.141608391608315, 110.74475524475554]
+	Offset			[63.141608391608315, 110.74475524475542]
       }
     }
   }
@@ -64,10 +63,10 @@ Model {
   Creator		  "daniele"
   UpdateHistory		  "UpdateHistoryNever"
   ModifiedByFormat	  "%<Auto>"
-  LastModifiedBy	  "DanielePucci"
+  LastModifiedBy	  "gnava"
   ModifiedDateFormat	  "%<Auto>"
-  LastModifiedDate	  "Fri Dec 16 11:27:21 2016"
-  RTWModifiedTimeStamp	  403788440
+  LastModifiedDate	  "Thu Jan 12 12:17:43 2017"
+  RTWModifiedTimeStamp	  406124261
   ModelVersionFormat	  "1.%<AutoIncrement:3098>"
   ConfigurationManager	  "none"
   SampleTimeColors	  off
@@ -594,7 +593,6 @@ Model {
 	      }
 	      TargetFcnLib	      "ansi_tfl_table_tmw.mat"
 	      TargetLibSuffix	      ""
-	      TargetPreCompLibLocation ""
 	      CodeReplacementLibrary  "C89/C90 (ANSI)"
 	      UtilityFuncGeneration   "Auto"
 	      ERTMultiwordTypeDef     "System defined"
@@ -952,6 +950,7 @@ Model {
       MinMaxOverflowLogging   "UseLocalSettings"
       SFBlockType	      "NONE"
       GeneratePreprocessorConditionals off
+      TreatAsGroupedWhenPropagatingVariantConditions on
     }
     Block {
       BlockType		      Sum
@@ -990,7 +989,7 @@ Model {
   }
   System {
     Name		    "torqueBalancing2012b"
-    Location		    [0, 23, 1280, 796]
+    Location		    [65, 14, 1345, 778]
     Open		    off
     ModelBrowserVisibility  off
     ModelBrowserWidth	    200
@@ -1039,7 +1038,7 @@ Model {
 	  Position		  [-200, 2570, -170, 2600]
 	  ZOrder		  613
 	  ShowName		  off
-	  LibraryVersion	  "1.358"
+	  LibraryVersion	  "1.386"
 	  SourceBlock		  "simulink/Logic and Bit\nOperations/Compare\nTo Zero"
 	  SourceType		  "Compare To Zero"
 	  relop			  "~="
@@ -1054,7 +1053,7 @@ Model {
 	  Position		  [-200, 2835, -170, 2865]
 	  ZOrder		  614
 	  ShowName		  off
-	  LibraryVersion	  "1.358"
+	  LibraryVersion	  "1.386"
 	  SourceBlock		  "simulink/Logic and Bit\nOperations/Compare\nTo Zero"
 	  SourceType		  "Compare To Zero"
 	  relop			  "~="
@@ -1069,7 +1068,7 @@ Model {
 	  Position		  [-230, 3100, -200, 3130]
 	  ZOrder		  615
 	  ShowName		  off
-	  LibraryVersion	  "1.358"
+	  LibraryVersion	  "1.386"
 	  SourceBlock		  "simulink/Logic and Bit\nOperations/Compare\nTo Zero"
 	  SourceType		  "Compare To Zero"
 	  relop			  "~="
@@ -1117,7 +1116,7 @@ Model {
 	  Position		  [-315, 2836, -255, 2864]
 	  ZOrder		  605
 	  ShowName		  off
-	  LibraryVersion	  "1.358"
+	  LibraryVersion	  "1.386"
 	  SourceBlock		  "simulink/Logic and Bit\nOperations/Bitwise\nOperator"
 	  SourceType		  "Bitwise Operator"
 	  logicop		  "AND"
@@ -1521,7 +1520,7 @@ Model {
 		    TiledPageScale	    1
 		    ShowPageBoundaries	    off
 		    ZoomFactor		    "100"
-		    SIDHighWatermark	    "3696"
+		    SIDHighWatermark	    "3698"
 		    Block {
 		    BlockType		    Inport
 		    Name		    "JcLeftFoot"
@@ -1560,25 +1559,25 @@ Model {
 		    Block {
 		    BlockType		    Demux
 		    Name		    " Demux "
-		    SID			    "2126::3694"
+		    SID			    "2126::3697"
 		    Ports		    [1, 1]
 		    Position		    [270, 230, 320, 270]
-		    ZOrder		    63
+		    ZOrder		    66
 		    Outputs		    "1"
 		    }
 		    Block {
 		    BlockType		    S-Function
 		    Name		    " SFunction "
-		    SID			    "2126::3693"
+		    SID			    "2126::3696"
 		    Tag			    "Stateflow S-Function torqueBalancing2012b 7"
 		    Ports		    [4, 2]
 		    Position		    [180, 102, 230, 203]
-		    ZOrder		    62
+		    ZOrder		    65
 		    FunctionName	    "sf_sfun"
 		    Parameters		    "reg"
 		    PortCounts		    "[4 2]"
 		    SFunctionDeploymentMode off
-		    EnableBusSupport	    on
+		    EnableBusSupport	    off
 		    Port {
 		    PortNumber		    2
 		    Name		    "y"
@@ -1589,9 +1588,9 @@ Model {
 		    Block {
 		    BlockType		    Terminator
 		    Name		    " Terminator "
-		    SID			    "2126::3695"
+		    SID			    "2126::3698"
 		    Position		    [460, 241, 480, 259]
-		    ZOrder		    64
+		    ZOrder		    67
 		    }
 		    Block {
 		    BlockType		    Outport
@@ -1851,7 +1850,7 @@ Model {
 		    TiledPageScale	    1
 		    ShowPageBoundaries	    off
 		    ZoomFactor		    "100"
-		    SIDHighWatermark	    "3696"
+		    SIDHighWatermark	    "3698"
 		    Block {
 		    BlockType		    Inport
 		    Name		    "xCom0"
@@ -1881,25 +1880,25 @@ Model {
 		    Block {
 		    BlockType		    Demux
 		    Name		    " Demux "
-		    SID			    "2134::3694"
+		    SID			    "2134::3697"
 		    Ports		    [1, 1]
 		    Position		    [270, 230, 320, 270]
-		    ZOrder		    97
+		    ZOrder		    100
 		    Outputs		    "1"
 		    }
 		    Block {
 		    BlockType		    S-Function
 		    Name		    " SFunction "
-		    SID			    "2134::3693"
+		    SID			    "2134::3696"
 		    Tag			    "Stateflow S-Function torqueBalancing2012b 10"
 		    Ports		    [3, 3]
 		    Position		    [180, 100, 230, 180]
-		    ZOrder		    96
+		    ZOrder		    99
 		    FunctionName	    "sf_sfun"
 		    Parameters		    "references"
 		    PortCounts		    "[3 3]"
 		    SFunctionDeploymentMode off
-		    EnableBusSupport	    on
+		    EnableBusSupport	    off
 		    Port {
 		    PortNumber		    2
 		    Name		    "qDes"
@@ -1916,9 +1915,9 @@ Model {
 		    Block {
 		    BlockType		    Terminator
 		    Name		    " Terminator "
-		    SID			    "2134::3695"
+		    SID			    "2134::3698"
 		    Position		    [460, 241, 480, 259]
-		    ZOrder		    98
+		    ZOrder		    101
 		    }
 		    Block {
 		    BlockType		    Outport
@@ -2384,7 +2383,7 @@ Model {
 		    TiledPageScale	    1
 		    ShowPageBoundaries	    off
 		    ZoomFactor		    "100"
-		    SIDHighWatermark	    "3696"
+		    SIDHighWatermark	    "3698"
 		    SIDPrevWatermark	    "9"
 		    Block {
 		    BlockType		    Inport
@@ -2442,25 +2441,25 @@ Model {
 		    Block {
 		    BlockType		    Demux
 		    Name		    " Demux "
-		    SID			    "3595::3694"
+		    SID			    "3595::3697"
 		    Ports		    [1, 1]
 		    Position		    [270, 230, 320, 270]
-		    ZOrder		    94
+		    ZOrder		    97
 		    Outputs		    "1"
 		    }
 		    Block {
 		    BlockType		    S-Function
 		    Name		    " SFunction "
-		    SID			    "3595::3693"
+		    SID			    "3595::3696"
 		    Tag			    "Stateflow S-Function torqueBalancing2012b 2"
 		    Ports		    [6, 2]
 		    Position		    [180, 102, 230, 243]
-		    ZOrder		    93
+		    ZOrder		    96
 		    FunctionName	    "sf_sfun"
 		    Parameters		    "CONFIG"
 		    PortCounts		    "[6 2]"
 		    SFunctionDeploymentMode off
-		    EnableBusSupport	    on
+		    EnableBusSupport	    off
 		    Port {
 		    PortNumber		    2
 		    Name		    "w_H_root"
@@ -2471,9 +2470,9 @@ Model {
 		    Block {
 		    BlockType		    Terminator
 		    Name		    " Terminator "
-		    SID			    "3595::3695"
+		    SID			    "3595::3698"
 		    Position		    [460, 241, 480, 259]
-		    ZOrder		    95
+		    ZOrder		    98
 		    }
 		    Block {
 		    BlockType		    Outport
@@ -3397,7 +3396,7 @@ Model {
 	    TiledPageScale	    1
 	    ShowPageBoundaries	    off
 	    ZoomFactor		    "100"
-	    SIDHighWatermark	    "3696"
+	    SIDHighWatermark	    "3698"
 	    Block {
 	      BlockType		      Inport
 	      Name		      "w_H_b_vectorised"
@@ -3418,24 +3417,24 @@ Model {
 	    Block {
 	      BlockType		      Demux
 	      Name		      " Demux "
-	      SID		      "3059::3694"
+	      SID		      "3059::3697"
 	      Ports		      [1, 1]
 	      Position		      [270, 230, 320, 270]
-	      ZOrder		      19
+	      ZOrder		      22
 	      Outputs		      "1"
 	    }
 	    Block {
 	      BlockType		      S-Function
 	      Name		      " SFunction "
-	      SID		      "3059::3693"
+	      SID		      "3059::3696"
 	      Tag		      "Stateflow S-Function torqueBalancing2012b 3"
 	      Ports		      [2, 3]
 	      Position		      [180, 100, 230, 180]
-	      ZOrder		      18
+	      ZOrder		      21
 	      FunctionName	      "sf_sfun"
 	      PortCounts	      "[2 3]"
 	      SFunctionDeploymentMode off
-	      EnableBusSupport	      on
+	      EnableBusSupport	      off
 	      Port {
 		PortNumber		2
 		Name			"w_H_b"
@@ -3452,9 +3451,9 @@ Model {
 	    Block {
 	      BlockType		      Terminator
 	      Name		      " Terminator "
-	      SID		      "3059::3695"
+	      SID		      "3059::3698"
 	      Position		      [460, 241, 480, 259]
-	      ZOrder		      20
+	      ZOrder		      23
 	    }
 	    Block {
 	      BlockType		      Outport
@@ -5051,7 +5050,7 @@ Model {
 		    TiledPageScale	    1
 		    ShowPageBoundaries	    off
 		    ZoomFactor		    "100"
-		    SIDHighWatermark	    "3696"
+		    SIDHighWatermark	    "3698"
 		    Block {
 		    BlockType		    Inport
 		    Name		    "JcLeftFoot"
@@ -5090,25 +5089,25 @@ Model {
 		    Block {
 		    BlockType		    Demux
 		    Name		    " Demux "
-		    SID			    "2214::3694"
+		    SID			    "2214::3697"
 		    Ports		    [1, 1]
 		    Position		    [270, 230, 320, 270]
-		    ZOrder		    63
+		    ZOrder		    66
 		    Outputs		    "1"
 		    }
 		    Block {
 		    BlockType		    S-Function
 		    Name		    " SFunction "
-		    SID			    "2214::3693"
+		    SID			    "2214::3696"
 		    Tag			    "Stateflow S-Function torqueBalancing2012b 12"
 		    Ports		    [4, 2]
 		    Position		    [180, 102, 230, 203]
-		    ZOrder		    62
+		    ZOrder		    65
 		    FunctionName	    "sf_sfun"
 		    Parameters		    "reg"
 		    PortCounts		    "[4 2]"
 		    SFunctionDeploymentMode off
-		    EnableBusSupport	    on
+		    EnableBusSupport	    off
 		    Port {
 		    PortNumber		    2
 		    Name		    "y"
@@ -5119,9 +5118,9 @@ Model {
 		    Block {
 		    BlockType		    Terminator
 		    Name		    " Terminator "
-		    SID			    "2214::3695"
+		    SID			    "2214::3698"
 		    Position		    [460, 241, 480, 259]
-		    ZOrder		    64
+		    ZOrder		    67
 		    }
 		    Block {
 		    BlockType		    Outport
@@ -5358,7 +5357,7 @@ Model {
 		TiledPageScale		1
 		ShowPageBoundaries	off
 		ZoomFactor		"100"
-		SIDHighWatermark	"3696"
+		SIDHighWatermark	"3698"
 		SIDPrevWatermark	"9"
 		Block {
 		  BlockType		  Inport
@@ -5452,25 +5451,25 @@ Model {
 		Block {
 		  BlockType		  Demux
 		  Name			  " Demux "
-		  SID			  "2220::3694"
+		  SID			  "2220::3697"
 		  Ports			  [1, 1]
 		  Position		  [270, 460, 320, 500]
-		  ZOrder		  93
+		  ZOrder		  96
 		  Outputs		  "1"
 		}
 		Block {
 		  BlockType		  S-Function
 		  Name			  " SFunction "
-		  SID			  "2220::3693"
+		  SID			  "2220::3696"
 		  Tag			  "Stateflow S-Function torqueBalancing2012b 13"
 		  Ports			  [10, 10]
 		  Position		  [180, 100, 230, 320]
-		  ZOrder		  92
+		  ZOrder		  95
 		  FunctionName		  "sf_sfun"
 		  Parameters		  "gain,sm"
 		  PortCounts		  "[10 10]"
 		  SFunctionDeploymentMode off
-		  EnableBusSupport	  on
+		  EnableBusSupport	  off
 		  Port {
 		    PortNumber		    2
 		    Name		    "w_H_b"
@@ -5529,9 +5528,9 @@ Model {
 		Block {
 		  BlockType		  Terminator
 		  Name			  " Terminator "
-		  SID			  "2220::3695"
+		  SID			  "2220::3698"
 		  Position		  [460, 471, 480, 489]
-		  ZOrder		  94
+		  ZOrder		  97
 		}
 		Block {
 		  BlockType		  Outport
@@ -5990,7 +5989,7 @@ Model {
 		    TiledPageScale	    1
 		    ShowPageBoundaries	    off
 		    ZoomFactor		    "100"
-		    SIDHighWatermark	    "3696"
+		    SIDHighWatermark	    "3698"
 		    Block {
 		    BlockType		    Inport
 		    Name		    "R"
@@ -6002,24 +6001,24 @@ Model {
 		    Block {
 		    BlockType		    Demux
 		    Name		    " Demux "
-		    SID			    "3384::3694"
+		    SID			    "3384::3697"
 		    Ports		    [1, 1]
 		    Position		    [270, 230, 320, 270]
-		    ZOrder		    19
+		    ZOrder		    22
 		    Outputs		    "1"
 		    }
 		    Block {
 		    BlockType		    S-Function
 		    Name		    " SFunction "
-		    SID			    "3384::3693"
+		    SID			    "3384::3696"
 		    Tag			    "Stateflow S-Function torqueBalancing2012b 21"
 		    Ports		    [1, 2]
 		    Position		    [180, 100, 230, 160]
-		    ZOrder		    18
+		    ZOrder		    21
 		    FunctionName	    "sf_sfun"
 		    PortCounts		    "[1 2]"
 		    SFunctionDeploymentMode off
-		    EnableBusSupport	    on
+		    EnableBusSupport	    off
 		    Port {
 		    PortNumber		    2
 		    Name		    "rollPitchYaw"
@@ -6030,9 +6029,9 @@ Model {
 		    Block {
 		    BlockType		    Terminator
 		    Name		    " Terminator "
-		    SID			    "3384::3695"
+		    SID			    "3384::3698"
 		    Position		    [460, 241, 480, 259]
-		    ZOrder		    20
+		    ZOrder		    23
 		    }
 		    Block {
 		    BlockType		    Outport
@@ -6342,7 +6341,7 @@ Model {
 		    TiledPageScale	    1
 		    ShowPageBoundaries	    off
 		    ZoomFactor		    "100"
-		    SIDHighWatermark	    "3696"
+		    SIDHighWatermark	    "3698"
 		    Block {
 		    BlockType		    Inport
 		    Name		    "R"
@@ -6354,24 +6353,24 @@ Model {
 		    Block {
 		    BlockType		    Demux
 		    Name		    " Demux "
-		    SID			    "3392::3694"
+		    SID			    "3392::3697"
 		    Ports		    [1, 1]
 		    Position		    [270, 230, 320, 270]
-		    ZOrder		    19
+		    ZOrder		    22
 		    Outputs		    "1"
 		    }
 		    Block {
 		    BlockType		    S-Function
 		    Name		    " SFunction "
-		    SID			    "3392::3693"
+		    SID			    "3392::3696"
 		    Tag			    "Stateflow S-Function torqueBalancing2012b 22"
 		    Ports		    [1, 2]
 		    Position		    [180, 100, 230, 160]
-		    ZOrder		    18
+		    ZOrder		    21
 		    FunctionName	    "sf_sfun"
 		    PortCounts		    "[1 2]"
 		    SFunctionDeploymentMode off
-		    EnableBusSupport	    on
+		    EnableBusSupport	    off
 		    Port {
 		    PortNumber		    2
 		    Name		    "rollPitchYaw"
@@ -6382,9 +6381,9 @@ Model {
 		    Block {
 		    BlockType		    Terminator
 		    Name		    " Terminator "
-		    SID			    "3392::3695"
+		    SID			    "3392::3698"
 		    Position		    [460, 241, 480, 259]
-		    ZOrder		    20
+		    ZOrder		    23
 		    }
 		    Block {
 		    BlockType		    Outport
@@ -6694,7 +6693,7 @@ Model {
 		    TiledPageScale	    1
 		    ShowPageBoundaries	    off
 		    ZoomFactor		    "100"
-		    SIDHighWatermark	    "3696"
+		    SIDHighWatermark	    "3698"
 		    Block {
 		    BlockType		    Inport
 		    Name		    "R"
@@ -6706,24 +6705,24 @@ Model {
 		    Block {
 		    BlockType		    Demux
 		    Name		    " Demux "
-		    SID			    "3376::3694"
+		    SID			    "3376::3697"
 		    Ports		    [1, 1]
 		    Position		    [270, 230, 320, 270]
-		    ZOrder		    19
+		    ZOrder		    22
 		    Outputs		    "1"
 		    }
 		    Block {
 		    BlockType		    S-Function
 		    Name		    " SFunction "
-		    SID			    "3376::3693"
+		    SID			    "3376::3696"
 		    Tag			    "Stateflow S-Function torqueBalancing2012b 26"
 		    Ports		    [1, 2]
 		    Position		    [180, 100, 230, 160]
-		    ZOrder		    18
+		    ZOrder		    21
 		    FunctionName	    "sf_sfun"
 		    PortCounts		    "[1 2]"
 		    SFunctionDeploymentMode off
-		    EnableBusSupport	    on
+		    EnableBusSupport	    off
 		    Port {
 		    PortNumber		    2
 		    Name		    "rollPitchYaw"
@@ -6734,9 +6733,9 @@ Model {
 		    Block {
 		    BlockType		    Terminator
 		    Name		    " Terminator "
-		    SID			    "3376::3695"
+		    SID			    "3376::3698"
 		    Position		    [460, 241, 480, 259]
-		    ZOrder		    20
+		    ZOrder		    23
 		    }
 		    Block {
 		    BlockType		    Outport
@@ -7046,7 +7045,7 @@ Model {
 		    TiledPageScale	    1
 		    ShowPageBoundaries	    off
 		    ZoomFactor		    "100"
-		    SIDHighWatermark	    "3696"
+		    SIDHighWatermark	    "3698"
 		    Block {
 		    BlockType		    Inport
 		    Name		    "R"
@@ -7058,24 +7057,24 @@ Model {
 		    Block {
 		    BlockType		    Demux
 		    Name		    " Demux "
-		    SID			    "3400::3694"
+		    SID			    "3400::3697"
 		    Ports		    [1, 1]
 		    Position		    [270, 230, 320, 270]
-		    ZOrder		    19
+		    ZOrder		    22
 		    Outputs		    "1"
 		    }
 		    Block {
 		    BlockType		    S-Function
 		    Name		    " SFunction "
-		    SID			    "3400::3693"
+		    SID			    "3400::3696"
 		    Tag			    "Stateflow S-Function torqueBalancing2012b 23"
 		    Ports		    [1, 2]
 		    Position		    [180, 100, 230, 160]
-		    ZOrder		    18
+		    ZOrder		    21
 		    FunctionName	    "sf_sfun"
 		    PortCounts		    "[1 2]"
 		    SFunctionDeploymentMode off
-		    EnableBusSupport	    on
+		    EnableBusSupport	    off
 		    Port {
 		    PortNumber		    2
 		    Name		    "rollPitchYaw"
@@ -7086,9 +7085,9 @@ Model {
 		    Block {
 		    BlockType		    Terminator
 		    Name		    " Terminator "
-		    SID			    "3400::3695"
+		    SID			    "3400::3698"
 		    Position		    [460, 241, 480, 259]
-		    ZOrder		    20
+		    ZOrder		    23
 		    }
 		    Block {
 		    BlockType		    Outport
@@ -7397,7 +7396,7 @@ Model {
 		    TiledPageScale	    1
 		    ShowPageBoundaries	    off
 		    ZoomFactor		    "100"
-		    SIDHighWatermark	    "3696"
+		    SIDHighWatermark	    "3698"
 		    Block {
 		    BlockType		    Inport
 		    Name		    "R"
@@ -7409,24 +7408,24 @@ Model {
 		    Block {
 		    BlockType		    Demux
 		    Name		    " Demux "
-		    SID			    "3408::3694"
+		    SID			    "3408::3697"
 		    Ports		    [1, 1]
 		    Position		    [270, 230, 320, 270]
-		    ZOrder		    19
+		    ZOrder		    22
 		    Outputs		    "1"
 		    }
 		    Block {
 		    BlockType		    S-Function
 		    Name		    " SFunction "
-		    SID			    "3408::3693"
+		    SID			    "3408::3696"
 		    Tag			    "Stateflow S-Function torqueBalancing2012b 24"
 		    Ports		    [1, 2]
 		    Position		    [180, 100, 230, 160]
-		    ZOrder		    18
+		    ZOrder		    21
 		    FunctionName	    "sf_sfun"
 		    PortCounts		    "[1 2]"
 		    SFunctionDeploymentMode off
-		    EnableBusSupport	    on
+		    EnableBusSupport	    off
 		    Port {
 		    PortNumber		    2
 		    Name		    "rollPitchYaw"
@@ -7437,9 +7436,9 @@ Model {
 		    Block {
 		    BlockType		    Terminator
 		    Name		    " Terminator "
-		    SID			    "3408::3695"
+		    SID			    "3408::3698"
 		    Position		    [460, 241, 480, 259]
-		    ZOrder		    20
+		    ZOrder		    23
 		    }
 		    Block {
 		    BlockType		    Outport
@@ -7774,7 +7773,7 @@ Model {
 		    TiledPageScale	    1
 		    ShowPageBoundaries	    off
 		    ZoomFactor		    "100"
-		    SIDHighWatermark	    "3696"
+		    SIDHighWatermark	    "3698"
 		    Block {
 		    BlockType		    Inport
 		    Name		    "R"
@@ -7786,24 +7785,24 @@ Model {
 		    Block {
 		    BlockType		    Demux
 		    Name		    " Demux "
-		    SID			    "3416::3694"
+		    SID			    "3416::3697"
 		    Ports		    [1, 1]
 		    Position		    [270, 230, 320, 270]
-		    ZOrder		    19
+		    ZOrder		    22
 		    Outputs		    "1"
 		    }
 		    Block {
 		    BlockType		    S-Function
 		    Name		    " SFunction "
-		    SID			    "3416::3693"
+		    SID			    "3416::3696"
 		    Tag			    "Stateflow S-Function torqueBalancing2012b 25"
 		    Ports		    [1, 2]
 		    Position		    [180, 100, 230, 160]
-		    ZOrder		    18
+		    ZOrder		    21
 		    FunctionName	    "sf_sfun"
 		    PortCounts		    "[1 2]"
 		    SFunctionDeploymentMode off
-		    EnableBusSupport	    on
+		    EnableBusSupport	    off
 		    Port {
 		    PortNumber		    2
 		    Name		    "rollPitchYaw"
@@ -7814,9 +7813,9 @@ Model {
 		    Block {
 		    BlockType		    Terminator
 		    Name		    " Terminator "
-		    SID			    "3416::3695"
+		    SID			    "3416::3698"
 		    Position		    [460, 241, 480, 259]
-		    ZOrder		    20
+		    ZOrder		    23
 		    }
 		    Block {
 		    BlockType		    Outport
@@ -9198,7 +9197,7 @@ Model {
 		    TiledPageScale	    1
 		    ShowPageBoundaries	    off
 		    ZoomFactor		    "100"
-		    SIDHighWatermark	    "3696"
+		    SIDHighWatermark	    "3698"
 		    SIDPrevWatermark	    "9"
 		    Block {
 		    BlockType		    Inport
@@ -9256,25 +9255,25 @@ Model {
 		    Block {
 		    BlockType		    Demux
 		    Name		    " Demux "
-		    SID			    "3679::3694"
+		    SID			    "3679::3697"
 		    Ports		    [1, 1]
 		    Position		    [270, 230, 320, 270]
-		    ZOrder		    94
+		    ZOrder		    97
 		    Outputs		    "1"
 		    }
 		    Block {
 		    BlockType		    S-Function
 		    Name		    " SFunction "
-		    SID			    "3679::3693"
+		    SID			    "3679::3696"
 		    Tag			    "Stateflow S-Function torqueBalancing2012b 1"
 		    Ports		    [6, 2]
 		    Position		    [180, 102, 230, 243]
-		    ZOrder		    93
+		    ZOrder		    96
 		    FunctionName	    "sf_sfun"
 		    Parameters		    "CONFIG"
 		    PortCounts		    "[6 2]"
 		    SFunctionDeploymentMode off
-		    EnableBusSupport	    on
+		    EnableBusSupport	    off
 		    Port {
 		    PortNumber		    2
 		    Name		    "w_H_root"
@@ -9285,9 +9284,9 @@ Model {
 		    Block {
 		    BlockType		    Terminator
 		    Name		    " Terminator "
-		    SID			    "3679::3695"
+		    SID			    "3679::3698"
 		    Position		    [460, 241, 480, 259]
-		    ZOrder		    95
+		    ZOrder		    98
 		    }
 		    Block {
 		    BlockType		    Outport
@@ -10064,7 +10063,7 @@ Model {
 		    TiledPageScale	    1
 		    ShowPageBoundaries	    off
 		    ZoomFactor		    "100"
-		    SIDHighWatermark	    "3696"
+		    SIDHighWatermark	    "3698"
 		    SIDPrevWatermark	    "9"
 		    Block {
 		    BlockType		    Inport
@@ -10122,25 +10121,25 @@ Model {
 		    Block {
 		    BlockType		    Demux
 		    Name		    " Demux "
-		    SID			    "3539::3694"
+		    SID			    "3539::3697"
 		    Ports		    [1, 1]
 		    Position		    [270, 230, 320, 270]
-		    ZOrder		    94
+		    ZOrder		    97
 		    Outputs		    "1"
 		    }
 		    Block {
 		    BlockType		    S-Function
 		    Name		    " SFunction "
-		    SID			    "3539::3693"
+		    SID			    "3539::3696"
 		    Tag			    "Stateflow S-Function torqueBalancing2012b 27"
 		    Ports		    [6, 2]
 		    Position		    [180, 102, 230, 243]
-		    ZOrder		    93
+		    ZOrder		    96
 		    FunctionName	    "sf_sfun"
 		    Parameters		    "CONFIG"
 		    PortCounts		    "[6 2]"
 		    SFunctionDeploymentMode off
-		    EnableBusSupport	    on
+		    EnableBusSupport	    off
 		    Port {
 		    PortNumber		    2
 		    Name		    "w_H_root"
@@ -10151,9 +10150,9 @@ Model {
 		    Block {
 		    BlockType		    Terminator
 		    Name		    " Terminator "
-		    SID			    "3539::3695"
+		    SID			    "3539::3698"
 		    Position		    [460, 241, 480, 259]
-		    ZOrder		    95
+		    ZOrder		    98
 		    }
 		    Block {
 		    BlockType		    Outport
@@ -11066,7 +11065,7 @@ Model {
 		    TiledPageScale	    1
 		    ShowPageBoundaries	    off
 		    ZoomFactor		    "100"
-		    SIDHighWatermark	    "3696"
+		    SIDHighWatermark	    "3698"
 		    SIDPrevWatermark	    "9"
 		    Block {
 		    BlockType		    Inport
@@ -11124,25 +11123,25 @@ Model {
 		    Block {
 		    BlockType		    Demux
 		    Name		    " Demux "
-		    SID			    "3455::3694"
+		    SID			    "3455::3697"
 		    Ports		    [1, 1]
 		    Position		    [270, 230, 320, 270]
-		    ZOrder		    94
+		    ZOrder		    97
 		    Outputs		    "1"
 		    }
 		    Block {
 		    BlockType		    S-Function
 		    Name		    " SFunction "
-		    SID			    "3455::3693"
+		    SID			    "3455::3696"
 		    Tag			    "Stateflow S-Function torqueBalancing2012b 9"
 		    Ports		    [6, 2]
 		    Position		    [180, 102, 230, 243]
-		    ZOrder		    93
+		    ZOrder		    96
 		    FunctionName	    "sf_sfun"
 		    Parameters		    "CONFIG"
 		    PortCounts		    "[6 2]"
 		    SFunctionDeploymentMode off
-		    EnableBusSupport	    on
+		    EnableBusSupport	    off
 		    Port {
 		    PortNumber		    2
 		    Name		    "w_H_root"
@@ -11153,9 +11152,9 @@ Model {
 		    Block {
 		    BlockType		    Terminator
 		    Name		    " Terminator "
-		    SID			    "3455::3695"
+		    SID			    "3455::3698"
 		    Position		    [460, 241, 480, 259]
-		    ZOrder		    95
+		    ZOrder		    98
 		    }
 		    Block {
 		    BlockType		    Outport
@@ -11932,7 +11931,7 @@ Model {
 		    TiledPageScale	    1
 		    ShowPageBoundaries	    off
 		    ZoomFactor		    "100"
-		    SIDHighWatermark	    "3696"
+		    SIDHighWatermark	    "3698"
 		    SIDPrevWatermark	    "9"
 		    Block {
 		    BlockType		    Inport
@@ -11990,25 +11989,25 @@ Model {
 		    Block {
 		    BlockType		    Demux
 		    Name		    " Demux "
-		    SID			    "2974::3694"
+		    SID			    "2974::3697"
 		    Ports		    [1, 1]
 		    Position		    [270, 230, 320, 270]
-		    ZOrder		    94
+		    ZOrder		    97
 		    Outputs		    "1"
 		    }
 		    Block {
 		    BlockType		    S-Function
 		    Name		    " SFunction "
-		    SID			    "2974::3693"
+		    SID			    "2974::3696"
 		    Tag			    "Stateflow S-Function torqueBalancing2012b 8"
 		    Ports		    [6, 2]
 		    Position		    [180, 102, 230, 243]
-		    ZOrder		    93
+		    ZOrder		    96
 		    FunctionName	    "sf_sfun"
 		    Parameters		    "CONFIG"
 		    PortCounts		    "[6 2]"
 		    SFunctionDeploymentMode off
-		    EnableBusSupport	    on
+		    EnableBusSupport	    off
 		    Port {
 		    PortNumber		    2
 		    Name		    "w_H_root"
@@ -12019,9 +12018,9 @@ Model {
 		    Block {
 		    BlockType		    Terminator
 		    Name		    " Terminator "
-		    SID			    "2974::3695"
+		    SID			    "2974::3698"
 		    Position		    [460, 241, 480, 259]
-		    ZOrder		    95
+		    ZOrder		    98
 		    }
 		    Block {
 		    BlockType		    Outport
@@ -13891,7 +13890,7 @@ Model {
 		    TiledPageScale	    1
 		    ShowPageBoundaries	    off
 		    ZoomFactor		    "100"
-		    SIDHighWatermark	    "3696"
+		    SIDHighWatermark	    "3698"
 		    Block {
 		    BlockType		    Inport
 		    Name		    "JcLeftFoot"
@@ -13930,25 +13929,25 @@ Model {
 		    Block {
 		    BlockType		    Demux
 		    Name		    " Demux "
-		    SID			    "2806::3694"
+		    SID			    "2806::3697"
 		    Ports		    [1, 1]
 		    Position		    [270, 230, 320, 270]
-		    ZOrder		    63
+		    ZOrder		    66
 		    Outputs		    "1"
 		    }
 		    Block {
 		    BlockType		    S-Function
 		    Name		    " SFunction "
-		    SID			    "2806::3693"
+		    SID			    "2806::3696"
 		    Tag			    "Stateflow S-Function torqueBalancing2012b 5"
 		    Ports		    [4, 2]
 		    Position		    [180, 102, 230, 203]
-		    ZOrder		    62
+		    ZOrder		    65
 		    FunctionName	    "sf_sfun"
 		    Parameters		    "reg"
 		    PortCounts		    "[4 2]"
 		    SFunctionDeploymentMode off
-		    EnableBusSupport	    on
+		    EnableBusSupport	    off
 		    Port {
 		    PortNumber		    2
 		    Name		    "y"
@@ -13959,9 +13958,9 @@ Model {
 		    Block {
 		    BlockType		    Terminator
 		    Name		    " Terminator "
-		    SID			    "2806::3695"
+		    SID			    "2806::3698"
 		    Position		    [460, 241, 480, 259]
-		    ZOrder		    64
+		    ZOrder		    67
 		    }
 		    Block {
 		    BlockType		    Outport
@@ -14239,7 +14238,7 @@ Model {
 		TiledPageScale		1
 		ShowPageBoundaries	off
 		ZoomFactor		"100"
-		SIDHighWatermark	"3696"
+		SIDHighWatermark	"3698"
 		SIDPrevWatermark	"9"
 		Block {
 		  BlockType		  Inport
@@ -14342,25 +14341,25 @@ Model {
 		Block {
 		  BlockType		  Demux
 		  Name			  " Demux "
-		  SID			  "2812::3694"
+		  SID			  "2812::3697"
 		  Ports			  [1, 1]
 		  Position		  [270, 350, 320, 390]
-		  ZOrder		  92
+		  ZOrder		  95
 		  Outputs		  "1"
 		}
 		Block {
 		  BlockType		  S-Function
 		  Name			  " SFunction "
-		  SID			  "2812::3693"
+		  SID			  "2812::3696"
 		  Tag			  "Stateflow S-Function torqueBalancing2012b 6"
 		  Ports			  [11, 7]
 		  Position		  [180, 95, 230, 335]
-		  ZOrder		  91
+		  ZOrder		  94
 		  FunctionName		  "sf_sfun"
 		  Parameters		  "gain,sm"
 		  PortCounts		  "[11 7]"
 		  SFunctionDeploymentMode off
-		  EnableBusSupport	  on
+		  EnableBusSupport	  off
 		  Port {
 		    PortNumber		    2
 		    Name		    "w_H_b"
@@ -14401,9 +14400,9 @@ Model {
 		Block {
 		  BlockType		  Terminator
 		  Name			  " Terminator "
-		  SID			  "2812::3695"
+		  SID			  "2812::3698"
 		  Position		  [460, 361, 480, 379]
-		  ZOrder		  93
+		  ZOrder		  96
 		}
 		Block {
 		  BlockType		  Outport
@@ -14977,7 +14976,7 @@ Model {
 		    TiledPageScale	    1
 		    ShowPageBoundaries	    off
 		    ZoomFactor		    "100"
-		    SIDHighWatermark	    "3696"
+		    SIDHighWatermark	    "3698"
 		    SIDPrevWatermark	    "9"
 		    Block {
 		    BlockType		    Inport
@@ -15035,25 +15034,25 @@ Model {
 		    Block {
 		    BlockType		    Demux
 		    Name		    " Demux "
-		    SID			    "3651::3694"
+		    SID			    "3651::3697"
 		    Ports		    [1, 1]
 		    Position		    [270, 230, 320, 270]
-		    ZOrder		    94
+		    ZOrder		    97
 		    Outputs		    "1"
 		    }
 		    Block {
 		    BlockType		    S-Function
 		    Name		    " SFunction "
-		    SID			    "3651::3693"
+		    SID			    "3651::3696"
 		    Tag			    "Stateflow S-Function torqueBalancing2012b 14"
 		    Ports		    [6, 2]
 		    Position		    [180, 102, 230, 243]
-		    ZOrder		    93
+		    ZOrder		    96
 		    FunctionName	    "sf_sfun"
 		    Parameters		    "CONFIG"
 		    PortCounts		    "[6 2]"
 		    SFunctionDeploymentMode off
-		    EnableBusSupport	    on
+		    EnableBusSupport	    off
 		    Port {
 		    PortNumber		    2
 		    Name		    "w_H_root"
@@ -15064,9 +15063,9 @@ Model {
 		    Block {
 		    BlockType		    Terminator
 		    Name		    " Terminator "
-		    SID			    "3651::3695"
+		    SID			    "3651::3698"
 		    Position		    [460, 241, 480, 259]
-		    ZOrder		    95
+		    ZOrder		    98
 		    }
 		    Block {
 		    BlockType		    Outport
@@ -15843,7 +15842,7 @@ Model {
 		    TiledPageScale	    1
 		    ShowPageBoundaries	    off
 		    ZoomFactor		    "100"
-		    SIDHighWatermark	    "3696"
+		    SIDHighWatermark	    "3698"
 		    SIDPrevWatermark	    "9"
 		    Block {
 		    BlockType		    Inport
@@ -15901,25 +15900,25 @@ Model {
 		    Block {
 		    BlockType		    Demux
 		    Name		    " Demux "
-		    SID			    "3623::3694"
+		    SID			    "3623::3697"
 		    Ports		    [1, 1]
 		    Position		    [270, 230, 320, 270]
-		    ZOrder		    94
+		    ZOrder		    97
 		    Outputs		    "1"
 		    }
 		    Block {
 		    BlockType		    S-Function
 		    Name		    " SFunction "
-		    SID			    "3623::3693"
+		    SID			    "3623::3696"
 		    Tag			    "Stateflow S-Function torqueBalancing2012b 11"
 		    Ports		    [6, 2]
 		    Position		    [180, 102, 230, 243]
-		    ZOrder		    93
+		    ZOrder		    96
 		    FunctionName	    "sf_sfun"
 		    Parameters		    "CONFIG"
 		    PortCounts		    "[6 2]"
 		    SFunctionDeploymentMode off
-		    EnableBusSupport	    on
+		    EnableBusSupport	    off
 		    Port {
 		    PortNumber		    2
 		    Name		    "w_H_root"
@@ -15930,9 +15929,9 @@ Model {
 		    Block {
 		    BlockType		    Terminator
 		    Name		    " Terminator "
-		    SID			    "3623::3695"
+		    SID			    "3623::3698"
 		    Position		    [460, 241, 480, 259]
-		    ZOrder		    95
+		    ZOrder		    98
 		    }
 		    Block {
 		    BlockType		    Outport
@@ -17226,7 +17225,7 @@ Model {
 	      Position		      [95, 267, 145, 303]
 	      ZOrder		      616
 	      ShowName		      off
-	      LibraryVersion	      "1.358"
+	      LibraryVersion	      "1.386"
 	      SourceBlock	      "simulink/Logic and Bit\nOperations/Compare\nTo Zero"
 	      SourceType	      "Compare To Zero"
 	      relop		      ">"
@@ -17241,7 +17240,7 @@ Model {
 	      Position		      [95, 377, 145, 413]
 	      ZOrder		      618
 	      ShowName		      off
-	      LibraryVersion	      "1.358"
+	      LibraryVersion	      "1.386"
 	      SourceBlock	      "simulink/Logic and Bit\nOperations/Compare\nTo Zero"
 	      SourceType	      "Compare To Zero"
 	      relop		      ">"
@@ -17256,7 +17255,7 @@ Model {
 	      Position		      [95, 327, 145, 363]
 	      ZOrder		      619
 	      ShowName		      off
-	      LibraryVersion	      "1.358"
+	      LibraryVersion	      "1.386"
 	      SourceBlock	      "simulink/Logic and Bit\nOperations/Compare\nTo Zero"
 	      SourceType	      "Compare To Zero"
 	      relop		      ">"
@@ -17400,7 +17399,7 @@ Model {
 	  Position		  [-315, 3101, -255, 3129]
 	  ZOrder		  607
 	  ShowName		  off
-	  LibraryVersion	  "1.358"
+	  LibraryVersion	  "1.386"
 	  SourceBlock		  "simulink/Logic and Bit\nOperations/Bitwise\nOperator"
 	  SourceType		  "Bitwise Operator"
 	  logicop		  "AND"
@@ -17436,7 +17435,7 @@ Model {
 	  Position		  [-315, 2571, -255, 2599]
 	  ZOrder		  606
 	  ShowName		  off
-	  LibraryVersion	  "1.358"
+	  LibraryVersion	  "1.386"
 	  SourceBlock		  "simulink/Logic and Bit\nOperations/Bitwise\nOperator"
 	  SourceType		  "Bitwise Operator"
 	  logicop		  "AND"
@@ -18955,7 +18954,7 @@ Model {
 	  Position		  [1050, 435, 1080, 475]
 	  ZOrder		  479
 	  Commented		  "on"
-	  LibraryVersion	  "1.358"
+	  LibraryVersion	  "1.386"
 	  SourceBlock		  "simulink/Sinks/XY Graph"
 	  SourceType		  "XY scope."
 	  xmin			  "gain.footSize(1,1)"
@@ -18972,7 +18971,7 @@ Model {
 	  Position		  [1050, 515, 1080, 555]
 	  ZOrder		  480
 	  Commented		  "on"
-	  LibraryVersion	  "1.358"
+	  LibraryVersion	  "1.386"
 	  SourceBlock		  "simulink/Sinks/XY Graph"
 	  SourceType		  "XY scope."
 	  xmin			  "gain.footSize(1,1)"
@@ -19553,7 +19552,7 @@ Model {
 		TiledPageScale		1
 		ShowPageBoundaries	off
 		ZoomFactor		"100"
-		SIDHighWatermark	"3696"
+		SIDHighWatermark	"3698"
 		Block {
 		  BlockType		  Inport
 		  Name			  "u"
@@ -19565,24 +19564,24 @@ Model {
 		Block {
 		  BlockType		  Demux
 		  Name			  " Demux "
-		  SID			  "2330::3694"
+		  SID			  "2330::3697"
 		  Ports			  [1, 1]
 		  Position		  [270, 230, 320, 270]
-		  ZOrder		  17
+		  ZOrder		  20
 		  Outputs		  "1"
 		}
 		Block {
 		  BlockType		  S-Function
 		  Name			  " SFunction "
-		  SID			  "2330::3693"
+		  SID			  "2330::3696"
 		  Tag			  "Stateflow S-Function torqueBalancing2012b 15"
 		  Ports			  [1, 2]
 		  Position		  [180, 100, 230, 160]
-		  ZOrder		  16
+		  ZOrder		  19
 		  FunctionName		  "sf_sfun"
 		  PortCounts		  "[1 2]"
 		  SFunctionDeploymentMode off
-		  EnableBusSupport	  on
+		  EnableBusSupport	  off
 		  Port {
 		    PortNumber		    2
 		    Name		    "normU"
@@ -19593,9 +19592,9 @@ Model {
 		Block {
 		  BlockType		  Terminator
 		  Name			  " Terminator "
-		  SID			  "2330::3695"
+		  SID			  "2330::3698"
 		  Position		  [460, 241, 480, 259]
-		  ZOrder		  18
+		  ZOrder		  21
 		}
 		Block {
 		  BlockType		  Outport
@@ -19730,7 +19729,7 @@ Model {
 		TiledPageScale		1
 		ShowPageBoundaries	off
 		ZoomFactor		"100"
-		SIDHighWatermark	"3696"
+		SIDHighWatermark	"3698"
 		Block {
 		  BlockType		  Inport
 		  Name			  "u"
@@ -19742,24 +19741,24 @@ Model {
 		Block {
 		  BlockType		  Demux
 		  Name			  " Demux "
-		  SID			  "2332::3694"
+		  SID			  "2332::3697"
 		  Ports			  [1, 1]
 		  Position		  [270, 230, 320, 270]
-		  ZOrder		  17
+		  ZOrder		  20
 		  Outputs		  "1"
 		}
 		Block {
 		  BlockType		  S-Function
 		  Name			  " SFunction "
-		  SID			  "2332::3693"
+		  SID			  "2332::3696"
 		  Tag			  "Stateflow S-Function torqueBalancing2012b 16"
 		  Ports			  [1, 2]
 		  Position		  [180, 100, 230, 160]
-		  ZOrder		  16
+		  ZOrder		  19
 		  FunctionName		  "sf_sfun"
 		  PortCounts		  "[1 2]"
 		  SFunctionDeploymentMode off
-		  EnableBusSupport	  on
+		  EnableBusSupport	  off
 		  Port {
 		    PortNumber		    2
 		    Name		    "normU"
@@ -19770,9 +19769,9 @@ Model {
 		Block {
 		  BlockType		  Terminator
 		  Name			  " Terminator "
-		  SID			  "2332::3695"
+		  SID			  "2332::3698"
 		  Position		  [460, 241, 480, 259]
-		  ZOrder		  18
+		  ZOrder		  21
 		}
 		Block {
 		  BlockType		  Outport
@@ -22137,7 +22136,7 @@ Model {
 		TiledPageScale		1
 		ShowPageBoundaries	off
 		ZoomFactor		"100"
-		SIDHighWatermark	"3696"
+		SIDHighWatermark	"3698"
 		Block {
 		  BlockType		  Inport
 		  Name			  "qjErr"
@@ -22158,24 +22157,24 @@ Model {
 		Block {
 		  BlockType		  Demux
 		  Name			  " Demux "
-		  SID			  "3092::3694"
+		  SID			  "3092::3697"
 		  Ports			  [1, 1]
 		  Position		  [270, 230, 320, 270]
-		  ZOrder		  21
+		  ZOrder		  24
 		  Outputs		  "1"
 		}
 		Block {
 		  BlockType		  S-Function
 		  Name			  " SFunction "
-		  SID			  "3092::3693"
+		  SID			  "3092::3696"
 		  Tag			  "Stateflow S-Function torqueBalancing2012b 4"
 		  Ports			  [2, 2]
 		  Position		  [180, 100, 230, 160]
-		  ZOrder		  20
+		  ZOrder		  23
 		  FunctionName		  "sf_sfun"
 		  PortCounts		  "[2 2]"
 		  SFunctionDeploymentMode off
-		  EnableBusSupport	  on
+		  EnableBusSupport	  off
 		  Port {
 		    PortNumber		    2
 		    Name		    "vbEquivalent"
@@ -22186,9 +22185,9 @@ Model {
 		Block {
 		  BlockType		  Terminator
 		  Name			  " Terminator "
-		  SID			  "3092::3695"
+		  SID			  "3092::3698"
 		  Position		  [460, 241, 480, 259]
-		  ZOrder		  22
+		  ZOrder		  25
 		}
 		Block {
 		  BlockType		  Outport
@@ -22201,6 +22200,7 @@ Model {
 		Line {
 		  SrcBlock		  "qjErr"
 		  SrcPort		  1
+		  Points		  [120, 0]
 		  DstBlock		  " SFunction "
 		  DstPort		  1
 		}
@@ -22634,7 +22634,7 @@ Model {
 	    TiledPageScale	    1
 	    ShowPageBoundaries	    off
 	    ZoomFactor		    "100"
-	    SIDHighWatermark	    "3696"
+	    SIDHighWatermark	    "3698"
 	    Block {
 	      BlockType		      Inport
 	      Name		      "constraints"
@@ -22862,25 +22862,25 @@ Model {
 	    Block {
 	      BlockType		      Demux
 	      Name		      " Demux "
-	      SID		      "2407::3694"
+	      SID		      "2407::3697"
 	      Ports		      [1, 1]
 	      Position		      [270, 675, 320, 715]
-	      ZOrder		      97
+	      ZOrder		      100
 	      Outputs		      "1"
 	    }
 	    Block {
 	      BlockType		      S-Function
 	      Name		      " SFunction "
-	      SID		      "2407::3693"
+	      SID		      "2407::3696"
 	      Tag		      "Stateflow S-Function torqueBalancing2012b 17"
 	      Ports		      [25, 16]
 	      Position		      [180, 60, 230, 580]
-	      ZOrder		      96
+	      ZOrder		      99
 	      FunctionName	      "sf_sfun"
 	      Parameters	      "gain,reg"
 	      PortCounts	      "[25 16]"
 	      SFunctionDeploymentMode off
-	      EnableBusSupport	      on
+	      EnableBusSupport	      off
 	      Port {
 		PortNumber		2
 		Name			"tauModel"
@@ -22975,9 +22975,9 @@ Model {
 	    Block {
 	      BlockType		      Terminator
 	      Name		      " Terminator "
-	      SID		      "2407::3695"
+	      SID		      "2407::3698"
 	      Position		      [460, 686, 480, 704]
-	      ZOrder		      98
+	      ZOrder		      101
 	    }
 	    Block {
 	      BlockType		      Outport
@@ -24230,7 +24230,7 @@ Model {
 	    TiledPageScale	    1
 	    ShowPageBoundaries	    off
 	    ZoomFactor		    "100"
-	    SIDHighWatermark	    "3696"
+	    SIDHighWatermark	    "3698"
 	    Block {
 	      BlockType		      Inport
 	      Name		      "umin"
@@ -24269,24 +24269,24 @@ Model {
 	    Block {
 	      BlockType		      Demux
 	      Name		      " Demux "
-	      SID		      "2421::3694"
+	      SID		      "2421::3697"
 	      Ports		      [1, 1]
 	      Position		      [270, 230, 320, 270]
-	      ZOrder		      44
+	      ZOrder		      47
 	      Outputs		      "1"
 	    }
 	    Block {
 	      BlockType		      S-Function
 	      Name		      " SFunction "
-	      SID		      "2421::3693"
+	      SID		      "2421::3696"
 	      Tag		      "Stateflow S-Function torqueBalancing2012b 18"
 	      Ports		      [4, 2]
 	      Position		      [180, 102, 230, 203]
-	      ZOrder		      43
+	      ZOrder		      46
 	      FunctionName	      "sf_sfun"
 	      PortCounts	      "[4 2]"
 	      SFunctionDeploymentMode off
-	      EnableBusSupport	      on
+	      EnableBusSupport	      off
 	      Port {
 		PortNumber		2
 		Name			"inRange"
@@ -24297,9 +24297,9 @@ Model {
 	    Block {
 	      BlockType		      Terminator
 	      Name		      " Terminator "
-	      SID		      "2421::3695"
+	      SID		      "2421::3698"
 	      Position		      [460, 241, 480, 259]
-	      ZOrder		      45
+	      ZOrder		      48
 	    }
 	    Block {
 	      BlockType		      Outport
@@ -24809,7 +24809,7 @@ Model {
 }
 #Finite State Machines
 #
-#   Stateflow 80000006
+#   Stateflow 80000009
 #
 #
 Stateflow {
