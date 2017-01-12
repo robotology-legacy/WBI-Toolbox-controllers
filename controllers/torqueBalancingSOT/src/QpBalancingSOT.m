@@ -31,7 +31,7 @@ block.SetPreCompOutPortInfoToDynamic;
 
 
 % Definition of port sizes for QP 2 feet
-%block.InputPort(1).Dimensions        = -1;  It does not copile if the
+%block.InputPort(1).Dimensions        = -1;  It does not compile if the
 %input port dimension is dynamic and the input is a matrix. Leave it
 %commented
 

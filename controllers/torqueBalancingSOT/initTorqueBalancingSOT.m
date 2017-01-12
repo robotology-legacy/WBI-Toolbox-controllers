@@ -65,7 +65,7 @@ CONFIG.SCOPES.QP             = false;
 CONFIG.USE_CENTROIDALDYN   = true;
 
 % CONFIG.CHECK_LIMITS: if set to true, the controller will stop as soon as 
-% any of the joint limit is touched. 
+% any of the joint limits is touched. 
 CONFIG.CHECK_LIMITS        = false;
 
 
@@ -83,7 +83,7 @@ WBT_modelName            = 'matlabTorqueBalancing';
 
 % CONFIG.USE_IMU4EST_BASE: if set to false, the base frame is estimated by 
 % assuming that either the left or the right foot stay stuck on the ground. 
-% Which foot the  controller uses depends on the contact forces acting on it. 
+% Which foot the controller uses depends on the contact forces acting on it. 
 % If set to true, the base orientation is estimated by using the IMU, while
 % the base position by assuming that the origin of either the right or the
 % left foot do not move. 
@@ -100,14 +100,14 @@ CONFIG.USE_IMU4EST_BASE    = false;
 CONFIG.YAW_IMU_FILTER      = true;
 CONFIG.PITCH_IMU_FILTER    = true;
 
-% CONFIG.CORRECT_NECK_IMU: when set euqal to true, the kineamtics from the
+% CONFIG.CORRECT_NECK_IMU: when set equal to true, the kinematics from the
 % IMU and the contact foot is corrected by using the neck angles. If it set
 % equal to false, recall that the neck is assumed to be in (0,0,0)
 CONFIG.CORRECT_NECK_IMU    = true;
 
 
 % CONFIG.ONSOFTCARPET: the third year CoDyCo review meeting consisted also
-% of a validation scenarion in which the robot had to balance on a soft
+% of a validation scenario in which the robot had to balance on a soft
 % carpet. Hence, when CONFIG.ONSOFTCARPET = true, other sets of gains are
 % loaded for the postural and CoM.
 CONFIG.ONSOFTCARPET        = false;
@@ -158,6 +158,6 @@ elseif strcmpi(SM.SM_TYPE, 'WALKING')
     run(robotSpecificFSM);
 end
 
-[ConstraintsFeetMatrix,upperBoundFeetConstratins]= constraints(forceFrictionCoefficient,numberOfPoints,torsionalFrictionCoefficient,gain.footSize,fZmin);
+[ConstraintsFeetMatrix,upperBoundFeetConstraints]= constraints(forceFrictionCoefficient,numberOfPoints,torsionalFrictionCoefficient,gain.footSize,fZmin);
 
 

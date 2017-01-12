@@ -153,7 +153,7 @@ function [hessianMatrix,biasVector,constraintMatrixLeftFoot,constraintMatrixRigh
     upperBoundEqConstraints   = desiredTaskAcc - jacobiansDotNu +  (jacobians/massMatrix)*biasTorques; 
     
     % Update constraint matrices. The constraint matrix for the inequality
-    % constraints in the problem 1) is built up startin from the constraint
+    % constraints in the problem 1) is built up starting from the constraint
     % matrix associated with each single foot. More precisely, the contact
     % wrench associated with the left foot (resp. right foot) is subject to
     % the following constraint:
@@ -168,7 +168,7 @@ function [hessianMatrix,biasVector,constraintMatrixLeftFoot,constraintMatrixRigh
     %
     % constraintMatrixLeftFoot = ConstraintsMatrix*l_sole_R_w
     %
-    % The same hold for the right foot
+    % The same holds for the right foot
     
     constraintMatrixLeftFoot  = ConstraintsMatrix * blkdiag(poseLeftFoot(1:3,1:3)' ,poseLeftFoot(1:3,1:3)');
     constraintMatrixRightFoot = ConstraintsMatrix * blkdiag(poseRightFoot(1:3,1:3)',poseRightFoot(1:3,1:3)');
