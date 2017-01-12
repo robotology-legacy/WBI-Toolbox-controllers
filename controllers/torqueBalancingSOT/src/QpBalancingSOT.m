@@ -152,7 +152,7 @@ function SetInputPortSamplingMode(block, idx, fd)
 function Outputs(block)
 
     CONTACT_THRESHOLD          = 0.0001;
-    unboundedConstant          = 1e12;
+    unboundedConstant          = 1e16;
     
     regHessian                 = 1e-4;
     
@@ -281,6 +281,7 @@ function Outputs(block)
     
     H = H + eye(size(H,1))*regHessian;
     H = (H + H')/2;
+      
     [u,~,exitFlagQP,~,~,~] = qpOASES(H,g,A,[],[],lbA,ubA);     
     
     if exitFlagQP ~= 0 
@@ -301,7 +302,7 @@ function Outputs(block)
     if sum(LEFT_RIGHT_FOOT_IN_CONTACT) > 2 - CONTACT_THRESHOLD
         block.OutputPort(3).Data = u(nDof+7:nDof+12);
     end
-
+    
     block.OutputPort(4).Data = exitFlagQP;
     
 %end Outputs
