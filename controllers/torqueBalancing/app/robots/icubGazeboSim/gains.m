@@ -1,4 +1,5 @@
-ROBOT_DOF = 25;
+
+ROBOT_DOF = 23;
 CONFIG.ON_GAZEBO = true;
 PORTS.IMU = '/icubSim/inertial';
 
@@ -11,7 +12,7 @@ CONFIG.SMOOTH_DES_COM      = 0;    % If equal to one, the desired streamed value
 CONFIG.SMOOTH_DES_Q        = 0;    % If equal to one, the desired streamed values 
                             % of the postural tasks are smoothed internally 
 
-WBT_wbiList = 'ROBOT_TORQUE_CONTROL_JOINTS';
+WBT_wbiList = '(torso_pitch,torso_roll,torso_yaw,l_shoulder_pitch, l_shoulder_roll, l_shoulder_yaw, l_elbow, r_shoulder_pitch,r_shoulder_roll, r_shoulder_yaw, r_elbow, l_hip_pitch, l_hip_roll, l_hip_yaw, l_knee, l_ankle_pitch, l_ankle_roll, r_hip_pitch,r_hip_roll,r_hip_yaw,r_knee,r_ankle_pitch,r_ankle_roll)';
 
 dump.left_wrench_port = '/icubSim/left_foot/analog:o';
 dump.right_wrench_port = '/icubSim/right_foot/analog:o';
@@ -43,8 +44,8 @@ if (sum(CONFIG.LEFT_RIGHT_FOOT_IN_CONTACT) == 2)
 
     impTorso            = [10   10   20
                             0    0    0]; 
-    impArms             = [10   10    10    8  0 
-                            0    0     0    0  0 ];
+    impArms             = [10   10    10    8   
+                            0    0     0    0 ];
                         
     impLeftLeg          = [ 30   30   30    60     10  10
                              0    0    0     0      0   0]; 
@@ -54,11 +55,11 @@ if (sum(CONFIG.LEFT_RIGHT_FOOT_IN_CONTACT) == 2)
     
                          
     intTorso            = [0   0    0]; 
-    intArms             = [0   0    0    0  0];
+    intArms             = [0   0    0    0];
                         
-    intLeftLeg          = [0   0    0    0    0  0]; 
+    intLeftLeg          = [0   0    0    0   0  0]; 
 
-    intRightLeg         = [0   0     0  0    0  0];   
+    intRightLeg         = [0   0    0    0   0  0];   
     
                                            
 end
@@ -78,7 +79,7 @@ if (sum(CONFIG.LEFT_RIGHT_FOOT_IN_CONTACT) == 1)
 
     
     intTorso            = [0   0    0]; 
-    intArms             = [0   0    0    0  0];
+    intArms             = [0   0    0   0];
                         
     intLeftLeg          = [0   0    0    0    0  0]; 
 
@@ -88,8 +89,8 @@ if (sum(CONFIG.LEFT_RIGHT_FOOT_IN_CONTACT) == 1)
     
     impTorso            = [20   20   30
                             0    0    0]*scalingImp; 
-    impArms             = [15   15    15    8   0
-                            0    0     0    0   0 ]*scalingImp;
+    impArms             = [15   15    15    8 
+                            0    0     0    0]*scalingImp;
                         
     impLeftLeg          = [ 30   30   30   120     10  10
                              0    0    0     0      0   0]*scalingImp; 
