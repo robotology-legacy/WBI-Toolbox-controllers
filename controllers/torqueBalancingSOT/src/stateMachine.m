@@ -2,7 +2,6 @@ function [w_H_b, CoMDes,qDes,constraints,impedances,kpCom,kdCom,currentState,joi
           desRootRotPosVelAcc,desLFootRotPosVelAcc,desLFootOrigin,desRFootRotPosVelAcc,desRFootOrigin] = ...
      stateMachine(CoM_0, q0, l_sole_CoM,r_sole_CoM,qj, t, ...
                   wrench_rightFoot,wrench_leftFoot,l_sole_H_b, r_sole_H_b, sm,gain)
-    %#codegen
     persistent state;
     persistent tSwitch;
     persistent w_H_fixedLink;
@@ -114,7 +113,15 @@ function [w_H_b, CoMDes,qDes,constraints,impedances,kpCom,kdCom,currentState,joi
         qTildeRLeg  = qj(end-5:end)-qDes(end-5:end);
         
         qTildeLLeg  = qj(end-11:end-6)-qDes(end-11:end-6);
-            
+        norm(qTildeRLeg)*180/pi < sm.joints.thresholdNotInContact
+        norm(qTildeRLeg)*180/pi  
+        sm.joints.thresholdNotInContact
+        norm(qTildeLLeg)*180/pi < sm.joints.thresholdInContact 
+        norm(qTildeLLeg)*180/pi 
+        sm.joints.thresholdInContact
+        
+        a = 1
+        disp(a)
         if norm(qTildeRLeg)*180/pi < sm.joints.thresholdNotInContact && norm(qTildeLLeg)*180/pi < sm.joints.thresholdInContact
             state   = 5;
             tSwitch = t;
