@@ -15,7 +15,6 @@
 %  * Public License for more details
 %  */
 %% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
 function QpTwoFeet(block)
 
 setup(block);
@@ -36,7 +35,6 @@ block.SetPreCompOutPortInfoToDynamic;
 % %3 % [Aeq,beq]                   
 % %4 % [x0;lb;ub]                  
 
-
 % Definition of port sizes for QP 2 feet
 block.InputPort(1).Dimensions        =  23;       % tauModel               
 block.InputPort(2).Dimensions        =  23;       % Sigmaf_HDot
@@ -52,7 +50,6 @@ block.OutputPort(1).Dimensions       = 12;        % f0 Two Feet
 block.OutputPort(2).Dimensions       = 1;         % Exit flag QP 2 Feet
 block.OutputPort(3).Dimensions       = 23;        % tau
 
-
 for i=1:block.NumInputPorts
     block.InputPort(i).DatatypeID  = -1;          % 'inherited', see http://www.mathworks.com/help/simulink/slref/simulink.blockdata.html#f29-108672
     block.InputPort(i).Complexity  = 'Real';
@@ -64,7 +61,6 @@ for i =1:block.NumOutputPorts
     block.OutputPort(i).Complexity  = 'Real';
 end
 
-
 % Register parameters
 block.NumDialogPrms     = 0;
 
@@ -74,8 +70,7 @@ block.NumDialogPrms     = 0;
 %
 %  [-1, 0]               : Inherited sample time
 %  [-2, 0]               : Variable sample time
-block.SampleTimes = [-1 0];
-
+block.SampleTimes       = [-1 0];
 
 % Specify the block simStateCompliance. The allowed values are:
 %    'UnknownSimState', < The default setting; warn and assume DefaultSimState
@@ -134,7 +129,6 @@ function SetInputPortSamplingMode(block, idx, fd)
 
 % end InitializeConditions
 
-
 %%
 %% Start:
 %%   Functionality    : Called once at start of model execution. If you
@@ -144,7 +138,7 @@ function SetInputPortSamplingMode(block, idx, fd)
 %%   C-MEX counterpart: mdlStart
 %%
 % function Start(block)
-% 
+ 
 % block.Dwork(1).Data = 0;
 
 %endfunction
@@ -155,7 +149,6 @@ function SetInputPortSamplingMode(block, idx, fd)
 %%                      simulation step
 %%   Required         : Yes
 %%   C-MEX counterpart: mdlOutputs
-%%
 
 function Outputs(block)
     
@@ -185,7 +178,6 @@ function Outputs(block)
     block.OutputPort(3).Data = tauModel + Sigmaf_HDot + SigmaNa*f02Feet;
     
 %end Outputs
-
 
 function Terminate(block)
 
