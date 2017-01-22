@@ -5,7 +5,7 @@ clc
 %% parameters
 Ts = 0.02;
 endTime = inf;
-robotName  = 'icubGazeboSim';
+robotName  = 'icubSim';
 localName = 'simulink'; 
 ROBOT_DOF = 25;
 footLength = 0.15;

@@ -1,9 +1,8 @@
 function [Qs,w_H_l_sole] = computeRotTransFromLsole2World(inertialSeesaw,seesaw)
 %#codegen
-
     e3     = [0;0;1];
     % Converting degree into rad
-    inertialSeesaw     = (inertialSeesaw   * pi)/180;
+    inertialSeesaw     = (inertialSeesaw +seesaw.offset)*pi/180 ;
 
     % Composing the rotation matrix:
     % See http://wiki.icub.org/images/8/82/XsensMtx.pdf page 12
@@ -16,12 +15,11 @@ function [Qs,w_H_l_sole] = computeRotTransFromLsole2World(inertialSeesaw,seesaw)
     s_s_l     = [0;  seesaw.lFootDistanceCenter; seesaw.top];
 
     % OC = centerOfRotationSeesaw - originOfWorld 
-    OC = [ 0;
-          -seesaw.rho*inertialSeesaw(1);
-           seesaw.rho];
+    OC        = [ 0;
+                 -seesaw.rho*inertialSeesaw(1);
+                  seesaw.rho];
 
     % CL = positionOfLeftFoot - centerOfRotationSeesaw w.r.t. world frame
-
     CL = w_R_s*(s_s_l-seesaw.delta*e3);   
 
     % P_l = positionOfLeftFoot w.r.t. world frame

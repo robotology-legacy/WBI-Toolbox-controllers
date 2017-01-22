@@ -82,6 +82,7 @@ if strcmpi(SM.SM_TYPE, 'YOGA')
 %% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%                      
          
 %% %%%%%%%%%%%%%%%%    FINITE STATE MACHINE SPECIFIC PARAMETERS
+sm.demoOnlyBalancing             = false;
 sm.yogaExtended                  = false;
 sm.skipYoga                      = false;
 sm.demoOnlyRightFoot             = false;
