@@ -50,7 +50,7 @@ CONFIG.SIMULATION_TIME     = inf;
 %               robots/YARP_ROBOT_NAME/initRegGen.m
 % 
 % 'WALKING': under development.
-SM.SM_TYPE                   = 'YOGA';
+SM.SM_TYPE                   = 'WALKING'; %'YOGA';
 
 % CONFIG.SCOPES: if set to true, all visualizers for debugging are active
 CONFIG.SCOPES.ALL            = true;
@@ -154,7 +154,7 @@ elseif strcmpi(SM.SM_TYPE, 'YOGA')
     SM.SM_TYPE_BIN = SM.SM.MASK.YOGA;
 elseif strcmpi(SM.SM_TYPE, 'WALKING')
     SM.SM_TYPE_BIN = SM.SM.MASK.WALKING;
-    robotSpecificFSM = fullfile('robots',getenv('YARP_ROBOT_NAME'),'initStateMachineWalking.m');
+    robotSpecificFSM = fullfile('app/robots',getenv('YARP_ROBOT_NAME'),'initStateMachineWalking.m');
     run(robotSpecificFSM);
 end
 

@@ -152,7 +152,7 @@ function SetInputPortSamplingMode(block, idx, fd)
 function Outputs(block)
 
     CONTACT_THRESHOLD          = 0.0001;
-    unboundedConstant          = 1e16;
+    unboundedConstant          = 1e14;
     
     regHessian                 = 1e-4;
     

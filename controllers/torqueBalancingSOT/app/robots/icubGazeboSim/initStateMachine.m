@@ -98,7 +98,7 @@ sm.com.threshold                 = 0.01;
 sm.wrench.thresholdContactOn     = 25;     % Force threshole above which contact is considered stable
 sm.wrench.thresholdContactOff    = 100;     % Force threshole under which contact is considered off
 sm.joints                        = struct;
-sm.joints.thresholdNotInContact  = 30;    % Degrees
+sm.joints.thresholdNotInContact  = 40;    % Degrees
 sm.joints.thresholdInContact     = 50;%%500;      % Degrees
 sm.joints.pauseTimeLastPostureL  = 3;
 sm.joints.pauseTimeLastPostureR  = 3;
@@ -129,7 +129,7 @@ sm.com.states      = [0.01,  0.00,0.0;   %% state ==  1  TWO FEET BALANCING NOT 
                       0.01,  0.00,0.0;   %% state ==  3  LEFT FOOT BALANCING 
                       0.01,  0.00,0.0;   %% state ==  4  PREPARING FOR SWITCHING
                       0.01, -0.02,0.0;   %% state ==  5  LOOKING FOR CONTACT 
-                      0.01, -0.09,0.0;   %% state ==  6  TRANSITION INIT POSITION: THIS REFERENCE IS IGNORED
+                      0.01, -0.02,0.0;   %% state ==  6  TRANSITION INIT POSITION: THIS REFERENCE IS IGNORED
                       0.01, -0.00,0.0;   %% state ==  7  COM TRANSITION TO RIGHT FOOT
                       0.01,  0.00,0.0;   %% state ==  8  RIGHT FOOT BALANCING 
                       0.01, -0.00,0.0;   %% state ==  9  PREPARING FOR SWITCHING
