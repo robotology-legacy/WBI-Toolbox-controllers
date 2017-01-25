@@ -269,8 +269,8 @@ function Outputs(block)
         ubA  = [];
         lbA  = [];
     end
-    
-    if USE_CONTINUITY_CONSTRAINTS 
+ 
+    if USE_CONTINUITY_CONSTRAINTS && ~isempty(uPrevious)
         A    = [ A;
                  eye(nDof),zeros(nDof,size(A,2)-nDof)];
         ubA  = [ubA;
