@@ -39,11 +39,11 @@ C_cNu_c       = [ zeros(3,1);
 dTNu          = M_c\(CNu-C_cNu_c);  
 
 Jc_c          = J*invT;
-Jc_cDNu_c     = dJcNu - Jc*invT*dTNu;
+Jc_cDNu_c     = dJcNu - J*invT*dTNu;
 
 CMMc          = M_c(1:6,:);
 
-CMM           = CMMc*T;
+CMM           = CMMc*c_T_b;
 
 h_c           = C_cNu_c + g_c;
 
