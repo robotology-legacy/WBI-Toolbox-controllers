@@ -8,12 +8,12 @@ if strcmpi(SM.SM_TYPE, 'CHAIR')
   
      %% State parameters
      sm.stateAt0             = 1;
-     sm.tBalancing           = 0.5;
+     sm.tBalancing           = 5;
      sm.jointsSmoothingTimes = [1;2.5;2;4];
      
      reg.pinvTol     = 1e-5;
-     reg.pinvDamp    = 0.5; 
-     reg.pinvDampVb  = 1e-2;
+     reg.pinvDamp    = 1; 
+     reg.pinvDampVb  = 1e-3;
      reg.HessianQP   = 1e-2;
      reg.impedances  = 0.1;
      reg.dampings    = 0;
@@ -36,7 +36,7 @@ if strcmpi(SM.SM_TYPE, 'CHAIR')
      gain.ICOM     = gain.PCOM*0;
      gain.DCOM     = 2*sqrt(gain.PCOM);
 
-     gain.PAngularMomentum  = 10 ;
+     gain.PAngularMomentum  = 1 ;
      gain.DAngularMomentum  = 2*sqrt(gain.PAngularMomentum);
 
 
@@ -61,8 +61,8 @@ sm.CoM.statesChair    = [0.1069 -0.0861  0.1616;   % state ==  2  COM TRANSITION
                          0.1269 -0.1061  0.321];   % state ==  4  TWO FEET BALANCING 
                      
 sm.LwrenchTreshold    = [60;    % state ==  2  COM TRANSITION
-                         120];  % state ==  3  LOOKING FOR CONTACT
+                         130];  % state ==  3  LOOKING FOR CONTACT
 sm.RwrenchTreshold    = [60;    % state ==  2  COM TRANSITION
-                         120];  % state ==  3  LOOKING FOR CONTACT
+                         130];  % state ==  3  LOOKING FOR CONTACT
        
    
