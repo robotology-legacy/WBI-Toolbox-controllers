@@ -20,7 +20,7 @@ function [hessianMatrix,biasVector,constraintMatrixLeftFoot,constraintMatrixRigh
                                         balancingControllerSOT(constraints,ROBOT_DOF_FOR_SIMULINK,ConstraintsMatrix,...
                                                                jointAngles,desJointAngles, massMatrix, biasTorques, ...
                                                                gravityTorques, jacobians, jacobiansDotNu, robotVelocity,...
-                                                               poseLeftFoot, poseRightFoot, desiredTaskAcc,impedances,dampings,gain,CONFIG)
+                                                               poseLeftFoot, poseRightFoot, desiredTaskAcc,impedances,dampings,gain,CONFIG, reg)
           
     %% BALANCING CONTROLLER
     %
@@ -148,7 +148,9 @@ function [hessianMatrix,biasVector,constraintMatrixLeftFoot,constraintMatrixRigh
         
     end
     
-    
+    biasVector = biasVector ...
+               + eye(size((S' * B)')) * reg.jointAnglesQP * (jointAngles-desJointAngles) ...
+               + eye(size((S' * B)')) * reg.torquesQP * tauFeedback;
     constraintMatrixEq        = jacobians*(massMatrix\B);
     upperBoundEqConstraints   = desiredTaskAcc - jacobiansDotNu +  (jacobians/massMatrix)*biasTorques; 
     

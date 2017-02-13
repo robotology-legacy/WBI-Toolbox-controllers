@@ -55,7 +55,7 @@ end
 
 
 % Register parameters
-block.NumDialogPrms     = 5;
+block.NumDialogPrms     = 6;
 
 % Register sample times
 %  [0 offset]            : Continuous sample time
@@ -151,10 +151,8 @@ function SetInputPortSamplingMode(block, idx, fd)
 
 function Outputs(block)
 
-    CONTACT_THRESHOLD          = 0.0001;
+    CONTACT_THRESHOLD          = 0.1;
     unboundedConstant          = 1e14;
-    
-    regHessian                 = 1e-4;
     
     torqueAt0                  = block.InputPort(1).Data;
     LEFT_RIGHT_FOOT_IN_CONTACT = block.InputPort(2).Data;
@@ -170,6 +168,7 @@ function Outputs(block)
     Ts                         = block.DialogPrm(3).Data;
     USE_CONTINUITY_CONSTRAINTS = block.DialogPrm(4).Data;
     USE_STRICT_TASK_PRIORITIES = block.DialogPrm(5).Data;
+    regHessian                 = block.DialogPrm(6).Data;
     
     if ~USE_STRICT_TASK_PRIORITIES
         constraintMatrixEq      = [];
