@@ -151,6 +151,8 @@ function [w_H_b, CoMDes,qDes,constraints,impedances,kpCom,kdCom,currentState,joi
         % configurable delta
         CoMDes      = [w_H_fixedLink(1:2,4);CoM_0(3)] + sm.com.states(state,:)';         
         qDes        = sm.joints.states(state,:)';
+        desRFootOrigin = w_H_fixedLink(1:3,4) + sm.origin.rightFoot(state,:)';
+
 
         if wrench_rightFoot(3) > sm.wrench.thresholdContactOn
             state = 6;
@@ -269,6 +271,8 @@ function [w_H_b, CoMDes,qDes,constraints,impedances,kpCom,kdCom,currentState,joi
         % configurable delta
         CoMDes      = [w_H_fixedLink(1:2,4);CoM_0(3)] + sm.com.states(state,:)';         
         qDes        = sm.joints.states(state,:)';
+        desLFootOrigin = w_H_fixedLink(1:3,4) + sm.origin.leftFoot(state,:)';
+
 
         if wrench_leftFoot(3) > sm.wrench.thresholdContactOn
             state = 11;
