@@ -7,9 +7,9 @@ PORTS.WBDT_RIGHTLEG_EE = '/wholeBodyDynamics/right_leg/cartesianEndEffectorWrenc
 CONFIG.LEFT_RIGHT_FOOT_IN_CONTACT  = [1 1];
 
 CONFIG.SMOOTH_DES_COM      = 0;    % If equal to one, the desired streamed values 
-                            % of the center of mass are smoothed internally 
+                                   % of the center of mass are smoothed internally 
 CONFIG.SMOOTH_DES_Q        = 0;    % If equal to one, the desired streamed values 
-                            % of the postural tasks are smoothed internally 
+                                   % of the postural tasks are smoothed internally 
                             
 references.smoothingTimeMinJerkComDesQDes    = 3.0;
 
@@ -24,7 +24,7 @@ postures = 0;
 gain.SmoothingTimeImp  = 1;  
 
 %%
-%           PARAMETERS FOR TWO FEET ONE GROUND
+%           PARAMETERS FOR TWO FEET ON THE GROUND
 if (sum(CONFIG.LEFT_RIGHT_FOOT_IN_CONTACT) == 2)
     gain.PCOM                 = diag([50    50  50]);
     gain.ICOM                 = diag([  0    0   0]);
@@ -33,7 +33,7 @@ if (sum(CONFIG.LEFT_RIGHT_FOOT_IN_CONTACT) == 2)
     gain.PAngularMomentum     = 5 ;
     gain.DAngularMomentum     = 2*sqrt(gain.PAngularMomentum);
 
-    % Impadances acting in the null space of the desired contact forces 
+    % Impedances acting in the null space of the desired contact forces 
 
     impTorso            = [10   10   20
                             0    0    0]; 
@@ -57,7 +57,7 @@ if (sum(CONFIG.LEFT_RIGHT_FOOT_IN_CONTACT) == 2)
                                            
 end
 
-% PARAMETERS FOR ONLY ONE FOOT ONE GROUND
+% PARAMETERS FOR ONLY ONE FOOT ON THE GROUND
 
 if (sum(CONFIG.LEFT_RIGHT_FOOT_IN_CONTACT) == 1)
     %%
@@ -68,7 +68,7 @@ if (sum(CONFIG.LEFT_RIGHT_FOOT_IN_CONTACT) == 1)
     gain.PAngularMomentum     = 1 ;
     gain.DAngularMomentum     = 1 ;
 
-    % Impadances acting in the null space of the desired contact forces 
+    % Impedances acting in the null space of the desired contact forces 
 
     
     intTorso            = [0   0    0]; 
@@ -111,7 +111,7 @@ end
 
 % Friction cone parameters
 numberOfPoints               = 4; % The friction cone is approximated by using linear interpolation of the circle. 
-                                  % So, numberOfPoints defines the number of points used to interpolate the circle in each cicle's quadrant 
+                                  % So, numberOfPoints defines the number of points used to interpolate the circle in each circle's quadrant 
 
 forceFrictionCoefficient     = 1/3;  
 torsionalFrictionCoefficient = 2/150;
@@ -120,7 +120,7 @@ torsionalFrictionCoefficient = 2/150;
 phys.footSize                = [ -0.065 0.13   ;    % xMin, xMax
                                  -0.045 0.05  ];   % yMin, yMax    
                       
-   gain.footSize  = [ -0.07  0.12   ;    % xMin, xMax
+gain.footSize  =    [ -0.07  0.12   ;    % xMin, xMax
                        -0.045 0.05 ];   % yMin, yMax   
 
 % gain.footSize                = [ -0.065 0.13   ;    % xMin, xMax
