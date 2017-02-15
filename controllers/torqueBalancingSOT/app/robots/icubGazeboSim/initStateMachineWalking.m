@@ -9,8 +9,9 @@ if strcmpi(SM.SM_TYPE, 'WALKING')
     reg.impedances             = 0.1;
     reg.dampings               = 0;
     reg.HessianQP              = 1e-4;
-    reg.jointAnglesQP          = 0; %1e-4;
-    reg.torquesQP              = 1e-3; %1e-4;
+    reg.jointAnglesQP          = 0;
+    reg.torquesQP              = 1e-3;
+    reg.taskAccQP              = 5e-3;
 
     sat.torque                 = 60;    
     sat.torqueDot              = 100*ones(ROBOT_DOF,1);
