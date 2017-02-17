@@ -8,8 +8,8 @@ if strcmpi(SM.SM_TYPE, 'CHAIR')
   
      %% State parameters
      sm.stateAt0             = 1;
-     sm.tBalancing           = 5;
-     sm.jointsSmoothingTimes = [1;2.5;2;4];
+     sm.tBalancing           = 1;
+     sm.jointsSmoothingTimes = [1;0.5;0;1];
      
      % smoothing time for time varying impedances
      gain.SmoothingTimeGainScheduling              = 2;  
@@ -32,7 +32,7 @@ if strcmpi(SM.SM_TYPE, 'CHAIR')
      (forceFrictionCoefficient,numberOfPoints,torsionalFrictionCoefficient,gain.legSize,fZmin);
 
      gain.PCOM     =    [50   50  50;    % state ==  1  LEGS BALANCING
-                         50   50  50;    % state ==  2  COM TRANSITION
+                         70   50  50;    % state ==  2  COM TRANSITION
                          30   60  60;    % state ==  3  LOOKING FOR CONTACT
                          50   50  50];   % state ==  4  TWO FEET BALANCING
 
@@ -59,13 +59,15 @@ sm.joints.statesChair = [1.5402   0.1594    -1.7365   -0.2814    -1.6455   0.192
                          1.1097   0.0122    -0.8365   -0.0714    -1.4615   0.1920   0.1545   0.2018   0.0611;   % state ==  3  LOOKING FOR CONTACT
                          0.2094   0.1047    -0.1745   -0.0349    -1.6455   0.1920   0.5862   0.2473   0.0];     % state ==  4  TWO FEET BALANCING 
                       
-sm.CoM.statesChair    = [-0.0869   0.0861  0.1616;    % state ==  2  COM TRANSITION
-                         -0.0769   0.0861  0.2816;    % state ==  3  LOOKING FOR CONTACT
-                         -0.0969   0.1061  0.48];     % state ==  4  TWO FEET BALANCING 
+% sm.CoM.statesChair    =  -0.002   0.088  0.17;     % state ==  2  COM TRANSITION
+
+sm.CoM.deltaStatesChair = [-0.0867   0.0  0.0;       % state ==  2  COM TRANSITION
+                            0.0      0.0  0.0;      % state ==  3  LOOKING FOR CONTACT
+                           -0.0      0.0  0.29];     % state ==  4  TWO FEET BALANCING 
                      
-sm.LwrenchTreshold    = [50;    % state ==  2  COM TRANSITION
+sm.LwrenchTreshold    = [57;    % state ==  2  COM TRANSITION
                          140];  % state ==  3  LOOKING FOR CONTACT
-sm.RwrenchTreshold    = [40;    % state ==  2  COM TRANSITION
+sm.RwrenchTreshold    = [57;    % state ==  2  COM TRANSITION
                          140];  % state ==  3  LOOKING FOR CONTACT
        
    
