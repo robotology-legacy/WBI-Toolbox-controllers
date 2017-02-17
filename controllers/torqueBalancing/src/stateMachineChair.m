@@ -43,7 +43,7 @@ function [w_H_b,constraints,impedances,kpCom,kdCom,currentState,jointsSmoothingT
         qjDes(1)             = sm.joints.statesChair(state-1,9);
         CoM_Des              = sm.CoM.statesChair(state-1,:)';
         
-        if Lwrench(3) > sm.LwrenchTreshold(state-1) &&  Rwrench(3) > sm.RwrenchTreshold(state-1)
+        if (Lwrench(3)+Rwrench(3)) > (sm.LwrenchTreshold(state-1) + sm.RwrenchTreshold(state-1))
            
             state           = 3;
             w_H_fixedLink   = w_H_fixedLink*l_leg_H_b/l_sole_H_b;
@@ -63,6 +63,7 @@ function [w_H_b,constraints,impedances,kpCom,kdCom,currentState,jointsSmoothingT
         qjDes([4 5 6 7])     = sm.joints.statesChair(state-1,[5 6 7 8]);
         qjDes(1)             = sm.joints.statesChair(state-1,9);
         CoM_Des              = sm.CoM.statesChair(state-1,:)';
+        qjDes(15)            = -0.1745;
         tDelta               = t-tInitState3;
         
         if Lwrench(3) > sm.LwrenchTreshold(state-1) &&  Rwrench(3) > sm.RwrenchTreshold(state-1) && tDelta > 1

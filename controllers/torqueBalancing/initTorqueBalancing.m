@@ -26,9 +26,9 @@ clear; clc;
 % To do this, you can uncomment the 
 
 % setenv('YARP_ROBOT_NAME','iCubGenova01');
-% setenv('YARP_ROBOT_NAME','iCubGenova02');
+setenv('YARP_ROBOT_NAME','iCubGenova02');
 % setenv('YARP_ROBOT_NAME','iCubDarmstadt01');
-  setenv('YARP_ROBOT_NAME','icubGazeboSim');
+%   setenv('YARP_ROBOT_NAME','icubGazeboSim');
 % setenv('YARP_ROBOT_NAME','iCubGenova05');
 
 % Simulation time in seconds
@@ -119,8 +119,8 @@ PORTS.COM_DES   = ['/' WBT_modelName '/comDes:i'];
 
 PORTS.Q_DES     = ['/' WBT_modelName '/qDes:i'];
 
-PORTS.WBDT_LEFTLEG_EE  = '/wholeBodyDynamicsTree/left_leg/cartesianEndEffectorWrench:o';
-PORTS.WBDT_RIGHTLEG_EE = '/wholeBodyDynamicsTree/right_leg/cartesianEndEffectorWrench:o';
+PORTS.WBDT_LEFTLEG_EE  = '/wholeBodyDynamics/left_leg/cartesianEndEffectorWrench:o';
+PORTS.WBDT_RIGHTLEG_EE = '/wholeBodyDynamics/right_leg/cartesianEndEffectorWrench:o';
 
 CONFIG.Ts                = 0.01;  % Controller period [s]
 
