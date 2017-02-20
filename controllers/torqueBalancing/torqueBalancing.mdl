@@ -6,7 +6,7 @@ Model {
     NumRootInports	    0
     NumRootOutports	    0
     ParameterArgumentNames  ""
-    ComputedModelVersion    "1.3284"
+    ComputedModelVersion    "1.3285"
     NumModelReferences	    0
     NumTestPointedSignals   0
     NumProvidedFunctions    0
@@ -63,11 +63,11 @@ Model {
 	$ObjectID		5
 	$ClassName		"Simulink.EditorInfo"
 	IsActive		[1]
-	ViewObjType		"SimulinkTopLevel"
-	LoadSaveID		"0"
+	ViewObjType		"SimulinkSubsys"
+	LoadSaveID		"2087"
 	Extents			[1821.0, 911.0]
-	ZoomFactor		[0.88922457200402816]
-	Offset			[118.57417893544732, 119.25594563986408]
+	ZoomFactor		[1.0]
+	Offset			[-451.23273668432785, 2246.0517550892359]
       }
       Object {
 	$PropName		"DockComponentsInfo"
@@ -100,9 +100,9 @@ Model {
   ModifiedByFormat	  "%<Auto>"
   LastModifiedBy	  "gnava"
   ModifiedDateFormat	  "%<Auto>"
-  LastModifiedDate	  "Mon Feb 20 14:57:48 2017"
-  RTWModifiedTimeStamp	  409503463
-  ModelVersionFormat	  "1.%<AutoIncrement:3284>"
+  LastModifiedDate	  "Mon Feb 20 15:56:02 2017"
+  RTWModifiedTimeStamp	  409506955
+  ModelVersionFormat	  "1.%<AutoIncrement:3285>"
   ConfigurationManager	  "none"
   SampleTimeColors	  off
   SampleTimeAnnotations	  off
@@ -1207,7 +1207,7 @@ Model {
   System {
     Name		    "torqueBalancing"
     Location		    [65, 24, 1920, 1080]
-    Open		    on
+    Open		    off
     ModelBrowserVisibility  off
     ModelBrowserWidth	    200
     ScreenColor		    "white"
@@ -1235,7 +1235,7 @@ Model {
       System {
 	Name			"DesValues"
 	Location		[65, 24, 1920, 1080]
-	Open			off
+	Open			on
 	ModelBrowserVisibility	off
 	ModelBrowserWidth	200
 	ScreenColor		"white"
@@ -1246,7 +1246,7 @@ Model {
 	TiledPaperMargins	[0.500000, 0.500000, 0.500000, 0.500000]
 	TiledPageScale		1
 	ShowPageBoundaries	off
-	ZoomFactor		"71"
+	ZoomFactor		"100"
 	Block {
 	  BlockType		  Reference
 	  Name			  "Compare\nTo Zero"
@@ -1348,7 +1348,7 @@ Model {
 	  BlockType		  Constant
 	  Name			  "Constant3"
 	  SID			  "4459"
-	  Position		  [800, 2367, 825, 2383]
+	  Position		  [760, 2367, 785, 2383]
 	  ZOrder		  716
 	  ShowName		  off
 	  Value			  "0.5"
@@ -26912,7 +26912,7 @@ Model {
 	  BlockType		  Switch
 	  Name			  "Switch1"
 	  SID			  "4458"
-	  Position		  [840, 2325, 880, 2385]
+	  Position		  [835, 2325, 875, 2385]
 	  ZOrder		  715
 	  ShowName		  off
 	  Criteria		  "u2 > Threshold"
@@ -27650,7 +27650,12 @@ Model {
 	  Points		  [434, 0; 0, -280]
 	  Branch {
 	    ZOrder		    441
-	    Points		    [0, -90; 10, 0]
+	    Points		    [0, -90; 5, 0]
+	    Branch {
+	      ZOrder		      678
+	      DstBlock		      "Switch3"
+	      DstPort		      2
+	    }
 	    Branch {
 	      ZOrder		      609
 	      Points		      [0, -110]
@@ -27665,11 +27670,6 @@ Model {
 		DstBlock		"Switch1"
 		DstPort			1
 	      }
-	    }
-	    Branch {
-	      ZOrder		      608
-	      DstBlock		      "Switch3"
-	      DstPort		      2
 	    }
 	  }
 	  Branch {
@@ -28068,7 +28068,7 @@ Model {
 	  ZOrder		  612
 	  SrcBlock		  "Switch1"
 	  SrcPort		  1
-	  Points		  [23, 0; 0, -30]
+	  Points		  [28, 0; 0, -30]
 	  DstBlock		  "Minimum Jerk Trajectory Generator2"
 	  DstPort		  2
 	}

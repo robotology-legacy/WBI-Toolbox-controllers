@@ -66,7 +66,7 @@ function [w_H_b,constraints,impedances,kpCom,kdCom,currentState,jointsSmoothingT
         qjDes([4 5 6 7])     = sm.joints.statesChair(state-1,[5 6 7 8]);
         qjDes(1)             = sm.joints.statesChair(state-1,9);
         CoM_Des              = CoMprevious + sm.CoM.deltaStatesChair(state-1,:)';
-        qjDes(15)            = -0.1745;
+        qjDes(15)            = sm.joints.ankleCorrection;
         tDelta               = t-tSwitch;
         
         jointsSmoothingTime = sm.jointsSmoothingTimes(state);

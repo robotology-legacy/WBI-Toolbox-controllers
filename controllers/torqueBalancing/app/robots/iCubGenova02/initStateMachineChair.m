@@ -61,6 +61,8 @@ sm.joints.statesChair = [1.5402   0.1594    -1.7365   -0.2814    -1.6455   0.192
                       
 % sm.CoM.statesChair    =  -0.002   0.088  0.17;     % state ==  2  COM TRANSITION
 
+sm.joints.ankleCorrection = -0.1745;
+
 sm.CoM.deltaStatesChair = [-0.0867   0.0  0.0;       % state ==  2  COM TRANSITION
                             0.0      0.0  0.0;      % state ==  3  LOOKING FOR CONTACT
                            -0.0      0.0  0.29];     % state ==  4  TWO FEET BALANCING 
