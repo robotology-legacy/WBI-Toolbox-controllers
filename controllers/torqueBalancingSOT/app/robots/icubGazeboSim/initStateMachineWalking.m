@@ -11,7 +11,7 @@ if strcmpi(SM.SM_TYPE, 'WALKING')
     reg.HessianQP              = 1e-4;
     reg.jointAnglesQP          = 0;
     reg.torquesQP              = 1e-3;
-    reg.taskAccQP              = 5e-3;
+    reg.taskAccQP              = 1e-3;
 
     sat.torque                 = 60;    
     sat.torqueDot              = 100*ones(ROBOT_DOF,1);
@@ -60,20 +60,18 @@ if strcmpi(SM.SM_TYPE, 'WALKING')
     % state == 10  LOOKING FOR CONTACT 
     % state == 11  TRANSITION TO INITIAL POSITION
 
-
-    %                   %   TORSO  %%      LEFT ARM       %%      RIGHT ARM      %%         LEFT LEG            %%         RIGHT LEG           %% 
-    gain.impedances  = [20   30   20, 12   12   12   12   10, 12   12   12   12   10,  30   50   30    60   100  100,  30   50   30    60   100  100;  % state ==  1  TWO FEET BALANCING
-                        20   30   20, 12   12   12   12   10, 12   12   12   12   10,  30   50   30    60   100  100,  30   50   30    60   100  100;  % state ==  2  COM TRANSITION TO LEFT 
-                        20   30   20, 12   12   12   12   10, 12   12   12   12   10,  30   50   30    60   100  100,  30   50   30    60   100  100;  % state ==  3  LEFT FOOT BALANCING
-                        30   30   30, 12   12   12   12   10, 12   12   12   12   10, 200  250   30    60    50   50, 220  550  220   200    65  300;  % state ==  4  PREPARING FOR SWITCHING 
-                        90   90   90, 12   12   12   12   10, 12   12   12   12   10, 100  350   30   200    50  100, 220  550  220   200    65  300;  % state ==  5  LOOKING FOR CONTACT
-                        20   30   20, 12   12   12   12   10, 12   12   12   12   10,  30   50   30   100    50   50,  30   50   30   100    50   50;  % state ==  6  TRANSITION TO INITIAL POSITION 
-                        20   30   20, 12   12   12   12   10, 12   12   12   12   10,  30   50   30    60   100  100,  30   50   30    60   100  100;  % state ==  7  COM TRANSITION TO RIGHT FOOT
-                        20   30   20, 12   12   12   12   10, 12   12   12   12   10,  30   50   30    60   100  100,  30   50   30    60   100  100;  % state ==  8  RIGHT FOOT BALANCING
-                        30   30   30, 12   12   12   12   10, 12   12   12   12   10, 220  550  220   200    65  300, 200  250   30    60    50   50;  % state ==  9  PREPARING FOR SWITCHING 
-                        90   90   90, 12   12   12   12   10, 12   12   12   12   10, 220  550  220   200    65  300, 100  350   30   200   100  100;  % state == 10  LOOKING FOR CONTACT
-                        20   30   20, 12   12   12   12   10, 12   12   12   12   10,  30   50   30    90    50   50,  30   50   30    90    50   50]; % state == 11  TRANSITION TO INITIAL POSITION
-
+    %                   %   TORSO  %%      LEFT ARM        %%       RIGHT ARM       %%         LEFT LEG            %%         RIGHT LEG           %% 
+    gain.impedances  = [20   30   20, 10   10    10   10   10, 10   10    10   10   10, 15   25   15    30     25  25, 15   25   15    30     25  25;  % state ==  1  TWO FEET BALANCING
+                        20   30   20, 10   10    10   10   10, 10   10    10   10   10, 25   25   15    30     50  50, 25   25   25    30     50  50;  % state ==  2  COM TRANSITION TO LEFT 
+                        20   30   20, 12   12    12   12   10, 12   12    12   12   10, 25   25   15    50     50  50, 25   25   25    30     50  50;  % state ==  3  LEFT FOOT BALANCING
+                        30   30   30, 10   10    10   10   10, 10   10    10   10   10, 15   25   50    30     25  25, 15   25   15    30     25  50;  % state ==  4  PREPARING FOR SWITCHING 
+                        30   30   30, 10   10    10   10   10, 10   10    10   10   10, 15   25   15    30     25  25, 15   25   15    30     25  25;  % state ==  5  LOOKING FOR CONTACT
+                        30   30   30, 10   10    10   10   10, 10   10    10   10   10, 15   25   15    50     25  50, 15   25   15    50     50  50;  % state ==  6  TRANSITION TO INITIAL POSITION 
+                        20   30   20, 10   10    10   10   10, 10   10    10   10   10, 25   25   25    30     50  50, 25   25   15    30     50  50;  % state ==  7  COM TRANSITION TO RIGHT FOOT
+                        20   30   20, 12   12    12   12   10, 12   12    12   12   10, 50   25   25    50     50  50, 50   25   15    50     50  50;  % state ==  8  RIGHT FOOT BALANCING
+                        30   30   30, 10   10    10   10   10, 10   10    10   10   10, 15   25   15    30     25  25, 15   25   50    30     25  25;  % state ==  9  PREPARING FOR SWITCHING 
+                        30   30   30, 10   10    10   10   10, 10   10    10   10   10, 15   25   15    30     25  25, 15   25   15    30     25  25;  % state == 10  LOOKING FOR CONTACT
+                        30   30   30, 10   10    10   10   10, 10   10    10   10   10, 15   25   15    30     25  25, 15   25   15    30     25  25]; % state == 11  TRANSITION TO INITIAL POSITION
    
     gain.rootPD      = [5 2];
 
@@ -87,10 +85,10 @@ if strcmpi(SM.SM_TYPE, 'WALKING')
 end              
 %% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%                      
          
-gain.weightPostural         = 0.5; %0.15;
+gain.weightPostural         = 0.3;
 gain.weightTasks            = 100;
-gain.impedances(:,14:end)   = gain.impedances(:,14:end)/3; %/5
-gain.dampings               = sqrt(gain.impedances(1,:));
+gain.impedances(:,14:end)   = gain.impedances(:,14:end); %/5
+gain.dampings               = 2*sqrt(gain.impedances(1,:));
 
 %% %%%%%%%%%%%%%%%%    FINITE STATE MACHINE SPECIFIC PARAMETERS
 sm.skipYoga                      = true;
@@ -98,7 +96,7 @@ sm.demoOnlyRightFoot             = false;
 sm.yogaAlsoOnRightFoot           = true;
 sm.yogaInLoop                    = true;
 sm.com.threshold                 = 0.01;
-sm.wrench.thresholdContactOn     = 10;    % Force threshold above which contact is considered stable
+sm.wrench.thresholdContactOn     = 5; %10;    % Force threshold above which contact is considered stable
 sm.wrench.thresholdContactOff    = 100;   % Force threshold under which contact is considered off
 sm.joints                        = struct;
 sm.joints.thresholdNotInContact  = 35;    % Degrees
@@ -277,3 +275,17 @@ sm.joints.states = [[ 0.0000, 0.0000, 0.0000, ...                         %% sta
 % %                       0.0522,-0.2582,0.0014,-0.2129,-0.0944,0.1937,...  %
 % %                       0.0128,0.4367,0.0093,-0.1585,-0.0725,-0.2931]];   %
 % %                  
+
+
+%     %                   %   TORSO  %%      LEFT ARM       %%      RIGHT ARM      %%         LEFT LEG            %%         RIGHT LEG           %% 
+%     gain.impedances  = [20   30   20, 12   12   12   12   10, 12   12   12   12   10,  30   50   30    60   100  100,  30   50   30    60   100  100;  % state ==  1  TWO FEET BALANCING
+%                         20   30   20, 12   12   12   12   10, 12   12   12   12   10,  30   50   30    60   100  100,  30   50   30    60   100  100;  % state ==  2  COM TRANSITION TO LEFT 
+%                         20   30   20, 12   12   12   12   10, 12   12   12   12   10,  30   50   30    60   100  100,  30   50   30    60   100  100;  % state ==  3  LEFT FOOT BALANCING
+%                         30   30   30, 12   12   12   12   10, 12   12   12   12   10, 200  250   30    60    50   50, 220  550  220   200    65  300;  % state ==  4  PREPARING FOR SWITCHING 
+%                         90   90   90, 12   12   12   12   10, 12   12   12   12   10, 100  350   30   200    50  100, 220  550  220   200    65  300;  % state ==  5  LOOKING FOR CONTACT
+%                         20   30   20, 12   12   12   12   10, 12   12   12   12   10, 100  350   30   200    50  100,  30   50   30   100    50   50;  % state ==  6  TRANSITION TO INITIAL POSITION 
+%                         20   30   20, 12   12   12   12   10, 12   12   12   12   10,  30   50   30    60   100  100,  30   50   30    60   100  100;  % state ==  7  COM TRANSITION TO RIGHT FOOT
+%                         20   30   20, 12   12   12   12   10, 12   12   12   12   10,  30   50   30    60   100  100,  30   50   30    60   100  100;  % state ==  8  RIGHT FOOT BALANCING
+%                         30   30   30, 12   12   12   12   10, 12   12   12   12   10, 220  550  220   200    65  300, 200  250   30    60    50   50;  % state ==  9  PREPARING FOR SWITCHING 
+%                         90   90   90, 12   12   12   12   10, 12   12   12   12   10, 220  550  220   200    65  300, 100  350   30   200   100  100;  % state == 10  LOOKING FOR CONTACT
+%                         20   30   20, 12   12   12   12   10, 12   12   12   12   10,  30   50   30    90    50   50,  30   50   30    90    50   50]; % state == 11  TRANSITION TO INITIAL POSITION
