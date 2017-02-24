@@ -10,7 +10,8 @@ if strcmpi(SM.SM_TYPE, 'YOGA')
     reg.dampings               = 0;
     reg.HessianQP              = 1e-2;
 
-    sat.torque                 = 60;
+    sat.torque                 = 60;   
+    sat.torqueDot       = 100*ones(ROBOT_DOF,1);
 
     gain.footSize              = [ -0.05  0.10 ;    % xMin, xMax
                                    -0.025 0.025];   % yMin, yMax  
@@ -18,7 +19,7 @@ if strcmpi(SM.SM_TYPE, 'YOGA')
     forceFrictionCoefficient     = 1/4;  
     
     %Smoothing time for time varying impedances
-    gain.SmoothingTimeGainScheduling              = 2;  
+    gain.SmoothingTimeGainScheduling  = 2;  
 
     %Smoothing time for time-varying constraints
     CONFIG.smoothingTimeTranDynamics  = 0.02;
@@ -39,8 +40,6 @@ if strcmpi(SM.SM_TYPE, 'YOGA')
     gain.ICOM  = gain.PCOM*0;
     gain.DCOM  = 2*sqrt(gain.PCOM);
 
-    gain.PAngularMomentum  = 0.25 ;
-    gain.DAngularMomentum  = 2*sqrt(gain.PAngularMomentum);
 
     % state ==  1  TWO FEET BALANCING
     % state ==  2  COM TRANSITION TO LEFT FOOT
@@ -57,19 +56,19 @@ if strcmpi(SM.SM_TYPE, 'YOGA')
     % state == 11  TRANSITION TO INITIAL POSITION
 
 
-    %                   %   TORSO  %%      LEFT ARM       %%      RIGHT ARM      %%         LEFT LEG            %%         RIGHT LEG           %% 
-    gain.impedances  = [20   30   20, 12   12    12   12 10, 12   12    12   12 10, 30   50   30    60     50  50, 30   50   30    60     50  50  % state ==  1  TWO FEET BALANCING
-                        20   30   20, 12   12    12   12 10, 12   12    12   12 10, 30   50   30    60     50  50, 30   50   30    60     50  50  % state ==  2  COM TRANSITION TO LEFT 
-                        20   30   20, 12   12    12   12 10, 12   12    12   12 10, 30   50   30    60     50  50, 30   50   30    60     50  50  % state ==  3  LEFT FOOT BALANCING
-                        20   30   20, 12   12    12   12 10, 12   12    12   12 10, 30   50   30    60     50  50, 30   50   30    60     50  50  % state ==  4  PREPARING FOR SWITCHING 
-                        20   30   20, 12   12    12   12 10, 12   12    12   12 10, 30   50   30    60     50  50, 30   50   30    60     50  50  % state ==  5  LOOKING FOR CONTACT
-                        20   30   20, 12   12    12   12 10, 12   12    12   12 10, 30   50   30    60     50  50, 30   50   30    60     50  50  % state ==  6  TRANSITION TO INITIAL POSITION 
-                        20   30   20, 12   12    12   12 10, 12   12    12   12 10, 30   50   30    60     50  50, 30   50   30    60     50  50  % state ==  7  COM TRANSITION TO RIGHT FOOT
-                        20   30   20, 12   12    12   12 10, 12   12    12   12 10, 30   50   30    60     50  50, 30   50   30    60     50  50  % state ==  8  RIGHT FOOT BALANCING
-                        20   30   20, 12   12    12   12 10, 12   12    12   12 10, 30   50   30    60     50  50, 30   50   30    60     50  50  % state ==  9  PREPARING FOR SWITCHING 
-                        20   30   20, 12   12    12   12 10, 12   12    12   12 10, 30   50   30    60     50  50, 30   50   30    60     50  50  % state == 10  LOOKING FOR CONTACT
-                        20   30   20, 12   12    12   12 10, 12   12    12   12 10, 30   50   30    60     50  50, 30   50   30    60     50  50];% state == 11  TRANSITION TO INITIAL POSITION
-                    
+    %                   %   TORSO  %     LEFT ARM     %%    RIGHT ARM     %%         LEFT LEG            %%         RIGHT LEG           %% 
+    gain.impedances  = [20   30   20, 12   12    12   12, 12   12    12   12, 30   50   30    60     50  50, 30   50   30    60     50  50  % state ==  1  TWO FEET BALANCING
+                        20   30   20, 12   12    12   12, 12   12    12   12, 30   50   30    60     50  50, 30   50   30    60     50  50  % state ==  2  COM TRANSITION TO LEFT 
+                        20   30   20, 12   12    12   12, 12   12    12   12, 30   50   30    60     50  50, 30   50   30    60     50  50  % state ==  3  LEFT FOOT BALANCING
+                        20   30   20, 12   12    12   12, 12   12    12   12, 30   50   30    60     50  50, 30   50   30    60     50  50  % state ==  4  PREPARING FOR SWITCHING 
+                        20   30   20, 12   12    12   12, 12   12    12   12, 30   50   30    60     50  50, 30   50   30    60     50  50  % state ==  5  LOOKING FOR CONTACT
+                        20   30   20, 12   12    12   12, 12   12    12   12, 30   50   30    60     50  50, 30   50   30    60     50  50  % state ==  6  TRANSITION TO INITIAL POSITION 
+                        20   30   20, 12   12    12   12, 12   12    12   12, 30   50   30    60     50  50, 30   50   30    60     50  50  % state ==  7  COM TRANSITION TO RIGHT FOOT
+                        20   30   20, 12   12    12   12, 12   12    12   12, 30   50   30    60     50  50, 30   50   30    60     50  50  % state ==  8  RIGHT FOOT BALANCING
+                        20   30   20, 12   12    12   12, 12   12    12   12, 30   50   30    60     50  50, 30   50   30    60     50  50  % state ==  9  PREPARING FOR SWITCHING 
+                        20   30   20, 12   12    12   12, 12   12    12   12, 30   50   30    60     50  50, 30   50   30    60     50  50  % state == 10  LOOKING FOR CONTACT
+                        20   30   20, 12   12    12   12, 12   12    12   12, 30   50   30    60     50  50, 30   50   30    60     50  50];% state == 11  TRANSITION TO INITIAL POSITION
+                                       
     gain.rootPD      = [5 2];
 
     gain.lFoot.posPD = [25*ones(3,1),2*sqrt(ones(3,1))];
@@ -82,12 +81,11 @@ if strcmpi(SM.SM_TYPE, 'YOGA')
 end              
 %% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%                      
          
-gain.weightPostural = 0.1;
-gain.weightTasks    = 100;
-gain.impedances(:,14:end)     = gain.impedances(:,14:end)/5;
-gain.dampings       = sqrt(gain.impedances(1,:));
+gain.weightPostural         = 0.1;
+gain.weightTasks            = 100;
+gain.impedances(:,14:end)   = gain.impedances(:,14:end)/5;
+gain.dampings               = sqrt(gain.impedances(1,:));
 
-sat.torqueDot       = 100*ones(ROBOT_DOF,1);
 
 %% %%%%%%%%%%%%%%%%    FINITE STATE MACHINE SPECIFIC PARAMETERS
 sm.skipYoga                      = true;
@@ -166,49 +164,49 @@ sm.tBalancing      = 0;%inf;%0.5;
 
 
 sm.joints.states = [[0.0864,0.0258,0.0152, ...                          %% state == 1  TWO FEET BALANCING, THIS REFERENCE IS IGNORED 
-                     0.1253,0.8135,0.3051,0.7928,0 ...                    %
-                     0.0563,0.6789,0.3340,0.6214,0 ...                    %
+                     0.1253,0.8135,0.3051,0.7928...                     %
+                     0.0563,0.6789,0.3340,0.6214 ...                    %
                      0.0522,-0.2582,0.0014,-0.2129,-0.0944,0.1937,...   %
                      0.0128,0.4367,0.0093,-0.1585,-0.0725,-0.2931];     %
                     [-0.0348,0.0779,0.0429, ...                         %% state == 2  COM TRANSITION TO LEFT 
-                     -0.1493,0.8580,0.2437,0.8710,0 ...                   %
-                     -0.1493,0.8580,0.2437,0.8710,0 ...                   %
+                     -0.1493,0.8580,0.2437,0.8710 ...                   %
+                     -0.1493,0.8580,0.2437,0.8710 ...                   %
                      -0.0015,-0.1109,-0.0001,0.0003,0.0160,0.1630, ...  %  
                      0.0005,0.0793,-0.0014,-0.0051,0.0073,-0.1151];     %  
                     [0.0864,0.0258,0.0152, ...                          %% state == 3  LEFT FOOT BALANCING
-                     0.1253,0.8135,0.3051,0.7928,0 ...                    %    
-                     0.0563,0.6789,0.3340,0.6214,0 ...                    %
+                     0.1253,0.8135,0.3051,0.7928 ...                    %    
+                     0.0563,0.6789,0.3340,0.6214 ...                    %
                      -0.0015,-0.1109,-0.0001,0.0003,0.0160,0.1630, ...  %  
                      0.0005,0.0793,-0.0014,-0.0051,0.0073,-0.1151];     % 
                     [-0.0348,0.0779,0.0429, ...                         %% state == 4  PREPARING FOR SWITCHING
-                     -0.1493,0.8580,0.2437,0.8710,0 ...                   %
-                     -0.1493,0.8580,0.2437,0.8710,0 ...                   %
+                     -0.1493,0.8580,0.2437,0.8710 ...                   %
+                     -0.1493,0.8580,0.2437,0.8710 ...                   %
                      -0.0015,-0.1109,-0.0001,0.0003,0.0160,0.1630, ...  %  
                      0.0005,0.0793,-0.0014,-0.0051    0.0073   -0.1151];%                                  %
                     [0.0864,0.0258,0.0152, ...                          %% state == 5  LOOKING FOR CONTACT
-                     0.1253,0.8135,0.3051,0.7928,0 ...                    %
-                     0.0563,0.6789,0.3340,0.6214,0 ...                    %
+                     0.1253,0.8135,0.3051,0.7928 ...                    %
+                     0.0563,0.6789,0.3340,0.6214 ...                    %
                      0.0107,-0.0741,-0.0001,-0.0120,0.0252,0.1369,...   %
                      -0.0026,0.0225,0.0093,-0.0020,0.0027,-0.0277];     %   
                      zeros(1,ROBOT_DOF);                                %% state == 6  TRANSITION INIT POSITION: THIS REFERENCE IS IGNORED
                     [0.0864,0.0258,0.0152, ...                          %% state == 7  COM TRANSITION TO RIGHT FOOT
-                     0.1253,0.8135,0.3051,0.7928,0 ...                    %
-                     0.0563,0.6789,0.3340,0.6214,0 ...                    %
+                     0.1253,0.8135,0.3051,0.7928 ...                    %
+                     0.0563,0.6789,0.3340,0.6214 ...                    %
                      0.0107,-0.0741,-0.0001,-0.0120,0.0252,0.1369,...   %
                      -0.0026,0.0225,0.0093,-0.0020,0.0027,-0.0277];     % 
                     [0.0864,0.0258,0.0152, ...                          %% state == 8  RIGHT FOOT BALANCING
-                     0.1253,0.8135,0.3051,0.7928,0 ...                    %    
-                     0.0563,0.6789,0.3340,0.6214,0 ...                    %
+                     0.1253,0.8135,0.3051,0.7928 ...                    %    
+                     0.0563,0.6789,0.3340,0.6214 ...                    %
                      0.0005,0.0793,-0.0014,-0.0051,0.0073,-0.1151, ...  %  
                      -0.0015,-0.1109,-0.0001,0.0003,0.0160,0.1630];     %  
                     [-0.0348,0.0779,0.0429, ...                         %% state == 9  PREPARING FOR SWITCHING
-                     -0.1493,0.8580,0.2437,0.8710,0 ...                   %
-                     -0.1493,0.8580,0.2437,0.8710,0 ...                   %
+                     -0.1493,0.8580,0.2437,0.8710 ...                   %
+                     -0.1493,0.8580,0.2437,0.8710 ...                   %
                       0.0005,0.0793,-0.0014,-0.0051,0.0073,-0.1151, ... %  
                       -0.0015,-0.1109,-0.0001,0.0003,0.0160,0.1630];    %                                  %
                     [0.0864,0.0258,0.0152, ...                          %% state == 10  LOOKING FOR CONTACT
-                     0.1253,0.8135,0.3051,0.7928,0 ...                    %
-                     0.0563,0.6789,0.3340,0.6214,0 ...                    %
+                     0.1253,0.8135,0.3051,0.7928 ...                    %
+                     0.0563,0.6789,0.3340,0.6214 ...                    %
                      -0.0026,0.0225,0.0093,-0.0020,0.0027,-0.0277,...   %
                      0.0107,-0.0741,-0.0001,-0.0120,0.0252,0.1369];     %   
                     zeros(1,ROBOT_DOF)];                                %% state == 11  BALANCING TWO FEET, THIS REFERENCE IS IGNORED                     

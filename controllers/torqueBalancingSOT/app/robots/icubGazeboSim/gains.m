@@ -1,15 +1,6 @@
-ROBOT_DOF = 25;
+ROBOT_DOF = 23; 
 CONFIG.ON_GAZEBO = true;
 PORTS.IMU = '/icubSim/inertial';
-
-
-gain.rootPD      = [20 2*sqrt(1)];
-
-gain.lFoot.posPD = [20*ones(3,1),2*sqrt(ones(3,1))];
-gain.lFoot.rotPD = [20,2];
-
-gain.rFoot.posPD = [50*ones(3,1),2*sqrt(ones(3,1))];
-gain.rFoot.rotPD = [50,10];
 
 CONFIG.LEFT_RIGHT_FOOT_IN_CONTACT  = [1 1];
 
@@ -19,7 +10,7 @@ CONFIG.SMOOTH_DES_COM      = 0;    % If equal to one, the desired streamed value
 CONFIG.SMOOTH_DES_Q        = 0;    % If equal to one, the desired streamed values 
                             % of the postural tasks are smoothed internally 
 
-WBT_wbiList = 'ROBOT_TORQUE_CONTROL_JOINTS';
+WBT_wbiList = '(torso_pitch,torso_roll,torso_yaw,l_shoulder_pitch, l_shoulder_roll, l_shoulder_yaw, l_elbow, r_shoulder_pitch,r_shoulder_roll, r_shoulder_yaw, r_elbow, l_hip_pitch, l_hip_roll, l_hip_yaw, l_knee, l_ankle_pitch, l_ankle_roll, r_hip_pitch,r_hip_roll,r_hip_yaw,r_knee,r_ankle_pitch,r_ankle_roll)';
 
 dump.left_wrench_port = '/icubGazeboSim/left_foot/analog:o';
 dump.right_wrench_port = '/icubGazeboSim/right_foot/analog:o';
@@ -38,7 +29,17 @@ gain.SmoothingTimeImp  = 1;
 gain.SmoothingTimeGainScheduling = 0.02;
 
 %%
-%           PARAMETERS FOR TWO FEET ONE GROUND
+
+gain.rootPD      = [20 2*sqrt(1)];
+
+gain.lFoot.posPD = [20*ones(3,1),2*sqrt(ones(3,1))];
+gain.lFoot.rotPD = [20,2];
+
+gain.rFoot.posPD = [50*ones(3,1),2*sqrt(ones(3,1))];
+gain.rFoot.rotPD = [50,10];
+
+
+%           PARAMETERS FOR TWO FEET ON THE GROUND
 if (sum(CONFIG.LEFT_RIGHT_FOOT_IN_CONTACT) == 2)
     gain.PCOM                 = diag([50    50  50]);
     gain.ICOM                 = diag([  0    0   0]);
@@ -47,12 +48,13 @@ if (sum(CONFIG.LEFT_RIGHT_FOOT_IN_CONTACT) == 2)
     gain.PAngularMomentum     = 10 ;
     gain.DAngularMomentum     = 2*sqrt(gain.PAngularMomentum);
 
-    % Impadances acting in the null space of the desired contact forces 
+    % Impedances acting in the null space of the desired contact forces 
 
     impTorso            = [10   10   20
                             0    0    0]; 
-    impArms             = [10   10    10    8  0 
-                            0    0     0    0  0 ];
+
+    impArms             = [10   10    10    8  
+                         0    0     0    0 ];
                         
     impLeftLeg          = [ 30   30   30    60     10  10
                              0    0    0     0      0   0]; 
@@ -62,7 +64,8 @@ if (sum(CONFIG.LEFT_RIGHT_FOOT_IN_CONTACT) == 2)
     
                          
     intTorso            = [0   0    0]; 
-    intArms             = [0   0    0    0  0];
+
+    intArms             = [0   0    0    0 ];
                         
     intLeftLeg          = [0   0    0    0    0  0]; 
 
@@ -71,7 +74,7 @@ if (sum(CONFIG.LEFT_RIGHT_FOOT_IN_CONTACT) == 2)
                                            
 end
 
-% PARAMETERS FOR ONLY ONE FOOT ONE GROUND
+% PARAMETERS FOR ONLY ONE FOOT ON THE GROUND
 
 if (sum(CONFIG.LEFT_RIGHT_FOOT_IN_CONTACT) == 1)
     %%
@@ -79,14 +82,11 @@ if (sum(CONFIG.LEFT_RIGHT_FOOT_IN_CONTACT) == 1)
     gain.ICOM                 = diag([  0    0   0]);
     gain.DCOM                 = diag([  0    0   0]);
 
-    gain.PAngularMomentum     = 1 ;
-    gain.DAngularMomentum     = 1 ;
-
-    % Impadances acting in the null space of the desired contact forces 
-
+    % Impedances acting in the null space of the desired contact forces 
     
     intTorso            = [0   0    0]; 
-    intArms             = [0   0    0    0  0];
+
+    intArms             = [0   0    0    0 ];
                         
     intLeftLeg          = [0   0    0    0    0  0]; 
 
@@ -96,8 +96,9 @@ if (sum(CONFIG.LEFT_RIGHT_FOOT_IN_CONTACT) == 1)
     
     impTorso            = [20   20   30
                             0    0    0]*scalingImp; 
-    impArms             = [15   15    15    8   0
-                            0    0     0    0   0 ]*scalingImp;
+
+    impArms             = [15   15    15    8 
+                            0    0     0    0 ]*scalingImp;
                         
     impLeftLeg          = [ 30   30   30   120     10  10
                              0    0    0     0      0   0]*scalingImp; 
@@ -108,15 +109,13 @@ if (sum(CONFIG.LEFT_RIGHT_FOOT_IN_CONTACT) == 1)
 %%    
 end
 
-sat.integral              = 0;
 gain.integral             = [intTorso,intArms,intArms,intLeftLeg,intRightLeg];
 gain.impedances           = [impTorso(1,:),impArms(1,:),impArms(1,:),impLeftLeg(1,:),impRightLeg(1,:)];
 gain.dampings             = 0*sqrt(gain.impedances);
 gain.increasingRatesImp   = [impTorso(2,:),impArms(2,:),impArms(2,:),impLeftLeg(2,:),impRightLeg(2,:)];
-sat.impedences            = [80   25    1400];
 
 if (size(gain.impedances,2) ~= ROBOT_DOF)
-    error('Dimension mismatch between ROBOT_DOF and dimension of the variable impedences. Check these variables in the file gains.m');
+    error('Dimension mismatch between ROBOT_DOF and dimension of the variable impedances. Check these variables in the file gains.m');
 end
 
 
@@ -125,7 +124,7 @@ end
 
 % Friction cone parameters
 numberOfPoints               = 4; % The friction cone is approximated by using linear interpolation of the circle. 
-                                  % So, numberOfPoints defines the number of points used to interpolate the circle in each cicle's quadrant 
+                                  % So, numberOfPoints defines the number of points used to interpolate the circle in each circle's quadrant 
 
 forceFrictionCoefficient     = 1;%1/3;  
 torsionalFrictionCoefficient = 2/150;
@@ -141,9 +140,12 @@ fZmin                        = 10;
 
 %% The QP solver will search a solution fo that 
 % satisfies the inequality Aineq_f F(fo) < bineq_f
-reg.pinvTol     = 1e-5;
-reg.pinvDamp    = 0.01;
-reg.pinvDampVb  = 1e-7;
-reg.HessianQP   = 1e-5;
-reg.impedances  = 0.1;
-reg.dampings    = 0;
+reg.pinvTol       = 1e-5;
+reg.pinvDamp      = 0.01;
+reg.pinvDampVb    = 1e-7;
+reg.HessianQP     = 1e-5;
+reg.impedances    = 0.1;
+reg.dampings      = 0;
+reg.jointAnglesQP = 0;
+reg.torquesQP     = 1e-3;
+reg.taskAccQP     = 1e-3;
