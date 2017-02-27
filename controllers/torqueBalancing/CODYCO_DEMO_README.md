@@ -6,7 +6,7 @@
 
 2) In your `.bashrc` file, add the following line:
     
-  `alias gazebo_chair="cd ~/$CODYCO_ROOT/build/install/share/gazebo/worlds/icub_chair_world && gazebo -slibgazebo_yarp_clock.so`
+  `alias gazebo_chair="cd ~/YOUR/PATH/TO/icub_chair_world && gazebo -slibgazebo_yarp_clock.so`
  
    just to initialize the Gazebo world with iCub on a chair. 
 
@@ -14,7 +14,9 @@
 
    `gazebo_chair`
 
-- To run the simulation, just run the torqueBalancing controller as usual. In the initialization file, there will be the new option "CHAIR" as long as the old ones "YOGA" and "COORDINATOR".
+### Simulations
+- To run the simulation, just run the torqueBalancing controller as usual, following the instructions in the [README](https://github.com/robotology-playground/WBI-Toolbox-controllers/blob/master/controllers/torqueBalancing/README.md). Do not open the yarpmotorgui: iCub is already in its home position!
 
+- In the [initialization file](https://github.com/robotology-playground/WBI-Toolbox-controllers/blob/icub_chair/controllers/torqueBalancing/initTorqueBalancing.m), there is now the new simulation option "CHAIR" as long as the old ones "YOGA" and "COORDINATOR".
 
 - All the demos "CHAIR", "YOGA" and "COORDINATOR" should be still available without conflicts (BUT with the right gazebo world for each demo). 
