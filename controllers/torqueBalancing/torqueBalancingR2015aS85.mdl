@@ -1,12 +1,12 @@
 Model {
   Name			  "torqueBalancingR2015aS85"
   Version		  8.5
-  SavedCharacterEncoding  "UTF-8"
+  SavedCharacterEncoding  "US-ASCII"
   GraphicalInterface {
     NumRootInports	    0
     NumRootOutports	    0
     ParameterArgumentNames  ""
-    ComputedModelVersion    "1.3111"
+    ComputedModelVersion    "1.3112"
     NumModelReferences	    0
     NumTestPointedSignals   0
   }
@@ -29,7 +29,7 @@ Model {
       $ObjectID		      2
       $ClassName	      "Simulink.WindowInfo"
       IsActive		      [1]
-      Location		      [303.0, 317.0, 1855.0, 1056.0]
+      Location		      [560.0, 23.0, 1855.0, 1056.0]
       Object {
 	$PropName		"ModelBrowserInfo"
 	$ObjectID		3
@@ -53,7 +53,7 @@ Model {
 	IsActive		[1]
 	ViewObjType		"SimulinkTopLevel"
 	LoadSaveID		"0"
-	Extents			[1801.0, 863.0]
+	Extents			[1821.0, 883.0]
 	ZoomFactor		[0.88654618473895586]
 	Offset			[115.48074745186864, 119.20838052095132]
       }
@@ -63,11 +63,11 @@ Model {
   Creator		  "daniele"
   UpdateHistory		  "UpdateHistoryNever"
   ModifiedByFormat	  "%<Auto>"
-  LastModifiedBy	  "gnava"
+  LastModifiedBy	  "makaveli"
   ModifiedDateFormat	  "%<Auto>"
-  LastModifiedDate	  "Tue Jan 17 18:18:19 2017"
-  RTWModifiedTimeStamp	  406577899
-  ModelVersionFormat	  "1.%<AutoIncrement:3111>"
+  LastModifiedDate	  "Fri Mar 03 10:33:57 2017"
+  RTWModifiedTimeStamp	  410438036
+  ModelVersionFormat	  "1.%<AutoIncrement:3112>"
   ConfigurationManager	  "none"
   SampleTimeColors	  off
   SampleTimeAnnotations	  off
@@ -1044,7 +1044,7 @@ Model {
   }
   System {
     Name		    "torqueBalancingR2015aS85"
-    Location		    [303, 317, 2158, 1373]
+    Location		    [560, 23, 2415, 1079]
     Open		    off
     ModelBrowserVisibility  off
     ModelBrowserWidth	    200
@@ -1058,7 +1058,7 @@ Model {
     ShowPageBoundaries	    off
     ZoomFactor		    "89"
     ReportName		    "simulink-default.rpt"
-    SIDHighWatermark	    "3753"
+    SIDHighWatermark	    "3756"
     Block {
       BlockType		      SubSystem
       Name		      "DesValues"
@@ -1084,7 +1084,7 @@ Model {
 	TiledPaperMargins	[0.500000, 0.500000, 0.500000, 0.500000]
 	TiledPageScale		1
 	ShowPageBoundaries	off
-	ZoomFactor		"71"
+	ZoomFactor		"125"
 	Block {
 	  BlockType		  Reference
 	  Name			  "Compare\nTo Zero"
@@ -1229,6 +1229,16 @@ Model {
 	    RTWStorageClass	    "Auto"
 	    DataLoggingNameMode	    "SignalName"
 	  }
+	}
+	Block {
+	  BlockType		  Switch
+	  Name			  "External/Internal CoM references"
+	  SID			  "3755"
+	  Position		  [565, 2405, 615, 2445]
+	  ZOrder		  701
+	  Criteria		  "u2 > Threshold"
+	  InputSameDT		  off
+	  SaturateOnIntegerOverflow off
 	}
 	Block {
 	  BlockType		  Reference
@@ -3643,7 +3653,7 @@ Model {
 	  BlockType		  Constant
 	  Name			  "SMOOTH_DES_COM"
 	  SID			  "2160"
-	  Position		  [1045, 2445, 1185, 2465]
+	  Position		  [1055, 2445, 1195, 2465]
 	  ZOrder		  488
 	  ShowName		  off
 	  Value			  "CONFIG.SMOOTH_DES_COM"
@@ -4367,7 +4377,7 @@ Model {
 	  Name			  "Selector"
 	  SID			  "2162"
 	  Ports			  [1, 1]
-	  Position		  [790, 2416, 825, 2434]
+	  Position		  [750, 2416, 785, 2434]
 	  ZOrder		  481
 	  ShowName		  off
 	  InputPortWidth	  "9"
@@ -17740,7 +17750,7 @@ Model {
 	  BlockType		  Outport
 	  Name			  "desired_x_dx_ddx_CoM"
 	  SID			  "2274"
-	  Position		  [1430, 2448, 1460, 2462]
+	  Position		  [1455, 2448, 1485, 2462]
 	  ZOrder		  323
 	  Port			  "8"
 	  IconDisplay		  "Port number"
@@ -17769,17 +17779,37 @@ Model {
 	  ZOrder		  1
 	  SrcBlock		  "Read desired_x_dx_ddx_CoM\nas 9 element vector"
 	  SrcPort		  2
-	  Points		  [52, 0; 0, 395]
-	  DstBlock		  "Subsystem"
-	  DstPort		  1
+	  Points		  [52, 0]
+	  Branch {
+	    ZOrder		    121
+	    Points		    [0, 395]
+	    DstBlock		    "Subsystem"
+	    DstPort		    1
+	  }
+	  Branch {
+	    ZOrder		    120
+	    Points		    [0, -10]
+	    DstBlock		    "External/Internal CoM references"
+	    DstPort		    2
+	  }
 	}
 	Line {
 	  ZOrder		  2
 	  SrcBlock		  "Read desired_x_dx_ddx_CoM\nas 9 element vector"
 	  SrcPort		  1
-	  Points		  [245, 0; 0, 750]
-	  DstBlock		  "Selector1"
-	  DstPort		  1
+	  Points		  [194, 0]
+	  Branch {
+	    ZOrder		    131
+	    Points		    [0, 750]
+	    DstBlock		    "Selector1"
+	    DstPort		    1
+	  }
+	  Branch {
+	    ZOrder		    123
+	    Points		    [0, -5]
+	    DstBlock		    "External/Internal CoM references"
+	    DstPort		    1
+	  }
 	}
 	Line {
 	  ZOrder		  3
@@ -18251,25 +18281,6 @@ Model {
 	  DstPort		  enable
 	}
 	Line {
-	  Name			  "CoMRefs"
-	  ZOrder		  80
-	  Labels		  [1, 1]
-	  SrcBlock		  "Demux"
-	  SrcPort		  1
-	  Points		  [380, 0]
-	  Branch {
-	    ZOrder		    81
-	    Points		    [0, -50]
-	    DstBlock		    "Selector"
-	    DstPort		    1
-	  }
-	  Branch {
-	    ZOrder		    82
-	    DstBlock		    "Switch3"
-	    DstPort		    3
-	  }
-	}
-	Line {
 	  ZOrder		  83
 	  SrcBlock		  "Mux"
 	  SrcPort		  1
@@ -18488,6 +18499,33 @@ Model {
 	  SrcPort		  1
 	  DstBlock		  "Multiport\nSwitch1"
 	  DstPort		  1
+	}
+	Line {
+	  Name			  "CoMRefs"
+	  ZOrder		  128
+	  Labels		  [0, 0]
+	  SrcBlock		  "Demux"
+	  SrcPort		  1
+	  Points		  [110, 0; 0, -35]
+	  DstBlock		  "External/Internal CoM references"
+	  DstPort		  3
+	}
+	Line {
+	  ZOrder		  130
+	  SrcBlock		  "External/Internal CoM references"
+	  SrcPort		  1
+	  Points		  [96, 0]
+	  Branch {
+	    ZOrder		    134
+	    Points		    [0, 50]
+	    DstBlock		    "Switch3"
+	    DstPort		    3
+	  }
+	  Branch {
+	    ZOrder		    133
+	    DstBlock		    "Selector"
+	    DstPort		    1
+	  }
 	}
       }
     }
