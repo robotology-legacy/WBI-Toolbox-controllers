@@ -22,7 +22,7 @@ setup(block);
 
 function setup(block)
     
-block.NumInputPorts  = 9; 
+block.NumInputPorts  = 8; 
 block.NumOutputPorts = 4; 
 
 % Setup port properties to be  dynamic
@@ -154,15 +154,14 @@ function Outputs(block)
     CONTACT_THRESHOLD          = 0.1;
     unboundedConstant          = 1e14;
     
-    torqueAt0                  = block.InputPort(1).Data;
-    LEFT_RIGHT_FOOT_IN_CONTACT = block.InputPort(2).Data;
-    hessianMatrixQP            = block.InputPort(3).Data;
-    biasVectorQP               = block.InputPort(4).Data;
-    constraintMatrixLeftFoot   = block.InputPort(5).Data;
-    constraintMatrixRightFoot  = block.InputPort(6).Data;
-    constraintMatrixEq         = block.InputPort(7).Data;
-    upperBoundEqConstraints    = block.InputPort(8).Data;
-    upperBoundFeetConstraints  = block.InputPort(9).Data;
+    LEFT_RIGHT_FOOT_IN_CONTACT = block.InputPort(1).Data;
+    hessianMatrixQP            = block.InputPort(2).Data;
+    biasVectorQP               = block.InputPort(3).Data;
+    constraintMatrixLeftFoot   = block.InputPort(4).Data;
+    constraintMatrixRightFoot  = block.InputPort(5).Data;
+    constraintMatrixEq         = block.InputPort(6).Data;
+    upperBoundEqConstraints    = block.InputPort(7).Data;
+    upperBoundFeetConstraints  = block.InputPort(8).Data;
     nDof                       = block.DialogPrm(1).Data;
     torqueDotMax               = block.DialogPrm(2).Data;
     Ts                         = block.DialogPrm(3).Data;
@@ -307,7 +306,7 @@ function Outputs(block)
 %end Outputs
 
 
-function Terminate(block)
+function Terminate(~) %Terminate(block)
 
 %end Terminate
 
