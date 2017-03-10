@@ -5,7 +5,8 @@ if strcmpi(SM.SM_TYPE, 'WALKING')
     CONFIG.SMOOTH_DES_Q        = 1;    % If equal to one, the desired streamed values 
                                        % of the postural tasks are smoothed internally 
 
-    reg.pinvDamp               = 1;
+    reg.pinvDamp               = 0.0001; %1;
+    reg.pinvDampVb             = 1e-7;
     reg.impedances             = 0.1;
     reg.dampings               = 0;
     reg.HessianQP              = 1e-4;
@@ -86,13 +87,13 @@ end
 gain.weightPostural         = 0.3;
 gain.weightTasks            = 100;
 % gain.impedances(:,14:end)   = gain.impedances(:,14:end);
-gain.dampings               = 2*sqrt(gain.impedances(1,:));
+gain.dampings               = 2*sqrt(gain.impedances);%(gain.impedances(1,:));
 
 %% %%%%%%%%%%%%%%%%    FINITE STATE MACHINE SPECIFIC PARAMETERS
 sm.skipYoga                      = true;
 sm.demoOnlyRightFoot             = false;
 sm.yogaAlsoOnRightFoot           = true;
-sm.yogaInLoop                    = true;
+sm.demoInLoop                    = true; %sm.yogaInLoop                    = true;
 sm.com.threshold                 = 0.01;
 sm.wrench.thresholdContactOn     = 5; %10;    % Force threshold above which contact is considered stable
 sm.wrench.thresholdContactOff    = 100;   % Force threshold under which contact is considered off

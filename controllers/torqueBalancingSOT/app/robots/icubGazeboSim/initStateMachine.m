@@ -9,14 +9,17 @@ if strcmpi(SM.SM_TYPE, 'YOGA')
     reg.impedances             = 0.1;
     reg.dampings               = 0;
     reg.HessianQP              = 1e-2;
+    reg.jointAnglesQP          = 0;
+    reg.torquesQP              = 1e-3;
+    reg.taskAccQP              = 1e-3;
 
     sat.torque                 = 60;   
-    sat.torqueDot       = 100*ones(ROBOT_DOF,1);
+    sat.torqueDot              = 100*ones(ROBOT_DOF,1);
 
     gain.footSize              = [ -0.05  0.10 ;    % xMin, xMax
                                    -0.025 0.025];   % yMin, yMax  
                    
-    forceFrictionCoefficient     = 1/4;  
+    forceFrictionCoefficient   = 1/4;  
     
     %Smoothing time for time varying impedances
     gain.SmoothingTimeGainScheduling  = 2;  

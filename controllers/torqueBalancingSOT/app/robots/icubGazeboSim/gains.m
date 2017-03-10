@@ -35,8 +35,8 @@ gain.rootPD      = [20 2*sqrt(1)];
 gain.lFoot.posPD = [20*ones(3,1),2*sqrt(ones(3,1))];
 gain.lFoot.rotPD = [20,2];
 
-gain.rFoot.posPD = [50*ones(3,1),2*sqrt(ones(3,1))];
-gain.rFoot.rotPD = [50,10];
+gain.rFoot.posPD = gain.lFoot.posPD; %[50*ones(3,1),2*sqrt(ones(3,1))];
+gain.rFoot.rotPD = gain.lFoot.rotPD; % [50,10];
 
 
 %           PARAMETERS FOR TWO FEET ON THE GROUND
@@ -149,3 +149,12 @@ reg.dampings      = 0;
 reg.jointAnglesQP = 0;
 reg.torquesQP     = 1e-3;
 reg.taskAccQP     = 1e-3;
+
+
+%% Inverse kinematics gains
+gain.ikin.Kpfeet     = 10;
+gain.ikin.Kdfeet     = 2*sqrt(gain.ikin.Kpfeet);
+gain.ikin.KpCoM      = gain.PCOM;
+gain.ikin.KdCoM      = 2*sqrt(gain.ikin.KpCoM);
+gain.ikin.impedances = diag(gain.impedances);
+gain.ikin.dampings   = 2*sqrt(gain.ikin.impedances);
