@@ -17,8 +17,8 @@ function [qDes,desired_x_dx_ddx_CoM] = refGen(xCom0,q0,t,references)
         else
             A = 0;
         end
-        f = references.com.frequencyOfOscillation;
-
+        f          = references.com.frequencyOfOscillation;
+        t          = t - references.com.noOscillationTime;
         xcomDes    = xCom0 + A*sin(2*pi*f*t)*references.com.directionOfOscillation;
         xDcomDes   =         A*2*pi*f*cos(2*pi*f*t)*references.com.directionOfOscillation;
         xDDcomDes  =        -A*(2*pi*f)^2*sin(2*pi*f*t)*references.com.directionOfOscillation;

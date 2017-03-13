@@ -30,9 +30,9 @@ gain.SmoothingTimeImp  = 1;
 %%
 %           PARAMETERS FOR TWO FEET ONE GROUND
 if (sum(CONFIG.LEFT_RIGHT_FOOT_IN_CONTACT) == 2)
-    gain.PCOM                 = diag([50    50  50]);
+    gain.PCOM                 = diag([50   100  50]);
     gain.ICOM                 = diag([  0    0   0]);
-    gain.DCOM                 = 2*sqrt(gain.PCOM)*0;
+    gain.DCOM                 = 2*sqrt(gain.PCOM)/20;
 
     gain.PAngularMomentum     = 5 ;
     gain.DAngularMomentum     = 2*sqrt(gain.PAngularMomentum);
@@ -119,22 +119,18 @@ numberOfPoints               = 4; % The friction cone is approximated by using l
 
 forceFrictionCoefficient     = 1/3;  
 torsionalFrictionCoefficient = 2/150;
-
-%physical size of foot
-phys.footSize                = [ -0.065 0.13   ;    % xMin, xMax
-                                 -0.045 0.05  ];   % yMin, yMax    
                       
-   gain.footSize  = [ -0.07  0.12   ;    % xMin, xMax
-                       -0.045 0.05 ];   % yMin, yMax   
+gain.footSize  = [ -0.07  0.12   ;    % xMin, xMax
+                       -0.04 0.04 ];   % yMin, yMax   
 
 % gain.footSize                = [ -0.065 0.13   ;    % xMin, xMax
 %                                  -0.04 0.04  ];   % yMin, yMax
-fZmin                        = 10;
+fZmin                        = 1;
 
 %% The QP solver will search a solution fo that 
 % satisfies the inequality Aineq_f F(fo) < bineq_f
 reg.pinvTol     = 1e-5;
-reg.pinvDamp    = 0.01;
+reg.pinvDamp    = 2;
 reg.pinvDampVb  = 1e-7;
 reg.HessianQP   = 1e-7;
 reg.impedances  = 0.1;
