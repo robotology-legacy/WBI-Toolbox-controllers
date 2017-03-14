@@ -15,7 +15,7 @@
 %  * Public License for more details
 %  */
 %% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-clear all; clc;
+clear; clc;
 %% GENERAL SIMULATION INFO
 % If you are simulating the robot with Gazebo, 
 % remember that you have to launch Gazebo as follows:
@@ -37,8 +37,6 @@ CONFIG.Ts                  = 0.01; %  Controller period [s]
 % SM.SM_TYPE: defines the kind of state machines that can be chosen. 
 % 'WALKING': under development.
 SM.SM_TYPE                 = 'WALKING';
-
-%MISSING
 
 %% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % CONFIGURATIONS COMPLETED: loading gains and parameters for the specific robot
@@ -72,18 +70,25 @@ CONFIG.PITCH_IMU_FILTER    = true;
 CONFIG.CORRECT_NECK_IMU    = true;
 
 
+% CONFIG.QP.USE_STRICT_TASK_PRIORITIES: when set to true, the balancing
+% controller solves an optimization problem for the desired posture. When
+% set to fals, the controller solves for the desired posture and tasks.
+CONFIG.QP.USE_STRICT_TASK_PRIORITIES = false;
+
+% CONFIG.QP.USE_CONTINUITY_CONSTRAINTS: when set to true, control torques
+% obtained from QP optimization are constrained to continuous values.
+CONFIG.QP.USE_CONTINUITY_CONSTRAINTS = true;
+
+
 % CONFIG.SCOPES.ALL: when set to false, all visualizations are disabled
 CONFIG.SCOPES.ALL         = true;
-% CONFIG.SCOPES.VALUE: when set to true, visualization of the element in question will be enabled
+% CONFIG.SCOPES.VALUE: when set to true, visualization of the element 
+% in question is enabled
 CONFIG.SCOPES.QP          = true;
 CONFIG.SCOPES.TORQUES     = true;
 CONFIG.SCOPES.JOINTS      = true;
 CONFIG.SCOPES.FEET        = true;
 CONFIG.SCOPES.TASKS       = true;
-
-%% ADD DESCRIPTION
-CONFIG.QP.USE_STRICT_TASK_PRIORITIES = false;
-CONFIG.QP.USE_CONTINUITY_CONSTRAINTS = true;
 %% 
 
 PORTS.IMU       = '/icub/inertial';
