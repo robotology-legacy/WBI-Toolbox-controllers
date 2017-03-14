@@ -30,9 +30,9 @@ gain.SmoothingTimeImp  = 1;
 %%
 %           PARAMETERS FOR TWO FEET ONE GROUND
 if (sum(CONFIG.LEFT_RIGHT_FOOT_IN_CONTACT) == 2)
-    gain.PCOM                 = diag([50   100  50]);
+    gain.PCOM                 = diag([50   100  5]);
     gain.ICOM                 = diag([  0    0   0]);
-    gain.DCOM                 = 2*sqrt(gain.PCOM)/20;
+    gain.DCOM                 = 0*2*sqrt(gain.PCOM)/20;
 
     gain.PAngularMomentum     = 5 ;
     gain.DAngularMomentum     = 2*sqrt(gain.PAngularMomentum);

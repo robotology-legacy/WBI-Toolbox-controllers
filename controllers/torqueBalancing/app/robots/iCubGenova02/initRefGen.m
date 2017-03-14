@@ -2,15 +2,15 @@ CONFIG.DEMO_MOVEMENTS      = true; % Either true or false
 
 
 references.com.points                  = 0;
-references.com.noOscillationTime       = 1;    % that the robot waits before starting the left-and-righ
+references.com.noOscillationTime       = 3;    % that the robot waits before starting the left-and-righ
  
 references.joints.points               = 0;
 
 if (sum(CONFIG.LEFT_RIGHT_FOOT_IN_CONTACT) == 2 )
     if (CONFIG.DEMO_MOVEMENTS)
         references.com.directionOfOscillation  = [0;1;0];
-        references.com.amplitudeOfOscillation  = 0.035;
-        references.com.frequencyOfOscillation  = 0.3;
+        references.com.amplitudeOfOscillation  = 0.025;
+        references.com.frequencyOfOscillation  = 1;
     else
         references.com.directionOfOscillation  = [0;0;0];
         references.com.amplitudeOfOscillation  = 0.0;  %referenceParams(1) = amplitude of ascillations in meters referenceParams(2) = frequency of ascillations in hertz
