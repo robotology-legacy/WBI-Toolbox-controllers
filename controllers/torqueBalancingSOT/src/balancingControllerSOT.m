@@ -155,7 +155,7 @@ function [hessianMatrix,biasVector,constraintMatrixLeftFoot,constraintMatrixRigh
                                   + gain.weightTasks*((jacobians / massMatrix) * B)' * (jacobians / massMatrix) * B;
                               
         biasVector                = gain.weightPostural*(((S' / massMatrix)* B)' * tauFeedback - ((S' / massMatrix) * B)' * (S' / massMatrix) * biasTorques)...
-                                  + gain.weightTasks*((jacobians / massMatrix) * B)'*aStar;
+                                  + gain.weightTasks*((jacobians / massMatrix) * B)' * aStar;
         
     end
     

@@ -1,33 +1,16 @@
 %% OVERWRITING SOME OF THE PARAMETERS CONTAINED IN gains.m WHEN USING FSM
-if strcmpi(SM.SM_TYPE, 'WALKING')
-    CONFIG.SMOOTH_DES_COM      = 1;    % If equal to one, the desired streamed values 
-                                       % of the center of mass are smoothed internally 
-    CONFIG.SMOOTH_DES_Q        = 1;    % If equal to one, the desired streamed values 
-                                       % of the postural tasks are smoothed internally 
 
-    reg.pinvDamp               = 1;
-    reg.impedances             = 0.1;
-    reg.dampings               = 0;
-    reg.HessianQP              = 1e-4;
-    reg.jointAnglesQP          = 0;
-    reg.torquesQP              = 1e-3;
-    reg.taskAccQP              = 1e-3;
+CONFIG.SMOOTH_DES_COM      = 1;    % If equal to one, the desired streamed values 
+                                   % of the center of mass are smoothed internally 
+CONFIG.SMOOTH_DES_Q        = 1;    % If equal to one, the desired streamed values 
+                                   % of the postural tasks are smoothed internally 
+                                   
+%Smoothing time for time varying impedances
+gain.SmoothingTimeGainScheduling  = 2.5;
 
-    sat.torque                 = 60;    
-    sat.torqueDot              = 100*ones(ROBOT_DOF,1);
+%% %%%%%%%%%%%%%%%%    CONTROLLER GAIN PARAMETERS
 
-    gain.footSize              = [ -0.05  0.10 ;    % xMin, xMax
-                                   -0.025 0.025];   % yMin, yMax  
-                   
-    forceFrictionCoefficient   = 1/4;  
-    
-    %Smoothing time for time varying impedances
-    gain.SmoothingTimeGainScheduling  = 2.5; %2;  
-
-    %Smoothing time for time-varying constraints
-   CONFIG.smoothingTimeTranDynamics  = 0.02;
-
-    gain.PCOM     =    [50    60  50;  % state ==  1  TWO FEET BALANCING
+gain.PCOM            = [50    60  50;  % state ==  1  TWO FEET BALANCING
                         50    60  50;  % state ==  2  COM TRANSITION TO LEFT 
                         50    60  50;  % state ==  3  LEFT FOOT BALANCING
                         50    60  50;  % state ==  4  PREPARING FOR SWITCHING 
@@ -38,28 +21,11 @@ if strcmpi(SM.SM_TYPE, 'WALKING')
                         50    60  50;  % state ==  9  PREPARING FOR SWITCHING 
                         50    60  50;  % state == 10  LOOKING FOR CONTACT
                         50    60  50]; % state == 11  TRANSITION TO INITIAL POSITION
+
+gain.DCOM            = 2 * sqrt(gain.PCOM);                    
                     
-    gain.PCOM  = gain.PCOM;
-    gain.ICOM  = gain.PCOM*0;
-    gain.DCOM  = 2*sqrt(gain.PCOM);
-
-
-    % state ==  1  TWO FEET BALANCING
-    % state ==  2  COM TRANSITION TO LEFT FOOT
-    % state ==  3  LEFT FOOT BALANCING 
-    % state ==  4  PREPARING FOR SWITCHING
-    % state ==  5  LOOKING FOR CONTACT 
-    
-    % state ==  6  TRANSITION TO INITIAL POSITION
-    
-    % state ==  7  COM TRANSITION TO RIGHT FOOT
-    % state ==  8  RIGHT FOOT BALANCING 
-    % state ==  9  PREPARING FOR SWITCHING
-    % state == 10  LOOKING FOR CONTACT 
-    % state == 11  TRANSITION TO INITIAL POSITION
-
-    %                   %   TORSO  %%    LEFT ARM     %%    RIGHT ARM     %%         LEFT LEG            %%         RIGHT LEG           %% 
-    gain.impedances  = [20   30   20, 10   10    10   10, 10   10    10   10, 15   25   15    30     25  25, 15   25   15    30     25  25;  % state ==  1  TWO FEET BALANCING
+%                    %  TORSO  %%    LEFT ARM     %%    RIGHT ARM     %%         LEFT LEG            %%         RIGHT LEG           %% 
+gain.impedances      = [20   30   20, 10   10    10   10, 10   10    10   10, 15   25   15    30     25  25, 15   25   15    30     25  25;  % state ==  1  TWO FEET BALANCING
                         20   30   20, 10   10    10   10, 10   10    10   10, 25   25   15    30     50  50, 25   25   25    30     50  50;  % state ==  2  COM TRANSITION TO LEFT 
                         20   30   20, 12   12    12   12, 12   12    12   12, 25   25   15    50     50  50, 25   25   25    30     50  50;  % state ==  3  LEFT FOOT BALANCING
                         30   30   30, 10   10    10   10, 10   10    10   10, 15   25   50    30     25  25, 15   25   15    30     25  50;  % state ==  4  PREPARING FOR SWITCHING 
@@ -71,42 +37,21 @@ if strcmpi(SM.SM_TYPE, 'WALKING')
                         30   30   30, 10   10    10   10, 10   10    10   10, 15   25   15    30     25  25, 15   25   15    30     25  25;  % state == 10  LOOKING FOR CONTACT
                         30   30   30, 10   10    10   10, 10   10    10   10, 15   25   15    30     25  25, 15   25   15    30     25  25]; % state == 11  TRANSITION TO INITIAL POSITION
     
-    gain.rootPD      = [5 2];
-
-    gain.lFoot.posPD = [25*ones(3,1),2*sqrt(ones(3,1))];
-    gain.lFoot.rotPD = [25,2];
-
-    gain.rFoot.posPD = [25*ones(3,1),2*sqrt(ones(3,1))];
-    gain.rFoot.rotPD = [25,2];
-
-    
-end              
-%% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%                      
-         
-gain.weightPostural         = 0.3;
-gain.weightTasks            = 100;
-% gain.impedances(:,14:end)   = gain.impedances(:,14:end);
-gain.dampings               = 2*sqrt(gain.impedances(1,:));
+gain.dampings          = 2 * sqrt(gain.impedances);
 
 %% %%%%%%%%%%%%%%%%    FINITE STATE MACHINE SPECIFIC PARAMETERS
-sm.skipYoga                      = true;
+
+sm.tBalancing                    = 1;     %Time allowed for transition to initial position / waiting time for balancing on two feet
+sm.DT                            = 5;     %Time allowed for balancing on a single foot
+sm.stateAt0                      = 1;     %Initial state
+sm.demoInLoop                    = true;
 sm.demoOnlyRightFoot             = false;
-sm.yogaAlsoOnRightFoot           = true;
-sm.yogaInLoop                    = true;
 sm.com.threshold                 = 0.01;
-sm.wrench.thresholdContactOn     = 5; %10;    % Force threshold above which contact is considered stable
+sm.wrench.thresholdContactOn     = 5;     % Force threshold above which contact is considered stable
 sm.wrench.thresholdContactOff    = 100;   % Force threshold under which contact is considered off
-sm.joints                        = struct;
 sm.joints.thresholdNotInContact  = 35;    % Degrees
 sm.joints.thresholdInContact     = 50;    % Degrees
-sm.joints.pauseTimeLastPostureL  = 3;
-sm.joints.pauseTimeLastPostureR  = 3;
-
-sm.stateAt0                      = 1;
-
-sm.DT                            = 5;
-sm.waitingTimeAfterYoga          = 0;
-
+    
 sm.jointsSmoothingTimes          = [1;   %% state ==  1  TWO FEET BALANCING
                                     2;   %% state ==  2  COM TRANSITION TO LEFT FOOT
                                     2;   %% state ==  3  LEFT FOOT BALANCING
@@ -120,17 +65,17 @@ sm.jointsSmoothingTimes          = [1;   %% state ==  1  TWO FEET BALANCING
                                     2];  %% state == 11  TRANSITION INIT POSITION
 
 
-sm.com.states      = [0.00,  0.00,  0.00;   %% state ==  1  TWO FEET BALANCING NOT USED
-                      0.00,  0.00,  0.00;   %% state ==  2  COM TRANSITION TO LEFT FOOT: THIS REFERENCE IS USED AS A DELTA W.R.T. THE POSITION OF THE LEFT FOOT
-                      0.00,  0.00,  0.00;   %% state ==  3  LEFT FOOT BALANCING
-                      0.00,  0.00,  0.00;   %% state ==  4  PREPARING FOR SWITCHING
-                      0.00, -0.015,-0.01;   %% state ==  5  LOOKING FOR CONTACT
-                      0.00,  0.00,  0.00;   %% state ==  6  RETURN TO INITIAL POSITION
-                      0.00,  0.00,  0.00;   %% state ==  7  COM TRANSITION TO RIGHT FOOT
-                      0.00,  0.00,  0.00;   %% state ==  8  RIGHT FOOT BALANCING 
-                      0.00,  0.00,  0.00;   %% state ==  9  PREPARING FOR SWITCHING
-                      0.00,  0.015,-0.01;   %% state == 10  LOOKING FOR CONTACT
-                      0.00,  0.00,  0.00];  %% state == 11  TRANSITION INIT POSITION: THIS REFERENCE IS IGNORED
+sm.com.states      = [0.00,  0.00,   0.00;   %% state ==  1  TWO FEET BALANCING NOT USED
+                      0.00,  0.00,   0.00;   %% state ==  2  COM TRANSITION TO LEFT FOOT: THIS REFERENCE IS USED AS A DELTA W.R.T. THE POSITION OF THE LEFT FOOT
+                      0.00,  0.00,   0.00;   %% state ==  3  LEFT FOOT BALANCING
+                      0.00,  0.00,   0.00;   %% state ==  4  PREPARING FOR SWITCHING
+                      0.00, -0.015, -0.01;   %% state ==  5  LOOKING FOR CONTACT
+                      0.00,  0.00,   0.00;   %% state ==  6  RETURN TO INITIAL POSITION
+                      0.00,  0.00,   0.00;   %% state ==  7  COM TRANSITION TO RIGHT FOOT
+                      0.00,  0.00,   0.00;   %% state ==  8  RIGHT FOOT BALANCING 
+                      0.00,  0.00,   0.00;   %% state ==  9  PREPARING FOR SWITCHING
+                      0.00,  0.015, -0.01;   %% state == 10  LOOKING FOR CONTACT
+                      0.00,  0.00,   0.00];  %% state == 11  TRANSITION INIT POSITION: THIS REFERENCE IS IGNORED
 
                 
 sm.origin.leftFoot = [0.0,  0.00,  0.00;   %% state ==  1  TWO FEET BALANCING NOT USED  : THIS REFERENCE IS IGNORED
@@ -151,17 +96,15 @@ sm.origin.rightFoot =[0.0,  0.00,  0.00;   %% state ==  1  TWO FEET BALANCING NO
                       0.0, -0.13,  0.05;   %% state ==  3  LEFT FOOT BALANCING
                       0.0,  0.00,  0.00;   %% state ==  4  PREPARING FOR SWITCHING      : THIS REFERENCE IS IGNORED
                       0.0, -0.13, -0.02;   %% state ==  5  LOOKING FOR CONTACT          : THIS REFERENCE IS IGNORED
-                      0.0,  0.00,  0.00;   %% state ==  6  RETURN TO INITIAL POSITION    : THIS REFERENCE IS IGNORED
+                      0.0,  0.00,  0.00;   %% state ==  6  RETURN TO INITIAL POSITION   : THIS REFERENCE IS IGNORED
                       0.0,  0.00,  0.00;   %% state ==  7  COM TRANSITION TO RIGHT FOOT : THIS REFERENCE IS IGNORED
                       0.0,  0.00,  0.00;   %% state ==  8  RIGHT FOOT BALANCING         : THIS REFERENCE IS IGNORED
                       0.0,  0.00,  0.00;   %% state ==  9  PREPARING FOR SWITCHING      : THIS REFERENCE IS IGNORED
                       0.0,  0.00,  0.00;   %% state ==  9  PREPARING FOR SWITCHING      : THIS REFERENCE IS IGNORED
                       0.0,  0.00,  0.00];  %% state == 11  TRANSITION INIT POSITION     : THIS REFERENCE IS IGNORED
                   
-                 
-sm.tBalancing      = 1; %inf;%0.5;
-
-sm.joints.states = [[ 0.0000, 0.0000, 0.0000, ...                         %% state == 1  TWO FEET BALANCING, THIS REFERENCE IS IGNORED 
+                
+sm.joints.states = [[ 0.0000, 0.0000, 0.0000, ...                         %% state == 1  TWO FEET BALANCING
                      -0.5131, 0.5306, 0.0000, 0.7782 ...                  %
                      -0.5131, 0.5306, 0.0000, 0.7782 ...                  %
                       0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, ... %
@@ -177,8 +120,8 @@ sm.joints.states = [[ 0.0000, 0.0000, 0.0000, ...                         %% sta
                       0.0000,-0.1109, 0.0000,-0.1000, 0.0000, 0.1630, ... %  
                       0.0000, 0.0793, 0.0000, 0.0000, 0.0000,-0.1151];    %
                     [ 0.0000, 0.0000, 0.0000, ...                         %% state == 4  PREPARING FOR SWITCHING
-                     -0.1493, 0.8580, 0.2437, 0.8710 ...               %
-                     -0.1493, 0.8580, 0.2437, 0.8710 ...               %
+                     -0.1493, 0.8580, 0.2437, 0.8710 ...                  %
+                     -0.1493, 0.8580, 0.2437, 0.8710 ...                  %
                       0.0000,-0.1109, 0.0000, 0.0000, 0.0000, 0.1630, ... %
                       0.0000, 0.0793, 0.0000, 0.0000, 0.0000,-0.1151];    %
                     [ 0.0000, 0.0000, 0.0000, ...                         %% state == 5  LOOKING FOR CONTACT
@@ -216,3 +159,4 @@ sm.joints.states = [[ 0.0000, 0.0000, 0.0000, ...                         %% sta
                      -0.5131, 0.5306, 0.0000, 0.7782 ...                  %
                       0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000,...  %
                       0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000]];   % 
+                  

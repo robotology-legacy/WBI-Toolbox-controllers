@@ -45,7 +45,7 @@ function [w_H_b, CoMDes,qDes,constraints,impedances,dampings, kpCom,kdCom,curren
         w_H_b      =  w_H_fixedLink * l_sole_H_b;
               
         CoMDes     = CoM_0 + sm.com.states(state,:)';   
-        qDes       = q0;
+        qDes       = sm.joints.states(state,:)'; %q0;
 
         fixed_link_CoMDes = w_H_fixedLink\[CoMDes;1];
         CoMError   = fixed_link_CoMDes(1:3) - l_sole_CoM(1:3);
