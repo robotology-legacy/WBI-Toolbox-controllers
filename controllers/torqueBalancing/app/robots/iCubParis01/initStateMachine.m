@@ -77,7 +77,7 @@ sm.joints.pauseTimeLastPostureR  = 3;
 
 sm.stateAt0                      = 1;
 
-sm.DT                            = 1;
+sm.tBalancingOneFoot             = 1;
 sm.waitingTimeAfterYoga          = 0;
 
 

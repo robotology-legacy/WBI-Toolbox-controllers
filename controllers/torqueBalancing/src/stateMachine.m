@@ -76,7 +76,7 @@ function [w_H_b, CoMDes,qDes,constraints,impedances,kpCom,kdCom,currentState,joi
         kpCom       = gain.PCOM(state,:);   
         kdCom       = gain.DCOM(state,:);   
 
-        if t > tSwitch + sm.DT % yoga
+        if t > tSwitch + sm.tBalancingOneFoot % yoga
             state   = 4;
             tSwitch = t;
             if sm.skipYoga
@@ -225,7 +225,7 @@ function [w_H_b, CoMDes,qDes,constraints,impedances,kpCom,kdCom,currentState,joi
         impedances  = gain.impedances(state,:);
         kpCom       = gain.PCOM(state,:);   
         kdCom       = gain.DCOM(state,:);   
-        if t > tSwitch + sm.DT % yoga
+        if t > tSwitch + sm.tBalancingOneFoot % yoga
             state   = 10;
             tSwitch = t;
             if sm.skipYoga

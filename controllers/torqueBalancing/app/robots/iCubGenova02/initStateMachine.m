@@ -92,10 +92,10 @@ sm.wrench.thresholdContactOff    = 100;     % Force threshole under which contac
 sm.joints                        = struct;
 sm.joints.thresholdNotInContact  =  5;      % Degrees
 sm.joints.thresholdInContact     = 50;      % Degrees
-sm.joints.pauseTimeLastPostureL  = 10;
-sm.joints.pauseTimeLastPostureR  = 10;
+sm.joints.pauseTimeLastPostureL  = 5;
+sm.joints.pauseTimeLastPostureR  = 5;
 
-sm.DT                            = 1;
+sm.tBalancingOneFoot             = 1;
 sm.waitingTimeAfterYoga          = 0;
 sm.tBalancing                    = 1; 
 
@@ -104,7 +104,7 @@ sm.jointsSmoothingTimes          = [1;   %% state ==  1  TWO FEET BALANCING
                                          %%
                                     1;   %% state ==  2  COM TRANSITION TO LEFT FOOT
                                     1;   %% state ==  3  LEFT FOOT BALANCING 
-                                    1.2; %% state ==  4  YOGA LEFT FOOT
+                                    2; %% state ==  4  YOGA LEFT FOOT
                                     2;   %% state ==  5  PREPARING FOR SWITCHING
                                     2;   %% state ==  6  LOOKING FOR CONTACT 
                                          %%
@@ -112,11 +112,11 @@ sm.jointsSmoothingTimes          = [1;   %% state ==  1  TWO FEET BALANCING
                                          %%
                                     1;   %% state ==  8  COM TRANSITION TO RIGHT FOOT
                                     1;   %% state ==  9  RIGHT FOOT BALANCING 
-                                    1.2; %% state == 10  YOGA RIGHT FOOT
+                                    2; %% state == 10  YOGA RIGHT FOOT
                                     2;   %% state == 11  PREPARING FOR SWITCHING
                                     5;   %% state == 12  LOOKING FOR CONTACT 
                                          %%
-                                    10];  %% state == 13  TRANSITION INIT POSITION
+                                    10]; %% state == 13  TRANSITION INIT POSITION
 
 sm.com.states      = [0.0,  0.01,0.0;   %% state ==  1  TWO FEET BALANCING NOT USED
                       0.0,  0.00,0.0;   %% state ==  2  COM TRANSITION TO LEFT FOOT: THIS REFERENCE IS USED AS A DELTA W.R.T. THE POSITION OF THE LEFT FOOT
@@ -237,23 +237,19 @@ q8 =        [-0.0852,-0.4273,0.0821,...
              -0.4181, 1.6800,0.7373, 0.3031, ...
               0.2092, 0.6473,0.0006,-0.1741,-0.1044, 0.0700,...
               0.3514, 1.3107,1.3253,-0.0189, 0.6374,-0.0614];
-          
-          
-          
+                   
 q9 =        [-0.0852,-0.4273,0.0821,...
               0.1391, 1.4585,0.2464, 0.3042, ...
              -0.4181, 1.6800,0.7373, 0.3031, ...
               0.2092, 0.6473,0.0006,-0.1741,-0.1044, 0.0700,...
               0.3514, 0.0107,1.3253,-0.0189, 0.6374,-0.0614];
-          
-          
+                    
 q10 =        [-0.0852,-0.4273,0.0821,...
               0.1391, 1.4585,0.2464, 0.3042, ...
              -0.4181, 1.6800,0.7373, 0.3031, ...
               0.2092, 0.6473,0.0006,-0.1741,-0.1044, 0.0700,...
               0.3514, 1.3107,1.3253,-0.0189, 0.6374,-0.0614];
-          
-          
+                   
 q11 =        [-0.0852,-0.4273,0.0821,...
               0.1391, 1.4585,0.2464, 0.3042, ...
              -0.4181, 1.6800,0.7373, 0.3031, ...
@@ -334,6 +330,52 @@ if sm.yogaExtended
                         24*sm.jointsSmoothingTimes(10),q17;
                         25*sm.jointsSmoothingTimes(10),q8];
 end
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 %% OVERRIDE SOME GAINS FOR DEMO ON CARPET
 if CONFIG.ONSOFTCARPET && strcmpi(SM.SM_TYPE, 'YOGA')

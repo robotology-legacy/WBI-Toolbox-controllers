@@ -99,7 +99,7 @@ sm.joints.pauseTimeLastPostureR  = 0.5;
 
 sm.stateAt0                      = 1;
 
-sm.DT                            = 1;
+sm.tBalancingOneFoot             = 1;
 sm.waitingTimeAfterYoga          = 0;
 
 sm.jointsSmoothingTimes          = [1;   %% state ==  1  TWO FEET BALANCING
