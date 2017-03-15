@@ -1,7 +1,8 @@
 function [w_H_b, CoMDes,qDes,constraints,impedances,dampings, kpCom,kdCom,currentState,jointsSmoothingTime,...
           desRootRotPosVelAcc,desLFootRotPosVelAcc,desLFootOrigin,desRFootRotPosVelAcc,desRFootOrigin] = ...
-     stateMachineWalking(CoM_0, q0, l_sole_CoM,r_sole_CoM,qj, t, ...
-                  wrench_rightFoot,wrench_leftFoot,l_sole_H_b, r_sole_H_b, sm,gain)
+     stateMachineWalking(t, qj, q0, CoM_0, ...
+                         l_sole_CoM, r_sole_CoM, l_sole_H_b, r_sole_H_b, ...
+                         wrench_leftFoot, wrench_rightFoot, sm, gain)
     persistent state;
     persistent tSwitch;
     persistent w_H_fixedLink;
@@ -45,7 +46,7 @@ function [w_H_b, CoMDes,qDes,constraints,impedances,dampings, kpCom,kdCom,curren
         w_H_b      =  w_H_fixedLink * l_sole_H_b;
               
         CoMDes     = CoM_0 + sm.com.states(state,:)';   
-        qDes       = sm.joints.states(state,:)'; %q0;
+        qDes       = q0; %sm.joints.states(state,:)';
 
         fixed_link_CoMDes = w_H_fixedLink\[CoMDes;1];
         CoMError   = fixed_link_CoMDes(1:3) - l_sole_CoM(1:3);
@@ -143,7 +144,7 @@ function [w_H_b, CoMDes,qDes,constraints,impedances,dampings, kpCom,kdCom,curren
         constraints = [1; 1];
         
         CoMDes     = CoM_0 + sm.com.states(state,:)';   
-        qDes       = sm.joints.states(state,:)'; %q0;
+        qDes       = q0; %sm.joints.states(state,:)';
         
         fixed_link_CoMDes = w_H_fixedLink\[CoMDes;1];
         CoMError   = fixed_link_CoMDes(1:3) - l_sole_CoM(1:3);
@@ -243,7 +244,7 @@ function [w_H_b, CoMDes,qDes,constraints,impedances,dampings, kpCom,kdCom,curren
         constraints = [1; 1];
         
         CoMDes     = CoM_0 + sm.com.states(state,:)';   
-        qDes       = q0;
+        qDes       = q0; %sm.joints.states(state,:)';
         qTildeLLeg  = qj(end-5:end)-qDes(end-5:end);
         
         if norm(qTildeLLeg)*180/pi < sm.joints.thresholdNotInContact && t > (tSwitch + sm.tBalancing)

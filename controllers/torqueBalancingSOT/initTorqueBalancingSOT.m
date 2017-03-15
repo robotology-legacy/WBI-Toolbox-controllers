@@ -71,8 +71,9 @@ CONFIG.CORRECT_NECK_IMU    = true;
 
 
 % CONFIG.QP.USE_STRICT_TASK_PRIORITIES: when set to true, the balancing
-% controller solves an optimization problem for the desired posture. When
-% set to fals, the controller solves for the desired posture and tasks.
+% controller solves an optimization problem for the desired posture, with
+% desired tasks given as equality constraints. When set to false, the 
+%controller solves for the weighted desired posture and tasks.
 CONFIG.QP.USE_STRICT_TASK_PRIORITIES = false;
 
 % CONFIG.QP.USE_CONTINUITY_CONSTRAINTS: when set to true, control torques
@@ -84,11 +85,11 @@ CONFIG.QP.USE_CONTINUITY_CONSTRAINTS = true;
 CONFIG.SCOPES.ALL         = true;
 % CONFIG.SCOPES.VALUE: when set to true, visualization of the element 
 % in question is enabled
-CONFIG.SCOPES.QP          = true;
-CONFIG.SCOPES.TORQUES     = true;
-CONFIG.SCOPES.JOINTS      = true;
+CONFIG.SCOPES.QP          = false; %true;
+CONFIG.SCOPES.TORQUES     = false; %true;
+CONFIG.SCOPES.JOINTS      = false; %true;
 CONFIG.SCOPES.FEET        = true;
-CONFIG.SCOPES.TASKS       = true;
+CONFIG.SCOPES.TASKS       = false; %true;
 %% 
 
 PORTS.IMU                 = '/icub/inertial';

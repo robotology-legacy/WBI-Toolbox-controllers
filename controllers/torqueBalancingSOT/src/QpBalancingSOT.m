@@ -1,7 +1,7 @@
 %% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % /**
 %  * Copyright (C) 2016 CoDyCo
-%  * @author: Daniele Pucci
+%  * @authors: Daniele Pucci & Marie Charbonneau
 %  * Permission is granted to copy, distribute, and/or modify this program
 %  * under the terms of the GNU General Public License, version 2 or any
 %  * later version published by the Free Software Foundation.
