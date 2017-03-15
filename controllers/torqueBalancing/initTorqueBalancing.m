@@ -28,8 +28,9 @@ clear; clc;
 % setenv('YARP_ROBOT_NAME','iCubGenova01');
 % setenv('YARP_ROBOT_NAME','iCubGenova02');
 % setenv('YARP_ROBOT_NAME','iCubDarmstadt01');
-setenv('YARP_ROBOT_NAME','icubGazeboSim');
+% setenv('YARP_ROBOT_NAME','icubGazeboSim');
 % setenv('YARP_ROBOT_NAME','iCubGenova05');
+setenv('YARP_ROBOT_NAME','isaacFirstProtoGazebo');
 
 % Simulation time in seconds
 CONFIG.SIMULATION_TIME     = inf;   
@@ -73,6 +74,8 @@ CONFIG.CHECK_LIMITS        = false;
 %% DO NOT MODIFY THE FOLLOWING VARIABLES, THEY ARE AUTOMATICALLY 
 %% CHANGED WHEN SIMULATING THE ROBOT ON GAZEBO, 
 WBT_modelName            = 'matlabTorqueBalancing';
+ 
+LINKS.BASE_LINK          = 'root_link'; 
 
 
 % CONFIG.USE_IMU4EST_BASE: if set to false, the base frame is estimated by 
