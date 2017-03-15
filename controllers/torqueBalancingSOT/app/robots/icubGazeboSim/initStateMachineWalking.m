@@ -42,15 +42,15 @@ gain.dampings          = 2 * sqrt(gain.impedances);
 %% %%%%%%%%%%%%%%%%    FINITE STATE MACHINE SPECIFIC PARAMETERS
 
 sm.tBalancing                    = 1;     %Time allowed for transition to initial position / waiting time for balancing on two feet
-sm.DT                            = 5;     %Time allowed for balancing on a single foot
+sm.DT                            = 3;     %Time allowed for balancing on a single foot
 sm.stateAt0                      = 1;     %Initial state
 sm.demoInLoop                    = true;
 sm.demoOnlyRightFoot             = false;
 sm.com.threshold                 = 0.01;
 sm.wrench.thresholdContactOn     = 4;     % Force threshold above which contact is considered stable
-sm.wrench.thresholdContactOff    = 100;   % Force threshold under which contact is considered off
-sm.joints.thresholdNotInContact  = 35;    % Degrees
-sm.joints.thresholdInContact     = 50;    % Degrees
+sm.wrench.thresholdContactOff    = 60; %100;   % Force threshold under which contact is considered off
+sm.joints.thresholdNotInContact  = 4;     % Degrees
+sm.joints.thresholdInContact     = 4;     % Degrees
     
 sm.jointsSmoothingTimes          = [1;   %% state ==  1  TWO FEET BALANCING
                                     2;   %% state ==  2  COM TRANSITION TO LEFT FOOT
@@ -66,12 +66,12 @@ sm.jointsSmoothingTimes          = [1;   %% state ==  1  TWO FEET BALANCING
 
 
 sm.com.states      = [0.00,  0.00,   0.00;   %% state ==  1  TWO FEET BALANCING NOT USED
-                      0.00,  0.00,   0.00;   %% state ==  2  COM TRANSITION TO LEFT FOOT: THIS REFERENCE IS USED AS A DELTA W.R.T. THE POSITION OF THE LEFT FOOT
+                      0.00,  0.01,   0.00;   %% state ==  2  COM TRANSITION TO LEFT FOOT: THIS REFERENCE IS USED AS A DELTA W.R.T. THE POSITION OF THE LEFT FOOT
                       0.00,  0.00,   0.00;   %% state ==  3  LEFT FOOT BALANCING
                       0.00,  0.00,   0.00;   %% state ==  4  PREPARING FOR SWITCHING
                       0.00, -0.02,  -0.01;   %% state ==  5  LOOKING FOR CONTACT
                       0.00,  0.00,   0.00;   %% state ==  6  RETURN TO INITIAL POSITION
-                      0.00,  0.00,   0.00;   %% state ==  7  COM TRANSITION TO RIGHT FOOT
+                      0.00, -0.01,   0.00;   %% state ==  7  COM TRANSITION TO RIGHT FOOT
                       0.00,  0.00,   0.00;   %% state ==  8  RIGHT FOOT BALANCING 
                       0.00,  0.00,   0.00;   %% state ==  9  PREPARING FOR SWITCHING
                       0.00,  0.02,  -0.01;   %% state == 10  LOOKING FOR CONTACT
