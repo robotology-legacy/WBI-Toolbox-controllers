@@ -15,7 +15,7 @@
 %  * Public License for more details
 %  */
 %% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-clear; clc;
+clear all; clc;
 %% GENERAL SIMULATION INFO
 % If you are simulating the robot with Gazebo, 
 % remember that you have to launch Gazebo as follows:
@@ -91,10 +91,10 @@ CONFIG.SCOPES.FEET        = true;
 CONFIG.SCOPES.TASKS       = true;
 %% 
 
-PORTS.IMU       = '/icub/inertial';
+PORTS.IMU                 = '/icub/inertial';
 
-PORTS.WBDT_LEFTLEG_EE  = '/wholeBodyDynamicsTree/left_leg/cartesianEndEffectorWrench:o';
-PORTS.WBDT_RIGHTLEG_EE = '/wholeBodyDynamicsTree/right_leg/cartesianEndEffectorWrench:o';
+PORTS.WBDT_LEFTLEG_EE     = '/wholeBodyDynamicsTree/left_leg/cartesianEndEffectorWrench:o';
+PORTS.WBDT_RIGHTLEG_EE    = '/wholeBodyDynamicsTree/right_leg/cartesianEndEffectorWrench:o';
 
 addpath('./src/')
 addpath('../utilityMatlabFunctions/')
