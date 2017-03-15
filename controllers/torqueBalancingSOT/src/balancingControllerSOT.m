@@ -88,31 +88,16 @@ function [hessianMatrix,biasVector,constraintMatrixLeftFoot,constraintMatrixRigh
     % 
     % Now, the variable u0 is found such that the joint dynamics is imposed
     % at desired values. 
-    
-    % The mass matrix M can be decomposed into blocks in the shape
-    % M = [Mb   Mbj]
-    %     [MbJ' Mj ]
-    % such that equation 2) takes the form
-    % 8) [Mb   Mbj] * [xDD ]  + [h_B] = [(Bu)_B]
-    %    [Mbj' Mj ]   [qjDD]    [h_j]   [(Bu)_j]
-    % from which a new equation of the same form as 2) is obtained :
-    % 9) MjBar*qjDD + hjBar = Bbar*u 
-    % with 
-    % MjBar = Mj - Mbj'*inv(Mb)*Mbj
-    % hjBar = hj - Mbj'*inv(Mb)*h_B
-    %  Bbar = [- Mbj'*inv(Mb)]
-    %         [  eye(n)      ]
-    % such that qjDD = inv(MjBar) * (Bbar*u - hjBar)
     %
-    % Hence, we would like to find u such that Bbar * u - hjBar = feedback action
+    % Hence, we would like to find u such that B * u - h = feedback action
     % on joint control while satisfying the equality constraint 7).
     %
     % In the language of optimization theory, we solve
     %
-    % 11) u* = argmin (1/2)*|S^t * inv(M) * (Bu - h) + tauFeedback|^2     %To do computed torque --|Bbar * u - hjBar + tauFeedback|^2
+    % 11) u* = argmin (1/2)*|S^t * inv(M) * (B * u - h) + tauFeedback|^2
     %           s.t.
     %               Cu < b
-    %               JDot * nu + J * inv(M) * (Bu - h) = aTaskDes
+    %               JDot * nu + J * inv(M) * (B * u - h) = aTaskDes
     %               tauFeedback = kp * qTilde + kd * qTildeDot
     %
     % and aTaskDes such that the output functions i-iv are stabilized
@@ -129,43 +114,44 @@ function [hessianMatrix,biasVector,constraintMatrixLeftFoot,constraintMatrixRigh
     B                         = [S,contactJacobians'];
     tauFeedback               = diag(impedances)*(jointAngles-desJointAngles)...
                                 + diag(dampings)*robotVelocity(7:end);
+                            
+    SMB                       = (S' / massMatrix)* B;
+    JMB                       = (jacobians / massMatrix) * B;                            
 
     if CONFIG.QP.USE_STRICT_TASK_PRIORITIES
-        hessianMatrix         = ((S' / massMatrix)* B)' * ((S' / massMatrix)* B);
-        biasVector            = ((S' / massMatrix)* B)' * tauFeedback - ((S' / massMatrix) * B)' * (S' / massMatrix) * biasTorques;
+        hessianMatrix         = SMB' * SMB;
+        biasVector            = SMB' * tauFeedback - SMB' * (S' / massMatrix) * biasTorques;
     else
         % In this case, the optimization problem 11) is changed, and the equality
         % constraint 
         %
-        % 12a) aStar + J * inv(M) * Bu  = 0 
+        % 12a) aStar + J * inv(M) * B * u  = 0 
         % 12b) aStar = JDot * nu  - aTaskDes - J * inv(M) * h
         %
         % is put in the const function, i.e.
         %
-        % 11) u* = argmin (1/2)*wP*|S^t * inv(M) * (Bu - h) + tauFeedback|^2 + (1/2)*wT*|aStar + J * inv(M) * Bu|^2
+        % 11) u* = argmin (1/2)*wP*|S^t * inv(M) * (B * u - h) + tauFeedback|^2 + (1/2)*wT*|aStar + J * inv(M) * B * u|^2
         %           s.t.
-        %               Cu < b
+        %               C * u < b
         %               tauFeedback = kp * qTilde + kd * qTildeDot
         %
         
+        aStar                 = jacobiansDotNu  - desiredTaskAcc - (jacobians / massMatrix) * biasTorques;
         
-        aStar = jacobiansDotNu  - desiredTaskAcc - (jacobians / massMatrix) * biasTorques;
-        
-        hessianMatrix             = gain.weightPostural*((S' / massMatrix)* B)' * ((S' / massMatrix)* B) ...
-                                  + gain.weightTasks*((jacobians / massMatrix) * B)' * (jacobians / massMatrix) * B;
+        hessianMatrix         = gain.weightPostural * (SMB' * SMB) ...
+                              + gain.weightTasks * (JMB' * JMB);
                               
-        biasVector                = gain.weightPostural*(((S' / massMatrix)* B)' * tauFeedback - ((S' / massMatrix) * B)' * (S' / massMatrix) * biasTorques)...
-                                  + gain.weightTasks*((jacobians / massMatrix) * B)' * aStar;
-        
+        biasVector            = gain.weightPostural * (SMB' * tauFeedback - SMB' * (S' / massMatrix) * biasTorques)...
+                              + gain.weightTasks * (JMB' * aStar);        
     end
     
-    biasVector = biasVector ...
-               + eye(size((S' * B)')) * reg.jointAnglesQP * (jointAngles-desJointAngles) ...
-               + eye(size((S' * B)')) * reg.torquesQP * tauFeedback ...
-               + eye(size(((jacobians / massMatrix) * B)')) * reg.taskAccQP * (taskAccError);
+    biasVector                = biasVector ...
+                              + eye(size((S' * B)')) * reg.jointAnglesQP * (jointAngles-desJointAngles) ...
+                              + eye(size((S' * B)')) * reg.torquesQP * tauFeedback ...
+                              + eye(size(JMB')) * reg.taskAccQP * (taskAccError);
            
-    constraintMatrixEq        = jacobians*(massMatrix\B);
-    upperBoundEqConstraints   = desiredTaskAcc - jacobiansDotNu +  (jacobians/massMatrix)*biasTorques; 
+    constraintMatrixEq        = jacobians * (massMatrix \ B);
+    upperBoundEqConstraints   = desiredTaskAcc - jacobiansDotNu + (jacobians / massMatrix) * biasTorques; 
     
     % Update constraint matrices. The constraint matrix for the inequality
     % constraints in the problem 1) is built up starting from the constraint
@@ -185,8 +171,8 @@ function [hessianMatrix,biasVector,constraintMatrixLeftFoot,constraintMatrixRigh
     %
     % The same holds for the right foot
     
-    constraintMatrixLeftFoot  = ConstraintsMatrix * blkdiag(poseLeftFoot(1:3,1:3)' ,poseLeftFoot(1:3,1:3)');
-    constraintMatrixRightFoot = ConstraintsMatrix * blkdiag(poseRightFoot(1:3,1:3)',poseRightFoot(1:3,1:3)');
+    constraintMatrixLeftFoot  = ConstraintsMatrix * blkdiag(poseLeftFoot(1:3,1:3)' , poseLeftFoot(1:3,1:3)');
+    constraintMatrixRightFoot = ConstraintsMatrix * blkdiag(poseRightFoot(1:3,1:3)', poseRightFoot(1:3,1:3)');
     
     
 
