@@ -19,9 +19,9 @@
 function [hessianMatrix,biasVector,constraintMatrixLeftFoot,constraintMatrixRightFoot,constraintMatrixEq, upperBoundEqConstraints] = ...
                                         balancingControllerSOT(constraints, impedances, dampings, jointAngles, ...
                                                                massMatrix, biasTorques, jacobiansDotNu, poseLeftFoot, poseRightFoot, jacobians, robotVelocity, ...
-                                                               desJointAngles, desiredTaskAcc, taskAccError, ...
+                                                               desJointAngles, desiredTaskAcc, ...
                                                                ROBOT_DOF_FOR_SIMULINK, ConstraintsMatrix, ...
-                                                               gain, CONFIG, reg)
+                                                               gain, CONFIG)
     %% BALANCING CONTROLLER
     %
     % ---------------------------------------------------------------------
@@ -115,12 +115,12 @@ function [hessianMatrix,biasVector,constraintMatrixLeftFoot,constraintMatrixRigh
     tauFeedback               = diag(impedances)*(jointAngles-desJointAngles)...
                                 + diag(dampings)*robotVelocity(7:end);
                             
-    SMB                       = (S' / massMatrix)* B;
-    JMB                       = (jacobians / massMatrix) * B;                            
+    St_invM_B                 = (S' / massMatrix)* B;
+    jacobians_invM_B          = (jacobians / massMatrix) * B;                            
 
     if CONFIG.QP.USE_STRICT_TASK_PRIORITIES
-        hessianMatrix         = SMB' * SMB;
-        biasVector            = SMB' * tauFeedback - SMB' * (S' / massMatrix) * biasTorques;
+        hessianMatrix         = St_invM_B' * St_invM_B;
+        biasVector            = St_invM_B' * tauFeedback - St_invM_B' * (S' / massMatrix) * biasTorques;
     else
         % In this case, the optimization problem 11) is changed, and the equality
         % constraint 
@@ -138,19 +138,14 @@ function [hessianMatrix,biasVector,constraintMatrixLeftFoot,constraintMatrixRigh
         
         aStar                 = jacobiansDotNu  - desiredTaskAcc - (jacobians / massMatrix) * biasTorques;
         
-        hessianMatrix         = gain.weightPostural * (SMB' * SMB) ...
-                              + gain.weightTasks * (JMB' * JMB);
+        hessianMatrix         = gain.weightPostural * (St_invM_B' * St_invM_B) ...
+                              + gain.weightTasks * (jacobians_invM_B' * jacobians_invM_B);
                               
-        biasVector            = gain.weightPostural * (SMB' * tauFeedback - SMB' * (S' / massMatrix) * biasTorques)...
-                              + gain.weightTasks * (JMB' * aStar);        
+        biasVector            = gain.weightPostural * (St_invM_B' * tauFeedback - St_invM_B' * (S' / massMatrix) * biasTorques)...
+                              + gain.weightTasks * (jacobians_invM_B' * aStar);        
     end
     
-    biasVector                = biasVector ...
-                              + eye(size((S' * B)')) * reg.jointAnglesQP * (jointAngles-desJointAngles) ...
-                              + eye(size((S' * B)')) * reg.torquesQP * tauFeedback ...
-                              + eye(size(JMB')) * reg.taskAccQP * (taskAccError);
-           
-    constraintMatrixEq        = jacobians * (massMatrix \ B);
+    constraintMatrixEq        = jacobians_invM_B; %jacobians * (massMatrix \ B);
     upperBoundEqConstraints   = desiredTaskAcc - jacobiansDotNu + (jacobians / massMatrix) * biasTorques; 
     
     % Update constraint matrices. The constraint matrix for the inequality

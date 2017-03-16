@@ -16,8 +16,8 @@ sat.torqueDot       = 100*ones(ROBOT_DOF,1);
 
 
 %% %%%%%%%%%%%%%%%%    Gains for desired values computation
-%Regularizing term for matrix inverse operation in base velocity computation
-reg.pinvDampVb      = 1e-7;
+
+reg.pinvDampVb      = 1e-7; %Regularizing term for matrix pseudoinverse operation in base velocity computation
 
 %% %%%%%%%%%%%%%%%%    Gains for desired Task Acceleration computation
 
@@ -29,8 +29,8 @@ gain.lFoot.rotPD    = [25, 2 ];
 gain.rFoot.posPD    = gain.lFoot.posPD;
 gain.rFoot.rotPD    = gain.lFoot.rotPD;
 
-
 %% %%%%%%%%%%%%%%%%    Controller gain parameters
+
 gain.PCOM           = 50 * ones(11, 3); %for 11 states
 gain.DCOM           = 2 * sqrt(gain.PCOM);  
 
@@ -41,15 +41,12 @@ gain.weightPostural = 0.3;
 gain.weightTasks    = 100;
 
 
-
 %% %%%%%%%%%%%%%%%%    QP parameters
 
-reg.jointAnglesQP   = 0;
-reg.torquesQP       = 1e-3;
-reg.taskAccQP       = 1e-3;
-reg.HessianQP       = 1e-4;
+reg.HessianQP       = 1e-4; %Regularizing coefficient for Hessian
 
 %% %%%%%%%%%%%%%%%%    Friction cone parameters
+
 numberOfPoints               = 4; % The friction cone is approximated by using linear interpolation of the circle. 
                                   % So, numberOfPoints defines the number of points used to interpolate the circle in each circle's quadrant 
 forceFrictionCoefficient     = 1/4; 

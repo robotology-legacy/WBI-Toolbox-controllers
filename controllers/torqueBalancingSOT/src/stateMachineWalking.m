@@ -44,14 +44,11 @@ function [w_H_b, CoMDes,qDes,constraints,impedances,dampings, kpCom,kdCom,curren
     %% 1 - TWO FEET BALANCING
     if state == 1 
         w_H_b      =  w_H_fixedLink * l_sole_H_b;
-              
-        CoMDes     = CoM_0 + sm.com.states(state,:)';   
-        qDes       = q0; %sm.joints.states(state,:)';
 
         fixed_link_CoMDes = w_H_fixedLink\[CoMDes;1];
         CoMError   = fixed_link_CoMDes(1:3) - l_sole_CoM(1:3);
         
-        if norm(CoMError(2)) < sm.com.threshold && t > (tSwitch + sm.tBalancing) %after tBalancing time start next state
+        if norm(CoMError) < sm.com.threshold && t > (tSwitch + sm.tBalancing) %after tBalancing time start next state
            state = 2;
            if sm.demoOnlyRightFoot
                 w_H_fixedLink   = w_H_fixedLink*l_sole_H_b/r_sole_H_b;
@@ -74,7 +71,7 @@ function [w_H_b, CoMDes,qDes,constraints,impedances,dampings, kpCom,kdCom,curren
         fixed_link_CoMDes = w_H_fixedLink\[CoMDes;1];
         CoMError   = fixed_link_CoMDes(1:3) - l_sole_CoM(1:3);
        
-        if norm(CoMError(2)) < sm.com.threshold && wrench_rightFoot(3) < sm.wrench.thresholdContactOff
+        if norm(CoMError) < sm.com.threshold && wrench_rightFoot(3) < sm.wrench.thresholdContactOff
            state = 3; 
            tSwitch = t;
         end
@@ -96,8 +93,7 @@ function [w_H_b, CoMDes,qDes,constraints,impedances,dampings, kpCom,kdCom,curren
             state   = 4;
             tSwitch = t;
         end
-    end
-    
+    end    
     
     %% 4 - PREPARING FOR SWITCHING
     if state == 4 
@@ -131,7 +127,6 @@ function [w_H_b, CoMDes,qDes,constraints,impedances,dampings, kpCom,kdCom,curren
         qDes        = sm.joints.states(state,:)';
         desRFootOrigin = w_H_fixedLink(1:3,4) + sm.origin.rightFoot(state,:)';
 
-
         if wrench_rightFoot(3) > sm.wrench.thresholdContactOn
             state = 6;
             tSwitch = t;
@@ -141,16 +136,11 @@ function [w_H_b, CoMDes,qDes,constraints,impedances,dampings, kpCom,kdCom,curren
     %% TRANSITION TO INITIAL POSITION
     if state == 6 
         w_H_b       =  w_H_fixedLink * l_sole_H_b;
-        constraints = [1; 1];
-        
-        CoMDes     = CoM_0 + sm.com.states(state,:)';   
-        qDes       = q0; %sm.joints.states(state,:)';
         
         fixed_link_CoMDes = w_H_fixedLink\[CoMDes;1];
         CoMError   = fixed_link_CoMDes(1:3) - l_sole_CoM(1:3);
-        qTildeRLeg  = qj(end-5:end)-qDes(end-5:end);
         
-        if norm(CoMError(2)) < sm.com.threshold && norm(qTildeRLeg)*180/pi < sm.joints.thresholdNotInContact && t > (tSwitch + sm.tBalancing)
+        if norm(CoMError) < sm.com.threshold && t > (tSwitch + sm.tBalancing)
             state           = 7;
             tSwitch         = t;
             w_H_fixedLink   = w_H_fixedLink*l_sole_H_b/r_sole_H_b;
@@ -160,7 +150,6 @@ function [w_H_b, CoMDes,qDes,constraints,impedances,dampings, kpCom,kdCom,curren
     %% TRANSITION TO THE RIGHT FOOT
     if state == 7 
         w_H_b       =  w_H_fixedLink * r_sole_H_b;
-        constraints = [1; 1];
         
         % Set the center of mass projection onto the x-y plane to be
         % coincident to the origin of the left foot (l_sole) plus a
@@ -171,13 +160,12 @@ function [w_H_b, CoMDes,qDes,constraints,impedances,dampings, kpCom,kdCom,curren
         fixed_link_CoMDes = w_H_fixedLink\[CoMDes;1];       
         CoMError    = fixed_link_CoMDes(1:3) - r_sole_CoM(1:3);
 
-        if norm(CoMError(2)) < sm.com.threshold  && wrench_leftFoot(3) < sm.wrench.thresholdContactOff
+        if norm(CoMError) < sm.com.threshold  && wrench_leftFoot(3) < sm.wrench.thresholdContactOff
            state = 8; 
            tSwitch = t;
         end
 
-    end
-    
+    end   
     
         %% 8 - RIGHT FOOT BALANCING 
     if state == 8 
@@ -196,8 +184,7 @@ function [w_H_b, CoMDes,qDes,constraints,impedances,dampings, kpCom,kdCom,curren
             tSwitch = t;
         end
     end
-    
-    
+        
     %% 9 - PREPARING FOR SWITCHING
     if state == 9 
         w_H_b       =  w_H_fixedLink * r_sole_H_b;
@@ -218,7 +205,6 @@ function [w_H_b, CoMDes,qDes,constraints,impedances,dampings, kpCom,kdCom,curren
         end
     end
     
-    
     %% 10 - LOOKING FOR A CONTACT
     if state == 10
         w_H_b       =  w_H_fixedLink * r_sole_H_b;
@@ -231,7 +217,6 @@ function [w_H_b, CoMDes,qDes,constraints,impedances,dampings, kpCom,kdCom,curren
         qDes        = sm.joints.states(state,:)';
         desLFootOrigin = w_H_fixedLink(1:3,4) + sm.origin.leftFoot(state,:)';
 
-
         if wrench_leftFoot(3) > sm.wrench.thresholdContactOn
             state = 11;
             tSwitch = t;
@@ -241,15 +226,13 @@ function [w_H_b, CoMDes,qDes,constraints,impedances,dampings, kpCom,kdCom,curren
     %% TRANSITION TO INITIAL POSITION
     if state == 11 
         w_H_b       =  w_H_fixedLink * r_sole_H_b;
-        constraints = [1; 1];
         
-        CoMDes     = CoM_0 + sm.com.states(state,:)';   
-        qDes       = q0; %sm.joints.states(state,:)';
-        qTildeLLeg  = qj(end-5:end)-qDes(end-5:end);
+        fixed_link_CoMDes = w_H_fixedLink\[CoMDes;1];
+        CoMError   = fixed_link_CoMDes(1:3) - r_sole_CoM(1:3);
         
-        if norm(qTildeLLeg)*180/pi < sm.joints.thresholdNotInContact && t > (tSwitch + sm.tBalancing)
+        if norm(CoMError) < sm.com.threshold && t > (tSwitch + sm.tBalancing) %after tBalancing time start next state
             if sm.demoInLoop
-              state = 1;
+              state = 2;
               tSwitch = t;
               w_H_fixedLink   = w_H_fixedLink*r_sole_H_b/l_sole_H_b;
               if sm.demoOnlyRightFoot
@@ -261,11 +244,11 @@ function [w_H_b, CoMDes,qDes,constraints,impedances,dampings, kpCom,kdCom,curren
     end    
     
     %% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-    currentState        = state;
+    currentState = state;
     
-    impedances  = gain.impedances(state,:);
-    dampings    = gain.dampings(state,:);
-    kpCom       = gain.PCOM(state,:);
-    kdCom       = gain.DCOM(state,:);
+    impedances   = gain.impedances(state,:);
+    dampings     = gain.dampings(state,:);
+    kpCom        = gain.PCOM(state,:);
+    kdCom        = gain.DCOM(state,:);
     
     jointsSmoothingTime = sm.jointsSmoothingTimes(state);
