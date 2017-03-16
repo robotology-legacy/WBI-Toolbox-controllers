@@ -15,7 +15,7 @@
 %  * Public License for more details
 %  */
 %% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-clear all; clc;
+clear; clc;
 %% GENERAL SIMULATION INFO
 % If you are simulating the robot with Gazebo, 
 % remember that you have to launch Gazebo as follows:
@@ -25,11 +25,11 @@ clear all; clc;
 % and set the environmental variable YARP_ROBOT_NAME = icubGazeboSim.
 % To do this, you can uncomment the 
 
-% setenv('YARP_ROBOT_NAME','iCubGenova02');
-setenv('YARP_ROBOT_NAME','icubGazeboSim');
+setenv('YARP_ROBOT_NAME','iCubGenova02');
+% setenv('YARP_ROBOT_NAME','icubGazeboSim');
 
 % Simulation time in seconds
-CONFIG.SIMULATION_TIME     = inf;
+CONFIG.SIMULATION_TIME     = 60;
 % Simulation time step in seconds
 CONFIG.Ts                  = 0.01; %  Controller period [s]
 
@@ -85,11 +85,11 @@ CONFIG.QP.USE_CONTINUITY_CONSTRAINTS = true;
 CONFIG.SCOPES.ALL         = true;
 % CONFIG.SCOPES.VALUE: when set to true, visualization of the element 
 % in question is enabled
-CONFIG.SCOPES.QP          = false; %true;
+CONFIG.SCOPES.QP          = true; %true;
 CONFIG.SCOPES.TORQUES     = false; %true;
 CONFIG.SCOPES.JOINTS      = false; %true;
 CONFIG.SCOPES.FEET        = true;
-CONFIG.SCOPES.TASKS       = false; %true;
+CONFIG.SCOPES.TASKS       = true; %true;
 %% 
 
 PORTS.IMU                 = '/icub/inertial';

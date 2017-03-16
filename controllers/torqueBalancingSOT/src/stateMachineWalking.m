@@ -89,7 +89,7 @@ function [w_H_b, CoMDes,qDes,constraints,impedances,dampings, kpCom,kdCom,curren
         qDes           = sm.joints.states(state,:)';
         desRFootOrigin = w_H_fixedLink(1:3,4) + sm.origin.rightFoot(state,:)';
         
-        if t > tSwitch + sm.DT 
+        if t > tSwitch + sm.tBalancingOneFoot 
             state   = 4;
             tSwitch = t;
         end
@@ -179,7 +179,7 @@ function [w_H_b, CoMDes,qDes,constraints,impedances,dampings, kpCom,kdCom,curren
         qDes           = sm.joints.states(state,:)';
         desLFootOrigin = w_H_fixedLink(1:3,4) + sm.origin.leftFoot(state,:)';
         
-        if t > tSwitch + sm.DT 
+        if t > tSwitch + sm.tBalancingOneFoot 
             state   = 9;
             tSwitch = t;
         end

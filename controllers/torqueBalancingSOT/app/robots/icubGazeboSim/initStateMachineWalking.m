@@ -42,7 +42,7 @@ gain.dampings          = 2 * sqrt(gain.impedances);
 %% %%%%%%%%%%%%%%%%    FINITE STATE MACHINE SPECIFIC PARAMETERS
 
 sm.tBalancing                    = 1;     % Time allowed for transition to initial position / waiting time for balancing on two feet
-sm.DT                            = 3;     % Time allowed for balancing on a single foot
+sm.tBalancingOneFoot             = 3;     % Time allowed for balancing on a single foot
 sm.stateAt0                      = 1;     % Initial state
 sm.demoInLoop                    = true;  % Determines if the demo is running in loop (true) or only once (false)
 sm.demoOnlyRightFoot             = false; % Determines if the robot balances on right foot only (true) or on both feet (false)
