@@ -116,7 +116,9 @@ function [hessianMatrix,biasVector,constraintMatrixLeftFoot,constraintMatrixRigh
                                 + diag(dampings)*robotVelocity(7:end);
                             
     St_invM_B                 = (S' / massMatrix)* B;
-    jacobians_invM_B          = (jacobians / massMatrix) * B;                            
+    jacobians_invM            = jacobians / massMatrix; 
+    jacobians_invM_biasTorques= jacobians_invM * biasTorques;
+    jacobians_invM_B          = jacobians_invM * B;                            
 
     if CONFIG.QP.USE_STRICT_TASK_PRIORITIES
         hessianMatrix         = St_invM_B' * St_invM_B;
@@ -136,7 +138,7 @@ function [hessianMatrix,biasVector,constraintMatrixLeftFoot,constraintMatrixRigh
         %               tauFeedback = kp * qTilde + kd * qTildeDot
         %
         
-        aStar                 = jacobiansDotNu  - desiredTaskAcc - (jacobians / massMatrix) * biasTorques;
+        aStar                 = jacobiansDotNu  - desiredTaskAcc - jacobians_invM_biasTorques;
         
         hessianMatrix         = gain.weightPostural * (St_invM_B' * St_invM_B) ...
                               + gain.weightTasks * (jacobians_invM_B' * jacobians_invM_B);
@@ -145,8 +147,8 @@ function [hessianMatrix,biasVector,constraintMatrixLeftFoot,constraintMatrixRigh
                               + gain.weightTasks * (jacobians_invM_B' * aStar);        
     end
     
-    constraintMatrixEq        = jacobians_invM_B; %jacobians * (massMatrix \ B);
-    upperBoundEqConstraints   = desiredTaskAcc - jacobiansDotNu + (jacobians / massMatrix) * biasTorques; 
+    constraintMatrixEq        = jacobians_invM_B; 
+    upperBoundEqConstraints   = desiredTaskAcc - jacobiansDotNu + jacobians_invM_biasTorques; 
     
     % Update constraint matrices. The constraint matrix for the inequality
     % constraints in the problem 1) is built up starting from the constraint
