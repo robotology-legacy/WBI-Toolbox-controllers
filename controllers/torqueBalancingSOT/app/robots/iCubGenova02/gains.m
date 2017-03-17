@@ -48,10 +48,6 @@ gain.weightTasks            = 100;
 gain.weightMinTorques       = 1e-4;
 gain.weightMinContactForces = 1e-7;
 
-%% %%%%%%%%%%%%%%%%    QP parameters
-
-reg.HessianQP       = 1e-4; %Regularizing coefficient for Hessian
-
 %% %%%%%%%%%%%%%%%%    Friction cone parameters
 
 numberOfPoints               = 4; % The friction cone is approximated by using linear interpolation of the circle. 

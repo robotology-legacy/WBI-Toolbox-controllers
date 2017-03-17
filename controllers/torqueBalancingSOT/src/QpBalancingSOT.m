@@ -207,6 +207,7 @@ function Outputs(block)
                     zeros(6,nDof), zeros(6)    ];
         H    = SL'*hessianMatrixQP*SL;
         g    = SL'*biasVectorQP;
+
         
         if USE_STRICT_TASK_PRIORITIES
             A    = [zeros(length(upperBoundFeetConstraints),nDof),constraintMatrixLeftFoot;
@@ -227,13 +228,14 @@ function Outputs(block)
         % 
         % x = [jointTorques
         %      contactWrenchRightFoot]
-        
         %
+
         SR   = [eye(nDof),     zeros(nDof,6)  
                zeros(6,nDof),     zeros(6)
                zeros(6,nDof),    eye(6)  ];
         H    = SR'*hessianMatrixQP*SR;
         g    = SR'*biasVectorQP;
+
         
         if USE_STRICT_TASK_PRIORITIES
             A    = [zeros(length(upperBoundFeetConstraints),nDof),constraintMatrixRightFoot;
