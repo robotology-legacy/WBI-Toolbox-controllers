@@ -45,6 +45,8 @@ gain.dampings       = 2 * sqrt(gain.impedances);
 
 gain.weightPostural = 0.3;
 gain.weightTasks    = 100;
+gain.weightTorqueMin= 100;
+gain.weightForceMin = 100;
 
 
 %% %%%%%%%%%%%%%%%%    QP parameters

@@ -203,9 +203,9 @@ function Outputs(block)
         %      contactWrenchLeftFoot]
         %
         
-        SL                         = [eye(nDof),     zeros(nDof,6)  
-                                      zeros(6,nDof),     eye(6)
-                                      zeros(6,nDof),    zeros(6)  ];
+        SL = [eye(nDof),     zeros(nDof,6)  
+              zeros(6,nDof),     eye(6)
+              zeros(6,nDof),    zeros(6)  ];
         H = SL'*hessianMatrixQP*SL;
         g = SL'*biasVectorQP;
         
@@ -230,11 +230,11 @@ function Outputs(block)
         %      contactWrenchRightFoot]
         
         %
-        SR   = [eye(nDof),     zeros(nDof,6)  
+        SR = [eye(nDof),     zeros(nDof,6)  
                 zeros(6,nDof),     zeros(6)
                 zeros(6,nDof),    eye(6)  ];
-        H = SR'*hessianMatrixQP*SR;
-        g = SR'*biasVectorQP;
+        H  = SR'*hessianMatrixQP*SR;
+        g  = SR'*biasVectorQP;
         
         if USE_STRICT_TASK_PRIORITIES
             A    = [zeros(length(upperBoundFeetConstraints),nDof),constraintMatrixRightFoot;
