@@ -22,7 +22,7 @@ setup(block);
 
 function setup(block)
     
-block.NumInputPorts  = 8; 
+block.NumInputPorts  = 9; 
 block.NumOutputPorts = 4; 
 
 % Setup port properties to be  dynamic
@@ -154,14 +154,16 @@ function Outputs(block)
     CONTACT_THRESHOLD          = 0.1;
     unboundedConstant          = 1e14;
     
-    LEFT_RIGHT_FOOT_IN_CONTACT = block.InputPort(1).Data;
-    hessianMatrixQP            = block.InputPort(2).Data;
-    biasVectorQP               = block.InputPort(3).Data;
-    constraintMatrixLeftFoot   = block.InputPort(4).Data;
-    constraintMatrixRightFoot  = block.InputPort(5).Data;
-    constraintMatrixEq         = block.InputPort(6).Data;
-    upperBoundEqConstraints    = block.InputPort(7).Data;
-    upperBoundFeetConstraints  = block.InputPort(8).Data;
+    initJointTorques           = block.InputPort(1).Data;
+    LEFT_RIGHT_FOOT_IN_CONTACT = block.InputPort(2).Data;
+    hessianMatrixQP            = block.InputPort(3).Data;
+    biasVectorQP               = block.InputPort(4).Data;
+    constraintMatrixLeftFoot   = block.InputPort(5).Data;
+    constraintMatrixRightFoot  = block.InputPort(6).Data;
+    constraintMatrixEq         = block.InputPort(7).Data;
+    upperBoundEqConstraints    = block.InputPort(8).Data;
+    upperBoundFeetConstraints  = block.InputPort(9).Data;
+    
     nDof                       = block.DialogPrm(1).Data;
     torqueDotMax               = block.DialogPrm(2).Data;
     Ts                         = block.DialogPrm(3).Data;
@@ -175,8 +177,9 @@ function Outputs(block)
     end
     
     persistent uPrevious;
-
-    
+    if isempty(uPrevious)
+       uPrevious  = initJointTorques;
+    end
     
     % What follows aims at defining the hessian matrix H, the bias
     % vector g, and the constraint matrix A for the formalism of qpOases,ie
@@ -285,11 +288,7 @@ function Outputs(block)
     if exitFlagQP ~= 0 
         u         = uPrevious;
     else
-        if isempty(uPrevious) 
-            uPrevious       = -H\g;
-        else  
-            uPrevious = u;
-        end
+        uPrevious = u;
     end
 
     block.OutputPort(1).Data = u(1:nDof);
