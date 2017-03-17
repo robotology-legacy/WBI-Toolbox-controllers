@@ -45,6 +45,8 @@ SM.SM_TYPE                 = 'WALKING';
 %% CHANGED WHEN SIMULATING THE ROBOT ON GAZEBO, 
 WBT_modelName            = 'matlabTorqueBalancing';
 
+FRAMES.BASE              = 'root_link';
+
 % CONFIG.USE_IMU4EST_BASE: if set to false, the base frame is estimated by 
 % assuming that either the left or the right foot stay stuck on the ground. 
 % Which foot the controller uses depends on the contact forces acting on it. 
