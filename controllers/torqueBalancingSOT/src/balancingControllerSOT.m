@@ -107,6 +107,9 @@ function [hessianMatrix,biasVector,constraintMatrixLeftFoot,constraintMatrixRigh
     ROBOT_DOF                 = size(ROBOT_DOF_FOR_SIMULINK,1);
     S                         = [zeros(6,ROBOT_DOF);
                                  eye(ROBOT_DOF)   ];
+
+    Storques                  = [zeros(ROBOT_DOF,12) eye(ROBOT_DOF)];
+    Sforces                   = [eye(12)             zeros(12, ROBOT_DOF)];
     
     contactJacobians          = [jacobians(end-11:end-6,:)*constraints(1);
                                  jacobians(end- 5:end,  :)*constraints(2)];
@@ -140,11 +143,13 @@ function [hessianMatrix,biasVector,constraintMatrixLeftFoot,constraintMatrixRigh
         
         aStar                 = jacobiansDotNu  - desiredTaskAcc - jacobians_invM_biasTorques;
         
-        hessianMatrix         = gain.weightPostural * (St_invM_B' * St_invM_B) ...
-                              + gain.weightTasks * (jacobians_invM_B' * jacobians_invM_B);
+        hessianMatrix         = gain.weightPostural   * (St_invM_B' * St_invM_B) ...
+                              + gain.weightTasks      * (jacobians_invM_B' * jacobians_invM_B) ...
+                              + gain.weightMinTorques * (Storques' * Storques) ...
+                              + gain.weightMinContactForces * (Sforces' * Sforces);
                               
         biasVector            = gain.weightPostural * (St_invM_B' * tauFeedback - St_invM_B' * (S' / massMatrix) * biasTorques)...
-                              + gain.weightTasks * (jacobians_invM_B' * aStar);        
+                              + gain.weightTasks    * (jacobians_invM_B' * aStar);        
     end
     
     constraintMatrixEq        = jacobians_invM_B; 

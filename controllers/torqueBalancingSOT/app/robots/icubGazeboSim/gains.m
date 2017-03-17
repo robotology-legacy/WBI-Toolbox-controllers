@@ -37,13 +37,11 @@ gain.DCOM           = 2 * sqrt(gain.PCOM);
 gain.impedances     = 10 * ones(11, ROBOT_DOF); %for 11 states
 gain.dampings       = 2 * sqrt(gain.impedances);
 
-gain.weightPostural = 0.3;
-gain.weightTasks    = 100;
+gain.weightPostural         = 0.3;
+gain.weightTasks            = 100;
+gain.weightMinTorques       = 1e-4;
+gain.weightMinContactForces = 1e-7;
 
-
-%% %%%%%%%%%%%%%%%%    QP parameters
-
-reg.HessianQP       = 1e-4; %Regularizing coefficient for Hessian
 
 %% %%%%%%%%%%%%%%%%    Friction cone parameters
 

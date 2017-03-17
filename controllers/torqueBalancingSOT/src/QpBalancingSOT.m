@@ -55,7 +55,7 @@ end
 
 
 % Register parameters
-block.NumDialogPrms     = 6;
+block.NumDialogPrms     = 5;
 
 % Register sample times
 %  [0 offset]            : Continuous sample time
@@ -154,22 +154,21 @@ function Outputs(block)
     CONTACT_THRESHOLD          = 0.1;
     unboundedConstant          = 1e14;
     
-    initJointTorques           = block.InputPort(1).Data;
-    LEFT_RIGHT_FOOT_IN_CONTACT = block.InputPort(2).Data;
-    hessianMatrixQP            = block.InputPort(3).Data;
-    biasVectorQP               = block.InputPort(4).Data;
-    constraintMatrixLeftFoot   = block.InputPort(5).Data;
-    constraintMatrixRightFoot  = block.InputPort(6).Data;
-    constraintMatrixEq         = block.InputPort(7).Data;
-    upperBoundEqConstraints    = block.InputPort(8).Data;
-    upperBoundFeetConstraints  = block.InputPort(9).Data;
+    initJointTorques            = block.InputPort(1).Data;
+    LEFT_RIGHT_FOOT_IN_CONTACT  = block.InputPort(2).Data;
+    hessianMatrixQP             = block.InputPort(3).Data;
+    biasVectorQP                = block.InputPort(4).Data;
+    constraintMatrixLeftFoot    = block.InputPort(5).Data;
+    constraintMatrixRightFoot   = block.InputPort(6).Data;
+    constraintMatrixEq          = block.InputPort(7).Data;
+    upperBoundEqConstraints     = block.InputPort(8).Data;
+    upperBoundFeetConstraints   = block.InputPort(9).Data;
     
-    nDof                       = block.DialogPrm(1).Data;
-    torqueDotMax               = block.DialogPrm(2).Data;
-    Ts                         = block.DialogPrm(3).Data;
-    USE_CONTINUITY_CONSTRAINTS = block.DialogPrm(4).Data;
-    USE_STRICT_TASK_PRIORITIES = block.DialogPrm(5).Data;
-    regHessian                 = block.DialogPrm(6).Data;
+    nDof                        = block.DialogPrm(1).Data;
+    torqueDotMax                = block.DialogPrm(2).Data;
+    Ts                          = block.DialogPrm(3).Data;
+    USE_CONTINUITY_CONSTRAINTS  = block.DialogPrm(4).Data;
+    USE_STRICT_TASK_PRIORITIES  = block.DialogPrm(5).Data;
     
     if ~USE_STRICT_TASK_PRIORITIES
         constraintMatrixEq      = [];
@@ -178,7 +177,7 @@ function Outputs(block)
     
     persistent uPrevious;
     if isempty(uPrevious)
-       uPrevious  = initJointTorques;
+       uPrevious                = initJointTorques;
     end
     
     % What follows aims at defining the hessian matrix H, the bias
@@ -203,11 +202,11 @@ function Outputs(block)
         %      contactWrenchLeftFoot]
         %
         
-        SL                         = [eye(nDof),     zeros(nDof,6)  
-                                      zeros(6,nDof),     eye(6)
-                                      zeros(6,nDof),    zeros(6)  ];
-        H = SL'*hessianMatrixQP*SL;
-        g = SL'*biasVectorQP;
+        SL   = [eye(nDof),     zeros(nDof,6)  
+                    zeros(6,nDof), eye(6)
+                    zeros(6,nDof), zeros(6)    ];
+        H    = SL'*hessianMatrixQP*SL;
+        g    = SL'*biasVectorQP;
         
         if USE_STRICT_TASK_PRIORITIES
             A    = [zeros(length(upperBoundFeetConstraints),nDof),constraintMatrixLeftFoot;
@@ -231,10 +230,10 @@ function Outputs(block)
         
         %
         SR   = [eye(nDof),     zeros(nDof,6)  
-                zeros(6,nDof),     zeros(6)
-                zeros(6,nDof),    eye(6)  ];
-        H = SR'*hessianMatrixQP*SR;
-        g = SR'*biasVectorQP;
+               zeros(6,nDof),     zeros(6)
+               zeros(6,nDof),    eye(6)  ];
+        H    = SR'*hessianMatrixQP*SR;
+        g    = SR'*biasVectorQP;
         
         if USE_STRICT_TASK_PRIORITIES
             A    = [zeros(length(upperBoundFeetConstraints),nDof),constraintMatrixRightFoot;
@@ -280,13 +279,12 @@ function Outputs(block)
                 -torqueDotMax*Ts+uPrevious(1:nDof)];
     end
     
-    H = H + eye(size(H,1))*regHessian;
     H = (H + H')/2;
       
     [u,~,exitFlagQP,~,~,~] = qpOASES(H,g,A,[],[],lbA,ubA);     
     
     if exitFlagQP ~= 0 
-        u         = uPrevious;
+        u = uPrevious;
     else
         uPrevious = u;
     end
