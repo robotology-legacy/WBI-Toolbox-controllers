@@ -32,8 +32,8 @@ gain.rootPD         = [5, 2 ];
 gain.lFoot.posPD    = [25*ones(3,1), 2*sqrt(ones(3,1))];
 gain.lFoot.rotPD    = [25, 2 ];
 
-gain.rFoot.posPD    = gain.lFoot.posPD;
-gain.rFoot.rotPD    = gain.lFoot.rotPD;
+gain.rFoot.posPD    = [50*ones(3,1), 2*sqrt(ones(3,1))]; %gain.lFoot.posPD;
+gain.rFoot.rotPD    = [200, 2]; %gain.lFoot.rotPD;
 
 %% %%%%%%%%%%%%%%%%    Controller gain parameters
 
@@ -43,8 +43,8 @@ gain.DCOM           = 2 * sqrt(gain.PCOM);
 gain.impedances     = 10 * ones(11, ROBOT_DOF); %for 11 states
 gain.dampings       = 2 * sqrt(gain.impedances);
 
-gain.weightPostural         = 0.3;
-gain.weightTasks            = 100;
+gain.weightPostural         = 0.1;
+gain.weightTasks            = 200;
 gain.weightMinTorques       = 1e-4;
 gain.weightMinContactForces = 1e-7;
 
