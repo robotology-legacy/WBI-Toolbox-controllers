@@ -76,7 +76,7 @@ CONFIG.CHECK_LIMITS        = false;
 WBT_modelName            = 'matlabTorqueBalancing';
  
 FRAMES.BASE              = 'root_link'; 
-
+FRAMES.IMU               = 'imu_frame';
 
 % CONFIG.USE_IMU4EST_BASE: if set to false, the base frame is estimated by 
 % assuming that either the left or the right foot stay stuck on the ground. 
