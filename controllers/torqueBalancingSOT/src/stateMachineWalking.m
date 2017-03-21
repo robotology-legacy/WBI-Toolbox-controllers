@@ -51,8 +51,7 @@ function [w_H_b, CoMDes,qDes,constraints,impedances,dampings, kpCom,kdCom,curren
         if norm(CoMError) < sm.com.threshold && t > (tSwitch + sm.tBalancing) %after tBalancing time start next state
            state = 2;
            if sm.demoOnlyRightFoot
-                w_H_fixedLink   = w_H_fixedLink*l_sole_H_b/r_sole_H_b;
-                state = 7;
+                state = 6;
            end
            
         end
