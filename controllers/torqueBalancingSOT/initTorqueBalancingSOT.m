@@ -15,7 +15,9 @@
 %  * Public License for more details
 %  */
 %% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-clear all; clc;
+clear; clc;
+%clearing functions with persistent variables
+clear stateMachineWalking QpBalancingSOT
 %% GENERAL SIMULATION INFO
 % If you are simulating the robot with Gazebo, 
 % remember that you have to launch Gazebo as follows:
@@ -25,8 +27,8 @@ clear all; clc;
 % and set the environmental variable YARP_ROBOT_NAME = icubGazeboSim.
 % To do this, you can uncomment the 
 
-setenv('YARP_ROBOT_NAME','iCubGenova02');
-% setenv('YARP_ROBOT_NAME','icubGazeboSim');
+% setenv('YARP_ROBOT_NAME','iCubGenova02');
+setenv('YARP_ROBOT_NAME','icubGazeboSim');
 
 % Simulation time in seconds
 CONFIG.SIMULATION_TIME     = inf;
@@ -92,7 +94,7 @@ CONFIG.SCOPES.TORQUES     = true;
 CONFIG.SCOPES.JOINTS      = true;
 CONFIG.SCOPES.FEET        = true;
 CONFIG.SCOPES.TASKS       = true;
-CONFIG.SCOPES.GAINS       = true;
+CONFIG.SCOPES.GAINS       = false;
 %% 
 
 PORTS.IMU                 = '/icub/inertial';
