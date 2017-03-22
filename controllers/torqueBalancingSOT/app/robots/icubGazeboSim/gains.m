@@ -43,6 +43,15 @@ gain.weightMinTorques       = 1e-4;
 gain.weightMinContactForces = 1e-7;
 
 
+%% %%%%%%%%%%%%%%%%    Inverse kinematics gains
+gain.ikin.Kpfeet     = 10;
+gain.ikin.Kdfeet     = 2*sqrt(gain.ikin.Kpfeet);
+gain.ikin.KpCoM      = gain.PCOM(1,:);
+gain.ikin.KdCoM      = 2*sqrt(gain.ikin.KpCoM);
+gain.ikin.impedances = diag(gain.impedances(1,:));
+gain.ikin.dampings   = 2*sqrt(gain.ikin.impedances);
+
+
 %% %%%%%%%%%%%%%%%%    Friction cone parameters
 
 numberOfPoints               = 4; % The friction cone is approximated by using linear interpolation of the circle. 

@@ -103,6 +103,7 @@ PORTS.WBDT_LEFTLEG_EE     = '/wholeBodyDynamicsTree/left_leg/cartesianEndEffecto
 PORTS.WBDT_RIGHTLEG_EE    = '/wholeBodyDynamicsTree/right_leg/cartesianEndEffectorWrench:o';
 
 addpath('./src/')
+addpath('./src/iKinUtilities')
 addpath('../utilityMatlabFunctions/')
 run(strcat('app/robots/',getenv('YARP_ROBOT_NAME'),'/gains.m')); 
 
