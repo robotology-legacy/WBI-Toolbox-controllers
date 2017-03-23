@@ -62,7 +62,7 @@ sm.joints.standUpPositions     = [0.0000      0.0000     0.0000    0.0000       
                                   1.1097      0.0122    -0.8365   -0.0714       -1.4615           0.1920          0.1545          0.2018   0.0611;   % state ==  3  TWO FEET BALANCING
                                   0.2094      0.1047    -0.1745   -0.0349       -1.6455           0.1920          0.5862          0.2473   0.0000];  % state ==  4  LIFTING UP
 
-sm.joints.rightAnkleCorrection = -0.1745;
+sm.joints.leftAnkleCorrection = -0.1745;
 
 sm.CoM.standUpDeltaCoM         = [0.0     0.0   0.0;       % state ==  1  THIS REFERENCE IS NOT USED
                                  -0.0867  0.0   0.0;       % state ==  2  MOVE COM FORWARD

@@ -59,19 +59,19 @@ sm.joints.standUpPositions = [0.0000      0.0000     0.0000    0.0000        0.0
                               0.2094      0.1047    -0.1745   -0.0349       -1.6455           0.1920          0.5862          0.2473   0.0000];  % state ==  4  LIFTING UP
                       
 sm.CoM.standUpDeltaCoM    = [0.0     0.0   0.0;       % state ==  1  THIS REFERENCE IS NOT USED
-                             0.1767  0.0   0.0;       % state ==  2  MOVE COM FORWARD
+                             0.20    0.0   0.0;       % state ==  2  MOVE COM FORWARD
                              0.0     0.0   0.0;       % state ==  3  TWO FEET BALANCING
-                             0.0     0.0   0.17];     % state ==  4  LIFTING UP
+                             0.06    0.0   0.17];     % state ==  4  LIFTING UP
                        
-sm.joints.rightAnkleCorrection = -0.0714;
+sm.joints.leftAnkleCorrection = -0.0714;
                      
 sm.LwrenchTreshold    = [0;   % state ==  1  THIS REFERENCE IS NOT USED
-                         70;  % state ==  2  MOVE COM FORWARD
+                         75;  % state ==  2  MOVE COM FORWARD
                          110  % state ==  3  TWO FEET BALANCING
                          0];  % state ==  4  THIS REFERENCE IS NOT USED
                      
 sm.RwrenchTreshold    = [0    % state ==  1  THIS REFERENCE IS NOT USED
-                         70;  % state ==  2  MOVE COM FORWARD
+                         75;  % state ==  2  MOVE COM FORWARD
                          110  % state ==  3  TWO FEET BALANCING
                          0];  % state ==  4  THIS REFERENCE IS NOT USED
                                          

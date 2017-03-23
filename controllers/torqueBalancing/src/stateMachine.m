@@ -177,7 +177,7 @@ function [w_H_b,CoMDes,qDes,constraints,impedances,kpCom,kdCom,currentState,join
         kpCom       = gain.PCOM(state,:);   
         kdCom       = gain.DCOM(state,:);   
         if ((norm(l_sole_CoM(1:2)-CoMDes(1:2)) < 10*sm.com.threshold) && sm.yogaAlsoOnRightFoot && (t > tSwitch + sm.tBalancing))
-            w_H_fixedLink   = w_H_fixedLink*l_sole_H_b/r_sole_H_b;
+            w_H_fixedLink   = w_H_fixedLink * l_sole_H_b/r_sole_H_b;
             state           = 8;
             tSwitch         = t;
         end
@@ -191,8 +191,7 @@ function [w_H_b,CoMDes,qDes,constraints,impedances,kpCom,kdCom,currentState,join
 %% TRANSITION TO THE RIGHT FOOT
     if state == 8 
         constraints = [1; 1]; %right foot is no longer a constraints
-        w_H_b       =  w_H_fixedLink*r_sole_H_b;
-
+        w_H_b       =  w_H_fixedLink * r_sole_H_b;
 
         % Set the center of mass projection onto the x-y plane to be
         % coincident to the origin of the left foot (l_sole) plus a
@@ -218,7 +217,7 @@ function [w_H_b,CoMDes,qDes,constraints,impedances,kpCom,kdCom,currentState,join
      %% RIGHT FOOT BALANCING 
     if state == 9
         constraints = [0; 1]; %left foot is no longer a constraints
-        w_H_b       =  w_H_fixedLink*r_sole_H_b;
+        w_H_b       =  w_H_fixedLink * r_sole_H_b;
 
         CoMDes      = [w_H_fixedLink(1:2,4);CoM_0(3)] + sm.com.states(state,:)';         
         qDes        = sm.joints.states(state,:)';
@@ -237,7 +236,7 @@ function [w_H_b,CoMDes,qDes,constraints,impedances,kpCom,kdCom,currentState,join
     %% YOGA RIGHT FOOT
     if state == 10 
         constraints = [0; 1]; %left foot is no longer a constraints
-        w_H_b   =  w_H_fixedLink*r_sole_H_b;
+        w_H_b   =  w_H_fixedLink * r_sole_H_b;
 
         CoMDes      = [w_H_fixedLink(1:2,4);CoM_0(3)] + sm.com.states(state,:)';         
         qDes        =  sm.joints.states(state,:)';
@@ -262,7 +261,7 @@ function [w_H_b,CoMDes,qDes,constraints,impedances,kpCom,kdCom,currentState,join
     %% PREPARING FOR SWITCHING
     if state == 11 
         constraints = [0; 1]; %left foot is no longer a constraints
-        w_H_b       =  w_H_fixedLink*r_sole_H_b;
+        w_H_b       =  w_H_fixedLink * r_sole_H_b;
 
         CoMDes      = [w_H_fixedLink(1:2,4);CoM_0(3)] + sm.com.states(state,:)';         
         qDes        =  sm.joints.states(state,:)';
@@ -283,7 +282,7 @@ function [w_H_b,CoMDes,qDes,constraints,impedances,kpCom,kdCom,currentState,join
     %% LOOKING FOR A CONTACT
     if state == 12
         constraints = [0; 1]; %left foot is no longer a constraints
-        w_H_b       =  w_H_fixedLink*r_sole_H_b;
+        w_H_b       =  w_H_fixedLink * r_sole_H_b;
 
         CoMDes      = [w_H_fixedLink(1:2,4);CoM_0(3)] + sm.com.states(state,:)';         
         qDes        = sm.joints.states(state,:)';
@@ -299,7 +298,7 @@ function [w_H_b,CoMDes,qDes,constraints,impedances,kpCom,kdCom,currentState,join
     
     %% TRANSITION TO INITIAL POSITION
     if state == 13
-        w_H_b       =  w_H_fixedLink*r_sole_H_b;
+        w_H_b       =  w_H_fixedLink * r_sole_H_b;
         constraints = [1; 1]; %right foot is no longer a constraints
         impedances  = gain.impedances(state,:);
         kpCom       = gain.PCOM(state,:);   
