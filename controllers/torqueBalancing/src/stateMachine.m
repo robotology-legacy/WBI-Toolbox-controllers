@@ -1,6 +1,6 @@
-function [w_H_b, CoMDes,qDes,constraints,impedances,kpCom,kdCom,currentState,jointsSmoothingTime] = ...
-          stateMachine(CoM_0, q0, l_sole_CoM,r_sole_CoM,qj, t, ...
-                       wrench_rightFoot,wrench_leftFoot,l_sole_H_b, r_sole_H_b, sm,gain)
+function [w_H_b,CoMDes,qDes,constraints,impedances,kpCom,kdCom,currentState,jointsSmoothingTime] = ...
+          stateMachine(CoM_0,q0,l_sole_CoM,r_sole_CoM,qj, t, ...
+                       wrench_rightFoot,wrench_leftFoot,l_sole_H_b,r_sole_H_b,sm,gain)
     %#codegen
     persistent state;
     persistent tSwitch;
@@ -49,7 +49,7 @@ function [w_H_b, CoMDes,qDes,constraints,impedances,kpCom,kdCom,currentState,joi
 
         fixed_link_CoMDes = w_H_fixedLink\[CoMDes;1];
         
-        CoMError   = fixed_link_CoMDes(1:3) - l_sole_CoM(1:3);
+        CoMError   = fixed_link_CoMDes(1:3) -l_sole_CoM(1:3);
         
         qDes       = sm.joints.states(state,:)'; % new reference for q
         
@@ -201,7 +201,7 @@ function [w_H_b, CoMDes,qDes,constraints,impedances,kpCom,kdCom,currentState,joi
  
         fixed_link_CoMDes = w_H_fixedLink\[CoMDes;1];
         
-        CoMError    = fixed_link_CoMDes(1:3) - r_sole_CoM(1:3);
+        CoMError    = fixed_link_CoMDes(1:3) -r_sole_CoM(1:3);
         
         impedances  = gain.impedances(state,:);
         kpCom       = gain.PCOM(state,:);   

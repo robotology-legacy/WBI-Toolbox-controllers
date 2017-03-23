@@ -49,14 +49,14 @@ CONFIG.SIMULATION_TIME = inf;
 %
 %                robots/YARP_ROBOT_NAME/initRegGen.m
 %
-% 'CHAIR': the robot will stand up from a chair. The associated
-%          configuration parameters can be found under the folder
+% 'STANDUP': the robot will stand up from a chair. The associated
+%            configuration parameters can be found under the folder
 %
-%          robots/YARP_ROBOT_NAME/initStateMachineChair.m
+%            robots/YARP_ROBOT_NAME/initStateMachineStandUp.m
 %
 % 'WALKING': under development.
 %
-SM.SM_TYPE                    = 'CHAIR';
+SM.SM_TYPE                    = 'STANDUP';
 
 % CONFIG.SCOPES: if set to true, all visualizers for debugging are active
 CONFIG.SCOPES.ALL             = true;
@@ -114,9 +114,7 @@ CONFIG.ONSOFTCARPET          = false;
 CONFIG.USE_QP_SOLVER         = true; 
 
 PORTS.IMU       = '/icub/inertial';
-
 PORTS.COM_DES   = ['/' WBT_modelName '/comDes:i'];
-
 PORTS.Q_DES     = ['/' WBT_modelName '/qDes:i'];
 
 PORTS.WBDT_LEFTLEG_EE  = '/wholeBodyDynamics/left_leg/cartesianEndEffectorWrench:o';
@@ -137,30 +135,30 @@ run(robotSpecificReferences);
 SM.SM.MASK.COORDINATOR   = bin2dec('001');
 SM.SM.MASK.YOGA          = bin2dec('010');
 SM.SM.MASK.WALKING       = bin2dec('100');
-SM.SM.MASK.CHAIR         = bin2dec('110');
+SM.SM.MASK.STANDUP       = bin2dec('110');
 
-SM.SM_TYPE_BIN    = SM.SM.MASK.COORDINATOR;
-robotSpecificFSM  = fullfile('app/robots',getenv('YARP_ROBOT_NAME'),'initStateMachine.m');
+SM.SM_TYPE_BIN           = SM.SM.MASK.COORDINATOR;
+robotSpecificFSM         = fullfile('app/robots',getenv('YARP_ROBOT_NAME'),'initStateMachine.m');
 run(robotSpecificFSM);
 
-%% iCub on a chair
-icubChair                     = 0;
+%% iCub stand up demo parameters
+icubStandup                   = 0;
 PORTS.WBDT_CHAIR              = '/chair/FT_sensor/analog:o/forceTorque';
-robotSpecificFSM              = fullfile('app/robots',getenv('YARP_ROBOT_NAME'),'initStateMachineChair.m');
-run(robotSpecificFSM);
 
 %% Define which simulation will be performed
 if strcmpi(SM.SM_TYPE, 'COORDINATOR')
-    SM.SM_TYPE_BIN = SM.SM.MASK.COORDINATOR;
+    SM.SM_TYPE_BIN      = SM.SM.MASK.COORDINATOR;
 elseif strcmpi(SM.SM_TYPE, 'YOGA')
-    SM.SM_TYPE_BIN = SM.SM.MASK.YOGA;
+    SM.SM_TYPE_BIN      = SM.SM.MASK.YOGA;
 elseif strcmpi(SM.SM_TYPE, 'WALKING')
-    SM.SM_TYPE_BIN   = SM.SM.MASK.WALKING;
-    robotSpecificFSM = fullfile('app/robots',getenv('YARP_ROBOT_NAME'),'initStateMachineWalking.m');
+    SM.SM_TYPE_BIN      = SM.SM.MASK.WALKING;
+    robotSpecificFSM    = fullfile('app/robots',getenv('YARP_ROBOT_NAME'),'initStateMachineWalking.m');
     run(robotSpecificFSM);
-elseif strcmpi(SM.SM_TYPE, 'CHAIR')
-    SM.SM_TYPE_BIN   = SM.SM.MASK.CHAIR;
-    icubChair = 1;
+elseif strcmpi(SM.SM_TYPE, 'STANDUP')
+    SM.SM_TYPE_BIN      = SM.SM.MASK.STANDUP;
+    icubStandup         = 1;
+    robotSpecificFSM    = fullfile('app/robots',getenv('YARP_ROBOT_NAME'),'initStateMachineStandUp.m');
+    run(robotSpecificFSM);
 end
 
 %% Contact constraints

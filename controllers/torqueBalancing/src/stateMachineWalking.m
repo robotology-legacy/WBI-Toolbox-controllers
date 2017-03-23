@@ -1,8 +1,7 @@
 function [CoMDes,qDes,constraints, currentState,impedances,w_H_b] = ...
-         stateMachineWalking(connection,CoM_0, q0, w_CoM, CoMIn, qIn, constraintsIn, wrench_rightFoot,wrench_leftFoot,...
-         l_sole_H_b, r_sole_H_b, sm,gain)
-    %#codegen
-        
+         stateMachineWalking(connection,CoM_0,q0,w_CoM,CoMIn,qIn,constraintsIn,wrench_rightFoot,wrench_leftFoot,...
+                             l_sole_H_b,r_sole_H_b,sm,gain)
+    %#codegen    
     persistent state;
     persistent fixedLink;
     persistent w_H_fixedLink;
@@ -14,15 +13,14 @@ function [CoMDes,qDes,constraints, currentState,impedances,w_H_b] = ...
     end
     
     
-%     w_H_fixedLink  = eye(4);
+%    w_H_fixedLink  = eye(4);
 %     
-%     fixedLink   =  1; % 1 = left, 2 = right
+%    fixedLink      =  1;  %1 = left, 2 = right
     
     CoMDes      = CoM_0;
     constraints = [1; 1];
     qDes        = q0;
-
-    impedances = gain.impedances(1,:);
+    impedances  = gain.impedances(1,:);
     
     %% STATES
     % 1 - initial state (waiting for references)
@@ -39,10 +37,11 @@ function [CoMDes,qDes,constraints, currentState,impedances,w_H_b] = ...
     if state == 1
         %waiting for com reference
             CoMDes      = CoM_0;
-
+            
         if norm(CoM_0 - CoMIn) > eps && connection
             state = 2;
         end
+        
     elseif state == 2
         
         CoMDes = CoMIn;
@@ -94,3 +93,5 @@ function [CoMDes,qDes,constraints, currentState,impedances,w_H_b] = ...
     end
        
     currentState = state;
+    
+end

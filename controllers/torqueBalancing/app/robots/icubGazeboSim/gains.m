@@ -5,7 +5,7 @@ PORTS.WBDT_LEFTLEG_EE  = '/wholeBodyDynamicsTree/left_leg/cartesianEndEffectorWr
 PORTS.WBDT_RIGHTLEG_EE = '/wholeBodyDynamicsTree/right_leg/cartesianEndEffectorWrench:o';
 
 
-CONFIG.LEFT_RIGHT_FOOT_IN_CONTACT  = [1 1];
+CONFIG.LEFT_RIGHT_FOOT_IN_CONTACT = [1 1];
 
 CONFIG.SMOOTH_DES_COM      = 0;    % If equal to one, the desired streamed values 
                                    % of the center of mass are smoothed internally 
@@ -13,14 +13,13 @@ CONFIG.SMOOTH_DES_COM      = 0;    % If equal to one, the desired streamed value
 CONFIG.SMOOTH_DES_Q        = 0;    % If equal to one, the desired streamed values 
                                    % of the postural tasks are smoothed internally 
 
-WBT_wbiList = 'ROBOT_TORQUE_CONTROL_JOINTS_WITHOUT_PRONOSUP';
+WBT_wbiList   = 'ROBOT_TORQUE_CONTROL_JOINTS_WITHOUT_PRONOSUP';
 WBT_robotName = 'icubSim';
 
 dump.left_wrench_port  = '/icubSim/left_foot/analog:o';
 dump.right_wrench_port = '/icubSim/right_foot/analog:o';
 
 references.smoothingTimeMinJerkComDesQDes = 3.0;
-
 sat.torque = 34;
 
 CONFIG.smoothingTimeTranDynamics = 0.05;
@@ -54,8 +53,7 @@ if (sum(CONFIG.LEFT_RIGHT_FOOT_IN_CONTACT) == 2)
 
     impRightLeg         = [ 30   30   30    60     10  10
                              0    0    0     0      0   0]; 
-    
-                         
+                             
     intTorso            = [0   0    0];
     
     intArms             = [0   0    0    0  ];
@@ -72,7 +70,6 @@ if (sum(CONFIG.LEFT_RIGHT_FOOT_IN_CONTACT) == 1)
     gain.PCOM                 = diag([50   100  50]);
     gain.ICOM                 = diag([  0    0   0]);
     gain.DCOM                 = diag([  0    0   0]);
-
     gain.PAngularMomentum     = 1 ;
     gain.DAngularMomentum     = 1 ;
 

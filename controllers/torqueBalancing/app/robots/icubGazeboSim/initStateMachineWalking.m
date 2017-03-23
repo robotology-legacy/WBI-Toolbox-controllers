@@ -32,8 +32,8 @@ end
 sm.com.threshold                 = 0.005;
 sm.wrench.threshold              = 70;
 sm.joints = struct;
-sm.joints.thresholdNotInContact =  3;
-sm.joints.thresholdInContact    = 50;
+sm.joints.thresholdNotInContact  =  3;
+sm.joints.thresholdInContact     = 50;
 
 sm.stateAt0               = 1;
 

@@ -17,20 +17,20 @@
 %% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 function [tauModel,Sigma,NA,f_HDot, ...
           HessianMatrixQP1Foot,gradientQP1Foot,ConstraintsMatrixQP1Foot,bVectorConstraintsQp1Foot,...
-          HessianMatrixQP2Feet,gradientQP2Feet,ConstraintsMatrixQP2Feet,bVectorConstraintsQp2Feet,...
+          HessianMatrixQP2FeetOrLegs,gradientQP2FeetOrLegs,ConstraintsMatrixQP2FeetOrLegs,bVectorConstraintsQp2FeetOrLegs,...
           errorCoM,qTilde,f]  =  ...
               balancingController(constraints,ROBOT_DOF_FOR_SIMULINK,ConstraintsMatrix,bVectorConstraints,...
-              q,qDes,v,M,h,H,intHw,w_H_l_sole,w_H_r_sole,JL,JR,dJLv,dJRv,xcom,J_CoM,desired_x_dx_ddx_CoM,...
+              q,qDes,v,M,h,H,intHw,w_H_l_contact,w_H_r_contact,JL,JR,dJLv,dJRv,xcom,J_CoM,desired_x_dx_ddx_CoM,...
               gainsPCOM,gainsDCOM,impedances,intErrorCoM,ki_int_qtilde,reg,gain)
           
     %BALANCING CONTROLLER
 
     %% DEFINITION OF CONTROL AND DYNAMIC VARIABLES
-    pos_leftFoot   = w_H_l_sole(1:3,4);
-    w_R_l_sole     = w_H_l_sole(1:3,1:3);
+    pos_leftFoot   = w_H_l_contact(1:3,4);
+    w_R_l_sole     = w_H_l_contact(1:3,1:3);
 
-    pos_rightFoot   = w_H_r_sole(1:3,4);
-    w_R_r_sole      = w_H_r_sole(1:3,1:3);
+    pos_rightFoot   = w_H_r_contact(1:3,4);
+    w_R_r_sole      = w_H_r_contact(1:3,1:3);
     
     gainsICOM       = zeros(3,1);
     dampings        = gain.dampings;
@@ -65,8 +65,8 @@ function [tauModel,Sigma,NA,f_HDot, ...
     qTilde          =  q-qDes;
     
     % Desired acceleration for the center of mass
-    xDDcomStar      = desired_x_dx_ddx_CoM(:,3) - gainsPCOM.*(xcom - desired_x_dx_ddx_CoM(:,1)) - gainsICOM.*intErrorCoM ...
-                      - gainsDCOM.*(xDcom - desired_x_dx_ddx_CoM(:,2));
+    xDDcomStar      = desired_x_dx_ddx_CoM(:,3) -gainsPCOM.*(xcom - desired_x_dx_ddx_CoM(:,1)) -gainsICOM.*intErrorCoM ...
+                      -gainsDCOM.*(xDcom - desired_x_dx_ddx_CoM(:,2));
    
     % Application point of the contact force on the right foot w.r.t. CoM
     Pr              = pos_rightFoot - xcom; 
@@ -177,8 +177,7 @@ function [tauModel,Sigma,NA,f_HDot, ...
     % constraints(1) = constraints(2) = 1. This because when the robot
     % stands on one foot, the f_HDot is evaluated directly from the
     % optimizer (see next section).
-    f_HDot          = pinvA*(HDotDes - gravityWrench)*constraints(1)*constraints(2);
-  
+    f_HDot          = pinvA*(HDotDes - gravityWrench)*constraints(1)*constraints(2);  
     SigmaNA         = Sigma*NA;
    
     % The optimization problem 1) seeks for the redundancy of the external
@@ -194,13 +193,13 @@ function [tauModel,Sigma,NA,f_HDot, ...
     % which in terms of f0 is:
     %
     % ConstraintsMatrix2Feet*NA*f0 < bVectorConstraints - ConstraintsMatrix2Feet*f_HDot
-    ConstraintsMatrixQP2Feet  = ConstraintsMatrix2Feet*NA;
-    bVectorConstraintsQp2Feet = bVectorConstraints2Feet-ConstraintsMatrix2Feet*f_HDot;
+    ConstraintsMatrixQP2FeetOrLegs  = ConstraintsMatrix2Feet*NA;
+    bVectorConstraintsQp2FeetOrLegs = bVectorConstraints2Feet-ConstraintsMatrix2Feet*f_HDot;
     
     % Evaluation of Hessian matrix and gradient vector for solving the
     % optimization problem 1).
-    HessianMatrixQP2Feet      = SigmaNA'*SigmaNA + eye(size(SigmaNA,2))*reg.HessianQP;
-    gradientQP2Feet           = SigmaNA'*(tauModel + Sigma*f_HDot);
+    HessianMatrixQP2FeetOrLegs      = SigmaNA'*SigmaNA + eye(size(SigmaNA,2))*reg.HessianQP;
+    gradientQP2FeetOrLegs           = SigmaNA'*(tauModel + Sigma*f_HDot);
 
     %% QP PARAMETERS FOR ONE FOOT STANDING
     % In the case the robot stands on one foot, there is no redundancy of

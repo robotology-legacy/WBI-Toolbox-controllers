@@ -37,10 +37,10 @@ block.SetPreCompOutPortInfoToDynamic;
 
 % Definition of port sizes for QP 2 feet
 block.InputPort(1).Dimensions        = [ 1  2];   % LEFT_RIGHT_FOOT_IN_CONTACT
-block.InputPort(2).Dimensions        = [12 12];   % HessianMatrixQP2Feet               
-block.InputPort(3).Dimensions        = [ 1 12];   % gradientQP2Feet
-block.InputPort(4).Dimensions        = [38 12];   % ConstraintsMatrixQP2Feet 
-block.InputPort(5).Dimensions        = [ 1 38];   % bVectorConstraintsQp2Feet 
+block.InputPort(2).Dimensions        = [12 12];   % HessianMatrixQP2FeetOrLegs               
+block.InputPort(3).Dimensions        = [ 1 12];   % gradientQP2FeetOrLegs
+block.InputPort(4).Dimensions        = [38 12];   % ConstraintsMatrixQP2FeetOrLegs 
+block.InputPort(5).Dimensions        = [ 1 38];   % bVectorConstraintsQp2FeetOrLegs 
 block.InputPort(6).Dimensions        = 1 ;        % USE_QP_SOLVER
 % Definition of port sizes for QP 1 foot
 block.InputPort(7).Dimensions        = [ 6  6];   % HessianMatrixQP1Foot              
@@ -160,7 +160,6 @@ function SetInputPortSamplingMode(block, idx, fd)
 function Outputs(block)
 
     CONTACT_THRESHOLD          = 0.1;
-    
     LEFT_RIGHT_FOOT_IN_CONTACT = block.InputPort(1).Data;
     exitFlagQP                 = 0;
     f0OneFoot                  = zeros(6,1);
@@ -168,21 +167,25 @@ function Outputs(block)
     USE_QPO_SOLVER             = block.InputPort(6).Data;
 
     if sum(LEFT_RIGHT_FOOT_IN_CONTACT) > (2 - CONTACT_THRESHOLD)
-        HessianMatrixQP2Feet       = block.InputPort(2).Data;
-        gradientQP2Feet            = block.InputPort(3).Data;
-        ConstraintsMatrixQP2Feet   = block.InputPort(4).Data;
-        bVectorConstraintsQp2Feet  = block.InputPort(5).Data;
+        
+        HessianMatrixQP2FeetOrLegs       = block.InputPort(2).Data;
+        gradientQP2FeetOrLegs            = block.InputPort(3).Data;
+        ConstraintsMatrixQP2FeetOrLegs   = block.InputPort(4).Data;
+        bVectorConstraintsQp2FeetOrLegs  = block.InputPort(5).Data;
+        
         if USE_QPO_SOLVER 
-            [f02Feet,~,exitFlagQP,~,~,~] = qpOASES(HessianMatrixQP2Feet,gradientQP2Feet',ConstraintsMatrixQP2Feet,[],[],[],bVectorConstraintsQp2Feet');           
+            [f02Feet,~,exitFlagQP,~,~,~] = qpOASES(HessianMatrixQP2FeetOrLegs,gradientQP2FeetOrLegs',ConstraintsMatrixQP2FeetOrLegs,[],[],[],bVectorConstraintsQp2FeetOrLegs');  
+            
             if exitFlagQP ~= 0
-                f02Feet = - inv(HessianMatrixQP2Feet)*gradientQP2Feet';
+                f02Feet = - inv(HessianMatrixQP2FeetOrLegs)*gradientQP2FeetOrLegs';
             end
         else
-            exitFlagQP                 = 1;
-            f02Feet = - inv(HessianMatrixQP2Feet)*gradientQP2Feet';
+            exitFlagQP                   = 1;
+            f02Feet = - inv(HessianMatrixQP2FeetOrLegs)*gradientQP2FeetOrLegs';
         end
             
     elseif sum(LEFT_RIGHT_FOOT_IN_CONTACT) > (1 - CONTACT_THRESHOLD) 
+        
         HessianMatrixQP1Foot       = block.InputPort(7).Data;
         gradientQP1Foot            = block.InputPort(8).Data;
         ConstraintsMatrixQP1Foot   = block.InputPort(9).Data;
@@ -201,9 +204,9 @@ function Outputs(block)
     else
         exitFlagQP           = -10;
     end
+    
     block.OutputPort(1).Data = f02Feet;
     block.OutputPort(2).Data = exitFlagQP;
-    
     block.OutputPort(3).Data = [f0OneFoot*LEFT_RIGHT_FOOT_IN_CONTACT(1);
                                 f0OneFoot*LEFT_RIGHT_FOOT_IN_CONTACT(2)]*abs(LEFT_RIGHT_FOOT_IN_CONTACT(2)-LEFT_RIGHT_FOOT_IN_CONTACT(1));
     

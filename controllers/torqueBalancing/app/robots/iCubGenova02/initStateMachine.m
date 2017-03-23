@@ -9,16 +9,15 @@ if strcmpi(SM.SM_TYPE, 'YOGA')
     reg.impedances             = 0.1;
     reg.dampings               = 0;
     reg.HessianQP              = 1e-7;
-
     sat.torque                 = 60;
 
     gain.footSize              = [ -0.07  0.12 ;    % xMin, xMax
                                    -0.045 0.05 ];   % yMin, yMax  
                    
-    forceFrictionCoefficient     = 1/3;
+    forceFrictionCoefficient   = 1/3;
     
     %Smoothing time for time varying impedances
-    gain.SmoothingTimeGainScheduling              = 2;  
+    gain.SmoothingTimeGainScheduling = 2;  
 
     %Smoothing time for time-varying constraints
     CONFIG.smoothingTimeTranDynamics  = 0.02;
@@ -36,11 +35,11 @@ if strcmpi(SM.SM_TYPE, 'YOGA')
                         30    50  30  % state == 11  PREPARING FOR SWITCHING 
                         30    50  30  % state == 12  LOOKING FOR CONTACT
                         30    50  30];% state == 13  TRANSITION TO INITIAL POSITION
+                    
     gain.PCOM  =  gain.PCOM;
     gain.ICOM  = gain.PCOM*0;
     gain.DCOM  = 2*sqrt(gain.PCOM)*0;   
- 
-    
+   
     gain.PAngularMomentum  = 0.25 ;
     gain.DAngularMomentum  = 2*sqrt(gain.PAngularMomentum);
 
@@ -59,7 +58,6 @@ if strcmpi(SM.SM_TYPE, 'YOGA')
     % state == 11  PREPARING FOR SWITCHING
     % state == 12  LOOKING FOR CONTACT 
     % state == 13  TRANSITION TO INITIAL POSITION
-
 
     %                   %   TORSO  %%      LEFT ARM   %%      RIGHT ARM   %%         LEFT LEG            %%         RIGHT LEG           %% 
     gain.impedances  = [10   10   20, 10   10    10    8, 10   10    10    8, 30   30   20    20     10  10, 30   50   30    60      5   5  % state ==  1  TWO FEET BALANCING

@@ -12,8 +12,8 @@ if (sum(CONFIG.LEFT_RIGHT_FOOT_IN_CONTACT) == 2 )
         references.com.frequencyOfOscillation  =  0.2;
     else
         references.com.directionOfOscillation  = [0;0;0];
-        references.com.amplitudeOfOscillation  = 0.0;  %referenceParams(1) = amplitude of oscillations in meters 
-        references.com.frequencyOfOscillation  = 0.0;  %referenceParams(2) = frequency of oscillations in hertz
+        references.com.amplitudeOfOscillation  =  0.0;  %referenceParams(1) = amplitude of oscillations in meters 
+        references.com.frequencyOfOscillation  =  0.0;  %referenceParams(2) = frequency of oscillations in hertz
     end
 else
 
