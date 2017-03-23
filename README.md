@@ -9,7 +9,6 @@ All the models implemented with the old WBI-Toolbox are in the [legacy](controll
 new [WB-Toolbox](https://github.com/robotology/WB-Toolbox) models are:
 
 - [torqueBalancing](#torquebalancing)
-- [torqueBalancing_experiments](#torquebalancing_experiments)
 - [torqueBalancingOnSeesaw](#torquebalancingonseesaw)
 - [wholeBodyImpedanceControl](#wholebodyimpedancecontrol)
 
@@ -18,9 +17,6 @@ Check the documentation in [WB-Toolbox](https://github.com/robotology/WB-Toolbox
 ### torqueBalancing
 This simulink model controls the robot using a momentum-based balancing control.
 The user can find the full description here: [torqueBalancing README](controllers/torqueBalancing/README.md)
-
-### torqueBalancing_experiments
-This folder contains two modifications of the original torqueBalancing code. These versions are deprecated and will be removed soon.
 
 ### torqueBalancingOnSeesaw
 This is a peculiar version of momentum-based balancing controller, specifically developed for balancing the robot on a seesaw. The readme is at the following link: [torqueBalancingOnSeesaw README](controllers/torqueBalancingOnSeesaw/README.md).
