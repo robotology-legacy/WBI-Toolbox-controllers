@@ -1,8 +1,8 @@
-function legsInContact = contactDetector(icubChair,state)
+function legsInContact = contactDetector(icubStandup,state)
 %#codegen
 legsInContact = 0;
 
-if (state < 3) && (icubChair == 1)
+if (state < 3) && (icubStandup == 1)
     
     legsInContact = 1;
     
