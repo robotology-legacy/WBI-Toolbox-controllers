@@ -30,7 +30,9 @@ clear; clc;
 % setenv('YARP_ROBOT_NAME','iCubDarmstadt01');
 % setenv('YARP_ROBOT_NAME','icubGazeboSim');
 % setenv('YARP_ROBOT_NAME','iCubGenova05');
-setenv('YARP_ROBOT_NAME','isaacFirstProtoGazebo');
+% setenv('YARP_ROBOT_NAME','isaacFirstProtoGazebo');
+setenv('YARP_ROBOT_NAME','bigman');
+% setenv('YARP_ROBOT_NAME','bigman_only_legs');
 
 % Simulation time in seconds
 CONFIG.SIMULATION_TIME     = inf;   

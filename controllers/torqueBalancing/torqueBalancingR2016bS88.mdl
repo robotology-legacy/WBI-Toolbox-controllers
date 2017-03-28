@@ -6,7 +6,7 @@ Model {
     NumRootInports	    0
     NumRootOutports	    0
     ParameterArgumentNames  ""
-    ComputedModelVersion    "1.3124"
+    ComputedModelVersion    "1.3125"
     NumModelReferences	    0
     NumTestPointedSignals   0
     NumProvidedFunctions    0
@@ -100,9 +100,9 @@ Model {
   ModifiedByFormat	  "%<Auto>"
   LastModifiedBy	  "gnava"
   ModifiedDateFormat	  "%<Auto>"
-  LastModifiedDate	  "Mon Mar 20 16:17:29 2017"
-  RTWModifiedTimeStamp	  411927401
-  ModelVersionFormat	  "1.%<AutoIncrement:3124>"
+  LastModifiedDate	  "Tue Mar 28 15:27:03 2017"
+  RTWModifiedTimeStamp	  412615614
+  ModelVersionFormat	  "1.%<AutoIncrement:3125>"
   ConfigurationManager	  "none"
   SampleTimeColors	  off
   SampleTimeAnnotations	  off
@@ -1234,7 +1234,7 @@ Model {
       Variant		      off
       System {
 	Name			"DesValues"
-	Location		[0, 22, 2560, 1435]
+	Location		[65, 24, 1920, 1080]
 	Open			off
 	ModelBrowserVisibility	off
 	ModelBrowserWidth	200
@@ -1246,7 +1246,7 @@ Model {
 	TiledPaperMargins	[0.500000, 0.500000, 0.500000, 0.500000]
 	TiledPageScale		1
 	ShowPageBoundaries	off
-	ZoomFactor		"99"
+	ZoomFactor		"71"
 	Block {
 	  BlockType		  Reference
 	  Name			  "Compare\nTo Zero"
@@ -3941,7 +3941,7 @@ Model {
 	      Name		      "DoFs converter"
 	      SID		      "3712"
 	      Ports		      [1, 5]
-	      Position		      [485, 234, 580, 336]
+	      Position		      [485, 214, 580, 316]
 	      ZOrder		      659
 	      LibraryVersion	      "1.381"
 	      SourceBlock	      "WBToolboxLibrary/Utilities/DoFs converter"
@@ -3975,13 +3975,19 @@ Model {
 		RTWStorageClass		"Auto"
 		DataLoggingNameMode	"SignalName"
 	      }
+	      Port {
+		PortNumber		5
+		Name			"right_leg"
+		RTWStorageClass		"Auto"
+		DataLoggingNameMode	"SignalName"
+	      }
 	    }
 	    Block {
 	      BlockType		      Reference
 	      Name		      "DoFs converter1"
 	      SID		      "3713"
 	      Ports		      [1, 5]
-	      Position		      [495, 534, 590, 636]
+	      Position		      [495, 514, 590, 616]
 	      ZOrder		      660
 	      LibraryVersion	      "1.381"
 	      SourceBlock	      "WBToolboxLibrary/Utilities/DoFs converter"
@@ -4012,6 +4018,12 @@ Model {
 	      Port {
 		PortNumber		4
 		Name			"left_leg"
+		RTWStorageClass		"Auto"
+		DataLoggingNameMode	"SignalName"
+	      }
+	      Port {
+		PortNumber		5
+		Name			"right_leg"
 		RTWStorageClass		"Auto"
 		DataLoggingNameMode	"SignalName"
 	      }
@@ -4217,7 +4229,7 @@ Model {
 	      ZOrder		      35
 	      SrcBlock		      "impedances"
 	      SrcPort		      1
-	      Points		      [0, 50]
+	      Points		      [0, 45]
 	      DstBlock		      "DoFs converter"
 	      DstPort		      1
 	    }
@@ -4237,15 +4249,16 @@ Model {
 	      Labels		      [2, 1]
 	      SrcBlock		      "DoFs converter"
 	      SrcPort		      4
-	      Points		      [0, -20]
+	      Points		      [0, 0]
 	      DstBlock		      "Impedances(t)"
 	      DstPort		      4
 	    }
 	    Line {
 	      Name		      "right_leg"
-	      ZOrder		      34
+	      ZOrder		      56
 	      Labels		      [1, 1]
-	      Points		      [585, 305]
+	      SrcBlock		      "DoFs converter"
+	      SrcPort		      5
 	      DstBlock		      "Impedances(t)"
 	      DstPort		      5
 	    }
@@ -4255,7 +4268,7 @@ Model {
 	      Labels		      [2, 1]
 	      SrcBlock		      "DoFs converter"
 	      SrcPort		      3
-	      Points		      [0, -20]
+	      Points		      [0, 0]
 	      DstBlock		      "Impedances(t)"
 	      DstPort		      3
 	    }
@@ -4265,7 +4278,7 @@ Model {
 	      Labels		      [2, 1]
 	      SrcBlock		      "DoFs converter"
 	      SrcPort		      1
-	      Points		      [0, -20]
+	      Points		      [0, 0]
 	      DstBlock		      "Impedances(t)"
 	      DstPort		      1
 	    }
@@ -4275,7 +4288,7 @@ Model {
 	      Labels		      [2, 1]
 	      SrcBlock		      "DoFs converter"
 	      SrcPort		      2
-	      Points		      [0, -20]
+	      Points		      [0, 0]
 	      DstBlock		      "Impedances(t)"
 	      DstPort		      2
 	    }
@@ -4293,15 +4306,16 @@ Model {
 	      Labels		      [2, 1]
 	      SrcBlock		      "DoFs converter1"
 	      SrcPort		      4
-	      Points		      [0, -20]
+	      Points		      [0, 0]
 	      DstBlock		      "qjDot(t) "
 	      DstPort		      4
 	    }
 	    Line {
 	      Name		      "right_leg"
-	      ZOrder		      37
+	      ZOrder		      57
 	      Labels		      [1, 1]
-	      Points		      [595, 605]
+	      SrcBlock		      "DoFs converter1"
+	      SrcPort		      5
 	      DstBlock		      "qjDot(t) "
 	      DstPort		      5
 	    }
@@ -4311,7 +4325,7 @@ Model {
 	      Labels		      [2, 1]
 	      SrcBlock		      "DoFs converter1"
 	      SrcPort		      3
-	      Points		      [0, -20]
+	      Points		      [0, 0]
 	      DstBlock		      "qjDot(t) "
 	      DstPort		      3
 	    }
@@ -4321,7 +4335,7 @@ Model {
 	      Labels		      [2, 1]
 	      SrcBlock		      "DoFs converter1"
 	      SrcPort		      1
-	      Points		      [0, -20]
+	      Points		      [0, 0]
 	      DstBlock		      "qjDot(t) "
 	      DstPort		      1
 	    }
@@ -4331,7 +4345,7 @@ Model {
 	      Labels		      [2, 1]
 	      SrcBlock		      "DoFs converter1"
 	      SrcPort		      2
-	      Points		      [0, -20]
+	      Points		      [0, 0]
 	      DstBlock		      "qjDot(t) "
 	      DstPort		      2
 	    }
@@ -18048,7 +18062,7 @@ Model {
 	  Name			  "DoFs converter"
 	  SID			  "3705"
 	  Ports			  [1, 5]
-	  Position		  [345, 14, 440, 116]
+	  Position		  [345, -6, 440, 96]
 	  ZOrder		  585
 	  LibraryVersion	  "1.381"
 	  SourceBlock		  "WBToolboxLibrary/Utilities/DoFs converter"
@@ -18082,13 +18096,19 @@ Model {
 	    RTWStorageClass	    "Auto"
 	    DataLoggingNameMode	    "SignalName"
 	  }
+	  Port {
+	    PortNumber		    5
+	    Name		    "right_leg"
+	    RTWStorageClass	    "Auto"
+	    DataLoggingNameMode	    "SignalName"
+	  }
 	}
 	Block {
 	  BlockType		  Reference
 	  Name			  "DoFs converter1"
 	  SID			  "3706"
 	  Ports			  [1, 5]
-	  Position		  [345, 169, 440, 271]
+	  Position		  [345, 149, 440, 251]
 	  ZOrder		  586
 	  LibraryVersion	  "1.381"
 	  SourceBlock		  "WBToolboxLibrary/Utilities/DoFs converter"
@@ -18122,13 +18142,19 @@ Model {
 	    RTWStorageClass	    "Auto"
 	    DataLoggingNameMode	    "SignalName"
 	  }
+	  Port {
+	    PortNumber		    5
+	    Name		    "right_leg"
+	    RTWStorageClass	    "Auto"
+	    DataLoggingNameMode	    "SignalName"
+	  }
 	}
 	Block {
 	  BlockType		  Reference
 	  Name			  "DoFs converter2"
 	  SID			  "3707"
 	  Ports			  [1, 5]
-	  Position		  [345, 304, 440, 406]
+	  Position		  [345, 284, 440, 386]
 	  ZOrder		  587
 	  LibraryVersion	  "1.381"
 	  SourceBlock		  "WBToolboxLibrary/Utilities/DoFs converter"
@@ -18162,13 +18188,19 @@ Model {
 	    RTWStorageClass	    "Auto"
 	    DataLoggingNameMode	    "SignalName"
 	  }
+	  Port {
+	    PortNumber		    5
+	    Name		    "right_leg"
+	    RTWStorageClass	    "Auto"
+	    DataLoggingNameMode	    "SignalName"
+	  }
 	}
 	Block {
 	  BlockType		  Reference
 	  Name			  "DoFs converter3"
 	  SID			  "3708"
 	  Ports			  [1, 5]
-	  Position		  [980, 34, 1075, 136]
+	  Position		  [980, 14, 1075, 116]
 	  ZOrder		  588
 	  LibraryVersion	  "1.381"
 	  SourceBlock		  "WBToolboxLibrary/Utilities/DoFs converter"
@@ -18202,13 +18234,19 @@ Model {
 	    RTWStorageClass	    "Auto"
 	    DataLoggingNameMode	    "SignalName"
 	  }
+	  Port {
+	    PortNumber		    5
+	    Name		    "right_leg"
+	    RTWStorageClass	    "Auto"
+	    DataLoggingNameMode	    "SignalName"
+	  }
 	}
 	Block {
 	  BlockType		  Reference
 	  Name			  "DoFs converter4"
 	  SID			  "3709"
 	  Ports			  [1, 5]
-	  Position		  [980, 169, 1075, 271]
+	  Position		  [980, 149, 1075, 251]
 	  ZOrder		  589
 	  LibraryVersion	  "1.381"
 	  SourceBlock		  "WBToolboxLibrary/Utilities/DoFs converter"
@@ -18242,13 +18280,19 @@ Model {
 	    RTWStorageClass	    "Auto"
 	    DataLoggingNameMode	    "SignalName"
 	  }
+	  Port {
+	    PortNumber		    5
+	    Name		    "right_leg"
+	    RTWStorageClass	    "Auto"
+	    DataLoggingNameMode	    "SignalName"
+	  }
 	}
 	Block {
 	  BlockType		  Reference
 	  Name			  "DoFs converter5"
 	  SID			  "3710"
 	  Ports			  [1, 5]
-	  Position		  [980, 304, 1075, 406]
+	  Position		  [980, 284, 1075, 386]
 	  ZOrder		  590
 	  LibraryVersion	  "1.381"
 	  SourceBlock		  "WBToolboxLibrary/Utilities/DoFs converter"
@@ -18279,6 +18323,12 @@ Model {
 	  Port {
 	    PortNumber		    4
 	    Name		    "left_leg"
+	    RTWStorageClass	    "Auto"
+	    DataLoggingNameMode	    "SignalName"
+	  }
+	  Port {
+	    PortNumber		    5
+	    Name		    "right_leg"
 	    RTWStorageClass	    "Auto"
 	    DataLoggingNameMode	    "SignalName"
 	  }
@@ -19565,9 +19615,10 @@ Model {
 	}
 	Line {
 	  Name			  "right_leg"
-	  ZOrder		  128
+	  ZOrder		  227
 	  Labels		  [1, 1]
-	  Points		  [1080, 105]
+	  SrcBlock		  "DoFs converter3"
+	  SrcPort		  5
 	  DstBlock		  "qj"
 	  DstPort		  5
 	}
@@ -19577,7 +19628,7 @@ Model {
 	  Labels		  [2, 1]
 	  SrcBlock		  "DoFs converter3"
 	  SrcPort		  1
-	  Points		  [0, -20]
+	  Points		  [0, 0]
 	  DstBlock		  "qj"
 	  DstPort		  1
 	}
@@ -19587,7 +19638,7 @@ Model {
 	  Labels		  [2, 1]
 	  SrcBlock		  "DoFs converter3"
 	  SrcPort		  2
-	  Points		  [0, -20]
+	  Points		  [0, 0]
 	  DstBlock		  "qj"
 	  DstPort		  2
 	}
@@ -19597,7 +19648,7 @@ Model {
 	  Labels		  [2, 1]
 	  SrcBlock		  "DoFs converter3"
 	  SrcPort		  4
-	  Points		  [0, -20]
+	  Points		  [0, 0]
 	  DstBlock		  "qj"
 	  DstPort		  4
 	}
@@ -19607,7 +19658,7 @@ Model {
 	  Labels		  [2, 1]
 	  SrcBlock		  "DoFs converter3"
 	  SrcPort		  3
-	  Points		  [0, -20]
+	  Points		  [0, 0]
 	  DstBlock		  "qj"
 	  DstPort		  3
 	}
@@ -19731,7 +19782,7 @@ Model {
 	  Points		  [40, 0]
 	  Branch {
 	    ZOrder		    123
-	    Points		    [0, 100]
+	    Points		    [0, 95]
 	    DstBlock		    "DoFs converter2"
 	    DstPort		    1
 	  }
@@ -19743,9 +19794,10 @@ Model {
 	}
 	Line {
 	  Name			  "right_leg"
-	  ZOrder		  109
+	  ZOrder		  222
 	  Labels		  [1, 1]
-	  Points		  [445, 85]
+	  SrcBlock		  "DoFs converter"
+	  SrcPort		  5
 	  DstBlock		  "tauDes"
 	  DstPort		  5
 	}
@@ -19755,7 +19807,7 @@ Model {
 	  Labels		  [2, 1]
 	  SrcBlock		  "DoFs converter"
 	  SrcPort		  1
-	  Points		  [0, -20]
+	  Points		  [0, 0]
 	  DstBlock		  "tauDes"
 	  DstPort		  1
 	}
@@ -19765,7 +19817,7 @@ Model {
 	  Labels		  [2, 1]
 	  SrcBlock		  "DoFs converter"
 	  SrcPort		  2
-	  Points		  [0, -20]
+	  Points		  [0, 0]
 	  DstBlock		  "tauDes"
 	  DstPort		  2
 	}
@@ -19775,7 +19827,7 @@ Model {
 	  Labels		  [2, 1]
 	  SrcBlock		  "DoFs converter"
 	  SrcPort		  4
-	  Points		  [0, -20]
+	  Points		  [0, 0]
 	  DstBlock		  "tauDes"
 	  DstPort		  4
 	}
@@ -19785,15 +19837,16 @@ Model {
 	  Labels		  [2, 1]
 	  SrcBlock		  "DoFs converter"
 	  SrcPort		  3
-	  Points		  [0, -20]
+	  Points		  [0, 0]
 	  DstBlock		  "tauDes"
 	  DstPort		  3
 	}
 	Line {
 	  Name			  "right_leg"
-	  ZOrder		  112
+	  ZOrder		  223
 	  Labels		  [1, 1]
-	  Points		  [445, 240]
+	  SrcBlock		  "DoFs converter1"
+	  SrcPort		  5
 	  DstBlock		  "tauError"
 	  DstPort		  5
 	}
@@ -19803,7 +19856,7 @@ Model {
 	  Labels		  [2, 1]
 	  SrcBlock		  "DoFs converter1"
 	  SrcPort		  1
-	  Points		  [0, -20]
+	  Points		  [0, 0]
 	  DstBlock		  "tauError"
 	  DstPort		  1
 	}
@@ -19813,7 +19866,7 @@ Model {
 	  Labels		  [2, 1]
 	  SrcBlock		  "DoFs converter1"
 	  SrcPort		  2
-	  Points		  [0, -20]
+	  Points		  [0, 0]
 	  DstBlock		  "tauError"
 	  DstPort		  2
 	}
@@ -19823,7 +19876,7 @@ Model {
 	  Labels		  [2, 1]
 	  SrcBlock		  "DoFs converter1"
 	  SrcPort		  4
-	  Points		  [0, -20]
+	  Points		  [0, 0]
 	  DstBlock		  "tauError"
 	  DstPort		  4
 	}
@@ -19833,7 +19886,7 @@ Model {
 	  Labels		  [2, 1]
 	  SrcBlock		  "DoFs converter1"
 	  SrcPort		  3
-	  Points		  [0, -20]
+	  Points		  [0, 0]
 	  DstBlock		  "tauError"
 	  DstPort		  3
 	}
@@ -19843,15 +19896,16 @@ Model {
 	  Labels		  [0, 0]
 	  SrcBlock		  "Sum"
 	  SrcPort		  1
-	  Points		  [54, 0; 0, 90]
+	  Points		  [54, 0; 0, 85]
 	  DstBlock		  "DoFs converter1"
 	  DstPort		  1
 	}
 	Line {
 	  Name			  "right_leg"
-	  ZOrder		  122
+	  ZOrder		  224
 	  Labels		  [1, 1]
-	  Points		  [445, 375]
+	  SrcBlock		  "DoFs converter2"
+	  SrcPort		  5
 	  DstBlock		  "tauMeasured"
 	  DstPort		  5
 	}
@@ -19861,7 +19915,7 @@ Model {
 	  Labels		  [2, 1]
 	  SrcBlock		  "DoFs converter2"
 	  SrcPort		  1
-	  Points		  [0, -20]
+	  Points		  [0, 0]
 	  DstBlock		  "tauMeasured"
 	  DstPort		  1
 	}
@@ -19871,7 +19925,7 @@ Model {
 	  Labels		  [2, 1]
 	  SrcBlock		  "DoFs converter2"
 	  SrcPort		  2
-	  Points		  [0, -20]
+	  Points		  [0, 0]
 	  DstBlock		  "tauMeasured"
 	  DstPort		  2
 	}
@@ -19881,7 +19935,7 @@ Model {
 	  Labels		  [2, 1]
 	  SrcBlock		  "DoFs converter2"
 	  SrcPort		  4
-	  Points		  [0, -20]
+	  Points		  [0, 0]
 	  DstBlock		  "tauMeasured"
 	  DstPort		  4
 	}
@@ -19891,7 +19945,7 @@ Model {
 	  Labels		  [2, 1]
 	  SrcBlock		  "DoFs converter2"
 	  SrcPort		  3
-	  Points		  [0, -20]
+	  Points		  [0, 0]
 	  DstBlock		  "tauMeasured"
 	  DstPort		  3
 	}
@@ -19924,9 +19978,10 @@ Model {
 	}
 	Line {
 	  Name			  "right_leg"
-	  ZOrder		  130
+	  ZOrder		  226
 	  Labels		  [1, 1]
-	  Points		  [1080, 240]
+	  SrcBlock		  "DoFs converter4"
+	  SrcPort		  5
 	  DstBlock		  "qjDes"
 	  DstPort		  5
 	}
@@ -19936,7 +19991,7 @@ Model {
 	  Labels		  [2, 1]
 	  SrcBlock		  "DoFs converter4"
 	  SrcPort		  1
-	  Points		  [0, -20]
+	  Points		  [0, 0]
 	  DstBlock		  "qjDes"
 	  DstPort		  1
 	}
@@ -19946,7 +20001,7 @@ Model {
 	  Labels		  [2, 1]
 	  SrcBlock		  "DoFs converter4"
 	  SrcPort		  2
-	  Points		  [0, -20]
+	  Points		  [0, 0]
 	  DstBlock		  "qjDes"
 	  DstPort		  2
 	}
@@ -19956,7 +20011,7 @@ Model {
 	  Labels		  [2, 1]
 	  SrcBlock		  "DoFs converter4"
 	  SrcPort		  4
-	  Points		  [0, -20]
+	  Points		  [0, 0]
 	  DstBlock		  "qjDes"
 	  DstPort		  4
 	}
@@ -19966,7 +20021,7 @@ Model {
 	  Labels		  [2, 1]
 	  SrcBlock		  "DoFs converter4"
 	  SrcPort		  3
-	  Points		  [0, -20]
+	  Points		  [0, 0]
 	  DstBlock		  "qjDes"
 	  DstPort		  3
 	}
@@ -19980,9 +20035,11 @@ Model {
 	}
 	Line {
 	  Name			  "right_leg"
-	  ZOrder		  136
+	  ZOrder		  225
 	  Labels		  [1, 1]
-	  Points		  [1080, 375; 213, 0]
+	  SrcBlock		  "DoFs converter5"
+	  SrcPort		  5
+	  Points		  [213, 0]
 	  Branch {
 	    ZOrder		    62
 	    Points		    [0, 80]
@@ -20001,7 +20058,7 @@ Model {
 	  Labels		  [2, 1]
 	  SrcBlock		  "DoFs converter5"
 	  SrcPort		  1
-	  Points		  [0, -20]
+	  Points		  [0, 0]
 	  DstBlock		  "qj_err"
 	  DstPort		  1
 	}
@@ -20011,7 +20068,7 @@ Model {
 	  Labels		  [2, 1]
 	  SrcBlock		  "DoFs converter5"
 	  SrcPort		  2
-	  Points		  [0, -20]
+	  Points		  [0, 0]
 	  DstBlock		  "qj_err"
 	  DstPort		  2
 	}
@@ -20021,7 +20078,7 @@ Model {
 	  Labels		  [2, 1]
 	  SrcBlock		  "DoFs converter5"
 	  SrcPort		  4
-	  Points		  [0, -20; 237, 0]
+	  Points		  [0, 0; 237, 0]
 	  Branch {
 	    ZOrder		    67
 	    Points		    [0, 90]
@@ -20040,7 +20097,7 @@ Model {
 	  Labels		  [2, 1]
 	  SrcBlock		  "DoFs converter5"
 	  SrcPort		  3
-	  Points		  [0, -20]
+	  Points		  [0, 0]
 	  DstBlock		  "qj_err"
 	  DstPort		  3
 	}
