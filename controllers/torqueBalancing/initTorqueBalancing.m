@@ -138,25 +138,47 @@ SM.SM.MASK.WALKING       = bin2dec('100');
 SM.SM.MASK.STANDUP       = bin2dec('110');
 
 SM.SM_TYPE_BIN           = SM.SM.MASK.COORDINATOR;
+
+%% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% %%
+% Run all the initialization files for finite state machines. The reason is 
+% there are variables used only in each initialization file: in this way,
+% all variables required by the Simulink model will be initialized. Don't 
+% worry, all common variables will be overwritten by calling again the 
+% function specific for your demo. It is not really clean, but this is how
+% things work for now.
+%% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% %%
+robotSpecificFSM         = fullfile('app/robots',getenv('YARP_ROBOT_NAME'),'initStateMachine.m');
+run(robotSpecificFSM);
+robotSpecificFSM         = fullfile('app/robots',getenv('YARP_ROBOT_NAME'),'initStateMachine.m');
+run(robotSpecificFSM);
 robotSpecificFSM         = fullfile('app/robots',getenv('YARP_ROBOT_NAME'),'initStateMachine.m');
 run(robotSpecificFSM);
 
 %% iCub stand up demo parameters
-icubStandup                   = 0;
+% both CONFIG.iCubStandUp and CONFIG.useExtHandForces are setted to TRUE,
+% the robot will be aware of the external forces at the arms and will use
+% also them for lifting up.
+CONFIG.iCubStandUp            = false;
+CONFIG.useExtArmForces        = false;
+
 PORTS.WBDT_CHAIR              = '/chair/FT_sensor/analog:o/forceTorque';
+PORTS.RIGHT_ARM               = '/wholeBodyDynamicsTree/left_arm/endEffectorWrench:o';
+PORTS.LEFT_ARM                = '/wholeBodyDynamicsTree/right_arm/endEffectorWrench:o';
 
 %% Define which simulation will be performed
 if strcmpi(SM.SM_TYPE, 'COORDINATOR')
     SM.SM_TYPE_BIN      = SM.SM.MASK.COORDINATOR;
 elseif strcmpi(SM.SM_TYPE, 'YOGA')
     SM.SM_TYPE_BIN      = SM.SM.MASK.YOGA;
+    robotSpecificFSM    = fullfile('app/robots',getenv('YARP_ROBOT_NAME'),'initStateMachine.m');
+    run(robotSpecificFSM);
 elseif strcmpi(SM.SM_TYPE, 'WALKING')
     SM.SM_TYPE_BIN      = SM.SM.MASK.WALKING;
     robotSpecificFSM    = fullfile('app/robots',getenv('YARP_ROBOT_NAME'),'initStateMachineWalking.m');
     run(robotSpecificFSM);
 elseif strcmpi(SM.SM_TYPE, 'STANDUP')
     SM.SM_TYPE_BIN      = SM.SM.MASK.STANDUP;
-    icubStandup         = 1;
+    CONFIG.iCubStandUp  = 1;
     robotSpecificFSM    = fullfile('app/robots',getenv('YARP_ROBOT_NAME'),'initStateMachineStandUp.m');
     run(robotSpecificFSM);
 end

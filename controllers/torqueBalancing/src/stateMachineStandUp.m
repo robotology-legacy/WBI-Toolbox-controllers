@@ -1,5 +1,5 @@
 function [w_H_b,constraints,impedances,kpCom,kdCom,currentState,jointsAndCoMSmoothingTime,qjDes,CoM_Des] = ...
-          stateMachineStandUp(qjRef,CoM,CoM_0,l_sole_H_b,l_upper_leg_contact_H_b,t,gain,sm,Lwrench,Rwrench)
+          stateMachineStandUp(qjRef,CoM,CoM_0,l_sole_H_b,l_upper_leg_contact_H_b,t,gain,sm,Lwrench,Rwrench,LArmWrench,RArmWrench,useExtArmForces)
       
     persistent state;
     persistent tSwitch;
@@ -28,9 +28,17 @@ function [w_H_b,constraints,impedances,kpCom,kdCom,currentState,jointsAndCoMSmoo
         w_H_b                     =  w_H_fixedLink * l_upper_leg_contact_H_b;
         jointsAndCoMSmoothingTime = sm.jointsAndCoMSmoothingTimes(state);
         
-        % after tBalancing time, start moving CoM forward
-        if t > sm.tBalancing 
-            state = 2;           
+        % after tBalancing time, start moving CoM forward. If useExtArmForces
+        % is enbabled, wait for external help before lifting up.
+        if useExtArmForces == 1
+            
+            if t > sm.tBalancing && RArmWrench(2) < sm.RArmThreshold(state) && LArmWrench(2) < sm.LArmThreshold(state)
+                state = 2;           
+            end
+        else
+            if t > sm.tBalancing
+                state = 2;           
+            end
         end
     end
 
@@ -49,7 +57,7 @@ function [w_H_b,constraints,impedances,kpCom,kdCom,currentState,jointsAndCoMSmoo
         CoM_Des                   = CoM_0 + transpose(sm.CoM.standUpDeltaCoM(state,:));
         jointsAndCoMSmoothingTime = sm.jointsAndCoMSmoothingTimes(state);
         
-        if (Lwrench(3)+Rwrench(3)) > (sm.LwrenchTreshold(state) + sm.RwrenchTreshold(state))
+        if (Lwrench(3)+Rwrench(3)) > (sm.LwrenchThreshold(state) + sm.RwrenchThreshold(state))
             state           = 3;
             w_H_fixedLink   = w_H_fixedLink * l_upper_leg_contact_H_b/l_sole_H_b;
             tSwitch         = t;
@@ -75,7 +83,7 @@ function [w_H_b,constraints,impedances,kpCom,kdCom,currentState,jointsAndCoMSmoo
         tDelta                    = t-tSwitch;
         jointsAndCoMSmoothingTime = sm.jointsAndCoMSmoothingTimes(state);
         
-        if Lwrench(3) > sm.LwrenchTreshold(state) &&  Rwrench(3) > sm.RwrenchTreshold(state) && tDelta > 1
+        if Lwrench(3) > sm.LwrenchThreshold(state) &&  Rwrench(3) > sm.RwrenchThreshold(state) && tDelta > 1
             state       = 4;
             CoMprevious = CoM;
         end

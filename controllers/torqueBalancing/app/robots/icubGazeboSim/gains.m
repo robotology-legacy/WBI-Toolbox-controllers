@@ -4,7 +4,6 @@ PORTS.IMU              = '/icubSim/inertial';
 PORTS.WBDT_LEFTLEG_EE  = '/wholeBodyDynamicsTree/left_leg/cartesianEndEffectorWrench:o';
 PORTS.WBDT_RIGHTLEG_EE = '/wholeBodyDynamicsTree/right_leg/cartesianEndEffectorWrench:o';
 
-
 CONFIG.LEFT_RIGHT_FOOT_IN_CONTACT = [1 1];
 
 CONFIG.SMOOTH_DES_COM      = 0;    % If equal to one, the desired streamed values 

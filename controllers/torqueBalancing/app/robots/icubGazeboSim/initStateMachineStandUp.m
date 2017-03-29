@@ -60,18 +60,30 @@ sm.joints.standUpPositions = [0.0000      0.0000     0.0000    0.0000        0.0
                       
 sm.CoM.standUpDeltaCoM    = [0.0     0.0   0.0;       % state ==  1  THIS REFERENCE IS NOT USED
                              0.20    0.0   0.0;       % state ==  2  MOVE COM FORWARD
-                             0.0     0.0   0.0;       % state ==  3  TWO FEET BALANCING
+                             0.03    0.0   0.0;       % state ==  3  TWO FEET BALANCING
                              0.06    0.0   0.17];     % state ==  4  LIFTING UP
                        
 sm.joints.leftAnkleCorrection = -0.0714;
-                     
-sm.LwrenchTreshold    = [0;   % state ==  1  THIS REFERENCE IS NOT USED
+    
+% feet threshold
+sm.LwrenchThreshold    = [0;  % state ==  1  THIS REFERENCE IS NOT USED
                          75;  % state ==  2  MOVE COM FORWARD
                          110  % state ==  3  TWO FEET BALANCING
                          0];  % state ==  4  THIS REFERENCE IS NOT USED
                      
-sm.RwrenchTreshold    = [0    % state ==  1  THIS REFERENCE IS NOT USED
+sm.RwrenchThreshold    = [0   % state ==  1  THIS REFERENCE IS NOT USED
                          75;  % state ==  2  MOVE COM FORWARD
                          110  % state ==  3  TWO FEET BALANCING
                          0];  % state ==  4  THIS REFERENCE IS NOT USED
+                
+% arms threshold                    
+sm.RArmThreshold      = [-30  % state ==  1  THIS REFERENCE IS NOT USED
+                          0;  % state ==  2  MOVE COM FORWARD
+                          0   % state ==  3  TWO FEET BALANCING
+                          0]; % state ==  4  THIS REFERENCE IS NOT USED
+                     
+sm.LArmThreshold      = [-30  % state ==  1  THIS REFERENCE IS NOT USED
+                          0;  % state ==  2  MOVE COM FORWARD
+                          0   % state ==  3  TWO FEET BALANCING
+                          0]; % state ==  4  THIS REFERENCE IS NOT USED
                                          
