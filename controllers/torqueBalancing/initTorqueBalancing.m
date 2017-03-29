@@ -28,7 +28,7 @@ clear; clc;
 % setenv('YARP_ROBOT_NAME','iCubGenova01');
 % setenv('YARP_ROBOT_NAME','iCubGenova02');
 % setenv('YARP_ROBOT_NAME','iCubDarmstadt01');
-  setenv('YARP_ROBOT_NAME','icubGazeboSim');
+setenv('YARP_ROBOT_NAME','icubGazeboSim');
 % setenv('YARP_ROBOT_NAME','iCubGenova05');
 
 % Simulation time in seconds
@@ -149,9 +149,7 @@ SM.SM_TYPE_BIN           = SM.SM.MASK.COORDINATOR;
 %% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% %%
 robotSpecificFSM         = fullfile('app/robots',getenv('YARP_ROBOT_NAME'),'initStateMachine.m');
 run(robotSpecificFSM);
-robotSpecificFSM         = fullfile('app/robots',getenv('YARP_ROBOT_NAME'),'initStateMachine.m');
-run(robotSpecificFSM);
-robotSpecificFSM         = fullfile('app/robots',getenv('YARP_ROBOT_NAME'),'initStateMachine.m');
+robotSpecificFSM         = fullfile('app/robots',getenv('YARP_ROBOT_NAME'),'initStateMachineStandUp.m');
 run(robotSpecificFSM);
 
 %% iCub stand up demo parameters

@@ -9,10 +9,6 @@ if strcmpi(SM.SM_TYPE, 'STANDUP')
      %% State parameters
      sm.stateAt0                   = 1;
      sm.tBalancing                 = 1;
-     sm.jointsAndCoMSmoothingTimes = [1;    % state ==  1  BALANCING ON THE LEGS
-                                      0.5;  % state ==  2  MOVE COM FORWARD
-                                      0;    % state ==  3  TWO FEET BALANCING
-                                      1];   % state ==  4  LIFTING UP  
      
      % smoothing time for time varying impedances
      gain.SmoothingTimeGainScheduling = 2;  
@@ -56,6 +52,11 @@ if strcmpi(SM.SM_TYPE, 'STANDUP')
                      
 end
 
+sm.jointsAndCoMSmoothingTimes = [1;    % state ==  1  BALANCING ON THE LEGS
+                                 0.5;  % state ==  2  MOVE COM FORWARD
+                                 0;    % state ==  3  TWO FEET BALANCING
+                                 1];   % state ==  4  LIFTING UP  
+
                                   %Hip pitch  %Hip roll  %Knee     %Ankle pitch  %Shoulder pitch  %Shoulder roll  %Shoulder yaw   %Elbow   %Torso pitch                        
 sm.joints.standUpPositions     = [0.0000      0.0000     0.0000    0.0000        0.0000           0.0000          0.0000          0.0000   0.0000;   % state ==  1  THIS REFERENCE IS NOT USED
                                   1.5402      0.1594    -1.7365   -0.2814       -1.6455           0.1920          0.5862          0.2473   0.1928;   % state ==  2  MOVE COM FORWARD
@@ -65,17 +66,28 @@ sm.joints.standUpPositions     = [0.0000      0.0000     0.0000    0.0000       
 sm.joints.leftAnkleCorrection = -0.1745;
 
 sm.CoM.standUpDeltaCoM         = [0.0     0.0   0.0;       % state ==  1  THIS REFERENCE IS NOT USED
-                                 -0.0867  0.0   0.0;       % state ==  2  MOVE COM FORWARD
-                                  0.0     0.0   0.0;       % state ==  3  TWO FEET BALANCING
-                                  0.0     0.0   0.29];     % state ==  4  LIFTING UP
+                                 -0.2     0.0   0.0;       % state ==  2  MOVE COM FORWARD
+                                 -0.03    0.0   0.0;       % state ==  3  TWO FEET BALANCING
+                                 -0.06    0.0   0.19];     % state ==  4  LIFTING UP
  
-sm.LwrenchTreshold    = [0;   % state ==  1  THIS REFERENCE IS NOT USED
+sm.LwrenchThreshold    = [0;  % state ==  1  THIS REFERENCE IS NOT USED
                          57;  % state ==  2  MOVE COM FORWARD
                          140  % state ==  3  TWO FEET BALANCING
                          0];  % state ==  4  THIS REFERENCE IS NOT USED
                      
-sm.RwrenchTreshold    = [0    % state ==  1  THIS REFERENCE IS NOT USED
+sm.RwrenchThreshold    = [0   % state ==  1  THIS REFERENCE IS NOT USED
                          57;  % state ==  2  MOVE COM FORWARD
                          140  % state ==  3  TWO FEET BALANCING
                          0];  % state ==  4  THIS REFERENCE IS NOT USED
+                     
+% arms threshold                    
+sm.RArmThreshold      = [-30  % state ==  1  BALANCING ON THE LEGS
+                          0;  % state ==  2  THIS REFERENCE IS NOT USED
+                          0   % state ==  3  THIS REFERENCE IS NOT USED
+                          0]; % state ==  4  THIS REFERENCE IS NOT USED
+                     
+sm.LArmThreshold      = [-30  % state ==  1  BALANCING ON THE LEGS
+                          0;  % state ==  2  THIS REFERENCE IS NOT USED
+                          0   % state ==  3  THIS REFERENCE IS NOT USED
+                          0]; % state ==  4  THIS REFERENCE IS NOT USED
                      
