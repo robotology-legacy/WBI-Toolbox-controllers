@@ -6,7 +6,7 @@ Model {
     NumRootInports	    0
     NumRootOutports	    0
     ParameterArgumentNames  ""
-    ComputedModelVersion    "1.180"
+    ComputedModelVersion    "1.182"
     NumModelReferences	    0
     NumTestPointedSignals   0
     NumProvidedFunctions    0
@@ -63,12 +63,12 @@ Model {
 	Dimension		7
 	Object {
 	  $ObjectID		  5
-	  IsActive		  [0]
+	  IsActive		  [1]
 	  ViewObjType		  "SimulinkTopLevel"
 	  LoadSaveID		  "0"
 	  Extents		  [1831.0, 905.0]
 	  ZoomFactor		  [0.57059206245933636]
-	  Offset		  [774.02622576966928, -849.53591790193843]
+	  Offset		  [793.02622576966928, -849.53591790193843]
 	}
 	Object {
 	  $ObjectID		  6
@@ -90,12 +90,12 @@ Model {
 	}
 	Object {
 	  $ObjectID		  8
-	  IsActive		  [1]
+	  IsActive		  [0]
 	  ViewObjType		  "SimulinkSubsys"
-	  LoadSaveID		  "1428"
+	  LoadSaveID		  "931"
 	  Extents		  [1831.0, 905.0]
-	  ZoomFactor		  [1.2647847031550565]
-	  Offset		  [-77.568713602329353, 529.58708792637265]
+	  ZoomFactor		  [1.5200959017797158]
+	  Offset		  [-207.44432023017191, 1060.6528231576867]
 	}
 	Object {
 	  $ObjectID		  9
@@ -121,8 +121,8 @@ Model {
 	  ViewObjType		  "SimulinkSubsys"
 	  LoadSaveID		  "335"
 	  Extents		  [1831.0, 905.0]
-	  ZoomFactor		  [0.6]
-	  Offset		  [-365.55429111357034, -210.33333333333371]
+	  ZoomFactor		  [1.0]
+	  Offset		  [-706.14724672899536, -43.95496553460157]
 	}
 	PropName		"EditorsInfo"
       }
@@ -157,9 +157,9 @@ Model {
   ModifiedByFormat	  "%<Auto>"
   LastModifiedBy	  "marie"
   ModifiedDateFormat	  "%<Auto>"
-  LastModifiedDate	  "Wed Mar 29 14:11:34 2017"
-  RTWModifiedTimeStamp	  412697490
-  ModelVersionFormat	  "1.%<AutoIncrement:180>"
+  LastModifiedDate	  "Wed Mar 29 14:34:05 2017"
+  RTWModifiedTimeStamp	  412698839
+  ModelVersionFormat	  "1.%<AutoIncrement:182>"
   ConfigurationManager	  "none"
   SampleTimeColors	  off
   SampleTimeAnnotations	  off
@@ -1290,13 +1290,13 @@ Model {
     ShowPageBoundaries	    off
     ZoomFactor		    "57"
     ReportName		    "simulink-default.rpt"
-    SIDHighWatermark	    "1518"
+    SIDHighWatermark	    "1521"
     Block {
       BlockType		      SubSystem
       Name		      "Controller and QP"
       SID		      "335"
-      Ports		      [14, 2]
-      Position		      [2710, -549, 2915, 74]
+      Ports		      [15, 2]
+      Position		      [2585, -547, 2790, 77]
       ZOrder		      -50
       ForegroundColor	      "red"
       BackgroundColor	      "[1.000000, 1.000000, 0.498039]"
@@ -1316,7 +1316,7 @@ Model {
 	TiledPaperMargins	[0.500000, 0.500000, 0.500000, 0.500000]
 	TiledPageScale		1
 	ShowPageBoundaries	off
-	ZoomFactor		"60"
+	ZoomFactor		"100"
 	Block {
 	  BlockType		  Inport
 	  Name			  "jointTorques"
@@ -1336,11 +1336,20 @@ Model {
 	}
 	Block {
 	  BlockType		  Inport
-	  Name			  "desiredJointAngles"
+	  Name			  "iKinReferenceJointAngles"
 	  SID			  "354"
-	  Position		  [165, 528, 195, 542]
+	  Position		  [-20, 508, 10, 522]
 	  ZOrder		  801
 	  Port			  "3"
+	  IconDisplay		  "Port number"
+	}
+	Block {
+	  BlockType		  Inport
+	  Name			  "desiredJointAngles"
+	  SID			  "1521"
+	  Position		  [-20, 548, 10, 562]
+	  ZOrder		  822
+	  Port			  "4"
 	  IconDisplay		  "Port number"
 	}
 	Block {
@@ -1349,7 +1358,7 @@ Model {
 	  SID			  "344"
 	  Position		  [165, 78, 195, 92]
 	  ZOrder		  791
-	  Port			  "4"
+	  Port			  "5"
 	  IconDisplay		  "Port number"
 	}
 	Block {
@@ -1358,7 +1367,7 @@ Model {
 	  SID			  "363"
 	  Position		  [165, 123, 195, 137]
 	  ZOrder		  808
-	  Port			  "5"
+	  Port			  "6"
 	  IconDisplay		  "Port number"
 	}
 	Block {
@@ -1367,7 +1376,7 @@ Model {
 	  SID			  "336"
 	  Position		  [165, 33, 195, 47]
 	  ZOrder		  783
-	  Port			  "6"
+	  Port			  "7"
 	  IconDisplay		  "Port number"
 	}
 	Block {
@@ -1376,7 +1385,7 @@ Model {
 	  SID			  "345"
 	  Position		  [165, 213, 195, 227]
 	  ZOrder		  792
-	  Port			  "7"
+	  Port			  "8"
 	  IconDisplay		  "Port number"
 	}
 	Block {
@@ -1385,7 +1394,7 @@ Model {
 	  SID			  "347"
 	  Position		  [165, 258, 195, 272]
 	  ZOrder		  794
-	  Port			  "8"
+	  Port			  "9"
 	  IconDisplay		  "Port number"
 	}
 	Block {
@@ -1394,7 +1403,7 @@ Model {
 	  SID			  "348"
 	  Position		  [165, 303, 195, 317]
 	  ZOrder		  795
-	  Port			  "9"
+	  Port			  "10"
 	  IconDisplay		  "Port number"
 	}
 	Block {
@@ -1403,7 +1412,7 @@ Model {
 	  SID			  "349"
 	  Position		  [165, 348, 195, 362]
 	  ZOrder		  796
-	  Port			  "10"
+	  Port			  "11"
 	  IconDisplay		  "Port number"
 	}
 	Block {
@@ -1412,7 +1421,7 @@ Model {
 	  SID			  "350"
 	  Position		  [165, 393, 195, 407]
 	  ZOrder		  797
-	  Port			  "11"
+	  Port			  "12"
 	  IconDisplay		  "Port number"
 	}
 	Block {
@@ -1421,7 +1430,7 @@ Model {
 	  SID			  "352"
 	  Position		  [165, 438, 195, 452]
 	  ZOrder		  799
-	  Port			  "12"
+	  Port			  "13"
 	  IconDisplay		  "Port number"
 	}
 	Block {
@@ -1430,7 +1439,7 @@ Model {
 	  SID			  "353"
 	  Position		  [165, 483, 195, 497]
 	  ZOrder		  800
-	  Port			  "13"
+	  Port			  "14"
 	  IconDisplay		  "Port number"
 	}
 	Block {
@@ -1439,7 +1448,7 @@ Model {
 	  SID			  "351"
 	  Position		  [165, 573, 195, 587]
 	  ZOrder		  798
-	  Port			  "14"
+	  Port			  "15"
 	  IconDisplay		  "Port number"
 	}
 	Block {
@@ -1468,6 +1477,15 @@ Model {
 	  ZOrder		  812
 	  ShowName		  off
 	  Value			  "upperBoundFeetConstraints"
+	}
+	Block {
+	  BlockType		  Constant
+	  Name			  "Constant3"
+	  SID			  "1519"
+	  Position		  [65, 527, 260, 543]
+	  ZOrder		  820
+	  ShowName		  off
+	  Value			  "CONFIG.USE_INVERSE_KINEMATICS"
 	}
 	Block {
 	  BlockType		  M-S-Function
@@ -1524,6 +1542,17 @@ Model {
 	    RTWStorageClass	    "Auto"
 	    DataLoggingNameMode	    "SignalName"
 	  }
+	}
+	Block {
+	  BlockType		  Switch
+	  Name			  "Switch1"
+	  SID			  "1520"
+	  Position		  [285, 505, 335, 565]
+	  ZOrder		  821
+	  ShowName		  off
+	  Criteria		  "u2 > Threshold"
+	  InputSameDT		  off
+	  SaturateOnIntegerOverflow off
 	}
 	Block {
 	  BlockType		  Terminator
@@ -2125,13 +2154,6 @@ Model {
 	  DstPort		  11
 	}
 	Line {
-	  ZOrder		  363
-	  SrcBlock		  "desiredJointAngles"
-	  SrcPort		  1
-	  DstBlock		  "balancingController"
-	  DstPort		  12
-	}
-	Line {
 	  ZOrder		  364
 	  SrcBlock		  "desiredTaskAcc"
 	  SrcPort		  1
@@ -2248,6 +2270,34 @@ Model {
 	  SrcPort		  1
 	  DstBlock		  "Level-2 MATLAB\nS-Function"
 	  DstPort		  1
+	}
+	Line {
+	  ZOrder		  576
+	  SrcBlock		  "Constant3"
+	  SrcPort		  1
+	  DstBlock		  "Switch1"
+	  DstPort		  2
+	}
+	Line {
+	  ZOrder		  581
+	  SrcBlock		  "iKinReferenceJointAngles"
+	  SrcPort		  1
+	  DstBlock		  "Switch1"
+	  DstPort		  1
+	}
+	Line {
+	  ZOrder		  582
+	  SrcBlock		  "desiredJointAngles"
+	  SrcPort		  1
+	  DstBlock		  "Switch1"
+	  DstPort		  3
+	}
+	Line {
+	  ZOrder		  579
+	  SrcBlock		  "Switch1"
+	  SrcPort		  1
+	  DstBlock		  "balancingController"
+	  DstPort		  12
 	}
       }
     }
@@ -7743,7 +7793,7 @@ Model {
       Name		      "Get Estimate2"
       SID		      "392"
       Ports		      [0, 1]
-      Position		      [1195, -163, 1275, -127]
+      Position		      [1195, -733, 1275, -697]
       ZOrder		      799
       BackgroundColor	      "[0.827500, 0.576500, 0.603900]"
       ShowName		      off
@@ -7762,7 +7812,7 @@ Model {
       Name		      "Integration Based Inverse Kinematics"
       SID		      "931"
       Ports		      [7, 1]
-      Position		      [2310, -548, 2500, -332]
+      Position		      [2080, -543, 2270, -327]
       ZOrder		      854
       BackgroundColor	      "[0.333333, 0.666667, 0.498039]"
       RequestExecContextInheritance off
@@ -7770,7 +7820,7 @@ Model {
       System {
 	Name			"Integration Based Inverse Kinematics"
 	Location		[1421, 24, 3286, 1080]
-	Open			off
+	Open			on
 	ModelBrowserVisibility	off
 	ModelBrowserWidth	200
 	ScreenColor		"white"
@@ -7970,7 +8020,7 @@ Model {
 	  System {
 	    Name		    "inverse kinematics integration"
 	    Location		    [1421, 24, 3286, 1080]
-	    Open		    on
+	    Open		    off
 	    ModelBrowserVisibility  off
 	    ModelBrowserWidth	    200
 	    ScreenColor		    "white"
@@ -11025,7 +11075,7 @@ Model {
       Name		      "Saturation"
       SID		      "371"
       Ports		      [1, 1]
-      Position		      [3015, -415, 3065, -365]
+      Position		      [2945, -415, 2995, -365]
       ZOrder		      785
       ShowName		      off
       InputPortMap	      "u0"
@@ -11037,7 +11087,7 @@ Model {
       Name		      "Set References"
       SID		      "372"
       Ports		      [1]
-      Position		      [3105, -415, 3180, -365]
+      Position		      [3035, -415, 3110, -365]
       ZOrder		      786
       BackgroundColor	      "[0.827500, 0.576500, 0.603900]"
       ShowName		      off
@@ -13526,53 +13576,53 @@ Model {
 	      "mgr.Configuration('Core','General UI',true),extmgr.Configuration('Core','Source UI',true),extmgr.Configuration("
 	      "'Sources','WiredSimulink',true,'DataLoggingVariableName','iKinReferenceJointPosition','DataLoggingSaveFormat','"
 	      "Structure','DataLoggingDecimateData',true),extmgr.Configuration('Visuals','Time Domain',true,'SerializedDisplay"
-	      "s',{struct('MinYLimReal','-18.12462','MaxYLimReal','17.26136','YLabelReal','','MinYLimMag','0.00000','MaxYLimMa"
-	      "g','18.12462','LegendVisibility','Off','XGrid',true,'YGrid',true,'PlotMagPhase',false,'AxesColor',[0 0 0],'Axes"
+	      "s',{struct('MinYLimReal','-14.57925','MaxYLimReal','15.68647','YLabelReal','','MinYLimMag','0.00000','MaxYLimMa"
+	      "g','15.68647','LegendVisibility','Off','XGrid',true,'YGrid',true,'PlotMagPhase',false,'AxesColor',[0 0 0],'Axes"
 	      "TickColor',[0.686274509803922 0.686274509803922 0.686274509803922],'ColorOrder',[1 1 0.0666666666666667;0.07450"
 	      "98039215686 0.623529411764706 1;1 0.411764705882353 0.16078431372549;0.392156862745098 0.831372549019608 0.0745"
 	      "098039215686;0.717647058823529 0.274509803921569 1;0.0588235294117647 1 1;1 0.0745098039215686 0.65098039215686"
 	      "3],'Title','%<SignalLabel>','LinePropertiesCache',{{}},'UserDefinedChannelNames',{{}},'NumLines',3,'LineNames',"
-	      "{{'torso:1','torso:2','torso:3'}},'ShowContent',true,'Placement',1),struct('MinYLimReal','-40.46524','MaxYLimRe"
-	      "al','69.25089','YLabelReal','','MinYLimMag',' 0.00000','MaxYLimMag','310.82357','LegendVisibility','off','XGrid"
+	      "{{'torso:1','torso:2','torso:3'}},'ShowContent',true,'Placement',1),struct('MinYLimReal','-27.26686','MaxYLimRe"
+	      "al','73.60433','YLabelReal','','MinYLimMag',' 0.00000','MaxYLimMag','310.82357','LegendVisibility','off','XGrid"
 	      "',true,'YGrid',true,'PlotMagPhase',false,'AxesColor',[0 0 0],'AxesTickColor',[0.686274509803922 0.6862745098039"
 	      "22 0.686274509803922],'ColorOrder',[1 1 0.0666666666666667;0.0745098039215686 0.623529411764706 1;1 0.411764705"
 	      "882353 0.16078431372549;0.392156862745098 0.831372549019608 0.0745098039215686;0.717647058823529 0.274509803921"
 	      "569 1;0.0588235294117647 1 1;1 0.0745098039215686 0.650980392156863],'Title','%<SignalLabel>','LinePropertiesCa"
 	      "che',{{}},'UserDefinedChannelNames',{{}},'NumLines',4,'LineNames',{{'left_arm:1','left_arm:2','left_arm:3','lef"
-	      "t_arm:4'}},'ShowContent',true,'Placement',2),struct('MinYLimReal','-40.59509','MaxYLimReal','70.42189','YLabelR"
+	      "t_arm:4'}},'ShowContent',true,'Placement',2),struct('MinYLimReal','-26.87355','MaxYLimReal','75.40294','YLabelR"
 	      "eal','','MinYLimMag',' 0.00000','MaxYLimMag','310.82357','LegendVisibility','off','XGrid',true,'YGrid',true,'Pl"
 	      "otMagPhase',false,'AxesColor',[0 0 0],'AxesTickColor',[0.686274509803922 0.686274509803922 0.686274509803922],'"
 	      "ColorOrder',[1 1 0.0666666666666667;0.0745098039215686 0.623529411764706 1;1 0.411764705882353 0.16078431372549"
 	      ";0.392156862745098 0.831372549019608 0.0745098039215686;0.717647058823529 0.274509803921569 1;0.058823529411764"
 	      "7 1 1;1 0.0745098039215686 0.650980392156863],'Title','%<SignalLabel>','LinePropertiesCache',{{}},'UserDefinedC"
 	      "hannelNames',{{}},'NumLines',4,'LineNames',{{'right_arm:1','right_arm:2','right_arm:3','right_arm:4'}},'ShowCon"
-	      "tent',true,'Placement',3),struct('MinYLimReal','-22.92653','MaxYLimReal','19.84116','YLabelReal','','MinYLimMag"
+	      "tent',true,'Placement',3),struct('MinYLimReal','-21.13798','MaxYLimReal','23.51773','YLabelReal','','MinYLimMag"
 	      "',' 0.00000','MaxYLimMag','310.82357','LegendVisibility','off','XGrid',true,'YGrid',true,'PlotMagPhase',false,'"
 	      "AxesColor',[0 0 0],'AxesTickColor',[0.686274509803922 0.686274509803922 0.686274509803922],'ColorOrder',[1 1 0."
 	      "0666666666666667;0.0745098039215686 0.623529411764706 1;1 0.411764705882353 0.16078431372549;0.392156862745098 "
 	      "0.831372549019608 0.0745098039215686;0.717647058823529 0.274509803921569 1;0.0588235294117647 1 1;1 0.074509803"
 	      "9215686 0.650980392156863],'Title','%<SignalLabel>','LinePropertiesCache',{{}},'UserDefinedChannelNames',{{}},'"
 	      "NumLines',6,'LineNames',{{'left_leg:1','left_leg:2','left_leg:3','left_leg:4','left_leg:5','left_leg:6'}},'Show"
-	      "Content',true,'Placement',4),struct('MinYLimReal','-52.99658','MaxYLimReal','34.67042','YLabelReal','','MinYLim"
-	      "Mag',' 0.00000','MaxYLimMag','310.82357','LegendVisibility','off','XGrid',true,'YGrid',true,'PlotMagPhase',fals"
-	      "e,'AxesColor',[0 0 0],'AxesTickColor',[0.686274509803922 0.686274509803922 0.686274509803922],'ColorOrder',[1 1"
-	      " 0.0666666666666667;0.0745098039215686 0.623529411764706 1;1 0.411764705882353 0.16078431372549;0.3921568627450"
-	      "98 0.831372549019608 0.0745098039215686;0.717647058823529 0.274509803921569 1;0.0588235294117647 1 1;1 0.074509"
-	      "8039215686 0.650980392156863],'Title','%<SignalLabel>','LinePropertiesCache',{{}},'UserDefinedChannelNames',{{}"
-	      "},'NumLines',6,'LineNames',{{'right_leg:1','right_leg:2','right_leg:3','right_leg:4','right_leg:5','right_leg:6"
-	      "'}},'ShowContent',true,'Placement',5),struct('MinYLimReal','-0.25','MaxYLimReal','12.25','YLabelReal','','MinYL"
-	      "imMag',' 0.00000','MaxYLimMag','310.82357','LegendVisibility','off','XGrid',true,'YGrid',true,'PlotMagPhase',fa"
-	      "lse,'AxesColor',[0 0 0],'AxesTickColor',[0.686274509803922 0.686274509803922 0.686274509803922],'ColorOrder',[1"
-	      " 1 0.0666666666666667;0.0745098039215686 0.623529411764706 1;1 0.411764705882353 0.16078431372549;0.39215686274"
-	      "5098 0.831372549019608 0.0745098039215686;0.717647058823529 0.274509803921569 1;0.0588235294117647 1 1;1 0.0745"
-	      "098039215686 0.650980392156863],'Title','%<SignalLabel>','LinePropertiesCache',{{}},'UserDefinedChannelNames',{"
-	      "{}},'NumLines',1,'LineNames',{{'state'}},'ShowContent',true,'Placement',6)},'DisplayPropertyDefaults',struct('Y"
-	      "LabelReal','','AxesColor',[0 0 0],'AxesTickColor',[0.686274509803922 0.686274509803922 0.686274509803922],'Colo"
-	      "rOrder',[0.0745098039215686 0.623529411764706 1;1 0.411764705882353 0.16078431372549;1 1 0.0666666666666667;0.7"
-	      "17647058823529 0.274509803921569 1;0.392156862745098 0.831372549019608 0.0745098039215686;0.0588235294117647 1 "
-	      "1;1 0.0745098039215686 0.650980392156863]),'DisplayLayoutDimensions',[3 2]),extmgr.Configuration('Tools','Plot "
-	      "Navigation',true,'PreviousAutoscale','XY'),extmgr.Configuration('Tools','Measurements',true,'Version','2016b'))"
-	      ",'Version','2016b','Position',[56 1 1865 1001],'VisibleAtModelOpen','on')"
+	      "Content',true,'Placement',4),struct('MinYLimReal','-21.5464','MaxYLimReal','39.00969','YLabelReal','','MinYLimM"
+	      "ag',' 0.00000','MaxYLimMag','310.82357','LegendVisibility','off','XGrid',true,'YGrid',true,'PlotMagPhase',false"
+	      ",'AxesColor',[0 0 0],'AxesTickColor',[0.686274509803922 0.686274509803922 0.686274509803922],'ColorOrder',[1 1 "
+	      "0.0666666666666667;0.0745098039215686 0.623529411764706 1;1 0.411764705882353 0.16078431372549;0.39215686274509"
+	      "8 0.831372549019608 0.0745098039215686;0.717647058823529 0.274509803921569 1;0.0588235294117647 1 1;1 0.0745098"
+	      "039215686 0.650980392156863],'Title','%<SignalLabel>','LinePropertiesCache',{{}},'UserDefinedChannelNames',{{}}"
+	      ",'NumLines',6,'LineNames',{{'right_leg:1','right_leg:2','right_leg:3','right_leg:4','right_leg:5','right_leg:6'"
+	      "}},'ShowContent',true,'Placement',5),struct('MinYLimReal','-0.25','MaxYLimReal','12.25','YLabelReal','','MinYLi"
+	      "mMag',' 0.00000','MaxYLimMag','310.82357','LegendVisibility','off','XGrid',true,'YGrid',true,'PlotMagPhase',fal"
+	      "se,'AxesColor',[0 0 0],'AxesTickColor',[0.686274509803922 0.686274509803922 0.686274509803922],'ColorOrder',[1 "
+	      "1 0.0666666666666667;0.0745098039215686 0.623529411764706 1;1 0.411764705882353 0.16078431372549;0.392156862745"
+	      "098 0.831372549019608 0.0745098039215686;0.717647058823529 0.274509803921569 1;0.0588235294117647 1 1;1 0.07450"
+	      "98039215686 0.650980392156863],'Title','%<SignalLabel>','LinePropertiesCache',{{}},'UserDefinedChannelNames',{{"
+	      "}},'NumLines',1,'LineNames',{{'state'}},'ShowContent',true,'Placement',6)},'DisplayPropertyDefaults',struct('YL"
+	      "abelReal','','AxesColor',[0 0 0],'AxesTickColor',[0.686274509803922 0.686274509803922 0.686274509803922],'Color"
+	      "Order',[0.0745098039215686 0.623529411764706 1;1 0.411764705882353 0.16078431372549;1 1 0.0666666666666667;0.71"
+	      "7647058823529 0.274509803921569 1;0.392156862745098 0.831372549019608 0.0745098039215686;0.0588235294117647 1 1"
+	      ";1 0.0745098039215686 0.650980392156863]),'DisplayLayoutDimensions',[3 2]),extmgr.Configuration('Tools','Plot N"
+	      "avigation',true,'PreviousAutoscale','XY'),extmgr.Configuration('Tools','Measurements',true,'Version','2016b')),"
+	      "'Version','2016b','Position',[56 1 1865 1001],'VisibleAtModelOpen','on')"
 	      NumInputPorts	      "6"
 	    }
 	    Line {
@@ -15769,7 +15819,7 @@ Model {
       Name		      "synchronizer"
       SID		      "110"
       Ports		      []
-      Position		      [1157, -302, 1277, -252]
+      Position		      [2192, -812, 2312, -762]
       ZOrder		      731
       BackgroundColor	      "green"
       ShowName		      off
@@ -16009,7 +16059,7 @@ Model {
 	Points			[133, 0]
 	Branch {
 	  ZOrder		  1378
-	  Points		  [0, -790]
+	  Points		  [0, -785]
 	  DstBlock		  "Integration Based Inverse Kinematics"
 	  DstPort		  6
 	}
@@ -16033,17 +16083,17 @@ Model {
       Points		      [193, 0]
       Branch {
 	ZOrder			1190
-	Points			[0, -250]
+	Points			[0, -255]
 	Branch {
 	  ZOrder		  1665
-	  Points		  [0, -450]
+	  Points		  [0, -440]
 	  DstBlock		  "Integration Based Inverse Kinematics"
 	  DstPort		  4
 	}
 	Branch {
 	  ZOrder		  1664
 	  DstBlock		  "Controller and QP"
-	  DstPort		  13
+	  DstPort		  14
 	}
       }
       Branch {
@@ -16065,7 +16115,7 @@ Model {
       }
       Branch {
 	ZOrder			1874
-	Points			[0, -810]
+	Points			[0, -805]
 	DstBlock		"Integration Based Inverse Kinematics"
 	DstPort			7
       }
@@ -16089,9 +16139,9 @@ Model {
       Points		      [118, 0]
       Branch {
 	ZOrder			784
-	Points			[0, -190]
+	Points			[0, -185]
 	DstBlock		"Controller and QP"
-	DstPort			11
+	DstPort			12
       }
       Branch {
 	ZOrder			501
@@ -16106,9 +16156,9 @@ Model {
       Points		      [92, 0]
       Branch {
 	ZOrder			787
-	Points			[0, -185]
+	Points			[0, -175]
 	DstBlock		"Controller and QP"
-	DstPort			10
+	DstPort			11
       }
       Branch {
 	ZOrder			500
@@ -16120,69 +16170,69 @@ Model {
       ZOrder		      352
       SrcBlock		      "Desired values"
       SrcPort		      2
-      Points		      [40, 0; 0, -809; 1057, 0]
+      Points		      [40, 0; 0, -809; 887, 0]
       Branch {
-	ZOrder			1945
-	Points			[0, 254]
-	DstBlock		"Controller and QP"
+	ZOrder			2058
+	Points			[858, 0; 0, 204]
+	DstBlock		"Visualize and log"
 	DstPort			4
       }
       Branch {
-	ZOrder			1228
-	Points			[697, 0; 0, 204]
-	DstBlock		"Visualize and log"
-	DstPort			4
+	ZOrder			1945
+	Points			[0, 294]
+	DstBlock		"Controller and QP"
+	DstPort			5
       }
     }
     Line {
       ZOrder		      353
       SrcBlock		      "Dynamics, Kinematics, Jacobians"
       SrcPort		      1
-      Points		      [31, 0; 0, -170]
+      Points		      [31, 0; 0, -145]
       DstBlock		      "Controller and QP"
-      DstPort		      7
+      DstPort		      8
     }
     Line {
       ZOrder		      355
       SrcBlock		      "Dynamics, Kinematics, Jacobians"
       SrcPort		      2
-      Points		      [49, 0; 0, -175]
+      Points		      [49, 0; 0, -155]
       DstBlock		      "Controller and QP"
-      DstPort		      8
+      DstPort		      9
     }
     Line {
       ZOrder		      387
       SrcBlock		      "Desired values"
       SrcPort		      3
-      Points		      [70, 0; 0, -837; 995, 0]
+      Points		      [70, 0; 0, -837; 827, 0]
       Branch {
-	ZOrder			1946
-	Points			[0, 277]
-	DstBlock		"Controller and QP"
+	ZOrder			2057
+	Points			[852, 0; 0, 272]
+	DstBlock		"Visualize and log"
 	DstPort			5
       }
       Branch {
-	ZOrder			1230
-	Points			[702, 0; 0, 272]
-	DstBlock		"Visualize and log"
-	DstPort			5
+	ZOrder			1946
+	Points			[0, 312]
+	DstBlock		"Controller and QP"
+	DstPort			6
       }
     }
     Line {
       ZOrder		      390
       SrcBlock		      "Controller and QP"
       SrcPort		      1
-      Points		      [62, 0]
+      Points		      [79, 0]
+      Branch {
+	ZOrder			2064
+	DstBlock		"Saturation"
+	DstPort			1
+      }
       Branch {
 	ZOrder			1033
 	Points			[0, 305]
 	DstBlock		"Visualize and log"
 	DstPort			8
-      }
-      Branch {
-	ZOrder			592
-	DstBlock		"Saturation"
-	DstPort			1
       }
     }
     Line {
@@ -16203,7 +16253,7 @@ Model {
       ZOrder		      563
       SrcBlock		      "Controller and QP"
       SrcPort		      2
-      Points		      [36, 0; 0, 85]
+      Points		      [51, 0; 0, 85]
       DstBlock		      "Visualize and log"
       DstPort		      9
     }
@@ -16267,15 +16317,15 @@ Model {
       ZOrder		      1067
       SrcBlock		      "Get Estimate2"
       SrcPort		      1
-      Points		      [16, 0; 0, -570; 1375, 0]
+      Points		      [1261, 0]
       Branch {
-	ZOrder			1942
+	ZOrder			2062
 	DstBlock		"Visualize and log"
 	DstPort			1
       }
       Branch {
 	ZOrder			1936
-	Points			[0, 185]
+	Points			[0, 200]
 	DstBlock		"Controller and QP"
 	DstPort			1
       }
@@ -16290,7 +16340,7 @@ Model {
 	Points			[386, 0]
 	Branch {
 	  ZOrder		  1497
-	  Points		  [0, -720]
+	  Points		  [0, -715]
 	  DstBlock		  "Integration Based Inverse Kinematics"
 	  DstPort		  5
 	}
@@ -16314,28 +16364,28 @@ Model {
       Points		      [36, 0]
       Branch {
 	ZOrder			1329
-	Points			[0, -737; 938, 0]
+	Points			[0, -737; 733, 0]
 	Branch {
-	  ZOrder		  1938
-	  Points		  [0, 167]
-	  DstBlock		  "Integration Based Inverse Kinematics"
-	  DstPort		  1
-	}
-	Branch {
-	  ZOrder		  1913
-	  Points		  [389, 0]
+	  ZOrder		  2065
+	  Points		  [459, 0]
 	  Branch {
-	    ZOrder		    1940
-	    Points		    [689, 0; 0, 72]
+	    ZOrder		    2061
+	    Points		    [824, 0; 0, 72]
 	    DstBlock		    "Visualize and log"
 	    DstPort		    2
 	  }
 	  Branch {
 	    ZOrder		    1937
-	    Points		    [0, 212]
+	    Points		    [0, 222]
 	    DstBlock		    "Controller and QP"
 	    DstPort		    2
 	  }
+	}
+	Branch {
+	  ZOrder		  1938
+	  Points		  [0, 172]
+	  DstBlock		  "Integration Based Inverse Kinematics"
+	  DstPort		  1
 	}
       }
       Branch {
@@ -16359,7 +16409,7 @@ Model {
 	ZOrder			1336
 	Points			[0, -195]
 	DstBlock		"Controller and QP"
-	DstPort			12
+	DstPort			13
       }
       Branch {
 	ZOrder			503
@@ -16374,28 +16424,28 @@ Model {
       Points		      [93, 0; 0, -125]
       Branch {
 	ZOrder			1219
-	Points			[0, -737; 612, 0]
+	Points			[0, -737; 404, 0]
 	Branch {
-	  ZOrder		  1947
-	  Points		  [0, 132]
-	  DstBlock		  "Integration Based Inverse Kinematics"
-	  DstPort		  3
-	}
-	Branch {
-	  ZOrder		  1915
-	  Points		  [330, 0]
+	  ZOrder		  2067
+	  Points		  [369, 0]
 	  Branch {
-	    ZOrder		    1948
-	    Points		    [0, 297]
-	    DstBlock		    "Controller and QP"
-	    DstPort		    6
-	  }
-	  Branch {
-	    ZOrder		    1222
-	    Points		    [699, 0; 0, 337]
+	    ZOrder		    2056
+	    Points		    [843, 0; 0, 337]
 	    DstBlock		    "Visualize and log"
 	    DstPort		    6
 	  }
+	  Branch {
+	    ZOrder		    1948
+	    Points		    [0, 327]
+	    DstBlock		    "Controller and QP"
+	    DstPort		    7
+	  }
+	}
+	Branch {
+	  ZOrder		  1947
+	  Points		  [0, 137]
+	  DstBlock		  "Integration Based Inverse Kinematics"
+	  DstPort		  3
 	}
       }
       Branch {
@@ -16408,17 +16458,17 @@ Model {
       ZOrder		      356
       SrcBlock		      "Dynamics, Kinematics, Jacobians"
       SrcPort		      3
-      Points		      [71, 0; 0, -180]
+      Points		      [71, 0; 0, -165]
       DstBlock		      "Controller and QP"
-      DstPort		      9
+      DstPort		      10
     }
     Line {
       ZOrder		      368
       SrcBlock		      "Task Acceleration"
       SrcPort		      1
-      Points		      [45, 0; 0, -85]
+      Points		      [45, 0; 0, -95]
       DstBlock		      "Controller and QP"
-      DstPort		      14
+      DstPort		      15
     }
     Line {
       ZOrder		      294
@@ -16432,15 +16482,15 @@ Model {
       ZOrder		      1765
       SrcBlock		      "Integration Based Inverse Kinematics"
       SrcPort		      1
-      Points		      [108, 0]
+      Points		      [203, 0]
       Branch {
-	ZOrder			1951
+	ZOrder			2060
 	DstBlock		"Controller and QP"
 	DstPort			3
       }
       Branch {
-	ZOrder			1931
-	Points			[0, -130; 582, 0; 0, 395]
+	ZOrder			2040
+	Points			[0, -135; 675, 0; 0, 395]
 	DstBlock		"Visualize and log"
 	DstPort			7
       }
@@ -16449,18 +16499,28 @@ Model {
       ZOrder		      290
       SrcBlock		      "Desired values"
       SrcPort		      1
-      Points		      [7, 0; 0, -783; 728, 0]
+      Points		      [7, 0; 0, -783; 524, 0]
       Branch {
-	ZOrder			1939
-	Points			[0, 173]
-	DstBlock		"Integration Based Inverse Kinematics"
-	DstPort			2
+	ZOrder			2066
+	Points			[432, 0]
+	Branch {
+	  ZOrder		  2059
+	  Points		  [857, 0; 0, 138]
+	  DstBlock		  "Visualize and log"
+	  DstPort		  3
+	}
+	Branch {
+	  ZOrder		  2038
+	  Points		  [0, 278]
+	  DstBlock		  "Controller and QP"
+	  DstPort		  4
+	}
       }
       Branch {
-	ZOrder			1914
-	Points			[1085, 0; 0, 138]
-	DstBlock		"Visualize and log"
-	DstPort			3
+	ZOrder			1939
+	Points			[0, 178]
+	DstBlock		"Integration Based Inverse Kinematics"
+	DstPort			2
       }
     }
   }
