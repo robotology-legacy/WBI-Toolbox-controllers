@@ -3,15 +3,16 @@ function qDes = fromQuaternionsToTransfMatr(qDesQuat)
 qBase = qDesQuat(1:7);
 
 % define the rotation matrix
-[xBase,Rbase] = frame2posrot(qBase);
+xBase = qBase(1:3);
+Rbase = rotationFromQuaternion(qBase(4:end));
 
 % generate the transformation matrix
-transfMatrix  = [Rbase xBase; [0 0 0 1]];
+transfMatrix = [Rbase xBase; [0 0 0 1]];
 
 % column-major serialization
-vectorizedTrans  = transfMatrix(:);
+vectorizedTrans = transfMatrix(:);
 
 % new state vector
-qDes    = [vectorizedTrans; qDesQuat(8:end)];
+qDes = [vectorizedTrans; qDesQuat(8:end)];
 
 end
