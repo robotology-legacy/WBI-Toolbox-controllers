@@ -46,7 +46,17 @@ gain.dampings       = 2 * sqrt(gain.impedances);
 gain.weightPostural         = 0.1;
 gain.weightTasks            = 200;
 gain.weightMinTorques       = 1e-4;
-gain.weightMinContactForces = 1e-7;
+gain.weightMinContactForces = 0;
+
+%% %%%%%%%%%%%%%%%%    Inverse kinematics gains
+ikin.PDCoM          = [50 * ones(3, 1), 2*sqrt(50*ones(3,1))]; 
+ikin.rootPD         = [5, 2*sqrt(5)];
+ikin.lFoot.posPD    = [25*ones(3,1), 2*sqrt(25*ones(3,1))];
+ikin.lFoot.rotPD    = [25, 2*sqrt(25)];
+ikin.rFoot.posPD    = gain.lFoot.posPD;
+ikin.rFoot.rotPD    = gain.lFoot.rotPD;
+ikin.impedances     = diag(25 * ones(1, ROBOT_DOF));
+ikin.dampings       = 2 * sqrt(ikin.impedances);
 
 %% %%%%%%%%%%%%%%%%    Friction cone parameters
 
