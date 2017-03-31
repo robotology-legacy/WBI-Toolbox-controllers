@@ -18,11 +18,11 @@
 function [tauModel,Sigma,NA,f_HDot, ...
           HessianMatrixQP1Foot,gradientQP1Foot,ConstraintsMatrixQP1Foot,bVectorConstraintsQp1Foot,...
           HessianMatrixQP2FeetOrLegs,gradientQP2FeetOrLegs,ConstraintsMatrixQP2FeetOrLegs,bVectorConstraintsQp2FeetOrLegs,...
-          errorCoM,qTilde,f]  =  ...
+          errorCoM,qTilde,f,alpha]  =  ...
               balancingController(constraints,ROBOT_DOF_FOR_SIMULINK,ConstraintsMatrix,bVectorConstraints,...
               q,qDes,v,M,h,H,intHw,w_H_l_contact,w_H_r_contact,JL,JR,dJLv,dJRv,xcom,J_CoM,desired_x_dx_ddx_CoM,...
               gainsPCOM,gainsDCOM,impedances,intErrorCoM,ki_int_qtilde,reg,gain,...
-              JLArm,JRArm,w_H_lArm,w_H_rArm,LArmWrench,RArmWrench,useExtArmForces)
+              w_H_lArm,w_H_rArm,LArmWrench,RArmWrench,useExtArmForces,state)
           
     %BALANCING CONTROLLER
 
@@ -68,10 +68,6 @@ function [tauModel,Sigma,NA,f_HDot, ...
     
     % Joint position error
     qTilde          =  q-qDes;
-    
-    % Desired acceleration for the center of mass
-    xDDcomStar      = desired_x_dx_ddx_CoM(:,3) -gainsPCOM.*(xcom - desired_x_dx_ddx_CoM(:,1)) -gainsICOM.*intErrorCoM ...
-                      -gainsDCOM.*(xDcom - desired_x_dx_ddx_CoM(:,2));
    
     % Application point of the contact force on the right foot w.r.t. CoM
     Pr              = pos_rightFoot - xcom; 
@@ -110,13 +106,44 @@ function [tauModel,Sigma,NA,f_HDot, ...
 
     A_arms          = [A_lArm, A_rArm]; 
     
-    % total wrench applied at arms
-    if useExtArmForces == 1
+    %% total wrench applied at arms. External force is decomposed into two components
+    %% along the direction of momentum error. Then, the parallel component is considered
+    %% fsupport = A_arms * fArms = alpha * H_err_parallel + beta * H_err_perpend
+
+    % support force
+    fArms        = [LArmWrench;
+                    RArmWrench];
+    fsupport     = A_arms * fArms;
+%     fsupport_lin = fsupport(1:3);
+    
+    % update the desired CoM velocity for taking into account the support
+    % provided by external forces
+%     dxCoM_desired = (gain.KdCoM_regulator*(1+(transpose(fsupport_lin)*desired_x_dx_ddx_CoM(:,2))/(norm(fsupport_lin)*norm(desired_x_dx_ddx_CoM(:,2))+reg.norm_tolerance))...
+%                      +norm(desired_x_dx_ddx_CoM(:,2)) +reg.norm_tolerance)*...
+%                     (desired_x_dx_ddx_CoM(:,2)/(norm(desired_x_dx_ddx_CoM(:,2))+reg.norm_tolerance));
+
+    dxCoM_desired = desired_x_dx_ddx_CoM(:,2);
+    
+    % Desired acceleration for the center of mass
+    xDDcomStar      = desired_x_dx_ddx_CoM(:,3) -gainsPCOM.*(xcom - desired_x_dx_ddx_CoM(:,1)) -gainsICOM.*intErrorCoM ...
+                      -gainsDCOM.*(xDcom - dxCoM_desired);   
+                      
+    % desired robot momentum
+    H_desired  = [m.*dxCoM_desired;
+                  zeros(3,1)];
+    % momentum error
+    H_error    = H - H_desired;
+    
+    % projector of contact forces into the direction parallel to momentum
+    % error
+    alpha         = (transpose(H_error)*fsupport)/(norm(H_error)+reg.norm_tolerance);
+    H_errParallel = H_error/(norm(H_error)+reg.norm_tolerance);
+    
+    if (useExtArmForces == 1) && (alpha <= 0)
         
-        fArms       = [LArmWrench;
-                       RArmWrench];
+        correctionFromSupportForce = alpha * H_errParallel;
     else
-        fArms       = zeros(12,1);
+        correctionFromSupportForce = zeros(6,1);
     end                
                 
     % Null space of the matrix A            
@@ -125,10 +152,6 @@ function [tauModel,Sigma,NA,f_HDot, ...
     % Time varying contact jacobian
     Jc              = [ JL*constraints(1);      
                         JR*constraints(2)];
-                    
-    % Arms jacobians
-    JArms           = [JLArm;
-                       JRArm];
 
     % Time varying dot(J)*nu
     JcDv            = [dJLv*constraints(1);      
@@ -191,15 +214,14 @@ function [tauModel,Sigma,NA,f_HDot, ...
     bVectorConstraints2Feet   = [bVectorConstraints;bVectorConstraints];
     
     % Terms used in Eq. 0)
-    tauModel        = PInv_JcMinvSt*(JcMinv*(h -transpose(JArms)*fArms) - JcDv) + nullJcMinvSt*(h(7:end)- Mbj'/Mb*h(1:6) ...
-                      -(transpose(Jc(:,7:end)) - Mbj'/Mb*transpose(Jc(:,1:6)))*fArms ...
+    tauModel        = PInv_JcMinvSt*(JcMinv*h - JcDv) + nullJcMinvSt*(h(7:end)- Mbj'/Mb*h(1:6) ...
                       -impedances*NLMbar*qTilde  -ki_int_qtilde -dampings*NLMbar*qD);
     
     Sigma           = -(PInv_JcMinvSt*JcMinvJct + nullJcMinvSt*JBar);
     
     % Desired rate-of-change of the robot momentum
     HDotDes         = [ m*xDDcomStar ;
-                        -gain.DAngularMomentum*H(4:end)-gain.PAngularMomentum*intHw];
+                        -gain.DAngularMomentum*H(4:end)-gain.PAngularMomentum*intHw] +  correctionFromSupportForce;
     
     % Contact wrenches realizing the desired rate-of-change of the robot
     % momentum HDotDes when standing on two feet. Note that f_HDot is
@@ -207,7 +229,7 @@ function [tauModel,Sigma,NA,f_HDot, ...
     % constraints(1) = constraints(2) = 1. This because when the robot
     % stands on one foot, the f_HDot is evaluated directly from the
     % optimizer (see next section).
-    f_HDot          = pinvA*(HDotDes -gravityWrench -A_arms*fArms)*constraints(1)*constraints(2);  
+    f_HDot          = pinvA*(HDotDes -gravityWrench)*constraints(1)*constraints(2);  
     SigmaNA         = Sigma*NA;
    
     % The optimization problem 1) seeks for the redundancy of the external
@@ -250,7 +272,7 @@ function [tauModel,Sigma,NA,f_HDot, ...
 
     A1Foot                    =  AL*constraints(1)*(1-constraints(2)) + AR*constraints(2)*(1-constraints(1));
     HessianMatrixQP1Foot      =  A1Foot'*A1Foot + eye(size(A1Foot,2))*reg.HessianQP;
-    gradientQP1Foot           = -A1Foot'*(HDotDes -gravityWrench -A_arms*fArms);
+    gradientQP1Foot           = -A1Foot'*(HDotDes -gravityWrench);
 
     %% DEBUG DIAGNOSTICS
     % Unconstrained solution for the problem 1)

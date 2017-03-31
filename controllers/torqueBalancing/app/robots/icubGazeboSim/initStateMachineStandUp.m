@@ -79,12 +79,12 @@ sm.RwrenchThreshold    = [0   % state ==  1  THIS REFERENCE IS NOT USED
                          0];  % state ==  4  THIS REFERENCE IS NOT USED
                 
 % arms threshold                    
-sm.RArmThreshold      = [-30  % state ==  1  BALANCING ON THE LEGS
+sm.RArmThreshold      = [10   % state ==  1  BALANCING ON THE LEGS
                           0;  % state ==  2  THIS REFERENCE IS NOT USED
                           0   % state ==  3  THIS REFERENCE IS NOT USED
                           0]; % state ==  4  THIS REFERENCE IS NOT USED
                      
-sm.LArmThreshold      = [-30  % state ==  1  BALANCING ON THE LEGS
+sm.LArmThreshold      = [10   % state ==  1  BALANCING ON THE LEGS
                           0;  % state ==  2  THIS REFERENCE IS NOT USED
                           0   % state ==  3  THIS REFERENCE IS NOT USED
                           0]; % state ==  4  THIS REFERENCE IS NOT USED

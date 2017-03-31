@@ -17,6 +17,9 @@ ROBOT_DOF_FOR_SIMULINK = eye(ROBOT_DOF);
 gain.qTildeMax         = 20*pi/180;
 postures               = 0;  
 
+PORTS.RIGHT_ARM               = '/wholeBodyDynamics/left_arm/endEffectorWrench:o';
+PORTS.LEFT_ARM                = '/wholeBodyDynamics/right_arm/endEffectorWrench:o';
+
 gain.SmoothingTimeImp  = 1;  
 
 %% PARAMETERS FOR TWO FEET ON GROUND
@@ -103,8 +106,8 @@ end
 numberOfPoints               = 4; % The friction cone is approximated by using linear interpolation of the circle. 
                                   % So, numberOfPoints defines the number of points used to interpolate the circle in each cicle's quadrant 
 
-forceFrictionCoefficient     = 1/3;  
-torsionalFrictionCoefficient = 2/150;
+forceFrictionCoefficient     = 1/5;  
+torsionalFrictionCoefficient = 1/150;
 
 %physical size of foot
 phys.footSize    = [ -0.065 0.13;    % xMin, xMax
@@ -118,11 +121,15 @@ gain.legSize     = [-0.025  0.025 ;  % xMin, xMax
                 
 fZmin            = 10;
 
+% gains for updating CoM velocity
+gain.KdCoM_regulator = 0.01;
+
 %% The QP solver will search a solution fo that 
 % satisfies the inequality Aineq_f F(fo) < bineq_f
-reg.pinvTol     = 1e-5;
-reg.pinvDamp    = 0.01;
-reg.pinvDampVb  = 1e-7;
-reg.HessianQP   = 1e-7;
-reg.impedances  = 0.1;
-reg.dampings    = 0;
+reg.pinvTol        = 1e-5;
+reg.pinvDamp       = 0.01;
+reg.pinvDampVb     = 1e-7;
+reg.HessianQP      = 1e-7;
+reg.impedances     = 0.1;
+reg.dampings       = 0;
+reg.norm_tolerance = 1e-4;
