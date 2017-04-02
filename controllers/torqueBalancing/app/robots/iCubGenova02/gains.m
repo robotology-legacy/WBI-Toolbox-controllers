@@ -16,10 +16,6 @@ CONFIG.smoothingTimeTranDynamics = 0.05;
 ROBOT_DOF_FOR_SIMULINK = eye(ROBOT_DOF);
 gain.qTildeMax         = 20*pi/180;
 postures               = 0;  
-
-PORTS.RIGHT_ARM               = '/wholeBodyDynamics/left_arm/endEffectorWrench:o';
-PORTS.LEFT_ARM                = '/wholeBodyDynamics/right_arm/endEffectorWrench:o';
-
 gain.SmoothingTimeImp  = 1;  
 
 %% PARAMETERS FOR TWO FEET ON GROUND
@@ -34,7 +30,8 @@ if (sum(CONFIG.LEFT_RIGHT_FOOT_IN_CONTACT) == 2)
     % Impedances acting in the null space of the desired contact forces 
 
     impTorso            = [10   10   20
-                            0    0    0]; 
+                            0    0    0];
+                        
     impArms             = [10   10    10    8   
                             0    0     0    0   ];
                         
@@ -69,6 +66,7 @@ if (sum(CONFIG.LEFT_RIGHT_FOOT_IN_CONTACT) == 1)
     % Impedances acting in the null space of the desired contact forces 
 
     intTorso            = [0   0    0]; 
+    
     intArms             = [0   0    0    0  ];
                         
     intLeftLeg          = [0   0    0    0    0  0]; 
@@ -120,9 +118,6 @@ gain.legSize     = [-0.025  0.025 ;  % xMin, xMax
                     -0.005  0.005];  % yMin, yMax 
                 
 fZmin            = 10;
-
-% gains for updating CoM velocity
-gain.KdCoM_regulator = 0.01;
 
 %% The QP solver will search a solution fo that 
 % satisfies the inequality Aineq_f F(fo) < bineq_f

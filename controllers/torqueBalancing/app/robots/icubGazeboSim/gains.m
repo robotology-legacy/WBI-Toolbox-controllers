@@ -3,6 +3,8 @@ CONFIG.ON_GAZEBO       = true;
 PORTS.IMU              = '/icubSim/inertial';
 PORTS.WBDT_LEFTLEG_EE  = '/wholeBodyDynamicsTree/left_leg/cartesianEndEffectorWrench:o';
 PORTS.WBDT_RIGHTLEG_EE = '/wholeBodyDynamicsTree/right_leg/cartesianEndEffectorWrench:o';
+PORTS.RIGHT_ARM        = '/wholeBodyDynamicsTree/left_arm/endEffectorWrench:o';
+PORTS.LEFT_ARM         = '/wholeBodyDynamicsTree/right_arm/endEffectorWrench:o';
 
 CONFIG.LEFT_RIGHT_FOOT_IN_CONTACT = [1 1];
 
@@ -116,19 +118,16 @@ forceFrictionCoefficient     = 1;%1/3;
 torsionalFrictionCoefficient = 2/150;
 
 %physical size of foot
-% phys.footSize                = [ -0.07 0.07  ;    % xMin, xMax
-%                                  -0.03 0.03 ];    % yMin, yMax    
+% phys.footSize              = [ -0.07 0.07  ;    % xMin, xMax
+%                                -0.03 0.03 ];    % yMin, yMax    
                              
-gain.footSize                  = [ -0.07 0.07   ;   % xMin, xMax
-                                   -0.03 0.03 ];    % yMin, yMax    
+gain.footSize                = [ -0.07 0.07   ;   % xMin, xMax
+                                 -0.03 0.03 ];    % yMin, yMax    
    
-fZmin                          = 10;
+fZmin                        = 10;
 
-gain.legSize                   = [ -0.025  0.025 ;   % xMin, xMax
-                                   -0.005  0.005];   % yMin, yMax  
-                               
-% gains for updating CoM velocity
-gain.KdCoM_regulator = 0.01;
+gain.legSize                 = [ -0.025  0.025 ;   % xMin, xMax
+                                 -0.005  0.005];   % yMin, yMax  
 
 %% The QP solver will search a solution fo that 
 % satisfies the inequality Aineq_f F(fo) < bineq_f
@@ -138,4 +137,4 @@ reg.pinvDampVb     = 1e-7;
 reg.HessianQP      = 1e-5;
 reg.impedances     = 0.1;
 reg.dampings       = 0;
-reg.norm_tolerance = 0.001;
+reg.norm_tolerance = 1e-4;

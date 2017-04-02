@@ -103,7 +103,7 @@ function [w_H_b,constraints,impedances,kpCom,kdCom,currentState,jointsAndCoMSmoo
         jointsAndCoMSmoothingTime = sm.jointsAndCoMSmoothingTimes(state);
         tDelta                    = t-tSwitch;
         
-        if tDelta > 15
+        if tDelta > 5 && sm.alsoSitDown
             state        = 5;
             tSwitch      = t;
             CoMprevious  = CoM;
@@ -111,7 +111,7 @@ function [w_H_b,constraints,impedances,kpCom,kdCom,currentState,jointsAndCoMSmoo
                 
     end
     
-    %% SITTING DOWN
+    %% MOVE ARMS FORWARD
     if state == 5 
         
         w_H_b      =  w_H_fixedLink * l_sole_H_b;
@@ -122,11 +122,83 @@ function [w_H_b,constraints,impedances,kpCom,kdCom,currentState,jointsAndCoMSmoo
         qjDes([8 9 10 11])   = sm.joints.standUpPositions(state,[5 6 7 8]);
         qjDes([4 5 6 7])     = sm.joints.standUpPositions(state,[5 6 7 8]);
         qjDes(1)             = sm.joints.standUpPositions(state,9);
-        
-        CoM_Des                   = CoMprevious + transpose(sm.CoM.standUpDeltaCoM(state,:));    
+         
+        CoM_Des                   = CoMprevious + transpose(sm.CoM.standUpDeltaCoM(state,:));        
         jointsAndCoMSmoothingTime = sm.jointsAndCoMSmoothingTimes(state);
-                
+        tDelta                    = t-tSwitch;
+        
+        if tDelta > 2 && RArmWrench(1) < sm.RArmThreshold(state) && LArmWrench(1) < sm.LArmThreshold(state)            
+            state        = 6;
+            tSwitch      = t;
+            CoMprevious  = CoM;            
+        end
+                           
     end
+    
+    %% LOOKING FOR CONTACT
+    if state == 6 
+        
+        w_H_b      =  w_H_fixedLink * l_sole_H_b;
+          
+        % setup new desired position for some joints: remapper
+        qjDes([18 19 21 22]) = sm.joints.standUpPositions(state,[1 2 3 4]);
+        qjDes([12 13 15 16]) = sm.joints.standUpPositions(state,[1 2 3 4]);
+        qjDes([8 9 10 11])   = sm.joints.standUpPositions(state,[5 6 7 8]);
+        qjDes([4 5 6 7])     = sm.joints.standUpPositions(state,[5 6 7 8]);
+        qjDes(1)             = sm.joints.standUpPositions(state,9);
+          
+        CoM_Des                   = CoMprevious + transpose(sm.CoM.standUpDeltaCoM(state,:));         
+        jointsAndCoMSmoothingTime = sm.jointsAndCoMSmoothingTimes(state);
+        tDelta                    = t-tSwitch;
+        
+        if Lwrench(3) > sm.LwrenchThreshold(state) &&  Rwrench(3) > sm.RwrenchThreshold(state) && tDelta > 2            
+            state           = 7;
+            tSwitch         = t;
+            CoMprevious     = CoM; 
+            w_H_fixedLink   = w_H_fixedLink * l_sole_H_b/l_upper_leg_contact_H_b;            
+        end
+                           
+    end
+    
+    %% SITTING DOWN
+    if state == 7
+        
+        w_H_b      =  w_H_fixedLink * l_upper_leg_contact_H_b;
+          
+        % setup new desired position for some joints: remapper
+        qjDes([18 19 21 22]) = sm.joints.standUpPositions(state,[1 2 3 4]);
+        qjDes([12 13 15 16]) = sm.joints.standUpPositions(state,[1 2 3 4]);
+        qjDes([8 9 10 11])   = sm.joints.standUpPositions(state,[5 6 7 8]);
+        qjDes([4 5 6 7])     = sm.joints.standUpPositions(state,[5 6 7 8]);
+        qjDes(1)             = sm.joints.standUpPositions(state,9);
+          
+        CoM_Des                   = CoMprevious + transpose(sm.CoM.standUpDeltaCoM(state,:));         
+        jointsAndCoMSmoothingTime = sm.jointsAndCoMSmoothingTimes(state);
+        tDelta                    = t-tSwitch;
+        
+        if  tDelta > 2            
+            state        = 8;
+            CoMprevious  = CoM;            
+        end
+                           
+    end
+    
+    %% BALACING ON THE LEGS
+    if state == 8
+        
+        w_H_b      =  w_H_fixedLink * l_upper_leg_contact_H_b;
+        
+        % setup new desired position for some joints: remapper
+        qjDes([18 19 21 22]) = sm.joints.standUpPositions(state,[1 2 3 4]);
+        qjDes([12 13 15 16]) = sm.joints.standUpPositions(state,[1 2 3 4]);
+        qjDes([8 9 10 11])   = sm.joints.standUpPositions(state,[5 6 7 8]);
+        qjDes([4 5 6 7])     = sm.joints.standUpPositions(state,[5 6 7 8]);
+        qjDes(1)             = sm.joints.standUpPositions(state,9);
+          
+        CoM_Des                   = CoMprevious + transpose(sm.CoM.standUpDeltaCoM(state,:));         
+        jointsAndCoMSmoothingTime = sm.jointsAndCoMSmoothingTimes(state);
+                           
+    end    
 
     currentState       = state;
     impedances         = gain.impedances(state,:);

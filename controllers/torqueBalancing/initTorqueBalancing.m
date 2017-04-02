@@ -26,9 +26,9 @@ clear; clc;
 % To do this, you can uncomment the 
 
 % setenv('YARP_ROBOT_NAME','iCubGenova01');
-setenv('YARP_ROBOT_NAME','iCubGenova02');
+% setenv('YARP_ROBOT_NAME','iCubGenova02');
 % setenv('YARP_ROBOT_NAME','iCubDarmstadt01');
-% setenv('YARP_ROBOT_NAME','icubGazeboSim');
+setenv('YARP_ROBOT_NAME','icubGazeboSim');
 % setenv('YARP_ROBOT_NAME','iCubGenova05');
 
 % Simulation time in seconds
@@ -85,7 +85,7 @@ WBT_modelName                 = 'matlabTorqueBalancing';
 % If set to true, the base orientation is estimated by using the IMU, while
 % the base position by assuming that the origin of either the right or the
 % left foot do not move. 
-CONFIG.USE_IMU4EST_BASE       = false;
+CONFIG.USE_IMU4EST_BASE      = false;
  
 % CONFIG.YAW_IMU_FILTER and CONFIG.PITCH_IMU_FILTER: when the flag
 % CONFIG.USE_IMU4EST_BASE = true, then the orientation of the floating base is
@@ -113,16 +113,14 @@ CONFIG.ONSOFTCARPET          = false;
 % inequality constraints of contact wrenches
 CONFIG.USE_QP_SOLVER         = true; 
 
-PORTS.IMU       = '/icub/inertial';
-PORTS.COM_DES   = ['/' WBT_modelName '/comDes:i'];
-PORTS.Q_DES     = ['/' WBT_modelName '/qDes:i'];
-
-PORTS.WBDT_LEFTLEG_EE  = '/wholeBodyDynamics/left_leg/cartesianEndEffectorWrench:o';
-PORTS.WBDT_RIGHTLEG_EE = '/wholeBodyDynamics/right_leg/cartesianEndEffectorWrench:o';
-
-PORTS.WBDT_CHAIR       = '/chair/FT_sensor/analog:o/forceTorque';
-PORTS.RIGHT_ARM        = '/wholeBodyDynamicsTree/left_arm/endEffectorWrench:o';
-PORTS.LEFT_ARM         = '/wholeBodyDynamicsTree/right_arm/endEffectorWrench:o';
+% YARP PORTS
+PORTS.IMU                = '/icub/inertial';
+PORTS.COM_DES            = ['/' WBT_modelName '/comDes:i'];
+PORTS.Q_DES              = ['/' WBT_modelName '/qDes:i'];
+PORTS.WBDT_LEFTLEG_EE    = '/wholeBodyDynamics/left_leg/cartesianEndEffectorWrench:o';
+PORTS.WBDT_RIGHTLEG_EE   = '/wholeBodyDynamics/right_leg/cartesianEndEffectorWrench:o';
+PORTS.RIGHT_ARM          = '/wholeBodyDynamics/left_arm/endEffectorWrench:o';
+PORTS.LEFT_ARM           = '/wholeBodyDynamics/right_arm/endEffectorWrench:o';
 
 CONFIG.Ts                = 0.01;  % Controller period [s]
 
@@ -157,35 +155,32 @@ robotSpecificFSM         = fullfile('app/robots',getenv('YARP_ROBOT_NAME'),'init
 run(robotSpecificFSM);
 
 %% iCub stand up demo parameters
-% both CONFIG.iCubStandUp and CONFIG.useExtHandForces are setted to TRUE,
+% whwn both CONFIG.iCubStandUp and CONFIG.useExtHandForces are setted to TRUE,
 % the robot will be aware of the external forces at the arms and will use
 % also them for lifting up.
-CONFIG.iCubStandUp            = false;
-CONFIG.useExtArmForces        = false;
+CONFIG.iCubStandUp       = false;
+CONFIG.useExtArmForces   = false;
 
 %% Define which simulation will be performed
 if strcmpi(SM.SM_TYPE, 'COORDINATOR')
     SM.SM_TYPE_BIN          = SM.SM.MASK.COORDINATOR;
-    CONFIG.useExtArmForces  = false;
 elseif strcmpi(SM.SM_TYPE, 'YOGA')
-    SM.SM_TYPE_BIN      = SM.SM.MASK.YOGA;
-    robotSpecificFSM    = fullfile('app/robots',getenv('YARP_ROBOT_NAME'),'initStateMachine.m');
+    SM.SM_TYPE_BIN          = SM.SM.MASK.YOGA;
+    robotSpecificFSM        = fullfile('app/robots',getenv('YARP_ROBOT_NAME'),'initStateMachine.m');
     run(robotSpecificFSM);
-    CONFIG.useExtArmForces = false;
 elseif strcmpi(SM.SM_TYPE, 'WALKING')
-    SM.SM_TYPE_BIN      = SM.SM.MASK.WALKING;
-    robotSpecificFSM    = fullfile('app/robots',getenv('YARP_ROBOT_NAME'),'initStateMachineWalking.m');
+    SM.SM_TYPE_BIN          = SM.SM.MASK.WALKING;
+    robotSpecificFSM        = fullfile('app/robots',getenv('YARP_ROBOT_NAME'),'initStateMachineWalking.m');
     run(robotSpecificFSM);
-    CONFIG.useExtArmForces = false;
 elseif strcmpi(SM.SM_TYPE, 'STANDUP')
-    SM.SM_TYPE_BIN      = SM.SM.MASK.STANDUP;
-    CONFIG.iCubStandUp  = 1;
-    robotSpecificFSM    = fullfile('app/robots',getenv('YARP_ROBOT_NAME'),'initStateMachineStandUp.m');
+    SM.SM_TYPE_BIN          = SM.SM.MASK.STANDUP;
+    CONFIG.iCubStandUp      = true;
+    robotSpecificFSM        = fullfile('app/robots',getenv('YARP_ROBOT_NAME'),'initStateMachineStandUp.m');
     run(robotSpecificFSM);
 end
 
-%% Contact constraints
-% feet
-[ConstraintsMatrix,bVectorConstraints]         = constraints(forceFrictionCoefficient,numberOfPoints,torsionalFrictionCoefficient,gain.footSize,fZmin);
-% legs
+%% Contact constraints: legs and feet
+% feet constraints
+[ConstraintsMatrixFeet,bVectorConstraintsFeet] = constraints(forceFrictionCoefficient,numberOfPoints,torsionalFrictionCoefficient,gain.footSize,fZmin);
+% legs constraints
 [ConstraintsMatrixLegs,bVectorConstraintsLegs] = constraints(forceFrictionCoefficient,numberOfPoints,torsionalFrictionCoefficient,gain.legSize,fZmin);

@@ -18,11 +18,11 @@
 function [tauModel,Sigma,NA,f_HDot, ...
           HessianMatrixQP1Foot,gradientQP1Foot,ConstraintsMatrixQP1Foot,bVectorConstraintsQp1Foot,...
           HessianMatrixQP2FeetOrLegs,gradientQP2FeetOrLegs,ConstraintsMatrixQP2FeetOrLegs,bVectorConstraintsQp2FeetOrLegs,...
-          errorCoM,qTilde,f,alpha]  =  ...
+          errorCoM,qTilde,f,correctionFromSupportForce]  =  ...
               balancingController(constraints,ROBOT_DOF_FOR_SIMULINK,ConstraintsMatrix,bVectorConstraints,...
               q,qDes,v,M,h,H,intHw,w_H_l_contact,w_H_r_contact,JL,JR,dJLv,dJRv,xcom,J_CoM,desired_x_dx_ddx_CoM,...
               gainsPCOM,gainsDCOM,impedances,intErrorCoM,ki_int_qtilde,reg,gain,...
-              w_H_lArm,w_H_rArm,LArmWrench,RArmWrench,useExtArmForces,state)
+              w_H_lArm,w_H_rArm,LArmWrench,RArmWrench,useExtArmForces)
           
     %BALANCING CONTROLLER
 
@@ -92,7 +92,7 @@ function [tauModel,Sigma,NA,f_HDot, ...
     AR              = [ eye(3),zeros(3);
                         Sf(Pr),  eye(3)];
                     
-    A               = [AL, AR];                  % dot(H) = mg + A*f
+    A               = [AL, AR];   % dot(H) = mg + A*f
                     
     pinvA           = pinv( A, reg.pinvTol)*constraints(1)*constraints(2)  ...
                     + [inv(AL);zeros(6)]*constraints(1)*(1-constraints(2)) ... 
@@ -111,25 +111,16 @@ function [tauModel,Sigma,NA,f_HDot, ...
     %% fsupport = A_arms * fArms = alpha * H_err_parallel + beta * H_err_perpend
 
     % support force
-    fArms        = [LArmWrench;
+    fArms         = [LArmWrench;
                     RArmWrench];
-    fsupport     = A_arms * fArms;
-%     fsupport_lin = fsupport(1:3);
-    
-    % update the desired CoM velocity for taking into account the support
-    % provided by external forces
-%     dxCoM_desired = (gain.KdCoM_regulator*(1+(transpose(fsupport_lin)*desired_x_dx_ddx_CoM(:,2))/(norm(fsupport_lin)*norm(desired_x_dx_ddx_CoM(:,2))+reg.norm_tolerance))...
-%                      +norm(desired_x_dx_ddx_CoM(:,2)) +reg.norm_tolerance)*...
-%                     (desired_x_dx_ddx_CoM(:,2)/(norm(desired_x_dx_ddx_CoM(:,2))+reg.norm_tolerance));
-
-    dxCoM_desired = desired_x_dx_ddx_CoM(:,2);
+    fsupport      = A_arms * fArms;
     
     % Desired acceleration for the center of mass
-    xDDcomStar      = desired_x_dx_ddx_CoM(:,3) -gainsPCOM.*(xcom - desired_x_dx_ddx_CoM(:,1)) -gainsICOM.*intErrorCoM ...
-                      -gainsDCOM.*(xDcom - dxCoM_desired);   
+    xDDcomStar    = desired_x_dx_ddx_CoM(:,3) -gainsPCOM.*(xcom - desired_x_dx_ddx_CoM(:,1)) -gainsICOM.*intErrorCoM ...
+                   -gainsDCOM.*(xDcom - desired_x_dx_ddx_CoM(:,2));   
                       
     % desired robot momentum
-    H_desired  = [m.*dxCoM_desired;
+    H_desired  = [m.*desired_x_dx_ddx_CoM(:,2);
                   zeros(3,1)];
     % momentum error
     H_error    = H - H_desired;
@@ -210,8 +201,8 @@ function [tauModel,Sigma,NA,f_HDot, ...
     % The same hold for the right foot
     constraintMatrixLeftFoot  = ConstraintsMatrix * blkdiag(w_R_l_sole',w_R_l_sole');
     constraintMatrixRightFoot = ConstraintsMatrix * blkdiag(w_R_r_sole',w_R_r_sole');
-    ConstraintsMatrix2Feet    = blkdiag(constraintMatrixLeftFoot,constraintMatrixRightFoot);
-    bVectorConstraints2Feet   = [bVectorConstraints;bVectorConstraints];
+    ConstraintsMatrix2FeetOrLegs  = blkdiag(constraintMatrixLeftFoot,constraintMatrixRightFoot);
+    bVectorConstraints2FeetOrLegs = [bVectorConstraints;bVectorConstraints];
     
     % Terms used in Eq. 0)
     tauModel        = PInv_JcMinvSt*(JcMinv*h - JcDv) + nullJcMinvSt*(h(7:end)- Mbj'/Mb*h(1:6) ...
@@ -245,8 +236,8 @@ function [tauModel,Sigma,NA,f_HDot, ...
     % which in terms of f0 is:
     %
     % ConstraintsMatrix2Feet*NA*f0 < bVectorConstraints - ConstraintsMatrix2Feet*f_HDot
-    ConstraintsMatrixQP2FeetOrLegs  = ConstraintsMatrix2Feet*NA;
-    bVectorConstraintsQp2FeetOrLegs = bVectorConstraints2Feet-ConstraintsMatrix2Feet*f_HDot;
+    ConstraintsMatrixQP2FeetOrLegs  = ConstraintsMatrix2FeetOrLegs*NA;
+    bVectorConstraintsQp2FeetOrLegs = bVectorConstraints2FeetOrLegs-ConstraintsMatrix2FeetOrLegs*f_HDot;
     
     % Evaluation of Hessian matrix and gradient vector for solving the
     % optimization problem 1).

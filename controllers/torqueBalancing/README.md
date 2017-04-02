@@ -55,7 +55,8 @@ It is possible to send the impedance resting position as a reference to the stre
 
 
 #### Citing this contribution
-In case you want to cite the content of this module please refer to [iCub whole-body control through force regulation on rigid non-coplanar contacts](http://journal.frontiersin.org/article/10.3389/frobt.2015.00006/abstract) and use the following bibtex entry:
+In case you want to cite the content of this module please refer to [iCub whole-body control through force regulation on rigid non-coplanar contacts](http://journal.frontiersin.org/article/10.3389/frobt.2015.00006/abstract) 
+and use the following bibtex entry:
 
 ```
  @article{Nori_etal2015,
