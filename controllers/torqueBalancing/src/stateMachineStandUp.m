@@ -74,7 +74,7 @@ function [w_H_b,constraints,impedances,kpCom,kdCom,currentState,jointsAndCoMSmoo
         qjDes([8 9 10 11])   = sm.joints.standUpPositions(state,[5 6 7 8]);
         qjDes([4 5 6 7])     = sm.joints.standUpPositions(state,[5 6 7 8]);
         qjDes(1)             = sm.joints.standUpPositions(state,9);
-        qjDes(16)            = sm.joints.leftAnkleCorrection;
+%         qjDes(16)            = sm.joints.leftAnkleCorrection;
         
         CoM_Des                   = CoMprevious + transpose(sm.CoM.standUpDeltaCoM(state,:));
         tDelta                    = t-tSwitch;
@@ -103,10 +103,10 @@ function [w_H_b,constraints,impedances,kpCom,kdCom,currentState,jointsAndCoMSmoo
         jointsAndCoMSmoothingTime = sm.jointsAndCoMSmoothingTimes(state);
         tDelta                    = t-tSwitch;
         
-        if tDelta > 5 && sm.alsoSitDown
+        if tDelta > 2.5 && sm.alsoSitDown
             state        = 5;
             tSwitch      = t;
-            CoMprevious  = CoM;
+            CoMprevious  = CoM_Des;
         end
                 
     end
@@ -127,7 +127,7 @@ function [w_H_b,constraints,impedances,kpCom,kdCom,currentState,jointsAndCoMSmoo
         jointsAndCoMSmoothingTime = sm.jointsAndCoMSmoothingTimes(state);
         tDelta                    = t-tSwitch;
         
-        if tDelta > 2 && RArmWrench(1) < sm.RArmThreshold(state) && LArmWrench(1) < sm.LArmThreshold(state)            
+        if tDelta > 2.5 && RArmWrench(3) < sm.RArmThreshold(state) && LArmWrench(3) < sm.LArmThreshold(state)            
             state        = 6;
             tSwitch      = t;
             CoMprevious  = CoM;            
@@ -151,7 +151,7 @@ function [w_H_b,constraints,impedances,kpCom,kdCom,currentState,jointsAndCoMSmoo
         jointsAndCoMSmoothingTime = sm.jointsAndCoMSmoothingTimes(state);
         tDelta                    = t-tSwitch;
         
-        if Lwrench(3) > sm.LwrenchThreshold(state) &&  Rwrench(3) > sm.RwrenchThreshold(state) && tDelta > 2            
+        if (Lwrench(3)+Rwrench(3)) < (sm.LwrenchThreshold(state) + sm.RwrenchThreshold(state)) && tDelta > 4            
             state           = 7;
             tSwitch         = t;
             CoMprevious     = CoM; 
@@ -176,7 +176,7 @@ function [w_H_b,constraints,impedances,kpCom,kdCom,currentState,jointsAndCoMSmoo
         jointsAndCoMSmoothingTime = sm.jointsAndCoMSmoothingTimes(state);
         tDelta                    = t-tSwitch;
         
-        if  tDelta > 2            
+        if  tDelta > 10           
             state        = 8;
             CoMprevious  = CoM;            
         end
