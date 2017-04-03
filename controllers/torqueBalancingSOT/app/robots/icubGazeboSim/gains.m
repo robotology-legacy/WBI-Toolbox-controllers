@@ -21,35 +21,37 @@ reg.pinvDampVb      = 1e-7; %Regularizing term for matrix pseudoinverse operatio
 
 %% %%%%%%%%%%%%%%%%    Gains for desired Task Acceleration computation
 
-gain.rootPD         = [5, 2 ];
+gain.CoM.posPD         = [50 * ones(11, 3), 2 * sqrt(ones(11,3))];  %for 11 states, x-y-z directions
 
-gain.lFoot.posPD    = [25*ones(3,1), 2*sqrt(ones(3,1))];
-gain.lFoot.rotPD    = [25, 2 ];
+gain.root.rotPD        = ones(11,1) * [5, 2 ];
 
-gain.rFoot.posPD    = gain.lFoot.posPD;
-gain.rFoot.rotPD    = gain.lFoot.rotPD;
+gain.lFoot.posPD       = [25*ones(11,3), 2*sqrt(ones(11,3))]; %for 11 states, x-y-z directions
+gain.lFoot.rotPD       = ones(11,1) * [25, 2 ];
 
-%% %%%%%%%%%%%%%%%%    Controller gain parameters
+gain.rFoot.posPD       = gain.lFoot.posPD;
+gain.rFoot.rotPD       = gain.lFoot.rotPD;
 
-gain.PCOM           = 50 * ones(11, 3); %for 11 states
-gain.DCOM           = 2 * sqrt(gain.PCOM);  
+gain.joints.impedances = 10 * ones(11, ROBOT_DOF); %for 11 states, 23 DOF
+gain.joints.dampings   = 2 * sqrt(gain.joints.impedances);
 
-gain.impedances     = 10 * ones(11, ROBOT_DOF); %for 11 states
-gain.dampings       = 2 * sqrt(gain.impedances);
-
+%% %%%%%%%%%%%%%%%%    Controller gain parameters 
 gain.weightPostural         = 0.3;
 gain.weightTasks            = 100;
 gain.weightMinTorques       = 1e-4;
 gain.weightMinContactForces = 0;
 
 %% %%%%%%%%%%%%%%%%    Inverse kinematics gains
-ikin.PDCoM          = [50 * ones(3, 1), 2*sqrt(50*ones(3,1))]; 
-ikin.rootPD         = [50, 2*sqrt(50)];
-ikin.lFoot.posPD    = [25*ones(3,1), 2*sqrt(25*ones(3,1))];
+ikin.CoM.posPD      = [50 * ones(3, 1)', 2*sqrt(50*ones(3,1))']; 
+
+ikin.root.rotPD     = [50, 2*sqrt(50)];
+
+ikin.lFoot.posPD    = [25*ones(1,3), 2*sqrt(25*ones(1,3))];
 ikin.lFoot.rotPD    = [25, 2*sqrt(25)];
+
 ikin.rFoot.posPD    = ikin.lFoot.posPD;
 ikin.rFoot.rotPD    = ikin.lFoot.rotPD;
-ikin.impedances     = diag(gain.impedances(1,:));
+
+ikin.impedances     = diag(gain.joints.impedances(1,:));
 ikin.dampings       = 2 * sqrt(ikin.impedances);
 
 %% %%%%%%%%%%%%%%%%    Friction cone parameters

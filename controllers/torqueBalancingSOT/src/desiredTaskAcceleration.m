@@ -21,7 +21,7 @@ function [desiredTaskAcc,comError,rootRotErr,lFootPosErr,lFootRotErr,rFootPosErr
                                       desComPosVelAcc, desRootRotPosVelAcc,...
                                       desLFootOriginPosVelAcc, desLFootRotPosVelAcc, ...
                                       desRFootOriginPosVelAcc, desRFootRotPosVelAcc, ...
-                                      gainsPDCom, gain)
+                                      PDgainsPos, PDgainsRot)
                                               
     comVel             = taskVelocities( 1: 3);
     rootAngVel         = taskVelocities( 4: 6);
@@ -32,14 +32,22 @@ function [desiredTaskAcc,comError,rootRotErr,lFootPosErr,lFootRotErr,rFootPosErr
     rightFootLinVel    = taskVelocities(13:15);
     rightFootAngVel    = taskVelocities(16:18);
     
-    comDDotStar        = linearPID(comPos,comVel,desComPosVelAcc,gainsPDCom);
-    rootOmegaDotStar   = rotationalPID(w_R_root,rootAngVel,desRootRotPosVelAcc,gain.rootPD);  
+    gainsPDpos_CoM     = [PDgainsPos(1:3)'   PDgainsPos(4:6)'];
+    gainsPDpos_lFoot   = [PDgainsPos(7:9)'   PDgainsPos(10:12)'];
+    gainsPDpos_rFoot   = [PDgainsPos(13:15)' PDgainsPos(16:18)'];
     
-    lFootPosDDotStar   = linearPID(w_H_l_sole(1:3,4),leftFootLinVel,desLFootOriginPosVelAcc,gain.lFoot.posPD);
-    lFootOmegaDotStar  = rotationalPID(w_H_l_sole(1:3,1:3),leftFootAngVel,desLFootRotPosVelAcc,gain.lFoot.rotPD);  
+    gainsPDrot_root    = PDgainsRot(1,:);
+    gainsPDrot_lFoot   = PDgainsRot(2,:);
+    gainsPDrot_rFoot   = PDgainsRot(3,:);
+       
+    comDDotStar        = linearPID(comPos,comVel,desComPosVelAcc,gainsPDpos_CoM);
+    rootOmegaDotStar   = rotationalPID(w_R_root,rootAngVel,desRootRotPosVelAcc, gainsPDrot_root); 
     
-    rFootPosDDotStar   = linearPID(w_H_r_sole(1:3,4),rightFootLinVel,desRFootOriginPosVelAcc,gain.rFoot.posPD);
-    rFootOmegaDotStar  = rotationalPID(w_H_r_sole(1:3,1:3),rightFootAngVel,desRFootRotPosVelAcc,gain.rFoot.rotPD);
+    lFootPosDDotStar   = linearPID(w_H_l_sole(1:3,4),leftFootLinVel,desLFootOriginPosVelAcc,gainsPDpos_lFoot);
+    lFootOmegaDotStar  = rotationalPID(w_H_l_sole(1:3,1:3),leftFootAngVel,desLFootRotPosVelAcc,gainsPDrot_lFoot);  
+    
+    rFootPosDDotStar   = linearPID(w_H_r_sole(1:3,4),rightFootLinVel,desRFootOriginPosVelAcc,gainsPDpos_rFoot);
+    rFootOmegaDotStar  = rotationalPID(w_H_r_sole(1:3,1:3),rightFootAngVel,desRFootRotPosVelAcc,gainsPDrot_rFoot);
     
     desiredTaskAcc     = [comDDotStar;
                           rootOmegaDotStar

@@ -10,34 +10,78 @@ gain.SmoothingTimeGainScheduling  = 2.5;
 
 %% %%%%%%%%%%%%%%%%    CONTROLLER GAIN PARAMETERS
 
-gain.PCOM            = [50    60  50;  % state ==  1  TWO FEET BALANCING
-                        50    60  50;  % state ==  2  COM TRANSITION TO LEFT 
-                        50    60  50;  % state ==  3  LEFT FOOT BALANCING
-                        50    60  50;  % state ==  4  PREPARING FOR SWITCHING 
-                        50    60  50;  % state ==  5  LOOKING FOR CONTACT
-                        50    60  50;  % state ==  6  TRANSITION TO INITIAL POSITION 
-                        50    60  50;  % state ==  7  COM TRANSITION TO RIGHT FOOT
-                        50    60  50;  % state ==  8  RIGHT FOOT BALANCING
-                        50    60  50;  % state ==  9  PREPARING FOR SWITCHING 
-                        50    60  50;  % state == 10  LOOKING FOR CONTACT
-                        50    60  50]; % state == 11  TRANSITION TO INITIAL POSITION
+PCoM                        = [50    60  50;  % state ==  1  TWO FEET BALANCING
+                               50    60  50;  % state ==  2  COM TRANSITION TO LEFT 
+                               50    60  50;  % state ==  3  LEFT FOOT BALANCING
+                               50    60  50;  % state ==  4  PREPARING FOR SWITCHING 
+                               50    60  50;  % state ==  5  LOOKING FOR CONTACT
+                               50    60  50;  % state ==  6  TRANSITION TO INITIAL POSITION 
+                               50    60  50;  % state ==  7  COM TRANSITION TO RIGHT FOOT
+                               50    60  50;  % state ==  8  RIGHT FOOT BALANCING
+                               50    60  50;  % state ==  9  PREPARING FOR SWITCHING 
+                               50    60  50;  % state == 10  LOOKING FOR CONTACT
+                               50    60  50]; % state == 11  TRANSITION TO INITIAL POSITION                  
 
-gain.DCOM            = 2 * sqrt(gain.PCOM);                    
+Proot                       = [50;  % state ==  1  TWO FEET BALANCING
+                               50;  % state ==  2  COM TRANSITION TO LEFT 
+                               50;  % state ==  3  LEFT FOOT BALANCING
+                               50;  % state ==  4  PREPARING FOR SWITCHING 
+                               50;  % state ==  5  LOOKING FOR CONTACT
+                               50;  % state ==  6  TRANSITION TO INITIAL POSITION 
+                               50;  % state ==  7  COM TRANSITION TO RIGHT FOOT
+                               50;  % state ==  8  RIGHT FOOT BALANCING
+                               50;  % state ==  9  PREPARING FOR SWITCHING 
+                               50;  % state == 10  LOOKING FOR CONTACT
+                               50]; % state == 11  TRANSITION TO INITIAL POSITION 
+                           
+PlfootPos                   = [25  25  25;  % state ==  1  TWO FEET BALANCING
+                               25  25  25;  % state ==  2  COM TRANSITION TO LEFT 
+                               25  25  25;  % state ==  3  LEFT FOOT BALANCING
+                               25  25  25;  % state ==  4  PREPARING FOR SWITCHING 
+                               25  25  25;  % state ==  5  LOOKING FOR CONTACT
+                               25  25  25;  % state ==  6  TRANSITION TO INITIAL POSITION 
+                               25  25  25;  % state ==  7  COM TRANSITION TO RIGHT FOOT
+                               25  25  25;  % state ==  8  RIGHT FOOT BALANCING
+                               25  25  25;  % state ==  9  PREPARING FOR SWITCHING 
+                               25  25  25;  % state == 10  LOOKING FOR CONTACT
+                               25  25  25]; % state == 11  TRANSITION TO INITIAL POSITION  
+                       
+PlfootRot                   = [50;  % state ==  1  TWO FEET BALANCING
+                               50;  % state ==  2  COM TRANSITION TO LEFT 
+                               50;  % state ==  3  LEFT FOOT BALANCING
+                               50;  % state ==  4  PREPARING FOR SWITCHING 
+                               50;  % state ==  5  LOOKING FOR CONTACT
+                               50;  % state ==  6  TRANSITION TO INITIAL POSITION 
+                               50;  % state ==  7  COM TRANSITION TO RIGHT FOOT
+                               50;  % state ==  8  RIGHT FOOT BALANCING
+                               50;  % state ==  9  PREPARING FOR SWITCHING 
+                               50;  % state == 10  LOOKING FOR CONTACT
+                               50]; % state == 11  TRANSITION TO INITIAL POSITION                             
+
+gain.CoM.posPD              = [PCoM,      2 * sqrt(PCoM)  ];
+gain.root.rotPD             = [Proot,     2 * sqrt(Proot) ];
+
+gain.lFoot.posPD            = [PlfootPos, 2 * sqrt(PlfootPos)]; 
+gain.lFoot.rotPD            = [PlfootRot, 2 * sqrt(PlfootRot)]; 
+                           
+gain.rFoot.posPD            = gain.lFoot.posPD;  
+gain.rFoot.rotPD            = gain.lFoot.rotPD;                        
+
                     
-%                    %  TORSO  %%    LEFT ARM     %%    RIGHT ARM     %%         LEFT LEG            %%         RIGHT LEG           %% 
-gain.impedances      = [20   30   20, 10   10    10   10, 10   10    10   10, 15   25   15    30     25  25, 15   25   15    30     25  25;  % state ==  1  TWO FEET BALANCING
-                        20   30   20, 10   10    10   10, 10   10    10   10, 25   25   15    30     50  50, 25   25   25    30     50  50;  % state ==  2  COM TRANSITION TO LEFT 
-                        20   30   20, 12   12    12   12, 12   12    12   12, 25   25   15    50     50  50, 25   25   25    30     50  50;  % state ==  3  LEFT FOOT BALANCING
-                        30   30   30, 10   10    10   10, 10   10    10   10, 15   25   50    30     25  25, 15   25   15    30     25  50;  % state ==  4  PREPARING FOR SWITCHING 
-                        30   30   30, 10   10    10   10, 10   10    10   10, 15   25   15    30     25  25, 15   25   15    30     25  25;  % state ==  5  LOOKING FOR CONTACT
-                        30   30   30, 10   10    10   10, 10   10    10   10, 15   25   15    50     25  50, 15   25   15    50     50  50;  % state ==  6  TRANSITION TO INITIAL POSITION 
-                        20   30   20, 10   10    10   10, 10   10    10   10, 25   25   25    30     50  50, 25   25   15    30     50  50;  % state ==  7  COM TRANSITION TO RIGHT FOOT
-                        20   30   20, 12   12    12   12, 12   12    12   12, 50   25   25    50     50  50, 50   25   15    50     50  50;  % state ==  8  RIGHT FOOT BALANCING
-                        30   30   30, 10   10    10   10, 10   10    10   10, 15   25   15    30     25  25, 15   25   50    30     25  25;  % state ==  9  PREPARING FOR SWITCHING 
-                        30   30   30, 10   10    10   10, 10   10    10   10, 15   25   15    30     25  25, 15   25   15    30     25  25;  % state == 10  LOOKING FOR CONTACT
-                        30   30   30, 10   10    10   10, 10   10    10   10, 15   25   15    30     25  25, 15   25   15    30     25  25]; % state == 11  TRANSITION TO INITIAL POSITION
+%                              %  TORSO  %%     LEFT ARM     %%    RIGHT ARM     %%         LEFT LEG            %%         RIGHT LEG           %% 
+gain.joints.impedances      = [20   30   20, 10   10    10   10, 10   10    10   10, 15   25   15    30     25  25, 15   25   15    30     25  25;  % state ==  1  TWO FEET BALANCING
+                               20   30   20, 10   10    10   10, 10   10    10   10, 25   25   15    30     50  50, 25   25   25    30     50  50;  % state ==  2  COM TRANSITION TO LEFT 
+                               20   30   20, 12   12    12   12, 12   12    12   12, 25   25   15    50     50  50, 25   25   25    30     50  50;  % state ==  3  LEFT FOOT BALANCING
+                               30   30   30, 10   10    10   10, 10   10    10   10, 15   25   50    30     25  25, 15   25   15    30     25  50;  % state ==  4  PREPARING FOR SWITCHING 
+                               30   30   30, 10   10    10   10, 10   10    10   10, 15   25   15    30     25  25, 15   25   15    30     25  25;  % state ==  5  LOOKING FOR CONTACT
+                               30   30   30, 10   10    10   10, 10   10    10   10, 15   25   15    50     25  50, 15   25   15    50     50  50;  % state ==  6  TRANSITION TO INITIAL POSITION 
+                               20   30   20, 10   10    10   10, 10   10    10   10, 25   25   25    30     50  50, 25   25   15    30     50  50;  % state ==  7  COM TRANSITION TO RIGHT FOOT
+                               20   30   20, 12   12    12   12, 12   12    12   12, 50   25   25    50     50  50, 50   25   15    50     50  50;  % state ==  8  RIGHT FOOT BALANCING
+                               30   30   30, 10   10    10   10, 10   10    10   10, 15   25   15    30     25  25, 15   25   50    30     25  25;  % state ==  9  PREPARING FOR SWITCHING 
+                               30   30   30, 10   10    10   10, 10   10    10   10, 15   25   15    30     25  25, 15   25   15    30     25  25;  % state == 10  LOOKING FOR CONTACT
+                               30   30   30, 10   10    10   10, 10   10    10   10, 15   25   15    30     25  25, 15   25   15    30     25  25]; % state == 11  TRANSITION TO INITIAL POSITION
     
-gain.dampings          = 2 * sqrt(gain.impedances);
+gain.joints.dampings        = 2 * sqrt(gain.joints.impedances);
 
 %% %%%%%%%%%%%%%%%%    FINITE STATE MACHINE SPECIFIC PARAMETERS
 
@@ -159,4 +203,22 @@ sm.joints.states    = [[ 0.0000, 0.0000, 0.0000, ...                         %% 
                         -0.5131, 0.5306, 0.0000, 0.7782 ...                  %
                          0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000,...  %
                          0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000]];   % 
-                  
+
+                     
+                     
+%% %%%%%%%%%%%%%%%%    Inverse kinematics gains
+ikin.CoM.posPD      = gain.CoM.posPD(1,:); 
+
+ikin.root.rotPD     = gain.root.rotPD(1,:);
+
+ikin.lFoot.posPD    = gain.lFoot.posPD(1,:);
+ikin.lFoot.rotPD    = gain.lFoot.rotPD(1,:);
+
+ikin.rFoot.posPD    = ikin.lFoot.posPD;
+ikin.rFoot.rotPD    = ikin.lFoot.rotPD;
+
+ikin.impedances     = diag(gain.joints.impedances(1,:));
+ikin.dampings       = 2 * sqrt(ikin.impedances);
+
+
+clear PCoM Proot PlfootPos PlfootRot;                  
