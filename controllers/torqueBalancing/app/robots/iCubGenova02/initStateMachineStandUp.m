@@ -63,7 +63,7 @@ gain.footSize    = [ -0.05  0.05;    % xMin, xMax
 end
 
 % set this variable to TRUE if you want iCub also sits down after standing up
-sm.alsoSitDown                 = false;
+sm.alsoSitDown                 = true;
 sm.joints.leftAnkleCorrection  = -0.1745;
 sm.armsDown                    = false;
 

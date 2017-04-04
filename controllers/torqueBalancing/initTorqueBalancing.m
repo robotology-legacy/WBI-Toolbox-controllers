@@ -159,7 +159,7 @@ run(robotSpecificFSM);
 % the robot will be aware of the external forces at the arms and will use
 % also them for lifting up.
 CONFIG.iCubStandUp       = false;
-CONFIG.useExtArmForces   = false;
+CONFIG.useExtArmForces   = true;
 
 %% Define which simulation will be performed
 if strcmpi(SM.SM_TYPE, 'COORDINATOR')

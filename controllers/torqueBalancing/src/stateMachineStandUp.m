@@ -30,11 +30,13 @@ function [w_H_b,constraints,impedances,kpCom,kdCom,currentState,jointsAndCoMSmoo
         if useExtArmForces == 1
             
             if t > sm.tBalancing && RArmWrench(1) > sm.RArmThreshold(state) && LArmWrench(1) > sm.LArmThreshold(state)
-                state = 2;           
+                state = 2;   
+                tSwitch = t;
             end
         else
             if t > sm.tBalancing
-                state = 2;           
+                state = 2;                     
+                tSwitch  = t;
             end
         end
     end
@@ -51,10 +53,11 @@ function [w_H_b,constraints,impedances,kpCom,kdCom,currentState,jointsAndCoMSmoo
         qjDes([4 5 6 7])     = sm.joints.standUpPositions(state,[5 6 7 8]);
         qjDes(1)             = sm.joints.standUpPositions(state,9);
         
+        tDelta                    = t-tSwitch;
         CoM_Des                   = CoM_0 + transpose(sm.CoM.standUpDeltaCoM(state,:));
         jointsAndCoMSmoothingTime = sm.jointsAndCoMSmoothingTimes(state);
         
-        if (Lwrench(3)+Rwrench(3)) > (sm.LwrenchThreshold(state) + sm.RwrenchThreshold(state))
+        if (Lwrench(3)+Rwrench(3)) > (sm.LwrenchThreshold(state) + sm.RwrenchThreshold(state)) && tDelta >1.5
             state           = 3;
             w_H_fixedLink   = w_H_fixedLink * l_upper_leg_contact_H_b/l_sole_H_b;
             tSwitch         = t;
