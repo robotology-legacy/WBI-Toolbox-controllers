@@ -125,13 +125,17 @@ gain.footSize                  = [ -0.07 0.07   ;   % xMin, xMax
 fZmin                          = 10;
 
 gain.legSize                   = [ -0.025  0.025 ;   % xMin, xMax
-                                   -0.005  0.005];   % yMin, yMax                                       
+                                   -0.005  0.005];   % yMin, yMax  
+                               
+% gains for updating CoM velocity
+gain.KdCoM_regulator = 0.01;
 
 %% The QP solver will search a solution fo that 
 % satisfies the inequality Aineq_f F(fo) < bineq_f
-reg.pinvTol     = 1e-5;
-reg.pinvDamp    = 0.01;
-reg.pinvDampVb  = 1e-7;
-reg.HessianQP   = 1e-5;
-reg.impedances  = 0.1;
-reg.dampings    = 0;
+reg.pinvTol        = 1e-5;
+reg.pinvDamp       = 0.01;
+reg.pinvDampVb     = 1e-7;
+reg.HessianQP      = 1e-5;
+reg.impedances     = 0.1;
+reg.dampings       = 0;
+reg.norm_tolerance = 0.001;

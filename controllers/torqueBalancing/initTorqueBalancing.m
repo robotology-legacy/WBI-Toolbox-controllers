@@ -26,9 +26,9 @@ clear; clc;
 % To do this, you can uncomment the 
 
 % setenv('YARP_ROBOT_NAME','iCubGenova01');
-% setenv('YARP_ROBOT_NAME','iCubGenova02');
+setenv('YARP_ROBOT_NAME','iCubGenova02');
 % setenv('YARP_ROBOT_NAME','iCubDarmstadt01');
-setenv('YARP_ROBOT_NAME','icubGazeboSim');
+% setenv('YARP_ROBOT_NAME','icubGazeboSim');
 % setenv('YARP_ROBOT_NAME','iCubGenova05');
 
 % Simulation time in seconds
@@ -120,6 +120,10 @@ PORTS.Q_DES     = ['/' WBT_modelName '/qDes:i'];
 PORTS.WBDT_LEFTLEG_EE  = '/wholeBodyDynamics/left_leg/cartesianEndEffectorWrench:o';
 PORTS.WBDT_RIGHTLEG_EE = '/wholeBodyDynamics/right_leg/cartesianEndEffectorWrench:o';
 
+PORTS.WBDT_CHAIR       = '/chair/FT_sensor/analog:o/forceTorque';
+PORTS.RIGHT_ARM        = '/wholeBodyDynamicsTree/left_arm/endEffectorWrench:o';
+PORTS.LEFT_ARM         = '/wholeBodyDynamicsTree/right_arm/endEffectorWrench:o';
+
 CONFIG.Ts                = 0.01;  % Controller period [s]
 
 CONFIG.ON_GAZEBO         = false;
@@ -159,21 +163,20 @@ run(robotSpecificFSM);
 CONFIG.iCubStandUp            = false;
 CONFIG.useExtArmForces        = false;
 
-PORTS.WBDT_CHAIR              = '/chair/FT_sensor/analog:o/forceTorque';
-PORTS.RIGHT_ARM               = '/wholeBodyDynamicsTree/left_arm/endEffectorWrench:o';
-PORTS.LEFT_ARM                = '/wholeBodyDynamicsTree/right_arm/endEffectorWrench:o';
-
 %% Define which simulation will be performed
 if strcmpi(SM.SM_TYPE, 'COORDINATOR')
-    SM.SM_TYPE_BIN      = SM.SM.MASK.COORDINATOR;
+    SM.SM_TYPE_BIN          = SM.SM.MASK.COORDINATOR;
+    CONFIG.useExtArmForces  = false;
 elseif strcmpi(SM.SM_TYPE, 'YOGA')
     SM.SM_TYPE_BIN      = SM.SM.MASK.YOGA;
     robotSpecificFSM    = fullfile('app/robots',getenv('YARP_ROBOT_NAME'),'initStateMachine.m');
     run(robotSpecificFSM);
+    CONFIG.useExtArmForces = false;
 elseif strcmpi(SM.SM_TYPE, 'WALKING')
     SM.SM_TYPE_BIN      = SM.SM.MASK.WALKING;
     robotSpecificFSM    = fullfile('app/robots',getenv('YARP_ROBOT_NAME'),'initStateMachineWalking.m');
     run(robotSpecificFSM);
+    CONFIG.useExtArmForces = false;
 elseif strcmpi(SM.SM_TYPE, 'STANDUP')
     SM.SM_TYPE_BIN      = SM.SM.MASK.STANDUP;
     CONFIG.iCubStandUp  = 1;
