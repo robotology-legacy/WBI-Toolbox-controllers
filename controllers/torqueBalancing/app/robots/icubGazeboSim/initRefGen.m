@@ -1,4 +1,4 @@
-CONFIG.DEMO_MOVEMENTS                  = false; % Either true or false
+CONFIG.DEMO_MOVEMENTS                  = true; % Either true or false
 
 references.com.points                  = 0;
 references.com.noOscillationTime       = 0;     % that the robot waits before starting the left-and-righ

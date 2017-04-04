@@ -21,16 +21,21 @@ function [tauModel,Sigma,NA,f_HDot, ...
           errorCoM,qTilde,f]  =  ...
               balancingController(constraints,ROBOT_DOF_FOR_SIMULINK,ConstraintsMatrix,bVectorConstraints,...
               q,qDes,v,M,h,H,intHw,w_H_l_contact,w_H_r_contact,JL,JR,dJLv,dJRv,xcom,J_CoM,desired_x_dx_ddx_CoM,...
-              gainsPCOM,gainsDCOM,impedances,intErrorCoM,ki_int_qtilde,reg,gain)
+              gainsPCOM,gainsDCOM,impedances,intErrorCoM,ki_int_qtilde,reg,gain,...
+              JLArm,JRArm,w_H_lArm,w_H_rArm,LArmWrench,RArmWrench,useExtArmForces)
           
     %BALANCING CONTROLLER
 
     %% DEFINITION OF CONTROL AND DYNAMIC VARIABLES
-    pos_leftFoot   = w_H_l_contact(1:3,4);
-    w_R_l_sole     = w_H_l_contact(1:3,1:3);
+    pos_leftFoot    = w_H_l_contact(1:3,4);
+    w_R_l_sole      = w_H_l_contact(1:3,1:3);
 
     pos_rightFoot   = w_H_r_contact(1:3,4);
     w_R_r_sole      = w_H_r_contact(1:3,1:3);
+    
+    % arms position
+    pos_leftArm     = w_H_lArm(1:3,4);
+    pos_rightArm    = w_H_rArm(1:3,4);
     
     gainsICOM       = zeros(3,1);
     dampings        = gain.dampings;
@@ -73,26 +78,46 @@ function [tauModel,Sigma,NA,f_HDot, ...
     
     % Application point of the contact force on the left foot w.r.t. CoM
     Pl              = pos_leftFoot  - xcom; 
+    
+    % Arms location w.r.t. CoM
+    PlArm           = pos_leftArm  - xcom; 
+    PrArm           = pos_rightArm  - xcom;
 
-    % The following variables serve for determening the rate-of-change of
+    % The following variables serve for determining the rate-of-change of
     % the robot's momentum. In particular, when balancing on two feet, one has:
     %
     %   dot(H) = gravityWrench +  AL*f_L + AR*f_R
     %          = gravityWrench + [AL,AR]*f
     %
     % where  f_L and f_R are the contact wrenches acting on the left and
-    % right foot, respectively, and f = [f_L;f_R].
-    
+    % right foot, respectively, and f = [f_L;f_R].    
     AL              = [ eye(3),zeros(3);
                         Sf(Pl),  eye(3)];
     AR              = [ eye(3),zeros(3);
                         Sf(Pr),  eye(3)];
                     
     A               = [AL, AR];                  % dot(H) = mg + A*f
-
+                    
     pinvA           = pinv( A, reg.pinvTol)*constraints(1)*constraints(2)  ...
                     + [inv(AL);zeros(6)]*constraints(1)*(1-constraints(2)) ... 
-                    + [zeros(6);inv(AR)]*constraints(2)*(1-constraints(1)); 
+                    + [zeros(6);inv(AR)]*constraints(2)*(1-constraints(1));
+             
+    % matrix multipliyng the forces at arms
+    A_lArm          = [ eye(3),     zeros(3);
+                        Sf(PlArm),  eye(3)];    
+    A_rArm          = [ eye(3),     zeros(3);
+                        Sf(PrArm),  eye(3)];  
+
+    A_arms          = [A_lArm, A_rArm]; 
+    
+    % total wrench applied at arms
+    if useExtArmForces == 1
+        
+        fArms       = [LArmWrench;
+                       RArmWrench];
+    else
+        fArms       = zeros(12,1);
+    end                
                 
     % Null space of the matrix A            
     NA              = (eye(12,12)-pinvA*A)*constraints(1)*constraints(2);
@@ -100,6 +125,10 @@ function [tauModel,Sigma,NA,f_HDot, ...
     % Time varying contact jacobian
     Jc              = [ JL*constraints(1);      
                         JR*constraints(2)];
+                    
+    % Arms jacobians
+    JArms           = [JLArm;
+                       JRArm];
 
     % Time varying dot(J)*nu
     JcDv            = [dJLv*constraints(1);      
@@ -162,7 +191,8 @@ function [tauModel,Sigma,NA,f_HDot, ...
     bVectorConstraints2Feet   = [bVectorConstraints;bVectorConstraints];
     
     % Terms used in Eq. 0)
-    tauModel        = PInv_JcMinvSt*(JcMinv*h - JcDv) + nullJcMinvSt*(h(7:end)- Mbj'/Mb*h(1:6) ...
+    tauModel        = PInv_JcMinvSt*(JcMinv*(h -transpose(JArms)*fArms) - JcDv) + nullJcMinvSt*(h(7:end)- Mbj'/Mb*h(1:6) ...
+                      -(transpose(Jc(:,7:end)) - Mbj'/Mb*transpose(Jc(:,1:6)))*fArms ...
                       -impedances*NLMbar*qTilde  -ki_int_qtilde -dampings*NLMbar*qD);
     
     Sigma           = -(PInv_JcMinvSt*JcMinvJct + nullJcMinvSt*JBar);
@@ -170,14 +200,14 @@ function [tauModel,Sigma,NA,f_HDot, ...
     % Desired rate-of-change of the robot momentum
     HDotDes         = [ m*xDDcomStar ;
                         -gain.DAngularMomentum*H(4:end)-gain.PAngularMomentum*intHw];
-
+    
     % Contact wrenches realizing the desired rate-of-change of the robot
     % momentum HDotDes when standing on two feet. Note that f_HDot is
     % different from zero only when both foot are in contact, i.e. 
     % constraints(1) = constraints(2) = 1. This because when the robot
     % stands on one foot, the f_HDot is evaluated directly from the
     % optimizer (see next section).
-    f_HDot          = pinvA*(HDotDes - gravityWrench)*constraints(1)*constraints(2);  
+    f_HDot          = pinvA*(HDotDes -gravityWrench -A_arms*fArms)*constraints(1)*constraints(2);  
     SigmaNA         = Sigma*NA;
    
     % The optimization problem 1) seeks for the redundancy of the external
@@ -220,7 +250,7 @@ function [tauModel,Sigma,NA,f_HDot, ...
 
     A1Foot                    =  AL*constraints(1)*(1-constraints(2)) + AR*constraints(2)*(1-constraints(1));
     HessianMatrixQP1Foot      =  A1Foot'*A1Foot + eye(size(A1Foot,2))*reg.HessianQP;
-    gradientQP1Foot           = -A1Foot'*(HDotDes - gravityWrench);
+    gradientQP1Foot           = -A1Foot'*(HDotDes -gravityWrench -A_arms*fArms);
 
     %% DEBUG DIAGNOSTICS
     % Unconstrained solution for the problem 1)

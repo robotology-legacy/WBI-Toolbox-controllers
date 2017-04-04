@@ -113,6 +113,9 @@ phys.footSize    = [ -0.065 0.13;    % xMin, xMax
 gain.footSize    = [ -0.07  0.12;    % xMin, xMax
                      -0.045 0.05];   % yMin, yMax   
 
+gain.legSize     = [-0.025  0.025 ;  % xMin, xMax
+                    -0.005  0.005];  % yMin, yMax 
+                
 fZmin            = 10;
 
 %% The QP solver will search a solution fo that 
