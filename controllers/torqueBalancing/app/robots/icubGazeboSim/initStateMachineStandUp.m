@@ -21,8 +21,8 @@ if strcmpi(SM.SM_TYPE, 'STANDUP')
      sat.torque                =  60;
      phys.legSize              = [ -0.025  0.025 ;        % xMin, xMax
                                    -0.005  0.005];        % yMin, yMax 
-     gain.legSize              = [ -0.025  0.025 ;        % xMin, xMax
-                                   -0.005  0.005];        % yMin, yMax 
+     gain.legSize              = [ -0.025  0.05 ;         % xMin, xMax
+                                   -0.025  0.025];        % yMin, yMax 
                                        
      addpath('../../../../utilityMatlabFunctions/')
      [ConstraintsMatrixLegs,bVectorConstraintsLegs] = constraints...
@@ -38,7 +38,7 @@ if strcmpi(SM.SM_TYPE, 'STANDUP')
                          50   50  50];   % state ==  8  BALANCING ON THE LEGS
 
      gain.ICOM              = gain.PCOM*0;
-     gain.DCOM              = 2*sqrt(gain.PCOM)*0;
+     gain.DCOM              = 2*sqrt(gain.PCOM);
      gain.PAngularMomentum  = 1 ;
      gain.DAngularMomentum  = 2*sqrt(gain.PAngularMomentum);
 
@@ -64,7 +64,7 @@ sm.jointsAndCoMSmoothingTimes = [1;    % state ==  1  BALANCING ON THE LEGS
                                  2.5;  % state ==  2  MOVE COM FORWARD
                                  2;    % state ==  3  TWO FEET BALANCING
                                  4;    % state ==  4  LIFTING UP  
-                                 1     % state ==  5  MOVE ARMS FORWARD
+                                 2     % state ==  5  MOVE ARMS FORWARD
                                  4     % state ==  6  LOOKING FOR CONTACT
                                  3     % state ==  7  SITTING DOWN
                                  1];   % state ==  8  BALANCING ON THE LEGS 
@@ -73,36 +73,36 @@ sm.jointsAndCoMSmoothingTimes = [1;    % state ==  1  BALANCING ON THE LEGS
 sm.joints.standUpPositions     = [0.0000      0.0000     0.0000    0.0000        0.0000           0.4363          0.0000          0.0000   0.0000;   % state ==  1  THIS REFERENCE IS NOT USED
                                   1.5402      0.1594    -1.7365   -0.2814       -1.6455           0.4363          0.5862          0.2473   0.4363;   % state ==  2  MOVE COM FORWARD
                                   1.1097      0.0122    -0.8365   -0.0714       -1.4615           0.4363          0.1545          0.2018   0.0611;   % state ==  3  TWO FEET BALANCING
-                                  0.2094      0.1047    -0.1745   -0.0349       -0.0873           0.4363          0.5862          0.2473   0.0000;   % state ==  4  LIFTING UP
+                                  0.2094      0.1047    -0.1745   -0.0349       -0.0873           0.2563          0.5862          0.2473   0.0000;   % state ==  4  LIFTING UP
                                   0.2094      0.1047    -0.1745   -0.0349       -1.4615           0.4363          0.5862          0.2473   0.0000;   % state ==  5  MOVE ARMS FORWARD
-                                  1.1097      0.0122    -0.8365   -0.0714       -1.4615           0.4363          0.1545          0.2018   0.0611;   % state ==  6  LOOKING FOR CONTACT
-                                  1.1097      0.0122    -0.8365   -0.0714       -1.4615           0.4363          0.1545          0.2018   0.0611;   % state ==  7 SITTING DOWN
-                                  1.1097      0.0122    -0.8365   -0.0714       -1.4615           0.4363          0.1545          0.2018   0.4363];  % state ==  8  BALANCING ON THE LEGS
+                                  1.5402      0.0122    -1.7365   -0.0714       -1.4615           0.4363          0.1545          0.2018   0.0000;   % state ==  6  LOOKING FOR CONTACT
+                                  1.5402      0.0122    -1.7365   -0.2814       -1.6455           0.4363          0.5862          0.2473   0.0611;   % state ==  7 SITTING DOWN
+                                  1.5402      0.0122    -1.7365   -0.2814       -1.4615           0.4363          0.1545          0.2018   0.4363];  % state ==  8  BALANCING ON THE LEGS
                                            
 sm.CoM.standUpDeltaCoM         = [0.0     0.0   0.0;       % state ==  1  THIS REFERENCE IS NOT USED
-                                  0.0867  0.0   0.0;       % state ==  2  MOVE COM FORWARD
-                                  0.00    0.0   0.0;       % state ==  3  TWO FEET BALANCING
-                                  0.03    0.0   0.17;      % state ==  4  LIFTING UP
+                                  0.1567  0.0   0.0;       % state ==  2  MOVE COM FORWARD
+                                  0.08    0.0   0.0;       % state ==  3  TWO FEET BALANCING
+                                  0.03    0.0   0.20;      % state ==  4  LIFTING UP
                                   0.0     0.0   0.0;       % state ==  5  MOVE ARMS FORWARD
-                                 -0.03    0.0  -0.17;      % state ==  6  LOOKING FOR CONTACT
-                                 -0.01    0.0  -0.02       % state ==  7 SITTING DOWN
-                                 -0.0867  0.0   0.0];      % state ==  8  BALANCING ON THE LEGS                           
+                                 -0.03    0.0  -0.22;      % state ==  6  LOOKING FOR CONTACT
+                                 -0.03    0.0  -0.0;       % state ==  7 SITTING DOWN
+                                 -0.1567  0.0   0.0];      % state ==  8  BALANCING ON THE LEGS                           
                                    
 sm.LwrenchThreshold    = [0;    % state ==  1  THIS REFERENCE IS NOT USED
                           75;   % state ==  2  MOVE COM FORWARD
-                          110;  % state ==  3  TWO FEET BALANCING
+                          130;  % state ==  3  TWO FEET BALANCING
                           0;    % state ==  4  THIS REFERENCE IS NOT USED
                           0;    % state ==  5  THIS REFERENCE IS NOT USED
-                          90;   % state ==  6  LOOKING FOR CONTACT
+                          140;   % state ==  6  LOOKING FOR CONTACT
                           0     % state ==  7  THIS REFERENCE IS NOT USED
                           0];   % state ==  8  THIS REFERENCE IS NOT USED 
                      
 sm.RwrenchThreshold    = [0     % state ==  1  THIS REFERENCE IS NOT USED
                           75;   % state ==  2  MOVE COM FORWARD
-                          110;  % state ==  3  TWO FEET BALANCING
+                          130;  % state ==  3  TWO FEET BALANCING
                           0;    % state ==  4  THIS REFERENCE IS NOT USED
                           0;    % state ==  5  THIS REFERENCE IS NOT USED
-                          90;   % state ==  6  LOOKING FOR CONTACT
+                          140;   % state ==  6  LOOKING FOR CONTACT
                           0     % state ==  7  THIS REFERENCE IS NOT USED
                           0];   % state ==  8  THIS REFERENCE IS NOT USED  
                      
