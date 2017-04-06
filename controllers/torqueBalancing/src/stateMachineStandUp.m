@@ -77,7 +77,6 @@ function [w_H_b,constraints,impedances,kpCom,kdCom,currentState,jointsAndCoMSmoo
         qjDes([8 9 10 11])   = sm.joints.standUpPositions(state,[5 6 7 8]);
         qjDes([4 5 6 7])     = sm.joints.standUpPositions(state,[5 6 7 8]);
         qjDes(1)             = sm.joints.standUpPositions(state,9);
-%         qjDes(16)            = sm.joints.leftAnkleCorrection;
         
         CoM_Des                   = CoMprevious + transpose(sm.CoM.standUpDeltaCoM(state,:));
         tDelta                    = t-tSwitch;

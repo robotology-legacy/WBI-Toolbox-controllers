@@ -57,8 +57,7 @@ if strcmpi(SM.SM_TYPE, 'STANDUP')
 end
 
 % set this variable to TRUE if you want iCub also sits down after standing up
-sm.alsoSitDown                 = true;
-sm.joints.leftAnkleCorrection  = -0.0714;
+sm.alsoSitDown                 = false;
 
 sm.jointsAndCoMSmoothingTimes = [1;    % state ==  1  BALANCING ON THE LEGS
                                  2.5;  % state ==  2  MOVE COM FORWARD

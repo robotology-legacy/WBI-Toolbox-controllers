@@ -261,5 +261,4 @@ for i = 1:size(sm.joints.pointsR,1)
 	sm.joints.pointsR(i,end-11:end-6) =  rightLeg;
 end	 
 
-
 clear q1 q2 q3 q4;
