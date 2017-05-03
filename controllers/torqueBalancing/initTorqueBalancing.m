@@ -26,11 +26,11 @@ clear; clc;
 % To do this, you can uncomment the 
 
 % setenv('YARP_ROBOT_NAME','iCubGenova01');
-% setenv('YARP_ROBOT_NAME','iCubGenova02');
+setenv('YARP_ROBOT_NAME','iCubGenova04');
 % setenv('YARP_ROBOT_NAME','iCubDarmstadt01');
 % setenv('YARP_ROBOT_NAME','icubGazeboSim');
 % setenv('YARP_ROBOT_NAME','iCubGenova05');
-setenv('YARP_ROBOT_NAME','isaacFirstProtoGazebo');
+% setenv('YARP_ROBOT_NAME','isaacFirstProtoGazebo');
 
 % Simulation time in seconds
 CONFIG.SIMULATION_TIME     = inf;   
@@ -54,7 +54,7 @@ CONFIG.SIMULATION_TIME     = inf;
 SM.SM_TYPE                 = 'YOGA';
 
 % CONFIG.SCOPES: if set to true, all visualizers for debugging are active
-CONFIG.SCOPES.ALL          = false;
+CONFIG.SCOPES.ALL          = true;
 % You can also activate only some specific debugging scopes
 CONFIG.SCOPES.BASE_EST_IMU = false;
 CONFIG.SCOPES.EXTWRENCHES  = false;
@@ -111,6 +111,7 @@ CONFIG.ONSOFTCARPET        = false;
 
 % CONFIG.USE_QP_SOLVER: if set to true, a QP solver is used to account for 
 % inequality constraints of contact wrenches
+CONFIG.USE_QP_SOLVER       = true; 
 
 PORTS.IMU       = '/icub/inertial';
 
@@ -121,8 +122,6 @@ PORTS.Q_DES     = ['/' WBT_modelName '/qDes:i'];
 PORTS.WBDT_LEFTLEG_EE  = '/wholeBodyDynamicsTree/left_leg/cartesianEndEffectorWrench:o';
 PORTS.WBDT_RIGHTLEG_EE = '/wholeBodyDynamicsTree/right_leg/cartesianEndEffectorWrench:o';
 
-CONFIG.USE_QP_SOLVER     = true; 
-
 CONFIG.Ts                = 0.01; %  Controller period [s]
 
 CONFIG.ON_GAZEBO         = false;
@@ -131,7 +130,6 @@ baseToWorldRotationPort  = ['/' WBT_modelName '/floatingBaseRotationMatrix:i'];
 run(strcat('app/robots/',getenv('YARP_ROBOT_NAME'),'/gains.m')); 
 addpath('./src/')
 addpath('../utilityMatlabFunctions/')
-
 
 robotSpecificReferences  = fullfile('app/robots',getenv('YARP_ROBOT_NAME'),'initRefGen.m');
 run(robotSpecificReferences);

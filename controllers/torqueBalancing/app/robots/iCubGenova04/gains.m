@@ -2,7 +2,7 @@ ROBOT_DOF = 23;
 
 WBT_wbiList = '(torso_pitch,torso_roll,torso_yaw,l_shoulder_pitch, l_shoulder_roll, l_shoulder_yaw, l_elbow, r_shoulder_pitch,r_shoulder_roll, r_shoulder_yaw, r_elbow, l_hip_pitch, l_hip_roll, l_hip_yaw, l_knee, l_ankle_pitch, l_ankle_roll, r_hip_pitch,r_hip_roll,r_hip_yaw,r_knee,r_ankle_pitch,r_ankle_roll)';
 
-gain.SmoothingTimeGainScheduling              = 2;  
+gain.SmoothingTimeGainScheduling  = 2;  
 
 
 CONFIG.LEFT_RIGHT_FOOT_IN_CONTACT  = [1 1];
@@ -28,7 +28,7 @@ postures = 0;
 gain.SmoothingTimeImp  = 1;  
 
 %%
-%           PARAMETERS FOR TWO FEET ONE GROUND
+%           PARAMETERS FOR TWO FEET ON GROUND
 if (sum(CONFIG.LEFT_RIGHT_FOOT_IN_CONTACT) == 2)
     gain.PCOM                 = diag([50   100  5]);
     gain.ICOM                 = diag([  0    0   0]);
@@ -61,7 +61,7 @@ if (sum(CONFIG.LEFT_RIGHT_FOOT_IN_CONTACT) == 2)
                                            
 end
 
-% PARAMETERS FOR ONLY ONE FOOT ONE GROUND
+% PARAMETERS FOR ONLY ONE FOOT ON GROUND
 
 if (sum(CONFIG.LEFT_RIGHT_FOOT_IN_CONTACT) == 1)
     %%
@@ -111,7 +111,6 @@ end
 
 
 %% constraints for QP for balancing on both feet - friction cone - z-moment - in terms of f (not f0!)
-
 
 % Friction cone parameters
 numberOfPoints               = 4; % The friction cone is approximated by using linear interpolation of the circle. 
