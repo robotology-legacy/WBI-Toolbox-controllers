@@ -104,16 +104,16 @@ sm.jointsSmoothingTimes          = [1;   %% state ==  1  TWO FEET BALANCING
                                          %%
                                     1;   %% state ==  2  COM TRANSITION TO LEFT FOOT
                                     1;   %% state ==  3  LEFT FOOT BALANCING 
-                                    1.5; %% state ==  4  YOGA LEFT FOOT
-                                    2;   %% state ==  5  PREPARING FOR SWITCHING
-                                    2;   %% state ==  6  LOOKING FOR CONTACT 
+                                    2; %% state ==  4  YOGA LEFT FOOT
+                                    4;   %% state ==  5  PREPARING FOR SWITCHING
+                                    4;   %% state ==  6  LOOKING FOR CONTACT 
                                          %%
                                     1;   %% state ==  7  TRANSITION INIT POSITION
                                          %%
                                     1;   %% state ==  8  COM TRANSITION TO RIGHT FOOT
                                     1;   %% state ==  9  RIGHT FOOT BALANCING 
-                                    1.5; %% state == 10  YOGA RIGHT FOOT
-                                    2;   %% state == 11  PREPARING FOR SWITCHING
+                                    2; %% state == 10  YOGA RIGHT FOOT
+                                    4;   %% state == 11  PREPARING FOR SWITCHING
                                     5;   %% state == 12  LOOKING FOR CONTACT 
                                          %%
                                     10]; %% state == 13  TRANSITION INIT POSITION
