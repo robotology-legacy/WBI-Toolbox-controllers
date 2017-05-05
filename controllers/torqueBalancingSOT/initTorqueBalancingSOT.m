@@ -27,7 +27,8 @@ clear stateMachineWalking QpBalancingSOT
 % and set the environmental variable YARP_ROBOT_NAME = icubGazeboSim.
 % To do this, you can uncomment the 
 
-% setenv('YARP_ROBOT_NAME','iCubGenova02');
+%setenv('YARP_ROBOT_NAME','iCubGenova02');
+%setenv('YARP_ROBOT_NAME','iCubGenova04');
 setenv('YARP_ROBOT_NAME','icubGazeboSim');
 
 % Simulation time in seconds
