@@ -6,7 +6,7 @@ Model {
     NumRootInports	    0
     NumRootOutports	    0
     ParameterArgumentNames  ""
-    ComputedModelVersion    "1.3126"
+    ComputedModelVersion    "1.3129"
     NumModelReferences	    0
     NumTestPointedSignals   0
   }
@@ -29,7 +29,7 @@ Model {
       $ObjectID		      2
       $ClassName	      "Simulink.WindowInfo"
       IsActive		      [1]
-      Location		      [1728.0, 239.0, 1311.0, 744.0]
+      Location		      [55.0, 24.0, 1311.0, 744.0]
       Object {
 	$PropName		"ModelBrowserInfo"
 	$ObjectID		3
@@ -51,11 +51,11 @@ Model {
 	$ObjectID		5
 	$ClassName		"Simulink.EditorInfo"
 	IsActive		[1]
-	ViewObjType		"SimulinkSubsys"
-	LoadSaveID		"2275"
-	Extents			[1257.0, 551.0]
-	ZoomFactor		[0.69128329297820823]
-	Offset			[-66.2108896125219, -70.252189141856377]
+	ViewObjType		"SimulinkTopLevel"
+	LoadSaveID		"0"
+	Extents			[1277.0, 599.0]
+	ZoomFactor		[0.57329317269076308]
+	Offset			[28.75919439579684, 110.57968476357269]
       }
     }
   }
@@ -63,11 +63,11 @@ Model {
   Creator		  "daniele"
   UpdateHistory		  "UpdateHistoryNever"
   ModifiedByFormat	  "%<Auto>"
-  LastModifiedBy	  "marie"
+  LastModifiedBy	  "gnava"
   ModifiedDateFormat	  "%<Auto>"
-  LastModifiedDate	  "Mon Mar 27 14:40:37 2017"
-  RTWModifiedTimeStamp	  412526436
-  ModelVersionFormat	  "1.%<AutoIncrement:3126>"
+  LastModifiedDate	  "Wed May 10 15:41:58 2017"
+  RTWModifiedTimeStamp	  416331718
+  ModelVersionFormat	  "1.%<AutoIncrement:3129>"
   ConfigurationManager	  "none"
   SampleTimeColors	  off
   SampleTimeAnnotations	  off
@@ -1072,7 +1072,7 @@ Model {
       Variant		      off
       System {
 	Name			"DesValues"
-	Location		[0, 22, 2560, 1435]
+	Location		[55, 24, 1366, 768]
 	Open			off
 	ModelBrowserVisibility	off
 	ModelBrowserWidth	200
@@ -1084,7 +1084,7 @@ Model {
 	TiledPaperMargins	[0.500000, 0.500000, 0.500000, 0.500000]
 	TiledPageScale		1
 	ShowPageBoundaries	off
-	ZoomFactor		"99"
+	ZoomFactor		"49"
 	Block {
 	  BlockType		  Reference
 	  Name			  "Compare\nTo Zero"
@@ -1270,7 +1270,7 @@ Model {
 	  Variant		  off
 	  System {
 	    Name		    "Internal coordinator"
-	    Location		    [0, 22, 2560, 1435]
+	    Location		    [55, 24, 1366, 768]
 	    Open		    off
 	    ModelBrowserVisibility  off
 	    ModelBrowserWidth	    200
@@ -1282,7 +1282,7 @@ Model {
 	    TiledPaperMargins	    [0.500000, 0.500000, 0.500000, 0.500000]
 	    TiledPageScale	    1
 	    ShowPageBoundaries	    off
-	    ZoomFactor		    "184"
+	    ZoomFactor		    "92"
 	    Block {
 	      BlockType		      Inport
 	      Name		      "jointAngles"
@@ -1439,7 +1439,7 @@ Model {
 	      blocking		      off
 	      timestamp		      off
 	      autoconnect	      on
-	      errorOnConnection	      off
+	      errorOnConnection	      on
 	    }
 	    Block {
 	      BlockType		      Constant
@@ -3607,7 +3607,7 @@ Model {
 	  Name			  "Read desired_x_dx_ddx_CoM\nas 9 element vector"
 	  SID			  "2157"
 	  Ports			  [0, 2]
-	  Position		  [-970, 2404, -910, 2446]
+	  Position		  [-970, 2399, -910, 2441]
 	  ZOrder		  599
 	  ForegroundColor	  "[0.490196, 0.000000, 0.000000]"
 	  LibraryVersion	  "1.381"
@@ -3678,7 +3678,7 @@ Model {
 	  Variant		  off
 	  System {
 	    Name		    "Scopes  "
-	    Location		    [65, 24, 1920, 1080]
+	    Location		    [55, 24, 1366, 768]
 	    Open		    off
 	    ModelBrowserVisibility  off
 	    ModelBrowserWidth	    200
@@ -3798,7 +3798,7 @@ Model {
 	      Name		      "DoFs converter"
 	      SID		      "3712"
 	      Ports		      [1, 5]
-	      Position		      [485, 234, 580, 336]
+	      Position		      [485, 214, 580, 316]
 	      ZOrder		      659
 	      LibraryVersion	      "1.381"
 	      SourceBlock	      "WBToolboxLibrary/Utilities/DoFs converter"
@@ -3829,6 +3829,12 @@ Model {
 	      Port {
 		PortNumber		4
 		Name			"left_leg"
+		RTWStorageClass		"Auto"
+		DataLoggingNameMode	"SignalName"
+	      }
+	      Port {
+		PortNumber		5
+		Name			"right_leg"
 		RTWStorageClass		"Auto"
 		DataLoggingNameMode	"SignalName"
 	      }
@@ -3913,8 +3919,8 @@ Model {
 	      MaxDataPoints	      5000
 	      SaveToWorkspace	      off
 	      SaveName		      ScopeData3
-	      YMin		      27.5~27.5~27.5~27.5~27.5~27.5
-	      YMax		      52.5~52.5~52.5~52.5~52.5~52.5
+	      YMin		      8.75~7.75~7.75~3.75~-1.00000~1.00000
+	      YMax		      21.25~10.25~10.25~66.25~1.00000~3.00000
 	      SampleInput	      off
 	      SampleTime	      -1
 	      ZoomMode		      on
@@ -3940,7 +3946,7 @@ Model {
 		LineWidths		"[0.5 0.5 0.5 0.5 0.5 0.5]"
 		MarkerStyles		"none|none|none|none|none|none"
 	      }
-	      Location		      [1 455 1921 1435]
+	      Location		      [56 78 1367 767]
 	    }
 	    Block {
 	      BlockType		      Scope
@@ -4189,7 +4195,7 @@ Model {
 	      ZOrder		      35
 	      SrcBlock		      "impedances"
 	      SrcPort		      1
-	      Points		      [0, 50]
+	      Points		      [0, 45]
 	      DstBlock		      "DoFs converter"
 	      DstPort		      1
 	    }
@@ -4209,15 +4215,16 @@ Model {
 	      Labels		      [2, 1]
 	      SrcBlock		      "DoFs converter"
 	      SrcPort		      4
-	      Points		      [0, -20]
+	      Points		      [0, 0]
 	      DstBlock		      "Impedances(t)"
 	      DstPort		      4
 	    }
 	    Line {
 	      Name		      "right_leg"
-	      ZOrder		      34
+	      ZOrder		      56
 	      Labels		      [1, 1]
-	      Points		      [585, 305]
+	      SrcBlock		      "DoFs converter"
+	      SrcPort		      5
 	      DstBlock		      "Impedances(t)"
 	      DstPort		      5
 	    }
@@ -4227,7 +4234,7 @@ Model {
 	      Labels		      [2, 1]
 	      SrcBlock		      "DoFs converter"
 	      SrcPort		      3
-	      Points		      [0, -20]
+	      Points		      [0, 0]
 	      DstBlock		      "Impedances(t)"
 	      DstPort		      3
 	    }
@@ -4237,7 +4244,7 @@ Model {
 	      Labels		      [2, 1]
 	      SrcBlock		      "DoFs converter"
 	      SrcPort		      1
-	      Points		      [0, -20]
+	      Points		      [0, 0]
 	      DstBlock		      "Impedances(t)"
 	      DstPort		      1
 	    }
@@ -4247,7 +4254,7 @@ Model {
 	      Labels		      [2, 1]
 	      SrcBlock		      "DoFs converter"
 	      SrcPort		      2
-	      Points		      [0, -20]
+	      Points		      [0, 0]
 	      DstBlock		      "Impedances(t)"
 	      DstPort		      2
 	    }
@@ -4405,7 +4412,7 @@ Model {
 	  Variant		  off
 	  System {
 	    Name		    "State Machine"
-	    Location		    [0, 22, 2560, 1435]
+	    Location		    [55, 24, 1366, 768]
 	    Open		    off
 	    ModelBrowserVisibility  off
 	    ModelBrowserWidth	    200
@@ -4417,7 +4424,7 @@ Model {
 	    TiledPaperMargins	    [0.500000, 0.500000, 0.500000, 0.500000]
 	    TiledPageScale	    1
 	    ShowPageBoundaries	    off
-	    ZoomFactor		    "162"
+	    ZoomFactor		    "80"
 	    Block {
 	      BlockType		      Inport
 	      Name		      "jointAngles"
@@ -4575,7 +4582,7 @@ Model {
 	      Variant		      off
 	      System {
 		Name			"Visualise extrnal wrenches  "
-		Location		[0, 22, 2560, 1435]
+		Location		[55, 24, 1366, 768]
 		Open			off
 		ModelBrowserVisibility	off
 		ModelBrowserWidth	200
@@ -4587,7 +4594,7 @@ Model {
 		TiledPaperMargins	[0.500000, 0.500000, 0.500000, 0.500000]
 		TiledPageScale		1
 		ShowPageBoundaries	off
-		ZoomFactor		"431"
+		ZoomFactor		"202"
 		Block {
 		  BlockType		  Inport
 		  Name			  "wL_WBDT"
@@ -4696,7 +4703,7 @@ Model {
 		    LineWidths		    "[0.5 0.5 0.5 0.5 0.5 0.5]"
 		    MarkerStyles	    "none|none|none|none|none|none"
 		  }
-		  Location		  [680 518 1670 1110]
+		  Location		  [248 245 1228 807]
 		}
 		Block {
 		  BlockType		  Scope
@@ -4738,7 +4745,7 @@ Model {
 		    LineWidths		    "[0.5 0.5 0.5 0.5 0.5 0.5]"
 		    MarkerStyles	    "none|none|none|none|none|none"
 		  }
-		  Location		  [2 95 1281 795]
+		  Location		  [56 123 1335 823]
 		}
 		Line {
 		  Name			  "thresholdContactOn"
@@ -4861,7 +4868,7 @@ Model {
 	      blocking		      off
 	      timestamp		      off
 	      autoconnect	      on
-	      errorOnConnection	      off
+	      errorOnConnection	      on
 	      Port {
 		PortNumber		1
 		Name			"wL_WBDT"
@@ -5259,7 +5266,7 @@ Model {
 	      blocking		      off
 	      timestamp		      off
 	      autoconnect	      on
-	      errorOnConnection	      off
+	      errorOnConnection	      on
 	      Port {
 		PortNumber		1
 		Name			"wR_WBDT"
@@ -17776,14 +17783,14 @@ Model {
 	  SrcPort		  2
 	  Points		  [52, 0]
 	  Branch {
-	    ZOrder		    121
-	    Points		    [0, 395]
+	    ZOrder		    240
+	    Points		    [0, 400]
 	    DstBlock		    "Subsystem"
 	    DstPort		    1
 	  }
 	  Branch {
 	    ZOrder		    120
-	    Points		    [0, -10]
+	    Points		    [0, -5]
 	    DstBlock		    "External/Internal CoM references"
 	    DstPort		    2
 	  }
@@ -17794,14 +17801,13 @@ Model {
 	  SrcPort		  1
 	  Points		  [194, 0]
 	  Branch {
-	    ZOrder		    131
-	    Points		    [0, 750]
+	    ZOrder		    241
+	    Points		    [0, 755]
 	    DstBlock		    "Selector1"
 	    DstPort		    1
 	  }
 	  Branch {
 	    ZOrder		    123
-	    Points		    [0, -5]
 	    DstBlock		    "External/Internal CoM references"
 	    DstPort		    1
 	  }
@@ -18535,7 +18541,7 @@ Model {
       Variant		      off
       System {
 	Name			"Dump and visualize"
-	Location		[1728, 239, 3039, 983]
+	Location		[55, 24, 1366, 768]
 	Open			off
 	ModelBrowserVisibility	off
 	ModelBrowserWidth	200
@@ -18681,8 +18687,8 @@ Model {
 	  MaxDataPoints		  5000
 	  SaveToWorkspace	  on
 	  SaveName		  comData
-	  YMin			  -0.24275~-0.24275~-0.24275~-0.24275
-	  YMax			  0.62134~0.62134~0.62134~0.62134
+	  YMin			  -0.05167~-0.05103~-0.00097~1.00000
+	  YMax			  0.60091~0.60053~0.00041~3.00000
 	  SampleInput		  off
 	  SampleTime		  -1
 	  ZoomMode		  on
@@ -18706,7 +18712,7 @@ Model {
 	    LineWidths		    "[0.5 0.5 0.5 0.5 0.5 0.5]"
 	    MarkerStyles	    "none|none|none|none|none|none"
 	  }
-	  Location		  [640 396 1920 1044]
+	  Location		  [87 119 1367 767]
 	}
 	Block {
 	  BlockType		  Selector
@@ -19791,7 +19797,7 @@ Model {
 	    LineWidths		    "[0.5 0.5 0.5 0.5 0.5 0.5]"
 	    MarkerStyles	    "none|none|none|none|none|none"
 	  }
-	  Location		  [1 95 1281 743]
+	  Location		  [56 123 1336 771]
 	}
 	Block {
 	  BlockType		  SubSystem
@@ -20388,8 +20394,8 @@ Model {
 	  MaxDataPoints		  5000
 	  SaveToWorkspace	  on
 	  SaveName		  jointErrorData
-	  YMin			  -19.07921~-19.07921~-19.07921~-19.07921~-19.07921~-19.07921
-	  YMax			  25.04716~25.04716~25.04716~25.04716~25.04716~25.04716
+	  YMin			  -0.10986~-0.10986~-0.10986~-0.10986~-0.10986~1.00000
+	  YMax			  0.10986~0.10986~0.10986~0.10986~0.10986~3.00000
 	  SampleInput		  off
 	  SampleTime		  -1
 	  ZoomMode		  on
@@ -20415,7 +20421,7 @@ Model {
 	    LineWidths		    "[0.5 0.5 0.5 0.5 0.5 0.5]"
 	    MarkerStyles	    "none|none|none|none|none|none"
 	  }
-	  Location		  [1 95 1281 743]
+	  Location		  [56 123 1336 771]
 	}
 	Block {
 	  BlockType		  Scope
@@ -20433,8 +20439,8 @@ Model {
 	  MaxDataPoints		  5000
 	  SaveToWorkspace	  on
 	  SaveName		  tauDesiredData
-	  YMin			  -11.78546~-11.78546~-11.78546~-11.78546~-11.78546~-11.78546
-	  YMax			  8.52242~8.52242~8.52242~8.52242~8.52242~8.52242
+	  YMin			  -2.62369~-1.31451~-1.35483~-80.67711~-80.58848~1.00000
+	  YMax			  22.48453~0.36849~0.37657~54.64406~54.86216~3.00000
 	  SampleInput		  off
 	  SampleTime		  -1
 	  ZoomMode		  on
@@ -20460,7 +20466,7 @@ Model {
 	    LineWidths		    "[0.5 0.5 0.5 0.5 0.5 0.5]"
 	    MarkerStyles	    "none|none|none|none|none|none"
 	  }
-	  Location		  [1 95 1281 795]
+	  Location		  [66 151 1336 812]
 	}
 	Block {
 	  BlockType		  Scope
@@ -20478,8 +20484,8 @@ Model {
 	  MaxDataPoints		  5000
 	  SaveToWorkspace	  on
 	  SaveName		  tauErrorData
-	  YMin			  -9.6915~-9.6915~-9.6915~-9.6915~-9.6915~-9.6915
-	  YMax			  9.49753~9.49753~9.49753~9.49753~9.49753~9.49753
+	  YMin			  -2.83014~-2.95269~-2.4544~-82.79251~-82.65526~1.00000
+	  YMax			  24.89482~2.14822~2.02082~54.75895~54.92062~3.00000
 	  SampleInput		  off
 	  SampleTime		  -1
 	  ZoomMode		  on
@@ -20505,7 +20511,7 @@ Model {
 	    LineWidths		    "[0.5 0.5 0.5 0.5 0.5 0.5]"
 	    MarkerStyles	    "none|none|none|none|none|none"
 	  }
-	  Location		  [1 95 1281 743]
+	  Location		  [66 134 1346 767]
 	}
 	Block {
 	  BlockType		  Scope
@@ -20523,8 +20529,8 @@ Model {
 	  MaxDataPoints		  5000
 	  SaveToWorkspace	  on
 	  SaveName		  tauMeasuredData
-	  YMin			  -10.14812~-10.14812~-10.14812~-10.14812~-10.14812~-10.14812
-	  YMax			  9.97513~9.97513~9.97513~9.97513~9.97513~9.97513
+	  YMin			  -2.46024~-3.39272~-3.27773~-5.7445~-5.79418~1.00000
+	  YMax			  0.43372~2.74619~2.17409~2.80564~2.76133~3.00000
 	  SampleInput		  off
 	  SampleTime		  -1
 	  ZoomMode		  on
@@ -20550,7 +20556,7 @@ Model {
 	    LineWidths		    "[0.5 0.5 0.5 0.5 0.5 0.5]"
 	    MarkerStyles	    "none|none|none|none|none|none"
 	  }
-	  Location		  [1 95 1281 795]
+	  Location		  [56 123 1336 823]
 	}
 	Line {
 	  Name			  "CoM_Error"
@@ -21647,7 +21653,7 @@ Model {
       Variant		      off
       System {
 	Name			"controller_QP"
-	Location		[65, 24, 1920, 1080]
+	Location		[55, 24, 1366, 768]
 	Open			off
 	ModelBrowserVisibility	off
 	ModelBrowserWidth	200
@@ -21659,7 +21665,7 @@ Model {
 	TiledPaperMargins	[0.500000, 0.500000, 0.500000, 0.500000]
 	TiledPageScale		1
 	ShowPageBoundaries	off
-	ZoomFactor		"54"
+	ZoomFactor		"35"
 	Block {
 	  BlockType		  Inport
 	  Name			  "impedances"
@@ -25912,7 +25918,7 @@ Model {
       Name		      "synchronizer"
       SID		      "2423"
       Ports		      []
-      Position		      [1632, 173, 1752, 223]
+      Position		      [1642, 183, 1762, 233]
       ZOrder		      546
       ForegroundColor	      "red"
       BackgroundColor	      "green"
