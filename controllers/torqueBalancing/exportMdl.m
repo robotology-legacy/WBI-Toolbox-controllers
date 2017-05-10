@@ -19,7 +19,7 @@ clear
 close
 
 fprintf('\n### Exporting Simulink model to previous versions');
-fprintf('\n### Starting Matlab version must be one of the following: 2015a, 2015b, 2016b');
+fprintf('\n### Matlab version must be at least 2015a');
 fprintf('\n### Exported versions: 2015b, 2015a, 2012b');
 fprintf('\n### If you need to export other versions, just modify this script accordingly.\n');
 
@@ -34,12 +34,12 @@ end
 matlabVersion     = ver('matlab');
 matlabVersion     = matlabVersion.Version;
 % generate the prefix for loading the model
-if strcmp(matlabVersion,'9.1')
-    versionName   = 'R2016bS88';
-elseif strcmp(matlabVersion,'8.6')    
+if str2double(matlabVersion) == 8.5
+    versionName   = 'R2015aS85';
+elseif str2double(matlabVersion) < 9.1 && str2double(matlabVersion) >= 8.6
     versionName   = 'R2015bS86';    
-elseif strcmp(matlabVersion,'8.5')    
-    versionName   = 'R2015aS85';    
+elseif str2double(matlabVersion) >= 9.1   
+    versionName   = 'R2016bS88';  
 end
 modelName         = ['torqueBalancing' versionName];
 
@@ -63,7 +63,11 @@ try
       fprintf('\nExporting to version 2015b\n'); 
       save_system(modelName, 'torqueBalancingR2015bS86', 'ExportToVersion', 'R2015B_MDl');
   end
-  
+  if str2double(matlabVersion) >= 9.1 
+      % export to 2016b
+      fprintf('\nExporting to version 2016b\n'); 
+      save_system(modelName, 'torqueBalancingR2016bS88', 'ExportToVersion', 'R2016B_MDl');
+  end
   % closing the model
   close_system(modelName);
   catch ex;
