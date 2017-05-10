@@ -57,7 +57,7 @@ try
 
   % export to 2012b
   fprintf('\nExporting to version 2012b\n');
-  save_system(modelName, 'torqueBalancingR2012b', 'ExportToVersion', 'R2012B_MDl');
+  save_system(modelName, 'torqueBalancing2012b', 'ExportToVersion', 'R2012B_MDl');
 
   if strcmp(matlabVersion,'9.1') || strcmp(matlabVersion,'8.6')   
       % export to 2015a

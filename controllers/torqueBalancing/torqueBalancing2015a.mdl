@@ -1,12 +1,12 @@
 Model {
-  Name			  "torqueBalancingR2015aS85"
+  Name			  "torqueBalancing2015a"
   Version		  8.5
   SavedCharacterEncoding  "UTF-8"
   GraphicalInterface {
     NumRootInports	    0
     NumRootOutports	    0
     ParameterArgumentNames  ""
-    ComputedModelVersion    "1.3125"
+    ComputedModelVersion    "1.3128"
     NumModelReferences	    0
     NumTestPointedSignals   0
   }
@@ -51,11 +51,11 @@ Model {
 	$ObjectID		5
 	$ClassName		"Simulink.EditorInfo"
 	IsActive		[1]
-	ViewObjType		"SimulinkTopLevel"
-	LoadSaveID		"0"
+	ViewObjType		"SimulinkSubsys"
+	LoadSaveID		"2275"
 	Extents			[1821.0, 911.0]
-	ZoomFactor		[0.88654618473895586]
-	Offset			[115.48074745186864, 119.20838052095132]
+	ZoomFactor		[1.0690072639225181]
+	Offset			[5.7087919379954428, -63.096262740656869]
       }
     }
   }
@@ -65,9 +65,9 @@ Model {
   ModifiedByFormat	  "%<Auto>"
   LastModifiedBy	  "gnava"
   ModifiedDateFormat	  "%<Auto>"
-  LastModifiedDate	  "Mon Mar 20 16:18:53 2017"
-  RTWModifiedTimeStamp	  411927532
-  ModelVersionFormat	  "1.%<AutoIncrement:3125>"
+  LastModifiedDate	  "Wed May 10 14:58:45 2017"
+  RTWModifiedTimeStamp	  416329124
+  ModelVersionFormat	  "1.%<AutoIncrement:3128>"
   ConfigurationManager	  "none"
   SampleTimeColors	  off
   SampleTimeAnnotations	  off
@@ -110,13 +110,13 @@ Model {
     $PropName		    "DataLoggingOverride"
     $ObjectID		    7
     $ClassName		    "Simulink.SimulationData.ModelLoggingInfo"
-    model_		    "torqueBalancingR2015aS85"
+    model_		    "torqueBalancing2015a"
     signals_		    []
     overrideMode_	    [0.0]
     Array {
       Type		      "Cell"
       Dimension		      1
-      Cell		      "torqueBalancingR2015aS85"
+      Cell		      "torqueBalancing2015a"
       PropName		      "logAsSpecifiedByModels_"
     }
     Array {
@@ -1043,7 +1043,7 @@ Model {
     }
   }
   System {
-    Name		    "torqueBalancingR2015aS85"
+    Name		    "torqueBalancing2015a"
     Location		    [65, 24, 1920, 1080]
     Open		    off
     ModelBrowserVisibility  off
@@ -1072,7 +1072,7 @@ Model {
       Variant		      off
       System {
 	Name			"DesValues"
-	Location		[0, 22, 2560, 1435]
+	Location		[65, 24, 1920, 1080]
 	Open			off
 	ModelBrowserVisibility	off
 	ModelBrowserWidth	200
@@ -1084,7 +1084,7 @@ Model {
 	TiledPaperMargins	[0.500000, 0.500000, 0.500000, 0.500000]
 	TiledPageScale		1
 	ShowPageBoundaries	off
-	ZoomFactor		"99"
+	ZoomFactor		"71"
 	Block {
 	  BlockType		  Reference
 	  Name			  "Compare\nTo Zero"
@@ -1631,7 +1631,7 @@ Model {
 		    BlockType		    S-Function
 		    Name		    " SFunction "
 		    SID			    "2126::3705"
-		    Tag			    "Stateflow S-Function torqueBalancingR2015aS85 7"
+		    Tag			    "Stateflow S-Function torqueBalancing2015a 7"
 		    Ports		    [4, 2]
 		    Position		    [180, 102, 230, 203]
 		    ZOrder		    74
@@ -1949,7 +1949,7 @@ Model {
 		    BlockType		    S-Function
 		    Name		    " SFunction "
 		    SID			    "2134::3705"
-		    Tag			    "Stateflow S-Function torqueBalancingR2015aS85 10"
+		    Tag			    "Stateflow S-Function torqueBalancing2015a 10"
 		    Ports		    [3, 3]
 		    Position		    [180, 100, 230, 180]
 		    ZOrder		    108
@@ -2497,7 +2497,7 @@ Model {
 		    BlockType		    S-Function
 		    Name		    " SFunction "
 		    SID			    "3595::3705"
-		    Tag			    "Stateflow S-Function torqueBalancingR2015aS85 2"
+		    Tag			    "Stateflow S-Function torqueBalancing2015a 2"
 		    Ports		    [6, 2]
 		    Position		    [180, 102, 230, 243]
 		    ZOrder		    105
@@ -3798,7 +3798,7 @@ Model {
 	      Name		      "DoFs converter"
 	      SID		      "3712"
 	      Ports		      [1, 5]
-	      Position		      [485, 234, 580, 336]
+	      Position		      [485, 214, 580, 316]
 	      ZOrder		      659
 	      LibraryVersion	      "1.381"
 	      SourceBlock	      "WBToolboxLibrary/Utilities/DoFs converter"
@@ -3832,13 +3832,19 @@ Model {
 		RTWStorageClass		"Auto"
 		DataLoggingNameMode	"SignalName"
 	      }
+	      Port {
+		PortNumber		5
+		Name			"right_leg"
+		RTWStorageClass		"Auto"
+		DataLoggingNameMode	"SignalName"
+	      }
 	    }
 	    Block {
 	      BlockType		      Reference
 	      Name		      "DoFs converter1"
 	      SID		      "3713"
 	      Ports		      [1, 5]
-	      Position		      [495, 534, 590, 636]
+	      Position		      [495, 514, 590, 616]
 	      ZOrder		      660
 	      LibraryVersion	      "1.381"
 	      SourceBlock	      "WBToolboxLibrary/Utilities/DoFs converter"
@@ -3869,6 +3875,12 @@ Model {
 	      Port {
 		PortNumber		4
 		Name			"left_leg"
+		RTWStorageClass		"Auto"
+		DataLoggingNameMode	"SignalName"
+	      }
+	      Port {
+		PortNumber		5
+		Name			"right_leg"
 		RTWStorageClass		"Auto"
 		DataLoggingNameMode	"SignalName"
 	      }
@@ -4189,7 +4201,7 @@ Model {
 	      ZOrder		      35
 	      SrcBlock		      "impedances"
 	      SrcPort		      1
-	      Points		      [0, 50]
+	      Points		      [0, 45]
 	      DstBlock		      "DoFs converter"
 	      DstPort		      1
 	    }
@@ -4209,15 +4221,16 @@ Model {
 	      Labels		      [2, 1]
 	      SrcBlock		      "DoFs converter"
 	      SrcPort		      4
-	      Points		      [0, -20]
+	      Points		      [0, 0]
 	      DstBlock		      "Impedances(t)"
 	      DstPort		      4
 	    }
 	    Line {
 	      Name		      "right_leg"
-	      ZOrder		      34
+	      ZOrder		      56
 	      Labels		      [1, 1]
-	      Points		      [585, 305]
+	      SrcBlock		      "DoFs converter"
+	      SrcPort		      5
 	      DstBlock		      "Impedances(t)"
 	      DstPort		      5
 	    }
@@ -4227,7 +4240,7 @@ Model {
 	      Labels		      [2, 1]
 	      SrcBlock		      "DoFs converter"
 	      SrcPort		      3
-	      Points		      [0, -20]
+	      Points		      [0, 0]
 	      DstBlock		      "Impedances(t)"
 	      DstPort		      3
 	    }
@@ -4237,7 +4250,7 @@ Model {
 	      Labels		      [2, 1]
 	      SrcBlock		      "DoFs converter"
 	      SrcPort		      1
-	      Points		      [0, -20]
+	      Points		      [0, 0]
 	      DstBlock		      "Impedances(t)"
 	      DstPort		      1
 	    }
@@ -4247,7 +4260,7 @@ Model {
 	      Labels		      [2, 1]
 	      SrcBlock		      "DoFs converter"
 	      SrcPort		      2
-	      Points		      [0, -20]
+	      Points		      [0, 0]
 	      DstBlock		      "Impedances(t)"
 	      DstPort		      2
 	    }
@@ -4265,15 +4278,16 @@ Model {
 	      Labels		      [2, 1]
 	      SrcBlock		      "DoFs converter1"
 	      SrcPort		      4
-	      Points		      [0, -20]
+	      Points		      [0, 0]
 	      DstBlock		      "qjDot(t) "
 	      DstPort		      4
 	    }
 	    Line {
 	      Name		      "right_leg"
-	      ZOrder		      37
+	      ZOrder		      57
 	      Labels		      [1, 1]
-	      Points		      [595, 605]
+	      SrcBlock		      "DoFs converter1"
+	      SrcPort		      5
 	      DstBlock		      "qjDot(t) "
 	      DstPort		      5
 	    }
@@ -4283,7 +4297,7 @@ Model {
 	      Labels		      [2, 1]
 	      SrcBlock		      "DoFs converter1"
 	      SrcPort		      3
-	      Points		      [0, -20]
+	      Points		      [0, 0]
 	      DstBlock		      "qjDot(t) "
 	      DstPort		      3
 	    }
@@ -4293,7 +4307,7 @@ Model {
 	      Labels		      [2, 1]
 	      SrcBlock		      "DoFs converter1"
 	      SrcPort		      1
-	      Points		      [0, -20]
+	      Points		      [0, 0]
 	      DstBlock		      "qjDot(t) "
 	      DstPort		      1
 	    }
@@ -4303,7 +4317,7 @@ Model {
 	      Labels		      [2, 1]
 	      SrcBlock		      "DoFs converter1"
 	      SrcPort		      2
-	      Points		      [0, -20]
+	      Points		      [0, 0]
 	      DstBlock		      "qjDot(t) "
 	      DstPort		      2
 	    }
@@ -4354,7 +4368,6 @@ Model {
 	      ZOrder		      36
 	      SrcBlock		      "Gain"
 	      SrcPort		      1
-	      Points		      [110, 0]
 	      DstBlock		      "DoFs converter1"
 	      DstPort		      1
 	    }
@@ -5050,7 +5063,7 @@ Model {
 		    BlockType		    S-Function
 		    Name		    " SFunction "
 		    SID			    "2214::3705"
-		    Tag			    "Stateflow S-Function torqueBalancingR2015aS85 12"
+		    Tag			    "Stateflow S-Function torqueBalancing2015a 12"
 		    Ports		    [4, 2]
 		    Position		    [180, 102, 230, 203]
 		    ZOrder		    74
@@ -5409,7 +5422,7 @@ Model {
 		  BlockType		  S-Function
 		  Name			  " SFunction "
 		  SID			  "2220::3705"
-		  Tag			  "Stateflow S-Function torqueBalancingR2015aS85 13"
+		  Tag			  "Stateflow S-Function torqueBalancing2015a 13"
 		  Ports			  [10, 10]
 		  Position		  [180, 100, 230, 320]
 		  ZOrder		  104
@@ -5962,7 +5975,7 @@ Model {
 		    BlockType		    S-Function
 		    Name		    " SFunction "
 		    SID			    "3384::3705"
-		    Tag			    "Stateflow S-Function torqueBalancingR2015aS85 21"
+		    Tag			    "Stateflow S-Function torqueBalancing2015a 21"
 		    Ports		    [1, 2]
 		    Position		    [180, 100, 230, 160]
 		    ZOrder		    30
@@ -6303,7 +6316,7 @@ Model {
 		    BlockType		    S-Function
 		    Name		    " SFunction "
 		    SID			    "3392::3705"
-		    Tag			    "Stateflow S-Function torqueBalancingR2015aS85 22"
+		    Tag			    "Stateflow S-Function torqueBalancing2015a 22"
 		    Ports		    [1, 2]
 		    Position		    [180, 100, 230, 160]
 		    ZOrder		    30
@@ -6644,7 +6657,7 @@ Model {
 		    BlockType		    S-Function
 		    Name		    " SFunction "
 		    SID			    "3376::3705"
-		    Tag			    "Stateflow S-Function torqueBalancingR2015aS85 26"
+		    Tag			    "Stateflow S-Function torqueBalancing2015a 26"
 		    Ports		    [1, 2]
 		    Position		    [180, 100, 230, 160]
 		    ZOrder		    30
@@ -6985,7 +6998,7 @@ Model {
 		    BlockType		    S-Function
 		    Name		    " SFunction "
 		    SID			    "3400::3705"
-		    Tag			    "Stateflow S-Function torqueBalancingR2015aS85 23"
+		    Tag			    "Stateflow S-Function torqueBalancing2015a 23"
 		    Ports		    [1, 2]
 		    Position		    [180, 100, 230, 160]
 		    ZOrder		    30
@@ -7325,7 +7338,7 @@ Model {
 		    BlockType		    S-Function
 		    Name		    " SFunction "
 		    SID			    "3408::3705"
-		    Tag			    "Stateflow S-Function torqueBalancingR2015aS85 24"
+		    Tag			    "Stateflow S-Function torqueBalancing2015a 24"
 		    Ports		    [1, 2]
 		    Position		    [180, 100, 230, 160]
 		    ZOrder		    30
@@ -7691,7 +7704,7 @@ Model {
 		    BlockType		    S-Function
 		    Name		    " SFunction "
 		    SID			    "3416::3705"
-		    Tag			    "Stateflow S-Function torqueBalancingR2015aS85 25"
+		    Tag			    "Stateflow S-Function torqueBalancing2015a 25"
 		    Ports		    [1, 2]
 		    Position		    [180, 100, 230, 160]
 		    ZOrder		    30
@@ -9168,7 +9181,7 @@ Model {
 		    BlockType		    S-Function
 		    Name		    " SFunction "
 		    SID			    "3679::3705"
-		    Tag			    "Stateflow S-Function torqueBalancingR2015aS85 1"
+		    Tag			    "Stateflow S-Function torqueBalancing2015a 1"
 		    Ports		    [6, 2]
 		    Position		    [180, 102, 230, 243]
 		    ZOrder		    105
@@ -10064,7 +10077,7 @@ Model {
 		    BlockType		    S-Function
 		    Name		    " SFunction "
 		    SID			    "3539::3705"
-		    Tag			    "Stateflow S-Function torqueBalancingR2015aS85 27"
+		    Tag			    "Stateflow S-Function torqueBalancing2015a 27"
 		    Ports		    [6, 2]
 		    Position		    [180, 102, 230, 243]
 		    ZOrder		    105
@@ -11117,7 +11130,7 @@ Model {
 		    BlockType		    S-Function
 		    Name		    " SFunction "
 		    SID			    "3455::3705"
-		    Tag			    "Stateflow S-Function torqueBalancingR2015aS85 9"
+		    Tag			    "Stateflow S-Function torqueBalancing2015a 9"
 		    Ports		    [6, 2]
 		    Position		    [180, 102, 230, 243]
 		    ZOrder		    105
@@ -12013,7 +12026,7 @@ Model {
 		    BlockType		    S-Function
 		    Name		    " SFunction "
 		    SID			    "2974::3705"
-		    Tag			    "Stateflow S-Function torqueBalancingR2015aS85 8"
+		    Tag			    "Stateflow S-Function torqueBalancing2015a 8"
 		    Ports		    [6, 2]
 		    Position		    [180, 102, 230, 243]
 		    ZOrder		    105
@@ -14046,7 +14059,7 @@ Model {
 		    BlockType		    S-Function
 		    Name		    " SFunction "
 		    SID			    "2806::3705"
-		    Tag			    "Stateflow S-Function torqueBalancingR2015aS85 5"
+		    Tag			    "Stateflow S-Function torqueBalancing2015a 5"
 		    Ports		    [4, 2]
 		    Position		    [180, 102, 230, 203]
 		    ZOrder		    74
@@ -14455,7 +14468,7 @@ Model {
 		  BlockType		  S-Function
 		  Name			  " SFunction "
 		  SID			  "2812::3705"
-		  Tag			  "Stateflow S-Function torqueBalancingR2015aS85 6"
+		  Tag			  "Stateflow S-Function torqueBalancing2015a 6"
 		  Ports			  [11, 7]
 		  Position		  [180, 95, 230, 335]
 		  ZOrder		  103
@@ -15148,7 +15161,7 @@ Model {
 		    BlockType		    S-Function
 		    Name		    " SFunction "
 		    SID			    "3651::3705"
-		    Tag			    "Stateflow S-Function torqueBalancingR2015aS85 14"
+		    Tag			    "Stateflow S-Function torqueBalancing2015a 14"
 		    Ports		    [6, 2]
 		    Position		    [180, 102, 230, 243]
 		    ZOrder		    105
@@ -16044,7 +16057,7 @@ Model {
 		    BlockType		    S-Function
 		    Name		    " SFunction "
 		    SID			    "3623::3705"
-		    Tag			    "Stateflow S-Function torqueBalancingR2015aS85 11"
+		    Tag			    "Stateflow S-Function torqueBalancing2015a 11"
 		    Ports		    [6, 2]
 		    Position		    [180, 102, 230, 243]
 		    ZOrder		    105
@@ -18662,7 +18675,7 @@ Model {
 	  Name			  "Enable"
 	  SID			  "3187"
 	  Ports			  []
-	  Position		  [802, -50, 822, -30]
+	  Position		  [707, 0, 727, 20]
 	  ZOrder		  539
 	}
 	Block {
@@ -18846,7 +18859,7 @@ Model {
 	  Name			  "DoFs converter"
 	  SID			  "3705"
 	  Ports			  [1, 5]
-	  Position		  [345, 14, 440, 116]
+	  Position		  [345, -6, 440, 96]
 	  ZOrder		  585
 	  LibraryVersion	  "1.381"
 	  SourceBlock		  "WBToolboxLibrary/Utilities/DoFs converter"
@@ -18880,13 +18893,19 @@ Model {
 	    RTWStorageClass	    "Auto"
 	    DataLoggingNameMode	    "SignalName"
 	  }
+	  Port {
+	    PortNumber		    5
+	    Name		    "right_leg"
+	    RTWStorageClass	    "Auto"
+	    DataLoggingNameMode	    "SignalName"
+	  }
 	}
 	Block {
 	  BlockType		  Reference
 	  Name			  "DoFs converter1"
 	  SID			  "3706"
 	  Ports			  [1, 5]
-	  Position		  [345, 169, 440, 271]
+	  Position		  [345, 149, 440, 251]
 	  ZOrder		  586
 	  LibraryVersion	  "1.381"
 	  SourceBlock		  "WBToolboxLibrary/Utilities/DoFs converter"
@@ -18920,13 +18939,19 @@ Model {
 	    RTWStorageClass	    "Auto"
 	    DataLoggingNameMode	    "SignalName"
 	  }
+	  Port {
+	    PortNumber		    5
+	    Name		    "right_leg"
+	    RTWStorageClass	    "Auto"
+	    DataLoggingNameMode	    "SignalName"
+	  }
 	}
 	Block {
 	  BlockType		  Reference
 	  Name			  "DoFs converter2"
 	  SID			  "3707"
 	  Ports			  [1, 5]
-	  Position		  [345, 304, 440, 406]
+	  Position		  [345, 284, 440, 386]
 	  ZOrder		  587
 	  LibraryVersion	  "1.381"
 	  SourceBlock		  "WBToolboxLibrary/Utilities/DoFs converter"
@@ -18960,13 +18985,19 @@ Model {
 	    RTWStorageClass	    "Auto"
 	    DataLoggingNameMode	    "SignalName"
 	  }
+	  Port {
+	    PortNumber		    5
+	    Name		    "right_leg"
+	    RTWStorageClass	    "Auto"
+	    DataLoggingNameMode	    "SignalName"
+	  }
 	}
 	Block {
 	  BlockType		  Reference
 	  Name			  "DoFs converter3"
 	  SID			  "3708"
 	  Ports			  [1, 5]
-	  Position		  [980, 34, 1075, 136]
+	  Position		  [980, 14, 1075, 116]
 	  ZOrder		  588
 	  LibraryVersion	  "1.381"
 	  SourceBlock		  "WBToolboxLibrary/Utilities/DoFs converter"
@@ -19000,13 +19031,19 @@ Model {
 	    RTWStorageClass	    "Auto"
 	    DataLoggingNameMode	    "SignalName"
 	  }
+	  Port {
+	    PortNumber		    5
+	    Name		    "right_leg"
+	    RTWStorageClass	    "Auto"
+	    DataLoggingNameMode	    "SignalName"
+	  }
 	}
 	Block {
 	  BlockType		  Reference
 	  Name			  "DoFs converter4"
 	  SID			  "3709"
 	  Ports			  [1, 5]
-	  Position		  [980, 169, 1075, 271]
+	  Position		  [980, 149, 1075, 251]
 	  ZOrder		  589
 	  LibraryVersion	  "1.381"
 	  SourceBlock		  "WBToolboxLibrary/Utilities/DoFs converter"
@@ -19040,13 +19077,19 @@ Model {
 	    RTWStorageClass	    "Auto"
 	    DataLoggingNameMode	    "SignalName"
 	  }
+	  Port {
+	    PortNumber		    5
+	    Name		    "right_leg"
+	    RTWStorageClass	    "Auto"
+	    DataLoggingNameMode	    "SignalName"
+	  }
 	}
 	Block {
 	  BlockType		  Reference
 	  Name			  "DoFs converter5"
 	  SID			  "3710"
 	  Ports			  [1, 5]
-	  Position		  [980, 304, 1075, 406]
+	  Position		  [980, 284, 1075, 386]
 	  ZOrder		  590
 	  LibraryVersion	  "1.381"
 	  SourceBlock		  "WBToolboxLibrary/Utilities/DoFs converter"
@@ -19077,6 +19120,12 @@ Model {
 	  Port {
 	    PortNumber		    4
 	    Name		    "left_leg"
+	    RTWStorageClass	    "Auto"
+	    DataLoggingNameMode	    "SignalName"
+	  }
+	  Port {
+	    PortNumber		    5
+	    Name		    "right_leg"
 	    RTWStorageClass	    "Auto"
 	    DataLoggingNameMode	    "SignalName"
 	  }
@@ -19924,7 +19973,7 @@ Model {
 		  BlockType		  S-Function
 		  Name			  " SFunction "
 		  SID			  "2330::3705"
-		  Tag			  "Stateflow S-Function torqueBalancingR2015aS85 15"
+		  Tag			  "Stateflow S-Function torqueBalancing2015a 15"
 		  Ports			  [1, 2]
 		  Position		  [180, 100, 230, 160]
 		  ZOrder		  28
@@ -20087,7 +20136,7 @@ Model {
 		  BlockType		  S-Function
 		  Name			  " SFunction "
 		  SID			  "2332::3705"
-		  Tag			  "Stateflow S-Function torqueBalancingR2015aS85 16"
+		  Tag			  "Stateflow S-Function torqueBalancing2015a 16"
 		  Ports			  [1, 2]
 		  Position		  [180, 100, 230, 160]
 		  ZOrder		  28
@@ -20397,8 +20446,8 @@ Model {
 	  MaxDataPoints		  5000
 	  SaveToWorkspace	  on
 	  SaveName		  tauDesiredData
-	  YMin			  -11.78546~-11.78546~-11.78546~-11.78546~-11.78546~-11.78546
-	  YMax			  8.52242~8.52242~8.52242~8.52242~8.52242~8.52242
+	  YMin			  -141.59179~-74.7594~-71.61322~-137.65902~-226.20555~-0.5
+	  YMax			  87.99864~72.4107~34.18237~297.23799~298.08236~14.5
 	  SampleInput		  off
 	  SampleTime		  -1
 	  ZoomMode		  on
@@ -20424,7 +20473,7 @@ Model {
 	    LineWidths		    "[0.5 0.5 0.5 0.5 0.5 0.5]"
 	    MarkerStyles	    "none|none|none|none|none|none"
 	  }
-	  Location		  [1 95 1281 795]
+	  Location		  [66 78 1921 1079]
 	}
 	Block {
 	  BlockType		  Scope
@@ -20487,8 +20536,8 @@ Model {
 	  MaxDataPoints		  5000
 	  SaveToWorkspace	  on
 	  SaveName		  tauMeasuredData
-	  YMin			  -10.14812~-10.14812~-10.14812~-10.14812~-10.14812~-10.14812
-	  YMax			  9.97513~9.97513~9.97513~9.97513~9.97513~9.97513
+	  YMin			  -141.47762~-74.57768~-71.55548~-136.50897~-221.60324~-0.5
+	  YMax			  87.85061~72.08475~34.13856~296.85892~297.46774~14.5
 	  SampleInput		  off
 	  SampleTime		  -1
 	  ZoomMode		  on
@@ -20514,7 +20563,7 @@ Model {
 	    LineWidths		    "[0.5 0.5 0.5 0.5 0.5 0.5]"
 	    MarkerStyles	    "none|none|none|none|none|none"
 	  }
-	  Location		  [1 95 1281 795]
+	  Location		  [66 78 1921 1079]
 	}
 	Line {
 	  Name			  "CoM_Error"
@@ -20575,55 +20624,51 @@ Model {
 	  ZOrder		  129
 	  SrcBlock		  "Gain"
 	  SrcPort		  1
-	  Points		  [110, 0]
 	  DstBlock		  "DoFs converter3"
 	  DstPort		  1
 	}
 	Line {
 	  Name			  "right_leg"
-	  ZOrder		  128
+	  ZOrder		  227
 	  Labels		  [1, 1]
-	  Points		  [1080, 105]
+	  SrcBlock		  "DoFs converter3"
+	  SrcPort		  5
 	  DstBlock		  "qj"
 	  DstPort		  5
 	}
 	Line {
 	  Name			  "torso"
 	  ZOrder		  124
-	  Labels		  [2, 1]
+	  Labels		  [-1, 0]
 	  SrcBlock		  "DoFs converter3"
 	  SrcPort		  1
-	  Points		  [0, -20]
 	  DstBlock		  "qj"
 	  DstPort		  1
 	}
 	Line {
 	  Name			  "left_arm"
 	  ZOrder		  125
-	  Labels		  [2, 1]
+	  Labels		  [-1, 0]
 	  SrcBlock		  "DoFs converter3"
 	  SrcPort		  2
-	  Points		  [0, -20]
 	  DstBlock		  "qj"
 	  DstPort		  2
 	}
 	Line {
 	  Name			  "left_leg"
 	  ZOrder		  127
-	  Labels		  [2, 1]
+	  Labels		  [-1, 0]
 	  SrcBlock		  "DoFs converter3"
 	  SrcPort		  4
-	  Points		  [0, -20]
 	  DstBlock		  "qj"
 	  DstPort		  4
 	}
 	Line {
 	  Name			  "right_arm"
 	  ZOrder		  126
-	  Labels		  [2, 1]
+	  Labels		  [-1, 0]
 	  SrcBlock		  "DoFs converter3"
 	  SrcPort		  3
-	  Points		  [0, -20]
 	  DstBlock		  "qj"
 	  DstPort		  3
 	}
@@ -20729,7 +20774,6 @@ Model {
 	  Points		  [31, 0]
 	  Branch {
 	    ZOrder		    111
-	    Points		    [199, 0]
 	    DstBlock		    "DoFs converter"
 	    DstPort		    1
 	  }
@@ -20747,7 +20791,7 @@ Model {
 	  Points		  [40, 0]
 	  Branch {
 	    ZOrder		    123
-	    Points		    [0, 100]
+	    Points		    [0, 95]
 	    DstBlock		    "DoFs converter2"
 	    DstPort		    1
 	  }
@@ -20759,97 +20803,91 @@ Model {
 	}
 	Line {
 	  Name			  "right_leg"
-	  ZOrder		  109
+	  ZOrder		  222
 	  Labels		  [1, 1]
-	  Points		  [445, 85]
+	  SrcBlock		  "DoFs converter"
+	  SrcPort		  5
 	  DstBlock		  "tauDes"
 	  DstPort		  5
 	}
 	Line {
 	  Name			  "torso"
 	  ZOrder		  108
-	  Labels		  [2, 1]
+	  Labels		  [-1, 0]
 	  SrcBlock		  "DoFs converter"
 	  SrcPort		  1
-	  Points		  [0, -20]
 	  DstBlock		  "tauDes"
 	  DstPort		  1
 	}
 	Line {
 	  Name			  "left_arm"
 	  ZOrder		  110
-	  Labels		  [2, 1]
+	  Labels		  [-1, 0]
 	  SrcBlock		  "DoFs converter"
 	  SrcPort		  2
-	  Points		  [0, -20]
 	  DstBlock		  "tauDes"
 	  DstPort		  2
 	}
 	Line {
 	  Name			  "left_leg"
 	  ZOrder		  107
-	  Labels		  [2, 1]
+	  Labels		  [-1, 0]
 	  SrcBlock		  "DoFs converter"
 	  SrcPort		  4
-	  Points		  [0, -20]
 	  DstBlock		  "tauDes"
 	  DstPort		  4
 	}
 	Line {
 	  Name			  "right_arm"
 	  ZOrder		  106
-	  Labels		  [2, 1]
+	  Labels		  [-1, 0]
 	  SrcBlock		  "DoFs converter"
 	  SrcPort		  3
-	  Points		  [0, -20]
 	  DstBlock		  "tauDes"
 	  DstPort		  3
 	}
 	Line {
 	  Name			  "right_leg"
-	  ZOrder		  112
+	  ZOrder		  223
 	  Labels		  [1, 1]
-	  Points		  [445, 240]
+	  SrcBlock		  "DoFs converter1"
+	  SrcPort		  5
 	  DstBlock		  "tauError"
 	  DstPort		  5
 	}
 	Line {
 	  Name			  "torso"
 	  ZOrder		  116
-	  Labels		  [2, 1]
+	  Labels		  [-1, 0]
 	  SrcBlock		  "DoFs converter1"
 	  SrcPort		  1
-	  Points		  [0, -20]
 	  DstBlock		  "tauError"
 	  DstPort		  1
 	}
 	Line {
 	  Name			  "left_arm"
 	  ZOrder		  113
-	  Labels		  [2, 1]
+	  Labels		  [-1, 0]
 	  SrcBlock		  "DoFs converter1"
 	  SrcPort		  2
-	  Points		  [0, -20]
 	  DstBlock		  "tauError"
 	  DstPort		  2
 	}
 	Line {
 	  Name			  "left_leg"
 	  ZOrder		  115
-	  Labels		  [2, 1]
+	  Labels		  [-1, 0]
 	  SrcBlock		  "DoFs converter1"
 	  SrcPort		  4
-	  Points		  [0, -20]
 	  DstBlock		  "tauError"
 	  DstPort		  4
 	}
 	Line {
 	  Name			  "right_arm"
 	  ZOrder		  114
-	  Labels		  [2, 1]
+	  Labels		  [-1, 0]
 	  SrcBlock		  "DoFs converter1"
 	  SrcPort		  3
-	  Points		  [0, -20]
 	  DstBlock		  "tauError"
 	  DstPort		  3
 	}
@@ -20859,55 +20897,52 @@ Model {
 	  Labels		  [0, 0]
 	  SrcBlock		  "Sum"
 	  SrcPort		  1
-	  Points		  [54, 0; 0, 90]
+	  Points		  [54, 0; 0, 85]
 	  DstBlock		  "DoFs converter1"
 	  DstPort		  1
 	}
 	Line {
 	  Name			  "right_leg"
-	  ZOrder		  122
+	  ZOrder		  224
 	  Labels		  [1, 1]
-	  Points		  [445, 375]
+	  SrcBlock		  "DoFs converter2"
+	  SrcPort		  5
 	  DstBlock		  "tauMeasured"
 	  DstPort		  5
 	}
 	Line {
 	  Name			  "torso"
 	  ZOrder		  119
-	  Labels		  [2, 1]
+	  Labels		  [-1, 0]
 	  SrcBlock		  "DoFs converter2"
 	  SrcPort		  1
-	  Points		  [0, -20]
 	  DstBlock		  "tauMeasured"
 	  DstPort		  1
 	}
 	Line {
 	  Name			  "left_arm"
 	  ZOrder		  121
-	  Labels		  [2, 1]
+	  Labels		  [-1, 0]
 	  SrcBlock		  "DoFs converter2"
 	  SrcPort		  2
-	  Points		  [0, -20]
 	  DstBlock		  "tauMeasured"
 	  DstPort		  2
 	}
 	Line {
 	  Name			  "left_leg"
 	  ZOrder		  118
-	  Labels		  [2, 1]
+	  Labels		  [-1, 0]
 	  SrcBlock		  "DoFs converter2"
 	  SrcPort		  4
-	  Points		  [0, -20]
 	  DstBlock		  "tauMeasured"
 	  DstPort		  4
 	}
 	Line {
 	  Name			  "right_arm"
 	  ZOrder		  120
-	  Labels		  [2, 1]
+	  Labels		  [-1, 0]
 	  SrcBlock		  "DoFs converter2"
 	  SrcPort		  3
-	  Points		  [0, -20]
 	  DstBlock		  "tauMeasured"
 	  DstPort		  3
 	}
@@ -20934,55 +20969,51 @@ Model {
 	  ZOrder		  135
 	  SrcBlock		  "Gain3"
 	  SrcPort		  1
-	  Points		  [95, 0]
 	  DstBlock		  "DoFs converter4"
 	  DstPort		  1
 	}
 	Line {
 	  Name			  "right_leg"
-	  ZOrder		  130
+	  ZOrder		  226
 	  Labels		  [1, 1]
-	  Points		  [1080, 240]
+	  SrcBlock		  "DoFs converter4"
+	  SrcPort		  5
 	  DstBlock		  "qjDes"
 	  DstPort		  5
 	}
 	Line {
 	  Name			  "torso"
 	  ZOrder		  132
-	  Labels		  [2, 1]
+	  Labels		  [-1, 0]
 	  SrcBlock		  "DoFs converter4"
 	  SrcPort		  1
-	  Points		  [0, -20]
 	  DstBlock		  "qjDes"
 	  DstPort		  1
 	}
 	Line {
 	  Name			  "left_arm"
 	  ZOrder		  134
-	  Labels		  [2, 1]
+	  Labels		  [-1, 0]
 	  SrcBlock		  "DoFs converter4"
 	  SrcPort		  2
-	  Points		  [0, -20]
 	  DstBlock		  "qjDes"
 	  DstPort		  2
 	}
 	Line {
 	  Name			  "left_leg"
 	  ZOrder		  133
-	  Labels		  [2, 1]
+	  Labels		  [-1, 0]
 	  SrcBlock		  "DoFs converter4"
 	  SrcPort		  4
-	  Points		  [0, -20]
 	  DstBlock		  "qjDes"
 	  DstPort		  4
 	}
 	Line {
 	  Name			  "right_arm"
 	  ZOrder		  131
-	  Labels		  [2, 1]
+	  Labels		  [-1, 0]
 	  SrcBlock		  "DoFs converter4"
 	  SrcPort		  3
-	  Points		  [0, -20]
 	  DstBlock		  "qjDes"
 	  DstPort		  3
 	}
@@ -20990,15 +21021,16 @@ Model {
 	  ZOrder		  141
 	  SrcBlock		  "Gain4"
 	  SrcPort		  1
-	  Points		  [110, 0]
 	  DstBlock		  "DoFs converter5"
 	  DstPort		  1
 	}
 	Line {
 	  Name			  "right_leg"
-	  ZOrder		  136
+	  ZOrder		  225
 	  Labels		  [1, 1]
-	  Points		  [1080, 375; 213, 0]
+	  SrcBlock		  "DoFs converter5"
+	  SrcPort		  5
+	  Points		  [213, 0]
 	  Branch {
 	    ZOrder		    62
 	    Points		    [0, 80]
@@ -21014,30 +21046,28 @@ Model {
 	Line {
 	  Name			  "torso"
 	  ZOrder		  139
-	  Labels		  [2, 1]
+	  Labels		  [-1, 0]
 	  SrcBlock		  "DoFs converter5"
 	  SrcPort		  1
-	  Points		  [0, -20]
 	  DstBlock		  "qj_err"
 	  DstPort		  1
 	}
 	Line {
 	  Name			  "left_arm"
 	  ZOrder		  138
-	  Labels		  [2, 1]
+	  Labels		  [-1, 0]
 	  SrcBlock		  "DoFs converter5"
 	  SrcPort		  2
-	  Points		  [0, -20]
 	  DstBlock		  "qj_err"
 	  DstPort		  2
 	}
 	Line {
 	  Name			  "left_leg"
 	  ZOrder		  137
-	  Labels		  [2, 1]
+	  Labels		  [-1, 0]
 	  SrcBlock		  "DoFs converter5"
 	  SrcPort		  4
-	  Points		  [0, -20; 237, 0]
+	  Points		  [237, 0]
 	  Branch {
 	    ZOrder		    67
 	    Points		    [0, 90]
@@ -21053,10 +21083,9 @@ Model {
 	Line {
 	  Name			  "right_arm"
 	  ZOrder		  140
-	  Labels		  [2, 1]
+	  Labels		  [-1, 0]
 	  SrcBlock		  "DoFs converter5"
 	  SrcPort		  3
-	  Points		  [0, -20]
 	  DstBlock		  "qj_err"
 	  DstPort		  3
 	}
@@ -22715,7 +22744,7 @@ Model {
 		  BlockType		  S-Function
 		  Name			  " SFunction "
 		  SID			  "3721::3706"
-		  Tag			  "Stateflow S-Function torqueBalancingR2015aS85 20"
+		  Tag			  "Stateflow S-Function torqueBalancing2015a 20"
 		  Ports			  [4, 2]
 		  Position		  [180, 102, 230, 203]
 		  ZOrder		  31
@@ -23237,7 +23266,7 @@ Model {
 		    BlockType		    S-Function
 		    Name		    " SFunction "
 		    SID			    "3745::3703"
-		    Tag			    "Stateflow S-Function torqueBalancingR2015aS85 28"
+		    Tag			    "Stateflow S-Function torqueBalancing2015a 28"
 		    Ports		    [6, 2]
 		    Position		    [180, 102, 230, 243]
 		    ZOrder		    102
@@ -24219,7 +24248,7 @@ Model {
 	      BlockType		      S-Function
 	      Name		      " SFunction "
 	      SID		      "2407::3705"
-	      Tag		      "Stateflow S-Function torqueBalancingR2015aS85 17"
+	      Tag		      "Stateflow S-Function torqueBalancing2015a 17"
 	      Ports		      [25, 16]
 	      Position		      [180, 60, 230, 580]
 	      ZOrder		      108
@@ -25761,7 +25790,7 @@ Model {
 	      BlockType		      S-Function
 	      Name		      " SFunction "
 	      SID		      "2421::3705"
-	      Tag		      "Stateflow S-Function torqueBalancingR2015aS85 18"
+	      Tag		      "Stateflow S-Function torqueBalancing2015a 18"
 	      Ports		      [4, 2]
 	      Position		      [180, 102, 230, 203]
 	      ZOrder		      55
@@ -25896,7 +25925,7 @@ Model {
       Name		      "synchronizer"
       SID		      "2423"
       Ports		      []
-      Position		      [1632, 173, 1752, 223]
+      Position		      [1642, 183, 1762, 233]
       ZOrder		      546
       ForegroundColor	      "red"
       BackgroundColor	      "green"
@@ -26328,7 +26357,7 @@ Model {
 Stateflow {
   machine {
     id			    1
-    name		    "torqueBalancingR2015aS85"
+    name		    "torqueBalancing2015a"
     created		    "18-Feb-2014 10:14:40"
     isLibrary		    0
     sfVersion		    80000006
