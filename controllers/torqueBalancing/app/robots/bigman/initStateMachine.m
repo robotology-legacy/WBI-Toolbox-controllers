@@ -113,7 +113,7 @@ sm.jointsSmoothingTimes          = [5;   %% state ==  1  TWO FEET BALANCING
                                     4];  %% state == 13  TRANSITION INIT POSITION
 
 sm.com.states      = [0.00,    0.00,    0.00;       %% state ==  1  TWO FEET BALANCING NOT USED
-                      0.00,    0.025,   0.00;       %% state ==  2  COM TRANSITION TO LEFT FOOT: THIS REFERENCE IS USED AS A DELTA W.R.T. THE POSITION OF THE LEFT FOOT
+                      0.00,    0.015,   0.00;       %% state ==  2  COM TRANSITION TO LEFT FOOT: THIS REFERENCE IS USED AS A DELTA W.R.T. THE POSITION OF THE LEFT FOOT
                       0.00,    0.00,    0.05;       %% state ==  3  LEFT FOOT BALANCING 
                       0.00,    0.025,   0.25;       %% state ==  4  YOGA LEFT FOOT
                       0.00,    0.000,   0.00;       %% state ==  5  PREPARING FOR SWITCHING

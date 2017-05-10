@@ -53,22 +53,20 @@ CONFIG.SIMULATION_TIME     = inf;
 %               robots/YARP_ROBOT_NAME/initRegGen.m
 % 
 % 'WALKING': under development.
-SM.SM_TYPE                 = 'YOGA';
+SM.SM_TYPE                   = 'YOGA';
 
 % CONFIG.SCOPES: if set to true, all visualizers for debugging are active
-CONFIG.SCOPES.ALL          = false;
+CONFIG.SCOPES.ALL            = true;
 % You can also activate only some specific debugging scopes
-CONFIG.SCOPES.BASE_EST_IMU = false;
-CONFIG.SCOPES.EXTWRENCHES  = false;
-CONFIG.SCOPES.GAIN_SCHE_INFO=false;
-CONFIG.SCOPES.MAIN         = false;
-CONFIG.SCOPES.QP           = false;
-
+CONFIG.SCOPES.BASE_EST_IMU   = false;
+CONFIG.SCOPES.EXTWRENCHES    = false;
+CONFIG.SCOPES.GAIN_SCHE_INFO = false;
+CONFIG.SCOPES.MAIN           = false;
+CONFIG.SCOPES.QP             = false;
 
 % CONFIG.CHECK_LIMITS: if set to true, the controller will stop as soon as 
 % any of the joint limit is touched. 
-CONFIG.CHECK_LIMITS        = false;
-
+CONFIG.CHECK_LIMITS          = false;
 
 %% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % CONFIGURATIONS COMPLETED: loading gains and parameters for the specific robot
@@ -76,7 +74,6 @@ CONFIG.CHECK_LIMITS        = false;
 %% DO NOT MODIFY THE FOLLOWING VARIABLES, THEY ARE AUTOMATICALLY 
 %% CHANGED WHEN SIMULATING THE ROBOT ON GAZEBO, 
 WBT_modelName            = 'matlabTorqueBalancing';
- 
 FRAMES.BASE              = 'root_link'; 
 FRAMES.IMU               = 'imu_frame';
 
@@ -113,6 +110,7 @@ CONFIG.ONSOFTCARPET        = false;
 
 % CONFIG.USE_QP_SOLVER: if set to true, a QP solver is used to account for 
 % inequality constraints of contact wrenches
+CONFIG.USE_QP_SOLVER       = true; 
 
 PORTS.IMU       = '/icub/inertial';
 
@@ -123,8 +121,6 @@ PORTS.Q_DES     = ['/' WBT_modelName '/qDes:i'];
 PORTS.WBDT_LEFTLEG_EE  = '/wholeBodyDynamicsTree/left_leg/cartesianEndEffectorWrench:o';
 PORTS.WBDT_RIGHTLEG_EE = '/wholeBodyDynamicsTree/right_leg/cartesianEndEffectorWrench:o';
 
-CONFIG.USE_QP_SOLVER     = true; 
-
 CONFIG.Ts                = 0.01; %  Controller period [s]
 
 CONFIG.ON_GAZEBO         = false;
@@ -134,14 +130,12 @@ run(strcat('app/robots/',getenv('YARP_ROBOT_NAME'),'/gains.m'));
 addpath('./src/')
 addpath('../utilityMatlabFunctions/')
 
-
 robotSpecificReferences  = fullfile('app/robots',getenv('YARP_ROBOT_NAME'),'initRefGen.m');
 run(robotSpecificReferences);
 
 SM.SM.MASK.COORDINATOR   = bin2dec('001');
 SM.SM.MASK.YOGA          = bin2dec('010');
 SM.SM.MASK.WALKING       = bin2dec('100');
-
 
 SM.SM_TYPE_BIN = SM.SM.MASK.COORDINATOR;
 robotSpecificFSM = fullfile('app/robots',getenv('YARP_ROBOT_NAME'),'initStateMachine.m');
@@ -157,6 +151,6 @@ elseif strcmpi(SM.SM_TYPE, 'WALKING')
     run(robotSpecificFSM);
 end
 
-[ConstraintsMatrix,bVectorConstraints]= constraints(forceFrictionCoefficient,numberOfPoints,torsionalFrictionCoefficient,gain.footSize,fZmin);
+[ConstraintsMatrix,bVectorConstraints] = constraints(forceFrictionCoefficient,numberOfPoints,torsionalFrictionCoefficient,gain.footSize,fZmin);
 
 
