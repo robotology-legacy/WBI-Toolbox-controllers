@@ -4,8 +4,7 @@
 % 
 %  - available Matlab versions: 2016b, 2015b, 2015a, 2012b
 %
-%  - this script should be launched from a Matlab version greater than 2012b
-%    (either 2015a, 2015b, 2016b)
+%  - this script should be launched at least from Matlab version 2015a
 %
 %  - adapted from https://github.com/robotology/WB-Toolbox/blob/master/toolbox/export_library.m
 %
@@ -52,18 +51,16 @@ try
   fprintf('\nExporting to version 2012b\n');
   save_system(modelName, 'torqueBalancingR2012bS80', 'ExportToVersion', 'R2012B_MDl');
 
-  if strcmp(matlabVersion,'9.1') || strcmp(matlabVersion,'8.6')   
+  if str2double(matlabVersion) >= 8.6  
       % export to 2015a
       fprintf('\nExporting to version 2015a\n');
       save_system(modelName, 'torqueBalancingR2015aS85', 'ExportToVersion', 'R2015A_MDl');
 
   end 
-  if strcmp(matlabVersion,'9.1')    
+  if str2double(matlabVersion) >= 9.1    
       % export to 2015b
       fprintf('\nExporting to version 2015b\n'); 
       save_system(modelName, 'torqueBalancingR2015bS86', 'ExportToVersion', 'R2015B_MDl');
-  end
-  if str2double(matlabVersion) >= 9.1 
       % export to 2016b
       fprintf('\nExporting to version 2016b\n'); 
       save_system(modelName, 'torqueBalancingR2016bS88', 'ExportToVersion', 'R2016B_MDl');
@@ -71,7 +68,6 @@ try
   % closing the model
   close_system(modelName);
   catch ex;
-
 end
     
 fprintf('\nDone\n');
