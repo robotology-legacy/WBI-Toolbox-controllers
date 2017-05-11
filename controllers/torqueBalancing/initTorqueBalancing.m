@@ -31,9 +31,19 @@ clear; clc;
 % setenv('YARP_ROBOT_NAME','icubGazeboSim');
 % setenv('YARP_ROBOT_NAME','iCubGenova05');
 % setenv('YARP_ROBOT_NAME','isaacFirstProtoGazebo');
-setenv('YARP_ROBOT_NAME','bigman');
-% setenv('YARP_ROBOT_NAME','bigman_only_legs');
+% setenv('YARP_ROBOT_NAME','bigman');
+setenv('YARP_ROBOT_NAME','bigman_only_legs');
 
+% SET ENVIRONEMENTAL VARIABLES 
+setenv('CODYCO_SUPERBUILD_ROOT','/home/lucamuratore/src/codyco-superbuild');
+
+current_path = getenv('PATH');
+setenv('PATH',fullfile(current_path, ':/home/lucamuratore/src/codyco-superbuild/build/install/bin'));
+
+current_ld_library_path = getenv('LD_LIBRARY_PATH');
+setenv('LD_LIBRARY_PATH',fullfile(current_ld_library_path, ':home/lucamuratore/src/codyco-superbuild/build/install/lib'));
+
+setenv('YARP_DATA_DIRS','/home/lucamuratore/src/codyco-superbuild/build/install/share/yarp:/home/lucamuratore/src/codyco-superbuild/build/install/share/iCub:/home/lucamuratore/src/codyco-superbuild/build/install/share/codyco');
 % Simulation time in seconds
 CONFIG.SIMULATION_TIME     = inf;   
 
