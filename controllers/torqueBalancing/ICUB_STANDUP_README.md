@@ -33,6 +33,6 @@ In order to run the simulation of iCub standing up from a chair, make sure you h
 - To run iCub stand up demo, just use torqueBalancing controller as for other simulations. (for further details see [README](https://github.com/robotology-playground/WBI-Toolbox-controllers/blob/master/controllers/torqueBalancing/README.md)). 
   Do not open the yarpmotorgui: iCub is already in its home position!
 
-- In the [initialization file](https://github.com/robotology-playground/WBI-Toolbox-controllers/blob/icub_chair/controllers/torqueBalancing/initTorqueBalancing.m), there is now the new simulation option "STANDUP" as long as the old ones "YOGA" and "COORDINATOR".
+- In the [initialization file](https://github.com/robotology-playground/WBI-Toolbox-controllers/blob/icub_chair/controllers/torqueBalancing/initTorqueBalancing.m), there is now the new state-machine option "STANDUP" as long as the old ones "YOGA" and "COORDINATOR".
 
 - All the demos "STANDUP", "YOGA" and "COORDINATOR" should be still available without conflicts (BUT with the right Gazebo environment for each demo). 
