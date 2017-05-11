@@ -20,11 +20,11 @@ In order to run the simulation of iCub standing up from a chair, make sure you h
 
 2) In your `.bashrc` file, add the following line:
     
-  `alias gazebo_standUp="cd ~/YOUR/PATH/TO/icub_standUp_world && gazebo -slibgazebo_yarp_clock.so"`
+  `alias gazebo_standup="cd ~/YOUR/PATH/TO/icub_standup_world && gazebo -slibgazebo_yarp_clock.so"`
  
    just to initialize the Gazebo world containing iCub on a chair. Instead of opening Gazebo as usual, on a terminal type:
 
-   `gazebo_standUp`
+   `gazebo_standup`
 
    and it will load the correct model.
 
