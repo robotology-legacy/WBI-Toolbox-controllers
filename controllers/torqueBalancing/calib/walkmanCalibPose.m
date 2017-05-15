@@ -119,6 +119,9 @@ desiredLegsPose = [0.00416779;
 % we are going to compare this position with the one of the legs motor pose        
 fprintf('           COMPARISON [deg]:\n\n')
 disp('   Desired    Real      Error')
-disp([desiredLegsPose motorPos(1:12) (desiredLegsPose-motorPos(1:12))]*180/pi)                
+disp([desiredLegsPose motorPos(1:12) (motorPos(1:12)-desiredLegsPose)]*180/pi)                
           
+% correction to add to joint measurements
+calibDelta = (motorPos(1:12)-desiredLegsPose);
+
                    
