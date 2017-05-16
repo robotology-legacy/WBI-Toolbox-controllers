@@ -63,7 +63,7 @@ gain.footSize    = [ -0.05  0.05;    % xMin, xMax
 end
 
 % set this variable to TRUE if you want iCub also sits down after standing up
-sm.alsoSitDown                 = true;
+sm.alsoSitDown                 = false;
 sm.joints.leftAnkleCorrection  = -0.1745;
 sm.armsDown                    = false;
 
@@ -119,7 +119,7 @@ sm.RwrenchThreshold    = [0     % state ==  1  THIS REFERENCE IS NOT USED
                           0];   % state ==  8  THIS REFERENCE IS NOT USED  
                      
 % external forces at arms threshold                    
-sm.RArmThreshold      = [10    % state ==  1  BALANCING ON THE LEGS
+sm.RArmThreshold      = [7.5    % state ==  1  BALANCING ON THE LEGS
                           0;   % state ==  2  THIS REFERENCE IS NOT USED
                           0;   % state ==  3  THIS REFERENCE IS NOT USED
                           0;   % state ==  4  THIS REFERENCE IS NOT USED
@@ -128,7 +128,7 @@ sm.RArmThreshold      = [10    % state ==  1  BALANCING ON THE LEGS
                           0    % state ==  7  THIS REFERENCE IS NOT USED
                           0];  % state ==  8  THIS REFERENCE IS NOT USED 
                       
-sm.LArmThreshold      = [10    % state ==  1  BALANCING ON THE LEGS
+sm.LArmThreshold      = [7.5    % state ==  1  BALANCING ON THE LEGS
                           0;   % state ==  2  THIS REFERENCE IS NOT USED
                           0;   % state ==  3  THIS REFERENCE IS NOT USED
                           0;   % state ==  4  THIS REFERENCE IS NOT USED
