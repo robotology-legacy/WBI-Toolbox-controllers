@@ -27,9 +27,9 @@ clear; clc;
 
 % setenv('YARP_ROBOT_NAME','iCubGenova01');
 % setenv('YARP_ROBOT_NAME','iCubGenova02');
-setenv('YARP_ROBOT_NAME','iCubGenova04');
+% setenv('YARP_ROBOT_NAME','iCubGenova04');
 % setenv('YARP_ROBOT_NAME','iCubDarmstadt01');
-% setenv('YARP_ROBOT_NAME','icubGazeboSim');
+setenv('YARP_ROBOT_NAME','icubGazeboSim');
 % setenv('YARP_ROBOT_NAME','iCubGenova05');
 
 % Simulation time in seconds
@@ -57,7 +57,7 @@ CONFIG.SIMULATION_TIME = inf;
 %
 % 'WALKING': under development.
 %
-SM.SM_TYPE                    = 'YOGA';
+SM.SM_TYPE                    = 'STANDUP';
 
 % CONFIG.SCOPES: if set to true, all visualizers for debugging are active
 CONFIG.SCOPES.ALL             = true;
@@ -160,7 +160,7 @@ run(robotSpecificFSM);
 % the robot will be aware of the external forces at the arms and will use
 % also them for lifting up.
 CONFIG.iCubStandUp       = false;
-CONFIG.useExtArmForces   = true;
+CONFIG.useExtArmForces   = false;
 
 %% Define which simulation will be performed
 if strcmpi(SM.SM_TYPE, 'COORDINATOR')
