@@ -10,9 +10,9 @@ gain.SmoothingTimeGainScheduling  = 2.5;
 
 %% %%%%%%%%%%%%%%%%    CONTROLLER GAIN PARAMETERS
 
-PCoM                     = [50    50  20;  % state ==  1  TWO FEET BALANCING
+PCoM                     = [25    25  20;  % state ==  1  TWO FEET BALANCING
                             50    50  20;  % state ==  2  COM TRANSITION TO LEFT 
-                            50    50  20;  % state ==  3  LEFT FOOT BALANCING
+                            25    25  20;  % state ==  3  LEFT FOOT BALANCING
                             50    50  20;  % state ==  4  PREPARING FOR SWITCHING 
                             50    50  20;  % state ==  5  LOOKING FOR CONTACT
                             50    50  20;  % state ==  6  TRANSITION TO INITIAL POSITION 
@@ -68,9 +68,9 @@ gain.rFoot.posPD            = gain.lFoot.posPD;
 gain.rFoot.rotPD            = gain.lFoot.rotPD;                     
                     
 %                              %  TORSO  %%     LEFT ARM     %%    RIGHT ARM     %%         LEFT LEG            %%         RIGHT LEG           %% 
-gain.joints.impedances      = [20   30   20, 10   10    10   10, 10   10    10   10, 30   30   20    20    100 100, 30   50   30    60    100 100;  % state ==  1  TWO FEET BALANCING
-                               20   30   20, 10   10    10   10, 10   10    10   10, 30   30   20    20    100 100, 30   50   30    60    100 100;  % state ==  2  COM TRANSITION TO LEFT 
-                               20   30   20, 12   12    12   12, 12   12    12   12, 30   50   30    60    100 100, 30   30   20    20    100 100;  % state ==  3  LEFT FOOT BALANCING
+gain.joints.impedances      = [40   40   40, 45   45    45   45, 45   45    45   45, 35   35   25    50    50   75, 35   35   25    50   50  75;  % state ==  1  TWO FEET BALANCING
+                               40   40   40, 45   45    45   45, 45   45    45   45, 35   35   25    50    50   75, 35   35   25    50   50  75;  % state ==  2  COM TRANSITION TO LEFT 
+                               40   40   40, 45   45    45   45, 45   45    45   45, 35   35   25    50    50   75, 35   35   25    50   50  75;  % state ==  3  LEFT FOOT BALANCING
                                30   30   30, 10   10    10   10, 10   10    10   10, 200  250  20    20     10  10, 220  550  220   200    65 300;  % state ==  4  PREPARING FOR SWITCHING 
                                30   30   30, 10   10    10   10, 10   10    10   10, 100  350  20    200    10 100, 220  550  220   200    65 300;  % state ==  5  LOOKING FOR CONTACT
                                30   30   30, 10   10    10   10, 10   10    10   10, 30   50   60    30      5   5, 30   30   30    20      5   5;  % state ==  6  TRANSITION TO INITIAL POSITION 
@@ -84,8 +84,8 @@ gain.joints.dampings        = 2 * sqrt(gain.joints.impedances)/20 * 0;
 
 %% %%%%%%%%%%%%%%%%    FINITE STATE MACHINE SPECIFIC PARAMETERS
 
-sm.tBalancing                    = 15;    % Time allowed for transition to initial position / waiting time for balancing on two feet
-sm.tBalancingOneFoot             = 3;     % Time allowed for balancing on a single foot
+sm.tBalancing                    = 5;    % Time allowed for transition to initial position / waiting time for balancing on two feet
+sm.tBalancingOneFoot             = inf;     % Time allowed for balancing on a single foot
 sm.stateAt0                      = 1;     % Initial state
 sm.demoInLoop                    = true;  % Determines if the demo is running in loop (true) or only once (false)
 sm.demoOnlyRightFoot             = false; % Determines if the robot balances on right foot only (true) or on both feet (false)
@@ -109,8 +109,8 @@ sm.jointsSmoothingTimes          = [1;   %% state ==  1  TWO FEET BALANCING
 
 
 sm.com.states       = [0.00,  0.00,   0.00;   %% state ==  1  TWO FEET BALANCING         : THIS REFERENCE IS IGNORED
-                       0.00,  0.00,   0.00;   %% state ==  2  COM TRANSITION TO LEFT FOOT: THIS REFERENCE IS USED AS A DELTA W.R.T. THE POSITION OF THE LEFT FOOT
-                       0.00,  0.00,   0.00;   %% state ==  3  LEFT FOOT BALANCING
+                       0.00, -0.03,   0.00;   %% state ==  2  COM TRANSITION TO LEFT FOOT: THIS REFERENCE IS USED AS A DELTA W.R.T. THE POSITION OF THE LEFT FOOT
+                       0.00, -0.03,   0.00;   %% state ==  3  LEFT FOOT BALANCING
                        0.00,  0.00,   0.00;   %% state ==  4  PREPARING FOR SWITCHING
                        0.00, -0.02,  -0.01;   %% state ==  5  LOOKING FOR CONTACT
                        0.00,  0.00,   0.00;   %% state ==  6  RETURN TO INITIAL POSITION : THIS REFERENCE IS IGNORED

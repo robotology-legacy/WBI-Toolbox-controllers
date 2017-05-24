@@ -64,7 +64,7 @@ function [w_H_b, CoMDes,qDes,constraints,impedances,dampings, PDgainsPos,PDgains
         % Set the center of mass projection onto the x-y plane to be
         % coincident to the origin of the left foot (l_sole) plus a
         % configurable delta
-% %         CoMDes            = [w_H_fixedLink(1:2,4);CoM_0(3)] + sm.com.states(state,:)';   
+        CoMDes            = [w_H_fixedLink(1:2,4);CoM_0(3)] + sm.com.states(state,:)';   
         qDes              = sm.joints.states(state,:)';
 
         fixed_link_CoMDes = w_H_fixedLink\[CoMDes;1];

@@ -28,8 +28,8 @@ clear stateMachineWalking QpBalancingSOT
 % To do this, you can uncomment the 
 
 %setenv('YARP_ROBOT_NAME','iCubGenova02');
-% % setenv('YARP_ROBOT_NAME','iCubGenova04');
-setenv('YARP_ROBOT_NAME','icubGazeboSim');
+setenv('YARP_ROBOT_NAME','iCubGenova04');
+% setenv('YARP_ROBOT_NAME','icubGazeboSim');
 
 % Simulation time in seconds
 CONFIG.SIMULATION_TIME     = inf;
@@ -74,7 +74,6 @@ CONFIG.PITCH_IMU_FILTER    = true;
 % equal to false, recall that the neck is assumed to be in (0,0,0)
 CONFIG.CORRECT_NECK_IMU    = true;
 
-
 % CONFIG.QP.USE_STRICT_TASK_PRIORITIES: when set to true, the balancing
 % controller solves an optimization problem for the desired posture, with
 % desired tasks given as equality constraints. When set to false, the 
@@ -88,7 +87,7 @@ CONFIG.QP.USE_CONTINUITY_CONSTRAINTS = true;
 %CONFIG.USE_INVERSE_KINEMATICS: when set to true, use reference joint
 %positions computed from integration-based inverse kinematics; when set to
 %false, use desired joint positions from state machine.
-CONFIG.USE_INVERSE_KINEMATICS = true;
+CONFIG.USE_INVERSE_KINEMATICS = false;
 
 % CONFIG.SCOPES.ALL: when set to false, all visualizations are disabled
 CONFIG.SCOPES.ALL         = true;

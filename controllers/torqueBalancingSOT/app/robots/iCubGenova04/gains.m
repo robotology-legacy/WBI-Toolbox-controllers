@@ -38,7 +38,7 @@ gain.joints.impedances = 10 * ones(11, ROBOT_DOF); %for 11 states, 23 DOF
 gain.joints.dampings   =                    0* 2 * sqrt(gain.joints.impedances);
 
 %% %%%%%%%%%%%%%%%%    Controller gain parameters 
-gain.weightPostural         = 0.3;
+gain.weightPostural         = 1;
 gain.weightTasks            = 100;
 gain.weightMinTorques       = 1e-4;
 gain.weightMinContactForces = 0;
