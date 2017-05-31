@@ -207,17 +207,17 @@ sm.joints.states    = [[ 0.0000, 0.0000, 0.0000, ...                         %% 
                      
                      
 %% %%%%%%%%%%%%%%%%    Inverse kinematics gains
-ikin.CoM.posPD      = 2*gain.CoM.posPD(1,:); 
+%ikin.CoM.posPD      = 2*gain.CoM.posPD(1,:); 
 
-ikin.root.rotPD     = 2*gain.root.rotPD(1,:);
+%ikin.root.rotPD     = 2*gain.root.rotPD(1,:);
 
-ikin.lFoot.posPD    = gain.lFoot.posPD(1,:);
-ikin.lFoot.rotPD    = gain.lFoot.rotPD(1,:);
+%ikin.lFoot.posPD    = gain.lFoot.posPD(1,:);
+%ikin.lFoot.rotPD    = gain.lFoot.rotPD(1,:);
 
-ikin.rFoot.posPD    = ikin.lFoot.posPD;
-ikin.rFoot.rotPD    = ikin.lFoot.rotPD;
+%ikin.rFoot.posPD    = ikin.lFoot.posPD;
+%ikin.rFoot.rotPD    = ikin.lFoot.rotPD;
 
-ikin.impedances     = diag([10 15 10 gain.joints.impedances(1,4:end)]);
+ikin.impedances     = diag([20 30 20 gain.joints.impedances(1,4:end)]);
 ikin.dampings       = 2 * sqrt(ikin.impedances);
 
 

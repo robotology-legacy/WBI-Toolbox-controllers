@@ -1,10 +1,10 @@
 function dnuDes   = referenceAcceleration(Jtask, dJnuDes, taskAccelerations, jointDynamics, ... 
-                                                      constraints, ROBOT_DOF)
+                                                      constraints, ROBOT_DOF, reg)
                                           
 % Generate the reference accelerations for both the floating base and the joints through a stack of task inverse kinematics structure
 
 % setup parameters
-PINV_TOL          = 5e-7;
+PINV_TOL          = reg.pinvDampVb;
 
 % Task corrections for foot in contact with ground
 Jcontact          = [Jtask( 7:12,:) * constraints(1);
