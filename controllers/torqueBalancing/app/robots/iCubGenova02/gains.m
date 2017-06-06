@@ -11,6 +11,9 @@ references.smoothingTimeMinJerkComDesQDes = 3.0;
 WBT_wbiList = '(torso_pitch,torso_roll,torso_yaw,l_shoulder_pitch, l_shoulder_roll, l_shoulder_yaw, l_elbow, r_shoulder_pitch,r_shoulder_roll, r_shoulder_yaw, r_elbow, l_hip_pitch, l_hip_roll, l_hip_yaw, l_knee, l_ankle_pitch, l_ankle_roll, r_hip_pitch,r_hip_roll,r_hip_yaw,r_knee,r_ankle_pitch,r_ankle_roll)';
 sat.torque  = 25;
 
+PORTS.RIGHT_ARM               = '/wholeBodyDynamics/left_arm/endEffectorWrench:o';
+PORTS.LEFT_ARM                = '/wholeBodyDynamics/right_arm/endEffectorWrench:o';
+
 CONFIG.smoothingTimeTranDynamics = 0.05;
 
 ROBOT_DOF_FOR_SIMULINK = eye(ROBOT_DOF);
@@ -103,8 +106,8 @@ end
 numberOfPoints               = 4; % The friction cone is approximated by using linear interpolation of the circle. 
                                   % So, numberOfPoints defines the number of points used to interpolate the circle in each cicle's quadrant 
 
-forceFrictionCoefficient     = 1/3;  
-torsionalFrictionCoefficient = 2/150;
+forceFrictionCoefficient     = 1/5; %1/3;  
+torsionalFrictionCoefficient = 1/150; %2/150;
 
 %physical size of foot
 phys.footSize    = [ -0.065 0.13;    % xMin, xMax

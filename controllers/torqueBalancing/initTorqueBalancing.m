@@ -15,7 +15,11 @@
 %  * Public License for more details
 %  */
 %% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% %%
-clear; clc;
+
+
+% clear; clc;
+
+
 %% GENERAL SIMULATION INFO
 % If you are simulating the robot with Gazebo, 
 % remember that you have to launch Gazebo as follow:
@@ -26,13 +30,16 @@ clear; clc;
 % To do this, you can uncomment the 
 
 % setenv('YARP_ROBOT_NAME','iCubGenova01');
-% setenv('YARP_ROBOT_NAME','iCubGenova02');
+setenv('YARP_ROBOT_NAME','iCubGenova02');
 % setenv('YARP_ROBOT_NAME','iCubDarmstadt01');
-setenv('YARP_ROBOT_NAME','icubGazeboSim');
+% setenv('YARP_ROBOT_NAME','icubGazeboSim');
 % setenv('YARP_ROBOT_NAME','iCubGenova05');
 
 % Simulation time in seconds
-CONFIG.SIMULATION_TIME = inf;   
+
+CONFIG.SIMULATION_TIME = 8;   
+
+% CONFIG.SIMULATION_TIME = inf;    
 
 %% PRELIMINARY CONFIGURATIONS 
 % SM.SM_TYPE: defines the kind of state machines that can be chosen.
@@ -114,11 +121,17 @@ CONFIG.ONSOFTCARPET          = false;
 CONFIG.USE_QP_SOLVER         = true; 
 
 PORTS.IMU       = '/icub/inertial';
-PORTS.COM_DES   = ['/' WBT_modelName '/comDes:i'];
+PORTS.COM_DES   = ['/WBIController/comDes:i'];
 PORTS.Q_DES     = ['/' WBT_modelName '/qDes:i'];
 
 PORTS.WBDT_LEFTLEG_EE  = '/wholeBodyDynamics/left_leg/cartesianEndEffectorWrench:o';
 PORTS.WBDT_RIGHTLEG_EE = '/wholeBodyDynamics/right_leg/cartesianEndEffectorWrench:o';
+
+PORTS.LEARNING_DATA = '/WBIController/learningData:o';
+PORTS.TRAJECTORY_TIME_PORT = '/WBIController/time:o';
+PORTS.WBDT_CHAIR              = '/chair/FT_sensor/analog:o/forceTorque';
+PORTS.RIGHT_ARM               = '/wholeBodyDynamicsTree/left_arm/endEffectorWrench:o';
+PORTS.LEFT_ARM                = '/wholeBodyDynamicsTree/right_arm/endEffectorWrench:o';
 
 CONFIG.Ts                = 0.01;  % Controller period [s]
 
@@ -158,10 +171,6 @@ run(robotSpecificFSM);
 % also them for lifting up.
 CONFIG.iCubStandUp            = false;
 CONFIG.useExtArmForces        = false;
-
-PORTS.WBDT_CHAIR              = '/chair/FT_sensor/analog:o/forceTorque';
-PORTS.RIGHT_ARM               = '/wholeBodyDynamicsTree/left_arm/endEffectorWrench:o';
-PORTS.LEFT_ARM                = '/wholeBodyDynamicsTree/right_arm/endEffectorWrench:o';
 
 %% Define which simulation will be performed
 if strcmpi(SM.SM_TYPE, 'COORDINATOR')

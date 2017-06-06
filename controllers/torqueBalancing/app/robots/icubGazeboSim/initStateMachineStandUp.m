@@ -8,7 +8,7 @@ if strcmpi(SM.SM_TYPE, 'STANDUP')
   
      %% State parameters
      sm.stateAt0                   = 1;
-     sm.tBalancing                 = 5;
+     sm.tBalancing                 = 0.1;
   
      reg.pinvTol     = 1e-5;
      reg.pinvDamp    = 1; 
@@ -69,12 +69,12 @@ sm.joints.leftAnkleCorrection = -0.0714;
     
 % feet threshold
 sm.LwrenchThreshold    = [0;  % state ==  1  THIS REFERENCE IS NOT USED
-                         75;  % state ==  2  MOVE COM FORWARD
+                         75;  %75 state ==  2  MOVE COM FORWARD
                          110  % state ==  3  TWO FEET BALANCING
                          0];  % state ==  4  THIS REFERENCE IS NOT USED
                      
 sm.RwrenchThreshold    = [0   % state ==  1  THIS REFERENCE IS NOT USED
-                         75;  % state ==  2  MOVE COM FORWARD
+                         75;  %75 state ==  2  MOVE COM FORWARD
                          110  % state ==  3  TWO FEET BALANCING
                          0];  % state ==  4  THIS REFERENCE IS NOT USED
                 
