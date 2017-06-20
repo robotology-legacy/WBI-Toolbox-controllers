@@ -59,11 +59,15 @@ ikin.dampings       = 2 * sqrt(ikin.impedances);
 
 %% %%%%%%%%%%%%%%%%    Friction cone parameters
 
+%% constraints for QP for balancing on both feet - friction cone - z-moment - in terms of f (not f0!)
+
+% Friction cone parameters
 numberOfPoints               = 4; % The friction cone is approximated by using linear interpolation of the circle. 
                                   % So, numberOfPoints defines the number of points used to interpolate the circle in each circle's quadrant 
-forceFrictionCoefficient     = 1/4; 
+forceFrictionCoefficient     = 1/3;
 torsionalFrictionCoefficient = 2/150;
-gain.footSize                = [ -0.07  0.12   ;   % xMin, xMax
-                                 -0.045 0.05 ];    % yMin, yMax                              
-fZmin                        = 10;
+
+gain.footSize                = [ -0.07  0.12 ;    % xMin, xMax
+                                 -0.04 0.04 ];   % yMin, yMax                             
+fZmin                        = 1;
 [ConstraintsFeetMatrix,upperBoundFeetConstraints]= constraints(forceFrictionCoefficient,numberOfPoints,torsionalFrictionCoefficient,gain.footSize,fZmin);             
