@@ -87,7 +87,7 @@ CONFIG.QP.USE_CONTINUITY_CONSTRAINTS = true;
 %CONFIG.USE_INVERSE_KINEMATICS: when set to true, use reference joint
 %positions computed from integration-based inverse kinematics; when set to
 %false, use desired joint positions from state machine.
-CONFIG.USE_INVERSE_KINEMATICS = false;
+CONFIG.USE_INVERSE_KINEMATICS = true;
 
 % CONFIG.SCOPES.ALL: when set to false, all visualizations are disabled
 CONFIG.SCOPES.ALL         = true;

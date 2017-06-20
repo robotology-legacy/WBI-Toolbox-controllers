@@ -6,7 +6,7 @@ CONFIG.SMOOTH_DES_Q        = 1;    % If equal to one, the desired streamed value
                                    % of the postural tasks are smoothed internally 
                                    
 %Smoothing time for time varying impedances
-gain.SmoothingTimeGainScheduling  = 2.5;
+gain.SmoothingTimeGainScheduling  = 2.5/2;
 
 %% %%%%%%%%%%%%%%%%    CONTROLLER GAIN PARAMETERS
 
@@ -24,7 +24,7 @@ PCoM                        = [50    60    50;  % state ==  1  TWO FEET BALANCIN
                     
 Proot                       = [5;  % state ==  1  TWO FEET BALANCING
                                5;  % state ==  2  COM TRANSITION TO LEFT 
-                               5;  % state ==  3  LEFT FOOT BALANCING
+                               0*5;  % state ==  3  LEFT FOOT BALANCING
                                5;  % state ==  4  PREPARING FOR SWITCHING 
                                5;  % state ==  5  LOOKING FOR CONTACT
                                5;  % state ==  6  TRANSITION TO INITIAL POSITION 
@@ -36,7 +36,7 @@ Proot                       = [5;  % state ==  1  TWO FEET BALANCING
 
 PlfootPos                   = [25    25    25;  % state ==  1  TWO FEET BALANCING
                                25    25    25;  % state ==  2  COM TRANSITION TO LEFT 
-                               25    25    25;  % state ==  3  LEFT FOOT BALANCING
+                               0*25    0*25    0*25;  % state ==  3  LEFT FOOT BALANCING
                                25    25    25;  % state ==  4  PREPARING FOR SWITCHING 
                                25    25    25;  % state ==  5  LOOKING FOR CONTACT
                                25    25    25;  % state ==  6  TRANSITION TO INITIAL POSITION 
@@ -48,7 +48,7 @@ PlfootPos                   = [25    25    25;  % state ==  1  TWO FEET BALANCIN
                        
 PlfootRot                   = [5;  % state ==  1  TWO FEET BALANCING
                                5;  % state ==  2  COM TRANSITION TO LEFT 
-                               5;  % state ==  3  LEFT FOOT BALANCING
+                              0*5;  % state ==  3  LEFT FOOT BALANCING
                                5;  % state ==  4  PREPARING FOR SWITCHING 
                                5;  % state ==  5  LOOKING FOR CONTACT
                                5;  % state ==  6  TRANSITION TO INITIAL POSITION 
@@ -76,7 +76,7 @@ gain.rFoot.rotPD            = [PrfootRot, 2 * ones(11,1)/20 ];
 %                              %  TORSO  %%     LEFT ARM     %%    RIGHT ARM     %%         LEFT LEG            %%         RIGHT LEG           %% 
 gain.joints.impedances      = [40   40   40, 45   45    45   45, 45   45    45   45, 35   35   25    50    50   75, 35   35   25    50   50  75;  % state ==  1  TWO FEET BALANCING
                                40   40   40, 45   45    45   45, 45   45    45   45, 35   35   25    50    50   75, 35   35   25    50   50  75;  % state ==  2  COM TRANSITION TO LEFT 
-                               40   40   40, 45   45    45   45, 45   45    45   45, 35   35   25    50    50   75, 35   35   25    100   50  75;  % state ==  3  LEFT FOOT BALANCING
+                               40   40   40, 45   45    45   45, 45   45    45   45, 35   35   25    50    50   75, 100  35   25    200  100 75;  % state ==  3  LEFT FOOT BALANCING
                                30   30   30, 10   10    10   10, 10   10    10   10, 100  100  20    20     10  10, 100  100  100   100    65 100;  % state ==  4  PREPARING FOR SWITCHING 
                                30   30   30, 10   10    10   10, 10   10    10   10, 100  100  20    100    10 100, 100  100  100   100    65 100;  % state ==  5  LOOKING FOR CONTACT
                                30   30   30, 10   10    10   10, 10   10    10   10, 30   50   60    30      5   5, 30   30   30    20      5   5;  % state ==  6  TRANSITION TO INITIAL POSITION 
