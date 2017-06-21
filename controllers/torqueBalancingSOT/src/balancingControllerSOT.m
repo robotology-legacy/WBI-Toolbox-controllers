@@ -82,7 +82,7 @@ function [hessianMatrix,biasVector,constraintMatrixLeftFoot,constraintMatrixRigh
     % In view of Eq. 2), one has:
     %
     %  7) JDot * nu + J * inv(M) * (Bu - h) = aTask
-    %
+   
     % and aTaskDes such that the output functions i-iv are stabilized
     % towards desired values.
     % 
@@ -153,7 +153,7 @@ function [hessianMatrix,biasVector,constraintMatrixLeftFoot,constraintMatrixRigh
     end
     
     constraintMatrixEq        = jacobians_invM_B; 
-    upperBoundEqConstraints   = desiredTaskAcc - jacobiansDotNu + jacobians_invM_biasTorques; 
+    upperBoundEqConstraints   = -aStar; %desiredTaskAcc - jacobiansDotNu + jacobians_invM_biasTorques;
     
     % Update constraint matrices. The constraint matrix for the inequality
     % constraints in the problem 1) is built up starting from the constraint
