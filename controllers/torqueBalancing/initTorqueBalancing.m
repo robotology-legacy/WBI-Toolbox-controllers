@@ -26,7 +26,8 @@ clear; clc;
 % To do this, you can uncomment the 
 
 % setenv('YARP_ROBOT_NAME','iCubGenova01');
-setenv('YARP_ROBOT_NAME','iCubGenova04');
+% setenv('YARP_ROBOT_NAME','iCubGenova04');
+setenv('YARP_ROBOT_NAME','iCubNancy01');
 % setenv('YARP_ROBOT_NAME','iCubDarmstadt01');
 % setenv('YARP_ROBOT_NAME','icubGazeboSim');
 % setenv('YARP_ROBOT_NAME','iCubGenova05');
@@ -54,7 +55,7 @@ CONFIG.SIMULATION_TIME     = inf;
 SM.SM_TYPE                 = 'YOGA';
 
 % CONFIG.SCOPES: if set to true, all visualizers for debugging are active
-CONFIG.SCOPES.ALL          = false;
+CONFIG.SCOPES.ALL          = true;
 % You can also activate only some specific debugging scopes
 CONFIG.SCOPES.BASE_EST_IMU = false;
 CONFIG.SCOPES.EXTWRENCHES  = false;
