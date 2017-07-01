@@ -1,6 +1,6 @@
-function jointAccelerations = jointDynamics(jointAngles, desJointAngles, jointVelocity, gain)
+function jointAccelerations = jointDynamics(jointAngles, desJointAngles, jointVelocity, impedances, dampings)
 
-jointAccelerations = -gain.impedances * (jointAngles-desJointAngles)...
-                     -gain.dampings   * jointVelocity;
+jointAccelerations = -diag(impedances) * (jointAngles-desJointAngles)...
+                     -diag(dampings)   * jointVelocity;
                           
 end

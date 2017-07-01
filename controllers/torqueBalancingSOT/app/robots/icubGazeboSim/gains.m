@@ -7,7 +7,7 @@ WBT_wbiList = '(torso_pitch,torso_roll,torso_yaw,l_shoulder_pitch, l_shoulder_ro
 CONFIG.SMOOTH_DES_COM = 0;    % If equal to one, the desired streamed values 
                               % of the center of mass are smoothed internally 
 CONFIG.SMOOTH_DES_Q   = 0;    % If equal to one, the desired streamed values 
-                              % of the postural tasks are smoothed internally 
+                              % of the postural tasks are smoothed internally                          
                                                                                                 
 PORTS.IMU = '/icubSim/inertial'; 
 
@@ -58,7 +58,7 @@ ikin.dampings       = 2 * sqrt(ikin.impedances);
 
 numberOfPoints               = 4; % The friction cone is approximated by using linear interpolation of the circle. 
                                   % So, numberOfPoints defines the number of points used to interpolate the circle in each circle's quadrant 
-forceFrictionCoefficient     = 1/4; 
+forceFrictionCoefficient     = 1/4; %1 used in torque balancing
 torsionalFrictionCoefficient = 2/150;
 gain.footSize                = [ -0.07 0.07   ;   % xMin, xMax
                                  -0.03 0.03 ];    % yMin, yMax    
