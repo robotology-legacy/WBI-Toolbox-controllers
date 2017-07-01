@@ -29,7 +29,8 @@ clear; clc;
 % setenv('YARP_ROBOT_NAME','iCubGenova02');
 % setenv('YARP_ROBOT_NAME','iCubGenova04');
 % setenv('YARP_ROBOT_NAME','iCubDarmstadt01');
-setenv('YARP_ROBOT_NAME','icubGazeboSim');
+% setenv('YARP_ROBOT_NAME','icubGazeboSim');
+setenv('YARP_ROBOT_NAME','iCubNancy01');
 % setenv('YARP_ROBOT_NAME','iCubGenova05');
 
 % Simulation time in seconds
@@ -156,7 +157,7 @@ robotSpecificFSM         = fullfile('app/robots',getenv('YARP_ROBOT_NAME'),'init
 run(robotSpecificFSM);
 
 %% iCub stand up demo parameters
-% whwn both CONFIG.iCubStandUp and CONFIG.useExtHandForces are setted to TRUE,
+% when both CONFIG.iCubStandUp and CONFIG.useExtHandForces are setted to TRUE,
 % the robot will be aware of the external forces at the arms and will use
 % also them for lifting up.
 CONFIG.iCubStandUp       = false;
