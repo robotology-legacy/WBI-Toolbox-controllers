@@ -39,7 +39,7 @@ CONFIG.Ts                  = 0.01; %  Controller period [s]
 %% PRELIMINARY CONFIGURATIONS 
 % SM.SM_TYPE: defines the kind of state machines that can be chosen. 
 % 'WALKING': under development.
-SM.SM_TYPE                 = 'WALKING';
+sm.SM_TYPE                 = 'WALKING';
 
 %% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % CONFIGURATIONS COMPLETED: loading gains and parameters for the specific robot
@@ -82,12 +82,21 @@ CONFIG.QP.USE_STRICT_TASK_PRIORITIES = false;
 
 % CONFIG.QP.USE_CONTINUITY_CONSTRAINTS: when set to true, control torques
 % obtained from QP optimization are constrained to continuous values.
-CONFIG.QP.USE_CONTINUITY_CONSTRAINTS = false; %true;
+CONFIG.QP.USE_CONTINUITY_CONSTRAINTS = false;
 
 %CONFIG.USE_INVERSE_KINEMATICS: when set to true, use reference joint
 %positions computed from integration-based inverse kinematics; when set to
 %false, use desired joint positions from state machine.
 CONFIG.USE_INVERSE_KINEMATICS = false;
+
+%CONFIG.SMOOTH_DES_COM: when set to true, the desired streamed values of 
+%the center of mass are smoothed internally; 
+CONFIG.SMOOTH_DES_COM      = true;  
+
+%CONFIG.SMOOTH_DES_Q: when set to true, the desired streamed values of 
+%the postural tasks are smoothed internally
+CONFIG.SMOOTH_DES_Q        = true;
+%other tasks (e.g. feet positions are automatically smoothed)
 
 % CONFIG.SCOPES.ALL: when set to false, all visualizations are disabled
 CONFIG.SCOPES.ALL         = true;
@@ -101,11 +110,6 @@ CONFIG.SCOPES.TASKS       = true;
 CONFIG.SCOPES.GAINS       = false;
 %% 
 
-PORTS.IMU                 = '/icub/inertial';
-
-PORTS.WBDT_LEFTLEG_EE     = '/wholeBodyDynamicsTree/left_leg/cartesianEndEffectorWrench:o';
-PORTS.WBDT_RIGHTLEG_EE    = '/wholeBodyDynamicsTree/right_leg/cartesianEndEffectorWrench:o';
-
 addpath('./src/')
 addpath('./src/iKinUtilities')
 addpath('../utilityMatlabFunctions/')
@@ -114,3 +118,4 @@ run(strcat('app/robots/',getenv('YARP_ROBOT_NAME'),'/gains.m'));
 robotSpecificFSM = fullfile('app/robots',getenv('YARP_ROBOT_NAME'),'initStateMachineWalking.m');
 run(robotSpecificFSM);
 
+clear robotSpecificFSM

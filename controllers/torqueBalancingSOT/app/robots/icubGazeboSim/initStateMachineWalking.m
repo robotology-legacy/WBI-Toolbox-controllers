@@ -1,13 +1,8 @@
-%% OVERWRITING SOME OF THE PARAMETERS CONTAINED IN gains.m WHEN USING FSM
+%% PARAMETERS FOR FINITE STATE MACHINE                                                                    
 
-CONFIG.SMOOTH_DES_COM      = 1;    % If equal to one, the desired streamed values 
-                                   % of the center of mass are smoothed internally 
-CONFIG.SMOOTH_DES_Q        = 1;    % If equal to one, the desired streamed values 
-                                   % of the postural tasks are smoothed internally 
-                                                                     
-%Smoothing time for time varying impedances
-gain.SmoothingTimeGainScheduling  = 2.5;
-gain.SmoothingTimeTasks = 2.5;
+gain.SmoothingTimeGainScheduling  = 2.5; %Smoothing time for time varying impedances
+gain.SmoothingTimeTasks           = 2.5; %Smoothing time for time varying tasks
+%note: keep gain.SmoothingTimeTasks <= gain.SmoothingTimeGainScheduling
 
 %% %%%%%%%%%%%%%%%%    CONTROLLER GAIN PARAMETERS
 
@@ -113,7 +108,7 @@ gain.joints.dampings        = 2 * sqrt(gain.joints.impedances);
 
 sm.tBalancing                    = 1;     % Time allowed for transition to initial position / waiting time for balancing on two feet
 sm.tBalancingOneFoot             = 5;     % Time allowed for balancing on a single foot
-sm.stateAt0                      = 1;     % Initial state
+sm.stateAt0                      = 1;     % Initial state (state 1 is TWO FEET BALANCING)
 sm.demoInLoop                    = true;  % Determines if the demo is running in loop (true) or only once (false)
 sm.demoOnlyRightFoot             = false; % Determines if the robot balances on right foot only (true) or on both feet (false)
 sm.com.threshold                 = 0.01;  % Distance threshold under which the position of the center of mass is considered correct
@@ -246,5 +241,4 @@ sm.joints.states    = [[ 0.0000, 0.0000, 0.0000, ...                         %% 
 % ikin.impedances     = diag([20 30 20 gain.joints.impedances(1,4:end)]);
 % ikin.dampings       = 2 * sqrt(ikin.impedances);
 
-
-clear PCoM Proot PlfootPos PlfootRot;                  
+clear PCoM Proot PlfootPos PlfootRot PrfootPos PrfootRot;                  
