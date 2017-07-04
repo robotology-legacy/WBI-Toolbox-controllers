@@ -7,8 +7,13 @@ PORTS.IMU                 = '/icubSim/inertial';
 PORTS.WBDT_LEFTLEG_EE     = '/wholeBodyDynamicsTree/left_leg/cartesianEndEffectorWrench:o';
 PORTS.WBDT_RIGHTLEG_EE    = '/wholeBodyDynamicsTree/right_leg/cartesianEndEffectorWrench:o';
 
+%Maximum torque value sent to actuators
 sat.torque          = 60;
-sat.torqueDot       = inf; %100*ones(ROBOT_DOF,1);
+
+%Maximum variation of torque from one time step to the next
+%Required as parameter of QP, but used only if
+%CONFIG.QP.USE_CONTINUITY_CONSTRAINTS = true;
+sat.torqueDot       = inf*ones(ROBOT_DOF,1);
 
 %% %%%%%%%%%%%%%%%%    Gains for desired values computation
 
@@ -24,7 +29,7 @@ gain.weightMinContactForces = 0;
 
 numberOfPoints               = 4; % The friction cone is approximated by using linear interpolation of the circle. 
                                   % So, numberOfPoints defines the number of points used to interpolate the circle in each circle's quadrant 
-forceFrictionCoefficient     = 1; %1/4; %1 used in torque balancing
+forceFrictionCoefficient     = 1; %1/4;
 torsionalFrictionCoefficient = 2/150;
 gain.footSize                = [ -0.07 0.07   ;   % xMin, xMax
                                  -0.03 0.03 ];    % yMin, yMax    
