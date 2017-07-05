@@ -124,8 +124,10 @@ function [hessianMatrix,biasVector,constraintMatrixLeftFoot,constraintMatrixRigh
     jacobians_invM_B          = jacobians_invM * B;                            
 
     if CONFIG.QP.USE_STRICT_TASK_PRIORITIES
-        hessianMatrix         = St_invM_B' * St_invM_B;
-        biasVector            = St_invM_B' * tauFeedback - St_invM_B' * (S' / massMatrix) * biasTorques;
+        hessianMatrix             = St_invM_B' * St_invM_B;
+        biasVector                = St_invM_B' * tauFeedback - St_invM_B' * (S' / massMatrix) * biasTorques;
+        constraintMatrixEq        = jacobians_invM_B; 
+        upperBoundEqConstraints   = desiredTaskAcc - jacobiansDotNu + jacobians_invM_biasTorques;
     else
         % In this case, the optimization problem 11) is changed, and the equality
         % constraint 
@@ -141,19 +143,19 @@ function [hessianMatrix,biasVector,constraintMatrixLeftFoot,constraintMatrixRigh
         %               tauFeedback = kp * qTilde + kd * qTildeDot
         %
         
-        aStar                 = jacobiansDotNu  - desiredTaskAcc - jacobians_invM_biasTorques;
+        aStar                     = jacobiansDotNu  - desiredTaskAcc - jacobians_invM_biasTorques;
         
-        hessianMatrix         = gain.weightPostural   * (St_invM_B' * St_invM_B) ...
-                              + gain.weightTasks      * (jacobians_invM_B' * jacobians_invM_B) ...
-                              + gain.weightMinTorques * (Storques' * Storques) ...
-                              + gain.weightMinContactForces * (Sforces' * Sforces);
+        hessianMatrix             = gain.weightPostural   * (St_invM_B' * St_invM_B) ...
+                                  + gain.weightTasks      * (jacobians_invM_B' * jacobians_invM_B) ...
+                                  + gain.weightMinTorques * (Storques' * Storques) ...
+                                  + gain.weightMinContactForces * (Sforces' * Sforces);
                               
-        biasVector            = gain.weightPostural * (St_invM_B' * tauFeedback - St_invM_B' * (S' / massMatrix) * biasTorques)...
-                              + gain.weightTasks    * (jacobians_invM_B' * aStar);        
-    end
-    
-    constraintMatrixEq        = jacobians_invM_B; 
-    upperBoundEqConstraints   = -aStar; %desiredTaskAcc - jacobiansDotNu + jacobians_invM_biasTorques;
+        biasVector                = gain.weightPostural * (St_invM_B' * tauFeedback - St_invM_B' * (S' / massMatrix) * biasTorques)...
+                                  + gain.weightTasks    * (jacobians_invM_B' * aStar);   
+                          
+        constraintMatrixEq        = jacobians_invM_B; 
+        upperBoundEqConstraints   = -aStar; %desiredTaskAcc - jacobiansDotNu + jacobians_invM_biasTorques;
+    end   
     
     % Update constraint matrices. The constraint matrix for the inequality
     % constraints in the problem 1) is built up starting from the constraint
