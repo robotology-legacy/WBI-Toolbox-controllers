@@ -27,23 +27,22 @@ clear; clc;
 
 % setenv('YARP_ROBOT_NAME','iCubGenova01');
 % setenv('YARP_ROBOT_NAME','iCubGenova02');
-setenv('YARP_ROBOT_NAME','iCubDarmstadt01');
-% setenv('YARP_ROBOT_NAME','icubGazeboSim');
+% setenv('YARP_ROBOT_NAME','iCubDarmstadt01');
+setenv('YARP_ROBOT_NAME','icubGazeboSim');
 
-% Simulation time in seconds
-CONFIG.SIMULATION_TIME     = inf;   
+CONFIG.Ts=0.01;
+CONFIG.SIMULATION_TIME = inf;   % Simulation time in seconds
+CONFIG.ON_GAZEBO       = false;
 
 GRAV_COMP = 1;
-
-MOVING    = 0;
-
+MOVING    = 1;
 
 %% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % CONFIGURATIONS COMPLETED: loading gains and parameters for the specific robot
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% DO NOT MODIFY THE FOLLOWING VARIABLES, THEY ARE AUTOMATICALLY 
 %% CHANGED WHEN SIMULATING THE ROBOT ON GAZEBO, 
-WBT_modelName            = 'impedanceControl';
+WBT_modelName = 'impedanceControl';
 
 run(strcat('app/robots/',getenv('YARP_ROBOT_NAME'),'/gains.m')); 
 
