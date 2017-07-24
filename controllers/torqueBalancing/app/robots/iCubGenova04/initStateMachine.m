@@ -104,7 +104,7 @@ sm.jointsSmoothingTimes          = [1;   %% state ==  1  TWO FEET BALANCING
                                          %%
                                     1;   %% state ==  2  COM TRANSITION TO LEFT FOOT
                                     1;   %% state ==  3  LEFT FOOT BALANCING 
-                                    2; %% state ==  4  YOGA LEFT FOOT
+                                    2;   %% state ==  4  YOGA LEFT FOOT
                                     4;   %% state ==  5  PREPARING FOR SWITCHING
                                     4;   %% state ==  6  LOOKING FOR CONTACT 
                                          %%
@@ -120,8 +120,8 @@ sm.jointsSmoothingTimes          = [1;   %% state ==  1  TWO FEET BALANCING
 
 sm.com.states      = [0.0,  0.01,0.0;   %% state ==  1  TWO FEET BALANCING NOT USED
                       0.0,  0.00,0.0;   %% state ==  2  COM TRANSITION TO LEFT FOOT: THIS REFERENCE IS USED AS A DELTA W.R.T. THE POSITION OF THE LEFT FOOT
-                      0.0,  0.00,0.0;   %% state ==  3  LEFT FOOT BALANCING 
-                      0.0,  0.005,0.0;  %% state ==  4  YOGA LEFT FOOT
+                      0.0,  0.005,0.0;  %% state ==  3  LEFT FOOT BALANCING 
+                      0.0,  0.01,0.0;   %% state ==  4  YOGA LEFT FOOT
                       0.0,  0.00,0.0;   %% state ==  5  PREPARING FOR SWITCHING
                       0.0, -0.09,0.0;   %% state ==  6  LOOKING FOR CONTACT 
                       0.0,  0.00,0.0;   %% state ==  7  TRANSITION INIT POSITION: DELTAS W.R.T. CoM_0
