@@ -8,7 +8,7 @@ It computes the joint torques and interaction forces at the feet in order to sta
     - right foot frame position + orientation
 A cost function penalizing high error on desired joint positions is added to the control framework.
 
-For details see [An Optimization Based Control Framework for Balancing and Walking: Implementation on the iCub Robot](online link to come)
+For details see [An Optimization Based Control Framework for Balancing and Walking: Implementation on the iCub Robot](http://arxiv.org/abs/1707.08359)
 
 ###Compatibility
 The repository contains three Simulink models: 
@@ -59,9 +59,14 @@ It is possible to send the impedance resting position as a reference to the stre
 
 
 #### Citing this contribution
-In case you want to cite the content of this module please refer to [An Optimization Based Control Framework for Balancing and Walking: Implementation on the iCub Robot](online link to come) and use the following bibtex entry:
+In case you want to cite the content of this module please refer to [An Optimization Based Control Framework for Balancing and Walking: Implementation on the iCub Robot](http://arxiv.org/abs/1707.08359) and use the following bibtex entry:
 
 ```
-upcoming bibtex entry
+@unpublished{Charbonneau2017,
+  author    = {Marie Charbonneau and Gabriele Nava and Francesco Nori and Daniele Pucci},
+  title     = {An Optimization Based Control Framework for Balancing and Walking: Implementation on the iCub Robot},
+  note      = {Manuscript submitted for publication},
+  year      = {2017},
+  url       = {http://arxiv.org/abs/1707.08359}}
 
 ```
