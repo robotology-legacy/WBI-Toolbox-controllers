@@ -252,19 +252,36 @@ function Outputs(block)
         end
     
     %Both feet in contact
-    elseif sum(LEFT_RIGHT_FOOT_IN_CONTACT) > 2 - CONTACT_THRESHOLD
+    elseif LEFT_RIGHT_FOOT_IN_CONTACT(2) > (1 - CONTACT_THRESHOLD) && LEFT_RIGHT_FOOT_IN_CONTACT(1) > (1 - CONTACT_THRESHOLD)
+        % In this case, 
+        % 
+        % x = [jointTorques
+        %      contactWrenchLeftFoot
+        %      contactWrenchRightFoot]
+        %
+        
         H    = hessianMatrixQP;
         g    = biasVectorQP; 
         
-        A    = [zeros(length(upperBoundFeetConstraints),nDof),constraintMatrixLeftFoot,zeros(length(upperBoundFeetConstraints),6);
-                zeros(length(upperBoundFeetConstraints),nDof),zeros(length(upperBoundFeetConstraints),6),constraintMatrixRightFoot;
-                constraintMatrixEq];
-        ubA  = [upperBoundFeetConstraints;
-                upperBoundFeetConstraints;
-                upperBoundEqConstraints];
-        lbA  = [-unboundedConstant*ones(length(upperBoundFeetConstraints),1);
-                -unboundedConstant*ones(length(upperBoundFeetConstraints),1);
-                 upperBoundEqConstraints];
+        if USE_STRICT_TASK_PRIORITIES
+            A    = [zeros(length(upperBoundFeetConstraints),nDof),constraintMatrixLeftFoot,zeros(length(upperBoundFeetConstraints),6);
+                    zeros(length(upperBoundFeetConstraints),nDof),zeros(length(upperBoundFeetConstraints),6),constraintMatrixRightFoot;
+                    constraintMatrixEq];
+            ubA  = [upperBoundFeetConstraints;
+                    upperBoundFeetConstraints;
+                    upperBoundEqConstraints];
+            lbA  = [-unboundedConstant*ones(length(upperBoundFeetConstraints),1);
+                    -unboundedConstant*ones(length(upperBoundFeetConstraints),1);
+                     upperBoundEqConstraints];
+        else
+            A    = [zeros(length(upperBoundFeetConstraints),nDof),constraintMatrixLeftFoot,zeros(length(upperBoundFeetConstraints),6);
+                    zeros(length(upperBoundFeetConstraints),nDof),zeros(length(upperBoundFeetConstraints),6),constraintMatrixRightFoot];
+            ubA  = [upperBoundFeetConstraints;
+                    upperBoundFeetConstraints];
+            lbA  = [-unboundedConstant*ones(length(upperBoundFeetConstraints),1);
+                    -unboundedConstant*ones(length(upperBoundFeetConstraints),1)];            
+        end
+        
     else
         H    = hessianMatrixQP;
         g    = biasVectorQP; 
