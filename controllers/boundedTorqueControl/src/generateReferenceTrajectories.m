@@ -19,7 +19,7 @@
 %t: simulation time
 %r, rd, rdd: reference trajectory
 
-function refTrajectory  = generateReferenceTrajectories(qMin,qMax,t, model, ROBOT_DOF)
+function refTrajectory  = generateReferenceTrajectories(qmin,qmax, t, model, ROBOT_DOF)
 
 r = zeros(ROBOT_DOF,1);
 rd = zeros(ROBOT_DOF,1);
@@ -31,17 +31,17 @@ for i = 1 : ROBOT_DOF
         case 1
             %Constant reference trajectory towards minimum/maximum joint limit
             if model.ramp(i) >= 0
-                r(i) = qMax(i) - (qMax(i) - qMin(i)) * model.ratio(i);
+                r(i) = qmax(i) - (qmax(i) - qmin(i)) * model.ratio(i);
             else
-                r(i) = (qMax(i) - qMin(i)) * model.ratio(i) + qMin(i);
+                r(i) = (qmax(i) - qmin(i)) * model.ratio(i) + qmin(i);
             end
             rd(i)    = 0;
             rdd(i)   = 0;
 
         case 2
             %Sinusoidal reference trajectory
-            amplitude     =  ((qMax(i)-qMin(i))/2)/model.ratioAmplitude(i);
-            r(i)          =    amplitude * sin( 2 * pi * model.rFrequency(i) * t + model.rPhase(i)) + (qMax(i)+qMin(i))/2;
+            amplitude     =  ((qmax(i)-qmin(i))/2)/model.ratioAmplitude(i);
+            r(i)          =    amplitude * sin( 2 * pi * model.rFrequency(i) * t + model.rPhase(i)) + (qmax(i)+qmin(i))/2;
             rd(i)         =    2 * pi * model.rFrequency(i) * amplitude * cos(2 * pi * model.rFrequency(i) * t + model.rPhase(i));
             rdd(i)        = - (2 * pi * model.rFrequency(i))^2 * amplitude * sin(2 * pi * model.rFrequency(i) * t + model.rPhase(i));
 

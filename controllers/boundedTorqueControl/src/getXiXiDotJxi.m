@@ -16,7 +16,7 @@
 %  */
 %% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-function [xi,xiDot,J,JDot] = getXiXiDotJxi(jointPositions,jointVelocities,qmin, qmax)
+function [xi,xiDot,J,JDot] = getXiXiDotJxi(jointPositions, jointVelocities, qmin, qmax)
 
     q0    = (qmin + qmax)/2;
     delta = (qmax - qmin)/2;

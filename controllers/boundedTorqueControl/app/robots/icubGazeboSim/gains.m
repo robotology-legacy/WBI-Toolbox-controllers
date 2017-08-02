@@ -1,15 +1,29 @@
-PORTS.WBDT_LEFTLEG_EE = '/wholeBodyDynamicsTree/left_leg/cartesianEndEffectorWrench:o';
+CONFIG.ON_GAZEBO      = true;
 
-WBT_wbiList           = '(r_hip_pitch,r_knee)'; %'ROBOT_TORQUE_CONTROL_2JOINTS';
+PORTS.WBDT_RIGHTLEG_EE = '/wholeBodyDynamicsTree/right_leg/cartesianEndEffectorWrench:o';
+
+WBT_wbiList           = '(r_hip_pitch,r_knee)';
 
 ROBOT_DOF             = 2;
 ROBOT_DOF_SIM         = eye(ROBOT_DOF);
-CONFIG.ON_GAZEBO      = true;
+
+%Maximum joint torque value
+sat.torque            = 60;
 
 %When set to true, variable change for joint limit avoidance is applied
 model.variableChange = true;
 
-%Control gains
+%Define which kind of trajectory to be applied at each joint
+%   1 - ramped reference trajectory, towards max or min joint limit
+%   2. sinusoidal reference trajectory
+%   3. Constant arbitrary position
+model.trajectory = [3;3];
+
+%When set to true, an external torque Text will be applied at the joints 
+%in the interval of time from TextIniTime to TextEndTime.
+model.applyExternalTorque = false;
+
+%% Control gains
 model.Kp = [20; 10];
 model.Kd = [0.2; 0.2]*2.*sqrt(model.Kp);
 
@@ -29,9 +43,6 @@ model.rPhase         = [0; -pi/2]; %[0; -pi/2];
 %3. Constant arbitrary position
 % model.jointPosDes = [80; -60] * pi/180;
 model.jointPosDes = [5; -70] * pi/180;
-
-%choose which trajectory from the above, for each joint
-model.trajectory = [3;3];
 
 %% External Torque parameters
 %Apply an external torque Text at the motor, in the interval of time
