@@ -21,7 +21,18 @@ function [xi,xiDot,J,JDot] = getXiXiDotJxi(jointPositions,jointVelocities,qmin, 
     q0    = (qmin + qmax)/2;
     delta = (qmax - qmin)/2;
 
-    xi    = atanh((jointPositions-q0)./delta);
+    if sum(abs((jointPositions-q0)./delta)) < 1
+        xi    = atanh((jointPositions-q0)./delta);
+    else
+        xi = zeros(length(qmin),1);
+        for i = 1 : length(qmin)
+           if abs((jointPositions(i)-q0(i))./delta(i)) < 1
+               xi(i) = atanh((jointPositions(i)-q0(i))./delta(i));
+           else
+               xi(i) = 10;
+           end
+        end
+    end
     
     J     = diag(delta./(cosh(xi).^2));
     

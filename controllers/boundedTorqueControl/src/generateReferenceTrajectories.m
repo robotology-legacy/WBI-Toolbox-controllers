@@ -18,34 +18,43 @@
 
 %t: simulation time
 %r, rd, rdd: reference trajectory
-%knee joint limits -2.1817:0.4014
 
-function refTrajectory  = generateReferenceTrajectories(qMin,qMax,t, model)
-    switch model.trajectory
+function refTrajectory  = generateReferenceTrajectories(qMin,qMax,t, model, ROBOT_DOF)
+
+r = zeros(ROBOT_DOF,1);
+rd = zeros(ROBOT_DOF,1);
+rdd = zeros(ROBOT_DOF,1);
+
+for i = 1 : ROBOT_DOF
+
+    switch model.trajectory(i)
         case 1
-            %Ramped reference trajectory towards minimum/maximum joint limit
-            r = model.p * t + model.r0;
-            rd = model.p;
-            rdd = 0;
-            if r >= model.rmax
-                r = model.rmax;
-                rd = 0;
+            %Constant reference trajectory towards minimum/maximum joint limit
+            if model.ramp(i) >= 0
+                r(i) = qMax(i) - (qMax(i) - qMin(i)) * model.ratio(i);
+            else
+                r(i) = (qMax(i) - qMin(i)) * model.ratio(i) + qMin(i);
             end
-            if r <= model.rmin
-                r = model.rmin;
-                rd = 0;
-            end
+            rd(i)    = 0;
+            rdd(i)   = 0;
 
         case 2
             %Sinusoidal reference trajectory
-            amplitude  = ((qMax-qMin)/2)/model.ratioAmplitude;
-            r          =    amplitude * sin( 2 * pi * model.rFrequency * t) + (qMax+qMin)/2;
-            rd         =    2 * pi * model.rFrequency * amplitude * cos(2 * pi * model.rFrequency * t);
-            rdd        = - (2 * pi * model.rFrequency)^2 * amplitude * sin(2 * pi * model.rFrequency * t);
+            amplitude     =  ((qMax(i)-qMin(i))/2)/model.ratioAmplitude(i);
+            r(i)          =    amplitude * sin( 2 * pi * model.rFrequency(i) * t + model.rPhase(i)) + (qMax(i)+qMin(i))/2;
+            rd(i)         =    2 * pi * model.rFrequency(i) * amplitude * cos(2 * pi * model.rFrequency(i) * t + model.rPhase(i));
+            rdd(i)        = - (2 * pi * model.rFrequency(i))^2 * amplitude * sin(2 * pi * model.rFrequency(i) * t + model.rPhase(i));
 
+        case 3
+            %Constant arbitrary reference position
+            r(i)   = model.jointPosDes(i);
+            rd(i)  = 0; 
+            rdd(i) = 0;
+            
         otherwise
-            r = 0; rd = 0; rdd = 0;
+            r(i) = 0; rd(i) = 0; rdd(i) = 0;
     end
-
-    refTrajectory = ones(length(qMin),1)*[r, rd, rdd];
+    
+end
+    refTrajectory = [r, rd, rdd];
 end

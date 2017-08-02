@@ -27,9 +27,9 @@ clear; clc;
 
 % setenv('YARP_ROBOT_NAME','iCubGenova01');
 % setenv('YARP_ROBOT_NAME','iCubGenova02');
+% setenv('YARP_ROBOT_NAME','iCubGenova04');
 % setenv('YARP_ROBOT_NAME','iCubDarmstadt01');
 setenv('YARP_ROBOT_NAME','icubGazeboSim');
-% setenv('YARP_ROBOT_NAME','iCubGenova05');
 
 % Simulation time in seconds
 CONFIG.SIMULATION_TIME     = inf;   
@@ -41,14 +41,12 @@ CONFIG.SIMULATION_TIME     = inf;
 %% CHANGED WHEN SIMULATING THE ROBOT ON GAZEBO, 
 CONFIG.ON_GAZEBO = false;
 
-% WBT_wbiList   = 'SINGLE_JOINT';
-WBT_wbiList   = 'ROBOT_TORQUE_CONTROL_1JOINT';
-WBT_modelName = 'impedance';
+WBT_modelName   = 'impedance';
 
-CONFIG.Ts     = 0.01; %  Controller period [s]
+%In order to use signal sensing with gazebo simulation, launch `wholeBodyDynamicsTree` as follows: 
+%`$ wholeBodyDynamicsTree --autoconnect --robot YARP_ROBOT_NAME_VALUE`
+
+CONFIG.Ts       = 0.01; %  Controller period [s]
 
 run(strcat('app/robots/',getenv('YARP_ROBOT_NAME'),'/gains.m')); 
 addpath('./src/')
-addpath('../utilityMatlabFunctions/')
-
-

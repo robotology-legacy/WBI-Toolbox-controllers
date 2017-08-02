@@ -6,6 +6,6 @@ function TauExt = applyExternTorque(t, model)
     if t >= model.TextIniTime && t <= model.TextEndTime
         TauExt = model.Text;
     else
-        TauExt = 0;
+        TauExt = zeros(length(model.Text), 1);
     end
 end
