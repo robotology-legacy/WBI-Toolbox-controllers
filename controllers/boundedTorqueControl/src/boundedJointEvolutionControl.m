@@ -19,7 +19,8 @@
 function [jointReference, jointError, xi, xiDot, tau, xiTilde] =  boundedJointEvolutionControl(model, qmin, qmax, jointPositions, jointVelocities, M, g, CJXiDotDes,CrDot,  refTrajectory, intKsi_tilda)
     %Computed torque control
 
-    [jointReference,jointReferenceDot,jointReferenceDDot]       = getReferences(refTrajectory);
+    [jointReference,jointReferenceDot,jointReferenceDDot]   ...
+                         = getReferences(refTrajectory);
     
     [xi,xiDot,J,JDot]    = getXiXiDotJxi(jointPositions,jointVelocities,qmin, qmax);
     
