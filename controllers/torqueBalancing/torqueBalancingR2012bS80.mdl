@@ -5,7 +5,7 @@ Model {
     NumRootInports	    0
     NumRootOutports	    0
     ParameterArgumentNames  ""
-    ComputedModelVersion    "1.3125"
+    ComputedModelVersion    "1.3128"
     NumModelReferences	    0
     NumTestPointedSignals   0
   }
@@ -29,7 +29,7 @@ Model {
       $ObjectID		      2
       $ClassName	      "Simulink.WindowInfo"
       IsActive		      [1]
-      Location		      [65.0, 24.0, 1855.0, 1056.0]
+      Location		      [58.0, 20.0, 1855.0, 1036.0]
       Object {
 	$PropName		"ModelBrowserInfo"
 	$ObjectID		3
@@ -51,11 +51,11 @@ Model {
 	$ObjectID		5
 	$ClassName		"Simulink.EditorInfo"
 	IsActive		[1]
-	ViewObjType		"SimulinkTopLevel"
-	LoadSaveID		"0"
-	Extents			[1821.0, 911.0]
-	ZoomFactor		[0.88654618473895586]
-	Offset			[115.48074745186864, 119.20838052095132]
+	ViewObjType		"SimulinkSubsys"
+	LoadSaveID		"2087"
+	Extents			[1801.0, 845.0]
+	ZoomFactor		[0.693980147881768]
+	Offset			[-1050.1734877326564, 2356.6929594966159]
       }
     }
   }
@@ -63,11 +63,11 @@ Model {
   Creator		  "daniele"
   UpdateHistory		  "UpdateHistoryNever"
   ModifiedByFormat	  "%<Auto>"
-  LastModifiedBy	  "gnava"
+  LastModifiedBy	  "leo"
   ModifiedDateFormat	  "%<Auto>"
-  LastModifiedDate	  "Mon Mar 20 16:18:22 2017"
-  RTWModifiedTimeStamp	  411927501
-  ModelVersionFormat	  "1.%<AutoIncrement:3125>"
+  LastModifiedDate	  "Tue Aug 22 17:51:51 2017"
+  RTWModifiedTimeStamp	  425325110
+  ModelVersionFormat	  "1.%<AutoIncrement:3128>"
   ConfigurationManager	  "none"
   SampleTimeColors	  off
   SampleTimeAnnotations	  off
@@ -996,7 +996,7 @@ Model {
   }
   System {
     Name		    "torqueBalancingR2012bS80"
-    Location		    [65, 24, 1920, 1080]
+    Location		    [58, 20, 1913, 1056]
     Open		    off
     ModelBrowserVisibility  off
     ModelBrowserWidth	    200
@@ -1008,9 +1008,9 @@ Model {
     TiledPaperMargins	    [0.500000, 0.500000, 0.500000, 0.500000]
     TiledPageScale	    1
     ShowPageBoundaries	    off
-    ZoomFactor		    "89"
+    ZoomFactor		    "82"
     ReportName		    "simulink-default.rpt"
-    SIDHighWatermark	    "3756"
+    SIDHighWatermark	    "3762"
     Block {
       BlockType		      SubSystem
       Name		      "DesValues"
@@ -1024,7 +1024,7 @@ Model {
       Variant		      off
       System {
 	Name			"DesValues"
-	Location		[0, 22, 2560, 1435]
+	Location		[58, 20, 1913, 1056]
 	Open			off
 	ModelBrowserVisibility	off
 	ModelBrowserWidth	200
@@ -1036,7 +1036,7 @@ Model {
 	TiledPaperMargins	[0.500000, 0.500000, 0.500000, 0.500000]
 	TiledPageScale		1
 	ShowPageBoundaries	off
-	ZoomFactor		"99"
+	ZoomFactor		"69"
 	Block {
 	  BlockType		  Reference
 	  Name			  "Compare\nTo Zero"
@@ -1180,6 +1180,17 @@ Model {
 	  }
 	}
 	Block {
+	  BlockType		  Demux
+	  Name			  "Demux1"
+	  SID			  "3759"
+	  Ports			  [1, 2]
+	  Position		  [-825, 3343, -820, 3452]
+	  ZOrder		  706
+	  ShowName		  off
+	  Outputs		  "[13;12]"
+	  DisplayOption		  "bar"
+	}
+	Block {
 	  BlockType		  Switch
 	  Name			  "External/Internal CoM references"
 	  SID			  "3755"
@@ -1194,7 +1205,7 @@ Model {
 	  Name			  "Get Estimate"
 	  SID			  "2692"
 	  Ports			  [0, 1]
-	  Position		  [-990, 3307, -910, 3343]
+	  Position		  [-1030, 3382, -950, 3418]
 	  ZOrder		  638
 	  BackgroundColor	  "[0.513700, 0.851000, 0.670600]"
 	  ShowName		  off
@@ -1537,7 +1548,7 @@ Model {
 		    TiledPageScale	    1
 		    ShowPageBoundaries	    off
 		    ZoomFactor		    "100"
-		    SIDHighWatermark	    "3756"
+		    SIDHighWatermark	    "3762"
 		    Block {
 		    BlockType		    Inport
 		    Name		    "JcLeftFoot"
@@ -1867,7 +1878,7 @@ Model {
 		    TiledPageScale	    1
 		    ShowPageBoundaries	    off
 		    ZoomFactor		    "100"
-		    SIDHighWatermark	    "3756"
+		    SIDHighWatermark	    "3762"
 		    Block {
 		    BlockType		    Inport
 		    Name		    "xCom0"
@@ -2400,7 +2411,7 @@ Model {
 		    TiledPageScale	    1
 		    ShowPageBoundaries	    off
 		    ZoomFactor		    "100"
-		    SIDHighWatermark	    "3756"
+		    SIDHighWatermark	    "3762"
 		    SIDPrevWatermark	    "9"
 		    Block {
 		    BlockType		    Inport
@@ -3359,6 +3370,15 @@ Model {
 	  MaskHideContents	  off
 	}
 	Block {
+	  BlockType		  Constant
+	  Name			  "Kinematic calibration correction"
+	  SID			  "3760"
+	  Position		  [-788, 3500, -672, 3530]
+	  ZOrder		  705
+	  BlockRotation		  270
+	  Value			  "calibDelta"
+	}
+	Block {
 	  BlockType		  Logic
 	  Name			  "Logical\nOperator1"
 	  SID			  "3270"
@@ -3476,6 +3496,17 @@ Model {
 	  ZOrder		  604
 	  ShowName		  off
 	  Inputs		  "10"
+	  DisplayOption		  "bar"
+	}
+	Block {
+	  BlockType		  Mux
+	  Name			  "Mux4"
+	  SID			  "3761"
+	  Ports			  [2, 1]
+	  Position		  [-635, 3343, -630, 3452]
+	  ZOrder		  707
+	  ShowName		  off
+	  Inputs		  "2"
 	  DisplayOption		  "bar"
 	}
 	Block {
@@ -3692,7 +3723,7 @@ Model {
 	      Name		      "DoFs converter"
 	      SID		      "3712"
 	      Ports		      [1, 5]
-	      Position		      [485, 234, 580, 336]
+	      Position		      [485, 214, 580, 316]
 	      ZOrder		      659
 	      LibraryVersion	      "1.381"
 	      SourceBlock	      "WBToolboxLibrary/Utilities/DoFs converter"
@@ -3726,13 +3757,19 @@ Model {
 		RTWStorageClass		"Auto"
 		DataLoggingNameMode	"SignalName"
 	      }
+	      Port {
+		PortNumber		5
+		Name			"right_leg"
+		RTWStorageClass		"Auto"
+		DataLoggingNameMode	"SignalName"
+	      }
 	    }
 	    Block {
 	      BlockType		      Reference
 	      Name		      "DoFs converter1"
 	      SID		      "3713"
 	      Ports		      [1, 5]
-	      Position		      [495, 534, 590, 636]
+	      Position		      [495, 514, 590, 616]
 	      ZOrder		      660
 	      LibraryVersion	      "1.381"
 	      SourceBlock	      "WBToolboxLibrary/Utilities/DoFs converter"
@@ -3763,6 +3800,12 @@ Model {
 	      Port {
 		PortNumber		4
 		Name			"left_leg"
+		RTWStorageClass		"Auto"
+		DataLoggingNameMode	"SignalName"
+	      }
+	      Port {
+		PortNumber		5
+		Name			"right_leg"
 		RTWStorageClass		"Auto"
 		DataLoggingNameMode	"SignalName"
 	      }
@@ -4074,7 +4117,7 @@ Model {
 	    Line {
 	      SrcBlock		      "impedances"
 	      SrcPort		      1
-	      Points		      [0, 50]
+	      Points		      [0, 45]
 	      DstBlock		      "DoFs converter"
 	      DstPort		      1
 	    }
@@ -4092,14 +4135,15 @@ Model {
 	      Labels		      [2, 1]
 	      SrcBlock		      "DoFs converter"
 	      SrcPort		      4
-	      Points		      [0, -20]
+	      Points		      [0, 0]
 	      DstBlock		      "Impedances(t)"
 	      DstPort		      4
 	    }
 	    Line {
 	      Name		      "right_leg"
 	      Labels		      [1, 1]
-	      Points		      [585, 305]
+	      SrcBlock		      "DoFs converter"
+	      SrcPort		      5
 	      DstBlock		      "Impedances(t)"
 	      DstPort		      5
 	    }
@@ -4108,7 +4152,7 @@ Model {
 	      Labels		      [2, 1]
 	      SrcBlock		      "DoFs converter"
 	      SrcPort		      3
-	      Points		      [0, -20]
+	      Points		      [0, 0]
 	      DstBlock		      "Impedances(t)"
 	      DstPort		      3
 	    }
@@ -4117,7 +4161,7 @@ Model {
 	      Labels		      [2, 1]
 	      SrcBlock		      "DoFs converter"
 	      SrcPort		      1
-	      Points		      [0, -20]
+	      Points		      [0, 0]
 	      DstBlock		      "Impedances(t)"
 	      DstPort		      1
 	    }
@@ -4126,7 +4170,7 @@ Model {
 	      Labels		      [2, 1]
 	      SrcBlock		      "DoFs converter"
 	      SrcPort		      2
-	      Points		      [0, -20]
+	      Points		      [0, 0]
 	      DstBlock		      "Impedances(t)"
 	      DstPort		      2
 	    }
@@ -4142,14 +4186,15 @@ Model {
 	      Labels		      [2, 1]
 	      SrcBlock		      "DoFs converter1"
 	      SrcPort		      4
-	      Points		      [0, -20]
+	      Points		      [0, 0]
 	      DstBlock		      "qjDot(t) "
 	      DstPort		      4
 	    }
 	    Line {
 	      Name		      "right_leg"
 	      Labels		      [1, 1]
-	      Points		      [595, 605]
+	      SrcBlock		      "DoFs converter1"
+	      SrcPort		      5
 	      DstBlock		      "qjDot(t) "
 	      DstPort		      5
 	    }
@@ -4158,7 +4203,7 @@ Model {
 	      Labels		      [2, 1]
 	      SrcBlock		      "DoFs converter1"
 	      SrcPort		      3
-	      Points		      [0, -20]
+	      Points		      [0, 0]
 	      DstBlock		      "qjDot(t) "
 	      DstPort		      3
 	    }
@@ -4167,7 +4212,7 @@ Model {
 	      Labels		      [2, 1]
 	      SrcBlock		      "DoFs converter1"
 	      SrcPort		      1
-	      Points		      [0, -20]
+	      Points		      [0, 0]
 	      DstBlock		      "qjDot(t) "
 	      DstPort		      1
 	    }
@@ -4176,7 +4221,7 @@ Model {
 	      Labels		      [2, 1]
 	      SrcBlock		      "DoFs converter1"
 	      SrcPort		      2
-	      Points		      [0, -20]
+	      Points		      [0, 0]
 	      DstBlock		      "qjDot(t) "
 	      DstPort		      2
 	    }
@@ -4220,7 +4265,6 @@ Model {
 	    Line {
 	      SrcBlock		      "Gain"
 	      SrcPort		      1
-	      Points		      [110, 0]
 	      DstBlock		      "DoFs converter1"
 	      DstPort		      1
 	    }
@@ -4877,7 +4921,7 @@ Model {
 		    TiledPageScale	    1
 		    ShowPageBoundaries	    off
 		    ZoomFactor		    "100"
-		    SIDHighWatermark	    "3756"
+		    SIDHighWatermark	    "3762"
 		    Block {
 		    BlockType		    Inport
 		    Name		    "JcLeftFoot"
@@ -5184,7 +5228,7 @@ Model {
 		TiledPageScale		1
 		ShowPageBoundaries	off
 		ZoomFactor		"100"
-		SIDHighWatermark	"3756"
+		SIDHighWatermark	"3762"
 		SIDPrevWatermark	"9"
 		Block {
 		  BlockType		  Inport
@@ -5817,7 +5861,7 @@ Model {
 		    TiledPageScale	    1
 		    ShowPageBoundaries	    off
 		    ZoomFactor		    "100"
-		    SIDHighWatermark	    "3756"
+		    SIDHighWatermark	    "3762"
 		    Block {
 		    BlockType		    Inport
 		    Name		    "R"
@@ -6172,7 +6216,7 @@ Model {
 		    TiledPageScale	    1
 		    ShowPageBoundaries	    off
 		    ZoomFactor		    "100"
-		    SIDHighWatermark	    "3756"
+		    SIDHighWatermark	    "3762"
 		    Block {
 		    BlockType		    Inport
 		    Name		    "R"
@@ -6527,7 +6571,7 @@ Model {
 		    TiledPageScale	    1
 		    ShowPageBoundaries	    off
 		    ZoomFactor		    "100"
-		    SIDHighWatermark	    "3756"
+		    SIDHighWatermark	    "3762"
 		    Block {
 		    BlockType		    Inport
 		    Name		    "R"
@@ -6882,7 +6926,7 @@ Model {
 		    TiledPageScale	    1
 		    ShowPageBoundaries	    off
 		    ZoomFactor		    "100"
-		    SIDHighWatermark	    "3756"
+		    SIDHighWatermark	    "3762"
 		    Block {
 		    BlockType		    Inport
 		    Name		    "R"
@@ -7236,7 +7280,7 @@ Model {
 		    TiledPageScale	    1
 		    ShowPageBoundaries	    off
 		    ZoomFactor		    "100"
-		    SIDHighWatermark	    "3756"
+		    SIDHighWatermark	    "3762"
 		    Block {
 		    BlockType		    Inport
 		    Name		    "R"
@@ -7616,7 +7660,7 @@ Model {
 		    TiledPageScale	    1
 		    ShowPageBoundaries	    off
 		    ZoomFactor		    "100"
-		    SIDHighWatermark	    "3756"
+		    SIDHighWatermark	    "3762"
 		    Block {
 		    BlockType		    Inport
 		    Name		    "R"
@@ -9049,7 +9093,7 @@ Model {
 		    TiledPageScale	    1
 		    ShowPageBoundaries	    off
 		    ZoomFactor		    "100"
-		    SIDHighWatermark	    "3756"
+		    SIDHighWatermark	    "3762"
 		    SIDPrevWatermark	    "9"
 		    Block {
 		    BlockType		    Inport
@@ -9916,7 +9960,7 @@ Model {
 		    TiledPageScale	    1
 		    ShowPageBoundaries	    off
 		    ZoomFactor		    "100"
-		    SIDHighWatermark	    "3756"
+		    SIDHighWatermark	    "3762"
 		    SIDPrevWatermark	    "9"
 		    Block {
 		    BlockType		    Inport
@@ -10919,7 +10963,7 @@ Model {
 		    TiledPageScale	    1
 		    ShowPageBoundaries	    off
 		    ZoomFactor		    "100"
-		    SIDHighWatermark	    "3756"
+		    SIDHighWatermark	    "3762"
 		    SIDPrevWatermark	    "9"
 		    Block {
 		    BlockType		    Inport
@@ -11786,7 +11830,7 @@ Model {
 		    TiledPageScale	    1
 		    ShowPageBoundaries	    off
 		    ZoomFactor		    "100"
-		    SIDHighWatermark	    "3756"
+		    SIDHighWatermark	    "3762"
 		    SIDPrevWatermark	    "9"
 		    Block {
 		    BlockType		    Inport
@@ -13748,7 +13792,7 @@ Model {
 		    TiledPageScale	    1
 		    ShowPageBoundaries	    off
 		    ZoomFactor		    "100"
-		    SIDHighWatermark	    "3756"
+		    SIDHighWatermark	    "3762"
 		    Block {
 		    BlockType		    Inport
 		    Name		    "JcLeftFoot"
@@ -14096,7 +14140,7 @@ Model {
 		TiledPageScale		1
 		ShowPageBoundaries	off
 		ZoomFactor		"100"
-		SIDHighWatermark	"3756"
+		SIDHighWatermark	"3762"
 		SIDPrevWatermark	"9"
 		Block {
 		  BlockType		  Inport
@@ -14834,7 +14878,7 @@ Model {
 		    TiledPageScale	    1
 		    ShowPageBoundaries	    off
 		    ZoomFactor		    "100"
-		    SIDHighWatermark	    "3756"
+		    SIDHighWatermark	    "3762"
 		    SIDPrevWatermark	    "9"
 		    Block {
 		    BlockType		    Inport
@@ -15701,7 +15745,7 @@ Model {
 		    TiledPageScale	    1
 		    ShowPageBoundaries	    off
 		    ZoomFactor		    "100"
-		    SIDHighWatermark	    "3756"
+		    SIDHighWatermark	    "3762"
 		    SIDPrevWatermark	    "9"
 		    Block {
 		    BlockType		    Inport
@@ -17198,6 +17242,20 @@ Model {
 	  MaskHideContents	  off
 	}
 	Block {
+	  BlockType		  Sum
+	  Name			  "Sum"
+	  SID			  "3762"
+	  Ports			  [2, 1]
+	  Position		  [-740, 3415, -720, 3435]
+	  ZOrder		  704
+	  ShowName		  off
+	  IconShape		  "round"
+	  Inputs		  "|++"
+	  InputSameDT		  off
+	  OutDataTypeStr	  "Inherit: Inherit via internal rule"
+	  SaturateOnIntegerOverflow off
+	}
+	Block {
 	  BlockType		  Switch
 	  Name			  "Switch2"
 	  SID			  "2245"
@@ -17881,27 +17939,6 @@ Model {
 	  }
 	}
 	Line {
-	  SrcBlock		  "Get Estimate"
-	  SrcPort		  1
-	  Points		  [323, 0]
-	  Branch {
-	    Points		    [0, -340]
-	    Branch {
-	      Points		      [0, -265]
-	      DstBlock		      "State Machine"
-	      DstPort		      1
-	    }
-	    Branch {
-	      DstBlock		      "Internal coordinator"
-	      DstPort		      1
-	    }
-	  }
-	  Branch {
-	    DstBlock		    "State Machine Walking"
-	    DstPort		    5
-	  }
-	}
-	Line {
 	  SrcBlock		  "State Machine"
 	  SrcPort		  9
 	  DstBlock		  "Mux1"
@@ -18018,6 +18055,57 @@ Model {
 	    DstPort		    1
 	  }
 	}
+	Line {
+	  SrcBlock		  "Mux4"
+	  SrcPort		  1
+	  Points		  [191, 0; 0, -75]
+	  Branch {
+	    Points		    [0, -340]
+	    Branch {
+	      DstBlock		      "Internal coordinator"
+	      DstPort		      1
+	    }
+	    Branch {
+	      Points		      [0, -265]
+	      DstBlock		      "State Machine"
+	      DstPort		      1
+	    }
+	  }
+	  Branch {
+	    DstBlock		    "State Machine Walking"
+	    DstPort		    5
+	  }
+	}
+	Line {
+	  SrcBlock		  "Kinematic calibration correction"
+	  SrcPort		  1
+	  DstBlock		  "Sum"
+	  DstPort		  2
+	}
+	Line {
+	  SrcBlock		  "Get Estimate"
+	  SrcPort		  1
+	  DstBlock		  "Demux1"
+	  DstPort		  1
+	}
+	Line {
+	  SrcBlock		  "Demux1"
+	  SrcPort		  2
+	  DstBlock		  "Sum"
+	  DstPort		  1
+	}
+	Line {
+	  SrcBlock		  "Demux1"
+	  SrcPort		  1
+	  DstBlock		  "Mux4"
+	  DstPort		  1
+	}
+	Line {
+	  SrcBlock		  "Sum"
+	  SrcPort		  1
+	  DstBlock		  "Mux4"
+	  DstPort		  2
+	}
       }
       RTWSystemCode	      "Auto"
       MinAlgLoopOccurrences   off
@@ -18037,7 +18125,7 @@ Model {
       Variant		      off
       System {
 	Name			"Dump and visualize"
-	Location		[65, 24, 1920, 1080]
+	Location		[58, 20, 1913, 1056]
 	Open			off
 	ModelBrowserVisibility	off
 	ModelBrowserWidth	200
@@ -18049,7 +18137,7 @@ Model {
 	TiledPaperMargins	[0.500000, 0.500000, 0.500000, 0.500000]
 	TiledPageScale		1
 	ShowPageBoundaries	off
-	ZoomFactor		"107"
+	ZoomFactor		"99"
 	Block {
 	  BlockType		  Inport
 	  Name			  "tauDesired"
@@ -18348,7 +18436,7 @@ Model {
 	  Name			  "DoFs converter"
 	  SID			  "3705"
 	  Ports			  [1, 5]
-	  Position		  [345, 14, 440, 116]
+	  Position		  [345, -6, 440, 96]
 	  ZOrder		  585
 	  LibraryVersion	  "1.381"
 	  SourceBlock		  "WBToolboxLibrary/Utilities/DoFs converter"
@@ -18382,13 +18470,19 @@ Model {
 	    RTWStorageClass	    "Auto"
 	    DataLoggingNameMode	    "SignalName"
 	  }
+	  Port {
+	    PortNumber		    5
+	    Name		    "right_leg"
+	    RTWStorageClass	    "Auto"
+	    DataLoggingNameMode	    "SignalName"
+	  }
 	}
 	Block {
 	  BlockType		  Reference
 	  Name			  "DoFs converter1"
 	  SID			  "3706"
 	  Ports			  [1, 5]
-	  Position		  [345, 169, 440, 271]
+	  Position		  [345, 149, 440, 251]
 	  ZOrder		  586
 	  LibraryVersion	  "1.381"
 	  SourceBlock		  "WBToolboxLibrary/Utilities/DoFs converter"
@@ -18422,13 +18516,19 @@ Model {
 	    RTWStorageClass	    "Auto"
 	    DataLoggingNameMode	    "SignalName"
 	  }
+	  Port {
+	    PortNumber		    5
+	    Name		    "right_leg"
+	    RTWStorageClass	    "Auto"
+	    DataLoggingNameMode	    "SignalName"
+	  }
 	}
 	Block {
 	  BlockType		  Reference
 	  Name			  "DoFs converter2"
 	  SID			  "3707"
 	  Ports			  [1, 5]
-	  Position		  [345, 304, 440, 406]
+	  Position		  [345, 284, 440, 386]
 	  ZOrder		  587
 	  LibraryVersion	  "1.381"
 	  SourceBlock		  "WBToolboxLibrary/Utilities/DoFs converter"
@@ -18462,13 +18562,19 @@ Model {
 	    RTWStorageClass	    "Auto"
 	    DataLoggingNameMode	    "SignalName"
 	  }
+	  Port {
+	    PortNumber		    5
+	    Name		    "right_leg"
+	    RTWStorageClass	    "Auto"
+	    DataLoggingNameMode	    "SignalName"
+	  }
 	}
 	Block {
 	  BlockType		  Reference
 	  Name			  "DoFs converter3"
 	  SID			  "3708"
 	  Ports			  [1, 5]
-	  Position		  [980, 34, 1075, 136]
+	  Position		  [980, 14, 1075, 116]
 	  ZOrder		  588
 	  LibraryVersion	  "1.381"
 	  SourceBlock		  "WBToolboxLibrary/Utilities/DoFs converter"
@@ -18502,13 +18608,19 @@ Model {
 	    RTWStorageClass	    "Auto"
 	    DataLoggingNameMode	    "SignalName"
 	  }
+	  Port {
+	    PortNumber		    5
+	    Name		    "right_leg"
+	    RTWStorageClass	    "Auto"
+	    DataLoggingNameMode	    "SignalName"
+	  }
 	}
 	Block {
 	  BlockType		  Reference
 	  Name			  "DoFs converter4"
 	  SID			  "3709"
 	  Ports			  [1, 5]
-	  Position		  [980, 169, 1075, 271]
+	  Position		  [980, 149, 1075, 251]
 	  ZOrder		  589
 	  LibraryVersion	  "1.381"
 	  SourceBlock		  "WBToolboxLibrary/Utilities/DoFs converter"
@@ -18542,13 +18654,19 @@ Model {
 	    RTWStorageClass	    "Auto"
 	    DataLoggingNameMode	    "SignalName"
 	  }
+	  Port {
+	    PortNumber		    5
+	    Name		    "right_leg"
+	    RTWStorageClass	    "Auto"
+	    DataLoggingNameMode	    "SignalName"
+	  }
 	}
 	Block {
 	  BlockType		  Reference
 	  Name			  "DoFs converter5"
 	  SID			  "3710"
 	  Ports			  [1, 5]
-	  Position		  [980, 304, 1075, 406]
+	  Position		  [980, 284, 1075, 386]
 	  ZOrder		  590
 	  LibraryVersion	  "1.381"
 	  SourceBlock		  "WBToolboxLibrary/Utilities/DoFs converter"
@@ -18579,6 +18697,12 @@ Model {
 	  Port {
 	    PortNumber		    4
 	    Name		    "left_leg"
+	    RTWStorageClass	    "Auto"
+	    DataLoggingNameMode	    "SignalName"
+	  }
+	  Port {
+	    PortNumber		    5
+	    Name		    "right_leg"
 	    RTWStorageClass	    "Auto"
 	    DataLoggingNameMode	    "SignalName"
 	  }
@@ -19395,7 +19519,7 @@ Model {
 		TiledPageScale		1
 		ShowPageBoundaries	off
 		ZoomFactor		"100"
-		SIDHighWatermark	"3756"
+		SIDHighWatermark	"3762"
 		Block {
 		  BlockType		  Inport
 		  Name			  "u"
@@ -19572,7 +19696,7 @@ Model {
 		TiledPageScale		1
 		ShowPageBoundaries	off
 		ZoomFactor		"100"
-		SIDHighWatermark	"3756"
+		SIDHighWatermark	"3762"
 		Block {
 		  BlockType		  Inport
 		  Name			  "u"
@@ -20068,50 +20192,46 @@ Model {
 	Line {
 	  SrcBlock		  "Gain"
 	  SrcPort		  1
-	  Points		  [110, 0]
 	  DstBlock		  "DoFs converter3"
 	  DstPort		  1
 	}
 	Line {
 	  Name			  "right_leg"
 	  Labels		  [1, 1]
-	  Points		  [1080, 105]
+	  SrcBlock		  "DoFs converter3"
+	  SrcPort		  5
 	  DstBlock		  "qj"
 	  DstPort		  5
 	}
 	Line {
 	  Name			  "torso"
-	  Labels		  [2, 1]
+	  Labels		  [-1, 0]
 	  SrcBlock		  "DoFs converter3"
 	  SrcPort		  1
-	  Points		  [0, -20]
 	  DstBlock		  "qj"
 	  DstPort		  1
 	}
 	Line {
 	  Name			  "left_arm"
-	  Labels		  [2, 1]
+	  Labels		  [-1, 0]
 	  SrcBlock		  "DoFs converter3"
 	  SrcPort		  2
-	  Points		  [0, -20]
 	  DstBlock		  "qj"
 	  DstPort		  2
 	}
 	Line {
 	  Name			  "left_leg"
-	  Labels		  [2, 1]
+	  Labels		  [-1, 0]
 	  SrcBlock		  "DoFs converter3"
 	  SrcPort		  4
-	  Points		  [0, -20]
 	  DstBlock		  "qj"
 	  DstPort		  4
 	}
 	Line {
 	  Name			  "right_arm"
-	  Labels		  [2, 1]
+	  Labels		  [-1, 0]
 	  SrcBlock		  "DoFs converter3"
 	  SrcPort		  3
-	  Points		  [0, -20]
 	  DstBlock		  "qj"
 	  DstPort		  3
 	}
@@ -20201,7 +20321,6 @@ Model {
 	  SrcPort		  1
 	  Points		  [31, 0]
 	  Branch {
-	    Points		    [199, 0]
 	    DstBlock		    "DoFs converter"
 	    DstPort		    1
 	  }
@@ -20216,7 +20335,7 @@ Model {
 	  SrcPort		  1
 	  Points		  [40, 0]
 	  Branch {
-	    Points		    [0, 100]
+	    Points		    [0, 95]
 	    DstBlock		    "DoFs converter2"
 	    DstPort		    1
 	  }
@@ -20228,86 +20347,80 @@ Model {
 	Line {
 	  Name			  "right_leg"
 	  Labels		  [1, 1]
-	  Points		  [445, 85]
+	  SrcBlock		  "DoFs converter"
+	  SrcPort		  5
 	  DstBlock		  "tauDes"
 	  DstPort		  5
 	}
 	Line {
 	  Name			  "torso"
-	  Labels		  [2, 1]
+	  Labels		  [-1, 0]
 	  SrcBlock		  "DoFs converter"
 	  SrcPort		  1
-	  Points		  [0, -20]
 	  DstBlock		  "tauDes"
 	  DstPort		  1
 	}
 	Line {
 	  Name			  "left_arm"
-	  Labels		  [2, 1]
+	  Labels		  [-1, 0]
 	  SrcBlock		  "DoFs converter"
 	  SrcPort		  2
-	  Points		  [0, -20]
 	  DstBlock		  "tauDes"
 	  DstPort		  2
 	}
 	Line {
 	  Name			  "left_leg"
-	  Labels		  [2, 1]
+	  Labels		  [-1, 0]
 	  SrcBlock		  "DoFs converter"
 	  SrcPort		  4
-	  Points		  [0, -20]
 	  DstBlock		  "tauDes"
 	  DstPort		  4
 	}
 	Line {
 	  Name			  "right_arm"
-	  Labels		  [2, 1]
+	  Labels		  [-1, 0]
 	  SrcBlock		  "DoFs converter"
 	  SrcPort		  3
-	  Points		  [0, -20]
 	  DstBlock		  "tauDes"
 	  DstPort		  3
 	}
 	Line {
 	  Name			  "right_leg"
 	  Labels		  [1, 1]
-	  Points		  [445, 240]
+	  SrcBlock		  "DoFs converter1"
+	  SrcPort		  5
 	  DstBlock		  "tauError"
 	  DstPort		  5
 	}
 	Line {
 	  Name			  "torso"
-	  Labels		  [2, 1]
+	  Labels		  [-1, 0]
 	  SrcBlock		  "DoFs converter1"
 	  SrcPort		  1
-	  Points		  [0, -20]
 	  DstBlock		  "tauError"
 	  DstPort		  1
 	}
 	Line {
 	  Name			  "left_arm"
-	  Labels		  [2, 1]
+	  Labels		  [-1, 0]
 	  SrcBlock		  "DoFs converter1"
 	  SrcPort		  2
-	  Points		  [0, -20]
 	  DstBlock		  "tauError"
 	  DstPort		  2
 	}
 	Line {
 	  Name			  "left_leg"
-	  Labels		  [2, 1]
+	  Labels		  [-1, 0]
 	  SrcBlock		  "DoFs converter1"
 	  SrcPort		  4
-	  Points		  [0, -20]
 	  DstBlock		  "tauError"
 	  DstPort		  4
 	}
 	Line {
 	  Name			  "right_arm"
-	  Labels		  [2, 1]
+	  Labels		  [-1, 0]
 	  SrcBlock		  "DoFs converter1"
 	  SrcPort		  3
-	  Points		  [0, -20]
 	  DstBlock		  "tauError"
 	  DstPort		  3
 	}
@@ -20316,50 +20429,47 @@ Model {
 	  Labels		  [0, 0]
 	  SrcBlock		  "Sum"
 	  SrcPort		  1
-	  Points		  [54, 0; 0, 90]
+	  Points		  [54, 0; 0, 85]
 	  DstBlock		  "DoFs converter1"
 	  DstPort		  1
 	}
 	Line {
 	  Name			  "right_leg"
 	  Labels		  [1, 1]
-	  Points		  [445, 375]
+	  SrcBlock		  "DoFs converter2"
+	  SrcPort		  5
 	  DstBlock		  "tauMeasured"
 	  DstPort		  5
 	}
 	Line {
 	  Name			  "torso"
-	  Labels		  [2, 1]
+	  Labels		  [-1, 0]
 	  SrcBlock		  "DoFs converter2"
 	  SrcPort		  1
-	  Points		  [0, -20]
 	  DstBlock		  "tauMeasured"
 	  DstPort		  1
 	}
 	Line {
 	  Name			  "left_arm"
-	  Labels		  [2, 1]
+	  Labels		  [-1, 0]
 	  SrcBlock		  "DoFs converter2"
 	  SrcPort		  2
-	  Points		  [0, -20]
 	  DstBlock		  "tauMeasured"
 	  DstPort		  2
 	}
 	Line {
 	  Name			  "left_leg"
-	  Labels		  [2, 1]
+	  Labels		  [-1, 0]
 	  SrcBlock		  "DoFs converter2"
 	  SrcPort		  4
-	  Points		  [0, -20]
 	  DstBlock		  "tauMeasured"
 	  DstPort		  4
 	}
 	Line {
 	  Name			  "right_arm"
-	  Labels		  [2, 1]
+	  Labels		  [-1, 0]
 	  SrcBlock		  "DoFs converter2"
 	  SrcPort		  3
-	  Points		  [0, -20]
 	  DstBlock		  "tauMeasured"
 	  DstPort		  3
 	}
@@ -20382,64 +20492,61 @@ Model {
 	Line {
 	  SrcBlock		  "Gain3"
 	  SrcPort		  1
-	  Points		  [95, 0]
 	  DstBlock		  "DoFs converter4"
 	  DstPort		  1
 	}
 	Line {
 	  Name			  "right_leg"
 	  Labels		  [1, 1]
-	  Points		  [1080, 240]
+	  SrcBlock		  "DoFs converter4"
+	  SrcPort		  5
 	  DstBlock		  "qjDes"
 	  DstPort		  5
 	}
 	Line {
 	  Name			  "torso"
-	  Labels		  [2, 1]
+	  Labels		  [-1, 0]
 	  SrcBlock		  "DoFs converter4"
 	  SrcPort		  1
-	  Points		  [0, -20]
 	  DstBlock		  "qjDes"
 	  DstPort		  1
 	}
 	Line {
 	  Name			  "left_arm"
-	  Labels		  [2, 1]
+	  Labels		  [-1, 0]
 	  SrcBlock		  "DoFs converter4"
 	  SrcPort		  2
-	  Points		  [0, -20]
 	  DstBlock		  "qjDes"
 	  DstPort		  2
 	}
 	Line {
 	  Name			  "left_leg"
-	  Labels		  [2, 1]
+	  Labels		  [-1, 0]
 	  SrcBlock		  "DoFs converter4"
 	  SrcPort		  4
-	  Points		  [0, -20]
 	  DstBlock		  "qjDes"
 	  DstPort		  4
 	}
 	Line {
 	  Name			  "right_arm"
-	  Labels		  [2, 1]
+	  Labels		  [-1, 0]
 	  SrcBlock		  "DoFs converter4"
 	  SrcPort		  3
-	  Points		  [0, -20]
 	  DstBlock		  "qjDes"
 	  DstPort		  3
 	}
 	Line {
 	  SrcBlock		  "Gain4"
 	  SrcPort		  1
-	  Points		  [110, 0]
 	  DstBlock		  "DoFs converter5"
 	  DstPort		  1
 	}
 	Line {
 	  Name			  "right_leg"
 	  Labels		  [1, 1]
-	  Points		  [1080, 375; 213, 0]
+	  SrcBlock		  "DoFs converter5"
+	  SrcPort		  5
+	  Points		  [213, 0]
 	  Branch {
 	    Points		    [0, 80]
 	    DstBlock		    "plotNorms"
@@ -20452,28 +20559,26 @@ Model {
 	}
 	Line {
 	  Name			  "torso"
-	  Labels		  [2, 1]
+	  Labels		  [-1, 0]
 	  SrcBlock		  "DoFs converter5"
 	  SrcPort		  1
-	  Points		  [0, -20]
 	  DstBlock		  "qj_err"
 	  DstPort		  1
 	}
 	Line {
 	  Name			  "left_arm"
-	  Labels		  [2, 1]
+	  Labels		  [-1, 0]
 	  SrcBlock		  "DoFs converter5"
 	  SrcPort		  2
-	  Points		  [0, -20]
 	  DstBlock		  "qj_err"
 	  DstPort		  2
 	}
 	Line {
 	  Name			  "left_leg"
-	  Labels		  [2, 1]
+	  Labels		  [-1, 0]
 	  SrcBlock		  "DoFs converter5"
 	  SrcPort		  4
-	  Points		  [0, -20; 237, 0]
+	  Points		  [237, 0]
 	  Branch {
 	    Points		    [0, 90]
 	    DstBlock		    "plotNorms"
@@ -20486,10 +20591,9 @@ Model {
 	}
 	Line {
 	  Name			  "right_arm"
-	  Labels		  [2, 1]
+	  Labels		  [-1, 0]
 	  SrcBlock		  "DoFs converter5"
 	  SrcPort		  3
-	  Points		  [0, -20]
 	  DstBlock		  "qj_err"
 	  DstPort		  3
 	}
@@ -21012,13 +21116,13 @@ Model {
       Name		      "controller_QP"
       SID		      "2355"
       Ports		      [13, 4]
-      Position		      [1095, 171, 1470, 1039]
+      Position		      [1075, 171, 1450, 1039]
       ZOrder		      542
       RequestExecContextInheritance off
       Variant		      off
       System {
 	Name			"controller_QP"
-	Location		[65, 24, 1920, 1080]
+	Location		[8, 20, 1863, 1056]
 	Open			off
 	ModelBrowserVisibility	off
 	ModelBrowserWidth	200
@@ -21030,7 +21134,7 @@ Model {
 	TiledPaperMargins	[0.500000, 0.500000, 0.500000, 0.500000]
 	TiledPageScale		1
 	ShowPageBoundaries	off
-	ZoomFactor		"54"
+	ZoomFactor		"50"
 	Block {
 	  BlockType		  Inport
 	  Name			  "impedances"
@@ -21456,7 +21560,7 @@ Model {
 	  Variant		  off
 	  System {
 	    Name		    "QP"
-	    Location		    [0, 23, 1936, 1131]
+	    Location		    [58, 20, 1913, 1056]
 	    Open		    off
 	    ModelBrowserVisibility  off
 	    ModelBrowserWidth	    200
@@ -21468,7 +21572,7 @@ Model {
 	    TiledPaperMargins	    [0.500000, 0.500000, 0.500000, 0.500000]
 	    TiledPageScale	    1
 	    ShowPageBoundaries	    off
-	    ZoomFactor		    "189"
+	    ZoomFactor		    "179"
 	    Block {
 	      BlockType		      Inport
 	      Name		      "LEFT_RIGHT_FOOT_IN_CONTACT"
@@ -21747,7 +21851,7 @@ Model {
 	      BlockType		      Outport
 	      Name		      "f0OneFoot"
 	      SID		      "2399"
-	      Position		      [1180, 853, 1210, 867]
+	      Position		      [1160, 853, 1190, 867]
 	      ZOrder		      401
 	      IconDisplay	      "Port number"
 	    }
@@ -21755,7 +21859,7 @@ Model {
 	      BlockType		      Outport
 	      Name		      "f0TwoFeet"
 	      SID		      "2400"
-	      Position		      [1180, 633, 1210, 647]
+	      Position		      [1160, 633, 1190, 647]
 	      ZOrder		      402
 	      Port		      "2"
 	      IconDisplay	      "Port number"
@@ -21921,7 +22025,7 @@ Model {
 	  Variant		  off
 	  System {
 	    Name		    "integralOf Hw1"
-	    Location		    [65, 24, 1920, 1080]
+	    Location		    [8, 20, 1863, 1056]
 	    Open		    off
 	    ModelBrowserVisibility  off
 	    ModelBrowserWidth	    200
@@ -21933,7 +22037,7 @@ Model {
 	    TiledPaperMargins	    [0.500000, 0.500000, 0.500000, 0.500000]
 	    TiledPageScale	    1
 	    ShowPageBoundaries	    off
-	    ZoomFactor		    "146"
+	    ZoomFactor		    "144"
 	    Block {
 	      BlockType		      Inport
 	      Name		      "qjDes"
@@ -22048,7 +22152,7 @@ Model {
 		TiledPageScale		1
 		ShowPageBoundaries	off
 		ZoomFactor		"100"
-		SIDHighWatermark	"3756"
+		SIDHighWatermark	"3762"
 		Block {
 		  BlockType		  Inport
 		  Name			  "qjErr"
@@ -22563,7 +22667,7 @@ Model {
 		    TiledPageScale	    1
 		    ShowPageBoundaries	    off
 		    ZoomFactor		    "100"
-		    SIDHighWatermark	    "3756"
+		    SIDHighWatermark	    "3762"
 		    SIDPrevWatermark	    "9"
 		    Block {
 		    BlockType		    Inport
@@ -23324,7 +23428,7 @@ Model {
 	    TiledPageScale	    1
 	    ShowPageBoundaries	    off
 	    ZoomFactor		    "100"
-	    SIDHighWatermark	    "3756"
+	    SIDHighWatermark	    "3762"
 	    Block {
 	      BlockType		      Inport
 	      Name		      "constraints"
@@ -24105,7 +24209,7 @@ Model {
 	  Variant		  off
 	  System {
 	    Name		    "xCom"
-	    Location		    [38, 36, 1884, 1051]
+	    Location		    [8, 20, 1863, 1056]
 	    Open		    off
 	    ModelBrowserVisibility  off
 	    ModelBrowserWidth	    200
@@ -24117,7 +24221,7 @@ Model {
 	    TiledPaperMargins	    [0.500000, 0.500000, 0.500000, 0.500000]
 	    TiledPageScale	    1
 	    ShowPageBoundaries	    off
-	    ZoomFactor		    "446"
+	    ZoomFactor		    "443"
 	    Block {
 	      BlockType		      Inport
 	      Name		      "w_H_b"
@@ -24928,7 +25032,7 @@ Model {
 	    TiledPageScale	    1
 	    ShowPageBoundaries	    off
 	    ZoomFactor		    "100"
-	    SIDHighWatermark	    "3756"
+	    SIDHighWatermark	    "3762"
 	    Block {
 	      BlockType		      Inport
 	      Name		      "umin"
@@ -25344,7 +25448,7 @@ Model {
     Line {
       SrcBlock		      "controller_QP"
       SrcPort		      1
-      Points		      [45, 0]
+      Points		      [65, 0]
       Branch {
 	Points			[0, 99; 206, 0; 0, 611]
 	DstBlock		"Dump and visualize"
@@ -25358,7 +25462,7 @@ Model {
     Line {
       SrcBlock		      "controller_QP"
       SrcPort		      2
-      Points		      [212, 0; 0, 510]
+      Points		      [232, 0; 0, 510]
       DstBlock		      "Dump and visualize"
       DstPort		      2
     }
@@ -25468,14 +25572,14 @@ Model {
     Line {
       SrcBlock		      "controller_QP"
       SrcPort		      4
-      Points		      [23, 0; 0, 110]
+      Points		      [43, 0; 0, 110]
       DstBlock		      "Dump and visualize"
       DstPort		      4
     }
     Line {
       SrcBlock		      "controller_QP"
       SrcPort		      3
-      Points		      [50, 0; 0, 310]
+      Points		      [70, 0; 0, 310]
       DstBlock		      "Dump and visualize"
       DstPort		      3
     }

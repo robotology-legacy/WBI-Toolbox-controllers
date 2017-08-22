@@ -30,7 +30,6 @@ clear; clc;
 % setenv('YARP_ROBOT_NAME','iCubDarmstadt01');
 % setenv('YARP_ROBOT_NAME','icubGazeboSim');
 % setenv('YARP_ROBOT_NAME','iCubGenova05');
-% setenv('YARP_ROBOT_NAME','isaacFirstProtoGazebo');
 setenv('YARP_ROBOT_NAME','bigman');
 % setenv('YARP_ROBOT_NAME','bigman_only_legs');
 
@@ -46,6 +45,23 @@ current_ld_library_path = getenv('LD_LIBRARY_PATH');
 setenv('LD_LIBRARY_PATH',fullfile(current_ld_library_path, ':home/lucamuratore/src/codyco-superbuild/build/install/lib'));
 
 setenv('YARP_DATA_DIRS','/home/lucamuratore/src/codyco-superbuild/build/install/share/yarp:/home/lucamuratore/src/codyco-superbuild/build/install/share/iCub:/home/lucamuratore/src/codyco-superbuild/build/install/share/codyco');
+
+% calibration delta for legs joints
+newOffsets = [0.12753
+              2.554397
+              2.024109
+             -2.243889
+              1.644721
+             -0.39407
+             -0.642021
+             -0.183969
+              0.233145
+             -1.176114
+              0.866804
+              0.247708]; % [deg]
+
+% calibration delta (real - desired) 
+calibDelta = newOffsets*pi/180;
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%

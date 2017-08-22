@@ -6,7 +6,7 @@ Model {
     NumRootInports	    0
     NumRootOutports	    0
     ParameterArgumentNames  ""
-    ComputedModelVersion    "1.3125"
+    ComputedModelVersion    "1.3127"
     NumModelReferences	    0
     NumTestPointedSignals   0
     NumProvidedFunctions    0
@@ -41,7 +41,7 @@ Model {
       $ObjectID		      2
       $ClassName	      "Simulink.WindowInfo"
       IsActive		      [1]
-      Location		      [65.0, 24.0, 1855.0, 1056.0]
+      Location		      [58.0, 20.0, 1855.0, 1036.0]
       Object {
 	$PropName		"ModelBrowserInfo"
 	$ObjectID		3
@@ -63,11 +63,11 @@ Model {
 	$ObjectID		5
 	$ClassName		"Simulink.EditorInfo"
 	IsActive		[1]
-	ViewObjType		"SimulinkTopLevel"
-	LoadSaveID		"0"
-	Extents			[1821.0, 911.0]
-	ZoomFactor		[0.88654618473895586]
-	Offset			[115.48074745186864, 119.20838052095132]
+	ViewObjType		"SimulinkSubsys"
+	LoadSaveID		"2087"
+	Extents			[1801.0, 845.0]
+	ZoomFactor		[0.693980147881768]
+	Offset			[-1050.1734877326564, 2356.6929594966159]
       }
       Object {
 	$PropName		"DockComponentsInfo"
@@ -87,22 +87,22 @@ Model {
       "AAAAAAA+wAAABYARABvAGMAawBXAGkAZABnAGUAdAA0AAAAAAD/////AAAAAAAAAAD7AAAAUgBHAEwAVQBFADIAIAB0AHIAZQBlACAAYwBvAG0Ac"
       "ABvAG4AZQBuAHQALwBHAEwAVQBFADIAIAB0AHIAZQBlACAAYwBvAG0AcABvAG4AZQBuAHQAAAAAAP////8AAABeAP///wAAAAEAAAAAAAAAAPwCA"
       "AAAAfsAAABUAEcATABVAEUAMgA6AFAAcgBvAHAAZQByAHQAeQBJAG4AcwBwAGUAYwB0AG8AcgAvAFAAcgBvAHAAZQByAHQAeQAgAEkAbgBzAHAAZ"
-      "QBjAHQAbwByAAAAAAD/////AAAAKAD///8AAAc/AAADyQAAAAEAAAACAAAAAQAAAAL8AAAAAQAAAAIAAAAP/////wAAAAAA/////wAAAAAAAAAA/"
+      "QBjAHQAbwByAAAAAAD/////AAAAKAD///8AAAcrAAADhwAAAAEAAAACAAAAAQAAAAL8AAAAAQAAAAIAAAAP/////wAAAAAA/////wAAAAAAAAAA/"
       "////wEAAAAA/////wAAAAAAAAAA/////wAAAAAA/////wAAAAAAAAAA/////wAAAAAA/////wAAAAAAAAAA/////wAAAAAA/////wAAAAAAAAAA/"
       "////wEAAACA/////wAAAAAAAAAA/////wEAAADo/////wAAAAAAAAAA/////wAAAAAA/////wAAAAAAAAAA/////wEAAAFo/////wAAAAAAAAAA/"
       "////wAAAAAA/////wAAAAAAAAAA/////wAAAAAA/////wAAAAAAAAAA/////wAAAAAA/////wAAAAAAAAAA/////wEAAANR/////wAAAAAAAAAA/"
-      "////wAAAAAA/////wAAAAAAAAAA/////wAAAAAA/////wAAAAAAAAAA"
+      "////wEAAAOD/////wAAAAAAAAAA/////wAAAAAA/////wAAAAAAAAAA"
     }
   }
   Created		  "Tue Feb 18 10:13:36 2014"
   Creator		  "daniele"
   UpdateHistory		  "UpdateHistoryNever"
   ModifiedByFormat	  "%<Auto>"
-  LastModifiedBy	  "gnava"
+  LastModifiedBy	  "leo"
   ModifiedDateFormat	  "%<Auto>"
-  LastModifiedDate	  "Tue Mar 28 15:27:03 2017"
-  RTWModifiedTimeStamp	  412615614
-  ModelVersionFormat	  "1.%<AutoIncrement:3125>"
+  LastModifiedDate	  "Tue Aug 22 17:51:29 2017"
+  RTWModifiedTimeStamp	  425325077
+  ModelVersionFormat	  "1.%<AutoIncrement:3127>"
   ConfigurationManager	  "none"
   SampleTimeColors	  off
   SampleTimeAnnotations	  off
@@ -1206,8 +1206,8 @@ Model {
   }
   System {
     Name		    "torqueBalancingR2016bS88"
-    Location		    [65, 24, 1920, 1080]
-    Open		    on
+    Location		    [58, 20, 1913, 1056]
+    Open		    off
     ModelBrowserVisibility  off
     ModelBrowserWidth	    200
     ScreenColor		    "white"
@@ -1218,9 +1218,9 @@ Model {
     TiledPaperMargins	    [0.500000, 0.500000, 0.500000, 0.500000]
     TiledPageScale	    1
     ShowPageBoundaries	    off
-    ZoomFactor		    "89"
+    ZoomFactor		    "82"
     ReportName		    "simulink-default.rpt"
-    SIDHighWatermark	    "3756"
+    SIDHighWatermark	    "3762"
     Block {
       BlockType		      SubSystem
       Name		      "DesValues"
@@ -1234,8 +1234,8 @@ Model {
       Variant		      off
       System {
 	Name			"DesValues"
-	Location		[65, 24, 1920, 1080]
-	Open			off
+	Location		[58, 20, 1913, 1056]
+	Open			on
 	ModelBrowserVisibility	off
 	ModelBrowserWidth	200
 	ScreenColor		"white"
@@ -1246,7 +1246,7 @@ Model {
 	TiledPaperMargins	[0.500000, 0.500000, 0.500000, 0.500000]
 	TiledPageScale		1
 	ShowPageBoundaries	off
-	ZoomFactor		"71"
+	ZoomFactor		"69"
 	Block {
 	  BlockType		  Reference
 	  Name			  "Compare\nTo Zero"
@@ -1393,6 +1393,17 @@ Model {
 	  }
 	}
 	Block {
+	  BlockType		  Demux
+	  Name			  "Demux1"
+	  SID			  "3759"
+	  Ports			  [1, 2]
+	  Position		  [-825, 3343, -820, 3452]
+	  ZOrder		  706
+	  ShowName		  off
+	  Outputs		  "[13;12]"
+	  DisplayOption		  "bar"
+	}
+	Block {
 	  BlockType		  Switch
 	  Name			  "External/Internal CoM references"
 	  SID			  "3755"
@@ -1407,7 +1418,7 @@ Model {
 	  Name			  "Get Estimate"
 	  SID			  "2692"
 	  Ports			  [0, 1]
-	  Position		  [-990, 3307, -910, 3343]
+	  Position		  [-1030, 3382, -950, 3418]
 	  ZOrder		  638
 	  BackgroundColor	  "[0.513700, 0.851000, 0.670600]"
 	  ShowName		  off
@@ -3608,6 +3619,15 @@ Model {
 	  }
 	}
 	Block {
+	  BlockType		  Constant
+	  Name			  "Kinematic calibration correction"
+	  SID			  "3760"
+	  Position		  [-788, 3500, -672, 3530]
+	  ZOrder		  705
+	  BlockRotation		  270
+	  Value			  "calibDelta"
+	}
+	Block {
 	  BlockType		  Logic
 	  Name			  "Logical\nOperator1"
 	  SID			  "3270"
@@ -3725,6 +3745,17 @@ Model {
 	  ZOrder		  604
 	  ShowName		  off
 	  Inputs		  "10"
+	  DisplayOption		  "bar"
+	}
+	Block {
+	  BlockType		  Mux
+	  Name			  "Mux4"
+	  SID			  "3761"
+	  Ports			  [2, 1]
+	  Position		  [-635, 3343, -630, 3452]
+	  ZOrder		  707
+	  ShowName		  off
+	  Inputs		  "2"
 	  DisplayOption		  "bar"
 	}
 	Block {
@@ -4396,7 +4427,6 @@ Model {
 	      ZOrder		      36
 	      SrcBlock		      "Gain"
 	      SrcPort		      1
-	      Points		      [110, 0]
 	      DstBlock		      "DoFs converter1"
 	      DstPort		      1
 	    }
@@ -16829,6 +16859,20 @@ Model {
 	  }
 	}
 	Block {
+	  BlockType		  Sum
+	  Name			  "Sum"
+	  SID			  "3762"
+	  Ports			  [2, 1]
+	  Position		  [-740, 3415, -720, 3435]
+	  ZOrder		  704
+	  ShowName		  off
+	  IconShape		  "round"
+	  Inputs		  "|++"
+	  InputSameDT		  off
+	  OutDataTypeStr	  "Inherit: Inherit via internal rule"
+	  SaturateOnIntegerOverflow off
+	}
+	Block {
 	  BlockType		  Switch
 	  Name			  "Switch2"
 	  SID			  "2245"
@@ -17599,32 +17643,6 @@ Model {
 	  }
 	}
 	Line {
-	  ZOrder		  96
-	  SrcBlock		  "Get Estimate"
-	  SrcPort		  1
-	  Points		  [323, 0]
-	  Branch {
-	    ZOrder		    97
-	    Points		    [0, -340]
-	    Branch {
-	      ZOrder		      98
-	      Points		      [0, -265]
-	      DstBlock		      "State Machine"
-	      DstPort		      1
-	    }
-	    Branch {
-	      ZOrder		      99
-	      DstBlock		      "Internal coordinator"
-	      DstPort		      1
-	    }
-	  }
-	  Branch {
-	    ZOrder		    100
-	    DstBlock		    "State Machine Walking"
-	    DstPort		    5
-	  }
-	}
-	Line {
 	  ZOrder		  101
 	  SrcBlock		  "State Machine"
 	  SrcPort		  9
@@ -17762,6 +17780,67 @@ Model {
 	    DstPort		    1
 	  }
 	}
+	Line {
+	  ZOrder		  258
+	  SrcBlock		  "Mux4"
+	  SrcPort		  1
+	  Points		  [191, 0; 0, -75]
+	  Branch {
+	    ZOrder		    244
+	    Points		    [0, -340]
+	    Branch {
+	      ZOrder		      247
+	      DstBlock		      "Internal coordinator"
+	      DstPort		      1
+	    }
+	    Branch {
+	      ZOrder		      246
+	      Points		      [0, -265]
+	      DstBlock		      "State Machine"
+	      DstPort		      1
+	    }
+	  }
+	  Branch {
+	    ZOrder		    243
+	    DstBlock		    "State Machine Walking"
+	    DstPort		    5
+	  }
+	}
+	Line {
+	  ZOrder		  249
+	  SrcBlock		  "Kinematic calibration correction"
+	  SrcPort		  1
+	  DstBlock		  "Sum"
+	  DstPort		  2
+	}
+	Line {
+	  ZOrder		  257
+	  SrcBlock		  "Get Estimate"
+	  SrcPort		  1
+	  DstBlock		  "Demux1"
+	  DstPort		  1
+	}
+	Line {
+	  ZOrder		  251
+	  SrcBlock		  "Demux1"
+	  SrcPort		  2
+	  DstBlock		  "Sum"
+	  DstPort		  1
+	}
+	Line {
+	  ZOrder		  252
+	  SrcBlock		  "Demux1"
+	  SrcPort		  1
+	  DstBlock		  "Mux4"
+	  DstPort		  1
+	}
+	Line {
+	  ZOrder		  256
+	  SrcBlock		  "Sum"
+	  SrcPort		  1
+	  DstBlock		  "Mux4"
+	  DstPort		  2
+	}
       }
     }
     Block {
@@ -17775,7 +17854,7 @@ Model {
       Variant		      off
       System {
 	Name			"Dump and visualize"
-	Location		[65, 24, 1920, 1080]
+	Location		[58, 20, 1913, 1056]
 	Open			off
 	ModelBrowserVisibility	off
 	ModelBrowserWidth	200
@@ -17787,7 +17866,7 @@ Model {
 	TiledPaperMargins	[0.500000, 0.500000, 0.500000, 0.500000]
 	TiledPageScale		1
 	ShowPageBoundaries	off
-	ZoomFactor		"107"
+	ZoomFactor		"99"
 	Block {
 	  BlockType		  Inport
 	  Name			  "tauDesired"
@@ -19609,7 +19688,6 @@ Model {
 	  ZOrder		  129
 	  SrcBlock		  "Gain"
 	  SrcPort		  1
-	  Points		  [110, 0]
 	  DstBlock		  "DoFs converter3"
 	  DstPort		  1
 	}
@@ -19625,40 +19703,36 @@ Model {
 	Line {
 	  Name			  "torso"
 	  ZOrder		  124
-	  Labels		  [2, 1]
+	  Labels		  [-1, 0]
 	  SrcBlock		  "DoFs converter3"
 	  SrcPort		  1
-	  Points		  [0, 0]
 	  DstBlock		  "qj"
 	  DstPort		  1
 	}
 	Line {
 	  Name			  "left_arm"
 	  ZOrder		  125
-	  Labels		  [2, 1]
+	  Labels		  [-1, 0]
 	  SrcBlock		  "DoFs converter3"
 	  SrcPort		  2
-	  Points		  [0, 0]
 	  DstBlock		  "qj"
 	  DstPort		  2
 	}
 	Line {
 	  Name			  "left_leg"
 	  ZOrder		  127
-	  Labels		  [2, 1]
+	  Labels		  [-1, 0]
 	  SrcBlock		  "DoFs converter3"
 	  SrcPort		  4
-	  Points		  [0, 0]
 	  DstBlock		  "qj"
 	  DstPort		  4
 	}
 	Line {
 	  Name			  "right_arm"
 	  ZOrder		  126
-	  Labels		  [2, 1]
+	  Labels		  [-1, 0]
 	  SrcBlock		  "DoFs converter3"
 	  SrcPort		  3
-	  Points		  [0, 0]
 	  DstBlock		  "qj"
 	  DstPort		  3
 	}
@@ -19764,7 +19838,6 @@ Model {
 	  Points		  [31, 0]
 	  Branch {
 	    ZOrder		    111
-	    Points		    [199, 0]
 	    DstBlock		    "DoFs converter"
 	    DstPort		    1
 	  }
@@ -19804,40 +19877,36 @@ Model {
 	Line {
 	  Name			  "torso"
 	  ZOrder		  108
-	  Labels		  [2, 1]
+	  Labels		  [-1, 0]
 	  SrcBlock		  "DoFs converter"
 	  SrcPort		  1
-	  Points		  [0, 0]
 	  DstBlock		  "tauDes"
 	  DstPort		  1
 	}
 	Line {
 	  Name			  "left_arm"
 	  ZOrder		  110
-	  Labels		  [2, 1]
+	  Labels		  [-1, 0]
 	  SrcBlock		  "DoFs converter"
 	  SrcPort		  2
-	  Points		  [0, 0]
 	  DstBlock		  "tauDes"
 	  DstPort		  2
 	}
 	Line {
 	  Name			  "left_leg"
 	  ZOrder		  107
-	  Labels		  [2, 1]
+	  Labels		  [-1, 0]
 	  SrcBlock		  "DoFs converter"
 	  SrcPort		  4
-	  Points		  [0, 0]
 	  DstBlock		  "tauDes"
 	  DstPort		  4
 	}
 	Line {
 	  Name			  "right_arm"
 	  ZOrder		  106
-	  Labels		  [2, 1]
+	  Labels		  [-1, 0]
 	  SrcBlock		  "DoFs converter"
 	  SrcPort		  3
-	  Points		  [0, 0]
 	  DstBlock		  "tauDes"
 	  DstPort		  3
 	}
@@ -19853,40 +19922,36 @@ Model {
 	Line {
 	  Name			  "torso"
 	  ZOrder		  116
-	  Labels		  [2, 1]
+	  Labels		  [-1, 0]
 	  SrcBlock		  "DoFs converter1"
 	  SrcPort		  1
-	  Points		  [0, 0]
 	  DstBlock		  "tauError"
 	  DstPort		  1
 	}
 	Line {
 	  Name			  "left_arm"
 	  ZOrder		  113
-	  Labels		  [2, 1]
+	  Labels		  [-1, 0]
 	  SrcBlock		  "DoFs converter1"
 	  SrcPort		  2
-	  Points		  [0, 0]
 	  DstBlock		  "tauError"
 	  DstPort		  2
 	}
 	Line {
 	  Name			  "left_leg"
 	  ZOrder		  115
-	  Labels		  [2, 1]
+	  Labels		  [-1, 0]
 	  SrcBlock		  "DoFs converter1"
 	  SrcPort		  4
-	  Points		  [0, 0]
 	  DstBlock		  "tauError"
 	  DstPort		  4
 	}
 	Line {
 	  Name			  "right_arm"
 	  ZOrder		  114
-	  Labels		  [2, 1]
+	  Labels		  [-1, 0]
 	  SrcBlock		  "DoFs converter1"
 	  SrcPort		  3
-	  Points		  [0, 0]
 	  DstBlock		  "tauError"
 	  DstPort		  3
 	}
@@ -19912,40 +19977,36 @@ Model {
 	Line {
 	  Name			  "torso"
 	  ZOrder		  119
-	  Labels		  [2, 1]
+	  Labels		  [-1, 0]
 	  SrcBlock		  "DoFs converter2"
 	  SrcPort		  1
-	  Points		  [0, 0]
 	  DstBlock		  "tauMeasured"
 	  DstPort		  1
 	}
 	Line {
 	  Name			  "left_arm"
 	  ZOrder		  121
-	  Labels		  [2, 1]
+	  Labels		  [-1, 0]
 	  SrcBlock		  "DoFs converter2"
 	  SrcPort		  2
-	  Points		  [0, 0]
 	  DstBlock		  "tauMeasured"
 	  DstPort		  2
 	}
 	Line {
 	  Name			  "left_leg"
 	  ZOrder		  118
-	  Labels		  [2, 1]
+	  Labels		  [-1, 0]
 	  SrcBlock		  "DoFs converter2"
 	  SrcPort		  4
-	  Points		  [0, 0]
 	  DstBlock		  "tauMeasured"
 	  DstPort		  4
 	}
 	Line {
 	  Name			  "right_arm"
 	  ZOrder		  120
-	  Labels		  [2, 1]
+	  Labels		  [-1, 0]
 	  SrcBlock		  "DoFs converter2"
 	  SrcPort		  3
-	  Points		  [0, 0]
 	  DstBlock		  "tauMeasured"
 	  DstPort		  3
 	}
@@ -19972,7 +20033,6 @@ Model {
 	  ZOrder		  135
 	  SrcBlock		  "Gain3"
 	  SrcPort		  1
-	  Points		  [95, 0]
 	  DstBlock		  "DoFs converter4"
 	  DstPort		  1
 	}
@@ -19988,40 +20048,36 @@ Model {
 	Line {
 	  Name			  "torso"
 	  ZOrder		  132
-	  Labels		  [2, 1]
+	  Labels		  [-1, 0]
 	  SrcBlock		  "DoFs converter4"
 	  SrcPort		  1
-	  Points		  [0, 0]
 	  DstBlock		  "qjDes"
 	  DstPort		  1
 	}
 	Line {
 	  Name			  "left_arm"
 	  ZOrder		  134
-	  Labels		  [2, 1]
+	  Labels		  [-1, 0]
 	  SrcBlock		  "DoFs converter4"
 	  SrcPort		  2
-	  Points		  [0, 0]
 	  DstBlock		  "qjDes"
 	  DstPort		  2
 	}
 	Line {
 	  Name			  "left_leg"
 	  ZOrder		  133
-	  Labels		  [2, 1]
+	  Labels		  [-1, 0]
 	  SrcBlock		  "DoFs converter4"
 	  SrcPort		  4
-	  Points		  [0, 0]
 	  DstBlock		  "qjDes"
 	  DstPort		  4
 	}
 	Line {
 	  Name			  "right_arm"
 	  ZOrder		  131
-	  Labels		  [2, 1]
+	  Labels		  [-1, 0]
 	  SrcBlock		  "DoFs converter4"
 	  SrcPort		  3
-	  Points		  [0, 0]
 	  DstBlock		  "qjDes"
 	  DstPort		  3
 	}
@@ -20029,7 +20085,6 @@ Model {
 	  ZOrder		  141
 	  SrcBlock		  "Gain4"
 	  SrcPort		  1
-	  Points		  [110, 0]
 	  DstBlock		  "DoFs converter5"
 	  DstPort		  1
 	}
@@ -20055,30 +20110,28 @@ Model {
 	Line {
 	  Name			  "torso"
 	  ZOrder		  139
-	  Labels		  [2, 1]
+	  Labels		  [-1, 0]
 	  SrcBlock		  "DoFs converter5"
 	  SrcPort		  1
-	  Points		  [0, 0]
 	  DstBlock		  "qj_err"
 	  DstPort		  1
 	}
 	Line {
 	  Name			  "left_arm"
 	  ZOrder		  138
-	  Labels		  [2, 1]
+	  Labels		  [-1, 0]
 	  SrcBlock		  "DoFs converter5"
 	  SrcPort		  2
-	  Points		  [0, 0]
 	  DstBlock		  "qj_err"
 	  DstPort		  2
 	}
 	Line {
 	  Name			  "left_leg"
 	  ZOrder		  137
-	  Labels		  [2, 1]
+	  Labels		  [-1, 0]
 	  SrcBlock		  "DoFs converter5"
 	  SrcPort		  4
-	  Points		  [0, 0; 237, 0]
+	  Points		  [237, 0]
 	  Branch {
 	    ZOrder		    67
 	    Points		    [0, 90]
@@ -20094,10 +20147,9 @@ Model {
 	Line {
 	  Name			  "right_arm"
 	  ZOrder		  140
-	  Labels		  [2, 1]
+	  Labels		  [-1, 0]
 	  SrcBlock		  "DoFs converter5"
 	  SrcPort		  3
-	  Points		  [0, 0]
 	  DstBlock		  "qj_err"
 	  DstPort		  3
 	}
@@ -20666,13 +20718,13 @@ Model {
       Name		      "controller_QP"
       SID		      "2355"
       Ports		      [13, 4]
-      Position		      [1095, 171, 1470, 1039]
+      Position		      [1075, 171, 1450, 1039]
       ZOrder		      542
       RequestExecContextInheritance off
       Variant		      off
       System {
 	Name			"controller_QP"
-	Location		[65, 24, 1920, 1080]
+	Location		[8, 20, 1863, 1056]
 	Open			off
 	ModelBrowserVisibility	off
 	ModelBrowserWidth	200
@@ -20684,7 +20736,7 @@ Model {
 	TiledPaperMargins	[0.500000, 0.500000, 0.500000, 0.500000]
 	TiledPageScale		1
 	ShowPageBoundaries	off
-	ZoomFactor		"54"
+	ZoomFactor		"50"
 	Block {
 	  BlockType		  Inport
 	  Name			  "impedances"
@@ -21093,7 +21145,7 @@ Model {
 	  Variant		  off
 	  System {
 	    Name		    "QP"
-	    Location		    [0, 23, 1936, 1131]
+	    Location		    [58, 20, 1913, 1056]
 	    Open		    off
 	    ModelBrowserVisibility  off
 	    ModelBrowserWidth	    200
@@ -21105,7 +21157,7 @@ Model {
 	    TiledPaperMargins	    [0.500000, 0.500000, 0.500000, 0.500000]
 	    TiledPageScale	    1
 	    ShowPageBoundaries	    off
-	    ZoomFactor		    "189"
+	    ZoomFactor		    "179"
 	    Block {
 	      BlockType		      Inport
 	      Name		      "LEFT_RIGHT_FOOT_IN_CONTACT"
@@ -21358,7 +21410,7 @@ Model {
 	      BlockType		      Outport
 	      Name		      "f0OneFoot"
 	      SID		      "2399"
-	      Position		      [1180, 853, 1210, 867]
+	      Position		      [1160, 853, 1190, 867]
 	      ZOrder		      401
 	      IconDisplay	      "Port number"
 	    }
@@ -21366,7 +21418,7 @@ Model {
 	      BlockType		      Outport
 	      Name		      "f0TwoFeet"
 	      SID		      "2400"
-	      Position		      [1180, 633, 1210, 647]
+	      Position		      [1160, 633, 1190, 647]
 	      ZOrder		      402
 	      Port		      "2"
 	      IconDisplay	      "Port number"
@@ -21545,7 +21597,7 @@ Model {
 	  Variant		  off
 	  System {
 	    Name		    "integralOf Hw1"
-	    Location		    [65, 24, 1920, 1080]
+	    Location		    [8, 20, 1863, 1056]
 	    Open		    off
 	    ModelBrowserVisibility  off
 	    ModelBrowserWidth	    200
@@ -21557,7 +21609,7 @@ Model {
 	    TiledPaperMargins	    [0.500000, 0.500000, 0.500000, 0.500000]
 	    TiledPageScale	    1
 	    ShowPageBoundaries	    off
-	    ZoomFactor		    "146"
+	    ZoomFactor		    "144"
 	    Block {
 	      BlockType		      Inport
 	      Name		      "qjDes"
@@ -23776,7 +23828,7 @@ Model {
 	  Variant		  off
 	  System {
 	    Name		    "xCom"
-	    Location		    [38, 36, 1884, 1051]
+	    Location		    [8, 20, 1863, 1056]
 	    Open		    off
 	    ModelBrowserVisibility  off
 	    ModelBrowserWidth	    200
@@ -23788,7 +23840,7 @@ Model {
 	    TiledPaperMargins	    [0.500000, 0.500000, 0.500000, 0.500000]
 	    TiledPageScale	    1
 	    ShowPageBoundaries	    off
-	    ZoomFactor		    "446"
+	    ZoomFactor		    "443"
 	    Block {
 	      BlockType		      Inport
 	      Name		      "w_H_b"
@@ -25101,7 +25153,7 @@ Model {
       ZOrder		      8
       SrcBlock		      "controller_QP"
       SrcPort		      1
-      Points		      [45, 0]
+      Points		      [65, 0]
       Branch {
 	ZOrder			9
 	Points			[0, 99; 206, 0; 0, 611]
@@ -25118,7 +25170,7 @@ Model {
       ZOrder		      11
       SrcBlock		      "controller_QP"
       SrcPort		      2
-      Points		      [212, 0; 0, 510]
+      Points		      [232, 0; 0, 510]
       DstBlock		      "Dump and visualize"
       DstPort		      2
     }
@@ -25250,7 +25302,7 @@ Model {
       ZOrder		      31
       SrcBlock		      "controller_QP"
       SrcPort		      4
-      Points		      [23, 0; 0, 110]
+      Points		      [43, 0; 0, 110]
       DstBlock		      "Dump and visualize"
       DstPort		      4
     }
@@ -25258,7 +25310,7 @@ Model {
       ZOrder		      32
       SrcBlock		      "controller_QP"
       SrcPort		      3
-      Points		      [50, 0; 0, 310]
+      Points		      [70, 0; 0, 310]
       DstBlock		      "Dump and visualize"
       DstPort		      3
     }
