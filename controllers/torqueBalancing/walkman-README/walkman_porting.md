@@ -27,7 +27,7 @@ this folder is, at the current state, in a private repository in git. This becau
 
 ### Working on the configuration files for yarpWholeBodyInterface, wholeBodyDynamics3 and torqueBalancing
 
-- torqueBalancing: I created a branch in [WBIToolboxControllers](https://github.com/robotology-playground/WBI-Toolbox-controllers) named `walkman`. Here I added the walkman platform to the list of  available robots. Furthermore, I modified the [codyco-modules](https://github.com/robotology/codyco-modules) repository. In the `torqueBalancing` subdirectory I created a new folder named `bigman`, containing the files:
+- torqueBalancing: I created a branch in [WBIToolboxControllers](https://github.com/robotology-playground/WBI-Toolbox-controllers) named `walkman@rbcs`. Here I added the walkman platform to the list of  available robots. Furthermore, I modified the [codyco-modules](https://github.com/robotology/codyco-modules) repository. In the `torqueBalancing` subdirectory I created a new folder named `bigman`, containing the files:
  
  1) homePoseBalancingTwoFeet.ini: this file contains the home position for walkman joints. This home is coincident with the initial position in Gazebo. Other three similar home positions files have been created.
 
