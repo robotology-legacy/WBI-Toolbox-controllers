@@ -63,6 +63,14 @@ newOffsets = [0.12753
 % calibration delta (real - desired) 
 calibDelta = newOffsets*pi/180;
 
+% dynamic calibration parameters
+USE_h_ONLY = false;
+tSwitch    = [10 20 30];
+tEnd       = 40;
+
+% ONLY FOR SIMULATION
+calibDelta = 0.*calibDelta;
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -96,11 +104,9 @@ CONFIG.SCOPES.GAIN_SCHE_INFO=false;
 CONFIG.SCOPES.MAIN         = false;
 CONFIG.SCOPES.QP           = false;
 
-
 % CONFIG.CHECK_LIMITS: if set to true, the controller will stop as soon as 
 % any of the joint limit is touched. 
 CONFIG.CHECK_LIMITS        = false;
-
 
 %% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % CONFIGURATIONS COMPLETED: loading gains and parameters for the specific robot
