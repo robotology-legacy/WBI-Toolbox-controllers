@@ -36,15 +36,15 @@ setenv('YARP_ROBOT_NAME','bigman');
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% %%%%% SET ENVIRONEMENTAL VARIABLES (only for walkman-pilot-pc) %%%%%% %%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-setenv('CODYCO_SUPERBUILD_ROOT','/home/lucamuratore/src/codyco-superbuild');
-
-current_path = getenv('PATH');
-setenv('PATH',fullfile(current_path, ':/home/lucamuratore/src/codyco-superbuild/build/install/bin'));
-
-current_ld_library_path = getenv('LD_LIBRARY_PATH');
-setenv('LD_LIBRARY_PATH',fullfile(current_ld_library_path, ':home/lucamuratore/src/codyco-superbuild/build/install/lib'));
-
-setenv('YARP_DATA_DIRS','/home/lucamuratore/src/codyco-superbuild/build/install/share/yarp:/home/lucamuratore/src/codyco-superbuild/build/install/share/iCub:/home/lucamuratore/src/codyco-superbuild/build/install/share/codyco');
+% setenv('CODYCO_SUPERBUILD_ROOT','/home/lucamuratore/src/codyco-superbuild');
+% 
+% current_path = getenv('PATH');
+% setenv('PATH',fullfile(current_path, ':/home/lucamuratore/src/codyco-superbuild/build/install/bin'));
+% 
+% current_ld_library_path = getenv('LD_LIBRARY_PATH');
+% setenv('LD_LIBRARY_PATH',fullfile(current_ld_library_path, ':home/lucamuratore/src/codyco-superbuild/build/install/lib'));
+% 
+% setenv('YARP_DATA_DIRS','/home/lucamuratore/src/codyco-superbuild/build/install/share/yarp:/home/lucamuratore/src/codyco-superbuild/build/install/share/iCub:/home/lucamuratore/src/codyco-superbuild/build/install/share/codyco');
 
 % calibration delta for legs joints
 newOffsets = [0.12753
@@ -64,9 +64,9 @@ newOffsets = [0.12753
 calibDelta = newOffsets*pi/180;
 
 % dynamic calibration parameters
-USE_h_ONLY = false;
-tSwitch    = [10 20 30];
-tEnd       = 40;
+USE_h_ONLY = true;
+tSwitch    = [10 20 30 40 50 60 70 80 90 100];
+tEnd       = tSwitch(end) + 10;
 
 % ONLY FOR SIMULATION
 calibDelta = 0.*calibDelta;
