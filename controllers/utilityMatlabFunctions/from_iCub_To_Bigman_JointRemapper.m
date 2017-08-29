@@ -1,24 +1,25 @@
 function qjRemapped = from_iCub_To_Bigman_JointRemapper(qj,ndof)
-% from_iCub_To_Bigman_JointRemapper maps the joints conventions from the
-%                                   bigman model to the iCub model. This is
-%                                   then used to set the correct joints 
-%                                   references while performing the YOGA++ 
-%                                   demo.
+% from_iCub_To_Bigman_JointRemapper
 %
-% [qjRemapped] = from_iCub_To_Bigman_JointRemapper(qj,ndof) takes as input 
-% the joint position qj and the number of DoF used for controlling the 
-% robot. The output is a vector of the same size, where some signs have been 
-% changed according to the iCub conventions.
+% this function defines a map between two different joint position vectors:
+% qj [ndof x 1] is a position vector representing the joint positions of the 
+% robot Walkman, with the signs convention of RBCS lab. qjRemapped [ndof x 1]
+% still represents the joint positions of Walkman robot, but signs convention
+% is the one used in the LOC2 team on the robot iCub. ndof is a scalar
+% representing the number of controlled robot joints. 
 %
 % Author : Gabriele Nava (gabriele.nava@iit.it)
-% Genova, October 2016
+% Genova, August 2017
 %
 
-% ------------Initialization----------------
-%% Divide the model in subsystems
+%% ------------Initialization----------------
+
+% joint vector is divided into a certain number of smaller vectors, each
+% one representing a robot part
 torso = [qj(1) qj(2) qj(3)];
 
-%% Check on the robot DoFs. Currently supported mapping: 25 DoF, 12 DoF and 23 DoF
+% check on the robot DoFs. Currently supported configurations: full controlled
+% (25 DoF), only legs (12 DoF) and no wrist pronosupination (23 DoF)
 if ndof == 23
     
     lArm  = [qj(4) qj(5) qj(6)  qj(7)];
@@ -40,10 +41,13 @@ elseif ndof == 12
 
 end
 
-%% Remapping according to the iCub conventions
+%% Remapping according to the iCub signs convention
+
+% define the vector of remapped joint positions
 qjRemapped = [];
 
 if ndof == 23 || ndof == 25
+    
     % torso: [pitch roll yaw]
     torso(2) = -torso(2);
     torso(3) = -torso(3);
@@ -71,23 +75,23 @@ if ndof == 23 || ndof == 25
     rLeg(4)   = -rLeg(4);
     rLeg(6)   = -rLeg(6);
 
-    %% New joint positions
+    % new joint positions (23-25 Dofs)
     qjRemapped = [torso,lArm,rArm,lLeg,rLeg];
 
 elseif ndof == 12
 
     % lLeg: [hip_pitch hip_roll hip_yaw knee ankle_pitch ankle_roll]
-    lLeg(1)   = -lLeg(1);
-    lLeg(4)   = -lLeg(4);
+    lLeg(1)    = -lLeg(1);
+    lLeg(4)    = -lLeg(4);
 
     % rLeg: [hip_pitch hip_roll hip_yaw knee ankle_pitch ankle_roll]
-    rLeg(1)   = -rLeg(1);
-    rLeg(2)   = -rLeg(2);
-    rLeg(3)   = -rLeg(3);
-    rLeg(4)   = -rLeg(4);
-    rLeg(6)   = -rLeg(6);
+    rLeg(1)    = -rLeg(1);
+    rLeg(2)    = -rLeg(2);
+    rLeg(3)    = -rLeg(3);
+    rLeg(4)    = -rLeg(4);
+    rLeg(6)    = -rLeg(6);
 
-    %% New joint positions
+    % new joint positions (12 Dofs)
     qjRemapped = [lLeg,rLeg];
     
 end

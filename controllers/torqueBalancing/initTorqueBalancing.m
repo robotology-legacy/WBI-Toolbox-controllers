@@ -30,9 +30,49 @@ clear; clc;
 % setenv('YARP_ROBOT_NAME','iCubDarmstadt01');
 % setenv('YARP_ROBOT_NAME','icubGazeboSim');
 % setenv('YARP_ROBOT_NAME','iCubGenova05');
-% setenv('YARP_ROBOT_NAME','isaacFirstProtoGazebo');
 setenv('YARP_ROBOT_NAME','bigman');
 % setenv('YARP_ROBOT_NAME','bigman_only_legs');
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% %%%%% SET ENVIRONEMENTAL VARIABLES (only for walkman-pilot-pc) %%%%%% %%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% setenv('CODYCO_SUPERBUILD_ROOT','/home/lucamuratore/src/codyco-superbuild');
+% 
+% current_path = getenv('PATH');
+% setenv('PATH',fullfile(current_path, ':/home/lucamuratore/src/codyco-superbuild/build/install/bin'));
+% 
+% current_ld_library_path = getenv('LD_LIBRARY_PATH');
+% setenv('LD_LIBRARY_PATH',fullfile(current_ld_library_path, ':home/lucamuratore/src/codyco-superbuild/build/install/lib'));
+% 
+% setenv('YARP_DATA_DIRS','/home/lucamuratore/src/codyco-superbuild/build/install/share/yarp:/home/lucamuratore/src/codyco-superbuild/build/install/share/iCub:/home/lucamuratore/src/codyco-superbuild/build/install/share/codyco');
+
+% calibration delta for legs joints
+newOffsets = [0.12753
+              2.554397
+              2.024109
+             -2.243889
+              1.644721
+             -0.39407
+             -0.642021
+             -0.183969
+              0.233145
+             -1.176114
+              0.866804
+              0.247708]; % [deg]
+
+% calibration delta (real - desired) 
+calibDelta = newOffsets*pi/180;
+
+% dynamic calibration parameters
+USE_h_ONLY = true;
+tSwitch    = [10 20 30 40 50 60 70 80 90 100];
+tEnd       = tSwitch(end) + 10;
+
+% ONLY FOR SIMULATION
+calibDelta = 0.*calibDelta;
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 % Simulation time in seconds
 CONFIG.SIMULATION_TIME     = inf;   
@@ -57,16 +97,17 @@ SM.SM_TYPE                   = 'YOGA';
 
 % CONFIG.SCOPES: if set to true, all visualizers for debugging are active
 CONFIG.SCOPES.ALL            = true;
+
 % You can also activate only some specific debugging scopes
-CONFIG.SCOPES.BASE_EST_IMU   = false;
-CONFIG.SCOPES.EXTWRENCHES    = false;
-CONFIG.SCOPES.GAIN_SCHE_INFO = false;
-CONFIG.SCOPES.MAIN           = false;
-CONFIG.SCOPES.QP             = false;
+CONFIG.SCOPES.BASE_EST_IMU = false;
+CONFIG.SCOPES.EXTWRENCHES  = false;
+CONFIG.SCOPES.GAIN_SCHE_INFO=false;
+CONFIG.SCOPES.MAIN         = false;
+CONFIG.SCOPES.QP           = false;
 
 % CONFIG.CHECK_LIMITS: if set to true, the controller will stop as soon as 
 % any of the joint limit is touched. 
-CONFIG.CHECK_LIMITS          = false;
+CONFIG.CHECK_LIMITS        = false;
 
 %% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % CONFIGURATIONS COMPLETED: loading gains and parameters for the specific robot
