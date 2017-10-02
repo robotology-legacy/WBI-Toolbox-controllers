@@ -20,7 +20,7 @@ function [hessianMatrix,biasVector,constraintMatrixLeftFoot,constraintMatrixRigh
                                         balancingControllerSOT(constraints, impedances, dampings, jointAngles, ...
                                                                massMatrix, biasTorques, jacobiansDotNu, poseLeftFoot, poseRightFoot, jacobians, robotVelocity, ...
                                                                desJointAngles, desiredTaskAcc, ...
-                                                               ROBOT_DOF_FOR_SIMULINK, ConstraintsMatrix, ...
+                                                               ROBOT_DOF, ConstraintsMatrix, ...
                                                                gain, CONFIG)
     %% BALANCING CONTROLLER
     %
@@ -104,7 +104,6 @@ function [hessianMatrix,biasVector,constraintMatrixLeftFoot,constraintMatrixRigh
     % towards desired values.
     %% IMPLEMENTATION
     
-    ROBOT_DOF                 = size(ROBOT_DOF_FOR_SIMULINK,1);
     S                         = [zeros(6,ROBOT_DOF);
                                  eye(ROBOT_DOF)   ];
 
@@ -114,7 +113,7 @@ function [hessianMatrix,biasVector,constraintMatrixLeftFoot,constraintMatrixRigh
     contactJacobians          = [jacobians(end-11:end-6,:)*constraints(1);
                                  jacobians(end- 5:end,  :)*constraints(2)];
                    
-    B                         = [S,contactJacobians'];
+    B                         = [S, contactJacobians'];
     tauFeedback               = diag(impedances)*(jointAngles-desJointAngles)...
                                 + diag(dampings)*robotVelocity(7:end);
                             
