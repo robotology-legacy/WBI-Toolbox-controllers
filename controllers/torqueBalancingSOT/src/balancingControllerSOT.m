@@ -108,8 +108,8 @@ function [hessianMatrix,biasVector,constraintMatrixLeftFoot,constraintMatrixRigh
     S                         = [zeros(6,ROBOT_DOF);
                                  eye(ROBOT_DOF)   ];
 
-    Storques                  = [zeros(ROBOT_DOF,12) eye(ROBOT_DOF)];
-    Sforces                   = [eye(12)             zeros(12, ROBOT_DOF)];
+    Storques                  = [eye(ROBOT_DOF) zeros(ROBOT_DOF,12)];
+    Sforces                   = [zeros(12, ROBOT_DOF) eye(12)];
     
     contactJacobians          = [jacobians(end-11:end-6,:)*constraints(1);
                                  jacobians(end- 5:end,  :)*constraints(2)];
