@@ -49,7 +49,7 @@ CONFIG.SIMULATION_TIME     = inf;
 %                joints. The associated configuration parameters can be 
 %                found under the folder
 %
-%               robots/YARP_ROBOT_NAME/initRegGen.m
+%               robots/YARP_ROBOT_NAME/initRefGen.m
 % 
 % 'WALKING': under development.
 SM.SM_TYPE                 = 'YOGA';

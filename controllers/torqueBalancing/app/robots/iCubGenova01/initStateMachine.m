@@ -71,8 +71,8 @@ sm.demoOnlyRightFoot             = false;
 sm.yogaAlsoOnRightFoot           = true;
 sm.yogaInLoop                    = false;
 sm.com.threshold                 = 0.01;
-sm.wrench.thresholdContactOn     =  25;     % Force threshole above which contact is considered stable
-sm.wrench.thresholdContactOff    =  85;     % Force threshole under which contact is considered off
+sm.wrench.thresholdContactOn     =  25;     % Force threshold above which contact is considered stable
+sm.wrench.thresholdContactOff    =  85;     % Force threshold under which contact is considered off
 sm.joints                        = struct;
 sm.joints.thresholdNotInContact  =  5;      % Degrees
 sm.joints.thresholdInContact     = 50;      % Degrees
@@ -110,7 +110,7 @@ sm.com.states      = [0.0,  0.01,0.511;   %% state ==  1  TWO FEET BALANCING NOT
                       0.0,  0.00,0.511;   %% state ==  5  PREPARING FOR SWITCHING
                       0.0, -0.09,0.511;   %% state ==  6  LOOKING FOR CONTACT 
                       0.0, -0.09,0.511;   %% state ==  7  TRANSITION INIT POSITION: THIS REFERENCE IS IGNORED
-                      % FROM NOW ON, THE REFERENCE ARE ALWAYS DELTAS W.R.T.
+                      % FROM NOW ON, THE REFERENCE IS ALWAYS DELTAS W.R.T.
                       % THE POSITION OF THE RIGHT FOOT
                       0.0,  0.00,0.0;   %% state ==  8  COM TRANSITION TO RIGHT FOOT
                       0.0,  0.00,0.0;   %% state ==  9  RIGHT FOOT BALANCING 
