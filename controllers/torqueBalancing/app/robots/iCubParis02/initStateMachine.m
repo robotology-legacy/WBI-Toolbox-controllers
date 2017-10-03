@@ -89,7 +89,7 @@ sm.com.states      = [0.0,  0.01,0.511;   %% state ==  1  TWO FEET BALANCING NOT
                       0.0, -0.00,0.511;   %% state ==  5  PREPARING FOR SWITCHING
                       0.0, -0.09,0.511;   %% state ==  6  LOOKING FOR CONTACT 
                       0.0, -0.09,0.511;   %% state ==  7  TRANSITION INIT POSITION: THIS REFERENCE IS IGNORED
-                      % FROM NOW ON, THE REFERENCE ARE ALWAYS DELTAS W.R.T.
+                      % FROM NOW ON, THE REFERENCE IS ALWAYS DELTAS W.R.T.
                       % THE POSITION OF THE RIGHT FOOT
                       0.0,  0.00,0.0;   %% state ==  8  COM TRANSITION TO RIGHT FOOT
                       0.0, -0.03,0.0;   %% state ==  9  RIGHT FOOT BALANCING 
