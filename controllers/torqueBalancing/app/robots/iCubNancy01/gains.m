@@ -37,7 +37,7 @@ if (sum(CONFIG.LEFT_RIGHT_FOOT_IN_CONTACT) == 2)
     gain.PAngularMomentum     = 5 ;
     gain.DAngularMomentum     = 2*sqrt(gain.PAngularMomentum);
 
-    % Impadances acting in the null space of the desired contact forces 
+    % Impedances acting in the null space of the desired contact forces 
 
     impTorso            = [10   10   20
                             0    0    0]; 
@@ -72,7 +72,7 @@ if (sum(CONFIG.LEFT_RIGHT_FOOT_IN_CONTACT) == 1)
     gain.PAngularMomentum     = 1 ;
     gain.DAngularMomentum     = 1 ;
 
-    % Impadances acting in the null space of the desired contact forces 
+    % Impedances acting in the null space of the desired contact forces 
 
     
     intTorso            = [0   0    0]; 
