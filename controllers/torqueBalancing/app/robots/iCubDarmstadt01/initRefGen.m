@@ -1,7 +1,7 @@
 CONFIG.DEMO_MOVEMENTS      = false; % Either true or false 
 
 references.com.points                  = 0;
-references.com.noOscillationTime       = 10;    % that the robot waits before starting the left-and-righ
+references.com.noOscillationTime       = 10;    % that the robot waits before starting the left-and-right
  
 references.joints.points               = 0;
 
