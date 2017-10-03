@@ -87,8 +87,8 @@ sm.yogaInLoop                    = false;
 
 sm.stateAt0                      = 1;
 sm.com.threshold                 = 0.01;
-sm.wrench.thresholdContactOn     =  50;     % Force threshole above which contact is considered stable
-sm.wrench.thresholdContactOff    = 100;     % Force threshole under which contact is considered off
+sm.wrench.thresholdContactOn     =  50;     % Force threshold above which contact is considered stable
+sm.wrench.thresholdContactOff    = 100;     % Force threshold under which contact is considered off
 sm.joints                        = struct;
 sm.joints.thresholdNotInContact  =  5;      % Degrees
 sm.joints.thresholdInContact     = 50;      % Degrees
@@ -125,7 +125,7 @@ sm.com.states      = [0.0,  0.01,0.0;   %% state ==  1  TWO FEET BALANCING NOT U
                       0.0,  0.00,0.0;   %% state ==  5  PREPARING FOR SWITCHING
                       0.0, -0.09,0.0;   %% state ==  6  LOOKING FOR CONTACT 
                       0.0,  0.00,0.0;   %% state ==  7  TRANSITION INIT POSITION: DELTAS W.R.T. CoM_0
-                      % FROM NOW ON, THE REFERENCE ARE ALWAYS DELTAS W.R.T.
+                      % FROM NOW ON, THE REFERENCE IS ALWAYS DELTAS W.R.T.
                       % THE POSITION OF THE RIGHT FOOT
                       0.0,  0.00,0.0;   %% state ==  8  COM TRANSITION TO RIGHT FOOT
                       0.0,  0.00,0.0;   %% state ==  9  RIGHT FOOT BALANCING 
@@ -436,7 +436,7 @@ if CONFIG.ONSOFTCARPET && strcmpi(SM.SM_TYPE, 'YOGA')
                           0.01, 0.00,0.0;   %% state ==  5  PREPARING FOR SWITCHING
                           0.015, -0.09,0.0;   %% state ==  6  LOOKING FOR CONTACT 
                           0.015,  0.0 ,0.0;   %% state ==  7  TRANSITION INIT POSITION: DELTAS W.R.T. CoM_0
-                          % FROM NOW ON, THE REFERENCE ARE ALWAYS DELTAS W.R.T.
+                          % FROM NOW ON, THE REFERENCE IS ALWAYS DELTAS W.R.T.
                           % THE POSITION OF THE RIGHT FOOT
                           0.0,  0.00,0.0;   %% state ==  8  COM TRANSITION TO RIGHT FOOT
                           0.0,  0.00,0.0;   %% state ==  9  RIGHT FOOT BALANCING 
@@ -461,10 +461,10 @@ if CONFIG.ONSOFTCARPET && strcmpi(SM.SM_TYPE, 'YOGA')
 
     if sm.demoOnlyRightFoot
         sm.wrench.thresholdContactOff    = 120; 
-        sm.wrench.thresholdContactOn     = 50;     % Force threshole above which contact is considered stable
+        sm.wrench.thresholdContactOn     = 50;     % Force threshold above which contact is considered stable
     else
-        sm.wrench.thresholdContactOff    = 100;     % Force threshole under which contact is considered off
-        sm.wrench.thresholdContactOn     = 50;     % Force threshole above which contact is considered stable
+        sm.wrench.thresholdContactOff    = 100;     % Force threshold under which contact is considered off
+        sm.wrench.thresholdContactOn     = 50;     % Force threshold above which contact is considered stable
     end
     
     q3 =        [-0.0852,-0.4273,0.0821,...
