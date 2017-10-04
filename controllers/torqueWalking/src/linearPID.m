@@ -1,0 +1,6 @@
+function desLinAcc = linearPID(pos,vel,desPosVelAcc,gainsPD)
+                                              
+    desLinAcc = desPosVelAcc(:,3) ...
+                - diag(gainsPD(:,1))*(pos-desPosVelAcc(:,1))...
+                - diag(gainsPD(:,2))*(vel-desPosVelAcc(:,2));
+end
