@@ -1,6 +1,7 @@
-function dnu_star = desiredAcceleration(qj, dqj, w_H_CoM, CoMVelocity, ...
-                           desired_x_dx_ddx_CoM, desired_Intw_w_dw_CoM, desired_q_dq_ddq, ...
-                           gain)
+function [dnu_star, CoM_x_error, CoM_w_error, qj_error] ...
+          = desiredAcceleration(qj, dqj, w_H_CoM, CoMVelocity, ...
+                                desired_x_dx_ddx_CoM, desired_Intw_w_dw_CoM, desired_q_dq_ddq, ...
+                                gain)
 
 %CoM linear acceleration
 xCoM        = w_H_CoM(1:3, 4);
@@ -17,6 +18,12 @@ dqq_star    = linearPID(qj, dqj, desired_q_dq_ddq, [gain.joints.p, gain.joints.d
 
 %Desired action feedback
 dnu_star    = [ddot_x_star; dw_star; dqq_star];
+
+
+%Debug information
+CoM_x_error = xCoM - desired_x_dx_ddx_CoM(:,1);
+CoM_w_error = invSkew(w_R_CoM - desired_Intw_w_dw_CoM(:,1:3));
+qj_error    = qj - desired_q_dq_ddq(:,1);
 
 end
 

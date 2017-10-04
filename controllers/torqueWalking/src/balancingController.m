@@ -116,6 +116,3 @@ frictionConeConstraintMatrix = [zeros(length(upperBoundFrictionConeConstraints),
 frictionConeUpperBoundVector = [upperBoundFrictionConeConstraints * feetActivation(1);
                                 upperBoundFrictionConeConstraints * feetActivation(2)];
 
-%Debug information
-% errorCoM = xCoM - desired_x_dx_ddx_CoM(:,1);
-
