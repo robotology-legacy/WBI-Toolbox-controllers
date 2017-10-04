@@ -23,26 +23,23 @@ setup(block);
 function setup(block)
     
 block.NumInputPorts  = 6; 
-block.NumOutputPorts = 4; 
+block.NumOutputPorts = 4;
 
-% Setup port properties to be  dynamic
+% Register parameters
+block.NumDialogPrms  = 2;
+
+% Setup port properties to be dynamic
 block.SetPreCompInpPortInfoToDynamic;
 block.SetPreCompOutPortInfoToDynamic;
 
-
-% Definition of port sizes for QP 2 feet
-%block.InputPort(1).Dimensions        = -1;  It does not compile if the
-%input port dimension is dynamic and the input is a matrix. Leave it
-%commented
-
 % Override output port properties
-block.OutputPort(1).Dimensions       = block.DialogPrm(1).Data; % f0 Two Feet
-block.OutputPort(2).Dimensions       = 6;                       % Exit flag QP 2 Feet
-block.OutputPort(3).Dimensions       = 6;                       % f0 One foot     
-block.OutputPort(4).Dimensions       = 1;                       % f0 One foot     
+block.OutputPort(1).Dimensions       = block.DialogPrm(1).Data; % Joint torques
+block.OutputPort(2).Dimensions       = 6;                       % Contact wrench left foot
+block.OutputPort(3).Dimensions       = 6;                       % Contact werench right foot     
+block.OutputPort(4).Dimensions       = 1;                       % QP exit flag   
 
 for i=1:block.NumInputPorts
-    block.InputPort(i).DatatypeID  = -1;          % 'inherited', see http://www.mathworks.com/help/simulink/slref/simulink.blockdata.html#f29-108672
+    block.InputPort(i).DatatypeID  = -1; % 'inherited', see http://www.mathworks.com/help/simulink/slref/simulink.blockdata.html#f29-108672
     block.InputPort(i).Complexity  = 'Real';
     block.InputPort(i).DirectFeedthrough = true;
 end
@@ -51,11 +48,6 @@ for i =1:block.NumOutputPorts
     block.OutputPort(i).DatatypeID  = 0; % double
     block.OutputPort(i).Complexity  = 'Real';
 end
-
-
-
-% Register parameters
-block.NumDialogPrms     = 3;
 
 % Register sample times
 %  [0 offset]            : Continuous sample time
@@ -122,8 +114,7 @@ function SetInputPortSamplingMode(block, idx, fd)
 %%   C-MEX counterpart: mdlInitializeConditions
 %%
 % function InitializeConditions(block)
-
-
+% 
 % end InitializeConditions
 
 
@@ -138,7 +129,7 @@ function SetInputPortSamplingMode(block, idx, fd)
 % function Start(block)
 % 
 % block.Dwork(1).Data = 0;
-
+% 
 %endfunction
 
 %%
@@ -152,20 +143,18 @@ function SetInputPortSamplingMode(block, idx, fd)
 function Outputs(block)
     
     ROBOT_DOF                  = block.DialogPrm(1).Data;
-    Ts                         = block.DialogPrm(2).Data;
-    constantMaxTolerance       = block.DialogPrm(3).Data;
-    
+    constants                  = block.DialogPrm(2).Data;
+
     HessianMatrixQP                 = block.InputPort(1).Data;
     biasVectorQP                    = block.InputPort(2).Data;
     feetAccelerationConstraintMatrix= block.InputPort(3).Data;
-    feetAccelerationConstraintUpperBoundVector = block.InputPort(4).Data;
+    feetAccelerationConstraintBoundVector = block.InputPort(4).Data;
     frictionConeConstraintMatrix    = block.InputPort(5).Data;
     frictionConeUpperBoundVector    = block.InputPort(6).Data;
         
-    
+    %
     % What follows aims at defining the hessian matrix H, the bias
     % vector g, and the constraint matrix A for the formalism of qpOases,ie
-    %
     %
     % min (1/2) x'*H*x + x'*g
     % s.t.
@@ -176,46 +165,53 @@ function Outputs(block)
     % 
     % http://www.coin-or.org/qpOASES/doc/3.0/manual.pdf
     %
-    % 
     
     H   = HessianMatrixQP;
+    
     g   = biasVectorQP;
+    
     A   = [feetAccelerationConstraintMatrix;
            frictionConeConstraintMatrix];
-    lbA = [ feetAccelerationConstraintUpperBoundVector;
-           -constantMaxTolerance * ones(size(frictionConeUpperBoundVector))];
-    ubA = [ feetAccelerationConstraintUpperBoundVector;
+       
+    lbA = [ feetAccelerationConstraintBoundVector - constants.minTolerance;
+           -constants.maxTolerance * ones(size(frictionConeUpperBoundVector))];
+       
+    ubA = [ feetAccelerationConstraintBoundVector + constants.minTolerance;
             frictionConeUpperBoundVector];
-    lb  = [-60   * ones(ROBOT_DOF,1);
-           -1000 * ones(12,1)];
-    ub  = [ 60   * ones(ROBOT_DOF,1);
-            1000 * ones(12,1)];
+        
+    lb  = [-constants.saturationTorque * ones(ROBOT_DOF,1);
+           -constants.saturationForce  * ones(12,1)];
+       
+    ub  = [ constants.saturationTorque * ones(ROBOT_DOF,1);
+            constants.saturationForce  * ones(12,1)];
     
     %Ensure symmetry of H
-    H = (H + H')/2;
+    %H = (H + H')/2;
           
     [u,~,exitFlagQP,~,~,~] = qpOASES(H,g,A,lb,ub,lbA,ubA);     
     
-%     if exitFlagQP ~= 0 
-%         u = uPrevious;
-%     else
-%         uPrevious = u;
-%     end
+    %     persistent uPrevious;
+    %     if isempty(uPrevious)
+    %        uPrevious = zeros(ROBOT_DOF + 12,1);
+    %     end
+    %     if exitFlagQP ~= 0 
+    %         u = uPrevious;
+    %     else
+    %         uPrevious = u;
+    %     end
 
 %Outputs: 
-    %Torques
+    %Joint torques
     block.OutputPort(1).Data = u(1:ROBOT_DOF);
-    %Contact forces at the feet (left, right)
+    %Contact wrenches at the left and right feet
     block.OutputPort(2).Data = u(ROBOT_DOF+1:ROBOT_DOF+6);
     block.OutputPort(3).Data = u(ROBOT_DOF+7:ROBOT_DOF+12);
     %QP exit flag
     block.OutputPort(4).Data = exitFlagQP;
-    
 %end Outputs
 
 
 function Terminate(~) %Terminate(block)
-
 %end Terminate
 
 function SetOutputPortDimensions(s, port, dimsInfo)

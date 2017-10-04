@@ -1,35 +1,44 @@
-ROBOT_DOF = 23;
 CONFIG.ON_GAZEBO = true;
 
+ROBOT_DOF = 23;
 WBT_wbiList = '(torso_pitch,torso_roll,torso_yaw,l_shoulder_pitch, l_shoulder_roll, l_shoulder_yaw, l_elbow, r_shoulder_pitch,r_shoulder_roll, r_shoulder_yaw, r_elbow, l_hip_pitch, l_hip_roll, l_hip_yaw, l_knee, l_ankle_pitch, l_ankle_roll, r_hip_pitch,r_hip_roll,r_hip_yaw,r_knee,r_ankle_pitch,r_ankle_roll)';                         
                                                                                                 
 PORTS.IMU                 = '/icubSim/inertial'; 
 PORTS.WBDT_LEFTLEG_EE     = '/wholeBodyDynamicsTree/left_leg/cartesianEndEffectorWrench:o';
 PORTS.WBDT_RIGHTLEG_EE    = '/wholeBodyDynamicsTree/right_leg/cartesianEndEffectorWrench:o';
 
-constants.g = 9.81;
-constants.maxTolerance = 1e14;
-constants.minTolerance = 1e-4;
 
-gain.regTorques = 1e-7;
+%% Constants used for tolerance/saturation
 
-%Maximum torque value sent to actuators
-sat.torque          = 60;
+constants.maxTolerance     = 1e14; %Maximum value for unconstrained variable
+constants.minTolerance     = 1e-4; %Tolerance on the value of an equality constrained variable
+constants.saturationTorque = 60;   %Maximum torque value sent to actuators
+constants.saturationForce  = 1000; %Maximum contact force value considered
+
+reg.pinvDampVb             = 1e-7; %Regularizing term for matrix pseudoinverse operation in base velocity computation
 
 %Maximum variation of torque from one time step to the next
-%Required as parameter of QP, but used only if
-%CONFIG.QP.USE_CONTINUITY_CONSTRAINTS = true;
+%Required as parameter of QP, but used only if CONFIG.QP.USE_CONTINUITY_CONSTRAINTS = true;
+%i.e. not used at the moment
 sat.torqueDot       = inf*ones(ROBOT_DOF,1);
 
-%% %%%%%%%%%%%%%%%%    Gains for desired values computation
+%% Controller gains
 
-reg.pinvDampVb      = 1e-7; %Regularizing term for matrix pseudoinverse operation in base velocity computation
+%Center of mass linear proportional (p) and derivative (d) gains
+gain.x_CoM.p = 60;
+gain.x_CoM.d = 2 * sqrt(gain.x_CoM.p);
 
-%% %%%%%%%%%%%%%%%%    Controller gain parameters 
-gain.weightPostural         = 0.3;
-gain.weightTasks            = 100;
-gain.weightMinTorques       = 1e-4;
-gain.weightMinContactForces = 0;
+%Center of mass angular proportional (p) and derivative (d) gains
+gain.w_CoM.p  = 5;
+gain.w_CoM.d  = 2 * sqrt(gain.w_CoM.p);
+
+%Joints proportional (p) and derivative (d) gains
+gain.joints.p = 30;
+gain.joints.d = 2*sqrt(gain.joints.p);
+
+%Weight on regularization of joint torques
+gain.reg.joint_torques = 1e-7;
+
 
 %% %%%%%%%%%%%%%%%%    Friction cone parameters
 
