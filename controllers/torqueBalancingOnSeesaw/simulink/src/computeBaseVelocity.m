@@ -1,23 +1,25 @@
-function w_v_base  = computeBaseVelocity(J_l_sole, w_H_l_sole,dq_j, s_omega_s, model)
-%#codegen
-    s_omega_s      = s_omega_s * (pi/180);
+function v_base = computeBaseVelocity(J_fixedLink,w_R_s,dqj,s_omega,seesaw,reg)
 
-    w_R_s          = w_H_l_sole(1:3,1:3);
+    % Velocity of the seesaw expressed in world frame
+    w_omega = w_R_s * s_omega;
 
-    w_omega_s      = w_R_s*s_omega_s;
-
+    % distance between the contact with the ground and the seesaw CoM w.r.t
+    % world frame
     e3 = [0;0;1];
+    w_r = (seesaw.delta*w_R_s*e3) -seesaw.rho*e3;
+
+    % s_sFixed = positionOfFixedLink - seesawCoM  w.r.t. seesaw frame
+    s_sFixed = seesaw.s_sFixed;
+
+    % positionOfFixedLink - seesawCoM  w.r.t. world frame
+    w_sFixed = w_R_s * s_sFixed;
+
+    % linear and angular velocity of fixedLink in the world coordinates
+    w_v_fixedLink = [skew(w_r - w_sFixed)*w_omega; 
+                                           w_omega];
+                                     
+    % finally, base velocity in world coodinates
+    invJb = pinv(J_fixedLink(1:6,1:6), reg.pinvTolVb);
+    v_base = invJb*(w_v_fixedLink - J_fixedLink(1:6,7:end)*dqj);
     
-    w_r            = model.seesaw.delta * w_R_s * e3 - model.seesaw.rho * e3 ; 
-
-    s_s_l          = [ 0; 
-                       model.seesaw.lFootDistanceCenter; 
-                       model.seesaw.top];
-
-    w_s_l          = w_R_s * s_s_l;
-
-    w_v_l_sole     = [Sf(w_r - w_s_l)*w_omega_s; 
-                                      w_omega_s  ];
-
-    w_v_base       = J_l_sole(1:6,1:6)\(w_v_l_sole - J_l_sole(1:6,7:end)*dq_j);
 end
