@@ -6,7 +6,7 @@ Model {
     NumRootInports	    0
     NumRootOutports	    0
     ParameterArgumentNames  ""
-    ComputedModelVersion    "1.455"
+    ComputedModelVersion    "1.463"
     NumModelReferences	    0
     NumTestPointedSignals   0
     NumProvidedFunctions    0
@@ -67,11 +67,11 @@ Model {
 	Object {
 	  $ObjectID		  5
 	  IsActive		  [1]
-	  ViewObjType		  "SimulinkSubsys"
-	  LoadSaveID		  "391"
+	  ViewObjType		  "SimulinkTopLevel"
+	  LoadSaveID		  "0"
 	  Extents		  [1277.0, 589.0]
-	  ZoomFactor		  [1.0851063829787233]
-	  Offset		  [109.63311887254895, 37.098039215686242]
+	  ZoomFactor		  [0.62541806020066892]
+	  Offset		  [182.51797935290205, -529.77768818417849]
 	}
 	Object {
 	  $ObjectID		  6
@@ -116,9 +116,9 @@ Model {
   ModifiedByFormat	  "%<Auto>"
   LastModifiedBy	  "mcharbonneau"
   ModifiedDateFormat	  "%<Auto>"
-  LastModifiedDate	  "Fri Oct 06 12:01:06 2017"
-  RTWModifiedTimeStamp	  429192062
-  ModelVersionFormat	  "1.%<AutoIncrement:455>"
+  LastModifiedDate	  "Fri Oct 06 12:35:05 2017"
+  RTWModifiedTimeStamp	  429194080
+  ModelVersionFormat	  "1.%<AutoIncrement:463>"
   ConfigurationManager	  "none"
   SampleTimeColors	  off
   SampleTimeAnnotations	  off
@@ -1138,7 +1138,7 @@ Model {
   System {
     Name		    "torqueWalking"
     Location		    [51, -4, 1366, 768]
-    Open		    off
+    Open		    on
     PortBlocksUseCompactNotation off
     ModelBrowserVisibility  off
     ModelBrowserWidth	    200
@@ -1150,9 +1150,9 @@ Model {
     TiledPaperMargins	    [0.500000, 0.500000, 0.500000, 0.500000]
     TiledPageScale	    1
     ShowPageBoundaries	    off
-    ZoomFactor		    "100"
+    ZoomFactor		    "63"
     ReportName		    "simulink-default.rpt"
-    SIDHighWatermark	    "561"
+    SIDHighWatermark	    "666"
     Block {
       BlockType		      SubSystem
       Name		      "Balancing controller"
@@ -1165,7 +1165,7 @@ Model {
       System {
 	Name			"Balancing controller"
 	Location		[51, -4, 1366, 768]
-	Open			on
+	Open			off
 	PortBlocksUseCompactNotation off
 	ModelBrowserVisibility	off
 	ModelBrowserWidth	200
@@ -2124,7 +2124,7 @@ Model {
 	}
 	Block {
 	  BlockType		  Inport
-	  Name			  "desired_q_dq_ddq"
+	  Name			  "desired_s_ds_dds"
 	  SID			  "370"
 	  Position		  [725, 618, 755, 632]
 	  ZOrder		  866
@@ -2413,7 +2413,7 @@ Model {
 	    SIDHighWatermark	    "31"
 	    Block {
 	      BlockType		      Inport
-	      Name		      "qj"
+	      Name		      "jointPositions"
 	      SID		      "364::27"
 	      Position		      [20, 101, 40, 119]
 	      ZOrder		      18
@@ -2421,7 +2421,7 @@ Model {
 	    }
 	    Block {
 	      BlockType		      Inport
-	      Name		      "dqj"
+	      Name		      "jointVelocities"
 	      SID		      "364::28"
 	      Position		      [20, 136, 40, 154]
 	      ZOrder		      19
@@ -2466,7 +2466,7 @@ Model {
 	    }
 	    Block {
 	      BlockType		      Inport
-	      Name		      "desired_q_dq_ddq"
+	      Name		      "desired_s_ds_dds"
 	      SID		      "364::26"
 	      Position		      [20, 316, 40, 334]
 	      ZOrder		      17
@@ -2510,7 +2510,7 @@ Model {
 	      }
 	      Port {
 		PortNumber		5
-		Name			"qj_error"
+		Name			"jointPositions_error"
 	      }
 	    }
 	    Block {
@@ -2548,7 +2548,7 @@ Model {
 	    }
 	    Block {
 	      BlockType		      Outport
-	      Name		      "qj_error"
+	      Name		      "jointPositions_error"
 	      SID		      "364::31"
 	      Position		      [460, 206, 480, 224]
 	      ZOrder		      22
@@ -2557,14 +2557,14 @@ Model {
 	    }
 	    Line {
 	      ZOrder		      74
-	      SrcBlock		      "qj"
+	      SrcBlock		      "jointPositions"
 	      SrcPort		      1
 	      DstBlock		      " SFunction "
 	      DstPort		      1
 	    }
 	    Line {
 	      ZOrder		      75
-	      SrcBlock		      "dqj"
+	      SrcBlock		      "jointVelocities"
 	      SrcPort		      1
 	      DstBlock		      " SFunction "
 	      DstPort		      2
@@ -2599,7 +2599,7 @@ Model {
 	    }
 	    Line {
 	      ZOrder		      80
-	      SrcBlock		      "desired_q_dq_ddq"
+	      SrcBlock		      "desired_s_ds_dds"
 	      SrcPort		      1
 	      DstBlock		      " SFunction "
 	      DstPort		      7
@@ -2632,12 +2632,12 @@ Model {
 	      DstPort		      1
 	    }
 	    Line {
-	      Name		      "qj_error"
+	      Name		      "jointPositions_error"
 	      ZOrder		      84
 	      Labels		      [0, 0]
 	      SrcBlock		      " SFunction "
 	      SrcPort		      5
-	      DstBlock		      "qj_error"
+	      DstBlock		      "jointPositions_error"
 	      DstPort		      1
 	    }
 	    Line {
@@ -2675,7 +2675,7 @@ Model {
 	}
 	Block {
 	  BlockType		  Outport
-	  Name			  "qj_error"
+	  Name			  "joint positions error"
 	  SID			  "382"
 	  Position		  [1395, 603, 1425, 617]
 	  ZOrder		  869
@@ -2858,7 +2858,7 @@ Model {
 	}
 	Line {
 	  ZOrder		  165
-	  SrcBlock		  "desired_q_dq_ddq"
+	  SrcBlock		  "desired_s_ds_dds"
 	  SrcPort		  1
 	  DstBlock		  "desiredAcceleration"
 	  DstPort		  7
@@ -2881,7 +2881,7 @@ Model {
 	  ZOrder		  168
 	  SrcBlock		  "desiredAcceleration"
 	  SrcPort		  4
-	  DstBlock		  "qj_error"
+	  DstBlock		  "joint positions error"
 	  DstPort		  1
 	}
 	Line {
@@ -6266,7 +6266,7 @@ Model {
       Variant		      off
       System {
 	Name			"State Machine"
-	Location		[51, 24, 1366, 768]
+	Location		[51, -4, 1366, 768]
 	Open			off
 	PortBlocksUseCompactNotation off
 	ModelBrowserVisibility	off
@@ -6360,7 +6360,7 @@ Model {
 	    SIDHighWatermark	    "25"
 	    Block {
 	      BlockType		      Inport
-	      Name		      "q0"
+	      Name		      "s0"
 	      SID		      "371::24"
 	      Position		      [20, 101, 40, 119]
 	      ZOrder		      15
@@ -6408,7 +6408,7 @@ Model {
 	      }
 	      Port {
 		PortNumber		4
-		Name			"desired_q_dq_ddq"
+		Name			"desired_s_ds_dds"
 	      }
 	    }
 	    Block {
@@ -6437,7 +6437,7 @@ Model {
 	    }
 	    Block {
 	      BlockType		      Outport
-	      Name		      "desired_q_dq_ddq"
+	      Name		      "desired_s_ds_dds"
 	      SID		      "371::23"
 	      Position		      [460, 171, 480, 189]
 	      ZOrder		      14
@@ -6446,7 +6446,7 @@ Model {
 	    }
 	    Line {
 	      ZOrder		      42
-	      SrcBlock		      "q0"
+	      SrcBlock		      "s0"
 	      SrcPort		      1
 	      DstBlock		      " SFunction "
 	      DstPort		      1
@@ -6477,12 +6477,12 @@ Model {
 	      DstPort		      1
 	    }
 	    Line {
-	      Name		      "desired_q_dq_ddq"
+	      Name		      "desired_s_ds_dds"
 	      ZOrder		      46
 	      Labels		      [0, 0]
 	      SrcBlock		      " SFunction "
 	      SrcPort		      4
-	      DstBlock		      "desired_q_dq_ddq"
+	      DstBlock		      "desired_s_ds_dds"
 	      DstPort		      1
 	    }
 	    Line {
@@ -6520,7 +6520,7 @@ Model {
 	}
 	Block {
 	  BlockType		  Outport
-	  Name			  "desired_q_dq_ddq"
+	  Name			  "desired_s_ds_dds"
 	  SID			  "377"
 	  Position		  [630, 113, 660, 127]
 	  ZOrder		  865
@@ -6538,7 +6538,7 @@ Model {
 	  ZOrder		  602
 	  SrcBlock		  "stateMachine"
 	  SrcPort		  3
-	  DstBlock		  "desired_q_dq_ddq"
+	  DstBlock		  "desired_s_ds_dds"
 	  DstPort		  1
 	}
 	Line {
@@ -6617,7 +6617,7 @@ Model {
       Name		      "contact forces1"
       SID		      "561"
       Ports		      [2]
-      Position		      [2030, 726, 2060, 759]
+      Position		      [2030, 751, 2060, 784]
       ZOrder		      868
       ScopeSpecificationString "Simulink.scopes.TimeScopeBlockCfg('CurrentConfiguration', extmgr.ConfigurationSet(extm"
       "gr.Configuration('Core','General UI',true),extmgr.Configuration('Core','Source UI',true),extmgr.Configuration('S"
@@ -6724,7 +6724,7 @@ Model {
     }
     Block {
       BlockType		      Scope
-      Name		      "qj_error"
+      Name		      "joint positions error"
       SID		      "383"
       Ports		      [1]
       Position		      [1605, 24, 1635, 56]
@@ -7011,7 +7011,7 @@ Model {
       Points		      [37, 0]
       Branch {
 	ZOrder			750
-	Points			[0, 170]
+	Points			[0, 195]
 	DstBlock		"contact forces1"
 	DstPort			1
       }
@@ -7035,7 +7035,7 @@ Model {
       Points		      [22, 0]
       Branch {
 	ZOrder			748
-	Points			[0, 140]
+	Points			[0, 165]
 	DstBlock		"contact forces1"
 	DstPort			2
       }
@@ -7155,7 +7155,7 @@ Model {
       ZOrder		      611
       SrcBlock		      "Dynamics"
       SrcPort		      3
-      DstBlock		      "qj_error"
+      DstBlock		      "joint positions error"
       DstPort		      1
     }
     Line {
@@ -9049,6 +9049,9 @@ Stateflow {
     screen		    [1 1 3600 1200 1.180555555555556]
     treeNode		    [0 80 0 0]
     viewObj		    79
+    visible		    1
+    subviewS {
+    }
     ssIdHighWaterMark	    15
     decomposition	    CLUSTER_CHART
     type		    EML_CHART
@@ -9075,18 +9078,19 @@ Stateflow {
     decomposition	    CLUSTER_STATE
     eml {
       isEML		      1
-      script		      "function [dnu_star, CoM_x_error, CoM_w_error, qj_error] = desiredAcceleration(qj, dqj, w_H_CoM, C"
-      "oMVelocity, ...\n                           desired_x_dx_ddx_CoM, desired_Intw_w_dw_CoM, desired_q_dq_ddq, ...\n"
-      "                           gain)\n[dnu_star, CoM_x_error, CoM_w_error, qj_error] = desiredAcceleration(qj, dqj, "
-      "w_H_CoM, CoMVelocity, ...\n                           desired_x_dx_ddx_CoM, desired_Intw_w_dw_CoM, desired_q_dq_"
-      "ddq, ...\n                           gain);\n\n"
+      script		      "function [dnu_star, CoM_x_error, CoM_w_error, jointPositions_error] = desiredAcceleration(jointPo"
+      "sitions, jointVelocities, w_H_CoM, CoMVelocity, ...\n                           desired_x_dx_ddx_CoM, desired_In"
+      "tw_w_dw_CoM, desired_s_ds_dds, ...\n                           gain)\n[dnu_star, CoM_x_error, CoM_w_error, joint"
+      "Positions_error] = desiredAcceleration(jointPositions, jointVelocities, w_H_CoM, CoMVelocity, ...\n             "
+      "              desired_x_dx_ddx_CoM, desired_Intw_w_dw_CoM, desired_s_ds_dds, ...\n                           gai"
+      "n);\n\n"
       editorLayout	      "100 M4x1[10 5 700 500]"
     }
   }
   data {
     id			    81
     ssIdNumber		    11
-    name		    "qj"
+    name		    "jointPositions"
     scope		    INPUT_DATA
     machine		    1
     props {
@@ -9111,7 +9115,7 @@ Stateflow {
   data {
     id			    82
     ssIdNumber		    12
-    name		    "dqj"
+    name		    "jointVelocities"
     scope		    INPUT_DATA
     machine		    1
     props {
@@ -9233,7 +9237,7 @@ Stateflow {
   data {
     id			    87
     ssIdNumber		    10
-    name		    "desired_q_dq_ddq"
+    name		    "desired_s_ds_dds"
     scope		    INPUT_DATA
     machine		    1
     props {
@@ -9357,7 +9361,7 @@ Stateflow {
   data {
     id			    92
     ssIdNumber		    15
-    name		    "qj_error"
+    name		    "jointPositions_error"
     scope		    OUTPUT_DATA
     machine		    1
     props {
@@ -9427,6 +9431,9 @@ Stateflow {
     screen		    [1 1 3600 1200 1.180555555555556]
     treeNode		    [0 97 0 0]
     viewObj		    96
+    visible		    1
+    subviewS {
+    }
     ssIdHighWaterMark	    9
     decomposition	    CLUSTER_CHART
     type		    EML_CHART
@@ -9453,8 +9460,8 @@ Stateflow {
     decomposition	    CLUSTER_STATE
     eml {
       isEML		      1
-      script		      "function [desired_x_dx_ddx_CoM, desired_Intw_w_dw_CoM, desired_q_dq_ddq] = stateMachine(q0, w_H_C"
-      "oM_0, ROBOT_DOF)\n\n[desired_x_dx_ddx_CoM, desired_Intw_w_dw_CoM, desired_q_dq_ddq] = stateMachine(q0, w_H_CoM_0"
+      script		      "function [desired_x_dx_ddx_CoM, desired_Intw_w_dw_CoM, desired_s_ds_dds] = stateMachine(s0, w_H_C"
+      "oM_0, ROBOT_DOF)\n\n[desired_x_dx_ddx_CoM, desired_Intw_w_dw_CoM, desired_s_ds_dds] = stateMachine(s0, w_H_CoM_0"
       ", ROBOT_DOF);\n\n"
       editorLayout	      "100 M4x1[10 5 700 500]"
     }
@@ -9462,7 +9469,7 @@ Stateflow {
   data {
     id			    98
     ssIdNumber		    8
-    name		    "q0"
+    name		    "s0"
     scope		    INPUT_DATA
     machine		    1
     props {
@@ -9557,7 +9564,7 @@ Stateflow {
   data {
     id			    102
     ssIdNumber		    7
-    name		    "desired_q_dq_ddq"
+    name		    "desired_s_ds_dds"
     scope		    OUTPUT_DATA
     machine		    1
     props {
