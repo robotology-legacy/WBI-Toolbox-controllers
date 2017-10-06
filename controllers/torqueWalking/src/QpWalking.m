@@ -22,7 +22,7 @@ setup(block);
 
 function setup(block)
     
-block.NumInputPorts  = 6; 
+block.NumInputPorts  = 8; 
 block.NumOutputPorts = 4;
 
 % Register parameters
@@ -149,8 +149,10 @@ function Outputs(block)
     biasVectorQP                    = block.InputPort(2).Data;
     feetAccelerationConstraintMatrix= block.InputPort(3).Data;
     feetAccelerationConstraintBoundVector = block.InputPort(4).Data;
-    frictionConeConstraintMatrix    = block.InputPort(5).Data;
-    frictionConeUpperBoundVector    = block.InputPort(6).Data;
+    CoMAccelerationConstraintMatrix = block.InputPort(5).Data;
+    CoMAccelerationConstraintBoundVector = block.InputPort(6).Data;
+    frictionConeConstraintMatrix    = block.InputPort(7).Data;
+    frictionConeUpperBoundVector    = block.InputPort(8).Data;
         
     %
     % What follows aims at defining the hessian matrix H, the bias
@@ -171,12 +173,15 @@ function Outputs(block)
     g   = biasVectorQP;
     
     A   = [feetAccelerationConstraintMatrix;
+           CoMAccelerationConstraintMatrix
            frictionConeConstraintMatrix];
        
     lbA = [ feetAccelerationConstraintBoundVector - constants.minTolerance;
+            CoMAccelerationConstraintBoundVector(1:2);
            -constants.maxTolerance * ones(size(frictionConeUpperBoundVector))];
        
     ubA = [ feetAccelerationConstraintBoundVector + constants.minTolerance;
+            CoMAccelerationConstraintBoundVector(3:4);
             frictionConeUpperBoundVector];
         
     lb  = [-constants.saturationTorque * ones(ROBOT_DOF,1);

@@ -13,9 +13,9 @@ PORTS.WBDT_RIGHTLEG_EE    = '/wholeBodyDynamicsTree/right_leg/cartesianEndEffect
 constants.maxTolerance     = 1e14; %Maximum value for unconstrained variable
 constants.minTolerance     = 1e-4; %Tolerance on the value of an equality constrained variable
 constants.saturationTorque = 60;   %Maximum torque value sent to actuators
-constants.saturationForce  = 1000; %Maximum contact force value considered
+constants.saturationForce  = 500; %Maximum contact force value considered
 
-reg.pinvDampVb             = 1e-7; %Regularizing term for matrix pseudoinverse operation in base velocity computation
+reg.pinvDampVb             = 1e-10; %Regularizing term for matrix pseudoinverse operation in base velocity computation
 
 %Maximum variation of torque from one time step to the next
 %Required as parameter of QP, but used only if CONFIG.QP.USE_CONTINUITY_CONSTRAINTS = true;
@@ -33,11 +33,15 @@ gain.w_CoM.p  = 5;
 gain.w_CoM.d  = 2 * sqrt(gain.w_CoM.p);
 
 %Joints proportional (p) and derivative (d) gains
-gain.joints.p = 30;
+gain.joints.p = 20;
 gain.joints.d = 2*sqrt(gain.joints.p);
 
 %Weight on regularization of joint torques
 gain.reg.joint_torques = 1e-7;
+
+%Factor multiplying CoM gains, for CoM acceleration bounds
+%value [0;1]
+gain.CoMboundFactor = 0.1;
 
 
 %% %%%%%%%%%%%%%%%%    Friction cone parameters

@@ -1,9 +1,10 @@
 function [HessianMatrixQP, biasVectorQP, ...
           feetAccelerationConstraintMatrix, feetAccelerationConstraintBoundVector, ...
+          CoMAccelerationConstraintMatrix, CoMAccelerationConstraintBoundVector, ...
           frictionConeConstraintMatrix, frictionConeUpperBoundVector] ...
-         = balancingController( M, h, dnu_star, ...
-                                w_H_l_sole, w_H_r_sole, w_J_l_sole, w_J_r_sole, ...
-                                dJnu_l_sole, dJnu_r_sole, feetActivation, ...
+         = balancingController( M, h, dnu_star, ddx_CoM_bounds, ...
+                                w_H_l_sole, w_H_r_sole, w_J_l_sole, w_J_r_sole, w_J_CoM,...
+                                dJnu_l_sole, dJnu_r_sole, dJnu_CoM, feetActivation, ...
                                 frictionConeConstraintsMatrix, upperBoundFrictionConeConstraints, ...
                                 ROBOT_DOF, gain)
 
@@ -53,7 +54,8 @@ function [HessianMatrixQP, biasVectorQP, ...
     % 5) u* = argmin (1/2) * |inv(M) * (B * u - h) - feedback|^2
     %           s.t.
     %               C * u < b
-    %               dJc * nu + Jc * inv(M) * (B * u - h) = 0
+    %               dJc * nu + Jc * inv(M) * (B * u - h) = 0 
+    %               lb < dJx * nu + Jx * inv(M) * (B * u - h) < ub
     %               feedback = ddnu_desired - kp * nuTilde - kd * dnuTilde
     %
     % note that the objective function could be rewritten as 1/2*|dnu - dnu_desired|^2
@@ -77,7 +79,8 @@ dJc_nu   = [dJnu_l_sole * feetActivation(1);
 S        = [zeros(6,ROBOT_DOF);
             eye(ROBOT_DOF) ];
 B        = [S, Jc'];
-Storques = [eye(ROBOT_DOF)   zeros(ROBOT_DOF,12)];
+Storques = [eye(ROBOT_DOF) zeros(ROBOT_DOF,12)];
+Sxy      = [eye(2) zeros(2,4)];
 % Sforces  = [zeros(12, ROBOT_DOF) eye(12)];
 
 %QP objective function
@@ -87,6 +90,10 @@ biasVectorQP    = (M \ B)' * (- M \ h - dnu_star);
 %Acceleration constraint for foot(feet) in contact with the ground
 feetAccelerationConstraintMatrix      = Jc / M * B;
 feetAccelerationConstraintBoundVector = Jc / M * h - dJc_nu;
+
+%Acceleration constraint to keep CoM (x and y) within bounds
+CoMAccelerationConstraintMatrix = Sxy * (w_J_CoM / M * B);
+CoMAccelerationConstraintBoundVector = ddx_CoM_bounds + [eye(2); eye(2)] * (Sxy * (w_J_CoM / M * h - dJnu_CoM));
 
 %Friction cone constraints for foot(feet) in contact with the ground
     % Update constraint matrices. The constraint matrix for the inequality
@@ -115,4 +122,6 @@ frictionConeConstraintMatrix = [zeros(length(upperBoundFrictionConeConstraints),
 
 frictionConeUpperBoundVector = [upperBoundFrictionConeConstraints * feetActivation(1);
                                 upperBoundFrictionConeConstraints * feetActivation(2)];
+                            
+%% Keep the CoM position within the support polygon at all times
 
