@@ -8,8 +8,11 @@ description of each balancing controller and the README links.
 All the models implemented with the old WBI-Toolbox are in the [legacy](controllers/legacy) folder. The
 new [WB-Toolbox](https://github.com/robotology/WB-Toolbox) models are:
 
+- [boundedTorqueControl](#boundedtorquecontrol)
 - [torqueBalancing](#torquebalancing)
+- [legacy](#legacy)
 - [torqueBalancingOnSeesaw](#torquebalancingonseesaw)
+- [torqueBalancingStandUp](#torquebalancingstandup)
 - [wholeBodyImpedanceControl](#wholebodyimpedancecontrol)
 
 Check the documentation in [WB-Toolbox](https://github.com/robotology/WB-Toolbox) for installation of the Simulink toolbox.
@@ -18,8 +21,16 @@ Check the documentation in [WB-Toolbox](https://github.com/robotology/WB-Toolbox
 This simulink model controls the robot using a momentum-based balancing control.
 The user can find the full description here: [torqueBalancing README](controllers/torqueBalancing/README.md)
 
+### boundedTorqueControl
+
+### legacy
+A folder containing old Simulink controllers for balancing.
+
 ### torqueBalancingOnSeesaw
 This is a peculiar version of momentum-based balancing controller, specifically developed for balancing the robot on a seesaw. The readme is at the following link: [torqueBalancingOnSeesaw README](controllers/torqueBalancingOnSeesaw/README.md).
+
+### torqueBalancingStandUp
+Another peculiar version of momentum-based balancing controller designed for standing up from a chair. See relative [README](https://github.com/robotology-playground/WBI-Toolbox-controllers/blob/master/controllers/torqueBalancingStandUp/ICUB_STANDUP_README.md).
 
 ###  wholeBodyImpedanceControl
 A simple impedance controller for the robot balancing. 
