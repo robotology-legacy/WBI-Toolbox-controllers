@@ -1,16 +1,15 @@
 Model {
   Name			  "impedanceControl2012b"
   Version		  8.0
-  MdlSubVersion		  0
-  SavedCharacterEncoding  "US-ASCII"
   GraphicalInterface {
     NumRootInports	    0
     NumRootOutports	    0
     ParameterArgumentNames  ""
-    ComputedModelVersion    "1.254"
+    ComputedModelVersion    "1.264"
     NumModelReferences	    0
     NumTestPointedSignals   0
   }
+  SavedCharacterEncoding  "UTF-8"
   ScopeRefreshTime	  0.035000
   OverrideScopeRefreshTime on
   DisableAllScopes	  off
@@ -30,7 +29,7 @@ Model {
       $ObjectID		      2
       $ClassName	      "Simulink.WindowInfo"
       IsActive		      [1]
-      Location		      [0.0, 23.0, 1905.0, 1035.0]
+      Location		      [73.0, 32.0, 1680.0, 1050.0]
       Object {
 	$PropName		"ModelBrowserInfo"
 	$ObjectID		3
@@ -47,28 +46,16 @@ Model {
 	$ClassName		"Simulink.ExplorerBarInfo"
 	Visible			[1]
       }
-      Array {
-	Type			"Simulink.EditorInfo"
-	Dimension		2
-	Object {
-	  $ObjectID		  5
-	  IsActive		  [1]
-	  ViewObjType		  "SimulinkTopLevel"
-	  LoadSaveID		  "0"
-	  Extents		  [1871.0, 862.0]
-	  ZoomFactor		  [1.037748050131311]
-	  Offset		  [51.509249525230643, 60.677610383884996]
-	}
-	Object {
-	  $ObjectID		  6
-	  IsActive		  [0]
-	  ViewObjType		  "SimulinkSubsys"
-	  LoadSaveID		  "182"
-	  Extents		  [1871.0, 862.0]
-	  ZoomFactor		  [2.2934919986777889]
-	  Offset		  [-13.447978838849679, -214.42304496744438]
-	}
-	PropName		"EditorsInfo"
+      Object {
+	$PropName		"EditorsInfo"
+	$ObjectID		5
+	$ClassName		"Simulink.EditorInfo"
+	IsActive		[1]
+	ViewObjType		"SimulinkTopLevel"
+	LoadSaveID		"0"
+	Extents			[1626.0, 857.0]
+	ZoomFactor		[0.91103202846975084]
+	Offset			[49.6328125, -56.7734375]
       }
     }
   }
@@ -76,11 +63,11 @@ Model {
   Creator		  "daniele"
   UpdateHistory		  "UpdateHistoryNever"
   ModifiedByFormat	  "%<Auto>"
-  LastModifiedBy	  "DanielePucci"
+  LastModifiedBy	  "gnava"
   ModifiedDateFormat	  "%<Auto>"
-  LastModifiedDate	  "Mon May 09 17:03:36 2016"
-  RTWModifiedTimeStamp	  384714216
-  ModelVersionFormat	  "1.%<AutoIncrement:254>"
+  LastModifiedDate	  "Fri Oct 06 10:52:32 2017"
+  RTWModifiedTimeStamp	  429187952
+  ModelVersionFormat	  "1.%<AutoIncrement:264>"
   ConfigurationManager	  "none"
   SampleTimeColors	  off
   SampleTimeAnnotations	  off
@@ -117,12 +104,12 @@ Model {
     $PropName		    "DataLoggingOverride"
     $ObjectID		    7
     $ClassName		    "Simulink.SimulationData.ModelLoggingInfo"
-    model_		    "impedanceControl"
+    model_		    "impedanceControl2012b"
     overrideMode_	    [0.0]
     Array {
       Type		      "Cell"
       Dimension		      1
-      Cell		      "impedanceControl"
+      Cell		      "impedanceControl2012b"
       PropName		      "logAsSpecifiedByModels_"
     }
     Array {
@@ -265,6 +252,7 @@ Model {
 	  BooleanDataType	  on
 	  ConditionallyExecuteInputs on
 	  InlineParams		  off
+	  UseIntDivNetSlope	  off
 	  UseFloatMulNetSlope	  off
 	  UseSpecifiedMinMax	  off
 	  InlineInvariantSignals  off
@@ -295,7 +283,6 @@ Model {
 	  BufferReusableBoundary  on
 	  SimCompilerOptimization "Off"
 	  AccelVerboseBuild	  off
-	  UseIntDivNetSlope	  off
 	}
 	Simulink.DebuggingCC {
 	  $ObjectID		  12
@@ -451,7 +438,7 @@ Model {
 	  Version		  "1.12.1"
 	  Array {
 	    Type		    "Cell"
-	    Dimension		    15
+	    Dimension		    16
 	    Cell		    "IncludeHyperlinkInReport"
 	    Cell		    "GenerateTraceInfo"
 	    Cell		    "GenerateTraceReport"
@@ -467,6 +454,7 @@ Model {
 	    Cell		    "CodeExecutionProfiling"
 	    Cell		    "CodeProfilingSaveOptions"
 	    Cell		    "CodeProfilingInstrumentation"
+	    Cell		    "GenerateMissedCodeReplacementReport"
 	    PropName		    "DisabledProps"
 	  }
 	  SystemTargetFile	  "grt.tlc"
@@ -477,7 +465,6 @@ Model {
 	  PackageGeneratedCodeAndArtifacts off
 	  TemplateMakefile	  "grt_default_tmf"
 	  PostCodeGenCommand	  ""
-	  Description		  ""
 	  GenerateReport	  off
 	  SaveLog		  off
 	  RTWVerbose		  on
@@ -491,6 +478,7 @@ Model {
 	  IncludeHyperlinkInReport off
 	  LaunchReport		  off
 	  PortableWordSizes	  off
+	  GenerateErtSFunction	  off
 	  CreateSILPILBlock	  "None"
 	  CodeExecutionProfiling  off
 	  CodeExecutionProfileVariable "executionProfile"
@@ -517,7 +505,7 @@ Model {
 	      Version		      "1.12.1"
 	      Array {
 		Type			"Cell"
-		Dimension		23
+		Dimension		25
 		Cell			"IgnoreCustomStorageClasses"
 		Cell			"IgnoreTestpoints"
 		Cell			"InsertBlockDesc"
@@ -541,6 +529,8 @@ Model {
 		Cell			"CustomSymbolStrMacro"
 		Cell			"CustomSymbolStrUtil"
 		Cell			"ReqsInCode"
+		Cell			"CustomSymbolStrModelFcn"
+		Cell			"CustomUserTokenString"
 		PropName		"DisabledProps"
 	      }
 	      ForceParamTrailComments off
@@ -586,7 +576,7 @@ Model {
 	      Version		      "1.12.1"
 	      Array {
 		Type			"Cell"
-		Dimension		14
+		Dimension		17
 		Cell			"GeneratePreprocessorConditionals"
 		Cell			"IncludeMdlTerminateFcn"
 		Cell			"SupportNonInlinedSFcns"
@@ -600,6 +590,9 @@ Model {
 		Cell			"SupportComplex"
 		Cell			"SupportAbsoluteTime"
 		Cell			"SupportContinuousTime"
+		Cell			"ExistingSharedCode"
+		Cell			"RemoveDisableFunc"
+		Cell			"RemoveResetFunc"
 		Cell			"CombineOutputUpdateFcns"
 		PropName		"DisabledProps"
 	      }
@@ -657,7 +650,6 @@ Model {
 	    }
 	    PropName		    "Components"
 	  }
-	  GenerateErtSFunction	  off
 	}
 	PropName		"Components"
       }
@@ -753,6 +745,19 @@ Model {
       BusSelectionMode	      off
     }
     Block {
+      BlockType		      EnablePort
+      StatesWhenEnabling      "held"
+      PropagateVarSize	      "Only when enabling"
+      ShowOutputPort	      off
+      ZeroCross		      on
+      PortDimensions	      "1"
+      SampleTime	      "-1"
+      OutMin		      "[]"
+      OutMax		      "[]"
+      OutDataTypeStr	      "double"
+      Interpolate	      on
+    }
+    Block {
       BlockType		      Gain
       Gain		      "1"
       Multiplication	      "Element-wise(K.*u)"
@@ -784,6 +789,15 @@ Model {
       LatchByDelayingOutsideSignal off
       LatchInputForFeedbackSignals off
       Interpolate	      on
+    }
+    Block {
+      BlockType		      Logic
+      Operator		      "AND"
+      Inputs		      "2"
+      IconShape		      "rectangular"
+      AllPortsSameDT	      on
+      OutDataTypeStr	      "Inherit: Logical (see Configuration Parameters: Optimization)"
+      SampleTime	      "-1"
     }
     Block {
       BlockType		      Outport
@@ -853,7 +867,6 @@ Model {
       Permissions	      "ReadWrite"
       PermitHierarchicalResolution "All"
       TreatAsAtomicUnit	      off
-      CheckFcnCallInpInsideContextMsg off
       SystemSampleTime	      "-1"
       RTWFcnNameOpts	      "Auto"
       RTWFileNameOpts	      "Auto"
@@ -868,6 +881,8 @@ Model {
       MinMaxOverflowLogging   "UseLocalSettings"
       SFBlockType	      "NONE"
       GeneratePreprocessorConditionals off
+      PropagateVariantConditions off
+      TreatAsGroupedWhenPropagatingVariantConditions on
     }
     Block {
       BlockType		      Sum
@@ -891,7 +906,7 @@ Model {
   }
   System {
     Name		    "impedanceControl2012b"
-    Location		    [0, 23, 1905, 1058]
+    Location		    [73, 32, 1753, 1082]
     Open		    off
     ModelBrowserVisibility  off
     ModelBrowserWidth	    200
@@ -903,9 +918,9 @@ Model {
     TiledPaperMargins	    [0.500000, 0.500000, 0.500000, 0.500000]
     TiledPageScale	    1
     ShowPageBoundaries	    off
-    ZoomFactor		    "104"
+    ZoomFactor		    "91"
     ReportName		    "simulink-default.rpt"
-    SIDHighWatermark	    "296"
+    SIDHighWatermark	    "309"
     Block {
       BlockType		      Gain
       Name		      "Gain"
@@ -928,7 +943,7 @@ Model {
       BlockType		      Gain
       Name		      "Gain1"
       SID		      "14"
-      Position		      [975, 380, 1030, 410]
+      Position		      [895, 380, 950, 410]
       ZOrder		      22
       ShowName		      off
       Gain		      "Kp"
@@ -947,7 +962,7 @@ Model {
       BlockType		      Gain
       Name		      "Gain2"
       SID		      "20"
-      Position		      [805, 315, 860, 345]
+      Position		      [895, 315, 950, 345]
       ZOrder		      26
       ShowName		      off
       Gain		      "Kd"
@@ -957,7 +972,7 @@ Model {
       SaturateOnIntegerOverflow	off
       Port {
 	PortNumber		1
-	Name			"                                                                             Kd(qDref - qD)"
+	Name			"Kd(qDref - qD)"
 	RTWStorageClass		"Auto"
 	DataLoggingNameMode	"SignalName"
       }
@@ -975,7 +990,7 @@ Model {
       SaturateOnIntegerOverflow	off
       Port {
 	PortNumber		1
-	Name			"                                                  gravityTorques "
+	Name			"gravityTorques "
 	RTWStorageClass		"Auto"
 	DataLoggingNameMode	"SignalName"
       }
@@ -1007,7 +1022,7 @@ Model {
       ZOrder		      384
       BackgroundColor	      "[0.513700, 0.851000, 0.670600]"
       ShowName		      off
-      LibraryVersion	      "1.355"
+      LibraryVersion	      "1.383"
       SourceBlock	      "WBToolboxLibrary/wholeBodyStates/Get Estimate"
       SourceType	      "Get Estimate"
       estimateType	      "Joints Position"
@@ -1025,7 +1040,7 @@ Model {
       ZOrder		      385
       BackgroundColor	      "[0.513700, 0.674500, 1.000000]"
       ShowName		      off
-      LibraryVersion	      "1.355"
+      LibraryVersion	      "1.383"
       SourceBlock	      "WBToolboxLibrary/wholeBodyStates/Get Estimate"
       SourceType	      "Get Estimate"
       estimateType	      "Joints Velocity"
@@ -1043,7 +1058,7 @@ Model {
       ZOrder		      590
       BackgroundColor	      "[0.827500, 0.576500, 0.603900]"
       ShowName		      off
-      LibraryVersion	      "1.355"
+      LibraryVersion	      "1.383"
       SourceBlock	      "WBToolboxLibrary/wholeBodyStates/Get Estimate"
       SourceType	      "Get Estimate"
       estimateType	      "Joints Torque"
@@ -1060,21 +1075,6 @@ Model {
     }
     Block {
       BlockType		      Reference
-      Name		      "Real Time Synchronizer"
-      SID		      "174"
-      Ports		      []
-      Position		      [658, 204, 783, 241]
-      ZOrder		      591
-      ForegroundColor	      "[0.916667, 0.916667, 0.916667]"
-      BackgroundColor	      "gray"
-      ShowName		      off
-      LibraryVersion	      "1.355"
-      SourceBlock	      "WBToolboxLibrary/Utilities/Real Time Synchronizer"
-      SourceType	      "Real Time Synchronizer"
-      period		      "0.01"
-    }
-    Block {
-      BlockType		      Reference
       Name		      "Set References"
       SID		      "137"
       Ports		      [1]
@@ -1082,10 +1082,12 @@ Model {
       ZOrder		      383
       BackgroundColor	      "[0.827500, 0.576500, 0.603900]"
       ShowName		      off
-      LibraryVersion	      "1.355"
+      LibraryVersion	      "1.383"
       SourceBlock	      "WBToolboxLibrary/wholeBodyActuators/Set References"
       SourceType	      "Set References"
       controlType	      "Torque"
+      fullOrSubControl	      "Full"
+      controlledJoints	      "''"
       robotName		      "WBT_robotName"
       localName		      "WBT_modelName"
       wbiFile		      "WBT_wbiFilename"
@@ -1172,8 +1174,8 @@ Model {
       MaxDataPoints	      5000
       SaveToWorkspace	      off
       SaveName		      ScopeData
-      YMin		      -20.93013~-24.21652~-4.0063
-      YMax		      5.78387~6.06845~4.66596
+      YMin		      -2922.58352~-101.2577~-3132.94288
+      YMax		      3120.6543~99.53511~2897.50788
       SampleInput	      off
       SampleTime	      -1
       ZoomMode		      on
@@ -1196,7 +1198,7 @@ Model {
 	LineWidths		"[0.5 0.5 0.5 0.5 0.5 0.5]"
 	MarkerStyles		"none|none|none|none|none|none"
       }
-      Location		      [1 95 1281 776]
+      Location		      [403 251 1675 928]
     }
     Block {
       BlockType		      SubSystem
@@ -1210,7 +1212,7 @@ Model {
       Variant		      off
       System {
 	Name			"WholeBodyDebug"
-	Location		[0, 23, 1905, 1058]
+	Location		[2760, 0, 3600, 776]
 	Open			off
 	ModelBrowserVisibility	off
 	ModelBrowserWidth	200
@@ -1881,6 +1883,16 @@ Model {
 	    axes2		    "%<SignalLabel>"
 	    axes3		    "%<SignalLabel>"
 	  }
+	  List {
+	    ListType		    ScopeGraphics
+	    FigureColor		    "[0.156862745098039 0.156862745098039 0.156862745098039]"
+	    AxesColor		    "[0 0 0]"
+	    AxesTickColor	    "[0.686274509803922 0.686274509803922 0.686274509803922]"
+	    LineColors		    "[1 1 0;1 0 1;0 1 1;1 0 0;0 1 0;0 0 1]"
+	    LineStyles		    "-|-|-|-|-|-"
+	    LineWidths		    "[0.5 0.5 0.5 0.5 0.5 0.5]"
+	    MarkerStyles	    "none|none|none|none|none|none"
+	  }
 	  Location		  [15 232 1648 1070]
 	}
 	Block {
@@ -1912,6 +1924,16 @@ Model {
 	    axes1		    "%<SignalLabel>"
 	    axes2		    "%<SignalLabel>"
 	    axes3		    "%<SignalLabel>"
+	  }
+	  List {
+	    ListType		    ScopeGraphics
+	    FigureColor		    "[0.156862745098039 0.156862745098039 0.156862745098039]"
+	    AxesColor		    "[0 0 0]"
+	    AxesTickColor	    "[0.686274509803922 0.686274509803922 0.686274509803922]"
+	    LineColors		    "[1 1 0;1 0 1;0 1 1;1 0 0;0 1 0;0 0 1]"
+	    LineStyles		    "-|-|-|-|-|-"
+	    LineWidths		    "[0.5 0.5 0.5 0.5 0.5 0.5]"
+	    MarkerStyles	    "none|none|none|none|none|none"
 	  }
 	  Location		  [113 130 1914 1062]
 	}
@@ -2065,7 +2087,7 @@ Model {
       Variant		      off
       System {
 	Name			"compute gravity torques"
-	Location		[0, 23, 1905, 1058]
+	Location		[0, 0, 1905, 1048]
 	Open			off
 	ModelBrowserVisibility	off
 	ModelBrowserWidth	200
@@ -2077,7 +2099,7 @@ Model {
 	TiledPaperMargins	[0.500000, 0.500000, 0.500000, 0.500000]
 	TiledPageScale		1
 	ShowPageBoundaries	off
-	ZoomFactor		"308"
+	ZoomFactor		"307"
 	Block {
 	  BlockType		  Inport
 	  Name			  "joint angles"
@@ -2121,7 +2143,7 @@ Model {
 	  Ports			  [4, 1]
 	  Position		  [180, 237, 320, 338]
 	  ZOrder		  589
-	  LibraryVersion	  "1.355"
+	  LibraryVersion	  "1.383"
 	  SourceBlock		  "WBToolboxLibrary/wholeBodyModel/Dynamics/Get Bias Forces"
 	  SourceType		  "Get Generalized Bias Forces"
 	  robotName		  "WBT_robotName"
@@ -2210,6 +2232,7 @@ Model {
       Ports		      [1]
       Position		      [1785, 646, 1830, 734]
       ZOrder		      626
+      NumInputPorts	      "1"
       Open		      off
       TimeRange		      20
       TickLabels	      OneTimeTick
@@ -2254,9 +2277,7 @@ Model {
       Variant		      off
       Port {
 	PortNumber		1
-	Name			"                                                                                                             "
-	"                                                                                                                     "
-	"                                                    Mj*qDDref"
+	Name			" Mj*qDDref"
 	RTWStorageClass		"Auto"
 	DataLoggingNameMode	"SignalName"
       }
@@ -2268,7 +2289,7 @@ Model {
       }
       System {
 	Name			"references"
-	Location		[0, 23, 1905, 1058]
+	Location		[1920, 0, 3600, 1050]
 	Open			off
 	ModelBrowserVisibility	off
 	ModelBrowserWidth	200
@@ -2280,7 +2301,7 @@ Model {
 	TiledPaperMargins	[0.500000, 0.500000, 0.500000, 0.500000]
 	TiledPageScale		1
 	ShowPageBoundaries	off
-	ZoomFactor		"156"
+	ZoomFactor		"157"
 	Block {
 	  BlockType		  Inport
 	  Name			  "qjRad"
@@ -2288,6 +2309,15 @@ Model {
 	  Position		  [20, 288, 50, 302]
 	  ZOrder		  364
 	  IconDisplay		  "Port number"
+	}
+	Block {
+	  BlockType		  Constant
+	  Name			  "Constant"
+	  SID			  "300"
+	  Position		  [275, 455, 305, 485]
+	  ZOrder		  377
+	  NamePlacement		  "alternate"
+	  Value			  "eye(4)"
 	}
 	Block {
 	  BlockType		  Gain
@@ -2356,7 +2386,7 @@ Model {
 	  Ports			  [2, 1]
 	  Position		  [380, 454, 520, 521]
 	  ZOrder		  375
-	  LibraryVersion	  "1.355"
+	  LibraryVersion	  "1.383"
 	  SourceBlock		  "WBToolboxLibrary/wholeBodyModel/Dynamics/Mass Matrix"
 	  SourceType		  "Mass Matrix"
 	  robotName		  "WBT_robotName"
@@ -2471,7 +2501,7 @@ Model {
 	    TiledPageScale	    1
 	    ShowPageBoundaries	    off
 	    ZoomFactor		    "100"
-	    SIDHighWatermark	    "296"
+	    SIDHighWatermark	    "309"
 	    Block {
 	      BlockType		      Inport
 	      Name		      "M"
@@ -2483,20 +2513,20 @@ Model {
 	    Block {
 	      BlockType		      Demux
 	      Name		      " Demux "
-	      SID		      "108::138"
+	      SID		      "108::141"
 	      Ports		      [1, 1]
 	      Position		      [270, 230, 320, 270]
-	      ZOrder		      8
+	      ZOrder		      11
 	      Outputs		      "1"
 	    }
 	    Block {
 	      BlockType		      S-Function
 	      Name		      " SFunction "
-	      SID		      "108::137"
+	      SID		      "108::140"
 	      Tag		      "Stateflow S-Function impedanceControl2012b 2"
 	      Ports		      [1, 2]
 	      Position		      [180, 100, 230, 160]
-	      ZOrder		      7
+	      ZOrder		      10
 	      FunctionName	      "sf_sfun"
 	      PortCounts	      "[1 2]"
 	      SFunctionDeploymentMode off
@@ -2511,9 +2541,9 @@ Model {
 	    Block {
 	      BlockType		      Terminator
 	      Name		      " Terminator "
-	      SID		      "108::139"
+	      SID		      "108::142"
 	      Position		      [460, 241, 480, 259]
-	      ZOrder		      9
+	      ZOrder		      12
 	    }
 	    Block {
 	      BlockType		      Outport
@@ -2565,176 +2595,9 @@ Model {
 	  Position		  [545, 17, 605, 63]
 	  ZOrder		  374
 	  BackgroundColor	  "[0.537255, 0.721569, 1.000000]"
-	  LibraryVersion	  "1.355"
+	  LibraryVersion	  "1.383"
 	  SourceBlock		  "WBToolboxLibrary/Utilities/holder\n"
 	  SourceType		  "Holder"
-	}
-	Block {
-	  BlockType		  SubSystem
-	  Name			  "l_sole_H_root_link"
-	  SID			  "141"
-	  Ports			  [1, 1]
-	  Position		  [165, 440, 305, 500]
-	  ZOrder		  376
-	  ShowName		  off
-	  RequestExecContextInheritance	off
-	  Variant		  off
-	  System {
-	    Name		    "l_sole_H_root_link"
-	    Location		    [65, 24, 1366, 768]
-	    Open		    off
-	    ModelBrowserVisibility  off
-	    ModelBrowserWidth	    200
-	    ScreenColor		    "white"
-	    PaperOrientation	    "landscape"
-	    PaperPositionMode	    "auto"
-	    PaperType		    "usletter"
-	    PaperUnits		    "inches"
-	    TiledPaperMargins	    [0.500000, 0.500000, 0.500000, 0.500000]
-	    TiledPageScale	    1
-	    ShowPageBoundaries	    off
-	    ZoomFactor		    "208"
-	    Block {
-	      BlockType		      Inport
-	      Name		      "qj"
-	      SID		      "142"
-	      Position		      [15, 180, 45, 195]
-	      ZOrder		      584
-	      BlockRotation	      270
-	      IconDisplay	      "Port number"
-	    }
-	    Block {
-	      BlockType		      Constant
-	      Name		      "Constant5"
-	      SID		      "143"
-	      Position		      [60, 20, 90, 50]
-	      ZOrder		      570
-	      ShowName		      off
-	      Value		      "eye(4)"
-	    }
-	    Block {
-	      BlockType		      Constant
-	      Name		      "Constant6"
-	      SID		      "144"
-	      Position		      [60, 105, 90, 135]
-	      ZOrder		      573
-	      ShowName		      off
-	      Value		      "eye(4)"
-	    }
-	    Block {
-	      BlockType		      Product
-	      Name		      "Inv\\*"
-	      SID		      "145"
-	      Ports		      [2, 1]
-	      Position		      [340, 35, 410, 90]
-	      ZOrder		      583
-	      Inputs		      "/*"
-	      Multiplication	      "Matrix(*)"
-	      InputSameDT	      off
-	      OutDataTypeStr	      "Inherit: Inherit via internal rule"
-	      RndMeth		      "Floor"
-	      SaturateOnIntegerOverflow	off
-	      Port {
-		PortNumber		1
-		Name			"l_sole_H_root_link"
-		RTWStorageClass		"Auto"
-		DataLoggingNameMode	"SignalName"
-	      }
-	    }
-	    Block {
-	      BlockType		      Reference
-	      Name		      "l_sole"
-	      SID		      "146"
-	      Ports		      [2, 1]
-	      Position		      [130, 20, 295, 80]
-	      ZOrder		      569
-	      LibraryVersion	      "1.355"
-	      SourceBlock	      "WBToolboxLibrary/wholeBodyModel/Kinematics/Forward Kinematics"
-	      SourceType	      "Forward Kinematics"
-	      frameName		      "'l_sole'"
-	      robotName		      "WBT_robotName"
-	      localName		      "WBT_modelName"
-	      wbiFile		      "WBT_wbiFilename"
-	      wbiList		      "WBT_wbiList"
-	    }
-	    Block {
-	      BlockType		      Reference
-	      Name		      "root_link"
-	      SID		      "147"
-	      Ports		      [2, 1]
-	      Position		      [130, 105, 295, 165]
-	      ZOrder		      572
-	      LibraryVersion	      "1.355"
-	      SourceBlock	      "WBToolboxLibrary/wholeBodyModel/Kinematics/Forward Kinematics"
-	      SourceType	      "Forward Kinematics"
-	      frameName		      "'root_link'"
-	      robotName		      "WBT_robotName"
-	      localName		      "WBT_modelName"
-	      wbiFile		      "WBT_wbiFilename"
-	      wbiList		      "WBT_wbiList"
-	    }
-	    Block {
-	      BlockType		      Outport
-	      Name		      "l_sole_H_root_link"
-	      SID		      "148"
-	      Position		      [550, 58, 580, 72]
-	      ZOrder		      585
-	      IconDisplay	      "Port number"
-	    }
-	    Line {
-	      SrcBlock		      "Constant5"
-	      SrcPort		      1
-	      DstBlock		      "l_sole"
-	      DstPort		      1
-	    }
-	    Line {
-	      Name		      "l_sole_H_root_link"
-	      Labels		      [1, 1]
-	      SrcBlock		      "Inv\\*"
-	      SrcPort		      1
-	      DstBlock		      "l_sole_H_root_link"
-	      DstPort		      1
-	    }
-	    Line {
-	      SrcBlock		      "l_sole"
-	      SrcPort		      1
-	      DstBlock		      "Inv\\*"
-	      DstPort		      1
-	    }
-	    Line {
-	      SrcBlock		      "Constant6"
-	      SrcPort		      1
-	      DstBlock		      "root_link"
-	      DstPort		      1
-	    }
-	    Line {
-	      SrcBlock		      "qj"
-	      SrcPort		      1
-	      Points		      [0, -25]
-	      Branch {
-		Points			[0, -85]
-		DstBlock		"l_sole"
-		DstPort			2
-	      }
-	      Branch {
-		DstBlock		"root_link"
-		DstPort			2
-	      }
-	    }
-	    Line {
-	      SrcBlock		      "root_link"
-	      SrcPort		      1
-	      Points		      [25, 0]
-	      DstBlock		      "Inv\\*"
-	      DstPort		      2
-	    }
-	  }
-	  RTWSystemCode		  "Auto"
-	  MinAlgLoopOccurrences	  off
-	  PropExecContextOutsideSubsystem off
-	  FunctionWithSeparateData off
-	  Opaque		  off
-	  MaskHideContents	  off
 	}
 	Block {
 	  BlockType		  Scope
@@ -2752,8 +2615,8 @@ Model {
 	  MaxDataPoints		  5000
 	  SaveToWorkspace	  off
 	  SaveName		  ScopeData2
-	  YMin			  -5~-5~-5
-	  YMax			  4~5~5
+	  YMin			  -1.00000~-1.00000~-1.00000
+	  YMax			  1.00000~1.00000~1.00000
 	  SampleInput		  off
 	  SampleTime		  -1
 	  ZoomMode		  on
@@ -2776,7 +2639,7 @@ Model {
 	    LineWidths		    "[0.5 0.5 0.5 0.5 0.5 0.5]"
 	    MarkerStyles	    "none|none|none|none|none|none"
 	  }
-	  Location		  [7 83 955 760]
+	  Location		  [361 299 1309 976]
 	}
 	Block {
 	  BlockType		  Outport
@@ -2901,16 +2764,9 @@ Model {
 	    DstPort		    1
 	  }
 	  Branch {
-	    Points		    [0, 175]
-	    Branch {
-	      DstBlock		      "l_sole_H_root_link"
-	      DstPort		      1
-	    }
-	    Branch {
-	      Points		      [0, 83; 256, 0; 0, -48]
-	      DstBlock		      "Mass Matrix"
-	      DstPort		      2
-	    }
+	    Points		    [0, 210]
+	    DstBlock		    "Mass Matrix"
+	    DstPort		    2
 	  }
 	}
 	Line {
@@ -2932,10 +2788,207 @@ Model {
 	  DstPort		  1
 	}
 	Line {
-	  SrcBlock		  "l_sole_H_root_link"
+	  SrcBlock		  "Constant"
 	  SrcPort		  1
 	  DstBlock		  "Mass Matrix"
 	  DstPort		  1
+	}
+      }
+      RTWSystemCode	      "Auto"
+      MinAlgLoopOccurrences   off
+      PropExecContextOutsideSubsystem off
+      FunctionWithSeparateData off
+      Opaque		      off
+      MaskHideContents	      off
+    }
+    Block {
+      BlockType		      SubSystem
+      Name		      "synchronizer"
+      SID		      "301"
+      Ports		      []
+      Position		      [787, 98, 907, 148]
+      ZOrder		      631
+      ForegroundColor	      "red"
+      BackgroundColor	      "green"
+      ShowName		      off
+      RequestExecContextInheritance off
+      Variant		      off
+      Object {
+	$PropName		"MaskObject"
+	$ObjectID		22
+	$ClassName		"Simulink.Mask"
+	Display			"disp('SYNCHRONIZER')"
+      }
+      System {
+	Name			"synchronizer"
+	Location		[0, 0, 1905, 1048]
+	Open			off
+	ModelBrowserVisibility	off
+	ModelBrowserWidth	200
+	ScreenColor		"white"
+	PaperOrientation	"landscape"
+	PaperPositionMode	"auto"
+	PaperType		"usletter"
+	PaperUnits		"inches"
+	TiledPaperMargins	[0.500000, 0.500000, 0.500000, 0.500000]
+	TiledPageScale		1
+	ShowPageBoundaries	off
+	ZoomFactor		"356"
+	Block {
+	  BlockType		  SubSystem
+	  Name			  "GAZEBO_SYNCHRONIZER"
+	  SID			  "302"
+	  Ports			  [0, 0, 1]
+	  Position		  [15, 15, 140, 75]
+	  ZOrder		  -7
+	  RequestExecContextInheritance	off
+	  Variant		  off
+	  System {
+	    Name		    "GAZEBO_SYNCHRONIZER"
+	    Location		    [1328, 33, 2547, 1436]
+	    Open		    off
+	    ModelBrowserVisibility  off
+	    ModelBrowserWidth	    200
+	    ScreenColor		    "white"
+	    PaperOrientation	    "landscape"
+	    PaperPositionMode	    "auto"
+	    PaperType		    "usletter"
+	    PaperUnits		    "inches"
+	    TiledPaperMargins	    [0.500000, 0.500000, 0.500000, 0.500000]
+	    TiledPageScale	    1
+	    ShowPageBoundaries	    off
+	    ZoomFactor		    "440"
+	    Block {
+	      BlockType		      EnablePort
+	      Name		      "Enable"
+	      SID		      "303"
+	      Ports		      []
+	      Position		      [177, 120, 197, 140]
+	      ZOrder		      538
+	    }
+	    Block {
+	      BlockType		      Reference
+	      Name		      "Simulator Synchronizer"
+	      SID		      "304"
+	      Ports		      []
+	      Position		      [120, 24, 250, 61]
+	      ZOrder		      539
+	      ForegroundColor	      "[0.490196, 0.000000, 0.000000]"
+	      ShowName		      off
+	      LibraryVersion	      "1.383"
+	      SourceBlock	      "WBToolboxLibrary/Utilities/Simulator Synchronizer"
+	      SourceType	      "Simulator Synchronizer"
+	      period		      "CONFIG.Ts"
+	      serverPortName	      "'/clock/rpc'"
+	      clientPortName	      "'/WBT_synchronizer/rpc:o'"
+	    }
+	  }
+	  RTWSystemCode		  "Auto"
+	  MinAlgLoopOccurrences	  off
+	  PropExecContextOutsideSubsystem off
+	  FunctionWithSeparateData off
+	  Opaque		  off
+	  MaskHideContents	  off
+	}
+	Block {
+	  BlockType		  Logic
+	  Name			  "Logical\nOperator"
+	  SID			  "305"
+	  Ports			  [1, 1]
+	  Position		  [-25, -41, 5, -9]
+	  ZOrder		  307
+	  BlockMirror		  on
+	  NamePlacement		  "alternate"
+	  ShowName		  off
+	  Operator		  "NOT"
+	  AllPortsSameDT	  off
+	  OutDataTypeStr	  "boolean"
+	}
+	Block {
+	  BlockType		  Constant
+	  Name			  "ON_GAZEBO\n"
+	  SID			  "306"
+	  Position		  [230, -35, 345, -15]
+	  ZOrder		  304
+	  BlockMirror		  on
+	  NamePlacement		  "alternate"
+	  ShowName		  off
+	  Value			  "CONFIG.ON_GAZEBO"
+	}
+	Block {
+	  BlockType		  SubSystem
+	  Name			  "REAL_TIME_SYNC"
+	  SID			  "307"
+	  Ports			  [0, 0, 1]
+	  Position		  [-170, 12, -45, 72]
+	  ZOrder		  -9
+	  RequestExecContextInheritance	off
+	  Variant		  off
+	  System {
+	    Name		    "REAL_TIME_SYNC"
+	    Location		    [0, 0, 1905, 1048]
+	    Open		    off
+	    ModelBrowserVisibility  off
+	    ModelBrowserWidth	    200
+	    ScreenColor		    "white"
+	    PaperOrientation	    "landscape"
+	    PaperPositionMode	    "auto"
+	    PaperType		    "usletter"
+	    PaperUnits		    "inches"
+	    TiledPaperMargins	    [0.500000, 0.500000, 0.500000, 0.500000]
+	    TiledPageScale	    1
+	    ShowPageBoundaries	    off
+	    ZoomFactor		    "307"
+	    Block {
+	      BlockType		      EnablePort
+	      Name		      "Enable"
+	      SID		      "308"
+	      Ports		      []
+	      Position		      [97, 85, 117, 105]
+	      ZOrder		      538
+	    }
+	    Block {
+	      BlockType		      Reference
+	      Name		      "Real Time Synchronizer"
+	      SID		      "309"
+	      Ports		      []
+	      Position		      [115, 34, 240, 71]
+	      ZOrder		      539
+	      ForegroundColor	      "[0.916667, 0.916667, 0.916667]"
+	      BackgroundColor	      "gray"
+	      ShowName		      off
+	      LibraryVersion	      "1.383"
+	      SourceBlock	      "WBToolboxLibrary/Utilities/Real Time Synchronizer"
+	      SourceType	      "Real Time Synchronizer"
+	      period		      "CONFIG.Ts"
+	    }
+	  }
+	  RTWSystemCode		  "Auto"
+	  MinAlgLoopOccurrences	  off
+	  PropExecContextOutsideSubsystem off
+	  FunctionWithSeparateData off
+	  Opaque		  off
+	  MaskHideContents	  off
+	}
+	Line {
+	  SrcBlock		  "Logical\nOperator"
+	  SrcPort		  1
+	  Points		  [-75, 0]
+	  DstBlock		  "REAL_TIME_SYNC"
+	  DstPort		  enable
+	}
+	Line {
+	  SrcBlock		  "ON_GAZEBO\n"
+	  SrcPort		  1
+	  Points		  [-150, 0]
+	  Branch {
+	    DstBlock		    "GAZEBO_SYNCHRONIZER"
+	    DstPort		    enable
+	  }
+	  Branch {
+	    DstBlock		    "Logical\nOperator"
+	    DstPort		    1
+	  }
 	}
       }
       RTWSystemCode	      "Auto"
@@ -2969,8 +3022,8 @@ Model {
       DstPort		      3
     }
     Line {
-      Name		      "                                                                             Kd(qDref - qD)"
-      Labels		      [1, 1]
+      Name		      "Kd(qDref - qD)"
+      Labels		      [-1, 0]
       SrcBlock		      "Gain2"
       SrcPort		      1
       DstBlock		      "Sum1"
@@ -3004,13 +3057,13 @@ Model {
       Branch {
 	Points			[85, 0; 0, -95]
 	Branch {
-	  Labels		  [2, 1]
+	  Labels		  [-1, 0]
 	  Points		  [0, -95]
 	  DstBlock		  "WholeBodyDebug"
 	  DstPort		  2
 	}
 	Branch {
-	  Labels		  [1, 1]
+	  Labels		  [-1, 0]
 	  DstBlock		  "Torque info"
 	  DstPort		  2
 	}
@@ -3027,13 +3080,13 @@ Model {
       SrcPort		      1
       Points		      [105, 0]
       Branch {
-	Labels			[2, 1]
+	Labels			[-1, 0]
 	Points			[0, -100]
 	DstBlock		"WholeBodyDebug"
 	DstPort			3
       }
       Branch {
-	Labels			[1, 1]
+	Labels			[-1, 0]
 	DstBlock		"Torque info"
 	DstPort			3
       }
@@ -3057,7 +3110,7 @@ Model {
     Line {
       SrcBlock		      "Sum3"
       SrcPort		      1
-      Points		      [23, 0; 0, -5]
+      Points		      [68, 0; 0, -5]
       DstBlock		      "Gain2"
       DstPort		      1
     }
@@ -3068,23 +3121,21 @@ Model {
       DstPort		      1
     }
     Line {
-      Name		      "                                                                                                   "
-      "                                                                                                                "
-      "                                                                   Mj*qDDref"
-      Labels		      [1, 1]
+      Name		      " Mj*qDDref"
+      Labels		      [-1, 0]
       SrcBlock		      "references"
       SrcPort		      1
       DstBlock		      "Sum1"
       DstPort		      1
     }
     Line {
-      Name		      "                                                  gravityTorques "
+      Name		      "gravityTorques "
       Labels		      [1, 1]
       SrcBlock		      "Gain4"
       SrcPort		      1
       Points		      [186, 0]
       Branch {
-	Labels			[2, 1]
+	Labels			[-1, 1]
 	Points			[0, -230]
 	DstBlock		"Sum1"
 	DstPort			4
@@ -3102,13 +3153,8 @@ Model {
       DstPort		      1
     }
     Line {
-      SrcBlock		      "compute gravity torques"
-      SrcPort		      1
-      DstBlock		      "Gain4"
-      DstPort		      1
-    }
-    Line {
       Name		      "torqueDesired"
+      Labels		      [1, 0]
       SrcBlock		      "Sum1"
       SrcPort		      1
       Points		      [80, 0]
@@ -3119,14 +3165,13 @@ Model {
 	  DstPort		  1
 	}
 	Branch {
-	  Labels		  [1, 1]
 	  Points		  [0, 90]
 	  Branch {
 	    DstBlock		    "Sum2"
 	    DstPort		    1
 	  }
 	  Branch {
-	    Labels		    [1, 1]
+	    Labels		    [-1, 0]
 	    DstBlock		    "Torque info"
 	    DstPort		    1
 	  }
@@ -3137,11 +3182,17 @@ Model {
 	DstPort			1
       }
     }
+    Line {
+      SrcBlock		      "compute gravity torques"
+      SrcPort		      1
+      DstBlock		      "Gain4"
+      DstPort		      1
+    }
   }
 }
 #Finite State Machines
 #
-#   Stateflow 80000006
+#   Stateflow 80000010
 #
 #
 Stateflow {
@@ -3150,29 +3201,29 @@ Stateflow {
     name		    "impedanceControl2012b"
     created		    "12-Mar-2015 18:23:09"
     isLibrary		    0
-    firstTarget		    9
     sfVersion		    76014001.0011
+    firstTarget		    9
   }
   chart {
     id			    2
+    machine		    1
     name		    "references/fromMtoMj"
     windowPosition	    [352.761 488.141 161 328]
     viewLimits		    [0 156.75 0 153.75]
     screen		    [1 1 1280 1024 1.000677131425054]
     treeNode		    [0 3 0 0]
-    firstTransition	    7
-    firstJunction	    6
     viewObj		    2
-    machine		    1
     ssIdHighWaterMark	    5
     decomposition	    CLUSTER_CHART
     type		    EML_CHART
-    firstData		    4
     chartFileNumber	    2
     disableImplicitCasting  1
     eml {
       name		      "fromMtoMj"
     }
+    firstData		    4
+    firstTransition	    7
+    firstJunction	    6
   }
   state {
     id			    3
@@ -3196,7 +3247,6 @@ Stateflow {
     id			    4
     ssIdNumber		    4
     name		    "M"
-    linkNode		    [2 0 5]
     scope		    INPUT_DATA
     machine		    1
     props {
@@ -3210,12 +3260,12 @@ Stateflow {
       complexity	      SF_COMPLEX_INHERITED
     }
     dataType		    "Inherit: Same as Simulink"
+    linkNode		    [2 0 5]
   }
   data {
     id			    5
     ssIdNumber		    5
     name		    "Mj"
-    linkNode		    [2 4 0]
     scope		    OUTPUT_DATA
     machine		    1
     props {
@@ -3230,15 +3280,16 @@ Stateflow {
       frame		      SF_FRAME_NO
     }
     dataType		    "Inherit: Same as Simulink"
+    linkNode		    [2 4 0]
   }
   junction {
     id			    6
     position		    [23.5747 49.5747 7]
     chart		    2
-    linkNode		    [2 0 0]
     subviewer		    2
     ssIdNumber		    3
     type		    CONNECTIVE_JUNCTION
+    linkNode		    [2 0 0]
   }
   transition {
     id			    7
@@ -3254,7 +3305,6 @@ Stateflow {
     }
     midPoint		    [23.5747 24.9468]
     chart		    2
-    linkNode		    [2 0 0]
     dataLimits		    [21.175 25.975 14.625 42.575]
     subviewer		    2
     drawStyle		    SMART
@@ -3263,18 +3313,19 @@ Stateflow {
     }
     executionOrder	    1
     ssIdNumber		    2
+    linkNode		    [2 0 0]
   }
   instance {
     id			    8
-    name		    "references/fromMtoMj"
     machine		    1
+    name		    "references/fromMtoMj"
     chart		    2
   }
   target {
     id			    9
+    machine		    1
     name		    "sfun"
     description		    "Default Simulink S-Function Target."
-    machine		    1
     linkNode		    [1 0 0]
   }
 }
