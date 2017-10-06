@@ -15,7 +15,7 @@ CONFIG.SMOOTH_DES_Q                = 0;    % If equal to one, the desired stream
                                            % of the postural tasks are smoothed internally 
 
 WBT_wbiList = '(LHipSag,LHipLat,LHipYaw,LKneeSag,LAnkSag,LAnkLat,RHipSag,RHipLat,RHipYaw,RKneeSag,RAnkSag,RAnkLat)';
-
+WBT_robotName          = 'bigman';
 dump.left_wrench_port  = '/bigman/left_leg_ft/analog:o/forceTorque';
 dump.right_wrench_port = '/bigman/right_leg_ft/analog:o/forceTorque';
 
