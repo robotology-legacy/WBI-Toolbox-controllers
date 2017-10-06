@@ -25,13 +25,12 @@ clear; clc;
 % and set the environmental variable YARP_ROBOT_NAME = icubGazeboSim.
 % To do this, you can uncomment the 
 
-% setenv('YARP_ROBOT_NAME','iCubGenova01');
 % setenv('YARP_ROBOT_NAME','iCubGenova04');
-setenv('YARP_ROBOT_NAME','iCubNancy01');
-% setenv('YARP_ROBOT_NAME','iCubDarmstadt01');
-% setenv('YARP_ROBOT_NAME','icubGazeboSim');
-% setenv('YARP_ROBOT_NAME','iCubGenova05');
-% setenv('YARP_ROBOT_NAME','isaacFirstProtoGazebo');
+% setenv('YARP_ROBOT_NAME','iCubNancy01');
+setenv('YARP_ROBOT_NAME','icubGazeboSim');
+% setenv('YARP_ROBOT_NAME','iCubGenova02');
+% setenv('YARP_ROBOT_NAME','bigman');
+% setenv('YARP_ROBOT_NAME','bigman_only_legs');
 
 % Simulation time in seconds
 CONFIG.SIMULATION_TIME     = inf;   
@@ -52,22 +51,21 @@ CONFIG.SIMULATION_TIME     = inf;
 %               robots/YARP_ROBOT_NAME/initRefGen.m
 % 
 % 'WALKING': under development.
-SM.SM_TYPE                 = 'YOGA';
+SM.SM_TYPE                   = 'YOGA';
 
 % CONFIG.SCOPES: if set to true, all visualizers for debugging are active
-CONFIG.SCOPES.ALL          = true;
-% You can also activate only some specific debugging scopes
-CONFIG.SCOPES.BASE_EST_IMU = false;
-CONFIG.SCOPES.EXTWRENCHES  = false;
-CONFIG.SCOPES.GAIN_SCHE_INFO=false;
-CONFIG.SCOPES.MAIN         = false;
-CONFIG.SCOPES.QP           = false;
+CONFIG.SCOPES.ALL            = true;
 
+% You can also activate only some specific debugging scopes
+CONFIG.SCOPES.BASE_EST_IMU   = false;
+CONFIG.SCOPES.EXTWRENCHES    = false;
+CONFIG.SCOPES.GAIN_SCHE_INFO = false;
+CONFIG.SCOPES.MAIN           = false;
+CONFIG.SCOPES.QP             = false;
 
 % CONFIG.CHECK_LIMITS: if set to true, the controller will stop as soon as 
 % any of the joint limit is touched. 
-CONFIG.CHECK_LIMITS        = false;
-
+CONFIG.CHECK_LIMITS          = false;
 
 %% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % CONFIGURATIONS COMPLETED: loading gains and parameters for the specific robot
@@ -75,7 +73,7 @@ CONFIG.CHECK_LIMITS        = false;
 %% DO NOT MODIFY THE FOLLOWING VARIABLES, THEY ARE AUTOMATICALLY 
 %% CHANGED WHEN SIMULATING THE ROBOT ON GAZEBO, 
 WBT_modelName            = 'matlabTorqueBalancing';
- 
+WBT_robotName            = 'iCub';
 FRAMES.BASE              = 'root_link'; 
 FRAMES.IMU               = 'imu_frame';
 
@@ -103,7 +101,6 @@ CONFIG.PITCH_IMU_FILTER    = true;
 % equal to false, recall that the neck is assumed to be in (0,0,0)
 CONFIG.CORRECT_NECK_IMU    = true;
 
-
 % CONFIG.ONSOFTCARPET: the third year CoDyCo review meeting consisted also
 % of a validation scenarion in which the robot had to balance on a soft
 % carpet. Hence, when CONFIG.ONSOFTCARPET = true, other sets of gains are
@@ -114,16 +111,13 @@ CONFIG.ONSOFTCARPET        = false;
 % inequality constraints of contact wrenches
 CONFIG.USE_QP_SOLVER       = true; 
 
-PORTS.IMU       = '/icub/inertial';
+PORTS.IMU              = '/icub/inertial';
+PORTS.COM_DES          = ['/' WBT_modelName '/comDes:i'];
+PORTS.Q_DES            = ['/' WBT_modelName '/qDes:i'];
+PORTS.WBD_LEFTLEG_EE  = '/wholeBodyDynamics/left_leg/cartesianEndEffectorWrench:o';
+PORTS.WBD_RIGHTLEG_EE = '/wholeBodyDynamics/right_leg/cartesianEndEffectorWrench:o';
 
-PORTS.COM_DES   = ['/' WBT_modelName '/comDes:i'];
-
-PORTS.Q_DES     = ['/' WBT_modelName '/qDes:i'];
-
-PORTS.WBDT_LEFTLEG_EE  = '/wholeBodyDynamicsTree/left_leg/cartesianEndEffectorWrench:o';
-PORTS.WBDT_RIGHTLEG_EE = '/wholeBodyDynamicsTree/right_leg/cartesianEndEffectorWrench:o';
-
-CONFIG.Ts                = 0.01; %  Controller period [s]
+CONFIG.Ts                = 0.01; % Controller period [s]
 
 CONFIG.ON_GAZEBO         = false;
 baseToWorldRotationPort  = ['/' WBT_modelName '/floatingBaseRotationMatrix:i'];
@@ -155,5 +149,4 @@ elseif strcmpi(SM.SM_TYPE, 'WALKING')
 end
 
 [ConstraintsMatrix,bVectorConstraints]= constraints(forceFrictionCoefficient,numberOfPoints,torsionalFrictionCoefficient,gain.footSize,fZmin);
-
 

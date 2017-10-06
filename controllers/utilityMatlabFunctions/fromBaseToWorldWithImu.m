@@ -29,7 +29,7 @@ if CONFIG.PITCH_IMU_FILTER
     rollPitchYawFiltered_link(2) = rollPitchYaw_link_0(2);
 end
 
-wImu_R_link         = rotz(rollPitchYawFiltered_link(3))*roty(rollPitchYawFiltered_link(2))*rotx(rollPitchYawFiltered_link(1));
+wImu_R_link     = rotz(rollPitchYawFiltered_link(3))*roty(rollPitchYawFiltered_link(2))*rotx(rollPitchYawFiltered_link(1));
     
 wImu_H_link     = [wImu_R_link,   zeros(3,1)
                     zeros(1,3),       1     ];
@@ -41,6 +41,7 @@ wImu_H_root     = wImu_H_link*link_H_root;
 
 %correcting neck movements
 wImu_H_wImuAssumingNeckToZero = correctIMU(neck);
-wImu_H_root = wImu_H_wImuAssumingNeckToZero * wImu_H_root;
+wImu_H_root                   = wImu_H_wImuAssumingNeckToZero * wImu_H_root;
+w_H_root                      = wImu_H_link_0\wImu_H_root; % link_0_H_root
 
-w_H_root        = wImu_H_link_0\wImu_H_root; % link_0_H_root
+end

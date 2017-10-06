@@ -1,6 +1,7 @@
 ROBOT_DOF = 23;
 
 WBT_wbiList = '(torso_pitch,torso_roll,torso_yaw,l_shoulder_pitch, l_shoulder_roll, l_shoulder_yaw, l_elbow, r_shoulder_pitch,r_shoulder_roll, r_shoulder_yaw, r_elbow, l_hip_pitch, l_hip_roll, l_hip_yaw, l_knee, l_ankle_pitch, l_ankle_roll, r_hip_pitch,r_hip_roll,r_hip_yaw,r_knee,r_ankle_pitch,r_ankle_roll)';
+WBT_robotName = 'icub';
 
 gain.SmoothingTimeGainScheduling              = 2;  
 
@@ -11,9 +12,6 @@ CONFIG.SMOOTH_DES_COM      = 0;    % If equal to one, the desired streamed value
                             % of the center of mass are smoothed internally 
 CONFIG.SMOOTH_DES_Q        = 0;    % If equal to one, the desired streamed values 
                             % of the postural tasks are smoothed internally 
-                            
-PORTS.WBDT_LEFTLEG_EE  = '/wholeBodyDynamics/left_leg/cartesianEndEffectorWrench:o';
-PORTS.WBDT_RIGHTLEG_EE = '/wholeBodyDynamics/right_leg/cartesianEndEffectorWrench:o';
 
 references.smoothingTimeMinJerkComDesQDes    = 3.0;
 
