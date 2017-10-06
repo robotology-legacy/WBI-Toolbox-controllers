@@ -30,7 +30,7 @@ A folder containing old Simulink controllers for balancing.
 This is a peculiar version of momentum-based balancing controller, specifically developed for balancing the robot on a seesaw. The readme is at the following link: [torqueBalancingOnSeesaw README](controllers/torqueBalancingOnSeesaw/README.md).
 
 ### torqueBalancingStandUp
-Another peculiar version of momentum-based balancing controller designed for standing up from a chair. See relative [README](https://github.com/robotology-playground/WBI-Toolbox-controllers/blob/master/controllers/torqueBalancingStandUp/ICUB_STANDUP_README.md).
+Another peculiar version of momentum-based balancing controller designed for standing up from a chair. See relative [torqueBalancingStandUp README](controllers/torqueBalancingStandUp/ICUB_STANDUP_README.md).
 
 ###  wholeBodyImpedanceControl
 A simple impedance controller for the robot balancing. 
