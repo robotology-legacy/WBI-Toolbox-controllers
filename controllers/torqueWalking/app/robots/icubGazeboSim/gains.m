@@ -25,15 +25,15 @@ sat.torqueDot       = inf*ones(ROBOT_DOF,1);
 %% Controller gains
 
 %Center of mass linear proportional (p) and derivative (d) gains
-gain.x_CoM.p = 60;
+gain.x_CoM.p = 400;
 gain.x_CoM.d = 2 * sqrt(gain.x_CoM.p);
 
 %Center of mass angular proportional (p) and derivative (d) gains
-gain.w_CoM.p  = 5;
+gain.w_CoM.p  = 100;
 gain.w_CoM.d  = 2 * sqrt(gain.w_CoM.p);
 
 %Joints proportional (p) and derivative (d) gains
-gain.joints.p = 20;
+gain.joints.p = 2;
 gain.joints.d = 2*sqrt(gain.joints.p);
 
 %Weight on regularization of joint torques
@@ -41,7 +41,9 @@ gain.reg.joint_torques = 1e-7;
 
 %Factor multiplying CoM gains, for CoM acceleration bounds
 %value [0;1]
-gain.CoMboundFactor = 0.1;
+% gain.CoMboundFactor = 1/gain.x_CoM.p;
+gain.x_CoMbound.p = 1;
+gain.x_CoMbound.d = 2 * sqrt(gain.x_CoMbound.p);
 
 
 %% %%%%%%%%%%%%%%%%    Friction cone parameters
