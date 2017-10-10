@@ -1,28 +1,28 @@
-function [dnu_star, CoM_x_error, CoM_w_error, s_error] ...
-          = desiredAcceleration(s, ds, w_H_CoM, CoMVelocity, ...
-                                desired_x_dx_ddx_CoM, desired_R_w_dw_CoM, desired_s_ds_dds, ...
+function [dnu_des, root_x_error, root_w_error, s_error] ...
+          = desiredAcceleration(s, ds, w_H_root, rootVelocity, ...
+                                desired_x_dx_ddx_root, desired_R_w_dw_root, desired_s_ds_dds, ...
                                 gain)
 
-%CoM linear acceleration
-xCoM        = w_H_CoM(1:3, 4);
-dxCoM       = CoMVelocity(1:3);
-ddx_star = linearPID(xCoM, dxCoM, desired_x_dx_ddx_CoM, [gain.x_CoM.p, gain.x_CoM.d]);
+%Root linear acceleration
+x_root        = w_H_root(1:3, 4);
+dx_root       = rootVelocity(1:3);
+ddx_star = linearPID(x_root, dx_root, desired_x_dx_ddx_root, [gain.x_root.p, gain.x_root.d]);
 
-%CoM angular acceleration
-w_R_CoM     = w_H_CoM(1:3,1:3);
-w_CoM       = CoMVelocity(4:6);
-dw_star     = rotationalPID(w_R_CoM,w_CoM,desired_R_w_dw_CoM, [gain.w_CoM.p, gain.w_CoM.d]);
+%Root angular acceleration
+w_R_root     = w_H_root(1:3,1:3);
+w_root       = rootVelocity(4:6);
+dw_star     = rotationalPID(w_R_root,w_root,desired_R_w_dw_root, [gain.w_root.p, gain.w_root.d]);
 
 %Joint accelerations
 dds_star    = linearPID(s, ds, desired_s_ds_dds, [gain.joints.p, gain.joints.d]);
 
 %Desired action feedback
-dnu_star    = [ddx_star; dw_star; dds_star];
+dnu_des    = [ddx_star; dw_star; dds_star];
 
 
 %Debug information
-CoM_x_error = xCoM - desired_x_dx_ddx_CoM(:,1);
-CoM_w_error = invSkew(desired_R_w_dw_CoM(1:3,1:3)' * w_R_CoM);
+root_x_error = x_root - desired_x_dx_ddx_root(:,1);
+root_w_error = invSkew(desired_R_w_dw_root(1:3,1:3)' * w_R_root);
 s_error     = s - desired_s_ds_dds(:,1);
 
 end

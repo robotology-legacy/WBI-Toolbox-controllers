@@ -15,35 +15,38 @@ constants.minTolerance     = 1e-4; %Tolerance on the value of an equality constr
 constants.saturationTorque = 60;   %Maximum torque value sent to actuators
 constants.saturationForce  = 500; %Maximum contact force value considered
 
-reg.pinvDampVb             = 1e-10; %Regularizing term for matrix pseudoinverse operation in base velocity computation
+reg.pinvDamp = 1e-10; %Regularizing term for matrix pseudoinverse operation in base velocity computation
 
 %Maximum variation of torque from one time step to the next
 %Required as parameter of QP, but used only if CONFIG.QP.USE_CONTINUITY_CONSTRAINTS = true;
 %i.e. not used at the moment
-sat.torqueDot       = inf*ones(ROBOT_DOF,1);
+sat.torqueDot = inf*ones(ROBOT_DOF,1);
 
 %% Controller gains
 
-%Center of mass linear proportional (p) and derivative (d) gains
-gain.x_CoM.p = 400;
-gain.x_CoM.d = 2 * sqrt(gain.x_CoM.p);
+%Root link linear proportional (p) and derivative (d) gains
+gain.x_root.p = 15;
+gain.x_root.d = 2 * sqrt(gain.x_root.p);
 
-%Center of mass angular proportional (p) and derivative (d) gains
-gain.w_CoM.p  = 100;
-gain.w_CoM.d  = 2 * sqrt(gain.w_CoM.p);
+%Root link angular proportional (p) and derivative (d) gains
+gain.w_root.p  = 15;
+gain.w_root.d  = 2 * sqrt(gain.w_root.p);
 
 %Joints proportional (p) and derivative (d) gains
-gain.joints.p = 2;
-gain.joints.d = 2*sqrt(gain.joints.p);
+gain.joints.torso = 10;
+gain.joints.arms  = 30;
+gain.joints.legs  = 0.01;
+gain.joints.p     = [gain.joints.torso * ones(3,1); 
+                     gain.joints.arms  * ones(8,1); 
+                     gain.joints.legs  * ones(12,1)];
+gain.joints.d     = 2*sqrt(gain.joints.p);
 
 %Weight on regularization of joint torques
 gain.reg.joint_torques = 1e-7;
 
-%Factor multiplying CoM gains, for CoM acceleration bounds
-%value [0;1]
-% gain.CoMboundFactor = 1/gain.x_CoM.p;
-gain.x_CoMbound.p = 1;
-gain.x_CoMbound.d = 2 * sqrt(gain.x_CoMbound.p);
+%Gains for root acceleration bounds
+gain.x_rootbound.p = 1;
+gain.x_rootbound.d = 2 * sqrt(gain.x_rootbound.p);
 
 
 %% %%%%%%%%%%%%%%%%    Friction cone parameters
