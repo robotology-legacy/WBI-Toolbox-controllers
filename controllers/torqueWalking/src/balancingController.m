@@ -1,12 +1,12 @@
 function [HessianMatrixQP, biasVectorQP, ...
           feetAccelerationConstraintMatrix, feetAccelerationConstraintBoundVector, ...
-          CoMAccelerationConstraintMatrix, CoMAccelerationConstraintBoundVector, ...
+          rootAccelerationConstraintMatrix, rootAccelerationConstraintBoundVector, ...
           frictionConeConstraintMatrix, frictionConeUpperBoundVector] ...
-         = balancingController( M, h, dnu_star, ddx_CoM_bounds, ...
-                                w_H_l_sole, w_H_r_sole, w_J_l_sole, w_J_r_sole, w_J_CoM,...
-                                dJnu_l_sole, dJnu_r_sole, dJnu_CoM, feetActivation, ...
+         = balancingController( M, h, dnu_des, ddx_root_bounds, ...
+                                w_H_l_sole, w_H_r_sole, w_J_l_sole, w_J_r_sole, w_J_root,...
+                                dJnu_l_sole, dJnu_r_sole, dJnu_root, feetActivation, ...
                                 frictionConeConstraintsMatrix, upperBoundFrictionConeConstraints, ...
-                                ROBOT_DOF, gain)
+                                ROBOT_DOF, gain, reg)
 
  %% BALANCING CONTROLLER
     %
@@ -51,7 +51,7 @@ function [HessianMatrixQP, biasVectorQP, ...
     %
     % In the language of optimization theory, we solve
     %
-    % 5) u* = argmin (1/2) * |inv(M) * (B * u - h) - feedback|^2
+    % 5) u* = argmin (1/2) * |inv(M) * (B * u - h) - dnu_feedback|^2
     %           s.t.
     %               C * u < b
     %               dJc * nu + Jc * inv(M) * (B * u - h) = 0 
@@ -62,7 +62,7 @@ function [HessianMatrixQP, biasVectorQP, ...
     % 
     % Re-formulated as a QP:
     %
-    % 6) u* = argmin 1/2 * u' (inv(M) * B)' * (inv(M) * B) * u - u' * (inv(M) * B)' * (-inv(M) * h - feedback)
+    % 6) u* = argmin 1/2 * u' (inv(M) * B)' * (inv(M) * B) * u - u' * (inv(M) * B)' * (-inv(M) * h - dnu_feedback)
     %           s.t.
     %               C * u < b
     %               (Jc * inv(M) * B) * u = Jc * inv(M) * h - dJc * nu
@@ -76,24 +76,48 @@ dJc_nu   = [dJnu_l_sole * feetActivation(1);
             dJnu_r_sole * feetActivation(2)];
         
 %Selection matrices
-S        = [zeros(6,ROBOT_DOF);
-            eye(ROBOT_DOF) ];
+S        = [zeros(6, ROBOT_DOF);
+            eye(ROBOT_DOF)    ];
 B        = [S, Jc'];
 Storques = [eye(ROBOT_DOF) zeros(ROBOT_DOF,12)];
 Sxy      = [eye(2) zeros(2,4)];
 % Sforces  = [zeros(12, ROBOT_DOF) eye(12)];
 
-%QP objective function
+
+%% Generate reference accelerations from feedback
+%for floating base and joints through a stack of tasks structure
+
+%Primary task: root
+rootAcceleration        = dnu_des(1:6); 
+dnuroot                 = pinv(w_J_root, reg.pinvDamp) * (rootAcceleration - dJnu_root);
+nullspaceprojectionRoot = eye(6 + ROBOT_DOF) - pinv(w_J_root, reg.pinvDamp) * w_J_root;
+
+%Secondary task: Feet contact
+contactAcceleration     = zeros(12,1);
+dnuContact              = pinv(Jc, reg.pinvDamp) * (contactAcceleration - dJc_nu);
+nullspaceProjectionFeet = eye(6 + ROBOT_DOF) - [pinv(w_J_root, reg.pinvDamp) pinv(w_J_root, reg.pinvDamp)] * Jc;
+
+%Tertiary task: joint posture
+jointAccelerations = dnu_des(7:end);
+dnuPosture = pinv(S' * nullspaceprojectionRoot, reg.pinvDamp) * (jointAccelerations - S' * dnuroot);
+% dnuPosture = S * jointAccelerations;
+
+dnu_feedback = dnuroot + nullspaceprojectionRoot * (dnuContact + nullspaceProjectionFeet * dnuPosture);
+
+
+%% QP parameters
+
+%objective function
 HessianMatrixQP = (M \ B)' * (M \ B) +  gain.reg.joint_torques * (Storques' * Storques);
-biasVectorQP    = (M \ B)' * (- M \ h - dnu_star);
+biasVectorQP    = (M \ B)' * (- M \ h - dnu_feedback);
 
 %Acceleration constraint for foot(feet) in contact with the ground
 feetAccelerationConstraintMatrix      = Jc / M * B;
 feetAccelerationConstraintBoundVector = Jc / M * h - dJc_nu;
 
-%Acceleration constraint to keep CoM (x and y) within bounds
-CoMAccelerationConstraintMatrix = Sxy * (w_J_CoM / M * B);
-CoMAccelerationConstraintBoundVector = ddx_CoM_bounds + [eye(2); eye(2)] * (Sxy * (w_J_CoM / M * h - dJnu_CoM));
+%Acceleration constraint to keep root (x and y) within bounds
+rootAccelerationConstraintMatrix = Sxy * (w_J_root / M * B);
+rootAccelerationConstraintBoundVector = ddx_root_bounds + [eye(2); eye(2)] * (Sxy * (w_J_root / M * h - dJnu_root));
 
 %Friction cone constraints for foot(feet) in contact with the ground
     % Update constraint matrices. The constraint matrix for the inequality
@@ -123,5 +147,5 @@ frictionConeConstraintMatrix = [zeros(length(upperBoundFrictionConeConstraints),
 frictionConeUpperBoundVector = [upperBoundFrictionConeConstraints * feetActivation(1);
                                 upperBoundFrictionConeConstraints * feetActivation(2)];
                             
-%% Keep the CoM position within the support polygon at all times
+%% Keep the root position within the support polygon at all times
 
