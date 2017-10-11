@@ -4,8 +4,8 @@ ROBOT_DOF = 23;
 WBT_wbiList = '(torso_pitch,torso_roll,torso_yaw,l_shoulder_pitch, l_shoulder_roll, l_shoulder_yaw, l_elbow, r_shoulder_pitch,r_shoulder_roll, r_shoulder_yaw, r_elbow, l_hip_pitch, l_hip_roll, l_hip_yaw, l_knee, l_ankle_pitch, l_ankle_roll, r_hip_pitch,r_hip_roll,r_hip_yaw,r_knee,r_ankle_pitch,r_ankle_roll)';                         
                                                                                                 
 PORTS.IMU                 = '/icubSim/inertial'; 
-PORTS.WBDT_LEFTLEG_EE     = '/wholeBodyDynamicsTree/left_leg/cartesianEndEffectorWrench:o';
-PORTS.WBDT_RIGHTLEG_EE    = '/wholeBodyDynamicsTree/right_leg/cartesianEndEffectorWrench:o';
+PORTS.WBDT_LEFTLEG_EE     = '/wholeBodyDynamics/left_leg/cartesianEndEffectorWrench:o';
+PORTS.WBDT_RIGHTLEG_EE    = '/wholeBodyDynamics/right_leg/cartesianEndEffectorWrench:o';
 
 
 %% Constants used for tolerance/saturation
@@ -35,7 +35,7 @@ gain.w_root.d  = 2 * sqrt(gain.w_root.p);
 %Joints proportional (p) and derivative (d) gains
 gain.joints.torso = 10;
 gain.joints.arms  = 30;
-gain.joints.legs  = 0.01;
+gain.joints.legs  = 0.005;
 gain.joints.p     = [gain.joints.torso * ones(3,1); 
                      gain.joints.arms  * ones(8,1); 
                      gain.joints.legs  * ones(12,1)];
