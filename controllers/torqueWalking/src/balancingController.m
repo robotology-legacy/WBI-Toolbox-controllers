@@ -95,12 +95,13 @@ nullspaceprojectionRoot = eye(6 + ROBOT_DOF) - pinv(w_J_root, reg.pinvDamp) * w_
 %Secondary task: Feet contact
 contactAcceleration     = zeros(12,1);
 dnuContact              = pinv(Jc, reg.pinvDamp) * (contactAcceleration - dJc_nu);
-nullspaceProjectionFeet = eye(6 + ROBOT_DOF) - [pinv(w_J_root, reg.pinvDamp) pinv(w_J_root, reg.pinvDamp)] * Jc;
+nullspaceProjectionFeet = eye(6 + ROBOT_DOF) - pinv(Jc, reg.pinvDamp) * Jc;
 
 %Tertiary task: joint posture
 jointAccelerations = dnu_des(7:end);
-dnuPosture = pinv(S' * nullspaceprojectionRoot, reg.pinvDamp) * (jointAccelerations - S' * dnuroot);
 % dnuPosture = S * jointAccelerations;
+% dnuPosture = pinv(S' * nullspaceprojectionRoot, reg.pinvDamp) * (jointAccelerations - S' * dnuroot);
+dnuPosture = pinv(nullspaceProjectionFeet, reg.pinvDamp) * (pinv(S' * nullspaceprojectionRoot, reg.pinvDamp) * (jointAccelerations - S' * dnuroot) - dnuContact);
 
 dnu_feedback = dnuroot + nullspaceprojectionRoot * (dnuContact + nullspaceProjectionFeet * dnuPosture);
 
@@ -147,5 +148,3 @@ frictionConeConstraintMatrix = [zeros(length(upperBoundFrictionConeConstraints),
 frictionConeUpperBoundVector = [upperBoundFrictionConeConstraints * feetActivation(1);
                                 upperBoundFrictionConeConstraints * feetActivation(2)];
                             
-%% Keep the root position within the support polygon at all times
-
