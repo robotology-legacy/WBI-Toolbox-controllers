@@ -7,23 +7,25 @@ function ddx_root_bounds = CoMaccelerationBounds( w_H_root, rootVelocity, ...
 %e.g. define stable position as the predicted support polygon
 
 %root current position and velocity, in x- and y-axis
-x_root    = w_H_root(1:2,4);
-dx_root   = rootVelocity(1:2);                       
+x_root   = w_H_root(1:2,4);
+dx_root  = rootVelocity(1:2);                       
 
 %Feet current position, in x- and y-axis
 x_l_sole = w_H_l_sole(1:2,4);
 x_r_sole = w_H_r_sole(1:2,4);
 
 %% Bounds on root position, for 2 feet balancing
-x_root_lowerBound = min(x_r_sole, x_l_sole) + [gain.footSize(1,1); gain.footSize(2,1)];
-x_root_upperBound = max(x_r_sole, x_l_sole) + [gain.footSize(1,2); gain.footSize(2,2)];
+x_root_lowerBound   = min(x_r_sole, x_l_sole) + [gain.footSize(1,1); gain.footSize(2,1)];
+x_root_upperBound   = max(x_r_sole, x_l_sole) + [gain.footSize(1,2); gain.footSize(2,2)];
 
-ddx_root_lowerBound = min(linearPID(x_root, dx_root, [x_root_lowerBound zeros(2,2)], [gain.x_rootbound.p, gain.x_rootbound.d]), ...
-                          linearPID(x_root, dx_root, [x_root_upperBound zeros(2,2)], [gain.x_rootbound.p, gain.x_rootbound.d]));
-ddx_root_upperBound = max(linearPID(x_root, dx_root, [x_root_lowerBound zeros(2,2)], [gain.x_rootbound.p, gain.x_rootbound.d]), ...
-                          linearPID(x_root, dx_root, [x_root_upperBound zeros(2,2)], [gain.x_rootbound.p, gain.x_rootbound.d]));
+ddx_root_lowerBound = gain.x_maxAcceleration * tanh( min( ...
+                          linearPID(x_root, dx_root, [x_root_lowerBound zeros(2,2)], [gain.x_rootbound.p, gain.x_rootbound.d]), ...
+                          linearPID(x_root, dx_root, [x_root_upperBound zeros(2,2)], [gain.x_rootbound.p, gain.x_rootbound.d])) );
+ddx_root_upperBound = gain.x_maxAcceleration * tanh( max( ...
+                          linearPID(x_root, dx_root, [x_root_lowerBound zeros(2,2)], [gain.x_rootbound.p, gain.x_rootbound.d]), ...
+                          linearPID(x_root, dx_root, [x_root_upperBound zeros(2,2)], [gain.x_rootbound.p, gain.x_rootbound.d])) );
 
-ddx_root_bounds = [ddx_root_lowerBound; ddx_root_upperBound];
+ddx_root_bounds     = [ddx_root_lowerBound; ddx_root_upperBound];
 
 end
 

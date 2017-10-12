@@ -25,12 +25,12 @@ sat.torqueDot = inf*ones(ROBOT_DOF,1);
 %% Controller gains
 
 %Root link linear proportional (p) and derivative (d) gains
-gain.x_root.p = 15;
-gain.x_root.d = 2 * sqrt(gain.x_root.p);
+gain.x_root.p     = 15;
+gain.x_root.d     = 2 * sqrt(gain.x_root.p);
 
 %Root link angular proportional (p) and derivative (d) gains
-gain.w_root.p  = 15;
-gain.w_root.d  = 2 * sqrt(gain.w_root.p);
+gain.w_root.p     = 15;
+gain.w_root.d     = 2 * sqrt(gain.w_root.p);
 
 %Joints proportional (p) and derivative (d) gains
 gain.joints.torso = 10;
@@ -39,12 +39,13 @@ gain.joints.legs  = 0.005;
 gain.joints.p     = [gain.joints.torso * ones(3,1); 
                      gain.joints.arms  * ones(8,1); 
                      gain.joints.legs  * ones(12,1)];
-gain.joints.d     = 2*sqrt(gain.joints.p);
+gain.joints.d     = 2 * sqrt(gain.joints.p);
 
 %Weight on regularization of joint torques
 gain.reg.joint_torques = 1e-7;
 
 %Gains for root acceleration bounds
+gain.x_maxAcceleration = 5;
 gain.x_rootbound.p = 1;
 gain.x_rootbound.d = 2 * sqrt(gain.x_rootbound.p);
 
