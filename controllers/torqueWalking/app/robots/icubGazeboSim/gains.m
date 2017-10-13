@@ -10,7 +10,7 @@ PORTS.WBDT_RIGHTLEG_EE    = '/wholeBodyDynamics/right_leg/cartesianEndEffectorWr
 
 %% Constants used for tolerance/saturation
 
-constants.maxTolerance     = 1e14; %Maximum value for unconstrained variable
+constants.maxTolerance     = 1e17; %Maximum value for unconstrained variable
 constants.minTolerance     = 1e-4; %Tolerance on the value of an equality constrained variable
 constants.saturationTorque = 60;   %Maximum torque value sent to actuators
 constants.saturationForce  = 500; %Maximum contact force value considered
@@ -49,6 +49,9 @@ gain.x_maxAcceleration = 5;
 gain.x_rootbound.p = 1;
 gain.x_rootbound.d = 2 * sqrt(gain.x_rootbound.p);
 
+%% %%%%%%%%%%%%%%%%    State Machine information
+% Move to the left
+root_displacement = [0; -0.15; 0];
 
 %% %%%%%%%%%%%%%%%%    Friction cone parameters
 
