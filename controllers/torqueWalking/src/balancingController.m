@@ -6,7 +6,7 @@ function [HessianMatrixQP, biasVectorQP, ...
                                 w_H_l_sole, w_H_r_sole, w_J_l_sole, w_J_r_sole, w_J_root,...
                                 dJnu_l_sole, dJnu_r_sole, dJnu_root, feetActivation, ...
                                 frictionConeConstraintsMatrix, upperBoundFrictionConeConstraints, ...
-                                ROBOT_DOF, gain, reg)
+                                ROBOT_DOF, reg)
 
  %% BALANCING CONTROLLER
     %
@@ -109,7 +109,7 @@ dnu_feedback = dnuroot + nullspaceprojectionRoot * (dnuContact + nullspaceProjec
 %% QP parameters
 
 %objective function
-HessianMatrixQP = (M \ B)' * (M \ B) +  gain.reg.joint_torques * (Storques' * Storques);
+HessianMatrixQP = (M \ B)' * (M \ B) +  reg.joint_torques * (Storques' * Storques);
 biasVectorQP    = (M \ B)' * (- M \ h - dnu_feedback);
 
 %Acceleration constraint for foot(feet) in contact with the ground

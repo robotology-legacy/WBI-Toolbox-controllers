@@ -113,7 +113,3 @@ addpath('./src/')
 addpath('../utilityMatlabFunctions/')
 run(strcat('app/robots/',getenv('YARP_ROBOT_NAME'),'/gains.m')); 
 
-robotSpecificFSM = fullfile('app/robots',getenv('YARP_ROBOT_NAME'),'initStateMachineWalking.m');
-run(robotSpecificFSM);
-
-clear robotSpecificFSM
