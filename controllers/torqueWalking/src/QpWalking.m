@@ -173,7 +173,7 @@ function Outputs(block)
     g   = biasVectorQP;
     
     A   = [feetAccelerationConstraintMatrix;
-           CoMAccelerationConstraintMatrix
+           CoMAccelerationConstraintMatrix;
            frictionConeConstraintMatrix];
        
     lbA = [ feetAccelerationConstraintBoundVector - constants.minTolerance;

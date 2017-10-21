@@ -1,4 +1,4 @@
-function nu  = baseVelocity(joint_velocities, w_J_l_sole, w_J_r_sole, feetActivation, reg)
+function [base_velocity, nu]  = baseVelocity(joint_velocities, w_J_l_sole, w_J_r_sole, feetActivation, reg)
 
 Jc     = [w_J_l_sole * feetActivation(1);
           w_J_r_sole * feetActivation(2)];
