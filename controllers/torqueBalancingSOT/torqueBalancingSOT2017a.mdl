@@ -6,7 +6,7 @@ Model {
     NumRootInports	    0
     NumRootOutports	    0
     ParameterArgumentNames  ""
-    ComputedModelVersion    "1.37"
+    ComputedModelVersion    "1.40"
     NumModelReferences	    0
     NumTestPointedSignals   0
     NumProvidedFunctions    0
@@ -44,7 +44,7 @@ Model {
       $ObjectID		      2
       $ClassName	      "Simulink.WindowInfo"
       IsActive		      [1]
-      Location		      [51.0, 24.0, 1315.0, 744.0]
+      Location		      [51.0, -4.0, 1315.0, 772.0]
       Object {
 	$PropName		"ModelBrowserInfo"
 	$ObjectID		3
@@ -67,20 +67,20 @@ Model {
 	Object {
 	  $ObjectID		  5
 	  IsActive		  [1]
-	  ViewObjType		  "SimulinkTopLevel"
-	  LoadSaveID		  "0"
+	  ViewObjType		  "SimulinkSubsys"
+	  LoadSaveID		  "335"
 	  Extents		  [1277.0, 589.0]
-	  ZoomFactor		  [0.6]
-	  Offset		  [1386.283783783784, -622.30630630630628]
+	  ZoomFactor		  [0.8]
+	  Offset		  [-45.56378862137899, 81.6517984666009]
 	}
 	Object {
 	  $ObjectID		  6
 	  IsActive		  [0]
-	  ViewObjType		  "SimulinkSubsys"
-	  LoadSaveID		  "441"
-	  Extents		  [1293.0, 609.0]
-	  ZoomFactor		  [0.8739365815931941]
-	  Offset		  [-215.6022123893805, 168.98053097345138]
+	  ViewObjType		  "SimulinkTopLevel"
+	  LoadSaveID		  "0"
+	  Extents		  [1277.0, 589.0]
+	  ZoomFactor		  [0.8]
+	  Offset		  [1559.75, -668.99999999999977]
 	}
 	PropName		"EditorsInfo"
       }
@@ -116,9 +116,9 @@ Model {
   ModifiedByFormat	  "%<Auto>"
   LastModifiedBy	  "mcharbonneau"
   ModifiedDateFormat	  "%<Auto>"
-  LastModifiedDate	  "Mon Oct 02 15:49:05 2017"
-  RTWModifiedTimeStamp	  428860117
-  ModelVersionFormat	  "1.%<AutoIncrement:37>"
+  LastModifiedDate	  "Mon Oct 23 13:43:19 2017"
+  RTWModifiedTimeStamp	  430666998
+  ModelVersionFormat	  "1.%<AutoIncrement:40>"
   ConfigurationManager	  "none"
   SampleTimeColors	  off
   SampleTimeAnnotations	  off
@@ -1251,7 +1251,7 @@ Model {
   }
   System {
     Name		    "torqueBalancingSOT2017a"
-    Location		    [51, 24, 1366, 768]
+    Location		    [51, -4, 1366, 768]
     Open		    on
     PortBlocksUseCompactNotation off
     ModelBrowserVisibility  off
@@ -1264,7 +1264,7 @@ Model {
     TiledPaperMargins	    [0.500000, 0.500000, 0.500000, 0.500000]
     TiledPageScale	    1
     ShowPageBoundaries	    off
-    ZoomFactor		    "60"
+    ZoomFactor		    "80"
     ReportName		    "simulink-default.rpt"
     SIDHighWatermark	    "1612"
     Block {
@@ -1280,8 +1280,8 @@ Model {
       Variant		      off
       System {
 	Name			"Controller and QP"
-	Location		[51, 24, 1366, 768]
-	Open			off
+	Location		[51, -4, 1366, 768]
+	Open			on
 	PortBlocksUseCompactNotation off
 	ModelBrowserVisibility	off
 	ModelBrowserWidth	200
@@ -1539,7 +1539,7 @@ Model {
 	  Name			  "balancingController"
 	  SID			  "331"
 	  Ports			  [14, 6]
-	  Position		  [390, 22, 635, 683]
+	  Position		  [420, 21, 665, 684]
 	  ZOrder		  782
 	  ErrorFcn		  "Stateflow.Translate.translate"
 	  PermitHierarchicalResolution "ExplicitOnly"
@@ -1563,90 +1563,90 @@ Model {
 	    TiledPageScale	    1
 	    ShowPageBoundaries	    off
 	    ZoomFactor		    "100"
-	    SIDHighWatermark	    "75"
+	    SIDHighWatermark	    "81"
 	    Block {
 	      BlockType		      Inport
-	      Name		      "feetConstraints"
-	      SID		      "331::1"
+	      Name		      "constraints"
+	      SID		      "331::23"
 	      Position		      [20, 101, 40, 119]
-	      ZOrder		      -1
+	      ZOrder		      14
 	      IconDisplay	      "Port number"
 	    }
 	    Block {
 	      BlockType		      Inport
 	      Name		      "impedances"
-	      SID		      "331::22"
+	      SID		      "331::25"
 	      Position		      [20, 136, 40, 154]
-	      ZOrder		      13
+	      ZOrder		      16
 	      Port		      "2"
 	      IconDisplay	      "Port number"
 	    }
 	    Block {
 	      BlockType		      Inport
 	      Name		      "dampings"
-	      SID		      "331::33"
+	      SID		      "331::1"
 	      Position		      [20, 171, 40, 189]
-	      ZOrder		      24
+	      ZOrder		      -1
 	      Port		      "3"
 	      IconDisplay	      "Port number"
 	    }
 	    Block {
 	      BlockType		      Inport
-	      Name		      "qj"
-	      SID		      "331::39"
+	      Name		      "jointAngles"
+	      SID		      "331::22"
 	      Position		      [20, 206, 40, 224]
-	      ZOrder		      30
+	      ZOrder		      13
 	      Port		      "4"
 	      IconDisplay	      "Port number"
 	    }
 	    Block {
 	      BlockType		      Inport
-	      Name		      "M"
-	      SID		      "331::23"
+	      Name		      "massMatrix"
+	      SID		      "331::27"
 	      Position		      [20, 246, 40, 264]
-	      ZOrder		      14
+	      ZOrder		      18
 	      Port		      "5"
 	      IconDisplay	      "Port number"
 	    }
 	    Block {
 	      BlockType		      Inport
-	      Name		      "h"
-	      SID		      "331::25"
+	      Name		      "biasTorques"
+	      SID		      "331::28"
 	      Position		      [20, 281, 40, 299]
-	      ZOrder		      16
+	      ZOrder		      19
 	      Port		      "6"
 	      IconDisplay	      "Port number"
 	    }
 	    Block {
 	      BlockType		      Inport
-	      Name		      "dJcNu"
-	      SID		      "331::26"
+	      Name		      "jacobiansDotNu"
+	      SID		      "331::33"
 	      Position		      [20, 316, 40, 334]
-	      ZOrder		      17
+	      ZOrder		      24
 	      Port		      "7"
 	      IconDisplay	      "Port number"
 	    }
 	    Block {
 	      BlockType		      Inport
-	      Name		      "w_H_l_sole"
-	      SID		      "331::27"
+	      Name		      "poseLeftFoot"
+	      SID		      "331::39"
 	      Position		      [20, 351, 40, 369]
-	      ZOrder		      18
+	      ZOrder		      30
 	      Port		      "8"
 	      IconDisplay	      "Port number"
 	    }
 	    Block {
 	      BlockType		      Inport
-	      Name		      "w_H_r_sole"
-	      SID		      "331::28"
+	      Name		      "poseRightFoot"
+	      SID		      "331::26"
 	      Position		      [20, 386, 40, 404]
-	      ZOrder		      19
+	      ZOrder		      17
 	      Port		      "9"
 	      IconDisplay	      "Port number"
 	    }
 	    Block {
 	      BlockType		      Inport
-	      Name		      "Jc"
+	      Name		      "jacobians"
 	      SID		      "331::29"
 	      Position		      [20, 426, 40, 444]
 	      ZOrder		      20
@@ -1655,7 +1655,7 @@ Model {
 	    }
 	    Block {
 	      BlockType		      Inport
-	      Name		      "nu"
+	      Name		      "robotVelocity"
 	      SID		      "331::30"
 	      Position		      [20, 461, 40, 479]
 	      ZOrder		      21
@@ -1664,7 +1664,7 @@ Model {
 	    }
 	    Block {
 	      BlockType		      Inport
-	      Name		      "desiredJointAngles"
+	      Name		      "desJointAngles"
 	      SID		      "331::31"
 	      Position		      [20, 496, 40, 514]
 	      ZOrder		      22
@@ -1682,7 +1682,7 @@ Model {
 	    }
 	    Block {
 	      BlockType		      Inport
-	      Name		      "ConstraintsFeetMatrix"
+	      Name		      "ConstraintsMatrix"
 	      SID		      "331::41"
 	      Position		      [20, 566, 40, 584]
 	      ZOrder		      32
@@ -1798,106 +1798,106 @@ Model {
 	      IconDisplay	      "Port number"
 	    }
 	    Line {
-	      ZOrder		      792
-	      SrcBlock		      "feetConstraints"
+	      ZOrder		      1351
+	      SrcBlock		      "constraints"
 	      SrcPort		      1
 	      DstBlock		      " SFunction "
 	      DstPort		      1
 	    }
 	    Line {
-	      ZOrder		      793
+	      ZOrder		      1352
 	      SrcBlock		      "impedances"
 	      SrcPort		      1
 	      DstBlock		      " SFunction "
 	      DstPort		      2
 	    }
 	    Line {
-	      ZOrder		      794
+	      ZOrder		      1353
 	      SrcBlock		      "dampings"
 	      SrcPort		      1
 	      DstBlock		      " SFunction "
 	      DstPort		      3
 	    }
 	    Line {
-	      ZOrder		      795
-	      SrcBlock		      "qj"
+	      ZOrder		      1354
+	      SrcBlock		      "jointAngles"
 	      SrcPort		      1
 	      DstBlock		      " SFunction "
 	      DstPort		      4
 	    }
 	    Line {
-	      ZOrder		      796
-	      SrcBlock		      "M"
+	      ZOrder		      1355
+	      SrcBlock		      "massMatrix"
 	      SrcPort		      1
 	      DstBlock		      " SFunction "
 	      DstPort		      5
 	    }
 	    Line {
-	      ZOrder		      797
-	      SrcBlock		      "h"
+	      ZOrder		      1356
+	      SrcBlock		      "biasTorques"
 	      SrcPort		      1
 	      DstBlock		      " SFunction "
 	      DstPort		      6
 	    }
 	    Line {
-	      ZOrder		      798
-	      SrcBlock		      "dJcNu"
+	      ZOrder		      1357
+	      SrcBlock		      "jacobiansDotNu"
 	      SrcPort		      1
 	      DstBlock		      " SFunction "
 	      DstPort		      7
 	    }
 	    Line {
-	      ZOrder		      799
-	      SrcBlock		      "w_H_l_sole"
+	      ZOrder		      1358
+	      SrcBlock		      "poseLeftFoot"
 	      SrcPort		      1
 	      DstBlock		      " SFunction "
 	      DstPort		      8
 	    }
 	    Line {
-	      ZOrder		      800
-	      SrcBlock		      "w_H_r_sole"
+	      ZOrder		      1359
+	      SrcBlock		      "poseRightFoot"
 	      SrcPort		      1
 	      DstBlock		      " SFunction "
 	      DstPort		      9
 	    }
 	    Line {
-	      ZOrder		      801
-	      SrcBlock		      "Jc"
+	      ZOrder		      1360
+	      SrcBlock		      "jacobians"
 	      SrcPort		      1
 	      DstBlock		      " SFunction "
 	      DstPort		      10
 	    }
 	    Line {
-	      ZOrder		      802
-	      SrcBlock		      "nu"
+	      ZOrder		      1361
+	      SrcBlock		      "robotVelocity"
 	      SrcPort		      1
 	      DstBlock		      " SFunction "
 	      DstPort		      11
 	    }
 	    Line {
-	      ZOrder		      803
-	      SrcBlock		      "desiredJointAngles"
+	      ZOrder		      1362
+	      SrcBlock		      "desJointAngles"
 	      SrcPort		      1
 	      DstBlock		      " SFunction "
 	      DstPort		      12
 	    }
 	    Line {
-	      ZOrder		      804
+	      ZOrder		      1363
 	      SrcBlock		      "desiredTaskAcc"
 	      SrcPort		      1
 	      DstBlock		      " SFunction "
 	      DstPort		      13
 	    }
 	    Line {
-	      ZOrder		      805
-	      SrcBlock		      "ConstraintsFeetMatrix"
+	      ZOrder		      1364
+	      SrcBlock		      "ConstraintsMatrix"
 	      SrcPort		      1
 	      DstBlock		      " SFunction "
 	      DstPort		      14
 	    }
 	    Line {
 	      Name		      "hessianMatrix"
-	      ZOrder		      806
+	      ZOrder		      1365
 	      Labels		      [0, 0]
 	      SrcBlock		      " SFunction "
 	      SrcPort		      2
@@ -1906,7 +1906,7 @@ Model {
 	    }
 	    Line {
 	      Name		      "biasVector"
-	      ZOrder		      807
+	      ZOrder		      1366
 	      Labels		      [0, 0]
 	      SrcBlock		      " SFunction "
 	      SrcPort		      3
@@ -1915,7 +1915,7 @@ Model {
 	    }
 	    Line {
 	      Name		      "constraintMatrixLeftFoot"
-	      ZOrder		      808
+	      ZOrder		      1367
 	      Labels		      [0, 0]
 	      SrcBlock		      " SFunction "
 	      SrcPort		      4
@@ -1924,7 +1924,7 @@ Model {
 	    }
 	    Line {
 	      Name		      "constraintMatrixRightFoot"
-	      ZOrder		      809
+	      ZOrder		      1368
 	      Labels		      [0, 0]
 	      SrcBlock		      " SFunction "
 	      SrcPort		      5
@@ -1933,7 +1933,7 @@ Model {
 	    }
 	    Line {
 	      Name		      "constraintMatrixEq"
-	      ZOrder		      810
+	      ZOrder		      1369
 	      Labels		      [0, 0]
 	      SrcBlock		      " SFunction "
 	      SrcPort		      6
@@ -1942,7 +1942,7 @@ Model {
 	    }
 	    Line {
 	      Name		      "upperBoundEqConstraints"
-	      ZOrder		      811
+	      ZOrder		      1370
 	      Labels		      [0, 0]
 	      SrcBlock		      " SFunction "
 	      SrcPort		      7
@@ -1950,14 +1950,14 @@ Model {
 	      DstPort		      1
 	    }
 	    Line {
-	      ZOrder		      812
+	      ZOrder		      1371
 	      SrcBlock		      " Demux "
 	      SrcPort		      1
 	      DstBlock		      " Terminator "
 	      DstPort		      1
 	    }
 	    Line {
-	      ZOrder		      813
+	      ZOrder		      1372
 	      SrcBlock		      " SFunction "
 	      SrcPort		      1
 	      DstBlock		      " Demux "
@@ -2006,7 +2006,6 @@ Model {
 	  ZOrder		  545
 	  SrcBlock		  "balancingController"
 	  SrcPort		  1
-	  Points		  [0, 0]
 	  DstBlock		  "Level-2 MATLAB\nS-Function"
 	  DstPort		  3
 	}
@@ -2016,65 +2015,30 @@ Model {
 	  SrcPort		  1
 	  Points		  [155, 0]
 	  Branch {
+	    ZOrder		    654
+	    DstBlock		    "balancingController"
+	    DstPort		    1
+	  }
+	  Branch {
 	    ZOrder		    622
 	    Points		    [0, -90]
 	    DstBlock		    "Level-2 MATLAB\nS-Function"
 	    DstPort		    2
 	  }
-	  Branch {
-	    ZOrder		    511
-	    DstBlock		    "balancingController"
-	    DstPort		    1
-	  }
 	}
 	Line {
-	  ZOrder		  353
-	  SrcBlock		  "qj"
-	  SrcPort		  1
-	  DstBlock		  "balancingController"
-	  DstPort		  4
-	}
-	Line {
-	  ZOrder		  354
-	  SrcBlock		  "impedances"
-	  SrcPort		  1
-	  DstBlock		  "balancingController"
-	  DstPort		  2
-	}
-	Line {
-	  ZOrder		  355
+	  ZOrder		  658
 	  SrcBlock		  "M"
 	  SrcPort		  1
 	  DstBlock		  "balancingController"
 	  DstPort		  5
 	}
 	Line {
-	  ZOrder		  357
-	  SrcBlock		  "h"
-	  SrcPort		  1
-	  DstBlock		  "balancingController"
-	  DstPort		  6
-	}
-	Line {
-	  ZOrder		  358
-	  SrcBlock		  "dJcNu"
-	  SrcPort		  1
-	  DstBlock		  "balancingController"
-	  DstPort		  7
-	}
-	Line {
-	  ZOrder		  359
+	  ZOrder		  661
 	  SrcBlock		  "w_H_l_sole"
 	  SrcPort		  1
 	  DstBlock		  "balancingController"
 	  DstPort		  8
-	}
-	Line {
-	  ZOrder		  360
-	  SrcBlock		  "w_H_r_sole"
-	  SrcPort		  1
-	  DstBlock		  "balancingController"
-	  DstPort		  9
 	}
 	Line {
 	  ZOrder		  361
@@ -2103,13 +2067,6 @@ Model {
 	  SrcPort		  1
 	  DstBlock		  "balancingController"
 	  DstPort		  14
-	}
-	Line {
-	  ZOrder		  369
-	  SrcBlock		  "dampings"
-	  SrcPort		  1
-	  DstBlock		  "balancingController"
-	  DstPort		  3
 	}
 	Line {
 	  ZOrder		  544
@@ -2233,6 +2190,48 @@ Model {
 	  SrcPort		  1
 	  DstBlock		  "balancingController"
 	  DstPort		  12
+	}
+	Line {
+	  ZOrder		  655
+	  SrcBlock		  "impedances"
+	  SrcPort		  1
+	  DstBlock		  "balancingController"
+	  DstPort		  2
+	}
+	Line {
+	  ZOrder		  656
+	  SrcBlock		  "dampings"
+	  SrcPort		  1
+	  DstBlock		  "balancingController"
+	  DstPort		  3
+	}
+	Line {
+	  ZOrder		  657
+	  SrcBlock		  "qj"
+	  SrcPort		  1
+	  DstBlock		  "balancingController"
+	  DstPort		  4
+	}
+	Line {
+	  ZOrder		  659
+	  SrcBlock		  "h"
+	  SrcPort		  1
+	  DstBlock		  "balancingController"
+	  DstPort		  6
+	}
+	Line {
+	  ZOrder		  660
+	  SrcBlock		  "dJcNu"
+	  SrcPort		  1
+	  DstBlock		  "balancingController"
+	  DstPort		  7
+	}
+	Line {
+	  ZOrder		  662
+	  SrcBlock		  "w_H_r_sole"
+	  SrcPort		  1
+	  DstBlock		  "balancingController"
+	  DstPort		  9
 	}
       }
     }
@@ -14331,8 +14330,8 @@ Model {
 	  Variant		  off
 	  System {
 	    Name		    "Visualize tasks"
-	    Location		    [51, 24, 1366, 768]
-	    Open		    on
+	    Location		    [51, -4, 1366, 768]
+	    Open		    off
 	    PortBlocksUseCompactNotation off
 	    ModelBrowserVisibility  off
 	    ModelBrowserWidth	    200
@@ -19584,13 +19583,16 @@ Stateflow {
     screen		    [1 1 3600 1200 1.180555555555556]
     treeNode		    [0 107 0 0]
     viewObj		    106
-    ssIdHighWaterMark	    29
+    visible		    1
+    subviewS {
+    }
+    ssIdHighWaterMark	    35
     decomposition	    CLUSTER_CHART
     type		    EML_CHART
     chartFileNumber	    7
     disableImplicitCasting  1
     eml {
-      name		      "balancingControllerSOT_FCN"
+      name		      "balancingControllerSOTFCN"
     }
     firstData		    108
     firstTransition	    132
@@ -19610,24 +19612,26 @@ Stateflow {
     decomposition	    CLUSTER_STATE
     eml {
       isEML		      1
-      script		      "function [hessianMatrix, biasVector, ...\n          constraintMatrixLeftFoot, constraintMatrixRig"
-      "htFoot, ...\n          constraintMatrixEq, upperBoundEqConstraints] = ...\n          balancingControllerSOT_FCN("
-      "feetConstraints, impedances, dampings, qj, ...\n                                     M, h, dJcNu, w_H_l_sole, w_"
-      "H_r_sole, Jc, nu, ...\n                                     desiredJointAngles, desiredTaskAcc, ...\n           "
-      "                          ROBOT_DOF, ConstraintsFeetMatrix, ...\n                                     gain, CONF"
-      "IG)\n\n[hessianMatrix,biasVector,constraintMatrixLeftFoot,constraintMatrixRightFoot,constraintMatrixEq, upperBou"
-      "ndEqConstraints] = ...\n                                        balancingControllerSOT(feetConstraints, impedanc"
-      "es, dampings, qj, ...\n                                                               M, h, dJcNu, w_H_l_sole, w"
-      "_H_r_sole, Jc, nu, ...\n                                                               desiredJointAngles, desir"
-      "edTaskAcc, ...\n                                                               ROBOT_DOF, ConstraintsFeetMatrix,"
-      " ...\n                                                               gain, CONFIG);\n"
+      script		      "function [hessianMatrix,biasVector,constraintMatrixLeftFoot,constraintMatrixRightFoot,constraintM"
+      "atrixEq, upperBoundEqConstraints] = ...\n                                        balancingControllerSOTFCN(const"
+      "raints, impedances, dampings, jointAngles, ...\n                                                               m"
+      "assMatrix, biasTorques, jacobiansDotNu, poseLeftFoot, poseRightFoot, jacobians, robotVelocity, ...\n            "
+      "                                                   desJointAngles, desiredTaskAcc, ...\n                        "
+      "                                       ROBOT_DOF, ConstraintsMatrix, ...\n                                      "
+      "                         gain, CONFIG)\n\n[hessianMatrix,biasVector,constraintMatrixLeftFoot,constraintMatrixRig"
+      "htFoot,constraintMatrixEq, upperBoundEqConstraints] = ...\n                                        balancingCont"
+      "rollerSOT(constraints, impedances, dampings, jointAngles, ...\n                                                 "
+      "              massMatrix, biasTorques, jacobiansDotNu, poseLeftFoot, poseRightFoot, jacobians, robotVelocity, .."
+      ".\n                                                               desJointAngles, desiredTaskAcc, ...\n         "
+      "                                                      ROBOT_DOF, ConstraintsMatrix, ...\n                       "
+      "                                        gain, CONFIG);\n"
       editorLayout	      "100 M4x1[10 5 700 500]"
     }
   }
   data {
     id			    108
-    ssIdNumber		    4
-    name		    "feetConstraints"
+    ssIdNumber		    7
+    name		    "constraints"
     scope		    INPUT_DATA
     machine		    1
     props {
@@ -19637,8 +19641,11 @@ Stateflow {
       type {
 	method			SF_INHERITED_TYPE
 	primitive		SF_DOUBLE_TYPE
+	isSigned		1
+	wordLength		"16"
       }
       complexity	      SF_COMPLEX_INHERITED
+      frame		      SF_FRAME_INHERITED
       unit {
 	name			"inherit"
       }
@@ -19648,7 +19655,7 @@ Stateflow {
   }
   data {
     id			    109
-    ssIdNumber		    6
+    ssIdNumber		    9
     name		    "impedances"
     scope		    INPUT_DATA
     machine		    1
@@ -19673,7 +19680,7 @@ Stateflow {
   }
   data {
     id			    110
-    ssIdNumber		    17
+    ssIdNumber		    4
     name		    "dampings"
     scope		    INPUT_DATA
     machine		    1
@@ -19684,11 +19691,8 @@ Stateflow {
       type {
 	method			SF_INHERITED_TYPE
 	primitive		SF_DOUBLE_TYPE
-	isSigned		1
-	wordLength		"16"
       }
       complexity	      SF_COMPLEX_INHERITED
-      frame		      SF_FRAME_INHERITED
       unit {
 	name			"inherit"
       }
@@ -19698,8 +19702,8 @@ Stateflow {
   }
   data {
     id			    111
-    ssIdNumber		    23
-    name		    "qj"
+    ssIdNumber		    6
+    name		    "jointAngles"
     scope		    INPUT_DATA
     machine		    1
     props {
@@ -19723,9 +19727,9 @@ Stateflow {
   }
   data {
     id			    112
-    ssIdNumber		    5
-    name		    "hessianMatrix"
-    scope		    OUTPUT_DATA
+    ssIdNumber		    11
+    name		    "massMatrix"
+    scope		    INPUT_DATA
     machine		    1
     props {
       array {
@@ -19734,9 +19738,11 @@ Stateflow {
       type {
 	method			SF_INHERITED_TYPE
 	primitive		SF_DOUBLE_TYPE
+	isSigned		1
+	wordLength		"16"
       }
       complexity	      SF_COMPLEX_INHERITED
-      frame		      SF_FRAME_NO
+      frame		      SF_FRAME_INHERITED
       unit {
 	name			"inherit"
       }
@@ -19746,8 +19752,8 @@ Stateflow {
   }
   data {
     id			    113
-    ssIdNumber		    7
-    name		    "M"
+    ssIdNumber		    12
+    name		    "biasTorques"
     scope		    INPUT_DATA
     machine		    1
     props {
@@ -19771,8 +19777,8 @@ Stateflow {
   }
   data {
     id			    114
-    ssIdNumber		    9
-    name		    "h"
+    ssIdNumber		    17
+    name		    "jacobiansDotNu"
     scope		    INPUT_DATA
     machine		    1
     props {
@@ -19796,8 +19802,8 @@ Stateflow {
   }
   data {
     id			    115
-    ssIdNumber		    10
-    name		    "dJcNu"
+    ssIdNumber		    23
+    name		    "poseLeftFoot"
     scope		    INPUT_DATA
     machine		    1
     props {
@@ -19821,9 +19827,9 @@ Stateflow {
   }
   data {
     id			    116
-    ssIdNumber		    11
-    name		    "w_H_l_sole"
-    scope		    INPUT_DATA
+    ssIdNumber		    5
+    name		    "hessianMatrix"
+    scope		    OUTPUT_DATA
     machine		    1
     props {
       array {
@@ -19832,11 +19838,9 @@ Stateflow {
       type {
 	method			SF_INHERITED_TYPE
 	primitive		SF_DOUBLE_TYPE
-	isSigned		1
-	wordLength		"16"
       }
       complexity	      SF_COMPLEX_INHERITED
-      frame		      SF_FRAME_INHERITED
+      frame		      SF_FRAME_NO
       unit {
 	name			"inherit"
       }
@@ -19846,8 +19850,8 @@ Stateflow {
   }
   data {
     id			    117
-    ssIdNumber		    12
-    name		    "w_H_r_sole"
+    ssIdNumber		    10
+    name		    "poseRightFoot"
     scope		    INPUT_DATA
     machine		    1
     props {
@@ -19872,7 +19876,7 @@ Stateflow {
   data {
     id			    118
     ssIdNumber		    13
-    name		    "Jc"
+    name		    "jacobians"
     scope		    INPUT_DATA
     machine		    1
     props {
@@ -19897,7 +19901,7 @@ Stateflow {
   data {
     id			    119
     ssIdNumber		    14
-    name		    "nu"
+    name		    "robotVelocity"
     scope		    INPUT_DATA
     machine		    1
     props {
@@ -19922,7 +19926,7 @@ Stateflow {
   data {
     id			    120
     ssIdNumber		    15
-    name		    "desiredJointAngles"
+    name		    "desJointAngles"
     scope		    INPUT_DATA
     machine		    1
     props {
@@ -19998,133 +20002,8 @@ Stateflow {
   }
   data {
     id			    123
-    ssIdNumber		    18
-    name		    "biasVector"
-    scope		    OUTPUT_DATA
-    machine		    1
-    props {
-      array {
-	size			"-1"
-      }
-      type {
-	method			SF_INHERITED_TYPE
-	primitive		SF_DOUBLE_TYPE
-	isSigned		1
-	wordLength		"16"
-      }
-      complexity	      SF_COMPLEX_INHERITED
-      frame		      SF_FRAME_NO
-      unit {
-	name			"inherit"
-      }
-    }
-    dataType		    "Inherit: Same as Simulink"
-    linkNode		    [106 122 124]
-  }
-  data {
-    id			    124
-    ssIdNumber		    19
-    name		    "constraintMatrixLeftFoot"
-    scope		    OUTPUT_DATA
-    machine		    1
-    props {
-      array {
-	size			"-1"
-      }
-      type {
-	method			SF_INHERITED_TYPE
-	primitive		SF_DOUBLE_TYPE
-	isSigned		1
-	wordLength		"16"
-      }
-      complexity	      SF_COMPLEX_INHERITED
-      frame		      SF_FRAME_NO
-      unit {
-	name			"inherit"
-      }
-    }
-    dataType		    "Inherit: Same as Simulink"
-    linkNode		    [106 123 125]
-  }
-  data {
-    id			    125
-    ssIdNumber		    20
-    name		    "constraintMatrixRightFoot"
-    scope		    OUTPUT_DATA
-    machine		    1
-    props {
-      array {
-	size			"-1"
-      }
-      type {
-	method			SF_INHERITED_TYPE
-	primitive		SF_DOUBLE_TYPE
-	isSigned		1
-	wordLength		"16"
-      }
-      complexity	      SF_COMPLEX_INHERITED
-      frame		      SF_FRAME_NO
-      unit {
-	name			"inherit"
-      }
-    }
-    dataType		    "Inherit: Same as Simulink"
-    linkNode		    [106 124 126]
-  }
-  data {
-    id			    126
-    ssIdNumber		    21
-    name		    "constraintMatrixEq"
-    scope		    OUTPUT_DATA
-    machine		    1
-    props {
-      array {
-	size			"-1"
-      }
-      type {
-	method			SF_INHERITED_TYPE
-	primitive		SF_DOUBLE_TYPE
-	isSigned		1
-	wordLength		"16"
-      }
-      complexity	      SF_COMPLEX_INHERITED
-      frame		      SF_FRAME_NO
-      unit {
-	name			"inherit"
-      }
-    }
-    dataType		    "Inherit: Same as Simulink"
-    linkNode		    [106 125 127]
-  }
-  data {
-    id			    127
-    ssIdNumber		    22
-    name		    "upperBoundEqConstraints"
-    scope		    OUTPUT_DATA
-    machine		    1
-    props {
-      array {
-	size			"-1"
-      }
-      type {
-	method			SF_INHERITED_TYPE
-	primitive		SF_DOUBLE_TYPE
-	isSigned		1
-	wordLength		"16"
-      }
-      complexity	      SF_COMPLEX_INHERITED
-      frame		      SF_FRAME_NO
-      unit {
-	name			"inherit"
-      }
-    }
-    dataType		    "Inherit: Same as Simulink"
-    linkNode		    [106 126 128]
-  }
-  data {
-    id			    128
     ssIdNumber		    25
-    name		    "ConstraintsFeetMatrix"
+    name		    "ConstraintsMatrix"
     scope		    INPUT_DATA
     machine		    1
     props {
@@ -20144,10 +20023,10 @@ Stateflow {
       }
     }
     dataType		    "Inherit: Same as Simulink"
-    linkNode		    [106 127 129]
+    linkNode		    [106 122 124]
   }
   data {
-    id			    129
+    id			    124
     ssIdNumber		    27
     name		    "gain"
     scope		    PARAMETER_DATA
@@ -20171,10 +20050,10 @@ Stateflow {
       }
     }
     dataType		    "Inherit: Same as Simulink"
-    linkNode		    [106 128 130]
+    linkNode		    [106 123 125]
   }
   data {
-    id			    130
+    id			    125
     ssIdNumber		    28
     name		    "CONFIG"
     scope		    PARAMETER_DATA
@@ -20192,6 +20071,131 @@ Stateflow {
       }
       complexity	      SF_COMPLEX_INHERITED
       frame		      SF_FRAME_INHERITED
+      unit {
+	name			"inherit"
+      }
+    }
+    dataType		    "Inherit: Same as Simulink"
+    linkNode		    [106 124 126]
+  }
+  data {
+    id			    126
+    ssIdNumber		    18
+    name		    "biasVector"
+    scope		    OUTPUT_DATA
+    machine		    1
+    props {
+      array {
+	size			"-1"
+      }
+      type {
+	method			SF_INHERITED_TYPE
+	primitive		SF_DOUBLE_TYPE
+	isSigned		1
+	wordLength		"16"
+      }
+      complexity	      SF_COMPLEX_INHERITED
+      frame		      SF_FRAME_NO
+      unit {
+	name			"inherit"
+      }
+    }
+    dataType		    "Inherit: Same as Simulink"
+    linkNode		    [106 125 127]
+  }
+  data {
+    id			    127
+    ssIdNumber		    19
+    name		    "constraintMatrixLeftFoot"
+    scope		    OUTPUT_DATA
+    machine		    1
+    props {
+      array {
+	size			"-1"
+      }
+      type {
+	method			SF_INHERITED_TYPE
+	primitive		SF_DOUBLE_TYPE
+	isSigned		1
+	wordLength		"16"
+      }
+      complexity	      SF_COMPLEX_INHERITED
+      frame		      SF_FRAME_NO
+      unit {
+	name			"inherit"
+      }
+    }
+    dataType		    "Inherit: Same as Simulink"
+    linkNode		    [106 126 128]
+  }
+  data {
+    id			    128
+    ssIdNumber		    20
+    name		    "constraintMatrixRightFoot"
+    scope		    OUTPUT_DATA
+    machine		    1
+    props {
+      array {
+	size			"-1"
+      }
+      type {
+	method			SF_INHERITED_TYPE
+	primitive		SF_DOUBLE_TYPE
+	isSigned		1
+	wordLength		"16"
+      }
+      complexity	      SF_COMPLEX_INHERITED
+      frame		      SF_FRAME_NO
+      unit {
+	name			"inherit"
+      }
+    }
+    dataType		    "Inherit: Same as Simulink"
+    linkNode		    [106 127 129]
+  }
+  data {
+    id			    129
+    ssIdNumber		    21
+    name		    "constraintMatrixEq"
+    scope		    OUTPUT_DATA
+    machine		    1
+    props {
+      array {
+	size			"-1"
+      }
+      type {
+	method			SF_INHERITED_TYPE
+	primitive		SF_DOUBLE_TYPE
+	isSigned		1
+	wordLength		"16"
+      }
+      complexity	      SF_COMPLEX_INHERITED
+      frame		      SF_FRAME_NO
+      unit {
+	name			"inherit"
+      }
+    }
+    dataType		    "Inherit: Same as Simulink"
+    linkNode		    [106 128 130]
+  }
+  data {
+    id			    130
+    ssIdNumber		    22
+    name		    "upperBoundEqConstraints"
+    scope		    OUTPUT_DATA
+    machine		    1
+    props {
+      array {
+	size			"-1"
+      }
+      type {
+	method			SF_INHERITED_TYPE
+	primitive		SF_DOUBLE_TYPE
+	isSigned		1
+	wordLength		"16"
+      }
+      complexity	      SF_COMPLEX_INHERITED
+      frame		      SF_FRAME_NO
       unit {
 	name			"inherit"
       }
@@ -20782,6 +20786,7 @@ Stateflow {
     screen		    [1 1 1280 1024 1.041666666666667]
     treeNode		    [0 162 0 0]
     viewObj		    161
+    visible		    1
     ssIdHighWaterMark	    6
     decomposition	    CLUSTER_CHART
     type		    EML_CHART

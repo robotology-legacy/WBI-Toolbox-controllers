@@ -123,10 +123,11 @@ function [hessianMatrix,biasVector,constraintMatrixLeftFoot,constraintMatrixRigh
     jacobians_invM_B          = jacobians_invM * B;                            
 
     if CONFIG.QP.USE_STRICT_TASK_PRIORITIES
-        hessianMatrix             = St_invM_B' * St_invM_B;
-        biasVector                = St_invM_B' * tauFeedback - St_invM_B' * (S' / massMatrix) * biasTorques;
+        hessianMatrix             = St_invM_B' * St_invM_B + gain.weightMinTorques * (Storques' * Storques);
+        biasVector                = St_invM_B' * (tauFeedback - (S' / massMatrix) * biasTorques);
         constraintMatrixEq        = jacobians_invM_B; 
         upperBoundEqConstraints   = desiredTaskAcc - jacobiansDotNu + jacobians_invM_biasTorques;
+
     else
         % In this case, the optimization problem 11) is changed, and the equality
         % constraint 

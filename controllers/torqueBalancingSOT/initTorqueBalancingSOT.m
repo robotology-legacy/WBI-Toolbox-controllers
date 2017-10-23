@@ -78,7 +78,7 @@ CONFIG.CORRECT_NECK_IMU    = true;
 % controller solves an optimization problem for the desired posture, with
 % desired tasks given as equality constraints. When set to false, the 
 %controller solves for the weighted desired posture and tasks.
-CONFIG.QP.USE_STRICT_TASK_PRIORITIES = false;
+CONFIG.QP.USE_STRICT_TASK_PRIORITIES = true;
 
 % CONFIG.QP.USE_CONTINUITY_CONSTRAINTS: when set to true, control torques
 % obtained from QP optimization are constrained to continuous values.
