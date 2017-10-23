@@ -1,10 +1,12 @@
 function [HessianMatrixQP, biasVectorQP, ...
           feetAccelerationConstraintMatrix, feetAccelerationConstraintBoundVector, ...
-          rootAccelerationConstraintMatrix, rootAccelerationConstraintBoundVector, ...
+          rootAccelerationBoundConstraintMatrix, rootAccelerationBoundConstraintBoundVector, ...
           frictionConeConstraintMatrix, frictionConeUpperBoundVector] ...
          = balancingController( M, h, dnu_des, ddx_root_bounds, ...
-                                w_H_l_sole, w_H_r_sole, w_J_l_sole, w_J_r_sole, w_J_root,...
-                                dJnu_l_sole, dJnu_r_sole, dJnu_root, feetActivation, ...
+                                w_H_l_sole, w_H_r_sole, ...
+                                w_J_l_sole, w_J_r_sole, w_J_root,...
+                                dJnu_l_sole, dJnu_r_sole, dJnu_root, ...
+                                feetActivation, ...
                                 frictionConeConstraintsMatrix, upperBoundFrictionConeConstraints, ...
                                 ROBOT_DOF, reg)
 
@@ -87,10 +89,10 @@ Sxy      = [eye(2) zeros(2,4)];
 %% Generate reference accelerations from feedback
 %for floating base and joints through a stack of tasks structure
 
-%Primary task: root
-rootAcceleration        = dnu_des(1:6); 
-dnuroot                 = pinv(w_J_root, reg.pinvDamp) * (rootAcceleration - dJnu_root);
-nullspaceprojectionRoot = eye(6 + ROBOT_DOF) - pinv(w_J_root, reg.pinvDamp) * w_J_root;
+%Primary task: CoM/root
+rootAcceleration        = dnu_des(1:6);
+dnuRoot                 = pinv(w_J_root, reg.pinvDamp) * (rootAcceleration - dJnu_root);
+nullspaceProjectionRoot = eye(6 + ROBOT_DOF) - pinv(w_J_root, reg.pinvDamp) * w_J_root;
 
 %Secondary task: Feet contact
 contactAcceleration     = zeros(12,1);
@@ -101,15 +103,15 @@ nullspaceProjectionFeet = eye(6 + ROBOT_DOF) - pinv(Jc, reg.pinvDamp) * Jc;
 jointAccelerations = dnu_des(7:end);
 % dnuPosture = S * jointAccelerations;
 % dnuPosture = pinv(S' * nullspaceprojectionRoot, reg.pinvDamp) * (jointAccelerations - S' * dnuroot);
-dnuPosture = pinv(nullspaceProjectionFeet, reg.pinvDamp) * (pinv(S' * nullspaceprojectionRoot, reg.pinvDamp) * (jointAccelerations - S' * dnuroot) - dnuContact);
+dnuPosture = pinv(nullspaceProjectionFeet, reg.pinvDamp) * (pinv(S' * nullspaceProjectionRoot, reg.pinvDamp) * (jointAccelerations - S' * dnuRoot) - dnuContact);
 
-dnu_feedback = dnuroot + nullspaceprojectionRoot * (dnuContact + nullspaceProjectionFeet * dnuPosture);
+dnu_feedback = dnuRoot + nullspaceProjectionRoot * (dnuContact + nullspaceProjectionFeet * dnuPosture);
 
 
 %% QP parameters
 
 %objective function
-HessianMatrixQP = (M \ B)' * (M \ B) +  reg.joint_torques * (Storques' * Storques);
+HessianMatrixQP = (M \ B)' * (M \ B) + reg.joint_torques * (Storques' * Storques);
 biasVectorQP    = (M \ B)' * (- M \ h - dnu_feedback);
 
 %Acceleration constraint for foot(feet) in contact with the ground
@@ -117,8 +119,8 @@ feetAccelerationConstraintMatrix      = Jc / M * B;
 feetAccelerationConstraintBoundVector = Jc / M * h - dJc_nu;
 
 %Acceleration constraint to keep root (x and y) within bounds
-rootAccelerationConstraintMatrix = Sxy * (w_J_root / M * B);
-rootAccelerationConstraintBoundVector = ddx_root_bounds + [eye(2); eye(2)] * (Sxy * (w_J_root / M * h - dJnu_root));
+rootAccelerationBoundConstraintMatrix = Sxy * (w_J_root / M * B);
+rootAccelerationBoundConstraintBoundVector = ddx_root_bounds + [eye(2); eye(2)] * (Sxy * (w_J_root / M * h - dJnu_root));
 
 %Friction cone constraints for foot(feet) in contact with the ground
     % Update constraint matrices. The constraint matrix for the inequality

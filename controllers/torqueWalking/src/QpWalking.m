@@ -145,14 +145,14 @@ function Outputs(block)
     ROBOT_DOF                  = block.DialogPrm(1).Data;
     constants                  = block.DialogPrm(2).Data;
 
-    HessianMatrixQP                 = block.InputPort(1).Data;
-    biasVectorQP                    = block.InputPort(2).Data;
-    feetAccelerationConstraintMatrix= block.InputPort(3).Data;
+    HessianMatrixQP                       = block.InputPort(1).Data;
+    biasVectorQP                          = block.InputPort(2).Data;
+    feetAccelerationConstraintMatrix      = block.InputPort(3).Data;
     feetAccelerationConstraintBoundVector = block.InputPort(4).Data;
-    CoMAccelerationConstraintMatrix = block.InputPort(5).Data;
-    CoMAccelerationConstraintBoundVector = block.InputPort(6).Data;
-    frictionConeConstraintMatrix    = block.InputPort(7).Data;
-    frictionConeUpperBoundVector    = block.InputPort(8).Data;
+    CoMAccelerationBoundConstraintMatrix      = block.InputPort(5).Data;
+    CoMAccelerationBoundConstraintBoundVector = block.InputPort(6).Data;
+    frictionConeConstraintMatrix          = block.InputPort(7).Data;
+    frictionConeUpperBoundVector          = block.InputPort(8).Data;
         
     %
     % What follows aims at defining the hessian matrix H, the bias
@@ -173,15 +173,15 @@ function Outputs(block)
     g   = biasVectorQP;
     
     A   = [feetAccelerationConstraintMatrix;
-           CoMAccelerationConstraintMatrix;
+           CoMAccelerationBoundConstraintMatrix;
            frictionConeConstraintMatrix];
        
     lbA = [ feetAccelerationConstraintBoundVector - constants.minTolerance;
-            CoMAccelerationConstraintBoundVector(1:2);
+            CoMAccelerationBoundConstraintBoundVector(1:2);
            -constants.maxTolerance * ones(size(frictionConeUpperBoundVector))];
        
     ubA = [ feetAccelerationConstraintBoundVector + constants.minTolerance;
-            CoMAccelerationConstraintBoundVector(3:4);
+            CoMAccelerationBoundConstraintBoundVector(3:4);
             frictionConeUpperBoundVector];
         
     lb  = [-constants.saturationTorque * ones(ROBOT_DOF,1);
