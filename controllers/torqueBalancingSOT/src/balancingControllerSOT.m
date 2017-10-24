@@ -125,9 +125,25 @@ function [hessianMatrix,biasVector,constraintMatrixLeftFoot,constraintMatrixRigh
     if CONFIG.QP.USE_STRICT_TASK_PRIORITIES
         hessianMatrix             = St_invM_B' * St_invM_B + gain.weightMinTorques * (Storques' * Storques);
         biasVector                = St_invM_B' * (tauFeedback - (S' / massMatrix) * biasTorques);
-        constraintMatrixEq        = jacobians_invM_B; 
-        upperBoundEqConstraints   = desiredTaskAcc - jacobiansDotNu + jacobians_invM_biasTorques;
+        constraintMatrixEq        = jacobians_invM_B;      
+        %upperBoundEqConstraints   = desiredTaskAcc - jacobiansDotNu + jacobians_invM_biasTorques;  
 
+        if CONFIG.QP.USE_STRICT_TASK_PRIORITIES_WITH_FOOT_ACCELERATION
+            %Acceleration constraints on CoM position, Root orientation,
+            %foot pose for the foot which is not in contact with the ground
+            %and null acceleration for foot in contact with the ground
+            desiredTaskAcc_plusContact= [desiredTaskAcc( 1:6  );
+                                     desiredTaskAcc( 7:12 ) * (1 - constraints(1));
+                                     desiredTaskAcc(13:end) * (1 - constraints(2))];
+            upperBoundEqConstraints   = desiredTaskAcc_plusContact - jacobiansDotNu + jacobians_invM_biasTorques;
+        else
+            %Acceleration constraints on CoM position, Root orientation,
+            %and null acceleration at ground contact
+            desiredTaskAcc_plusContact= [desiredTaskAcc(1:6);
+                                         zeros(12,1)]; 
+            upperBoundEqConstraints   = desiredTaskAcc_plusContact - jacobiansDotNu + jacobians_invM_biasTorques;
+        end
+        
     else
         % In this case, the optimization problem 11) is changed, and the equality
         % constraint 
