@@ -13,7 +13,7 @@ constants.maxTolerance     = 1e17; %Maximum value for unconstrained variable
 constants.minTolerance     = 1e-4; %Tolerance on the value of an equality constrained variable
 constants.saturationTorque = 60;   %Maximum torque value sent to actuators
 constants.saturationForce  = 500;  %Maximum contact force value considered
-constants.thresholdContact = 25;   %Minimum vertical force to consider a contact to be active
+constants.thresholdContact = 10; %25;   %Minimum vertical force to consider a contact to be active
 
 reg.pinvDamp      = 1e-10; %Regularizing term for matrix pseudoinverse operation in base velocity computation
 reg.joint_torques = 1e-7;  %Weight on regularization of joint torques
@@ -29,7 +29,7 @@ root_displacement = [0; -0.15; 0];
 gain.x_root.p     = 15;
 
 %Root link angular proportional gains
-gain.w_root.p     = 50;
+gain.w_root.p     = 15;
 
 %Joints proportional gains
 gain.joints.torso = 10;

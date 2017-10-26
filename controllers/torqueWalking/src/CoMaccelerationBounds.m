@@ -16,16 +16,16 @@ x_r_sole = w_H_r_sole(1:2,4);
 
 %% Bounds on root position, for 2 feet balancing
 if feetActivation(1) > 0.9 && feetActivation(2) > 0.9
-    x_root_lowerBound   = min(x_r_sole, x_l_sole) + [gain.footSize(1,1)*0.5; gain.footSize(2,1)*0];
-    x_root_upperBound   = max(x_r_sole, x_l_sole) + [gain.footSize(1,2); gain.footSize(2,2)*0];
+    x_root_lowerBound   = min(x_r_sole, x_l_sole) + [gain.footSize(1,1); gain.footSize(2,1)];
+    x_root_upperBound   = max(x_r_sole, x_l_sole) + [gain.footSize(1,2); gain.footSize(2,2)];
     
 elseif feetActivation(2) < 0.9 %only left foot on ground
-    x_root_lowerBound   = x_l_sole + [gain.footSize(1,1)*0.5; gain.footSize(2,1)*0.25];
-    x_root_upperBound   = x_l_sole + [gain.footSize(1,2)*0.5; gain.footSize(2,2)*0.25];
+    x_root_lowerBound   = x_l_sole + [gain.footSize(1,1); gain.footSize(2,1)];
+    x_root_upperBound   = x_l_sole + [gain.footSize(1,2); gain.footSize(2,2)];
     
 else %only right foot on ground
-    x_root_lowerBound   = x_r_sole + [gain.footSize(1,1)*0.5; gain.footSize(2,1)*0.25];
-    x_root_upperBound   = x_r_sole + [gain.footSize(1,2)*0.5; gain.footSize(2,2)*0.25];
+    x_root_lowerBound   = x_r_sole + [gain.footSize(1,1); gain.footSize(2,1)];
+    x_root_upperBound   = x_r_sole + [gain.footSize(1,2); gain.footSize(2,2)];
 end
 
 ddx_root_lowerBound = gain.x_maxAcceleration * tanh( min( ...
