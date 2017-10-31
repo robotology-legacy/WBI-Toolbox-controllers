@@ -17,9 +17,9 @@
 %% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 function [hessianMatrix,biasVector,constraintMatrixLeftFoot,constraintMatrixRightFoot,constraintMatrixEq, upperBoundEqConstraints] = ...
-                                        balancingControllerSOT(constraints, impedances, dampings, jointAngles, ...
-                                                               massMatrix, biasTorques, jacobiansDotNu, poseLeftFoot, poseRightFoot, jacobians, robotVelocity, ...
-                                                               desJointAngles, desiredTaskAcc, ...
+                                        balancingControllerSOT(feetActivation, ...
+                                                               massMatrix, biasTorques, jacobiansDotNu, poseLeftFoot, poseRightFoot, jacobians, ...
+                                                               desJointAcc, desiredTaskAcc, ...
                                                                ROBOT_DOF, ConstraintsMatrix, ...
                                                                gain, CONFIG)
     %% BALANCING CONTROLLER
@@ -110,19 +110,19 @@ function [hessianMatrix,biasVector,constraintMatrixLeftFoot,constraintMatrixRigh
     Storques                  = [eye(ROBOT_DOF) zeros(ROBOT_DOF,12)];
     Sforces                   = [zeros(12, ROBOT_DOF) eye(12)];
     
-    contactJacobians          = [jacobians(end-11:end-6,:)*constraints(1);
-                                 jacobians(end- 5:end,  :)*constraints(2)];
+    contactJacobians          = [jacobians(end-11:end-6,:)*feetActivation(1);
+                                 jacobians(end- 5:end,  :)*feetActivation(2)];
                    
     B                         = [S, contactJacobians'];
-    tauFeedback               = diag(impedances)*(jointAngles-desJointAngles)...
-                                + diag(dampings)*robotVelocity(7:end);
+    tauFeedback               = - desJointAcc; %diag(impedances)*(jointAngles-desJointAngles)...
+                                %+ diag(dampings)*robotVelocity(7:end);
                             
     St_invM_B                 = (S' / massMatrix)* B;
     jacobians_invM            = jacobians / massMatrix; 
     jacobians_invM_biasTorques= jacobians_invM * biasTorques;
     jacobians_invM_B          = jacobians_invM * B;                            
 
-    if CONFIG.QP.USE_STRICT_TASK_PRIORITIES
+    if CONFIG.QP.USE_STRICT_TASK_PRIORITIES || CONFIG.QP.USE_STRICT_TASK_PRIORITIES_WITH_FOOT_ACCELERATION
         hessianMatrix             = St_invM_B' * St_invM_B + gain.weightMinTorques * (Storques' * Storques);
         biasVector                = St_invM_B' * (tauFeedback - (S' / massMatrix) * biasTorques);
         constraintMatrixEq        = jacobians_invM_B;      
