@@ -32,9 +32,9 @@ function [desiredTaskAcc,comError,rootRotErr,lFootPosErr,lFootRotErr,rFootPosErr
     rightFootLinVel    = taskVelocities(13:15);
     rightFootAngVel    = taskVelocities(16:18);
     
-    gainsPDpos_CoM     = [PDgainsPos(1:3)'   PDgainsPos(4:6)'];
-    gainsPDpos_lFoot   = [PDgainsPos(7:9)'   PDgainsPos(10:12)'];
-    gainsPDpos_rFoot   = [PDgainsPos(13:15)' PDgainsPos(16:18)'];
+    gainsPDpos_CoM     = PDgainsPos(1:3, :);
+    gainsPDpos_lFoot   = PDgainsPos(4:6, :);
+    gainsPDpos_rFoot   = PDgainsPos(7:9, :);
     
     gainsPDrot_root    = PDgainsRot(1,:);
     gainsPDrot_lFoot   = PDgainsRot(2,:);

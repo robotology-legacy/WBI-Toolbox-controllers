@@ -248,12 +248,12 @@ function [w_H_b, CoMDes,qDes,constraints,impedances,dampings, PDgainsPos,PDgains
     impedances          = gain.joints.impedances(state,:);
     dampings            = gain.joints.dampings(state,:);
     
-    PDgainsPos          = [gain.CoM.posPD(state,:)  , ...
-                           gain.lFoot.posPD(state,:), ...
-                           gain.rFoot.posPD(state,:)];
+    PDgainsPos          = [gain.CoM.posPD(state,1:3)'  , gain.CoM.posPD(state,4:6)';
+                           gain.lFoot.posPD(state,1:3)', gain.lFoot.posPD(state,4:6)';
+                           gain.rFoot.posPD(state,1:3)', gain.rFoot.posPD(state,4:6)'];
     
-    PDgainsRot          = [gain.root.rotPD(state,:) , ...
-                           gain.lFoot.rotPD(state,:), ...
+    PDgainsRot          = [gain.root.rotPD(state,:);
+                           gain.lFoot.rotPD(state,:);
                            gain.rFoot.rotPD(state,:)]; 
     
     jointsSmoothingTime = sm.jointsSmoothingTimes(state);
