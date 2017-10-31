@@ -22,7 +22,7 @@ setup(block);
 
 function setup(block)
     
-block.NumInputPorts  = 9; 
+block.NumInputPorts  = 8; 
 block.NumOutputPorts = 4; 
 
 % Setup port properties to be  dynamic
@@ -55,7 +55,7 @@ end
 
 
 % Register parameters
-block.NumDialogPrms     = 5;
+block.NumDialogPrms     = 4;
 
 % Register sample times
 %  [0 offset]            : Continuous sample time
@@ -150,10 +150,7 @@ function SetInputPortSamplingMode(block, idx, fd)
 %%
 
 function Outputs(block)
-
-    CONTACT_THRESHOLD          = 0.1;
-    unboundedConstant          = 1e14;
-    
+   
     initJointTorques            = block.InputPort(1).Data;
     LEFT_RIGHT_FOOT_IN_CONTACT  = block.InputPort(2).Data;
     hessianMatrixQP             = block.InputPort(3).Data;
@@ -162,18 +159,12 @@ function Outputs(block)
     constraintMatrixRightFoot   = block.InputPort(6).Data;
     constraintMatrixEq          = block.InputPort(7).Data;
     upperBoundEqConstraints     = block.InputPort(8).Data;
-    upperBoundFeetConstraints   = block.InputPort(9).Data;
     
-    nDof                        = block.DialogPrm(1).Data;
-    torqueDotMax                = block.DialogPrm(2).Data;
-    Ts                          = block.DialogPrm(3).Data;
-    USE_CONTINUITY_CONSTRAINTS  = block.DialogPrm(4).Data;
-    USE_STRICT_TASK_PRIORITIES  = block.DialogPrm(5).Data;
     
-    if ~USE_STRICT_TASK_PRIORITIES
-        constraintMatrixEq      = [];
-        upperBoundEqConstraints = [];
-    end
+    ROBOT_DOF                   = block.DialogPrm(1).Data;
+    sat                         = block.DialogPrm(2).Data;
+    CONFIG                      = block.DialogPrm(3).Data;
+    upperBoundFeetConstraints   = block.DialogPrm(4).Data;
     
     persistent uPrevious;
     if isempty(uPrevious)
@@ -194,65 +185,66 @@ function Outputs(block)
     %
     % 
     
+    
     % Only left foot is in contact
-    if LEFT_RIGHT_FOOT_IN_CONTACT(1) > (1 - CONTACT_THRESHOLD) && LEFT_RIGHT_FOOT_IN_CONTACT(2) < CONTACT_THRESHOLD
+    if LEFT_RIGHT_FOOT_IN_CONTACT(1) && ~LEFT_RIGHT_FOOT_IN_CONTACT(2)
         % In this case, 
         % 
         % x = [jointTorques
         %      contactWrenchLeftFoot]
         %
         
-        SL   = [eye(nDof),     zeros(nDof,6)  
-                    zeros(6,nDof), eye(6)
-                    zeros(6,nDof), zeros(6)    ];
+        SL   = [eye(ROBOT_DOF),     zeros(ROBOT_DOF,6)  
+                zeros(6,ROBOT_DOF), eye(6)
+                zeros(6,ROBOT_DOF), zeros(6)    ];
         H    = SL'*hessianMatrixQP*SL;
         g    = SL'*biasVectorQP;
 
         
-        if USE_STRICT_TASK_PRIORITIES
-            A    = [zeros(length(upperBoundFeetConstraints),nDof),constraintMatrixLeftFoot;
+        if CONFIG.QP.USE_STRICT_TASK_PRIORITIES || CONFIG.QP.USE_STRICT_TASK_PRIORITIES_WITH_FOOT_ACCELERATION
+            A    = [zeros(length(upperBoundFeetConstraints),ROBOT_DOF),constraintMatrixLeftFoot;
                     constraintMatrixEq*SL];
             ubA  = [upperBoundFeetConstraints;
                     upperBoundEqConstraints];
-            lbA  = [-unboundedConstant*ones(length(upperBoundFeetConstraints),1);
+            lbA  = [-sat.unboundedConstant*ones(length(upperBoundFeetConstraints),1);
                     upperBoundEqConstraints];
         else
-            A    = [zeros(length(upperBoundFeetConstraints),nDof),constraintMatrixLeftFoot];
+            A    = [zeros(length(upperBoundFeetConstraints),ROBOT_DOF),constraintMatrixLeftFoot];
             ubA  = upperBoundFeetConstraints;
             lbA  = -unboundedConstant*ones(length(upperBoundFeetConstraints),1);
         end
            
     % Only right foot is in contact
-    elseif LEFT_RIGHT_FOOT_IN_CONTACT(2) > (1 - CONTACT_THRESHOLD) && LEFT_RIGHT_FOOT_IN_CONTACT(1) < CONTACT_THRESHOLD
+    elseif LEFT_RIGHT_FOOT_IN_CONTACT(2) && ~LEFT_RIGHT_FOOT_IN_CONTACT(1)
         % In this case, 
         % 
         % x = [jointTorques
         %      contactWrenchRightFoot]
         %
 
-        SR   = [eye(nDof),     zeros(nDof,6)  
-               zeros(6,nDof),     zeros(6)
-               zeros(6,nDof),    eye(6)  ];
+        SR   = [eye(ROBOT_DOF),     zeros(ROBOT_DOF,6)  
+                zeros(6,ROBOT_DOF), zeros(6)
+                zeros(6,ROBOT_DOF), eye(6)  ];
         H    = SR'*hessianMatrixQP*SR;
         g    = SR'*biasVectorQP;
 
         
-        if USE_STRICT_TASK_PRIORITIES
-            A    = [zeros(length(upperBoundFeetConstraints),nDof),constraintMatrixRightFoot;
+        if CONFIG.QP.USE_STRICT_TASK_PRIORITIES || CONFIG.QP.USE_STRICT_TASK_PRIORITIES_WITH_FOOT_ACCELERATION
+            A    = [zeros(length(upperBoundFeetConstraints),ROBOT_DOF),constraintMatrixRightFoot;
                     constraintMatrixEq*SR];
             ubA  = [upperBoundFeetConstraints;
                     upperBoundEqConstraints];
-            lbA  = [-unboundedConstant*ones(length(upperBoundFeetConstraints),1);
+            lbA  = [-sat.unboundedConstant*ones(length(upperBoundFeetConstraints),1);
                     upperBoundEqConstraints];
         else
-            A    = [zeros(length(upperBoundFeetConstraints),nDof),constraintMatrixRightFoot];
+            A    = [zeros(length(upperBoundFeetConstraints),ROBOT_DOF),constraintMatrixRightFoot];
             ubA  = upperBoundFeetConstraints;
             lbA  = -unboundedConstant*ones(length(upperBoundFeetConstraints),1);
             
         end
     
     %Both feet in contact
-    elseif LEFT_RIGHT_FOOT_IN_CONTACT(2) > (1 - CONTACT_THRESHOLD) && LEFT_RIGHT_FOOT_IN_CONTACT(1) > (1 - CONTACT_THRESHOLD)
+    elseif LEFT_RIGHT_FOOT_IN_CONTACT(2) && LEFT_RIGHT_FOOT_IN_CONTACT(1)
         % In this case, 
         % 
         % x = [jointTorques
@@ -263,23 +255,23 @@ function Outputs(block)
         H    = hessianMatrixQP;
         g    = biasVectorQP; 
         
-        if USE_STRICT_TASK_PRIORITIES
-            A    = [zeros(length(upperBoundFeetConstraints),nDof),constraintMatrixLeftFoot,zeros(length(upperBoundFeetConstraints),6);
-                    zeros(length(upperBoundFeetConstraints),nDof),zeros(length(upperBoundFeetConstraints),6),constraintMatrixRightFoot;
+        if CONFIG.QP.USE_STRICT_TASK_PRIORITIES || CONFIG.QP.USE_STRICT_TASK_PRIORITIES_WITH_FOOT_ACCELERATION
+            A    = [zeros(length(upperBoundFeetConstraints),ROBOT_DOF),constraintMatrixLeftFoot,zeros(length(upperBoundFeetConstraints),6);
+                    zeros(length(upperBoundFeetConstraints),ROBOT_DOF),zeros(length(upperBoundFeetConstraints),6),constraintMatrixRightFoot;
                     constraintMatrixEq];
             ubA  = [upperBoundFeetConstraints;
                     upperBoundFeetConstraints;
                     upperBoundEqConstraints];
-            lbA  = [-unboundedConstant*ones(length(upperBoundFeetConstraints),1);
-                    -unboundedConstant*ones(length(upperBoundFeetConstraints),1);
+            lbA  = [-sat.unboundedConstant*ones(length(upperBoundFeetConstraints),1);
+                    -sat.unboundedConstant*ones(length(upperBoundFeetConstraints),1);
                      upperBoundEqConstraints];
         else
-            A    = [zeros(length(upperBoundFeetConstraints),nDof),constraintMatrixLeftFoot,zeros(length(upperBoundFeetConstraints),6);
-                    zeros(length(upperBoundFeetConstraints),nDof),zeros(length(upperBoundFeetConstraints),6),constraintMatrixRightFoot];
+            A    = [zeros(length(upperBoundFeetConstraints),ROBOT_DOF),constraintMatrixLeftFoot,zeros(length(upperBoundFeetConstraints),6);
+                    zeros(length(upperBoundFeetConstraints),ROBOT_DOF),zeros(length(upperBoundFeetConstraints),6),constraintMatrixRightFoot];
             ubA  = [upperBoundFeetConstraints;
                     upperBoundFeetConstraints];
-            lbA  = [-unboundedConstant*ones(length(upperBoundFeetConstraints),1);
-                    -unboundedConstant*ones(length(upperBoundFeetConstraints),1)];            
+            lbA  = [-sat.unboundedConstant*ones(length(upperBoundFeetConstraints),1);
+                    -sat.unboundedConstant*ones(length(upperBoundFeetConstraints),1)];            
         end
         
     else
@@ -289,13 +281,13 @@ function Outputs(block)
         lbA  = [];
     end
  
-    if USE_CONTINUITY_CONSTRAINTS && ~isempty(uPrevious)
+    if CONFIG.QP.USE_CONTINUITY_CONSTRAINTS && ~isempty(uPrevious)
         A    = [ A;
-                 eye(nDof),zeros(nDof,size(A,2)-nDof)];
+                 eye(ROBOT_DOF),zeros(ROBOT_DOF,size(A,2)-ROBOT_DOF)];
         ubA  = [ubA;
-                torqueDotMax*Ts+uPrevious(1:nDof)];
+                sat.torqueDotMax*CONFIG.Ts+uPrevious(1:ROBOT_DOF)];
         lbA  = [lbA;
-                -torqueDotMax*Ts+uPrevious(1:nDof)];
+                -sat.torqueDotMax*CONFIG.Ts+uPrevious(1:ROBOT_DOF)];
     end
     
     H = (H + H')/2;
@@ -308,13 +300,13 @@ function Outputs(block)
         uPrevious = u;
     end
 
-    block.OutputPort(1).Data = u(1:nDof);
-    block.OutputPort(2).Data = u(nDof+1:nDof+6)*LEFT_RIGHT_FOOT_IN_CONTACT(1);
-    block.OutputPort(3).Data = u(nDof+1:nDof+6)*LEFT_RIGHT_FOOT_IN_CONTACT(2);
+    block.OutputPort(1).Data = u(1:ROBOT_DOF);
+    block.OutputPort(2).Data = u(ROBOT_DOF+1:ROBOT_DOF+6)*LEFT_RIGHT_FOOT_IN_CONTACT(1);
+    block.OutputPort(3).Data = u(ROBOT_DOF+1:ROBOT_DOF+6)*LEFT_RIGHT_FOOT_IN_CONTACT(2);
 
     %Both feet in contact
-    if sum(LEFT_RIGHT_FOOT_IN_CONTACT) > 2 - CONTACT_THRESHOLD
-        block.OutputPort(3).Data = u(nDof+7:nDof+12);
+    if LEFT_RIGHT_FOOT_IN_CONTACT(1) && LEFT_RIGHT_FOOT_IN_CONTACT(2)
+        block.OutputPort(3).Data = u(ROBOT_DOF+7:ROBOT_DOF+12);
     end
     
     block.OutputPort(4).Data = exitFlagQP;

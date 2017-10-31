@@ -8,12 +8,15 @@ PORTS.WBDT_LEFTLEG_EE     = '/wholeBodyDynamics/left_leg/cartesianEndEffectorWre
 PORTS.WBDT_RIGHTLEG_EE    = '/wholeBodyDynamics/right_leg/cartesianEndEffectorWrench:o';
 
 %Maximum torque value sent to actuators
-sat.torque          = 60;
+sat.torque            = 60;
 
 %Maximum variation of torque from one time step to the next
 %Required as parameter of QP, but used only if
 %CONFIG.QP.USE_CONTINUITY_CONSTRAINTS = true;
-sat.torqueDot       = inf*ones(ROBOT_DOF,1);
+sat.torqueDot         = inf*ones(ROBOT_DOF,1);
+
+%Maximum value used as upper bound constraint
+sat.unboundedConstant = 1e14;
 
 %% %%%%%%%%%%%%%%%%    Gains for desired values computation
 
