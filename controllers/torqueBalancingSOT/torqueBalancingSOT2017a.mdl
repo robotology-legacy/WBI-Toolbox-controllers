@@ -6,7 +6,7 @@ Model {
     NumRootInports	    0
     NumRootOutports	    0
     ParameterArgumentNames  ""
-    ComputedModelVersion    "1.126"
+    ComputedModelVersion    "1.129"
     NumModelReferences	    0
     NumTestPointedSignals   0
     NumProvidedFunctions    0
@@ -71,7 +71,7 @@ Model {
 	  LoadSaveID		  "162"
 	  Extents		  [1277.0, 589.0]
 	  ZoomFactor		  [1.0]
-	  Offset		  [613.6374004270009, 193.59807638914515]
+	  Offset		  [622.25848222851039, -54.035954130244477]
 	}
 	Object {
 	  $ObjectID		  6
@@ -80,7 +80,7 @@ Model {
 	  LoadSaveID		  "299"
 	  Extents		  [1277.0, 589.0]
 	  ZoomFactor		  [1.0]
-	  Offset		  [-195.74174065555863, -35.012901257269625]
+	  Offset		  [-266.06276893766528, -181.95974112937682]
 	}
 	Object {
 	  $ObjectID		  7
@@ -89,7 +89,7 @@ Model {
 	  LoadSaveID		  "0"
 	  Extents		  [1277.0, 589.0]
 	  ZoomFactor		  [0.8]
-	  Offset		  [1150.9621542074083, -71.903318304930508]
+	  Offset		  [2267.0707150377466, -93.231948540167878]
 	}
 	Object {
 	  $ObjectID		  8
@@ -98,7 +98,7 @@ Model {
 	  LoadSaveID		  "876"
 	  Extents		  [1277.0, 589.0]
 	  ZoomFactor		  [1.0]
-	  Offset		  [0.0, 0.0]
+	  Offset		  [-377.81907362775053, -121.03943312905221]
 	}
 	Object {
 	  $ObjectID		  9
@@ -115,8 +115,8 @@ Model {
 	  ViewObjType		  "SimulinkSubsys"
 	  LoadSaveID		  "1710"
 	  Extents		  [1277.0, 589.0]
-	  ZoomFactor		  [1.25]
-	  Offset		  [-304.64892977751418, 270.33939672412828]
+	  ZoomFactor		  [0.8]
+	  Offset		  [-605.30006889755975, -115.86896421202437]
 	}
 	PropName		"EditorsInfo"
       }
@@ -152,9 +152,9 @@ Model {
   ModifiedByFormat	  "%<Auto>"
   LastModifiedBy	  "mcharbonneau"
   ModifiedDateFormat	  "%<Auto>"
-  LastModifiedDate	  "Tue Oct 31 16:44:55 2017"
-  RTWModifiedTimeStamp	  431369077
-  ModelVersionFormat	  "1.%<AutoIncrement:126>"
+  LastModifiedDate	  "Tue Oct 31 17:12:58 2017"
+  RTWModifiedTimeStamp	  431370775
+  ModelVersionFormat	  "1.%<AutoIncrement:129>"
   ConfigurationManager	  "none"
   SampleTimeColors	  off
   SampleTimeAnnotations	  off
@@ -1302,13 +1302,13 @@ Model {
     ShowPageBoundaries	    off
     ZoomFactor		    "80"
     ReportName		    "simulink-default.rpt"
-    SIDHighWatermark	    "1740"
+    SIDHighWatermark	    "1745"
     Block {
       BlockType		      SubSystem
       Name		      "Controller and QP"
       SID		      "335"
       Ports		      [10, 2]
-      Position		      [2600, -603, 2805, 23]
+      Position		      [2600, -653, 2805, -27]
       ZOrder		      -50
       ForegroundColor	      "red"
       BackgroundColor	      "[1.000000, 1.000000, 0.498039]"
@@ -1316,7 +1316,7 @@ Model {
       Variant		      off
       System {
 	Name			"Controller and QP"
-	Location		[51, 24, 1366, 768]
+	Location		[51, -4, 1366, 768]
 	Open			off
 	PortBlocksUseCompactNotation off
 	ModelBrowserVisibility	off
@@ -2084,8 +2084,8 @@ Model {
       BlockType		      SubSystem
       Name		      "Desired values"
       SID		      "162"
-      Ports		      [4, 8]
-      Position		      [1335, 96, 1490, 479]
+      Ports		      [4, 7]
+      Position		      [1335, 130, 1485, 470]
       ZOrder		      -28
       BackgroundColor	      "[0.333333, 0.333333, 1.000000]"
       RequestExecContextInheritance off
@@ -2145,12 +2145,12 @@ Model {
 	  BlockType		  BusCreator
 	  Name			  "Bus\nCreator"
 	  SID			  "141"
-	  Ports			  [5, 1]
-	  Position		  [1515, 144, 1520, 366]
+	  Ports			  [6, 1]
+	  Position		  [1515, 103, 1520, 362]
 	  ZOrder		  848
 	  ShowName		  off
-	  Inputs		  "'desRootRotPosVelAcc','desLeftFootOriginPosVelAcc','desLeftFootRotPosVelAcc','desRightFootOriginPosVelAc"
-	  "c','desRightFootRotPosVelAcc'"
+	  Inputs		  "'desCoMPosVelAcc','desRootRotPosVelAcc','desLeftFootOriginPosVelAcc','desLeftFootRotPosVelAcc','desRight"
+	  "FootOriginPosVelAcc','desRightFootRotPosVelAcc'"
 	  DisplayOption		  "bar"
 	  InheritFromInputs	  on
 	}
@@ -2205,6 +2205,10 @@ Model {
 	  NumInputs		  "3"
 	  Mode			  "Multidimensional array"
 	  ConcatenateDimension	  "2"
+	  Port {
+	    PortNumber		    1
+	    Name		    "desCoMPosVelAcc"
+	  }
 	}
 	Block {
 	  BlockType		  Reference
@@ -2310,7 +2314,7 @@ Model {
 	  Name			  "Mux1"
 	  SID			  "81"
 	  Ports			  [4, 1]
-	  Position		  [935, 371, 940, 544]
+	  Position		  [955, 371, 960, 544]
 	  ZOrder		  835
 	  ShowName		  off
 	  DisplayOption		  "bar"
@@ -4975,38 +4979,29 @@ Model {
 	}
 	Block {
 	  BlockType		  Outport
-	  Name			  "CoMdes"
-	  SID			  "133"
-	  Position		  [1565, 123, 1595, 137]
-	  ZOrder		  843
+	  Name			  "gains"
+	  SID			  "1724"
+	  Position		  [1305, 463, 1335, 477]
+	  ZOrder		  855
 	  Port			  "4"
+	  IconDisplay		  "Port number"
+	}
+	Block {
+	  BlockType		  Outport
+	  Name			  "qj_des"
+	  SID			  "122"
+	  Position		  [1565, 78, 1595, 92]
+	  ZOrder		  837
+	  Port			  "5"
 	  IconDisplay		  "Port number"
 	}
 	Block {
 	  BlockType		  Outport
 	  Name			  "desTaskValues"
 	  SID			  "124"
-	  Position		  [1565, 248, 1595, 262]
+	  Position		  [1565, 228, 1595, 242]
 	  ZOrder		  838
-	  Port			  "5"
-	  IconDisplay		  "Port number"
-	}
-	Block {
-	  BlockType		  Outport
-	  Name			  "qDes"
-	  SID			  "122"
-	  Position		  [1565, 78, 1595, 92]
-	  ZOrder		  837
 	  Port			  "6"
-	  IconDisplay		  "Port number"
-	}
-	Block {
-	  BlockType		  Outport
-	  Name			  "gains"
-	  SID			  "1724"
-	  Position		  [1305, 463, 1335, 477]
-	  ZOrder		  855
-	  Port			  "7"
 	  IconDisplay		  "Port number"
 	}
 	Block {
@@ -5015,7 +5010,7 @@ Model {
 	  SID			  "132"
 	  Position		  [1305, 698, 1335, 712]
 	  ZOrder		  842
-	  Port			  "8"
+	  Port			  "7"
 	  IconDisplay		  "Port number"
 	}
 	Line {
@@ -5055,12 +5050,12 @@ Model {
 	  FontSize		  9
 	  FontWeight		  "normal"
 	  FontAngle		  "normal"
-	  ZOrder		  501
+	  ZOrder		  569
 	  Labels		  [0, 0]
 	  SrcBlock		  "stateMachineWalkingFCN"
 	  SrcPort		  7
 	  DstBlock		  "Bus\nCreator"
-	  DstPort		  5
+	  DstPort		  6
 	}
 	Line {
 	  ZOrder		  504
@@ -5250,12 +5245,12 @@ Model {
 	  FontSize		  9
 	  FontWeight		  "normal"
 	  FontAngle		  "normal"
-	  ZOrder		  533
+	  ZOrder		  573
 	  Labels		  [0, 0]
 	  SrcBlock		  "stateMachineWalkingFCN"
 	  SrcPort		  3
 	  DstBlock		  "Bus\nCreator"
-	  DstPort		  1
+	  DstPort		  2
 	}
 	Line {
 	  ZOrder		  534
@@ -5345,12 +5340,12 @@ Model {
 	  FontSize		  9
 	  FontWeight		  "normal"
 	  FontAngle		  "normal"
-	  ZOrder		  549
+	  ZOrder		  571
 	  Labels		  [0, 0]
 	  SrcBlock		  "stateMachineWalkingFCN"
 	  SrcPort		  5
 	  DstBlock		  "Bus\nCreator"
-	  DstPort		  3
+	  DstPort		  4
 	}
 	Line {
 	  ZOrder		  550
@@ -5370,7 +5365,7 @@ Model {
 	  ZOrder		  552
 	  SrcBlock		  "Minimum Jerk Trajectory Generator3"
 	  SrcPort		  1
-	  DstBlock		  "qDes"
+	  DstBlock		  "qj_des"
 	  DstPort		  1
 	}
 	Line {
@@ -5402,10 +5397,17 @@ Model {
 	  DstPort		  3
 	}
 	Line {
-	  ZOrder		  557
+	  Name			  "desCoMPosVelAcc"
+	  FontName		  "Helvetica"
+	  FontSize		  9
+	  FontWeight		  "normal"
+	  FontAngle		  "normal"
+	  ZOrder		  574
+	  Labels		  [1, 1]
 	  SrcBlock		  "Matrix\nConcatenate2"
 	  SrcPort		  1
-	  DstBlock		  "CoMdes"
+	  Points		  [92, 0; 0, -10]
+	  DstBlock		  "Bus\nCreator"
 	  DstPort		  1
 	}
 	Line {
@@ -5414,13 +5416,13 @@ Model {
 	  FontSize		  9
 	  FontWeight		  "normal"
 	  FontAngle		  "normal"
-	  ZOrder		  558
+	  ZOrder		  570
 	  Labels		  [0, 0]
 	  SrcBlock		  "Matrix\nConcatenate1"
 	  SrcPort		  1
 	  Points		  [68, 0; 0, -10]
 	  DstBlock		  "Bus\nCreator"
-	  DstPort		  4
+	  DstPort		  5
 	}
 	Line {
 	  ZOrder		  559
@@ -5470,13 +5472,13 @@ Model {
 	  FontSize		  9
 	  FontWeight		  "normal"
 	  FontAngle		  "normal"
-	  ZOrder		  565
+	  ZOrder		  572
 	  Labels		  [0, 0]
 	  SrcBlock		  "Matrix\nConcatenate"
 	  SrcPort		  1
 	  Points		  [68, 0; 0, -10]
 	  DstBlock		  "Bus\nCreator"
-	  DstPort		  2
+	  DstPort		  3
 	}
 	Line {
 	  ZOrder		  566
@@ -5499,7 +5501,7 @@ Model {
       Name		      "Dynamics, Kinematics, Jacobians"
       SID		      "231"
       Ports		      [4, 8]
-      Position		      [1690, -258, 1830, 113]
+      Position		      [1690, -271, 1830, 121]
       ZOrder		      -42
       BackgroundColor	      "orange"
       RequestExecContextInheritance off
@@ -7140,7 +7142,7 @@ Model {
       Name		      "Get Estimate2"
       SID		      "392"
       Ports		      [0, 1]
-      Position		      [1195, -733, 1275, -697]
+      Position		      [1195, -758, 1275, -722]
       ZOrder		      799
       BackgroundColor	      "[0.827500, 0.576500, 0.603900]"
       ShowName		      off
@@ -7159,13 +7161,12 @@ Model {
       BlockType		      Constant
       Name		      "ON_GAZEBO\n3"
       SID		      "377"
-      Position		      [3444, -825, 3556, -810]
+      Position		      [3494, 40, 3606, 55]
       ZOrder		      790
       BlockRotation	      270
       BlockMirror	      on
       NamePlacement	      "alternate"
       ShowName		      off
-      Commented		      "on"
       Value		      "CONFIG.SCOPES.ALL"
     }
     Block {
@@ -7206,8 +7207,8 @@ Model {
       BlockType		      SubSystem
       Name		      "Task Acceleration"
       SID		      "299"
-      Ports		      [13, 3]
-      Position		      [2225, -118, 2405, 468]
+      Ports		      [12, 3]
+      Position		      [2225, -168, 2405, 418]
       ZOrder		      -46
       BackgroundColor	      "cyan"
       RequestExecContextInheritance off
@@ -7230,46 +7231,55 @@ Model {
 	ZoomFactor		"100"
 	Block {
 	  BlockType		  Inport
+	  Name			  "qj"
+	  SID			  "1725"
+	  Position		  [150, -282, 180, -268]
+	  ZOrder		  873
+	  IconDisplay		  "Port number"
+	}
+	Block {
+	  BlockType		  Inport
 	  Name			  "w_H_l_sole"
 	  SID			  "329"
-	  Position		  [490, 118, 520, 132]
+	  Position		  [490, 123, 520, 137]
 	  ZOrder		  806
+	  Port			  "2"
 	  IconDisplay		  "Port number"
 	}
 	Block {
 	  BlockType		  Inport
 	  Name			  "w_H_r_sole"
 	  SID			  "330"
-	  Position		  [490, 168, 520, 182]
+	  Position		  [490, 178, 520, 192]
 	  ZOrder		  807
-	  Port			  "2"
+	  Port			  "3"
 	  IconDisplay		  "Port number"
 	}
 	Block {
 	  BlockType		  Inport
 	  Name			  "jacobians"
 	  SID			  "315"
-	  Position		  [490, 218, 520, 232]
+	  Position		  [490, 233, 520, 247]
 	  ZOrder		  796
-	  Port			  "3"
+	  Port			  "4"
 	  IconDisplay		  "Port number"
 	}
 	Block {
 	  BlockType		  Inport
 	  Name			  "nu"
 	  SID			  "316"
-	  Position		  [490, 268, 520, 282]
+	  Position		  [490, 288, 520, 302]
 	  ZOrder		  797
-	  Port			  "4"
+	  Port			  "5"
 	  IconDisplay		  "Port number"
 	}
 	Block {
 	  BlockType		  Inport
 	  Name			  "CoMPos"
 	  SID			  "318"
-	  Position		  [490, 318, 520, 332]
+	  Position		  [490, 343, 520, 357]
 	  ZOrder		  799
-	  Port			  "5"
+	  Port			  "6"
 	  IconDisplay		  "Port number"
 	}
 	Block {
@@ -7278,16 +7288,16 @@ Model {
 	  SID			  "1726"
 	  Position		  [150, -207, 180, -193]
 	  ZOrder		  874
-	  Port			  "6"
+	  Port			  "7"
 	  IconDisplay		  "Port number"
 	}
 	Block {
 	  BlockType		  Inport
 	  Name			  "w_H_b"
 	  SID			  "300"
-	  Position		  [490, 368, 520, 382]
+	  Position		  [490, 398, 520, 412]
 	  ZOrder		  781
-	  Port			  "7"
+	  Port			  "8"
 	  IconDisplay		  "Port number"
 	}
 	Block {
@@ -7296,24 +7306,15 @@ Model {
 	  SID			  "1727"
 	  Position		  [150, -157, 180, -143]
 	  ZOrder		  875
-	  Port			  "8"
-	  IconDisplay		  "Port number"
-	}
-	Block {
-	  BlockType		  Inport
-	  Name			  "desCoMPosVelAcc"
-	  SID			  "319"
-	  Position		  [490, 418, 520, 432]
-	  ZOrder		  800
 	  Port			  "9"
 	  IconDisplay		  "Port number"
 	}
 	Block {
 	  BlockType		  Inport
-	  Name			  "desTaskValues"
-	  SID			  "301"
-	  Position		  [490, 468, 520, 482]
-	  ZOrder		  782
+	  Name			  "gains"
+	  SID			  "1723"
+	  Position		  [100, 93, 130, 107]
+	  ZOrder		  872
 	  Port			  "10"
 	  IconDisplay		  "Port number"
 	}
@@ -7328,20 +7329,11 @@ Model {
 	}
 	Block {
 	  BlockType		  Inport
-	  Name			  "gains"
-	  SID			  "1723"
-	  Position		  [100, 93, 130, 107]
-	  ZOrder		  872
+	  Name			  "desTaskValues"
+	  SID			  "301"
+	  Position		  [490, 453, 520, 467]
+	  ZOrder		  782
 	  Port			  "12"
-	  IconDisplay		  "Port number"
-	}
-	Block {
-	  BlockType		  Inport
-	  Name			  "qj"
-	  SID			  "1725"
-	  Position		  [150, -282, 180, -268]
-	  ZOrder		  873
-	  Port			  "13"
 	  IconDisplay		  "Port number"
 	}
 	Block {
@@ -7375,7 +7367,7 @@ Model {
 	  BlockType		  SubSystem
 	  Name			  "Desired task accelerations"
 	  SID			  "1710"
-	  Ports			  [10, 2]
+	  Ports			  [9, 2]
 	  Position		  [775, 93, 910, 607]
 	  ZOrder		  864
 	  RequestExecContextInheritance	off
@@ -7395,7 +7387,7 @@ Model {
 	    TiledPaperMargins	    [0.500000, 0.500000, 0.500000, 0.500000]
 	    TiledPageScale	    1
 	    ShowPageBoundaries	    off
-	    ZoomFactor		    "125"
+	    ZoomFactor		    "80"
 	    Block {
 	      BlockType		      Inport
 	      Name		      "w_H_l_sole"
@@ -7451,20 +7443,11 @@ Model {
 	    }
 	    Block {
 	      BlockType		      Inport
-	      Name		      "desCoMPosVelAcc"
-	      SID		      "1717"
-	      Position		      [20, 308, 50, 322]
-	      ZOrder		      865
-	      Port		      "7"
-	      IconDisplay	      "Port number"
-	    }
-	    Block {
-	      BlockType		      Inport
 	      Name		      "desTaskPosVelAcc"
 	      SID		      "1718"
-	      Position		      [20, 473, 50, 487]
+	      Position		      [20, 448, 50, 462]
 	      ZOrder		      866
-	      Port		      "8"
+	      Port		      "7"
 	      IconDisplay	      "Port number"
 	    }
 	    Block {
@@ -7473,7 +7456,7 @@ Model {
 	      SID		      "1719"
 	      Position		      [20, 638, 50, 652]
 	      ZOrder		      867
-	      Port		      "9"
+	      Port		      "8"
 	      IconDisplay	      "Port number"
 	    }
 	    Block {
@@ -7482,7 +7465,7 @@ Model {
 	      SID		      "1720"
 	      Position		      [20, 693, 50, 707]
 	      ZOrder		      868
-	      Port		      "10"
+	      Port		      "9"
 	      IconDisplay	      "Port number"
 	    }
 	    Block {
@@ -7502,31 +7485,35 @@ Model {
 	      BlockType		      BusSelector
 	      Name		      "Bus\nSelector"
 	      SID		      "298"
-	      Ports		      [1, 5]
-	      Position		      [150, 343, 155, 617]
+	      Ports		      [1, 6]
+	      Position		      [150, 285, 155, 620]
 	      ZOrder		      780
 	      ShowName		      off
-	      OutputSignals	      "desRootRotPosVelAcc,desLeftFootOriginPosVelAcc,desLeftFootRotPosVelAcc,desRightFootOriginP"
-	      "osVelAcc,desRightFootRotPosVelAcc"
+	      OutputSignals	      "desCoMPosVelAcc,desRootRotPosVelAcc,desLeftFootOriginPosVelAcc,desLeftFootRotPosVelAcc,des"
+	      "RightFootOriginPosVelAcc,desRightFootRotPosVelAcc"
 	      OutputAsBus	      off
 	      Port {
 		PortNumber		1
-		Name			"<desRootRotPosVelAcc>"
+		Name			"<desCoMPosVelAcc>"
 	      }
 	      Port {
 		PortNumber		2
-		Name			"<desLeftFootOriginPosVelAcc>"
+		Name			"<desRootRotPosVelAcc>"
 	      }
 	      Port {
 		PortNumber		3
-		Name			"<desLeftFootRotPosVelAcc>"
+		Name			"<desLeftFootOriginPosVelAcc>"
 	      }
 	      Port {
 		PortNumber		4
-		Name			"<desRightFootOriginPosVelAcc>"
+		Name			"<desLeftFootRotPosVelAcc>"
 	      }
 	      Port {
 		PortNumber		5
+		Name			"<desRightFootOriginPosVelAcc>"
+	      }
+	      Port {
+		PortNumber		6
 		Name			"<desRightFootRotPosVelAcc>"
 	      }
 	    }
@@ -8015,7 +8002,7 @@ Model {
 	      ZOrder		      340
 	      Labels		      [0, 0]
 	      SrcBlock		      "Bus\nSelector"
-	      SrcPort		      3
+	      SrcPort		      4
 	      DstBlock		      "desiredTaskAcceleration"
 	      DstPort		      9
 	    }
@@ -8031,7 +8018,7 @@ Model {
 	      ZOrder		      341
 	      Labels		      [0, 0]
 	      SrcBlock		      "Bus\nSelector"
-	      SrcPort		      2
+	      SrcPort		      3
 	      DstBlock		      "desiredTaskAcceleration"
 	      DstPort		      8
 	    }
@@ -8068,7 +8055,7 @@ Model {
 	      ZOrder		      342
 	      Labels		      [0, 0]
 	      SrcBlock		      "Bus\nSelector"
-	      SrcPort		      5
+	      SrcPort		      6
 	      DstBlock		      "desiredTaskAcceleration"
 	      DstPort		      11
 	    }
@@ -8098,7 +8085,7 @@ Model {
 	      ZOrder		      339
 	      Labels		      [0, 0]
 	      SrcBlock		      "Bus\nSelector"
-	      SrcPort		      1
+	      SrcPort		      2
 	      DstBlock		      "desiredTaskAcceleration"
 	      DstPort		      7
 	    }
@@ -8123,13 +8110,6 @@ Model {
 	      SrcPort		      1
 	      DstBlock		      "desiredTaskAcceleration"
 	      DstPort		      1
-	    }
-	    Line {
-	      ZOrder		      506
-	      SrcBlock		      "desCoMPosVelAcc"
-	      SrcPort		      1
-	      DstBlock		      "desiredTaskAcceleration"
-	      DstPort		      6
 	    }
 	    Line {
 	      ZOrder		      511
@@ -8164,9 +8144,18 @@ Model {
 	      ZOrder		      343
 	      Labels		      [0, 0]
 	      SrcBlock		      "Bus\nSelector"
-	      SrcPort		      4
+	      SrcPort		      5
 	      DstBlock		      "desiredTaskAcceleration"
 	      DstPort		      10
+	    }
+	    Line {
+	      Name		      "<desCoMPosVelAcc>"
+	      ZOrder		      512
+	      Labels		      [0, 0]
+	      SrcBlock		      "Bus\nSelector"
+	      SrcPort		      1
+	      DstBlock		      "desiredTaskAcceleration"
+	      DstPort		      6
 	    }
 	  }
 	}
@@ -8174,8 +8163,8 @@ Model {
 	  BlockType		  SubSystem
 	  Name			  "Integration Based Inverse Kinematics"
 	  SID			  "931"
-	  Ports			  [12, 1, 1]
-	  Position		  [775, -281, 980, 6]
+	  Ports			  [11, 1, 1]
+	  Position		  [775, -279, 980, 9]
 	  ZOrder		  862
 	  BackgroundColor	  "[0.333333, 0.666667, 0.498039]"
 	  RequestExecContextInheritance	off
@@ -8195,7 +8184,7 @@ Model {
 	    TiledPaperMargins	    [0.500000, 0.500000, 0.500000, 0.500000]
 	    TiledPageScale	    1
 	    ShowPageBoundaries	    off
-	    ZoomFactor		    "100"
+	    ZoomFactor		    "90"
 	    Block {
 	      BlockType		      Inport
 	      Name		      "jointAngles"
@@ -8208,7 +8197,7 @@ Model {
 	      BlockType		      Inport
 	      Name		      "impedances"
 	      SID		      "1574"
-	      Position		      [-170, 1528, -140, 1542]
+	      Position		      [-170, 1513, -140, 1527]
 	      ZOrder		      927
 	      Port		      "2"
 	      IconDisplay	      "Port number"
@@ -8217,7 +8206,7 @@ Model {
 	      BlockType		      Inport
 	      Name		      "dampings"
 	      SID		      "1575"
-	      Position		      [-170, 1573, -140, 1587]
+	      Position		      [-170, 1563, -140, 1577]
 	      ZOrder		      928
 	      Port		      "3"
 	      IconDisplay	      "Port number"
@@ -8226,7 +8215,7 @@ Model {
 	      BlockType		      Inport
 	      Name		      "constraints"
 	      SID		      "936"
-	      Position		      [-170, 1483, -140, 1497]
+	      Position		      [-170, 1463, -140, 1477]
 	      ZOrder		      524
 	      Port		      "4"
 	      IconDisplay	      "Port number"
@@ -8244,7 +8233,7 @@ Model {
 	      BlockType		      Inport
 	      Name		      "desJointAngles"
 	      SID		      "935"
-	      Position		      [-170, 1437, -140, 1453]
+	      Position		      [-170, 1412, -140, 1428]
 	      ZOrder		      523
 	      Port		      "6"
 	      IconDisplay	      "Port number"
@@ -8269,29 +8258,20 @@ Model {
 	    }
 	    Block {
 	      BlockType		      Inport
-	      Name		      "desCoMPosVelAcc"
-	      SID		      "934"
-	      Position		      [-170, 1348, -140, 1362]
-	      ZOrder		      522
-	      Port		      "9"
-	      IconDisplay	      "Port number"
-	    }
-	    Block {
-	      BlockType		      Inport
 	      Name		      "desTaskValues"
 	      SID		      "1423"
-	      Position		      [-170, 1393, -140, 1407]
+	      Position		      [-170, 1363, -140, 1377]
 	      ZOrder		      908
-	      Port		      "10"
+	      Port		      "9"
 	      IconDisplay	      "Port number"
 	    }
 	    Block {
 	      BlockType		      Inport
 	      Name		      "PDgainsPos"
 	      SID		      "1576"
-	      Position		      [-170, 1618, -140, 1632]
+	      Position		      [-170, 1613, -140, 1627]
 	      ZOrder		      929
-	      Port		      "11"
+	      Port		      "10"
 	      IconDisplay	      "Port number"
 	    }
 	    Block {
@@ -8300,7 +8280,7 @@ Model {
 	      SID		      "1577"
 	      Position		      [-170, 1663, -140, 1677]
 	      ZOrder		      930
-	      Port		      "12"
+	      Port		      "11"
 	      IconDisplay	      "Port number"
 	    }
 	    Block {
@@ -9183,8 +9163,8 @@ Model {
 	      BlockType		      SubSystem
 	      Name		      "referenceAccelerations"
 	      SID		      "1281"
-	      Ports		      [10, 1]
-	      Position		      [-30, 1240, 155, 1695]
+	      Ports		      [9, 1]
+	      Position		      [-30, 1242, 155, 1698]
 	      ZOrder		      -23
 	      BackgroundColor	      "[0.666667, 1.000000, 0.498039]"
 	      RequestExecContextInheritance off
@@ -9204,7 +9184,7 @@ Model {
 		TiledPaperMargins	[0.500000, 0.500000, 0.500000, 0.500000]
 		TiledPageScale		1
 		ShowPageBoundaries	off
-		ZoomFactor		"100"
+		ZoomFactor		"80"
 		Block {
 		  BlockType		  Inport
 		  Name			  "qDes"
@@ -9224,29 +9204,20 @@ Model {
 		}
 		Block {
 		  BlockType		  Inport
-		  Name			  "desCoMPosVelAcc"
-		  SID			  "1418"
-		  Position		  [0, 638, 30, 652]
-		  ZOrder		  945
-		  Port			  "3"
-		  IconDisplay		  "Port number"
-		}
-		Block {
-		  BlockType		  Inport
 		  Name			  "desTaskValues"
 		  SID			  "1419"
-		  Position		  [0, 683, 30, 697]
+		  Position		  [0, 673, 30, 687]
 		  ZOrder		  947
-		  Port			  "4"
+		  Port			  "3"
 		  IconDisplay		  "Port number"
 		}
 		Block {
 		  BlockType		  Inport
 		  Name			  "desJointAngles"
 		  SID			  "1421"
-		  Position		  [0, 413, 30, 427]
+		  Position		  [0, 423, 30, 437]
 		  ZOrder		  949
-		  Port			  "5"
+		  Port			  "4"
 		  IconDisplay		  "Port number"
 		}
 		Block {
@@ -9255,16 +9226,16 @@ Model {
 		  SID			  "1426"
 		  Position		  [0, 938, 30, 952]
 		  ZOrder		  952
-		  Port			  "6"
+		  Port			  "5"
 		  IconDisplay		  "Port number"
 		}
 		Block {
 		  BlockType		  Inport
 		  Name			  "impedances"
 		  SID			  "1580"
-		  Position		  [0, 728, 30, 742]
+		  Position		  [0, 723, 30, 737]
 		  ZOrder		  956
-		  Port			  "7"
+		  Port			  "6"
 		  IconDisplay		  "Port number"
 		}
 		Block {
@@ -9273,25 +9244,25 @@ Model {
 		  SID			  "1581"
 		  Position		  [0, 773, 30, 787]
 		  ZOrder		  957
-		  Port			  "8"
+		  Port			  "7"
 		  IconDisplay		  "Port number"
 		}
 		Block {
 		  BlockType		  Inport
 		  Name			  "PDgainsPos"
 		  SID			  "1582"
-		  Position		  [0, 818, 30, 832]
+		  Position		  [0, 823, 30, 837]
 		  ZOrder		  958
-		  Port			  "9"
+		  Port			  "8"
 		  IconDisplay		  "Port number"
 		}
 		Block {
 		  BlockType		  Inport
 		  Name			  "PDgainsRot"
 		  SID			  "1583"
-		  Position		  [0, 863, 30, 877]
+		  Position		  [0, 873, 30, 887]
 		  ZOrder		  959
-		  Port			  "10"
+		  Port			  "9"
 		  IconDisplay		  "Port number"
 		}
 		Block {
@@ -9936,7 +9907,7 @@ Model {
 		  Name			  "Kinematics"
 		  SID			  "1488"
 		  Ports			  [2, 4]
-		  Position		  [315, 445, 435, 620]
+		  Position		  [315, 454, 435, 656]
 		  ZOrder		  -43
 		  BackgroundColor	  "[0.333333, 1.000000, 0.498039]"
 		  RequestExecContextInheritance	off
@@ -10242,7 +10213,7 @@ Model {
 		  BlockType		  SubSystem
 		  Name			  "Task and Joint Accelerations"
 		  SID			  "1498"
-		  Ports			  [15, 2]
+		  Ports			  [14, 2]
 		  Position		  [530, 210, 695, 900]
 		  ZOrder		  -45
 		  BackgroundColor	  "[0.333333, 1.000000, 0.498039]"
@@ -10263,7 +10234,7 @@ Model {
 		    TiledPaperMargins	    [0.500000, 0.500000, 0.500000, 0.500000]
 		    TiledPageScale	    1
 		    ShowPageBoundaries	    off
-		    ZoomFactor		    "80"
+		    ZoomFactor		    "100"
 		    Block {
 		    BlockType		    Inport
 		    Name		    "Jtask"
@@ -10346,20 +10317,11 @@ Model {
 		    }
 		    Block {
 		    BlockType		    Inport
-		    Name		    "desCoMPosVelAcc"
-		    SID			    "1508"
-		    Position		    [75, 598, 105, 612]
-		    ZOrder		    958
-		    Port		    "10"
-		    IconDisplay		    "Port number"
-		    }
-		    Block {
-		    BlockType		    Inport
 		    Name		    "desTaskValues"
 		    SID			    "1509"
-		    Position		    [75, 733, 105, 747]
+		    Position		    [75, 713, 105, 727]
 		    ZOrder		    959
-		    Port		    "11"
+		    Port		    "10"
 		    IconDisplay		    "Port number"
 		    }
 		    Block {
@@ -10368,7 +10330,7 @@ Model {
 		    SID			    "1584"
 		    Position		    [75, 1178, 105, 1192]
 		    ZOrder		    966
-		    Port		    "12"
+		    Port		    "11"
 		    IconDisplay		    "Port number"
 		    }
 		    Block {
@@ -10377,7 +10339,7 @@ Model {
 		    SID			    "1585"
 		    Position		    [75, 1238, 105, 1252]
 		    ZOrder		    967
-		    Port		    "13"
+		    Port		    "12"
 		    IconDisplay		    "Port number"
 		    }
 		    Block {
@@ -10386,7 +10348,7 @@ Model {
 		    SID			    "1586"
 		    Position		    [75, 868, 105, 882]
 		    ZOrder		    968
-		    Port		    "14"
+		    Port		    "13"
 		    IconDisplay		    "Port number"
 		    }
 		    Block {
@@ -10395,38 +10357,42 @@ Model {
 		    SID			    "1587"
 		    Position		    [75, 913, 105, 927]
 		    ZOrder		    969
-		    Port		    "15"
+		    Port		    "14"
 		    IconDisplay		    "Port number"
 		    }
 		    Block {
 		    BlockType		    BusSelector
 		    Name		    "Bus\nSelector"
 		    SID			    "1420"
-		    Ports		    [1, 5]
-		    Position		    [155, 625, 160, 855]
+		    Ports		    [1, 6]
+		    Position		    [155, 580, 160, 855]
 		    ZOrder		    946
 		    ShowName		    off
-		    OutputSignals	    "desRootRotPosVelAcc,desLeftFootOriginPosVelAcc,desLeftFootRotPosVelAcc,desRightFootOriginPosV"
-		    "elAcc,desRightFootRotPosVelAcc"
+		    OutputSignals	    "desCoMPosVelAcc,desRootRotPosVelAcc,desLeftFootOriginPosVelAcc,desLeftFootRotPosVelAcc,desRig"
+		    "htFootOriginPosVelAcc,desRightFootRotPosVelAcc"
 		    OutputAsBus		    off
 		    Port {
 		    PortNumber		    1
-		    Name		    "<desRootRotPosVelAcc>"
+		    Name		    "<desCoMPosVelAcc>"
 		    }
 		    Port {
 		    PortNumber		    2
-		    Name		    "<desLeftFootOriginPosVelAcc>"
+		    Name		    "<desRootRotPosVelAcc>"
 		    }
 		    Port {
 		    PortNumber		    3
-		    Name		    "<desLeftFootRotPosVelAcc>"
+		    Name		    "<desLeftFootOriginPosVelAcc>"
 		    }
 		    Port {
 		    PortNumber		    4
-		    Name		    "<desRightFootOriginPosVelAcc>"
+		    Name		    "<desLeftFootRotPosVelAcc>"
 		    }
 		    Port {
 		    PortNumber		    5
+		    Name		    "<desRightFootOriginPosVelAcc>"
+		    }
+		    Port {
+		    PortNumber		    6
 		    Name		    "<desRightFootRotPosVelAcc>"
 		    }
 		    }
@@ -10950,18 +10916,11 @@ Model {
 		    DstPort		    2
 		    }
 		    Line {
-		    ZOrder		    2
-		    SrcBlock		    "desCoMPosVelAcc"
-		    SrcPort		    1
-		    DstBlock		    "TaskAccelerations"
-		    DstPort		    6
-		    }
-		    Line {
 		    Name		    "<desRightFootRotPosVelAcc>"
 		    ZOrder		    3
 		    Labels		    [0, 0]
 		    SrcBlock		    "Bus\nSelector"
-		    SrcPort		    5
+		    SrcPort		    6
 		    DstBlock		    "TaskAccelerations"
 		    DstPort		    11
 		    }
@@ -10977,7 +10936,7 @@ Model {
 		    ZOrder		    5
 		    Labels		    [0, 0]
 		    SrcBlock		    "Bus\nSelector"
-		    SrcPort		    3
+		    SrcPort		    4
 		    DstBlock		    "TaskAccelerations"
 		    DstPort		    9
 		    }
@@ -10993,7 +10952,7 @@ Model {
 		    ZOrder		    7
 		    Labels		    [0, 0]
 		    SrcBlock		    "Bus\nSelector"
-		    SrcPort		    2
+		    SrcPort		    3
 		    DstBlock		    "TaskAccelerations"
 		    DstPort		    8
 		    }
@@ -11002,7 +10961,7 @@ Model {
 		    ZOrder		    8
 		    Labels		    [0, 0]
 		    SrcBlock		    "Bus\nSelector"
-		    SrcPort		    1
+		    SrcPort		    2
 		    DstBlock		    "TaskAccelerations"
 		    DstPort		    7
 		    }
@@ -11053,7 +11012,7 @@ Model {
 		    ZOrder		    15
 		    Labels		    [0, 0]
 		    SrcBlock		    "Bus\nSelector"
-		    SrcPort		    4
+		    SrcPort		    5
 		    DstBlock		    "TaskAccelerations"
 		    DstPort		    10
 		    }
@@ -11112,6 +11071,15 @@ Model {
 		    SrcPort		    1
 		    DstBlock		    "TaskAccelerations"
 		    DstPort		    13
+		    }
+		    Line {
+		    Name		    "<desCoMPosVelAcc>"
+		    ZOrder		    24
+		    Labels		    [0, 0]
+		    SrcBlock		    "Bus\nSelector"
+		    SrcPort		    1
+		    DstBlock		    "TaskAccelerations"
+		    DstPort		    6
 		    }
 		  }
 		}
@@ -11313,10 +11281,10 @@ Model {
 		  ZOrder		  2
 		  SrcBlock		  "Demux1"
 		  SrcPort		  2
-		  Points		  [56, 0]
+		  Points		  [56, 0; 0, -5]
 		  Branch {
 		    ZOrder		    3
-		    Points		    [0, -75]
+		    Points		    [0, -70]
 		    DstBlock		    "Jacobians"
 		    DstPort		    4
 		  }
@@ -11340,7 +11308,7 @@ Model {
 		  Points		  [88, 0]
 		  Branch {
 		    ZOrder		    7
-		    Points		    [0, 370]
+		    Points		    [0, 385]
 		    DstBlock		    "Kinematics"
 		    DstPort		    1
 		  }
@@ -11357,10 +11325,10 @@ Model {
 		  Points		  [134, 0]
 		  Branch {
 		    ZOrder		    10
-		    Points		    [0, 225]
+		    Points		    [0, 230]
 		    Branch {
 		    ZOrder		    11
-		    Points		    [0, 200]
+		    Points		    [0, 225]
 		    DstBlock		    "Kinematics"
 		    DstPort		    2
 		    }
@@ -11415,7 +11383,7 @@ Model {
 		  Points		  [42, 0]
 		  Branch {
 		    ZOrder		    20
-		    Points		    [0, 105]
+		    Points		    [0, 95]
 		    DstBlock		    "Task and Joint Accelerations"
 		    DstPort		    1
 		  }
@@ -11476,18 +11444,11 @@ Model {
 		  DstPort		  7
 		}
 		Line {
-		  ZOrder		  29
-		  SrcBlock		  "desCoMPosVelAcc"
-		  SrcPort		  1
-		  DstBlock		  "Task and Joint Accelerations"
-		  DstPort		  10
-		}
-		Line {
 		  ZOrder		  30
 		  SrcBlock		  "desTaskValues"
 		  SrcPort		  1
 		  DstBlock		  "Task and Joint Accelerations"
-		  DstPort		  11
+		  DstPort		  10
 		}
 		Line {
 		  ZOrder		  31
@@ -11510,28 +11471,28 @@ Model {
 		  SrcBlock		  "impedances"
 		  SrcPort		  1
 		  DstBlock		  "Task and Joint Accelerations"
-		  DstPort		  12
+		  DstPort		  11
 		}
 		Line {
 		  ZOrder		  34
 		  SrcBlock		  "dampings"
 		  SrcPort		  1
 		  DstBlock		  "Task and Joint Accelerations"
-		  DstPort		  13
+		  DstPort		  12
 		}
 		Line {
 		  ZOrder		  35
 		  SrcBlock		  "PDgainsPos"
 		  SrcPort		  1
 		  DstBlock		  "Task and Joint Accelerations"
-		  DstPort		  14
+		  DstPort		  13
 		}
 		Line {
 		  ZOrder		  36
 		  SrcBlock		  "PDgainsRot"
 		  SrcPort		  1
 		  DstBlock		  "Task and Joint Accelerations"
-		  DstPort		  15
+		  DstPort		  14
 		}
 	      }
 	    }
@@ -11551,18 +11512,11 @@ Model {
 	      DstPort		      1
 	    }
 	    Line {
-	      ZOrder		      2
-	      SrcBlock		      "desCoMPosVelAcc"
-	      SrcPort		      1
-	      DstBlock		      "referenceAccelerations"
-	      DstPort		      3
-	    }
-	    Line {
 	      ZOrder		      3
 	      SrcBlock		      "constraints"
 	      SrcPort		      1
 	      DstBlock		      "referenceAccelerations"
-	      DstPort		      6
+	      DstPort		      5
 	    }
 	    Line {
 	      ZOrder		      4
@@ -11604,14 +11558,14 @@ Model {
 	      SrcBlock		      "desJointAngles"
 	      SrcPort		      1
 	      DstBlock		      "referenceAccelerations"
-	      DstPort		      5
+	      DstPort		      4
 	    }
 	    Line {
 	      ZOrder		      10
 	      SrcBlock		      "desTaskValues"
 	      SrcPort		      1
 	      DstBlock		      "referenceAccelerations"
-	      DstPort		      4
+	      DstPort		      3
 	    }
 	    Line {
 	      ZOrder		      11
@@ -11632,7 +11586,7 @@ Model {
 	      ZOrder		      13
 	      SrcBlock		      "inverse kinematics integration"
 	      SrcPort		      1
-	      Points		      [27, 0; 0, -62; -751, 0; 0, 47]
+	      Points		      [27, 0; 0, -62; -751, 0; 0, 52]
 	      DstBlock		      "referenceAccelerations"
 	      DstPort		      1
 	    }
@@ -11640,7 +11594,7 @@ Model {
 	      ZOrder		      14
 	      SrcBlock		      "inverse kinematics integration"
 	      SrcPort		      2
-	      Points		      [59, 0; 0, -139; -810, 0; 0, 119]
+	      Points		      [59, 0; 0, -139; -810, 0; 0, 129]
 	      DstBlock		      "referenceAccelerations"
 	      DstPort		      2
 	    }
@@ -11701,28 +11655,28 @@ Model {
 	      SrcBlock		      "impedances"
 	      SrcPort		      1
 	      DstBlock		      "referenceAccelerations"
-	      DstPort		      7
+	      DstPort		      6
 	    }
 	    Line {
 	      ZOrder		      23
 	      SrcBlock		      "dampings"
 	      SrcPort		      1
 	      DstBlock		      "referenceAccelerations"
-	      DstPort		      8
+	      DstPort		      7
 	    }
 	    Line {
 	      ZOrder		      24
 	      SrcBlock		      "PDgainsPos"
 	      SrcPort		      1
 	      DstBlock		      "referenceAccelerations"
-	      DstPort		      9
+	      DstPort		      8
 	    }
 	    Line {
 	      ZOrder		      25
 	      SrcBlock		      "PDgainsRot"
 	      SrcPort		      1
 	      DstBlock		      "referenceAccelerations"
-	      DstPort		      10
+	      DstPort		      9
 	    }
 	    Line {
 	      ZOrder		      26
@@ -11993,6 +11947,7 @@ Model {
 	  }
 	  Branch {
 	    ZOrder		    573
+	    Points		    [0, 15]
 	    DstBlock		    "Integration Based Inverse Kinematics"
 	    DstPort		    1
 	  }
@@ -12018,6 +11973,7 @@ Model {
 	  ZOrder		  557
 	  SrcBlock		  "feetActivation"
 	  SrcPort		  1
+	  Points		  [264, 0; 0, 15]
 	  DstBlock		  "Integration Based Inverse Kinematics"
 	  DstPort		  4
 	}
@@ -12048,11 +12004,11 @@ Model {
 	  SrcPort		  1
 	  Points		  [14, 0]
 	  Branch {
-	    ZOrder		    530
-	    Points		    [0, -400]
+	    ZOrder		    598
+	    Points		    [0, -405]
 	    Branch {
-	      ZOrder		      578
-	      Points		      [0, -295]
+	      ZOrder		      601
+	      Points		      [0, -310]
 	      DstBlock		      "jointAccelerations"
 	      DstPort		      4
 	    }
@@ -12081,8 +12037,8 @@ Model {
 	  SrcPort		  1
 	  Points		  [28, 0]
 	  Branch {
-	    ZOrder		    532
-	    Points		    [0, -475]
+	    ZOrder		    599
+	    Points		    [0, -490]
 	    DstBlock		    "Integration Based Inverse Kinematics"
 	    DstPort		    8
 	  }
@@ -12093,37 +12049,20 @@ Model {
 	  }
 	}
 	Line {
-	  ZOrder		  523
-	  SrcBlock		  "desCoMPosVelAcc"
-	  SrcPort		  1
-	  Points		  [43, 0]
-	  Branch {
-	    ZOrder		    534
-	    Points		    [0, -500]
-	    DstBlock		    "Integration Based Inverse Kinematics"
-	    DstPort		    9
-	  }
-	  Branch {
-	    ZOrder		    533
-	    DstBlock		    "Desired task accelerations"
-	    DstPort		    7
-	  }
-	}
-	Line {
 	  ZOrder		  524
 	  SrcBlock		  "desTaskValues"
 	  SrcPort		  1
 	  Points		  [61, 0]
 	  Branch {
 	    ZOrder		    536
-	    Points		    [0, -525]
+	    Points		    [0, -520]
 	    DstBlock		    "Integration Based Inverse Kinematics"
-	    DstPort		    10
+	    DstPort		    9
 	  }
 	  Branch {
 	    ZOrder		    535
 	    DstBlock		    "Desired task accelerations"
-	    DstPort		    8
+	    DstPort		    7
 	  }
 	}
 	Line {
@@ -12144,7 +12083,7 @@ Model {
 	  ZOrder		  558
 	  SrcBlock		  "jointSmoothingTime"
 	  SrcPort		  1
-	  Points		  [31, 0; 0, -25]
+	  Points		  [31, 0; 0, -10]
 	  DstBlock		  "Integration Based Inverse Kinematics"
 	  DstPort		  5
 	}
@@ -12179,6 +12118,7 @@ Model {
 	  }
 	  Branch {
 	    ZOrder		    571
+	    Points		    [0, 15]
 	    DstBlock		    "Integration Based Inverse Kinematics"
 	    DstPort		    3
 	  }
@@ -12190,15 +12130,15 @@ Model {
 	  Points		  [89, 0]
 	  Branch {
 	    ZOrder		    566
-	    Points		    [0, 410]
+	    Points		    [0, 405]
 	    DstBlock		    "Desired task accelerations"
-	    DstPort		    10
+	    DstPort		    9
 	  }
 	  Branch {
 	    ZOrder		    565
-	    Points		    [2, 0; 0, -165]
+	    Points		    [2, 0; 0, -175]
 	    DstBlock		    "Integration Based Inverse Kinematics"
-	    DstPort		    12
+	    DstPort		    11
 	  }
 	}
 	Line {
@@ -12217,15 +12157,15 @@ Model {
 	  Points		  [32, 0]
 	  Branch {
 	    ZOrder		    568
-	    Points		    [0, 405]
+	    Points		    [0, 395]
 	    DstBlock		    "Desired task accelerations"
-	    DstPort		    9
+	    DstPort		    8
 	  }
 	  Branch {
 	    ZOrder		    567
-	    Points		    [1, 0; 0, -145]
+	    Points		    [1, 0; 0, -155]
 	    DstBlock		    "Integration Based Inverse Kinematics"
-	    DstPort		    11
+	    DstPort		    10
 	  }
 	}
 	Line {
@@ -12234,10 +12174,10 @@ Model {
 	  Labels		  [1, 1]
 	  SrcBlock		  "Demux"
 	  SrcPort		  1
-	  Points		  [86, 0; 0, -280]
+	  Points		  [86, 0; 0, -265]
 	  Branch {
-	    ZOrder		    570
-	    Points		    [0, -305]
+	    ZOrder		    602
+	    Points		    [0, -320]
 	    DstBlock		    "jointAccelerations"
 	    DstPort		    1
 	  }
@@ -12275,6 +12215,7 @@ Model {
 	  }
 	  Branch {
 	    ZOrder		    575
+	    Points		    [0, 15]
 	    DstBlock		    "Integration Based Inverse Kinematics"
 	    DstPort		    6
 	  }
@@ -12292,16 +12233,15 @@ Model {
       BlockType		      SubSystem
       Name		      "Visualize and log"
       SID		      "385"
-      Ports		      [16, 0, 1]
-      Position		      [3405, -776, 3600, 696]
+      Ports		      [13, 0, 1]
+      Position		      [3470, 123, 3630, 757]
       ZOrder		      -58
       BackgroundColor	      "[1.000000, 0.701961, 0.933333]"
-      Commented		      "on"
       RequestExecContextInheritance off
       Variant		      off
       System {
 	Name			"Visualize and log"
-	Location		[51, 24, 1366, 768]
+	Location		[51, -4, 1366, 768]
 	Open			off
 	PortBlocksUseCompactNotation off
 	ModelBrowserVisibility	off
@@ -12327,36 +12267,9 @@ Model {
 	  BlockType		  Inport
 	  Name			  "JointsPosition"
 	  SID			  "409"
-	  Position		  [950, 953, 980, 967]
+	  Position		  [950, 968, 980, 982]
 	  ZOrder		  810
 	  Port			  "2"
-	  IconDisplay		  "Port number"
-	}
-	Block {
-	  BlockType		  Inport
-	  Name			  "desiredJointsPosition"
-	  SID			  "411"
-	  Position		  [950, 983, 980, 997]
-	  ZOrder		  812
-	  Port			  "3"
-	  IconDisplay		  "Port number"
-	}
-	Block {
-	  BlockType		  Inport
-	  Name			  "impedance"
-	  SID			  "872"
-	  Position		  [950, 1193, 980, 1207]
-	  ZOrder		  847
-	  Port			  "4"
-	  IconDisplay		  "Port number"
-	}
-	Block {
-	  BlockType		  Inport
-	  Name			  "damping"
-	  SID			  "873"
-	  Position		  [950, 1228, 980, 1242]
-	  ZOrder		  848
-	  Port			  "5"
 	  IconDisplay		  "Port number"
 	}
 	Block {
@@ -12365,16 +12278,7 @@ Model {
 	  SID			  "480"
 	  Position		  [1420, 528, 1450, 542]
 	  ZOrder		  839
-	  Port			  "6"
-	  IconDisplay		  "Port number"
-	}
-	Block {
-	  BlockType		  Inport
-	  Name			  "iKinReferenceJointsPosition"
-	  SID			  "1516"
-	  Position		  [950, 1013, 980, 1027]
-	  ZOrder		  853
-	  Port			  "7"
+	  Port			  "3"
 	  IconDisplay		  "Port number"
 	}
 	Block {
@@ -12383,7 +12287,7 @@ Model {
 	  SID			  "391"
 	  Position		  [950, 768, 980, 782]
 	  ZOrder		  797
-	  Port			  "8"
+	  Port			  "4"
 	  IconDisplay		  "Port number"
 	}
 	Block {
@@ -12392,7 +12296,7 @@ Model {
 	  SID			  "386"
 	  Position		  [950, 483, 980, 497]
 	  ZOrder		  793
-	  Port			  "9"
+	  Port			  "5"
 	  IconDisplay		  "Port number"
 	}
 	Block {
@@ -12401,25 +12305,34 @@ Model {
 	  SID			  "435"
 	  Position		  [1420, 943, 1450, 957]
 	  ZOrder		  825
-	  Port			  "10"
+	  Port			  "6"
 	  IconDisplay		  "Port number"
 	}
 	Block {
 	  BlockType		  Inport
 	  Name			  "desTaskValues"
 	  SID			  "436"
-	  Position		  [1420, 768, 1450, 782]
+	  Position		  [1420, 753, 1450, 767]
 	  ZOrder		  827
-	  Port			  "11"
+	  Port			  "7"
 	  IconDisplay		  "Port number"
 	}
 	Block {
 	  BlockType		  Inport
-	  Name			  "desCoMPosVelAcc"
-	  SID			  "433"
-	  Position		  [1420, 663, 1450, 677]
-	  ZOrder		  823
-	  Port			  "12"
+	  Name			  "desiredJointsPosition"
+	  SID			  "411"
+	  Position		  [950, 1008, 980, 1022]
+	  ZOrder		  812
+	  Port			  "8"
+	  IconDisplay		  "Port number"
+	}
+	Block {
+	  BlockType		  Inport
+	  Name			  "gains"
+	  SID			  "872"
+	  Position		  [950, 1188, 980, 1202]
+	  ZOrder		  847
+	  Port			  "9"
 	  IconDisplay		  "Port number"
 	}
 	Block {
@@ -12428,7 +12341,7 @@ Model {
 	  SID			  "434"
 	  Position		  [1420, 628, 1450, 642]
 	  ZOrder		  824
-	  Port			  "13"
+	  Port			  "10"
 	  IconDisplay		  "Port number"
 	}
 	Block {
@@ -12437,7 +12350,7 @@ Model {
 	  SID			  "388"
 	  Position		  [845, 528, 875, 542]
 	  ZOrder		  795
-	  Port			  "14"
+	  Port			  "11"
 	  IconDisplay		  "Port number"
 	}
 	Block {
@@ -12446,7 +12359,7 @@ Model {
 	  SID			  "494"
 	  Position		  [1420, 468, 1450, 482]
 	  ZOrder		  843
-	  Port			  "15"
+	  Port			  "12"
 	  IconDisplay		  "Port number"
 	}
 	Block {
@@ -12455,7 +12368,7 @@ Model {
 	  SID			  "493"
 	  Position		  [1420, 498, 1450, 512]
 	  ZOrder		  842
-	  Port			  "16"
+	  Port			  "13"
 	  IconDisplay		  "Port number"
 	}
 	Block {
@@ -12501,31 +12414,35 @@ Model {
 	  BlockType		  BusSelector
 	  Name			  "Bus\nSelector2"
 	  SID			  "432"
-	  Ports			  [1, 5]
-	  Position		  [1550, 687, 1555, 863]
+	  Ports			  [1, 6]
+	  Position		  [1550, 652, 1555, 863]
 	  ZOrder		  834
 	  ShowName		  off
-	  OutputSignals		  "desRootRotPosVelAcc,desLeftFootOriginPosVelAcc,desLeftFootRotPosVelAcc,desRightFootOriginPosVelAc"
-	  "c,desRightFootRotPosVelAcc"
+	  OutputSignals		  "desCoMPosVelAcc,desRootRotPosVelAcc,desLeftFootOriginPosVelAcc,desLeftFootRotPosVelAcc,desRightFo"
+	  "otOriginPosVelAcc,desRightFootRotPosVelAcc"
 	  OutputAsBus		  off
 	  Port {
 	    PortNumber		    1
-	    Name		    "<desRootRotPosVelAcc>"
+	    Name		    "<desCoMPosVelAcc>"
 	  }
 	  Port {
 	    PortNumber		    2
-	    Name		    "<desLeftFootOriginPosVelAcc>"
+	    Name		    "<desRootRotPosVelAcc>"
 	  }
 	  Port {
 	    PortNumber		    3
-	    Name		    "<desLeftFootRotPosVelAcc>"
+	    Name		    "<desLeftFootOriginPosVelAcc>"
 	  }
 	  Port {
 	    PortNumber		    4
-	    Name		    "<desRightFootOriginPosVelAcc>"
+	    Name		    "<desLeftFootRotPosVelAcc>"
 	  }
 	  Port {
 	    PortNumber		    5
+	    Name		    "<desRightFootOriginPosVelAcc>"
+	  }
+	  Port {
+	    PortNumber		    6
 	    Name		    "<desRightFootRotPosVelAcc>"
 	  }
 	}
@@ -12533,11 +12450,10 @@ Model {
 	  BlockType		  SubSystem
 	  Name			  "Control gains"
 	  SID			  "876"
-	  Ports			  [3, 0, 1]
-	  Position		  [1115, 1146, 1270, 1254]
+	  Ports			  [2, 0, 1]
+	  Position		  [1115, 1148, 1270, 1212]
 	  ZOrder		  -28
 	  BackgroundColor	  "[1.000000, 0.741176, 0.988235]"
-	  Commented		  "on"
 	  RequestExecContextInheritance	off
 	  Variant		  off
 	  System {
@@ -12560,7 +12476,7 @@ Model {
 	      BlockType		      Inport
 	      Name		      "state"
 	      SID		      "878"
-	      Position		      [20, 168, 50, 182]
+	      Position		      [-165, 318, -135, 332]
 	      ZOrder		      852
 	      IconDisplay	      "Port number"
 	      Port {
@@ -12571,20 +12487,11 @@ Model {
 	    }
 	    Block {
 	      BlockType		      Inport
-	      Name		      "impedance"
+	      Name		      "gains"
 	      SID		      "877"
-	      Position		      [20, 73, 50, 87]
+	      Position		      [-165, 143, -135, 157]
 	      ZOrder		      851
 	      Port		      "2"
-	      IconDisplay	      "Port number"
-	    }
-	    Block {
-	      BlockType		      Inport
-	      Name		      "damping"
-	      SID		      "879"
-	      Position		      [20, 243, 50, 257]
-	      ZOrder		      853
-	      Port		      "3"
 	      IconDisplay	      "Port number"
 	    }
 	    Block {
@@ -12594,6 +12501,33 @@ Model {
 	      Ports		      []
 	      Position		      [307, -80, 327, -60]
 	      ZOrder		      855
+	    }
+	    Block {
+	      BlockType		      Demux
+	      Name		      "Demux"
+	      SID		      "1741"
+	      Ports		      [1, 4]
+	      Position		      [-65, 60, -60, 235]
+	      ZOrder		      872
+	      ShowName		      off
+	      Outputs		      "[ROBOT_DOF, ROBOT_DOF, 18, 6]"
+	      DisplayOption	      "bar"
+	      Port {
+		PortNumber		1
+		Name			"impedances"
+	      }
+	      Port {
+		PortNumber		2
+		Name			"dampings"
+	      }
+	      Port {
+		PortNumber		3
+		Name			"PDgainsPos"
+	      }
+	      Port {
+		PortNumber		4
+		Name			"PDgainsRot"
+	      }
 	    }
 	    Block {
 	      BlockType		      Reference
@@ -12670,6 +12604,42 @@ Model {
 		PortNumber		5
 		Name			"right_leg"
 	      }
+	    }
+	    Block {
+	      BlockType		      Reshape
+	      Name		      "Reshape2"
+	      SID		      "1742"
+	      Ports		      [1, 1]
+	      Position		      [20, 158, 50, 182]
+	      ZOrder		      873
+	      OutputDimensionality    "Customize"
+	      OutputDimensions	      "[9,2]"
+	    }
+	    Block {
+	      BlockType		      Reshape
+	      Name		      "Reshape3"
+	      SID		      "1743"
+	      Ports		      [1, 1]
+	      Position		      [20, 203, 50, 227]
+	      ZOrder		      874
+	      OutputDimensionality    "Customize"
+	      OutputDimensions	      "[3,2]"
+	    }
+	    Block {
+	      BlockType		      Terminator
+	      Name		      "Terminator"
+	      SID		      "1744"
+	      Position		      [90, 160, 110, 180]
+	      ZOrder		      875
+	      ShowName		      off
+	    }
+	    Block {
+	      BlockType		      Terminator
+	      Name		      "Terminator1"
+	      SID		      "1745"
+	      Position		      [90, 205, 110, 225]
+	      ZOrder		      876
+	      ShowName		      off
 	    }
 	    Block {
 	      BlockType		      Scope
@@ -12823,19 +12793,18 @@ Model {
 	      ZOrder		      815
 	      SrcBlock		      "state"
 	      SrcPort		      1
-	      Points		      [295, 0]
+	      Points		      [480, 0; 0, -15]
 	      Branch {
-		ZOrder			831
+		ZOrder			865
 		Labels			[2, 1]
-		Points			[0, 135]
-		DstBlock		"dampings"
+		Points			[0, -170]
+		DstBlock		"impedances"
 		DstPort			6
 	      }
 	      Branch {
-		ZOrder			820
-		Labels			[2, 1]
-		Points			[0, -35]
-		DstBlock		"impedances"
+		ZOrder			861
+		Labels			[1, 1]
+		DstBlock		"dampings"
 		DstPort			6
 	      }
 	    }
@@ -12847,20 +12816,6 @@ Model {
 	      SrcPort		      3
 	      DstBlock		      "dampings"
 	      DstPort		      3
-	    }
-	    Line {
-	      ZOrder		      816
-	      SrcBlock		      "damping"
-	      SrcPort		      1
-	      DstBlock		      "DoFs converter1"
-	      DstPort		      1
-	    }
-	    Line {
-	      ZOrder		      814
-	      SrcBlock		      "impedance"
-	      SrcPort		      1
-	      DstBlock		      "DoFs converter"
-	      DstPort		      1
 	    }
 	    Line {
 	      Name		      "torso"
@@ -12915,6 +12870,64 @@ Model {
 	      SrcPort		      4
 	      DstBlock		      "dampings"
 	      DstPort		      4
+	    }
+	    Line {
+	      Name		      "PDgainsRot"
+	      ZOrder		      853
+	      Labels		      [1, 1]
+	      SrcBlock		      "Demux"
+	      SrcPort		      4
+	      DstBlock		      "Reshape3"
+	      DstPort		      1
+	    }
+	    Line {
+	      Name		      "PDgainsPos"
+	      ZOrder		      854
+	      Labels		      [1, 1]
+	      SrcBlock		      "Demux"
+	      SrcPort		      3
+	      DstBlock		      "Reshape2"
+	      DstPort		      1
+	    }
+	    Line {
+	      ZOrder		      859
+	      SrcBlock		      "gains"
+	      SrcPort		      1
+	      DstBlock		      "Demux"
+	      DstPort		      1
+	    }
+	    Line {
+	      Name		      "dampings"
+	      ZOrder		      860
+	      Labels		      [0, 0]
+	      SrcBlock		      "Demux"
+	      SrcPort		      2
+	      Points		      [223, 0; 0, 125]
+	      DstBlock		      "DoFs converter1"
+	      DstPort		      1
+	    }
+	    Line {
+	      Name		      "impedances"
+	      ZOrder		      862
+	      Labels		      [0, 0]
+	      SrcBlock		      "Demux"
+	      SrcPort		      1
+	      DstBlock		      "DoFs converter"
+	      DstPort		      1
+	    }
+	    Line {
+	      ZOrder		      863
+	      SrcBlock		      "Reshape2"
+	      SrcPort		      1
+	      DstBlock		      "Terminator"
+	      DstPort		      1
+	    }
+	    Line {
+	      ZOrder		      864
+	      SrcBlock		      "Reshape3"
+	      SrcPort		      1
+	      DstBlock		      "Terminator1"
+	      DstPort		      1
 	    }
 	  }
 	}
@@ -12988,7 +13001,6 @@ Model {
 	  BlockMirror		  on
 	  NamePlacement		  "alternate"
 	  ShowName		  off
-	  Commented		  "on"
 	  Value			  "CONFIG.SCOPES.GAINS"
 	}
 	Block {
@@ -13305,7 +13317,7 @@ Model {
 	  BlockType		  SubSystem
 	  Name			  "Visualize joint positions"
 	  SID			  "420"
-	  Ports			  [4, 0, 1]
+	  Ports			  [3, 0, 1]
 	  Position		  [1115, 914, 1270, 1036]
 	  ZOrder		  -13
 	  BackgroundColor	  "[1.000000, 0.741176, 0.988235]"
@@ -13313,7 +13325,7 @@ Model {
 	  Variant		  off
 	  System {
 	    Name		    "Visualize joint positions"
-	    Location		    [51, 24, 1366, 768]
+	    Location		    [51, -4, 1366, 768]
 	    Open		    off
 	    PortBlocksUseCompactNotation off
 	    ModelBrowserVisibility  off
@@ -13326,7 +13338,7 @@ Model {
 	    TiledPaperMargins	    [0.500000, 0.500000, 0.500000, 0.500000]
 	    TiledPageScale	    1
 	    ShowPageBoundaries	    off
-	    ZoomFactor		    "100"
+	    ZoomFactor		    "80"
 	    Block {
 	      BlockType		      Inport
 	      Name		      "state"
@@ -13354,20 +13366,11 @@ Model {
 	      IconDisplay	      "Port number"
 	    }
 	    Block {
-	      BlockType		      Inport
-	      Name		      "iKinReferenceJointPositions"
-	      SID		      "1517"
-	      Position		      [-90, 63, -60, 77]
-	      ZOrder		      849
-	      Port		      "4"
-	      IconDisplay	      "Port number"
-	    }
-	    Block {
 	      BlockType		      EnablePort
 	      Name		      "Enable"
 	      SID		      "425"
 	      Ports		      []
-	      Position		      [257, -30, 277, -10]
+	      Position		      [247, 155, 267, 175]
 	      ZOrder		      825
 	    }
 	    Block {
@@ -13407,15 +13410,6 @@ Model {
 		PortNumber		1
 		Name			"thresholdNotInContact"
 	      }
-	    }
-	    Block {
-	      BlockType		      Constant
-	      Name		      "Constant3"
-	      SID		      "1572"
-	      Position		      [-150, 592, 45, 608]
-	      ZOrder		      850
-	      ShowName		      off
-	      Value		      "CONFIG.USE_INVERSE_KINEMATICS"
 	    }
 	    Block {
 	      BlockType		      Reference
@@ -13532,44 +13526,6 @@ Model {
 	      }
 	    }
 	    Block {
-	      BlockType		      Reference
-	      Name		      "DoFs converter3"
-	      SID		      "894"
-	      Ports		      [1, 5]
-	      Position		      [350, 13, 455, 127]
-	      ZOrder		      847
-	      ShowName		      off
-	      LibraryVersion	      "1.383"
-	      SourceBlock	      "WBToolboxLibrary/Utilities/DoFs converter"
-	      SourceType	      "DoFs converter"
-	      SourceProductName	      "Whole Body Toolbox"
-	      yarp2WBIOption	      "From WBI to YARP"
-	      robotName		      "WBT_robotName"
-	      localName		      "WBT_modelName"
-	      wbiFile		      "WBT_wbiFilename"
-	      wbiList		      "WBT_wbiList"
-	      Port {
-		PortNumber		1
-		Name			"torso"
-	      }
-	      Port {
-		PortNumber		2
-		Name			"left_arm"
-	      }
-	      Port {
-		PortNumber		3
-		Name			"right_arm"
-	      }
-	      Port {
-		PortNumber		4
-		Name			"left_leg"
-	      }
-	      Port {
-		PortNumber		5
-		Name			"right_leg"
-	      }
-	    }
-	    Block {
 	      BlockType		      DotProduct
 	      Name		      "Dot Product"
 	      SID		      "497"
@@ -13605,18 +13561,6 @@ Model {
 	      SID		      "412"
 	      Position		      [-5, 400, 45, 430]
 	      ZOrder		      813
-	      ShowName		      off
-	      Gain		      "180/pi"
-	      ParamDataTypeStr	      "Inherit: Inherit via internal rule"
-	      OutDataTypeStr	      "Inherit: Inherit via internal rule"
-	      SaturateOnIntegerOverflow	off
-	    }
-	    Block {
-	      BlockType		      Gain
-	      Name		      "Gain2"
-	      SID		      "1518"
-	      Position		      [-5, 55, 45, 85]
-	      ZOrder		      848
 	      ShowName		      off
 	      Gain		      "180/pi"
 	      ParamDataTypeStr	      "Inherit: Inherit via internal rule"
@@ -13668,17 +13612,6 @@ Model {
 		PortNumber		1
 		Name			"norm(qTilde_rightLeg)"
 	      }
-	    }
-	    Block {
-	      BlockType		      Switch
-	      Name		      "Switch1"
-	      SID		      "1573"
-	      Position		      [165, 570, 215, 630]
-	      ZOrder		      851
-	      ShowName		      off
-	      Criteria		      "u2 > Threshold"
-	      InputSameDT	      off
-	      SaturateOnIntegerOverflow	off
 	    }
 	    Block {
 	      BlockType		      Scope
@@ -13900,66 +13833,6 @@ Model {
 	      "sition',[56 1 1311 689])"
 	      NumInputPorts	      "3"
 	    }
-	    Block {
-	      BlockType		      Scope
-	      Name		      "referenceJointPositions"
-	      SID		      "901"
-	      Ports		      [6]
-	      Position		      [540, 19, 630, 141]
-	      ZOrder		      846
-	      ScopeSpecificationString "Simulink.scopes.TimeScopeBlockCfg('CurrentConfiguration', extmgr.ConfigurationSet(ext"
-	      "mgr.Configuration('Core','General UI',true),extmgr.Configuration('Core','Source UI',true),extmgr.Configuration("
-	      "'Sources','WiredSimulink',true,'DataLoggingVariableName','iKinReferenceJointPosition','DataLoggingSaveFormat','"
-	      "Structure','DataLoggingDecimateData',true),extmgr.Configuration('Visuals','Time Domain',true,'SerializedDisplay"
-	      "s',{struct('MinYLimReal','-1.00000','MaxYLimReal','1.00000','YLabelReal','','MinYLimMag','0.00000','MaxYLimMag'"
-	      ",'1.00000','LegendVisibility','Off','XGrid',true,'YGrid',true,'PlotMagPhase',false,'AxesColor',[0 0 0],'AxesTic"
-	      "kColor',[0.686274509803922 0.686274509803922 0.686274509803922],'ColorOrder',[1 1 0.0666666666666667;0.07450980"
-	      "39215686 0.623529411764706 1;1 0.411764705882353 0.16078431372549;0.392156862745098 0.831372549019608 0.0745098"
-	      "039215686;0.717647058823529 0.274509803921569 1;0.0588235294117647 1 1;1 0.0745098039215686 0.650980392156863],"
-	      "'Title','%<SignalLabel>','LinePropertiesCache',{{}},'UserDefinedChannelNames',{{}},'NumLines',3,'LineNames',{{'"
-	      "torso:1','torso:2','torso:3'}},'ShowContent',true,'Placement',1),struct('MinYLimReal','-1.00000','MaxYLimReal',"
-	      "'1.00000','YLabelReal','','MinYLimMag',' 0.00000','MaxYLimMag','310.82357','LegendVisibility','off','XGrid',tru"
-	      "e,'YGrid',true,'PlotMagPhase',false,'AxesColor',[0 0 0],'AxesTickColor',[0.686274509803922 0.686274509803922 0."
-	      "686274509803922],'ColorOrder',[1 1 0.0666666666666667;0.0745098039215686 0.623529411764706 1;1 0.41176470588235"
-	      "3 0.16078431372549;0.392156862745098 0.831372549019608 0.0745098039215686;0.717647058823529 0.274509803921569 1"
-	      ";0.0588235294117647 1 1;1 0.0745098039215686 0.650980392156863],'Title','%<SignalLabel>','LinePropertiesCache',"
-	      "{{}},'UserDefinedChannelNames',{{}},'NumLines',4,'LineNames',{{'left_arm:1','left_arm:2','left_arm:3','left_arm"
-	      ":4'}},'ShowContent',true,'Placement',2),struct('MinYLimReal','-1.00000','MaxYLimReal','1.00000','YLabelReal',''"
-	      ",'MinYLimMag',' 0.00000','MaxYLimMag','310.82357','LegendVisibility','off','XGrid',true,'YGrid',true,'PlotMagPh"
-	      "ase',false,'AxesColor',[0 0 0],'AxesTickColor',[0.686274509803922 0.686274509803922 0.686274509803922],'ColorOr"
-	      "der',[1 1 0.0666666666666667;0.0745098039215686 0.623529411764706 1;1 0.411764705882353 0.16078431372549;0.3921"
-	      "56862745098 0.831372549019608 0.0745098039215686;0.717647058823529 0.274509803921569 1;0.0588235294117647 1 1;1"
-	      " 0.0745098039215686 0.650980392156863],'Title','%<SignalLabel>','LinePropertiesCache',{{}},'UserDefinedChannelN"
-	      "ames',{{}},'NumLines',4,'LineNames',{{'right_arm:1','right_arm:2','right_arm:3','right_arm:4'}},'ShowContent',t"
-	      "rue,'Placement',3),struct('MinYLimReal','-1.00000','MaxYLimReal','1.00000','YLabelReal','','MinYLimMag','0.0000"
-	      "0','MaxYLimMag','13.12671','LegendVisibility','On','XGrid',true,'YGrid',true,'PlotMagPhase',false,'AxesColor',["
-	      "0 0 0],'AxesTickColor',[0.686274509803922 0.686274509803922 0.686274509803922],'ColorOrder',[1 1 0.066666666666"
-	      "6667;0.0745098039215686 0.623529411764706 1;1 0.411764705882353 0.16078431372549;0.392156862745098 0.8313725490"
-	      "19608 0.0745098039215686;0.717647058823529 0.274509803921569 1;0.0588235294117647 1 1;1 0.0745098039215686 0.65"
-	      "0980392156863],'Title','%<SignalLabel>','LinePropertiesCache',{{}},'UserDefinedChannelNames',{{}},'NumLines',6,"
-	      "'LineNames',{{'left_leg:1','left_leg:2','left_leg:3','left_leg:4','left_leg:5','left_leg:6'}},'ShowContent',tru"
-	      "e,'Placement',4),struct('MinYLimReal','-1.00000','MaxYLimReal','1.00000','YLabelReal','','MinYLimMag',' 0.00000"
-	      "','MaxYLimMag','310.82357','LegendVisibility','off','XGrid',true,'YGrid',true,'PlotMagPhase',false,'AxesColor',"
-	      "[0 0 0],'AxesTickColor',[0.686274509803922 0.686274509803922 0.686274509803922],'ColorOrder',[1 1 0.06666666666"
-	      "66667;0.0745098039215686 0.623529411764706 1;1 0.411764705882353 0.16078431372549;0.392156862745098 0.831372549"
-	      "019608 0.0745098039215686;0.717647058823529 0.274509803921569 1;0.0588235294117647 1 1;1 0.0745098039215686 0.6"
-	      "50980392156863],'Title','%<SignalLabel>','LinePropertiesCache',{{}},'UserDefinedChannelNames',{{}},'NumLines',6"
-	      ",'LineNames',{{'right_leg:1','right_leg:2','right_leg:3','right_leg:4','right_leg:5','right_leg:6'}},'ShowConte"
-	      "nt',true,'Placement',5),struct('MinYLimReal','0.625','MaxYLimReal','4.375','YLabelReal','','MinYLimMag',' 0.000"
-	      "00','MaxYLimMag','310.82357','LegendVisibility','off','XGrid',true,'YGrid',true,'PlotMagPhase',false,'AxesColor"
-	      "',[0 0 0],'AxesTickColor',[0.686274509803922 0.686274509803922 0.686274509803922],'ColorOrder',[1 1 0.066666666"
-	      "6666667;0.0745098039215686 0.623529411764706 1;1 0.411764705882353 0.16078431372549;0.392156862745098 0.8313725"
-	      "49019608 0.0745098039215686;0.717647058823529 0.274509803921569 1;0.0588235294117647 1 1;1 0.0745098039215686 0"
-	      ".650980392156863],'Title','%<SignalLabel>','LinePropertiesCache',{{}},'UserDefinedChannelNames',{{}},'NumLines'"
-	      ",1,'LineNames',{{'state'}},'ShowContent',true,'Placement',6)},'DisplayPropertyDefaults',struct('YLabelReal','',"
-	      "'AxesColor',[0 0 0],'AxesTickColor',[0.686274509803922 0.686274509803922 0.686274509803922],'ColorOrder',[0.074"
-	      "5098039215686 0.623529411764706 1;1 0.411764705882353 0.16078431372549;1 1 0.0666666666666667;0.717647058823529"
-	      " 0.274509803921569 1;0.392156862745098 0.831372549019608 0.0745098039215686;0.0588235294117647 1 1;1 0.07450980"
-	      "39215686 0.650980392156863]),'DisplayLayoutDimensions',[3 2]),extmgr.Configuration('Tools','Plot Navigation',tr"
-	      "ue,'PreviousAutoscale','XY'),extmgr.Configuration('Tools','Measurements',true,'Version','2016b')),'Version','20"
-	      "16b','Position',[56 1 1311 689])"
-	      NumInputPorts	      "6"
-	    }
 	    Line {
 	      Name		      "right_leg"
 	      ZOrder		      624
@@ -14004,23 +13877,6 @@ Model {
 	      SrcPort		      2
 	      DstBlock		      "errorJointPositions"
 	      DstPort		      2
-	    }
-	    Line {
-	      ZOrder		      655
-	      SrcBlock		      "Gain1"
-	      SrcPort		      1
-	      Points		      [41, 0]
-	      Branch {
-		ZOrder			849
-		DstBlock		"DoFs converter1"
-		DstPort			1
-	      }
-	      Branch {
-		ZOrder			845
-		Points			[0, 205]
-		DstBlock		"Switch1"
-		DstPort			3
-	      }
 	    }
 	    Line {
 	      Name		      "torso"
@@ -14196,17 +14052,8 @@ Model {
 	      Branch {
 		ZOrder			812
 		Points			[0, -30]
-		Branch {
-		  ZOrder		  811
-		  Points		  [0, -170]
-		  DstBlock		  "referenceJointPositions"
-		  DstPort		  6
-		}
-		Branch {
-		  ZOrder		  727
-		  DstBlock		  "measuredJointPositions"
-		  DstPort		  6
-		}
+		DstBlock		"measuredJointPositions"
+		DstPort			6
 	      }
 	      Branch {
 		ZOrder			729
@@ -14319,87 +14166,21 @@ Model {
 	      DstPort		      2
 	    }
 	    Line {
-	      Name		      "right_leg"
-	      ZOrder		      802
-	      Labels		      [1, 1]
-	      SrcBlock		      "DoFs converter3"
-	      SrcPort		      5
-	      DstBlock		      "referenceJointPositions"
-	      DstPort		      5
-	    }
-	    Line {
-	      Name		      "left_leg"
-	      ZOrder		      803
-	      Labels		      [1, 1]
-	      SrcBlock		      "DoFs converter3"
-	      SrcPort		      4
-	      DstBlock		      "referenceJointPositions"
-	      DstPort		      4
-	    }
-	    Line {
-	      Name		      "left_arm"
-	      ZOrder		      804
-	      Labels		      [1, 1]
-	      SrcBlock		      "DoFs converter3"
-	      SrcPort		      2
-	      DstBlock		      "referenceJointPositions"
-	      DstPort		      2
-	    }
-	    Line {
-	      Name		      "torso"
-	      ZOrder		      805
-	      Labels		      [1, 1]
-	      SrcBlock		      "DoFs converter3"
+	      ZOrder		      655
+	      SrcBlock		      "Gain1"
 	      SrcPort		      1
-	      DstBlock		      "referenceJointPositions"
-	      DstPort		      1
-	    }
-	    Line {
-	      Name		      "right_arm"
-	      ZOrder		      806
-	      Labels		      [1, 1]
-	      SrcBlock		      "DoFs converter3"
-	      SrcPort		      3
-	      DstBlock		      "referenceJointPositions"
-	      DstPort		      3
-	    }
-	    Line {
-	      ZOrder		      809
-	      SrcBlock		      "iKinReferenceJointPositions"
-	      SrcPort		      1
-	      DstBlock		      "Gain2"
-	      DstPort		      1
-	    }
-	    Line {
-	      ZOrder		      810
-	      SrcBlock		      "Gain2"
-	      SrcPort		      1
-	      Points		      [79, 0]
+	      Points		      [41, 0]
 	      Branch {
-		ZOrder			847
-		DstBlock		"DoFs converter3"
-		DstPort			1
+		ZOrder			907
+		Points			[0, 185]
+		DstBlock		"Add"
+		DstPort			2
 	      }
 	      Branch {
-		ZOrder			842
-		Points			[0, 510]
-		DstBlock		"Switch1"
+		ZOrder			849
+		DstBlock		"DoFs converter1"
 		DstPort			1
 	      }
-	    }
-	    Line {
-	      ZOrder		      843
-	      SrcBlock		      "Switch1"
-	      SrcPort		      1
-	      DstBlock		      "Add"
-	      DstPort		      2
-	    }
-	    Line {
-	      ZOrder		      848
-	      SrcBlock		      "Constant3"
-	      SrcPort		      1
-	      DstBlock		      "Switch1"
-	      DstPort		      2
 	    }
 	  }
 	}
@@ -16276,10 +16057,10 @@ Model {
 	      Points		      [0, 95]
 	      Branch {
 		ZOrder			672
-		Points			[0, 235]
+		Points			[0, 240]
 		Branch {
 		  ZOrder		  849
-		  Points		  [0, 235]
+		  Points		  [0, 230]
 		  DstBlock		  "Control gains"
 		  DstPort		  1
 		}
@@ -16341,18 +16122,11 @@ Model {
 	  DstPort		  2
 	}
 	Line {
-	  ZOrder		  709
-	  SrcBlock		  "desCoMPosVelAcc"
-	  SrcPort		  1
-	  DstBlock		  "Visualize tasks"
-	  DstPort		  3
-	}
-	Line {
 	  Name			  "<desLeftFootRotPosVelAcc>"
 	  ZOrder		  720
 	  Labels		  [0, 0]
 	  SrcBlock		  "Bus\nSelector2"
-	  SrcPort		  3
+	  SrcPort		  4
 	  DstBlock		  "Visualize tasks"
 	  DstPort		  6
 	}
@@ -16361,7 +16135,7 @@ Model {
 	  ZOrder		  719
 	  Labels		  [0, 0]
 	  SrcBlock		  "Bus\nSelector2"
-	  SrcPort		  2
+	  SrcPort		  3
 	  DstBlock		  "Visualize tasks"
 	  DstPort		  5
 	}
@@ -16370,7 +16144,7 @@ Model {
 	  ZOrder		  722
 	  Labels		  [0, 0]
 	  SrcBlock		  "Bus\nSelector2"
-	  SrcPort		  5
+	  SrcPort		  6
 	  DstBlock		  "Visualize tasks"
 	  DstPort		  8
 	}
@@ -16379,7 +16153,7 @@ Model {
 	  ZOrder		  721
 	  Labels		  [0, 0]
 	  SrcBlock		  "Bus\nSelector2"
-	  SrcPort		  4
+	  SrcPort		  5
 	  DstBlock		  "Visualize tasks"
 	  DstPort		  7
 	}
@@ -16395,7 +16169,7 @@ Model {
 	  ZOrder		  718
 	  Labels		  [0, 0]
 	  SrcBlock		  "Bus\nSelector2"
-	  SrcPort		  1
+	  SrcPort		  2
 	  DstBlock		  "Visualize tasks"
 	  DstPort		  4
 	}
@@ -16488,17 +16262,10 @@ Model {
 	}
 	Line {
 	  ZOrder		  814
-	  SrcBlock		  "impedance"
+	  SrcBlock		  "gains"
 	  SrcPort		  1
 	  DstBlock		  "Control gains"
 	  DstPort		  2
-	}
-	Line {
-	  ZOrder		  815
-	  SrcBlock		  "damping"
-	  SrcPort		  1
-	  DstBlock		  "Control gains"
-	  DstPort		  3
 	}
 	Line {
 	  ZOrder		  819
@@ -16508,11 +16275,13 @@ Model {
 	  DstPort		  enable
 	}
 	Line {
-	  ZOrder		  848
-	  SrcBlock		  "iKinReferenceJointsPosition"
+	  Name			  "<desCoMPosVelAcc>"
+	  ZOrder		  881
+	  Labels		  [0, 0]
+	  SrcBlock		  "Bus\nSelector2"
 	  SrcPort		  1
-	  DstBlock		  "Visualize joint positions"
-	  DstPort		  4
+	  DstBlock		  "Visualize tasks"
+	  DstPort		  3
 	}
       }
     }
@@ -16521,7 +16290,7 @@ Model {
       Name		      "inertial"
       SID		      "65"
       Ports		      [0, 1]
-      Position		      [1210, 233, 1260, 247]
+      Position		      [1210, 253, 1260, 267]
       ZOrder		      792
       ForegroundColor	      "[0.490196, 0.000000, 0.000000]"
       LibraryVersion	      "1.383"
@@ -16727,7 +16496,7 @@ Model {
       Name		      "wbdt_leftleg"
       SID		      "76"
       Ports		      [0, 1]
-      Position		      [1210, 378, 1260, 392]
+      Position		      [1210, 338, 1260, 352]
       ZOrder		      793
       ForegroundColor	      "[0.490196, 0.000000, 0.000000]"
       LibraryVersion	      "1.383"
@@ -16746,7 +16515,7 @@ Model {
       Name		      "wbdt_rightleg"
       SID		      "77"
       Ports		      [0, 1]
-      Position		      [1210, 523, 1260, 537]
+      Position		      [1210, 423, 1260, 437]
       ZOrder		      794
       ForegroundColor	      "[0.490196, 0.000000, 0.000000]"
       LibraryVersion	      "1.383"
@@ -16764,34 +16533,17 @@ Model {
       ZOrder		      297
       SrcBlock		      "Dynamics, Kinematics, Jacobians"
       SrcPort		      8
-      Points		      [105, 0]
+      Points		      [56, 0]
       Branch {
-	ZOrder			3416
+	ZOrder			3478
 	DstBlock		"Task Acceleration"
-	DstPort			5
+	DstPort			6
       }
       Branch {
-	ZOrder			3414
-	Points			[0, 504; 700, 0; 0, -224]
+	ZOrder			3457
+	Points			[0, 490]
 	DstBlock		"Visualize and log"
-	DstPort			13
-      }
-    }
-    Line {
-      ZOrder		      3400
-      SrcBlock		      "Desired values"
-      SrcPort		      4
-      Points		      [487, 0]
-      Branch {
-	ZOrder			3374
-	Points			[0, 314; 598, 0; 0, -304]
-	DstBlock		"Visualize and log"
-	DstPort			12
-      }
-      Branch {
-	ZOrder			3369
-	DstBlock		"Task Acceleration"
-	DstPort			9
+	DstPort			10
       }
     }
     Line {
@@ -16799,23 +16551,23 @@ Model {
       SrcBlock		      "Dynamics, Kinematics, Jacobians"
       SrcPort		      7
       DstBlock		      "Task Acceleration"
-      DstPort		      4
+      DstPort		      5
     }
     Line {
       ZOrder		      3401
       SrcBlock		      "Desired values"
-      SrcPort		      5
-      Points		      [538, 0]
+      SrcPort		      6
+      Points		      [543, 0]
       Branch {
-	ZOrder			3373
-	Points			[0, 254; 487, 0; 0, -379]
-	DstBlock		"Visualize and log"
-	DstPort			11
+	ZOrder			3463
+	DstBlock		"Task Acceleration"
+	DstPort			12
       }
       Branch {
-	ZOrder			3370
-	DstBlock		"Task Acceleration"
-	DstPort			10
+	ZOrder			3431
+	Points			[0, 40]
+	DstBlock		"Visualize and log"
+	DstPort			7
       }
     }
     Line {
@@ -16824,15 +16576,15 @@ Model {
       SrcPort		      5
       Points		      [188, 0]
       Branch {
-	ZOrder			3356
-	DstBlock		"Task Acceleration"
-	DstPort			2
-      }
-      Branch {
-	ZOrder			3352
-	Points			[0, -150]
+	ZOrder			3461
+	Points			[0, -200]
 	DstBlock		"Controller and QP"
 	DstPort			7
+      }
+      Branch {
+	ZOrder			3356
+	DstBlock		"Task Acceleration"
+	DstPort			3
       }
     }
     Line {
@@ -16841,22 +16593,22 @@ Model {
       SrcPort		      4
       Points		      [147, 0]
       Branch {
-	ZOrder			3355
-	Points			[0, -165]
+	ZOrder			3462
+	Points			[0, -210]
 	DstBlock		"Controller and QP"
 	DstPort			6
       }
       Branch {
 	ZOrder			3231
 	DstBlock		"Task Acceleration"
-	DstPort			1
+	DstPort			2
       }
     }
     Line {
       ZOrder		      353
       SrcBlock		      "Dynamics, Kinematics, Jacobians"
       SrcPort		      1
-      Points		      [12, 0; 0, -210]
+      Points		      [12, 0; 0, -240]
       DstBlock		      "Controller and QP"
       DstPort		      3
     }
@@ -16864,7 +16616,7 @@ Model {
       ZOrder		      355
       SrcBlock		      "Dynamics, Kinematics, Jacobians"
       SrcPort		      2
-      Points		      [54, 0; 0, -195]
+      Points		      [54, 0; 0, -230]
       DstBlock		      "Controller and QP"
       DstPort		      4
     }
@@ -16872,7 +16624,7 @@ Model {
       ZOrder		      2926
       SrcBlock		      "Controller and QP"
       SrcPort		      1
-      Points		      [55, 0; 0, 60]
+      Points		      [55, 0; 0, 110]
       DstBlock		      "Saturation"
       DstPort		      1
     }
@@ -16888,9 +16640,9 @@ Model {
       }
       Branch {
 	ZOrder			2928
-	Points			[0, 300]
+	Points			[0, 675]
 	DstBlock		"Visualize and log"
-	DstPort			8
+	DstPort			4
       }
     }
     Line {
@@ -16904,17 +16656,17 @@ Model {
       ZOrder		      563
       SrcBlock		      "Controller and QP"
       SrcPort		      2
-      Points		      [36, 0; 0, 135]
+      Points		      [134, 0; 0, 520]
       DstBlock		      "Visualize and log"
-      DstPort		      9
+      DstPort		      5
     }
     Line {
       ZOrder		      616
       SrcBlock		      "Task Acceleration"
       SrcPort		      3
-      Points		      [56, 0; 0, -275]
+      Points		      [458, 0; 0, 70]
       DstBlock		      "Visualize and log"
-      DstPort		      10
+      DstPort		      6
     }
     Line {
       ZOrder		      3381
@@ -16929,16 +16681,15 @@ Model {
       SrcPort		      1
       Points		      [47, 0]
       Branch {
-	ZOrder			3382
-	Points			[0, -50]
-	DstBlock		"Desired values"
-	DstPort			3
+	ZOrder			3444
+	Points			[0, 345]
+	DstBlock		"Visualize and log"
+	DstPort			12
       }
       Branch {
-	ZOrder			3360
-	Points			[0, 234; 1449, 0; 0, -74]
-	DstBlock		"Visualize and log"
-	DstPort			15
+	ZOrder			3382
+	DstBlock		"Desired values"
+	DstPort			3
       }
     }
     Line {
@@ -16947,22 +16698,22 @@ Model {
       SrcPort		      1
       Points		      [21, 0]
       Branch {
-	ZOrder			3386
-	Points			[0, -100]
-	DstBlock		"Desired values"
-	DstPort			4
+	ZOrder			3445
+	Points			[0, 310]
+	DstBlock		"Visualize and log"
+	DstPort			13
       }
       Branch {
-	ZOrder			2351
-	Points			[0, 105]
-	DstBlock		"Visualize and log"
-	DstPort			16
+	ZOrder			3386
+	DstBlock		"Desired values"
+	DstPort			4
       }
     }
     Line {
       ZOrder		      740
       SrcBlock		      "Get Estimate1"
       SrcPort		      1
+      Points		      [16, 0; 0, -10]
       DstBlock		      "Dynamics, Kinematics, Jacobians"
       DstPort		      1
     }
@@ -16972,14 +16723,15 @@ Model {
       SrcPort		      1
       Points		      [1228, 0]
       Branch {
-	ZOrder			3365
-	DstBlock		"Visualize and log"
+	ZOrder			3479
+	Points			[0, 130]
+	DstBlock		"Controller and QP"
 	DstPort			1
       }
       Branch {
-	ZOrder			1936
-	Points			[0, 155]
-	DstBlock		"Controller and QP"
+	ZOrder			3365
+	Points			[872, 0; 0, 880]
+	DstBlock		"Visualize and log"
 	DstPort			1
       }
     }
@@ -16987,17 +16739,18 @@ Model {
       ZOrder		      3399
       SrcBlock		      "Desired values"
       SrcPort		      2
-      Points		      [121, 0]
+      Points		      [126, 0]
       Branch {
-	ZOrder			3408
-	Points			[0, -110]
+	ZOrder			3434
+	Points			[0, -130]
 	DstBlock		"Dynamics, Kinematics, Jacobians"
 	DstPort			4
       }
       Branch {
-	ZOrder			3403
+	ZOrder			3432
+	Points			[594, 0]
 	DstBlock		"Task Acceleration"
-	DstPort			7
+	DstPort			8
       }
     }
     Line {
@@ -17006,29 +16759,33 @@ Model {
       SrcPort		      1
       Points		      [36, 0]
       Branch {
-	ZOrder			3411
-	Points			[0, -582; 862, 0]
+	ZOrder			3459
+	Points			[0, -5]
 	Branch {
-	  ZOrder		  3349
-	  Points		  [0, 1142]
-	  DstBlock		  "Task Acceleration"
-	  DstPort		  13
+	  ZOrder		  3443
+	  Points		  [0, -577; 862, 0]
+	  Branch {
+	    ZOrder		    3349
+	    Points		    [0, 547]
+	    DstBlock		    "Task Acceleration"
+	    DstPort		    1
+	  }
+	  Branch {
+	    ZOrder		    3362
+	    Points		    [1154, 0; 0, 887]
+	    DstBlock		    "Visualize and log"
+	    DstPort		    2
+	  }
 	}
 	Branch {
-	  ZOrder		  3362
-	  Points		  [1154, 0; 0, 72]
-	  DstBlock		  "Visualize and log"
+	  ZOrder		  957
+	  DstBlock		  "Dynamics, Kinematics, Jacobians"
 	  DstPort		  2
 	}
       }
       Branch {
-	ZOrder			957
-	DstBlock		"Dynamics, Kinematics, Jacobians"
-	DstPort			2
-      }
-      Branch {
-	ZOrder			3379
-	Points			[0, 260]
+	ZOrder			3437
+	Points			[0, 290]
 	DstBlock		"Desired values"
 	DstPort			1
       }
@@ -17039,42 +16796,36 @@ Model {
       SrcPort		      6
       Points		      [241, 0]
       Branch {
-	ZOrder			3350
-	Points			[0, -135]
+	ZOrder			3460
+	Points			[0, -190]
 	DstBlock		"Controller and QP"
 	DstPort			8
       }
       Branch {
 	ZOrder			3345
 	DstBlock		"Task Acceleration"
-	DstPort			3
+	DstPort			4
       }
     }
     Line {
       ZOrder		      3397
       SrcBlock		      "Desired values"
       SrcPort		      1
-      Points		      [83, 0]
+      Points		      [88, 0]
       Branch {
-	ZOrder			3406
-	DstBlock		"Task Acceleration"
-	DstPort			6
-      }
-      Branch {
-	ZOrder			3405
-	Points			[0, -155]
+	ZOrder			3433
+	Points			[0, -175]
 	Branch {
-	  ZOrder		  3351
-	  Points		  [0, -603; 880, 0]
+	  ZOrder		  3456
+	  Points		  [0, -525; 880, 0]
 	  Branch {
-	    ZOrder		    3368
-	    Points		    [736, 0; 0, 363]
+	    ZOrder		    3466
+	    Points		    [0, -126; 736, 0; 0, 916]
 	    DstBlock		    "Visualize and log"
-	    DstPort		    6
+	    DstPort		    3
 	  }
 	  Branch {
 	    ZOrder		    2248
-	    Points		    [0, 128]
 	    DstBlock		    "Controller and QP"
 	    DstPort		    2
 	  }
@@ -17085,12 +16836,18 @@ Model {
 	  DstPort		  3
 	}
       }
+      Branch {
+	ZOrder			3430
+	Points			[632, 0]
+	DstBlock		"Task Acceleration"
+	DstPort			7
+      }
     }
     Line {
       ZOrder		      356
       SrcBlock		      "Dynamics, Kinematics, Jacobians"
       SrcPort		      3
-      Points		      [101, 0; 0, -180]
+      Points		      [101, 0; 0, -220]
       DstBlock		      "Controller and QP"
       DstPort		      5
     }
@@ -17105,24 +16862,35 @@ Model {
     Line {
       ZOrder		      3375
       SrcBlock		      "Desired values"
-      SrcPort		      8
-      Points		      [26, 0; 0, 46; 1502, 0; 0, -36]
+      SrcPort		      7
+      Points		      [342, 0; 0, 190]
       DstBlock		      "Visualize and log"
-      DstPort		      14
+      DstPort		      11
     }
     Line {
       ZOrder		      3395
       SrcBlock		      "Desired values"
-      SrcPort		      7
-      DstBlock		      "Task Acceleration"
-      DstPort		      12
+      SrcPort		      4
+      Points		      [460, 0]
+      Branch {
+	ZOrder			3480
+	DstBlock		"Task Acceleration"
+	DstPort			10
+      }
+      Branch {
+	ZOrder			3476
+	Points			[0, 240]
+	DstBlock		"Visualize and log"
+	DstPort			9
+      }
     }
     Line {
       ZOrder		      3396
       SrcBlock		      "Desired values"
       SrcPort		      3
+      Points		      [720, 0]
       DstBlock		      "Task Acceleration"
-      DstPort		      8
+      DstPort		      9
     }
     Line {
       ZOrder		      3219
@@ -17135,9 +16903,19 @@ Model {
     Line {
       ZOrder		      3398
       SrcBlock		      "Desired values"
-      SrcPort		      6
-      DstBlock		      "Task Acceleration"
-      DstPort		      11
+      SrcPort		      5
+      Points		      [510, 0]
+      Branch {
+	ZOrder			3472
+	Points			[0, 140]
+	DstBlock		"Visualize and log"
+	DstPort			8
+      }
+      Branch {
+	ZOrder			3469
+	DstBlock		"Task Acceleration"
+	DstPort			11
+      }
     }
   }
 }
