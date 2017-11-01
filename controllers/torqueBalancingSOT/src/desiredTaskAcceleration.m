@@ -17,12 +17,23 @@
 %% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 function [desiredTaskAcc,comError,rootRotErr,lFootPosErr,lFootRotErr,rFootPosErr,rFootRotErr, taskAccErr] = ...
-              desiredTaskAcceleration(w_H_l_sole, w_H_r_sole, taskVelocities, comPos, w_R_root,...
-                                      desComPosVelAcc, desRootRotPosVelAcc,...
+              desiredTaskAcceleration(taskPositions, taskVelocities, ...
+                                      desComPosVelAcc, desRootRotPosVelAcc, ...
                                       desLFootOriginPosVelAcc, desLFootRotPosVelAcc, ...
                                       desRFootOriginPosVelAcc, desRFootRotPosVelAcc, ...
                                       PDgainsPos, PDgainsRot)
-                                              
+    
+                                  
+    comPos             = taskPositions(1:3,  4);
+    w_R_root           = taskPositions(1:3,1:3);
+    
+    w_H_l_sole         = taskPositions(5:8,  :);
+    w_H_r_sole         = taskPositions(9:12, :);    
+    l_solePos          = w_H_l_sole(1:3,4);
+    r_solePos          = w_H_r_sole(1:3,4);
+    w_R_l_sole         = w_H_l_sole(1:3,1:3);
+    w_R_r_sole         = w_H_r_sole(1:3,1:3);
+    
     comVel             = taskVelocities( 1: 3);
     rootAngVel         = taskVelocities( 4: 6);
     
@@ -43,11 +54,11 @@ function [desiredTaskAcc,comError,rootRotErr,lFootPosErr,lFootRotErr,rFootPosErr
     comDDotStar        = linearPID(comPos,comVel,desComPosVelAcc,gainsPDpos_CoM);
     rootOmegaDotStar   = rotationalPID(w_R_root,rootAngVel,desRootRotPosVelAcc, gainsPDrot_root); 
     
-    lFootPosDDotStar   = linearPID(w_H_l_sole(1:3,4),leftFootLinVel,desLFootOriginPosVelAcc,gainsPDpos_lFoot);
-    lFootOmegaDotStar  = rotationalPID(w_H_l_sole(1:3,1:3),leftFootAngVel,desLFootRotPosVelAcc,gainsPDrot_lFoot);  
+    lFootPosDDotStar   = linearPID(l_solePos,leftFootLinVel,desLFootOriginPosVelAcc,gainsPDpos_lFoot);
+    lFootOmegaDotStar  = rotationalPID(w_R_l_sole,leftFootAngVel,desLFootRotPosVelAcc,gainsPDrot_lFoot);  
     
-    rFootPosDDotStar   = linearPID(w_H_r_sole(1:3,4),rightFootLinVel,desRFootOriginPosVelAcc,gainsPDpos_rFoot);
-    rFootOmegaDotStar  = rotationalPID(w_H_r_sole(1:3,1:3),rightFootAngVel,desRFootRotPosVelAcc,gainsPDrot_rFoot);
+    rFootPosDDotStar   = linearPID(r_solePos,rightFootLinVel,desRFootOriginPosVelAcc,gainsPDpos_rFoot);
+    rFootOmegaDotStar  = rotationalPID(w_R_r_sole,rightFootAngVel,desRFootRotPosVelAcc,gainsPDrot_rFoot);
     
     desiredTaskAcc     = [comDDotStar;
                           rootOmegaDotStar
@@ -58,10 +69,10 @@ function [desiredTaskAcc,comError,rootRotErr,lFootPosErr,lFootRotErr,rFootPosErr
     
     comError          = comPos - desComPosVelAcc(:,1);
     rootRotErr        = invSkew(desRootRotPosVelAcc(1:3,1:3)'*w_R_root);
-    lFootPosErr       = w_H_l_sole(1:3,4) - desLFootOriginPosVelAcc(:,1);
-    lFootRotErr       = invSkew(desLFootRotPosVelAcc(1:3,1:3)'*w_H_l_sole(1:3,1:3));
-    rFootPosErr       = w_H_r_sole(1:3,4) - desRFootOriginPosVelAcc(:,1);
-    rFootRotErr       = invSkew(desRFootRotPosVelAcc(1:3,1:3)'*w_H_r_sole(1:3,1:3));
+    lFootPosErr       = l_solePos - desLFootOriginPosVelAcc(:,1);
+    lFootRotErr       = invSkew(desLFootRotPosVelAcc(1:3,1:3)'*w_R_l_sole);
+    rFootPosErr       = r_solePos - desRFootOriginPosVelAcc(:,1);
+    rFootRotErr       = invSkew(desRFootRotPosVelAcc(1:3,1:3)'*w_R_r_sole);
     
     taskAccErr = [comError;
                   rootRotErr;
