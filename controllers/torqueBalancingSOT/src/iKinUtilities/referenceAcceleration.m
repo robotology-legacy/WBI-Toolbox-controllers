@@ -1,43 +1,32 @@
 function dnuDes   = referenceAcceleration(Jtask, dJnuDes, taskAccelerations, jointDynamics, ... 
-                                                      constraints, ROBOT_DOF, reg)
+                                          ROBOT_DOF, reg)
                                           
 % Generate the reference accelerations for both the floating base and the joints through a stack of task inverse kinematics structure
 
 % setup parameters
-PINV_TOL          = reg.pinvDampVb;
-
-% Task corrections for foot in contact with ground
-Jcontact          = [Jtask( 7:12,:) * constraints(1);
-                     Jtask(13:18,:) * constraints(2)];
-        
-dJnuContact       = [dJnuDes( 7:12) * constraints(1); 
-                     dJnuDes(13:18) * constraints(2)];  
-
-Jtask             = [Jtask( 1:6, :);
-                     Jtask( 7:12,:) * constraints(1);
-                     Jtask(13:18,:) * constraints(2);
-                     Jcontact]; 
-
-dJnuDes           = [dJnuDes( 1:6 );
-                     dJnuDes( 7:12) * constraints(1);
-                     dJnuDes(13:18) * constraints(2);
-                     dJnuContact];     
-        
-taskAccelerations = [taskAccelerations; 
-                     zeros(12,1)];        
+PINV_TOL          = reg.pinvDampVb;     
     
 %% Stack-of-tasks inverse kinematics
+    
+%Primary task: respect task constraints
+CoMrootAcc = taskAccelerations(1:6);
+JCoMroot   = Jtask(1:6, :);
+dnuCoMroot = pinv(JCoMroot, PINV_TOL) * (CoMrootAcc - dJnuDes(1:6));
+nullCoMroot= eye(6 + ROBOT_DOF) - pinv(JCoMroot, PINV_TOL) * JCoMroot;
 
-%Primary task: respect task constraints and contact constraints
-dnuTask    = pinv(Jtask, PINV_TOL) * (taskAccelerations - dJnuDes);
-% null space projector for primary task
-NullTask   = eye(6 + ROBOT_DOF) - pinv(Jtask, PINV_TOL)*Jtask;
+%Secondary task: Feet contact
+feetAcc     = taskAccelerations(7:end);
+Jfeet       = Jtask(7:end, :);
+dJnu_feet   = dJnuDes(7:end);
+dnu_feet    = pinv(Jfeet, PINV_TOL) * (feetAcc - dJnu_feet);
+null_feet   = eye(6 + ROBOT_DOF) - pinv(Jfeet, PINV_TOL) * Jfeet;
 
-%Secondary task: achieve desired joints position
-S          = [zeros(ROBOT_DOF, 6) eye(ROBOT_DOF)];
-dnuPosture = pinv(S*NullTask, PINV_TOL)*(jointDynamics - S*dnuTask);
+%Tertiary task: joint posture
+S           = [zeros(ROBOT_DOF, 6) eye(ROBOT_DOF)];
+dnuPosture  = pinv(null_feet, PINV_TOL) * (pinv(S * nullCoMroot, PINV_TOL) * (jointDynamics - S * dnuCoMroot) - dnu_feet);
 
-%Reference accelerations for floating base and joints
-dnuDes     = dnuTask + NullTask*dnuPosture;
+dnuDes = dnuCoMroot + nullCoMroot * (dnu_feet + null_feet * dnuPosture);
+
+
 
 end
