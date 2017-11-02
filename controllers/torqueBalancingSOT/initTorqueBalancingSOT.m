@@ -74,12 +74,30 @@ CONFIG.PITCH_IMU_FILTER    = true;
 % equal to false, recall that the neck is assumed to be in (0,0,0)
 CONFIG.CORRECT_NECK_IMU    = true;
 
-% CONFIG.QP.USE_STRICT_TASK_PRIORITIES: when set to true, the balancing
-% controller solves an optimization problem for the desired posture, with
-% desired tasks given as equality constraints. When set to false, the 
-%controller solves for the weighted desired posture and tasks.
-CONFIG.QP.USE_STRICT_TASK_PRIORITIES = true;
-CONFIG.QP.USE_STRICT_TASK_PRIORITIES_WITH_FOOT_ACCELERATION = true;
+%The balancing controller solves an optimization problem for desired tasks and posture
+%There are at the moment 3 ways to define the balancing controller:
+%1. Weighted/soft task priorities
+%       minimizes weighted error on desired tasks and posture
+%       use it by setting CONFIG.QP.USE_STRICT_TASK_PRIORITIES = false
+%2. Strict task priorities
+%       tasks defined as equality constraints on CoM position and root orientation
+%       use it by setting CONFIG.QP.USE_STRICT_TASK_PRIORITIES = true
+%3. Strict task priorities
+%       tasks defined as equality constraints on CoM position, root orientation 
+%       and feet pose (position and orientation)
+%       use it by setting CONFIG.QP.USE_STRICT_TASK_PRIORITIES_WITH_FOOT_ACCELERATION = true
+controllerType = 3;
+switch controllerType
+    case 1
+        CONFIG.QP.USE_STRICT_TASK_PRIORITIES = false;
+        CONFIG.QP.USE_STRICT_TASK_PRIORITIES_WITH_FOOT_ACCELERATION = false;
+    case 2
+        CONFIG.QP.USE_STRICT_TASK_PRIORITIES = true;
+        CONFIG.QP.USE_STRICT_TASK_PRIORITIES_WITH_FOOT_ACCELERATION = false;
+    case 3
+        CONFIG.QP.USE_STRICT_TASK_PRIORITIES = false;
+        CONFIG.QP.USE_STRICT_TASK_PRIORITIES_WITH_FOOT_ACCELERATION = true;
+end
 
 % CONFIG.QP.USE_CONTINUITY_CONSTRAINTS: when set to true, control torques
 % obtained from QP optimization are constrained to continuous values.
@@ -90,17 +108,8 @@ CONFIG.QP.USE_CONTINUITY_CONSTRAINTS = false;
 %false, use desired joint positions from state machine.
 CONFIG.USE_INVERSE_KINEMATICS = false;
 
-%CONFIG.SMOOTH_DES_COM: when set to true, the desired streamed values of 
-%the center of mass are smoothed internally; 
-CONFIG.SMOOTH_DES_COM      = true;  
-
-%CONFIG.SMOOTH_DES_Q: when set to true, the desired streamed values of 
-%the postural tasks are smoothed internally
-CONFIG.SMOOTH_DES_Q        = true;
-%other tasks (e.g. feet positions are automatically smoothed)
-
 % CONFIG.SCOPES.ALL: when set to false, all visualizations are disabled
-CONFIG.SCOPES.ALL         = true;
+CONFIG.SCOPES.ALL         = false;
 % CONFIG.SCOPES.VALUE: when set to true, visualization of the element 
 % in question is enabled
 CONFIG.SCOPES.QP          = true;
