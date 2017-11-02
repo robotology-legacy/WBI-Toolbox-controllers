@@ -1,9 +1,5 @@
 %% PARAMETERS FOR FINITE STATE MACHINE                                                                    
 
-gain.SmoothingTimeGainScheduling  = 2; %Smoothing time for time varying impedances
-gain.SmoothingTimeTasks           = 2; %Smoothing time for time varying tasks
-%note: keep gain.SmoothingTimeTasks <= gain.SmoothingTimeGainScheduling
-
 %% %%%%%%%%%%%%%%%%    CONTROLLER GAIN PARAMETERS
 
 PCoM                        = [50    60    50;  % state ==  1  TWO FEET BALANCING
@@ -30,7 +26,7 @@ Proot                       = [5;  % state ==  1  TWO FEET BALANCING
                               10;  % state == 10  LOOKING FOR CONTACT
                               15]; % state == 11  TRANSITION TO INITIAL POSITION 
                            
-PlfootPos                   = [ 0     0     0;  % state ==  1  TWO FEET BALANCING
+PlfootPos                   = [20    20    20;  % state ==  1  TWO FEET BALANCING
                                 0     0     0;  % state ==  2  COM TRANSITION TO LEFT 
                                 0     0     0;  % state ==  3  LEFT FOOT BALANCING
                                 0     0     0;  % state ==  4  PREPARING FOR SWITCHING 
@@ -54,7 +50,7 @@ PlfootRot                   = [5;  % state ==  1  TWO FEET BALANCING
                               10;  % state == 10  LOOKING FOR CONTACT
                                5]; % state == 11  TRANSITION TO INITIAL POSITION                             
 
-PrfootPos                   = [ 0     0     0;  % state ==  1  TWO FEET BALANCING
+PrfootPos                   = [20    20    20;  % state ==  1  TWO FEET BALANCING
                                 0     0     0;  % state ==  2  COM TRANSITION TO LEFT 
                                20    20    20;  % state ==  3  LEFT FOOT BALANCING
                                20    20    20;  % state ==  4  PREPARING FOR SWITCHING 
@@ -80,7 +76,7 @@ PrfootRot                   = [5;  % state ==  1  TWO FEET BALANCING
 
                            
 %                              %  TORSO  %%     LEFT ARM     %%    RIGHT ARM     %%         LEFT LEG            %%         RIGHT LEG           %% 
-gain.joints.impedances      = [20   30   20, 10   10    10   10, 10   10    10   10, 15   25   15    30     25  25, 15   25   15    30     25  25;  % state ==  1  TWO FEET BALANCING
+gain.joints.impedances      = [20   50   50, 10   10    10   10, 10   10    10   10, 15   25   15    30     25  25, 15   25   15    30     25  25;  % state ==  1  TWO FEET BALANCING
                                20   30   20, 10   10    10   10, 10   10    10   10, 15   25   15    30     25  25, 15   25   15    30     25  25;  % state ==  2  COM TRANSITION TO LEFT 
                                20   30   20, 10   10    10   10, 10   10    10   10, 15   25   15    30     25  25, 15   25   15    30     25  25;  % state ==  3  LEFT FOOT BALANCING
                                20   30   20, 10   10    10   10, 10   10    10   10, 15   25   15    30     25  25, 15   25   15    30     25  25;  % state ==  4  PREPARING FOR SWITCHING 
@@ -111,6 +107,7 @@ sm.stateAt0                      = 1;     % Initial state (state 1 is TWO FEET B
 sm.demoInLoop                    = true;  % Determines if the demo is running in loop (true) or only once (false)
 sm.demoOnlyRightFoot             = false; % Determines if the robot balances on right foot only (true) or on both feet (false)
 sm.com.threshold                 = 0.01;  % Distance threshold under which the position of the center of mass is considered correct
+sm.foot.threshold                = 0.01;  % Distance threshold under which the position of the foot is considered correct
 sm.wrench.thresholdContactOn     = 4;     % Force threshold above which contact is considered stable
 sm.wrench.thresholdContactOff    = 60;    % Force threshold under which contact is considered off
 sm.joints.thresholdNotInContact  = 20;    % Degrees
@@ -168,11 +165,7 @@ sm.origin.rightFoot = [0.0,  0.00,  0.00;   %% state ==  1  TWO FEET BALANCING N
                        0.0,  0.00,  0.00];  %% state == 11  TRANSITION INIT POSITION     : THIS REFERENCE IS IGNORED
                   
                 
-sm.joints.states    = [[ 0.0000, 0.0000, 0.0000, ...                         %% state == 1  TWO FEET BALANCING : THIS REFERENCE IS IGNORED
-                        -0.5131, 0.5306, 0.0000, 0.7782 ...                  %
-                        -0.5131, 0.5306, 0.0000, 0.7782 ...                  %
-                         0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, ... %
-                         0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000];    %
+sm.joints.states    = [zeros(1,ROBOT_DOF);                                   %% state == 1  TWO FEET BALANCING : THIS REFERENCE IS IGNORED
                        [-0.0350, 0.0780, 0.0430, ...                         %% state == 2  COM TRANSITION TO LEFT 
                         -0.1493, 0.8580, 0.2437, 0.8710 ...                  %
                         -0.1493, 0.8580, 0.2437, 0.8710 ...                  %
@@ -193,11 +186,7 @@ sm.joints.states    = [[ 0.0000, 0.0000, 0.0000, ...                         %% 
                          0.0563, 0.6789, 0.3340, 0.6214 ...                  %
                          0.0000,-0.0741, 0.0000, 0.0000, 0.0250, 0.1200,...  %
                          0.0000, 0.0225, 0.0000, 0.0000, 0.0000,-0.0277];    %
-                       [ 0.0000, 0.0000, 0.0000, ...                         %% state == 6  TRANSITION INITIAL POSITION : THIS REFERENCE IS IGNORED
-                        -0.5131, 0.5306, 0.0000, 0.7782 ...                  %
-                        -0.5131, 0.5306, 0.0000, 0.7782 ...                  %
-                         0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000,...  %
-                         0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000];    %
+                       zeros(1,ROBOT_DOF);                                   %% state == 6  TRANSITION INITIAL POSITION : THIS REFERENCE IS IGNORED
                        [ 0.0350,-0.0780, 0.0430, ...                         %% state == 7  COM TRANSITION TO RIGHT FOOT
                         -0.1493, 0.8580, 0.2437, 0.8710 ...                  %
                         -0.1493, 0.8580, 0.2437, 0.8710 ...                  %     
@@ -218,11 +207,7 @@ sm.joints.states    = [[ 0.0000, 0.0000, 0.0000, ...                         %% 
                          0.1253, 0.8135, 0.3051, 0.7928 ...                  %
                          0.0000, 0.0225, 0.0000, 0.0000, 0.0000,-0.0277,...  %
                          0.0000,-0.0741, 0.0000, 0.0000, 0.0250, 0.1200];    %
-                       [ 0.0000, 0.0000, 0.0000, ...                         %% state == 11  TRANSITION INITIAL POSITION : THIS REFERENCE IS IGNORED
-                        -0.5131, 0.5306, 0.0000, 0.7782 ...                  %
-                        -0.5131, 0.5306, 0.0000, 0.7782 ...                  %
-                         0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000,...  %
-                         0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000]];   % 
+                       zeros(1,ROBOT_DOF)];                                  %% state == 11  TRANSITION INITIAL POSITION : THIS REFERENCE IS IGNORED
 
                      
                      
