@@ -3,24 +3,32 @@ CONFIG.ON_GAZEBO = true;
 
 WBT_wbiList = '(torso_pitch,torso_roll,torso_yaw,l_shoulder_pitch, l_shoulder_roll, l_shoulder_yaw, l_elbow, r_shoulder_pitch,r_shoulder_roll, r_shoulder_yaw, r_elbow, l_hip_pitch, l_hip_roll, l_hip_yaw, l_knee, l_ankle_pitch, l_ankle_roll, r_hip_pitch,r_hip_roll,r_hip_yaw,r_knee,r_ankle_pitch,r_ankle_roll)';                         
                                                                                                 
-PORTS.IMU                 = '/icubSim/inertial'; 
-PORTS.WBDT_LEFTLEG_EE     = '/wholeBodyDynamics/left_leg/cartesianEndEffectorWrench:o';
-PORTS.WBDT_RIGHTLEG_EE    = '/wholeBodyDynamics/right_leg/cartesianEndEffectorWrench:o';
+PORTS.IMU              = '/icubSim/inertial'; 
+PORTS.WBDT_LEFTLEG_EE  = '/wholeBodyDynamics/left_leg/cartesianEndEffectorWrench:o';
+PORTS.WBDT_RIGHTLEG_EE = '/wholeBodyDynamics/right_leg/cartesianEndEffectorWrench:o';
 
 %Maximum torque value sent to actuators
-sat.torque            = 60;
+sat.torque             = 60;
 
 %Maximum variation of torque from one time step to the next
 %Required as parameter of QP, but used only if
 %CONFIG.QP.USE_CONTINUITY_CONSTRAINTS = true;
-sat.torqueDot         = inf*ones(ROBOT_DOF,1);
+sat.torqueDot          = inf*ones(ROBOT_DOF,1);
 
 %Maximum value used as upper bound constraint
-sat.unboundedConstant = 1e14;
+sat.unboundedConstant  = 1e14;
 
 %% %%%%%%%%%%%%%%%%    Gains for desired values computation
 
-reg.pinvDampVb      = 1e-7; %Regularizing term for matrix pseudoinverse operation in base velocity computation
+reg.pinvDampVb         = 1e-7; %Regularizing term for matrix pseudoinverse operation in base velocity computation
+
+
+%% PES gain tuning parameters
+gainTuning.sinAmplitude = 2;
+gainTuning.sinFrequency = 0.1;
+gainTuning.K            = 50;
+gainTuning.maxImpedance = 200;
+gainTuning.Kdamping     = 1; %parameter to tune when working on robot, to put damping to 0
 
 %% %%%%%%%%%%%%%%%%    Controller gain parameters 
 gain.weightPostural         = 0.3;
@@ -32,7 +40,7 @@ gain.weightMinContactForces = 0;
 
 numberOfPoints               = 4; % The friction cone is approximated by using linear interpolation of the circle. 
                                   % So, numberOfPoints defines the number of points used to interpolate the circle in each circle's quadrant 
-forceFrictionCoefficient     = 1; %1/4;
+forceFrictionCoefficient     = 1;
 torsionalFrictionCoefficient = 2/150;
 gain.footSize                = [ -0.07 0.07   ;   % xMin, xMax
                                  -0.03 0.03 ];    % yMin, yMax    

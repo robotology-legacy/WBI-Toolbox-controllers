@@ -86,7 +86,7 @@ CONFIG.CORRECT_NECK_IMU    = true;
 %       tasks defined as equality constraints on CoM position, root orientation 
 %       and feet pose (position and orientation)
 %       use it by setting CONFIG.QP.USE_STRICT_TASK_PRIORITIES_WITH_FOOT_ACCELERATION = true
-controllerType = 3;
+controllerType = 1;
 switch controllerType
     case 1
         CONFIG.QP.USE_STRICT_TASK_PRIORITIES = false;
@@ -108,16 +108,20 @@ CONFIG.QP.USE_CONTINUITY_CONSTRAINTS = false;
 %false, use desired joint positions from state machine.
 CONFIG.USE_INVERSE_KINEMATICS = false;
 
+%Impedance/damping gains can be set manually, or they can be tuned automatically
+%using a perturbation-base extremum seeking (PES) algorithm.
+CONFIG.USE_PES_gain_tuning = true;
+
 % CONFIG.SCOPES.ALL: when set to false, all visualizations are disabled
-CONFIG.SCOPES.ALL         = false;
+CONFIG.SCOPES.ALL         = true;
 % CONFIG.SCOPES.VALUE: when set to true, visualization of the element 
 % in question is enabled
-CONFIG.SCOPES.QP          = true;
-CONFIG.SCOPES.TORQUES     = true;
-CONFIG.SCOPES.JOINTS      = true;
-CONFIG.SCOPES.FEET        = true;
-CONFIG.SCOPES.TASKS       = true;
-CONFIG.SCOPES.GAINS       = false;
+CONFIG.SCOPES.QP          = false;
+CONFIG.SCOPES.TORQUES     = false;
+CONFIG.SCOPES.JOINTS      = false;
+CONFIG.SCOPES.FEET        = false;
+CONFIG.SCOPES.TASKS       = false;
+CONFIG.SCOPES.GAINS       = true;
 %% 
 
 addpath('./src/')
