@@ -211,7 +211,7 @@ function Outputs(block)
         else
             A    = [zeros(length(upperBoundFeetConstraints),ROBOT_DOF),constraintMatrixLeftFoot];
             ubA  = upperBoundFeetConstraints;
-            lbA  = -unboundedConstant*ones(length(upperBoundFeetConstraints),1);
+            lbA  = -sat.unboundedConstant*ones(length(upperBoundFeetConstraints),1);
         end
            
     % Only right foot is in contact
@@ -239,7 +239,7 @@ function Outputs(block)
         else
             A    = [zeros(length(upperBoundFeetConstraints),ROBOT_DOF),constraintMatrixRightFoot];
             ubA  = upperBoundFeetConstraints;
-            lbA  = -unboundedConstant*ones(length(upperBoundFeetConstraints),1);
+            lbA  = -sat.unboundedConstant*ones(length(upperBoundFeetConstraints),1);
             
         end
     

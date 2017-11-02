@@ -209,20 +209,5 @@ sm.joints.states    = [zeros(1,ROBOT_DOF);                                   %% 
                          0.0000,-0.0741, 0.0000, 0.0000, 0.0250, 0.1200];    %
                        zeros(1,ROBOT_DOF)];                                  %% state == 11  TRANSITION INITIAL POSITION : THIS REFERENCE IS IGNORED
 
-                     
-                     
-%% %%%%%%%%%%%%%%%%    Inverse kinematics gains
-%ikin.CoM.posPD      = 2*gain.CoM.posPD(1,:); 
-
-%ikin.root.rotPD     = 2*gain.root.rotPD(1,:);
-
-%ikin.lFoot.posPD    = gain.lFoot.posPD(1,:);
-%ikin.lFoot.rotPD    = gain.lFoot.rotPD(1,:);
-
-%ikin.rFoot.posPD    = ikin.lFoot.posPD;
-%ikin.rFoot.rotPD    = ikin.lFoot.rotPD;
-
-% ikin.impedances     = diag([20 30 20 gain.joints.impedances(1,4:end)]);
-% ikin.dampings       = 2 * sqrt(ikin.impedances);
-
+                                        
 clear PCoM Proot PlfootPos PlfootRot PrfootPos PrfootRot;                  
