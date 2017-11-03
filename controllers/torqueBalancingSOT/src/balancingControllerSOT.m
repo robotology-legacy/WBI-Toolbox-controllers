@@ -122,15 +122,28 @@ function [hessianMatrix,biasVector,constraintMatrixLeftFoot,constraintMatrixRigh
     jacobians_invM_biasTorques= jacobians_invM * biasTorques;
     jacobians_invM_B          = jacobians_invM * B;                            
 
-    if CONFIG.QP.USE_STRICT_TASK_PRIORITIES
+    if CONFIG.QP.USE_STRICT_TASK_PRIORITIES_NO_FOOT_ACCELERATION
+        %Acceleration constraints on CoM position, Root orientation,
+        %and null acceleration at ground contact
+        desiredTaskAcc_withContact= [desiredTaskAcc(1:6);
+                                     zeros(12,1)];
+        
+        jacobians_withContact     = [jacobians(1:6,:);
+                                     contactJacobians];
+                                 
+        jacobiansDotNu_withContact= [jacobiansDotNu(1:6);
+                                     jacobiansDotNu(7:12) * feetActivation(1);
+                                     jacobiansDotNu(13:18)* feetActivation(2)];
+                                 
+        jacobians_invM            = jacobians_withContact / massMatrix; 
+        jacobians_invM_biasTorques= jacobians_invM * biasTorques;
+        jacobians_invM_B          = jacobians_invM * B; 
+        
         hessianMatrix             = St_invM_B' * St_invM_B + gain.weightMinTorques * (Storques' * Storques);
         biasVector                = St_invM_B' * (tauFeedback - (S' / massMatrix) * biasTorques);
         constraintMatrixEq        = jacobians_invM_B;
-        %Acceleration constraints on CoM position, Root orientation,
-        %and null acceleration at ground contact
-        desiredTaskAcc_plusContact= [desiredTaskAcc(1:6);
-                                     zeros(12,1)]; 
-        upperBoundEqConstraints   = desiredTaskAcc_plusContact - jacobiansDotNu + jacobians_invM_biasTorques;
+
+        upperBoundEqConstraints   = desiredTaskAcc_withContact - jacobiansDotNu_withContact + jacobians_invM_biasTorques;
 
     elseif CONFIG.QP.USE_STRICT_TASK_PRIORITIES_WITH_FOOT_ACCELERATION
             hessianMatrix             = St_invM_B' * St_invM_B + gain.weightMinTorques * (Storques' * Storques);

@@ -110,8 +110,8 @@ sm.com.threshold                 = 0.01;  % Distance threshold under which the p
 sm.foot.threshold                = 0.01;  % Distance threshold under which the position of the foot is considered correct
 sm.wrench.thresholdContactOn     = 4;     % Force threshold above which contact is considered stable
 sm.wrench.thresholdContactOff    = 60;    % Force threshold under which contact is considered off
-sm.joints.thresholdNotInContact  = 20;    % Degrees
-sm.joints.thresholdInContact     = 20;    % Degrees
+sm.joints.thresholdNotInContact  = 10;    % Degrees
+sm.joints.thresholdInContact     = 10;    % Degrees
     
 sm.jointsSmoothingTimes          = [2;   %% state ==  1  TWO FEET BALANCING
                                     2;   %% state ==  2  COM TRANSITION TO LEFT FOOT
@@ -209,5 +209,4 @@ sm.joints.states    = [zeros(1,ROBOT_DOF);                                   %% 
                          0.0000,-0.0741, 0.0000, 0.0000, 0.0250, 0.1200];    %
                        zeros(1,ROBOT_DOF)];                                  %% state == 11  TRANSITION INITIAL POSITION : THIS REFERENCE IS IGNORED
 
-                                        
 clear PCoM Proot PlfootPos PlfootRot PrfootPos PrfootRot;                  

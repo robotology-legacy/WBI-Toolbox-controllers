@@ -201,7 +201,7 @@ function Outputs(block)
         g    = SL'*biasVectorQP;
 
         
-        if CONFIG.QP.USE_STRICT_TASK_PRIORITIES || CONFIG.QP.USE_STRICT_TASK_PRIORITIES_WITH_FOOT_ACCELERATION
+        if CONFIG.QP.USE_STRICT_TASK_PRIORITIES_NO_FOOT_ACCELERATION || CONFIG.QP.USE_STRICT_TASK_PRIORITIES_WITH_FOOT_ACCELERATION
             A    = [zeros(length(upperBoundFeetConstraints),ROBOT_DOF),constraintMatrixLeftFoot;
                     constraintMatrixEq*SL];
             ubA  = [upperBoundFeetConstraints;
@@ -229,7 +229,7 @@ function Outputs(block)
         g    = SR'*biasVectorQP;
 
         
-        if CONFIG.QP.USE_STRICT_TASK_PRIORITIES || CONFIG.QP.USE_STRICT_TASK_PRIORITIES_WITH_FOOT_ACCELERATION
+        if CONFIG.QP.USE_STRICT_TASK_PRIORITIES_NO_FOOT_ACCELERATION || CONFIG.QP.USE_STRICT_TASK_PRIORITIES_WITH_FOOT_ACCELERATION
             A    = [zeros(length(upperBoundFeetConstraints),ROBOT_DOF),constraintMatrixRightFoot;
                     constraintMatrixEq*SR];
             ubA  = [upperBoundFeetConstraints;
@@ -255,7 +255,7 @@ function Outputs(block)
         H    = hessianMatrixQP;
         g    = biasVectorQP; 
         
-        if CONFIG.QP.USE_STRICT_TASK_PRIORITIES || CONFIG.QP.USE_STRICT_TASK_PRIORITIES_WITH_FOOT_ACCELERATION
+        if CONFIG.QP.USE_STRICT_TASK_PRIORITIES_NO_FOOT_ACCELERATION || CONFIG.QP.USE_STRICT_TASK_PRIORITIES_WITH_FOOT_ACCELERATION
             A    = [zeros(length(upperBoundFeetConstraints),ROBOT_DOF),constraintMatrixLeftFoot,zeros(length(upperBoundFeetConstraints),6);
                     zeros(length(upperBoundFeetConstraints),ROBOT_DOF),zeros(length(upperBoundFeetConstraints),6),constraintMatrixRightFoot;
                     constraintMatrixEq];

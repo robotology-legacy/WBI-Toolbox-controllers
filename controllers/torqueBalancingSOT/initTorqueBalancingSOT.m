@@ -90,16 +90,16 @@ CONFIG.CORRECT_NECK_IMU    = true;
 %       tasks defined as equality constraints on CoM position, root orientation 
 %       and feet pose (position and orientation)
 %       use it by setting CONFIG.QP.USE_STRICT_TASK_PRIORITIES_WITH_FOOT_ACCELERATION = true
-controllerType = 3;
+controllerType = 2;
 switch controllerType
     case 1
-        CONFIG.QP.USE_STRICT_TASK_PRIORITIES = false;
+        CONFIG.QP.USE_STRICT_TASK_PRIORITIES_NO_FOOT_ACCELERATION   = false;
         CONFIG.QP.USE_STRICT_TASK_PRIORITIES_WITH_FOOT_ACCELERATION = false;
     case 2
-        CONFIG.QP.USE_STRICT_TASK_PRIORITIES = true;
+        CONFIG.QP.USE_STRICT_TASK_PRIORITIES_NO_FOOT_ACCELERATION   = true;
         CONFIG.QP.USE_STRICT_TASK_PRIORITIES_WITH_FOOT_ACCELERATION = false;
     case 3
-        CONFIG.QP.USE_STRICT_TASK_PRIORITIES = false;
+        CONFIG.QP.USE_STRICT_TASK_PRIORITIES_NO_FOOT_ACCELERATION   = false;
         CONFIG.QP.USE_STRICT_TASK_PRIORITIES_WITH_FOOT_ACCELERATION = true;
 end
 
