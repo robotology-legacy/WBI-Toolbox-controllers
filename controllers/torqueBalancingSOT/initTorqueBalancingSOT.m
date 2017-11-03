@@ -50,6 +50,10 @@ WBT_modelName            = 'matlabTorqueBalancing';
 
 FRAMES.BASE              = 'root_link';
 
+%Define which frame is to be used for the orientation task of the
+%controller. Sensible choices include 'root_link', 'torso', 'head'
+FRAMES.ORIENTATION_TASK  = 'head';
+
 % CONFIG.USE_IMU4EST_BASE: if set to false, the base frame is estimated by 
 % assuming that either the left or the right foot stay stuck on the ground. 
 % Which foot the controller uses depends on the contact forces acting on it. 
@@ -86,7 +90,7 @@ CONFIG.CORRECT_NECK_IMU    = true;
 %       tasks defined as equality constraints on CoM position, root orientation 
 %       and feet pose (position and orientation)
 %       use it by setting CONFIG.QP.USE_STRICT_TASK_PRIORITIES_WITH_FOOT_ACCELERATION = true
-controllerType = 1;
+controllerType = 3;
 switch controllerType
     case 1
         CONFIG.QP.USE_STRICT_TASK_PRIORITIES = false;
@@ -110,7 +114,7 @@ CONFIG.USE_INVERSE_KINEMATICS = false;
 
 %Impedance/damping gains can be set manually, or they can be tuned automatically
 %using a perturbation-base extremum seeking (PES) algorithm.
-CONFIG.USE_PES_gain_tuning = true;
+CONFIG.USE_PES_gain_tuning = false;
 
 % CONFIG.SCOPES.ALL: when set to false, all visualizations are disabled
 CONFIG.SCOPES.ALL         = true;

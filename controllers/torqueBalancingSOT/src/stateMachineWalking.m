@@ -1,7 +1,7 @@
 function [w_H_b, CoMDes,qDes,constraints,impedances,dampings, PDgainsPos,PDgainsRot, currentState,jointsSmoothingTime,...
           desRootRotPosVelAcc,desLFootRotPosVelAcc,desLFootOrigin,desRFootRotPosVelAcc,desRFootOrigin] = ...
      stateMachineWalking(qj, q0, CoM_0, ...
-                         l_sole_CoM, r_sole_CoM, l_sole_H_b, r_sole_H_b, ...
+                         l_sole_CoM, r_sole_CoM, l_sole_H_b, r_sole_H_b, rotFrame_H_b0, ...
                          wrench_leftFoot, wrench_rightFoot, sm, gain, CONFIG)
     persistent state;
     persistent stateTime;
@@ -24,7 +24,8 @@ function [w_H_b, CoMDes,qDes,constraints,impedances,dampings, PDgainsPos,PDgains
     qDes                 = q0;
     w_H_b                = eye(4);
 
-    desRootRotPosVelAcc  = [l_sole_H_b0(1:3,1:3),zeros(3,2)];
+    l_sole_H_rotFrame0   = l_sole_H_b0 / rotFrame_H_b0;
+    desRootRotPosVelAcc  = [l_sole_H_rotFrame0(1:3,1:3),zeros(3,2)]; %[l_sole_H_b0(1:3,1:3),zeros(3,2)];
     desLFootRotPosVelAcc = [eye(3),zeros(3,2)];
     desLFootOrigin       = zeros(3,1);
     desRFootRotPosVelAcc = [eye(3),zeros(3,2)];
