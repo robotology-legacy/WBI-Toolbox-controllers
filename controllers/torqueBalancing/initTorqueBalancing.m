@@ -41,17 +41,22 @@ CONFIG.SIMULATION_TIME     = inf;
 % 'YOGA': the robot will perform the YOGA++ demo. The associated
 %         configuration parameters can be found under the folder
 %
-%         robots/YARP_ROBOT_NAME/initStateMachine.m
+%         robots/YARP_ROBOT_NAME/initStateMachineYoga.m
 %   
 % 'COORDINATOR': the robot can either stay still, or follow a
 %                center-of-mass trajectory, or follow references for the
 %                joints. The associated configuration parameters can be 
 %                found under the folder
 %
-%               robots/YARP_ROBOT_NAME/initRefGen.m
+%               robots/YARP_ROBOT_NAME/initCoordinator.m
 % 
-% 'WALKING': under development.
-SM.SM_TYPE                   = 'YOGA';
+% 'WALKING': a footstep planner + MPC controller will interface the
+%            balancing controller for walking. The associated configuration
+%            parameters can be found under the folder
+%
+%            robots/YARP_ROBOT_NAME/initStateMachineWalking.m
+%
+SM.SM_TYPE                   = 'COORDINATOR';
 
 % CONFIG.SCOPES: if set to true, all visualizers for debugging are active
 CONFIG.SCOPES.ALL            = true;
@@ -101,6 +106,10 @@ CONFIG.PITCH_IMU_FILTER    = true;
 % equal to false, recall that the neck is assumed to be in (0,0,0)
 CONFIG.CORRECT_NECK_IMU    = true;
 
+% CONFIG.DEMO_MOVEMENTS: used by COORDINATOR. When true, the robot will
+% move CoM left and right following a sine trajectory
+CONFIG.DEMO_MOVEMENTS      = false; 
+
 % CONFIG.ONSOFTCARPET: the third year CoDyCo review meeting consisted also
 % of a validation scenarion in which the robot had to balance on a soft
 % carpet. Hence, when CONFIG.ONSOFTCARPET = true, other sets of gains are
@@ -114,39 +123,38 @@ CONFIG.USE_QP_SOLVER       = true;
 PORTS.IMU              = '/icub/inertial';
 PORTS.COM_DES          = ['/' WBT_modelName '/comDes:i'];
 PORTS.Q_DES            = ['/' WBT_modelName '/qDes:i'];
-PORTS.WBD_LEFTLEG_EE  = '/wholeBodyDynamics/left_leg/cartesianEndEffectorWrench:o';
-PORTS.WBD_RIGHTLEG_EE = '/wholeBodyDynamics/right_leg/cartesianEndEffectorWrench:o';
+PORTS.WBD_LEFTLEG_EE   = '/wholeBodyDynamics/left_leg/cartesianEndEffectorWrench:o';
+PORTS.WBD_RIGHTLEG_EE  = '/wholeBodyDynamics/right_leg/cartesianEndEffectorWrench:o';
 
 CONFIG.Ts                = 0.01; % Controller period [s]
-
 CONFIG.ON_GAZEBO         = false;
 baseToWorldRotationPort  = ['/' WBT_modelName '/floatingBaseRotationMatrix:i'];
 
-run(strcat('app/robots/',getenv('YARP_ROBOT_NAME'),'/gains.m')); 
+% load all parameters that are robot-specific, but in common for all demos
+run(strcat('app/robots/',getenv('YARP_ROBOT_NAME'),'/robotConfiguration.m')); 
 addpath('./src/')
 addpath('../utilityMatlabFunctions/')
 
 robotSpecificReferences  = fullfile('app/robots',getenv('YARP_ROBOT_NAME'),'initRefGen.m');
-run(robotSpecificReferences);
 
 SM.SM.MASK.COORDINATOR   = bin2dec('001');
 SM.SM.MASK.YOGA          = bin2dec('010');
 SM.SM.MASK.WALKING       = bin2dec('100');
 
-
-SM.SM_TYPE_BIN = SM.SM.MASK.COORDINATOR;
-robotSpecificFSM = fullfile('app/robots',getenv('YARP_ROBOT_NAME'),'initStateMachine.m');
-run(robotSpecificFSM);
-
 if strcmpi(SM.SM_TYPE, 'COORDINATOR')
     SM.SM_TYPE_BIN = SM.SM.MASK.COORDINATOR;
+    robotSpecificFSM = fullfile('app/robots',getenv('YARP_ROBOT_NAME'),'initCoordinator.m');
 elseif strcmpi(SM.SM_TYPE, 'YOGA')
     SM.SM_TYPE_BIN = SM.SM.MASK.YOGA;
+    robotSpecificFSM = fullfile('app/robots',getenv('YARP_ROBOT_NAME'),'initStateMachineYoga.m');
 elseif strcmpi(SM.SM_TYPE, 'WALKING')
     SM.SM_TYPE_BIN = SM.SM.MASK.WALKING;
     robotSpecificFSM = fullfile('robots',getenv('YARP_ROBOT_NAME'),'initStateMachineWalking.m');
-    run(robotSpecificFSM);
 end
 
-[ConstraintsMatrix,bVectorConstraints]= constraints(forceFrictionCoefficient,numberOfPoints,torsionalFrictionCoefficient,gain.footSize,fZmin);
+% run parameters for the specified demo
+run(robotSpecificFSM);
+
+% contact constraints
+[ConstraintsMatrix,bVectorConstraints] = constraints(forceFrictionCoefficient,numberOfPoints,torsionalFrictionCoefficient,gain.footSize,fZmin);
 
