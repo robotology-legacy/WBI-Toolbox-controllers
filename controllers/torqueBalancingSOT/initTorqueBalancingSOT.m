@@ -110,7 +110,7 @@ CONFIG.QP.USE_CONTINUITY_CONSTRAINTS = false;
 %CONFIG.USE_INVERSE_KINEMATICS: when set to true, use reference joint
 %positions computed from integration-based inverse kinematics; when set to
 %false, use desired joint positions from state machine.
-CONFIG.USE_INVERSE_KINEMATICS = false;
+CONFIG.USE_INVERSE_KINEMATICS = true;
 
 %Impedance/damping gains can be set manually, or they can be tuned automatically
 %using a perturbation-base extremum seeking (PES) algorithm.
