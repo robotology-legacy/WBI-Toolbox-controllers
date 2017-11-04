@@ -120,13 +120,24 @@ function [w_H_b, CoMDes,qDes,constraints,impedances,dampings, PDgainsPos,PDgains
         % configurable delta
         CoMDes      = [w_H_fixedLink(1:2,4);CoM_0(3)] + sm.com.states(state,:)';         
         qDes        =  sm.joints.states(state,:)';
-  
-        qTildeRLeg  = qj(end-5:end) - qDes(end-5:end);        
-        qTildeLLeg  = qj(end-11:end-6) - qDes(end-11:end-6);        
+        desRFootOrigin = w_H_fixedLink(1:3,4) + sm.origin.rightFoot(state,:)';
 
-        if norm(qTildeRLeg)*180/pi < sm.joints.thresholdNotInContact && norm(qTildeLLeg)*180/pi < sm.joints.thresholdInContact
-            state   = 5;
-        end
+        
+        %if not using feet position as a constraint, but only relying on postural
+        %task, then the error on leg posture shall be used
+        if CONFIG.QP.USE_STRICT_TASK_PRIORITIES_NO_FOOT_ACCELERATION
+            qTildeRLeg  = qj(end-5:end) - qDes(end-5:end);  
+            qTildeLLeg  = qj(end-11:end-6) - qDes(end-11:end-6);        
+            if norm(qTildeRLeg)*180/pi < sm.joints.thresholdNotInContact && norm(qTildeLLeg)*180/pi < sm.joints.thresholdInContact
+                state   = 5;
+            end
+        else %otherwise, use the error on foot position
+            RFootOrigin  = w_H_b / r_sole_H_b;
+            r_foot_error = RFootOrigin(1:3, 4) - desRFootOrigin;
+            if norm(r_foot_error) < sm.foot.threshold
+                state    = 5;
+            end
+        end      
     end
     
     %% 5 - LOOKING FOR A CONTACT
@@ -217,12 +228,22 @@ function [w_H_b, CoMDes,qDes,constraints,impedances,dampings, PDgainsPos,PDgains
         % configurable delta
         CoMDes      = [w_H_fixedLink(1:2,4);CoM_0(3)] + sm.com.states(state,:)';         
         qDes        =  sm.joints.states(state,:)';
-  
-        qTildeRLeg  = qj(end-5:end) - qDes(end-5:end);        
-        qTildeLLeg  = qj(end-11:end-6) - qDes(end-11:end-6);        
+        desLFootOrigin = w_H_fixedLink(1:3,4) + sm.origin.leftFoot(state,:)';
 
-        if norm(qTildeLLeg)*180/pi < sm.joints.thresholdNotInContact && norm(qTildeRLeg)*180/pi < sm.joints.thresholdInContact
-            state   = 10;
+        %if not using feet position as a constraint, but only relying on postural
+        %task, then the error on leg posture shall be used
+        if CONFIG.QP.USE_STRICT_TASK_PRIORITIES_NO_FOOT_ACCELERATION
+            qTildeRLeg  = qj(end-5:end) - qDes(end-5:end);        
+            qTildeLLeg  = qj(end-11:end-6) - qDes(end-11:end-6); 
+            if norm(qTildeLLeg)*180/pi < sm.joints.thresholdNotInContact && norm(qTildeRLeg)*180/pi < sm.joints.thresholdInContact
+                state   = 10;
+            end
+        else %otherwise, use the error on foot position
+            l_footOrigin   = w_H_b / l_sole_H_b;
+            l_foot_error   = l_footOrigin(1:3, 4) - desLFootOrigin;
+            if norm(l_foot_error) < sm.foot.threshold
+                state    = 10;
+            end
         end
     end
     

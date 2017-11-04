@@ -90,7 +90,7 @@ CONFIG.CORRECT_NECK_IMU    = true;
 %       tasks defined as equality constraints on CoM position, root orientation 
 %       and feet pose (position and orientation)
 %       use it by setting CONFIG.QP.USE_STRICT_TASK_PRIORITIES_WITH_FOOT_ACCELERATION = true
-controllerType = 2;
+controllerType = 3;
 switch controllerType
     case 1
         CONFIG.QP.USE_STRICT_TASK_PRIORITIES_NO_FOOT_ACCELERATION   = false;
@@ -110,7 +110,7 @@ CONFIG.QP.USE_CONTINUITY_CONSTRAINTS = false;
 %CONFIG.USE_INVERSE_KINEMATICS: when set to true, use reference joint
 %positions computed from integration-based inverse kinematics; when set to
 %false, use desired joint positions from state machine.
-CONFIG.USE_INVERSE_KINEMATICS = true;
+CONFIG.USE_INVERSE_KINEMATICS = false;
 
 %Impedance/damping gains can be set manually, or they can be tuned automatically
 %using a perturbation-base extremum seeking (PES) algorithm.
