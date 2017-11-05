@@ -1,7 +1,7 @@
 function [w_H_b, CoMDes,qDes,constraints,impedances,kpCom,kdCom,currentState,jointsSmoothingTime] = ...
-    stateMachine(CoM_0, q0, l_sole_CoM,r_sole_CoM,qj, t, ...
-                  wrench_rightFoot,wrench_leftFoot,l_sole_H_b, r_sole_H_b, sm,gain)
-    %#codegen
+          stateMachineYoga(CoM_0, q0, l_sole_CoM,r_sole_CoM,qj, t, ...
+                           wrench_rightFoot,wrench_leftFoot,l_sole_H_b, r_sole_H_b, sm,gain)
+    % codegen
     persistent state;
     persistent tSwitch;
     persistent w_H_fixedLink;
@@ -29,8 +29,7 @@ function [w_H_b, CoMDes,qDes,constraints,impedances,kpCom,kdCom,currentState,joi
            if sm.demoOnlyRightFoot
                 w_H_fixedLink   = w_H_fixedLink*l_sole_H_b/r_sole_H_b;
                 state = 8;
-           end
-           
+           end      
         end
     end
 
@@ -54,7 +53,7 @@ function [w_H_b, CoMDes,qDes,constraints,impedances,kpCom,kdCom,currentState,joi
         qDes       = sm.joints.states(state,:)'; % new reference for q
         
         if norm(CoMError(2)) < sm.com.threshold && wrench_rightFoot(3) < sm.wrench.thresholdContactOff
-           state = 3; 
+           state   = 3; 
            tSwitch = t;
         end
     end
@@ -68,8 +67,7 @@ function [w_H_b, CoMDes,qDes,constraints,impedances,kpCom,kdCom,currentState,joi
         % configurable delta
         CoMDes     = [w_H_fixedLink(1:2,4);CoM_0(3)] + sm.com.states(state,:)';         
  
-        
-        constraints = [1; 0]; %right foot is no longer a constraints
+        constraints = [1; 0]; % right foot is no longer a constraints
 
         qDes        = sm.joints.states(state,:)';
         impedances  = gain.impedances(state,:);
@@ -87,15 +85,15 @@ function [w_H_b, CoMDes,qDes,constraints,impedances,kpCom,kdCom,currentState,joi
     
     %% YOGA LEFT FOOT
     if state == 4 
+        
         w_H_b       =  w_H_fixedLink * l_sole_H_b;
-
 
         % Set the center of mass projection onto the x-y plane to be
         % coincident to the origin of the left foot (l_sole) plus a
         % configurable delta
         CoMDes      = [w_H_fixedLink(1:2,4);CoM_0(3)] + sm.com.states(state,:)';         
         
-        constraints = [1; 0]; %right foot is no longer a constraints
+        constraints = [1; 0]; % right foot is no longer a constraints
 
         qDes        =  sm.joints.states(state,:)';
         impedances  = gain.impedances(state,:);
@@ -118,6 +116,7 @@ function [w_H_b, CoMDes,qDes,constraints,impedances,kpCom,kdCom,currentState,joi
     
     %% PREPARING FOR SWITCHING
     if state == 5 
+        
         w_H_b       =  w_H_fixedLink * l_sole_H_b;
 
         % Set the center of mass projection onto the x-y plane to be
@@ -125,9 +124,9 @@ function [w_H_b, CoMDes,qDes,constraints,impedances,kpCom,kdCom,currentState,joi
         % configurable delta
         CoMDes      = [w_H_fixedLink(1:2,4);CoM_0(3)] + sm.com.states(state,:)';         
         
-        constraints = [1; 0]; %right foot is no longer a constraints
+        constraints = [1; 0]; % right foot is no longer a constraints
 
-        qDes        =  sm.joints.states(state,:)';
+        qDes        = sm.joints.states(state,:)';
         impedances  = gain.impedances(state,:);
         kpCom       = gain.PCOM(state,:);   
         kdCom       = gain.DCOM(state,:);   
@@ -151,31 +150,31 @@ function [w_H_b, CoMDes,qDes,constraints,impedances,kpCom,kdCom,currentState,joi
         % configurable delta
         CoMDes      = [w_H_fixedLink(1:2,4);CoM_0(3)] + sm.com.states(state,:)';         
         
-        constraints = [1; 0]; %right foot is no longer a constraints
+        constraints = [1; 0]; % right foot is no longer a constraints
 
         qDes        = sm.joints.states(state,:)';
         impedances  = gain.impedances(state,:);
         kpCom       = gain.PCOM(state,:);   
         kdCom       = gain.DCOM(state,:);   
 
-        if wrench_rightFoot(3) > sm.wrench.thresholdContactOn
-            state = 7;
+        if wrench_rightFoot(3) > sm.wrench.thresholdContactOn      
+            state   = 7;
             tSwitch = t;
         end
     end
     
     %% TRANSITION TO INITIAL POSITION
     if state == 7 
-        w_H_b       =  w_H_fixedLink * l_sole_H_b;
         
+        w_H_b       =  w_H_fixedLink * l_sole_H_b;
         
         CoMDes      = CoM_0 + sm.com.states(state,:)';         
 
-        
-        constraints = [1; 1]; %right foot is no longer a constraints
+        constraints = [1; 1]; % right foot is no longer a constraints
         impedances  = gain.impedances(state,:);
         kpCom       = gain.PCOM(state,:);   
-        kdCom       = gain.DCOM(state,:);   
+        kdCom       = gain.DCOM(state,:); 
+        
         if ((norm(l_sole_CoM(1:2)-CoMDes(1:2)) < 10*sm.com.threshold) && sm.yogaAlsoOnRightFoot && (t > tSwitch + sm.tBalancing))
             w_H_fixedLink   = w_H_fixedLink*l_sole_H_b/r_sole_H_b;
             state           = 8;
@@ -190,9 +189,9 @@ function [w_H_b, CoMDes,qDes,constraints,impedances,kpCom,kdCom,currentState,joi
      
 %% TRANSITION TO THE RIGHT FOOT
     if state == 8 
-        constraints = [1; 1]; %right foot is no longer a constraints
+        
+        constraints = [1; 1];
         w_H_b       =  w_H_fixedLink*r_sole_H_b;
-
 
         % Set the center of mass projection onto the x-y plane to be
         % coincident to the origin of the left foot (l_sole) plus a
@@ -212,19 +211,20 @@ function [w_H_b, CoMDes,qDes,constraints,impedances,kpCom,kdCom,currentState,joi
            state = 9; 
            tSwitch = t;
         end
-
     end
     
-     %% RIGHT FOOT BALANCING 
+    %% RIGHT FOOT BALANCING 
     if state == 9
-        constraints = [0; 1]; %left foot is no longer a constraints
+        
+        constraints = [0; 1]; % left foot is no longer a constraints
         w_H_b       =  w_H_fixedLink*r_sole_H_b;
 
         CoMDes      = [w_H_fixedLink(1:2,4);CoM_0(3)] + sm.com.states(state,:)';         
         qDes        = sm.joints.states(state,:)';
         impedances  = gain.impedances(state,:);
         kpCom       = gain.PCOM(state,:);   
-        kdCom       = gain.DCOM(state,:);   
+        kdCom       = gain.DCOM(state,:); 
+        
         if t > tSwitch + sm.tBalancingOneFoot % yoga
             state   = 10;
             tSwitch = t;
@@ -236,8 +236,9 @@ function [w_H_b, CoMDes,qDes,constraints,impedances,kpCom,kdCom,currentState,joi
     
     %% YOGA RIGHT FOOT
     if state == 10 
-        constraints = [0; 1]; %left foot is no longer a constraints
-        w_H_b   =  w_H_fixedLink*r_sole_H_b;
+        
+        constraints = [0; 1]; % left foot is no longer a constraints
+        w_H_b       =  w_H_fixedLink*r_sole_H_b;
 
         CoMDes      = [w_H_fixedLink(1:2,4);CoM_0(3)] + sm.com.states(state,:)';         
         qDes        =  sm.joints.states(state,:)';
@@ -261,7 +262,8 @@ function [w_H_b, CoMDes,qDes,constraints,impedances,kpCom,kdCom,currentState,joi
     
     %% PREPARING FOR SWITCHING
     if state == 11 
-        constraints = [0; 1]; %left foot is no longer a constraints
+        
+        constraints = [0; 1]; % left foot is no longer a constraints
         w_H_b       =  w_H_fixedLink*r_sole_H_b;
 
         CoMDes      = [w_H_fixedLink(1:2,4);CoM_0(3)] + sm.com.states(state,:)';         
@@ -282,7 +284,7 @@ function [w_H_b, CoMDes,qDes,constraints,impedances,kpCom,kdCom,currentState,joi
     
     %% LOOKING FOR A CONTACT
     if state == 12
-        constraints = [0; 1]; %left foot is no longer a constraints
+        constraints = [0; 1]; % left foot is no longer a constraints
         w_H_b       =  w_H_fixedLink*r_sole_H_b;
 
         CoMDes      = [w_H_fixedLink(1:2,4);CoM_0(3)] + sm.com.states(state,:)';         
@@ -299,12 +301,14 @@ function [w_H_b, CoMDes,qDes,constraints,impedances,kpCom,kdCom,currentState,joi
     
     %% TRANSITION TO INITIAL POSITION
     if state == 13
+        
         w_H_b       =  w_H_fixedLink*r_sole_H_b;
-        constraints = [1; 1]; %right foot is no longer a constraints
+        constraints = [1; 1]; 
         impedances  = gain.impedances(state,:);
         kpCom       = gain.PCOM(state,:);   
-        kdCom       = gain.DCOM(state,:);   
-        if t - tSwitch> sm.tBalancing %after tBalancing time start moving weight to the left
+        kdCom       = gain.DCOM(state,:); 
+        
+        if t - tSwitch> sm.tBalancing % after tBalancing time start moving weight to the left
            if sm.yogaInLoop
               state = 2; 
               w_H_fixedLink   = w_H_fixedLink*r_sole_H_b/l_sole_H_b;
@@ -315,13 +319,9 @@ function [w_H_b, CoMDes,qDes,constraints,impedances,kpCom,kdCom,currentState,joi
            end
         end
     end 
-    
+ 
     %% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-    
     currentState        = state;
     jointsSmoothingTime = sm.jointsSmoothingTimes(state);
+end
     
-    
-    
-    
-   

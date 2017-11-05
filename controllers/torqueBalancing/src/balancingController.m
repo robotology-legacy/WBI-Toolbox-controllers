@@ -15,7 +15,6 @@
 %  * Public License for more details
 %  */
 %% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
 function [tauModel,Sigma,NA,f_HDot, ...
           HessianMatrixQP1Foot,gradientQP1Foot,ConstraintsMatrixQP1Foot,bVectorConstraintsQp1Foot,...
           HessianMatrixQP2Feet,gradientQP2Feet,ConstraintsMatrixQP2Feet,bVectorConstraintsQp2Feet,...
@@ -23,21 +22,16 @@ function [tauModel,Sigma,NA,f_HDot, ...
               balancingController(constraints,ROBOT_DOF_FOR_SIMULINK,ConstraintsMatrix,bVectorConstraints,...
               q,qDes,v, M, h , H,intHw,w_H_l_sole, w_H_r_sole, JL,JR, dJLv,dJRv, xcom,J_CoM, desired_x_dx_ddx_CoM,...
               gainsPCOM,gainsDCOM,impedances,intErrorCoM,ki_int_qtilde,reg,gain)
-    %BALANCING CONTROLLER
-
+          
     %% DEFINITION OF CONTROL AND DYNAMIC VARIABLES
-    pos_leftFoot   = w_H_l_sole(1:3,4);
-    w_R_l_sole     = w_H_l_sole(1:3,1:3);
-
+    pos_leftFoot    = w_H_l_sole(1:3,4);
+    w_R_l_sole      = w_H_l_sole(1:3,1:3);
     pos_rightFoot   = w_H_r_sole(1:3,4);
     w_R_r_sole      = w_H_r_sole(1:3,1:3);
 
-    
     gainsICOM       = zeros(3,1);
     dampings        = gain.dampings;
-
     ROBOT_DOF       = size(ROBOT_DOF_FOR_SIMULINK,1);
-
     gravAcc         = 9.81;
     
     % Mass of the robot.
@@ -46,7 +40,9 @@ function [tauModel,Sigma,NA,f_HDot, ...
     % The mass matrix is partitioned as:
     %
     %   M = [ Mb,  Mbj
-    %         Mbj',Mj  ];  Mb \in R^{6x6}, Mbj \in R^{6x6+nDof}, Mj \in R^{nDofxnDof}
+    %         Mbj',Mj  ];  
+    %   Mb \in R^{6x6}, Mbj \in R^{6x6+nDof}, Mj \in R^{nDofxnDof}
+    %
     Mb              = M(1:6,1:6);
     Mbj             = M(1:6,7:end);
     Mj              = M(7:end,7:end);
@@ -83,16 +79,16 @@ function [tauModel,Sigma,NA,f_HDot, ...
     %
     % where  f_L and f_R are the contact wrenches acting on the left and
     % right foot, respectively, and f = [f_L;f_R].
-    
+    %
     AL              = [ eye(3),zeros(3);
                         Sf(Pl),  eye(3)];
     AR              = [ eye(3), zeros(3);
                         Sf(Pr), eye(3) ];
 
-    A               = [ AL, AR];                  % dot(H) = mg + A*f
+    A               = [ AL, AR]; % dot(H) = mg + A*f
     pinvA           = pinv( A, reg.pinvTol)*constraints(1)*constraints(2)  ...
-                    + [inv(AL);zeros(6)]*constraints(1)*(1-constraints(2)) ... 
-                    + [zeros(6);inv(AR)]*constraints(2)*(1-constraints(1)); 
+                            + [inv(AL);zeros(6)]*constraints(1)*(1-constraints(2)) ... 
+                            + [zeros(6);inv(AR)]*constraints(2)*(1-constraints(1)); 
                 
     % Null space of the matrix A            
     NA              = (eye(12,12)-pinvA*A)*constraints(1)*constraints(2);
@@ -109,14 +105,13 @@ function [tauModel,Sigma,NA,f_HDot, ...
     JcMinvJct       = JcMinv*transpose(Jc);
     JBar            = transpose(Jc(:,7:end)) - Mbj'/Mb*transpose(Jc(:,1:6)); % multiplier of f in tau0
 
-    
     PInv_JcMinvSt   = pinvDamped(JcMinvSt,reg.pinvDamp); 
-    % nullJcMinvSt  = null space of PInv_JcMinvSt
+   
+    % null space of PInv_JcMinvSt
     nullJcMinvSt    = eye(ROBOT_DOF) - PInv_JcMinvSt*JcMinvSt;
 
     % Mbar is the mass matrix associated with the joint dynamics, i.e.
     Mbar            = Mj-Mbj'/Mb*Mbj;
-
     NLMbar          = nullJcMinvSt*Mbar;
     
     % Adaptation of control gains for back compatibility with older
@@ -178,7 +173,6 @@ function [tauModel,Sigma,NA,f_HDot, ...
     % stands on one foot, the f_HDot is evaluated directly from the
     % optimizer (see next section).
     f_HDot          = pinvA*(HDotDes - gravityWrench)*constraints(1)*constraints(2);
-   
     SigmaNA         = Sigma*NA;
    
     % The optimization problem 1) seeks for the redundancy of the external
@@ -214,7 +208,7 @@ function [tauModel,Sigma,NA,f_HDot, ...
     %
     % where f is the contact wrench either of the left or on the right
     % foot.
-    
+    %
     ConstraintsMatrixQP1Foot  = constraints(1) * (1 - constraints(2)) * constraintMatrixLeftFoot + ...
                                 constraints(2) * (1 - constraints(1)) * constraintMatrixRightFoot;
     bVectorConstraintsQp1Foot = bVectorConstraints;
@@ -225,7 +219,7 @@ function [tauModel,Sigma,NA,f_HDot, ...
 
     %% DEBUG DIAGNOSTICS
     % Unconstrained solution for the problem 1)
-    f0                        = -pinvDamped(SigmaNA,reg.pinvDamp*1e-5)*(tauModel + Sigma*f_HDot);
+    % f0                        = -pinvDamped(SigmaNA,reg.pinvDamp*1e-5)*(tauModel + Sigma*f_HDot);
     % Unconstrained contact wrenches
     f                         = zeros(12,1);%pinvA*(HDotDes - gravityWrench) + NA*f0*constraints(1)*constraints(2); 
     % Error on the center of mass
