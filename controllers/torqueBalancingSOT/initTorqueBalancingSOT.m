@@ -50,6 +50,10 @@ WBT_modelName            = 'matlabTorqueBalancing';
 
 FRAMES.BASE              = 'root_link';
 
+%Define which frame is to be used for the position task of the
+%controller. Sensible choices include 'com'
+FRAMES.POSITION_TASK  = 'com';
+
 %Define which frame is to be used for the orientation task of the
 %controller. Sensible choices include 'root_link', 'torso', 'head'
 FRAMES.ORIENTATION_TASK  = 'head';
