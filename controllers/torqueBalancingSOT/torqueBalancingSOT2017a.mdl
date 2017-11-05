@@ -6,7 +6,7 @@ Model {
     NumRootInports	    0
     NumRootOutports	    0
     ParameterArgumentNames  ""
-    ComputedModelVersion    "1.183"
+    ComputedModelVersion    "1.198"
     NumModelReferences	    0
     NumTestPointedSignals   0
     NumProvidedFunctions    0
@@ -66,21 +66,21 @@ Model {
 	Dimension		3
 	Object {
 	  $ObjectID		  5
-	  IsActive		  [0]
-	  ViewObjType		  "SimulinkSubsys"
-	  LoadSaveID		  "385"
-	  Extents		  [1277.0, 589.0]
-	  ZoomFactor		  [1.0]
-	  Offset		  [592.88680926916231, 448.05704099821753]
-	}
-	Object {
-	  $ObjectID		  6
 	  IsActive		  [1]
 	  ViewObjType		  "SimulinkTopLevel"
 	  LoadSaveID		  "0"
 	  Extents		  [1277.0, 589.0]
 	  ZoomFactor		  [0.46945606694560671]
 	  Offset		  [770.915329768271, -547.82174688057034]
+	}
+	Object {
+	  $ObjectID		  6
+	  IsActive		  [0]
+	  ViewObjType		  "SimulinkSubsys"
+	  LoadSaveID		  "162"
+	  Extents		  [1277.0, 589.0]
+	  ZoomFactor		  [1.0]
+	  Offset		  [340.94455856351749, 229.39999999999998]
 	}
 	Object {
 	  $ObjectID		  7
@@ -125,9 +125,9 @@ Model {
   ModifiedByFormat	  "%<Auto>"
   LastModifiedBy	  "mcharbonneau"
   ModifiedDateFormat	  "%<Auto>"
-  LastModifiedDate	  "Sun Nov 05 09:31:39 2017"
-  RTWModifiedTimeStamp	  431774807
-  ModelVersionFormat	  "1.%<AutoIncrement:183>"
+  LastModifiedDate	  "Sun Nov 05 10:44:27 2017"
+  RTWModifiedTimeStamp	  431779453
+  ModelVersionFormat	  "1.%<AutoIncrement:198>"
   ConfigurationManager	  "none"
   SampleTimeColors	  off
   SampleTimeAnnotations	  off
@@ -1283,7 +1283,7 @@ Model {
     ShowPageBoundaries	    off
     ZoomFactor		    "47"
     ReportName		    "simulink-default.rpt"
-    SIDHighWatermark	    "1848"
+    SIDHighWatermark	    "1850"
     Block {
       BlockType		      SubSystem
       Name		      "Controller and QP"
@@ -1297,7 +1297,7 @@ Model {
       Variant		      off
       System {
 	Name			"Controller and QP"
-	Location		[71, 27, 1366, 751]
+	Location		[51, -4, 1366, 768]
 	Open			off
 	PortBlocksUseCompactNotation off
 	ModelBrowserVisibility	off
@@ -1321,7 +1321,7 @@ Model {
 	}
 	Block {
 	  BlockType		  Inport
-	  Name			  "feetconstraints"
+	  Name			  "feetActivation"
 	  SID			  "336"
 	  Position		  [165, 13, 195, 27]
 	  ZOrder		  783
@@ -1925,7 +1925,7 @@ Model {
 	}
 	Line {
 	  ZOrder		  350
-	  SrcBlock		  "feetconstraints"
+	  SrcBlock		  "feetActivation"
 	  SrcPort		  1
 	  Points		  [155, 0]
 	  Branch {
@@ -2123,7 +2123,7 @@ Model {
       System {
 	Name			"Desired values"
 	Location		[51, -4, 1366, 768]
-	Open			off
+	Open			on
 	PortBlocksUseCompactNotation off
 	ModelBrowserVisibility	off
 	ModelBrowserWidth	200
@@ -2135,7 +2135,7 @@ Model {
 	TiledPaperMargins	[0.500000, 0.500000, 0.500000, 0.500000]
 	TiledPageScale		1
 	ShowPageBoundaries	off
-	ZoomFactor		"150"
+	ZoomFactor		"100"
 	Block {
 	  BlockType		  Inport
 	  Name			  "qj"
@@ -2448,7 +2448,7 @@ Model {
 	    TiledPageScale	    1
 	    ShowPageBoundaries	    off
 	    ZoomFactor		    "100"
-	    SIDHighWatermark	    "88"
+	    SIDHighWatermark	    "89"
 	    Block {
 	      BlockType		      Inport
 	      Name		      "qj"
@@ -2513,7 +2513,7 @@ Model {
 	    }
 	    Block {
 	      BlockType		      Inport
-	      Name		      "l_sole_orientationFrame"
+	      Name		      "rotFrame_H_b0"
 	      SID		      "78::88"
 	      Position		      [20, 351, 40, 369]
 	      ZOrder		      44
@@ -2615,7 +2615,7 @@ Model {
 	      }
 	      Port {
 		PortNumber		15
-		Name			"feetConstraints"
+		Name			"feetActivation"
 	      }
 	      Port {
 		PortNumber		16
@@ -2747,7 +2747,7 @@ Model {
 	    }
 	    Block {
 	      BlockType		      Outport
-	      Name		      "feetConstraints"
+	      Name		      "feetActivation"
 	      SID		      "78::41"
 	      Position		      [460, 566, 480, 584]
 	      ZOrder		      32
@@ -2764,70 +2764,70 @@ Model {
 	      IconDisplay	      "Port number"
 	    }
 	    Line {
-	      ZOrder		      160
+	      ZOrder		      270
 	      SrcBlock		      "qj"
 	      SrcPort		      1
 	      DstBlock		      " SFunction "
 	      DstPort		      1
 	    }
 	    Line {
-	      ZOrder		      161
+	      ZOrder		      271
 	      SrcBlock		      "qj0"
 	      SrcPort		      1
 	      DstBlock		      " SFunction "
 	      DstPort		      2
 	    }
 	    Line {
-	      ZOrder		      162
+	      ZOrder		      272
 	      SrcBlock		      "CoM_0"
 	      SrcPort		      1
 	      DstBlock		      " SFunction "
 	      DstPort		      3
 	    }
 	    Line {
-	      ZOrder		      163
+	      ZOrder		      273
 	      SrcBlock		      "l_sole_CoM"
 	      SrcPort		      1
 	      DstBlock		      " SFunction "
 	      DstPort		      4
 	    }
 	    Line {
-	      ZOrder		      164
+	      ZOrder		      274
 	      SrcBlock		      "r_sole_CoM"
 	      SrcPort		      1
 	      DstBlock		      " SFunction "
 	      DstPort		      5
 	    }
 	    Line {
-	      ZOrder		      165
+	      ZOrder		      275
 	      SrcBlock		      "l_sole_H_b"
 	      SrcPort		      1
 	      DstBlock		      " SFunction "
 	      DstPort		      6
 	    }
 	    Line {
-	      ZOrder		      166
+	      ZOrder		      276
 	      SrcBlock		      "r_sole_H_b"
 	      SrcPort		      1
 	      DstBlock		      " SFunction "
 	      DstPort		      7
 	    }
 	    Line {
-	      ZOrder		      167
-	      SrcBlock		      "l_sole_orientationFrame"
+	      ZOrder		      277
+	      SrcBlock		      "rotFrame_H_b0"
 	      SrcPort		      1
 	      DstBlock		      " SFunction "
 	      DstPort		      8
 	    }
 	    Line {
-	      ZOrder		      168
+	      ZOrder		      278
 	      SrcBlock		      "wrench_leftFoot"
 	      SrcPort		      1
 	      DstBlock		      " SFunction "
 	      DstPort		      9
 	    }
 	    Line {
-	      ZOrder		      169
+	      ZOrder		      279
 	      SrcBlock		      "wrench_rightFoot"
 	      SrcPort		      1
 	      DstBlock		      " SFunction "
@@ -2835,7 +2835,7 @@ Model {
 	    }
 	    Line {
 	      Name		      "qDes"
-	      ZOrder		      170
+	      ZOrder		      280
 	      Labels		      [0, 0]
 	      SrcBlock		      " SFunction "
 	      SrcPort		      2
@@ -2844,7 +2844,7 @@ Model {
 	    }
 	    Line {
 	      Name		      "CoMDes"
-	      ZOrder		      171
+	      ZOrder		      281
 	      Labels		      [0, 0]
 	      SrcBlock		      " SFunction "
 	      SrcPort		      3
@@ -2853,7 +2853,7 @@ Model {
 	    }
 	    Line {
 	      Name		      "desRootRotPosVelAcc"
-	      ZOrder		      172
+	      ZOrder		      282
 	      Labels		      [0, 0]
 	      SrcBlock		      " SFunction "
 	      SrcPort		      4
@@ -2862,7 +2862,7 @@ Model {
 	    }
 	    Line {
 	      Name		      "desLeftFootOriginPos"
-	      ZOrder		      173
+	      ZOrder		      283
 	      Labels		      [0, 0]
 	      SrcBlock		      " SFunction "
 	      SrcPort		      5
@@ -2871,7 +2871,7 @@ Model {
 	    }
 	    Line {
 	      Name		      "desLeftFootRotPosVelAcc"
-	      ZOrder		      174
+	      ZOrder		      284
 	      Labels		      [0, 0]
 	      SrcBlock		      " SFunction "
 	      SrcPort		      6
@@ -2880,7 +2880,7 @@ Model {
 	    }
 	    Line {
 	      Name		      "desRightFootOriginPos"
-	      ZOrder		      175
+	      ZOrder		      285
 	      Labels		      [0, 0]
 	      SrcBlock		      " SFunction "
 	      SrcPort		      7
@@ -2889,7 +2889,7 @@ Model {
 	    }
 	    Line {
 	      Name		      "desRightFootRotPosVelAcc"
-	      ZOrder		      176
+	      ZOrder		      286
 	      Labels		      [0, 0]
 	      SrcBlock		      " SFunction "
 	      SrcPort		      8
@@ -2898,7 +2898,7 @@ Model {
 	    }
 	    Line {
 	      Name		      "impedances"
-	      ZOrder		      177
+	      ZOrder		      287
 	      Labels		      [0, 0]
 	      SrcBlock		      " SFunction "
 	      SrcPort		      9
@@ -2907,7 +2907,7 @@ Model {
 	    }
 	    Line {
 	      Name		      "dampings"
-	      ZOrder		      178
+	      ZOrder		      288
 	      Labels		      [0, 0]
 	      SrcBlock		      " SFunction "
 	      SrcPort		      10
@@ -2916,7 +2916,7 @@ Model {
 	    }
 	    Line {
 	      Name		      "PDgainsPos"
-	      ZOrder		      179
+	      ZOrder		      289
 	      Labels		      [0, 0]
 	      SrcBlock		      " SFunction "
 	      SrcPort		      11
@@ -2925,7 +2925,7 @@ Model {
 	    }
 	    Line {
 	      Name		      "PDgainsRot"
-	      ZOrder		      180
+	      ZOrder		      290
 	      Labels		      [0, 0]
 	      SrcBlock		      " SFunction "
 	      SrcPort		      12
@@ -2934,7 +2934,7 @@ Model {
 	    }
 	    Line {
 	      Name		      "jointsSmoothingTime"
-	      ZOrder		      181
+	      ZOrder		      291
 	      Labels		      [0, 0]
 	      SrcBlock		      " SFunction "
 	      SrcPort		      13
@@ -2943,7 +2943,7 @@ Model {
 	    }
 	    Line {
 	      Name		      "w_H_b"
-	      ZOrder		      182
+	      ZOrder		      292
 	      Labels		      [0, 0]
 	      SrcBlock		      " SFunction "
 	      SrcPort		      14
@@ -2951,17 +2951,17 @@ Model {
 	      DstPort		      1
 	    }
 	    Line {
-	      Name		      "feetConstraints"
-	      ZOrder		      183
+	      Name		      "feetActivation"
+	      ZOrder		      293
 	      Labels		      [0, 0]
 	      SrcBlock		      " SFunction "
 	      SrcPort		      15
-	      DstBlock		      "feetConstraints"
+	      DstBlock		      "feetActivation"
 	      DstPort		      1
 	    }
 	    Line {
 	      Name		      "currentState"
-	      ZOrder		      184
+	      ZOrder		      294
 	      Labels		      [0, 0]
 	      SrcBlock		      " SFunction "
 	      SrcPort		      16
@@ -2969,14 +2969,14 @@ Model {
 	      DstPort		      1
 	    }
 	    Line {
-	      ZOrder		      185
+	      ZOrder		      295
 	      SrcBlock		      " Demux "
 	      SrcPort		      1
 	      DstBlock		      " Terminator "
 	      DstPort		      1
 	    }
 	    Line {
-	      ZOrder		      186
+	      ZOrder		      296
 	      SrcBlock		      " SFunction "
 	      SrcPort		      1
 	      DstBlock		      " Demux "
@@ -5661,7 +5661,7 @@ Model {
 	    TiledPaperMargins	    [0.500000, 0.500000, 0.500000, 0.500000]
 	    TiledPageScale	    1
 	    ShowPageBoundaries	    off
-	    ZoomFactor		    "175"
+	    ZoomFactor		    "125"
 	    Block {
 	      BlockType		      Inport
 	      Name		      "qj"
@@ -5874,7 +5874,7 @@ Model {
 	}
 	Block {
 	  BlockType		  Outport
-	  Name			  "feetConstraints"
+	  Name			  "feetActivation"
 	  SID			  "131"
 	  Position		  [1305, 653, 1335, 667]
 	  ZOrder		  841
@@ -6211,10 +6211,10 @@ Model {
 	  Points		  [45, 0]
 	  Branch {
 	    ZOrder		    733
-	    Points		    [0, 185]
+	    Points		    [0, 211]
 	    Branch {
 	      ZOrder		      546
-	      Points		      [0, 65]
+	      Points		      [0, 39]
 	      Branch {
 		ZOrder			545
 		Points			[0, 130]
@@ -6240,20 +6240,24 @@ Model {
 	      ZOrder		      543
 	      Points		      [203, 0]
 	      Branch {
-		ZOrder			542
-		Points			[0, -120]
-		DstBlock		"holder\n1"
-		DstPort			1
+		ZOrder			804
+		Points			[0, -26]
+		Branch {
+		  ZOrder		  542
+		  Points		  [0, -120]
+		  DstBlock		  "holder\n1"
+		  DstPort		  1
+		}
+		Branch {
+		  ZOrder		  540
+		  DstBlock		  "xCom"
+		  DstPort		  1
+		}
 	      }
 	      Branch {
 		ZOrder			725
-		Points			[0, 65]
+		Points			[0, 39]
 		DstBlock		"xCom1"
-		DstPort			1
-	      }
-	      Branch {
-		ZOrder			540
-		DstBlock		"xCom"
 		DstPort			1
 	      }
 	    }
@@ -6375,7 +6379,7 @@ Model {
 	  ZOrder		  564
 	  SrcBlock		  "stateMachineWalkingFCN"
 	  SrcPort		  14
-	  DstBlock		  "feetConstraints"
+	  DstBlock		  "feetActivation"
 	  DstPort		  1
 	}
 	Line {
@@ -6430,7 +6434,7 @@ Model {
       Variant		      off
       System {
 	Name			"Dynamics, Kinematics, Jacobians"
-	Location		[71, 27, 1366, 751]
+	Location		[51, -4, 1366, 768]
 	Open			off
 	PortBlocksUseCompactNotation off
 	ModelBrowserVisibility	off
@@ -6463,7 +6467,7 @@ Model {
 	}
 	Block {
 	  BlockType		  Inport
-	  Name			  "feetConstraints"
+	  Name			  "feetActivation"
 	  SID			  "871"
 	  Position		  [335, -42, 365, -28]
 	  ZOrder		  802
@@ -6813,7 +6817,7 @@ Model {
 	  Variant		  off
 	  System {
 	    Name		    "Jacobians"
-	    Location		    [71, 27, 1366, 751]
+	    Location		    [51, -4, 1366, 768]
 	    Open		    off
 	    PortBlocksUseCompactNotation off
 	    ModelBrowserVisibility  off
@@ -6826,10 +6830,10 @@ Model {
 	    TiledPaperMargins	    [0.500000, 0.500000, 0.500000, 0.500000]
 	    TiledPageScale	    1
 	    ShowPageBoundaries	    off
-	    ZoomFactor		    "125"
+	    ZoomFactor		    "80"
 	    Block {
 	      BlockType		      Inport
-	      Name		      "feetConstraints"
+	      Name		      "feetActivation"
 	      SID		      "889"
 	      Position		      [-60, 528, -30, 542]
 	      ZOrder		      791
@@ -7683,7 +7687,7 @@ Model {
 	    }
 	    Line {
 	      ZOrder		      230
-	      SrcBlock		      "feetConstraints"
+	      SrcBlock		      "feetActivation"
 	      SrcPort		      1
 	      DstBlock		      "baseVelocityFCN"
 	      DstPort		      3
@@ -8061,7 +8065,7 @@ Model {
 	}
 	Line {
 	  ZOrder		  567
-	  SrcBlock		  "feetConstraints"
+	  SrcBlock		  "feetActivation"
 	  SrcPort		  1
 	  DstBlock		  "Jacobians"
 	  DstPort		  1
@@ -8270,7 +8274,7 @@ Model {
 	}
 	Block {
 	  BlockType		  Inport
-	  Name			  "feetConstraints"
+	  Name			  "feetActivation"
 	  SID			  "1848"
 	  Position		  [300, -287, 330, -273]
 	  ZOrder		  899
@@ -13591,7 +13595,7 @@ Model {
 	}
 	Line {
 	  ZOrder		  795
-	  SrcBlock		  "feetConstraints"
+	  SrcBlock		  "feetActivation"
 	  SrcPort		  1
 	  DstBlock		  "Integration Based Inverse Kinematics"
 	  DstPort		  1
@@ -13610,8 +13614,8 @@ Model {
       Variant		      off
       System {
 	Name			"Visualize and log"
-	Location		[51, 24, 1366, 768]
-	Open			on
+	Location		[51, -4, 1366, 768]
+	Open			off
 	PortBlocksUseCompactNotation off
 	ModelBrowserVisibility	off
 	ModelBrowserWidth	200
@@ -13643,7 +13647,7 @@ Model {
 	}
 	Block {
 	  BlockType		  Inport
-	  Name			  "feetConstraints"
+	  Name			  "feetActivation"
 	  SID			  "480"
 	  Position		  [1350, 528, 1380, 542]
 	  ZOrder		  839
@@ -14437,7 +14441,7 @@ Model {
 	  Variant		  off
 	  System {
 	    Name		    "Visualize feet constraints"
-	    Location		    [51, 24, 1366, 768]
+	    Location		    [51, -4, 1366, 768]
 	    Open		    off
 	    PortBlocksUseCompactNotation off
 	    ModelBrowserVisibility  off
@@ -14450,7 +14454,7 @@ Model {
 	    TiledPaperMargins	    [0.500000, 0.500000, 0.500000, 0.500000]
 	    TiledPageScale	    1
 	    ShowPageBoundaries	    off
-	    ZoomFactor		    "309"
+	    ZoomFactor		    "300"
 	    Block {
 	      BlockType		      Inport
 	      Name		      "wrench_leftFoot"
@@ -14478,7 +14482,7 @@ Model {
 	    }
 	    Block {
 	      BlockType		      Inport
-	      Name		      "feetConstraints"
+	      Name		      "feetActivation"
 	      SID		      "482"
 	      Position		      [20, 28, 50, 42]
 	      ZOrder		      839
@@ -14486,7 +14490,7 @@ Model {
 	      IconDisplay	      "Port number"
 	      Port {
 		PortNumber		1
-		Name			"feetConstraints"
+		Name			"feetActivation"
 		PropagatedSignals	"feetConstraints"
 	      }
 	    }
@@ -14514,7 +14518,7 @@ Model {
 	    }
 	    Block {
 	      BlockType		      Scope
-	      Name		      "Feet Constraints"
+	      Name		      "Feet Activation Constraints"
 	      SID		      "479"
 	      Ports		      [4]
 	      Position		      [155, -42, 225, 82]
@@ -14581,16 +14585,16 @@ Model {
 	      Labels		      [1, 1]
 	      SrcBlock		      "state"
 	      SrcPort		      1
-	      DstBlock		      "Feet Constraints"
+	      DstBlock		      "Feet Activation Constraints"
 	      DstPort		      4
 	    }
 	    Line {
-	      Name		      "feetConstraints"
+	      Name		      "feetActivation"
 	      ZOrder		      741
 	      Labels		      [1, 1]
-	      SrcBlock		      "feetConstraints"
+	      SrcBlock		      "feetActivation"
 	      SrcPort		      1
-	      DstBlock		      "Feet Constraints"
+	      DstBlock		      "Feet Activation Constraints"
 	      DstPort		      3
 	    }
 	    Line {
@@ -14599,7 +14603,7 @@ Model {
 	      Labels		      [1, 1]
 	      SrcBlock		      "wrench_rightFoot"
 	      SrcPort		      1
-	      DstBlock		      "Feet Constraints"
+	      DstBlock		      "Feet Activation Constraints"
 	      DstPort		      2
 	    }
 	    Line {
@@ -14608,7 +14612,7 @@ Model {
 	      Labels		      [1, 1]
 	      SrcBlock		      "wrench_leftFoot"
 	      SrcPort		      1
-	      DstBlock		      "Feet Constraints"
+	      DstBlock		      "Feet Activation Constraints"
 	      DstPort		      1
 	    }
 	  }
@@ -17032,7 +17036,7 @@ Model {
 	}
 	Line {
 	  ZOrder		  736
-	  SrcBlock		  "feetConstraints"
+	  SrcBlock		  "feetActivation"
 	  SrcPort		  1
 	  DstBlock		  "Visualize feet constraints"
 	  DstPort		  3
@@ -17946,7 +17950,10 @@ Stateflow {
     screen		    [1 1 3600 1200 1.180555555555556]
     treeNode		    [0 14 0 0]
     viewObj		    13
-    ssIdHighWaterMark	    38
+    visible		    1
+    subviewS {
+    }
+    ssIdHighWaterMark	    39
     decomposition	    CLUSTER_CHART
     type		    EML_CHART
     chartFileNumber	    2
@@ -17974,14 +17981,13 @@ Stateflow {
       isEML		      1
       script		      "function [qDes, CoMDes, desRootRotPosVelAcc, ...\n          desLeftFootOriginPos, desLeftFootRotP"
       "osVelAcc, desRightFootOriginPos, desRightFootRotPosVelAcc,  ...\n          impedances, dampings, PDgainsPos, PDg"
-      "ainsRot, jointsSmoothingTime, w_H_b, feetConstraints, currentState] ...\n          = stateMachineWalkingFCN(qj, "
-      "qj0, CoM_0, ...\n                                   l_sole_CoM, r_sole_CoM, l_sole_H_b, r_sole_H_b, l_sole_orien"
-      "tationFrame, ...\n                                   wrench_leftFoot, wrench_rightFoot, sm, gain, CONFIG)\n\n[w_"
-      "H_b, CoMDes, qDes,feetConstraints, impedances, dampings, PDgainsPos, PDgainsRot, currentState, jointsSmoothingTi"
-      "me,...\n desRootRotPosVelAcc, desLeftFootRotPosVelAcc, desLeftFootOriginPos, desRightFootRotPosVelAcc, desRightF"
-      "ootOriginPos] ...\n= stateMachineWalking(qj, qj0, CoM_0, ...\n                      l_sole_CoM, r_sole_CoM, l_so"
-      "le_H_b, r_sole_H_b, l_sole_orientationFrame, ...\n                      wrench_leftFoot, wrench_rightFoot, sm, g"
-      "ain, CONFIG); \n \n"
+      "ainsRot, jointsSmoothingTime, w_H_b, feetActivation, currentState] ...\n          = stateMachineWalkingFCN(qj, q"
+      "j0, CoM_0, ...\n                                   l_sole_CoM, r_sole_CoM, l_sole_H_b, r_sole_H_b, rotFrame_H_b0"
+      ", ...\n                                   wrench_leftFoot, wrench_rightFoot, sm, gain, CONFIG)\n\n[w_H_b, CoMDes"
+      ", qDes, feetActivation, impedances, dampings, PDgainsPos, PDgainsRot, currentState, jointsSmoothingTime,...\n de"
+      "sRootRotPosVelAcc, desLeftFootRotPosVelAcc, desLeftFootOriginPos, desRightFootRotPosVelAcc, desRightFootOriginPo"
+      "s] ...\n= stateMachineWalking(qj, qj0, CoM_0, ...\n                      l_sole_CoM, r_sole_CoM, l_sole_H_b, r_s"
+      "ole_H_b, rotFrame_H_b0, ...\n                      wrench_leftFoot, wrench_rightFoot, sm, gain, CONFIG); \n \n"
       editorLayout	      "100 M4x1[10 5 700 500]"
     }
   }
@@ -18186,7 +18192,7 @@ Stateflow {
   data {
     id			    23
     ssIdNumber		    38
-    name		    "l_sole_orientationFrame"
+    name		    "rotFrame_H_b0"
     scope		    INPUT_DATA
     machine		    1
     props {
@@ -18561,7 +18567,7 @@ Stateflow {
   data {
     id			    38
     ssIdNumber		    25
-    name		    "feetConstraints"
+    name		    "feetActivation"
     scope		    OUTPUT_DATA
     machine		    1
     props {
