@@ -116,6 +116,12 @@ CONFIG.QP.USE_CONTINUITY_CONSTRAINTS = false;
 %false, use desired joint positions from state machine.
 CONFIG.USE_INVERSE_KINEMATICS = false;
 
+% CONFIG.QP.USE_CENTROIDAL_TRANSFORMATION: when set to true, centroidal
+% transformation is performed, in order to use the center of mass of the
+% robot as base. This affects the computations performed, but shoud have 
+% no incidence on the behavior of the robot.
+CONFIG.QP.USE_CENTROIDAL_TRANSFORMATION = true;
+
 %Impedance/damping gains can be set manually, or they can be tuned automatically
 %using a perturbation-base extremum seeking (PES) algorithm.
 CONFIG.USE_PES_gain_tuning = false;
