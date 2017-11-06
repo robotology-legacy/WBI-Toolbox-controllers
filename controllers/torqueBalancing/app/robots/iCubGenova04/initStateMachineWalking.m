@@ -2,9 +2,9 @@
 %% AND YOGA DEMO
 if strcmpi(SM.SM_TYPE, 'WALKING')
     
-    CONFIG.SMOOTH_DES_COM      = 1;    % If equal to one, the desired streamed values 
+    CONFIG.SMOOTH_DES_COM      = 0;    % If equal to one, the desired streamed values 
                                        % of the center of mass are smoothed internally 
-    CONFIG.SMOOTH_DES_Q        = 1;    % If equal to one, the desired streamed values 
+    CONFIG.SMOOTH_DES_Q        = 0;    % If equal to one, the desired streamed values 
                                        % of the postural tasks are smoothed internally 
 
     reg.pinvDamp               = 1;
@@ -47,7 +47,6 @@ if strcmpi(SM.SM_TYPE, 'WALKING')
     sm.com.threshold                 = 0.01;
     sm.wrench.thresholdContactOn     = 50;     % Force threshold above which contact is considered stable
     sm.wrench.thresholdContactOff    = 100;    % Force threshold under which contact is considered off
-    sm.joints                        = struct;
     sm.joints.thresholdNotInContact  = 5;      % Degrees
     sm.joints.thresholdInContact     = 30;     % Degrees
     sm.tBalancing                    = 1; 

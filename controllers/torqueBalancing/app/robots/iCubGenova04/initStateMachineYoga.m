@@ -83,12 +83,10 @@ sm.skipYoga                      = false;
 sm.demoOnlyRightFoot             = false;
 sm.yogaAlsoOnRightFoot           = false;
 sm.yogaInLoop                    = false;
-
 sm.stateAt0                      = 1;
 sm.com.threshold                 = 0.01;
 sm.wrench.thresholdContactOn     = 50;     % Force threshold above which contact is considered stable
 sm.wrench.thresholdContactOff    = 100;    % Force threshold under which contact is considered off
-sm.joints                        = struct;
 sm.joints.thresholdNotInContact  = 5;      % Degrees
 sm.joints.thresholdInContact     = 30;     % Degrees
 sm.joints.pauseTimeLastPostureL  = 5;
