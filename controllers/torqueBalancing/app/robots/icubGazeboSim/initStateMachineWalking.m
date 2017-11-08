@@ -26,8 +26,8 @@ if strcmpi(SM.SM_TYPE, 'WALKING')
     CONFIG.smoothingTimeTranDynamics  = 0.02;
 
     gain.PCOM     =    [10    50  10  % state ==  1  TWO FEET BALANCING 
-                        10    50  10  % state ==  2  LEFT FOOT BALANCING
-                        10    50  10];% state ==  3  RIGHT FOOT BALANCING 
+                        40    40  40  % state ==  2  LEFT FOOT BALANCING
+                        40    40  40];% state ==  3  RIGHT FOOT BALANCING 
 
     gain.ICOM  = gain.PCOM*0;
     gain.DCOM  = 2*sqrt(gain.PCOM);
@@ -46,12 +46,12 @@ if strcmpi(SM.SM_TYPE, 'WALKING')
          
     sm.demoOnlyBalancing             = false;
     sm.com.threshold                 = 0.01;
-    sm.wrench.thresholdContactOn     = 25;     % Force threshold above which contact is considered stable
-    sm.wrench.thresholdContactOff    = 85;     % Force threshold under which contact is considered off
+    sm.wrench.thresholdContactOn     = 35;     % Force threshold above which contact is considered stable
+    sm.wrench.thresholdContactOff    = 75;     % Force threshold under which contact is considered off
     sm.joints.thresholdNotInContact  = 5;      % Degrees
     sm.joints.thresholdInContact     = 50;     % Degrees
     sm.stateAt0                      = 1;
-    sm.tBalancing                    = 0;
+    sm.tBalancing                    = 0.5;
 
     sm.jointsSmoothingTimes          = [5;   %% state ==  1  TWO FEET BALANCING
                                         3;   %% state ==  2  LEFT FOOT BALANCING 

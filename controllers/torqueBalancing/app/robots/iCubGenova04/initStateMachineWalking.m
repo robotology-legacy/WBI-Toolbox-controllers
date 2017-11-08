@@ -62,4 +62,6 @@ if strcmpi(SM.SM_TYPE, 'WALKING')
                           0.0,  0.00, 0.0];  %% state ==  4  RIGHT FOOT BALANCING 
 end
 
-% walking specific parameters (to be filled ...)
+%% Walking specific parameters
+
+% to be filled ...
