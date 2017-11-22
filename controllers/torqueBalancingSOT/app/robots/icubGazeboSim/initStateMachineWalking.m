@@ -84,9 +84,9 @@ gain.joints.impedances      = [20   50   50, 10   10    10   10, 10   10    10  
                                30   30   30, 10   10    10   10, 10   10    10   10, 15   25   15    30     25  25, 15   25   15    30     25  25;  % state ==  6  TRANSITION TO INITIAL POSITION 
                                20   30   20, 10   10    10   10, 10   10    10   10, 15   25   15    30     25  25, 15   25   15    30     25  25;  % state ==  7  COM TRANSITION TO RIGHT FOOT
                                20   30   20, 10   10    10   10, 10   10    10   10, 15   25   15    30     25  25, 15   25   15    30     25  25;  % state ==  8  RIGHT FOOT BALANCING
-                               20   20   20, 10   10    10   10, 10   10    10   10, 15   25   15    30     25  25, 15   15   15    15     15  15;  % state ==  9  PREPARING FOR SWITCHING 
-                               20   20   20, 10   10    10   10, 10   10    10   10, 15   25   15    30     25  25, 15   15   15    15     15  15;  % state == 10  LOOKING FOR CONTACT
-                               20   20   20, 10   10    10   10, 10   10    10   10, 15   25   15    30     25  25, 15   15   15    15     15  15]; % state == 11  TRANSITION TO INITIAL POSITION
+                               20   20   20, 10   10    10   10, 10   10    10   10, 15   25   15    30     25  25, 15   25   15    30     25  25;  % state ==  9  PREPARING FOR SWITCHING 
+                               20   20   20, 10   10    10   10, 10   10    10   10, 15   25   15    30     25  25, 15   25   15    30     25  25;  % state == 10  LOOKING FOR CONTACT
+                               20   20   20, 10   10    10   10, 10   10    10   10, 15   25   15    30     25  25, 15   25   15    30     25  25]; % state == 11  TRANSITION TO INITIAL POSITION
    
 gain.joints.dampings        = 2 * sqrt(gain.joints.impedances);
 
@@ -110,8 +110,8 @@ sm.com.threshold                 = 0.01;  % Distance threshold under which the p
 sm.foot.threshold                = 0.01;  % Distance threshold under which the position of the foot is considered correct
 sm.wrench.thresholdContactOn     = 4;     % Force threshold above which contact is considered stable
 sm.wrench.thresholdContactOff    = 60;    % Force threshold under which contact is considered off
-sm.joints.thresholdNotInContact  = 10;    % Degrees
-sm.joints.thresholdInContact     = 10;    % Degrees
+sm.joints.thresholdNotInContact  = 5;    % Degrees
+sm.joints.thresholdInContact     = 5;    % Degrees
     
 sm.jointsSmoothingTimes          = [2;   %% state ==  1  TWO FEET BALANCING
                                     2;   %% state ==  2  COM TRANSITION TO LEFT FOOT
