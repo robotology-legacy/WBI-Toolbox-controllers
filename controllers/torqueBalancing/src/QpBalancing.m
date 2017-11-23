@@ -56,8 +56,8 @@ setup(block);
         block.OutputPort(3).Dimensions       = 12;        % f0 One foot     
 
         for i=1:block.NumInputPorts
-            block.InputPort(i).DatatypeID  = -1;          % 'inherited', see http://www.mathworks.com/help/simulink/slref/simulink.blockdata.html#f29-108672
-            block.InputPort(i).Complexity  = 'Real';
+            block.InputPort(i).DatatypeID   = -1;         % 'inherited', see http://www.mathworks.com/help/simulink/slref/simulink.blockdata.html#f29-108672
+            block.InputPort(i).Complexity   = 'Real';
             block.InputPort(i).DirectFeedthrough = true;
         end
 

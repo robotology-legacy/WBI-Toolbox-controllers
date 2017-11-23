@@ -163,9 +163,9 @@ run(robotConfigWalking);
 %% Generate contact constraint model
 [ConstraintsMatrix,bVectorConstraints] = constraints(forceFrictionCoefficient,numberOfPoints,torsionalFrictionCoefficient,gain.footSize,fZmin);
 
-%% TEST PLANNER CONFIGURATION
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% [TO BE REMOVED WHEN FULLY OPERATIVE] TEST PLANNER CONFIGURATION
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 PORTS.LEFT_FOOT_IN_CONTACT = ['/' WBT_modelName '/leftInContact:i'];
-planner                    = fullfile('tests/getDataFromTxt.m');
-run(planner);
+run(fullfile('tests/getJointPosFromTxt.m'));
 

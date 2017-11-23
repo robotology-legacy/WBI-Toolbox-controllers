@@ -37,8 +37,8 @@ if strcmpi(SM.SM_TYPE, 'YOGA')
                         10    50  10  % state == 12  LOOKING FOR CONTACT
                         10    50  10];% state == 13  TRANSITION TO INITIAL POSITION
 
-    gain.ICOM  = gain.PCOM*0;
-    gain.DCOM  = 2*sqrt(gain.PCOM);
+    gain.ICOM = gain.PCOM*0;
+    gain.DCOM = 2*sqrt(gain.PCOM);
 
     gain.PAngularMomentum  = 0.25 ;
     gain.DAngularMomentum  = 2*sqrt(gain.PAngularMomentum);

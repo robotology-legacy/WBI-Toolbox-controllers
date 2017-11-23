@@ -27,6 +27,7 @@ Users willing to use the module should follow this list.
 - Run the module.
 
 ## Module details
+
 ### Configuration file
 At start, the module calls the initialization file initTorqueBalancing.m. Once open, this file contains some configuration variables. Please follow the instruction inside initTorqueBalancing.m to properly configure your simulation
 

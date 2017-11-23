@@ -1,9 +1,10 @@
-%% Convert .txt data into a matlab format
+%% Extracts from .txt file the joint positions for walking (a specific format 
+%% for data is required).
 
-% open the file
-fid = fopen('test.txt');
+% open the .txt file
+fid = fopen('jointPosForWalking.txt');
 
-% parse the lines in the .txt
+% parse all the lines in the .txt file
 res  = {};
 
 while ~feof(fid)
@@ -11,7 +12,7 @@ while ~feof(fid)
    res{end+1} = fgetl(fid); %#ok<SAGROW>
 end
 
-% from the second line, convert lines from char to double
+% starting from the second line, convert lines from char to double
 cuttingStep = 52;
 
 step  = zeros(length(res)-1-cuttingStep,1);
@@ -34,17 +35,17 @@ for k=2:length(res)-cuttingStep
     qjDes(k-1,:) = str2double(splittedString(3:end));
 end
 
+% close file
+fclose(fid);
+
 %% Plot check
 % figure(1)
 % 
-% hold on
+% hold all
 % grid on
-% 
-% plot(qjDes)
+% plot(time,qjDes(:,end-2:end))
 
-%% Close file
-fclose(fid);
-
+%% Save data into a matlab variable
 % joint sequence:
 %
 % torso_pitch torso_roll torso_yaw 
@@ -52,6 +53,6 @@ fclose(fid);
 % r_hip_pitch r_hip_roll r_hip_yaw r_knee r_ankle_pitch r_ankle_roll 
 
 % data for Simulink
-simulinkData = [time qjDes];
+jointDesiredForSimulink = [time qjDes];
 
  

@@ -27,12 +27,12 @@ gain.SmoothingTimeImp  = 1;
 %% PARAMETERS FOR TWO FEET ON GROUND
 if (sum(CONFIG.LEFT_RIGHT_FOOT_IN_CONTACT) == 2)
    
-    gain.PCOM                 = diag([50   100  5]);
-    gain.ICOM                 = diag([ 0    0   0]);
-    gain.DCOM                 = 0*2*sqrt(gain.PCOM)/20;
+    gain.PCOM                = diag([50   100  5]);
+    gain.ICOM                = diag([ 0    0   0]);
+    gain.DCOM                = 0*2*sqrt(gain.PCOM)/20;
 
-    gain.PAngularMomentum     = 5 ;
-    gain.DAngularMomentum     = 2*sqrt(gain.PAngularMomentum);
+    gain.PAngularMomentum    = 5 ;
+    gain.DAngularMomentum    = 2*sqrt(gain.PAngularMomentum);
 
     % Impedances acting in the null space of the desired contact forces 
     impTorso            = [10   10   20
@@ -46,8 +46,8 @@ if (sum(CONFIG.LEFT_RIGHT_FOOT_IN_CONTACT) == 2)
                          
     intTorso            = [0   0    0]; 
     intArms             = [0   0    0   0];                       
-    intLeftLeg          = [0   0    0    0   0  0]; 
-    intRightLeg         = [0   0    0    0   0  0];   
+    intLeftLeg          = [0   0    0   0   0  0]; 
+    intRightLeg         = [0   0    0   0   0  0];   
     
 end
 

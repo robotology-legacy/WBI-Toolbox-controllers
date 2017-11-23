@@ -14,8 +14,8 @@ if strcmpi(SM.SM_TYPE, 'WALKING')
 
     sat.torque                 = 60;
 
-    gain.footSize              = [ -0.05  0.10 ;    % xMin, xMax
-                                   -0.025 0.025];   % yMin, yMax  
+    gain.footSize              = [-0.05  0.10 ;    % xMin, xMax
+                                  -0.025 0.025];   % yMin, yMax  
                    
     forceFrictionCoefficient   = 1/3;  
     
@@ -64,6 +64,6 @@ end
 
 %% WALKING STATE MACHINE SPECIFIC PARAMETERS
 
-% to be filled ...
+% to be filled (if necessary)...
 
 

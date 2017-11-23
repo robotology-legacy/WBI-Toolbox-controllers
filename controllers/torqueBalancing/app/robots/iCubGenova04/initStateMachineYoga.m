@@ -41,8 +41,8 @@ if strcmpi(SM.SM_TYPE, 'YOGA')
     gain.ICOM  = gain.PCOM*0;
     gain.DCOM  = 2*sqrt(gain.PCOM)/20;
 
-    gain.PAngularMomentum  = 0.25 ;
-    gain.DAngularMomentum  = 2*sqrt(gain.PAngularMomentum);
+    gain.PAngularMomentum = 0.25 ;
+    gain.DAngularMomentum = 2*sqrt(gain.PAngularMomentum);
 
     % state ==  1  TWO FEET BALANCING
     % state ==  2  COM TRANSITION TO LEFT FOOT
@@ -179,8 +179,7 @@ sm.joints.states = [[0.0864,0.0258,0.0152, ...                          %% state
                      -0.0026,0.0225,0.0093,-0.0020,0.0027,-0.0277,...   %
                      0.0107,-0.0741,-0.0001,-0.0120,0.0252,0.1369];     %   
                     zeros(1,ROBOT_DOF)];                                %% state == 13  BALANCING TWO FEET, THIS REFERENCE IS IGNORED                     
-
- 
+                
 q1 =        [-0.0790,0.2279, 0.4519, ...
              -1.1621,0.6663, 0.4919, 0.9947, ... 
              -1.0717,1.2904,-0.2447, 1.0948, ...
@@ -283,7 +282,6 @@ q17 =        [-0.0852,-0.4273,0.0821,...
               0.2092, 0.6473,0.0006,-0.1741,-0.1044, 0.0700,...
              -0.3514, 0.3107,1.3253,-0.0189, 0.6374,-0.0614];
           
-  
 sm.joints.pointsL =[ 0,                            q1;
                      1*sm.jointsSmoothingTimes(10),q2;
                      2*sm.jointsSmoothingTimes(10),q3;
@@ -322,7 +320,9 @@ if sm.yogaExtended
                         25*sm.jointsSmoothingTimes(10),q8];
 end
 
-%% OVERRIDE SOME GAINS FOR DEMO ON CARPET
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% %%%%%%%%% OVERRIDE SOME GAINS FOR DEMO ON CARPET %%%%%%%%%%%%%%%%%%%% %%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 if CONFIG.ONSOFTCARPET && strcmpi(SM.SM_TYPE, 'YOGA')
     
     gain.impedances  = [50   50   30, 10   10    10    8, 10   10    10    8, 30   30   20    20      0   0, 100  100   30    60    100 100  % state ==  1  TWO FEET BALANCING

@@ -1,7 +1,8 @@
 function [w_H_b, CoMDes,qDes,constraints,impedances,kpCom,kdCom,currentState,jointsSmoothingTime] = ...
           stateMachineYoga(CoM_0, q0, l_sole_CoM,r_sole_CoM,qj, t, ...
                            wrench_rightFoot,wrench_leftFoot,l_sole_H_b, r_sole_H_b, sm,gain)
-    % codegen
+    
+    % state machine for performing Yoga demo
     persistent state;
     persistent tSwitch;
     persistent w_H_fixedLink;
@@ -143,6 +144,7 @@ function [w_H_b, CoMDes,qDes,constraints,impedances,kpCom,kdCom,currentState,joi
     
     %% LOOKING FOR A CONTACT
     if state == 6 
+        
         w_H_b       =  w_H_fixedLink * l_sole_H_b;
 
         % Set the center of mass projection onto the x-y plane to be
@@ -182,10 +184,10 @@ function [w_H_b, CoMDes,qDes,constraints,impedances,kpCom,kdCom,currentState,joi
         end
     end
     
-%% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%    
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%    
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%    
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%    
+%% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%   
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%   
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%   
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%   
      
 %% TRANSITION TO THE RIGHT FOOT
     if state == 8 
@@ -284,6 +286,7 @@ function [w_H_b, CoMDes,qDes,constraints,impedances,kpCom,kdCom,currentState,joi
     
     %% LOOKING FOR A CONTACT
     if state == 12
+        
         constraints = [0; 1]; % left foot is no longer a constraints
         w_H_b       =  w_H_fixedLink*r_sole_H_b;
 
@@ -304,6 +307,7 @@ function [w_H_b, CoMDes,qDes,constraints,impedances,kpCom,kdCom,currentState,joi
         
         w_H_b       =  w_H_fixedLink*r_sole_H_b;
         constraints = [1; 1]; 
+        
         impedances  = gain.impedances(state,:);
         kpCom       = gain.PCOM(state,:);   
         kdCom       = gain.DCOM(state,:); 
@@ -320,7 +324,7 @@ function [w_H_b, CoMDes,qDes,constraints,impedances,kpCom,kdCom,currentState,joi
         end
     end 
  
-    %% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+    %% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
     currentState        = state;
     jointsSmoothingTime = sm.jointsSmoothingTimes(state);
 end

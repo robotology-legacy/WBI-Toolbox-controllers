@@ -2,7 +2,7 @@ function     [w_H_b, CoMDes, qDes, constraints, impedances, kpCom, kdCom, curren
               stateMachineWalking(wrench_rightFoot, wrench_leftFoot, CoM_0, q0, x_CoM, qj, t, sm, gain,...
                                   CoMDesInput, qjDesInput, constraintsInput, w_H_bInput)
                          
-    % codegen
+    % state machine for teleoperated walking
     persistent state;
     persistent tSwitch;
 
@@ -22,13 +22,15 @@ function     [w_H_b, CoMDes, qDes, constraints, impedances, kpCom, kdCom, curren
         
         % nothing to do actually. Just wait to switch in another state
         
-        if t > sm.tBalancing && ~sm.demoOnlyBalancing && wrench_rightFoot(3) < sm.wrench.thresholdContactOff && norm(CoMError(2)) < sm.com.threshold
+        if t > (tSwitch+sm.tBalancing) && ~sm.demoOnlyBalancing && wrench_rightFoot(3) < sm.wrench.thresholdContactOff && norm(CoMError(2)) < sm.com.threshold
             
-           state = 2; % switch to left foot balancing
+           state   = 2; % switch to left foot balancing
+           tSwitch = t;
            
-        elseif t > sm.tBalancing && ~sm.demoOnlyBalancing && wrench_leftFoot(3) < sm.wrench.thresholdContactOff && norm(CoMError(2)) < sm.com.threshold
+        elseif t > (tSwitch+sm.tBalancing) && ~sm.demoOnlyBalancing && wrench_leftFoot(3) < sm.wrench.thresholdContactOff && norm(CoMError(2)) < sm.com.threshold
            
-           state = 3; % switch to right foot balancing
+           state   = 3; % switch to right foot balancing
+           tSwitch = t;
         end
     end
 
@@ -42,9 +44,10 @@ function     [w_H_b, CoMDes, qDes, constraints, impedances, kpCom, kdCom, curren
         kpCom       = gain.PCOM(state,:);   
         kdCom       = gain.DCOM(state,:);   
 
-        if t > sm.tBalancing && ~sm.demoOnlyBalancing && wrench_rightFoot(3) < sm.wrench.thresholdContactOn && norm(CoMError(2)) < sm.com.threshold
+        if t > (tSwitch+sm.tBalancing) && wrench_rightFoot(3) < sm.wrench.thresholdContactOn && norm(CoMError(2)) < sm.com.threshold
             
-           state = 1; % go back to two feet balancing
+           state   = 1; % go back to two feet balancing
+           tSwitch = t;
         end
     end
     
@@ -58,9 +61,10 @@ function     [w_H_b, CoMDes, qDes, constraints, impedances, kpCom, kdCom, curren
         kpCom       = gain.PCOM(state,:);   
         kdCom       = gain.DCOM(state,:);   
 
-        if t > sm.tBalancing && ~sm.demoOnlyBalancing && wrench_leftFoot(3) < sm.wrench.thresholdContactOn && norm(CoMError(2)) < sm.com.threshold
+        if t > (tSwitch+sm.tBalancing) && wrench_leftFoot(3) < sm.wrench.thresholdContactOn && norm(CoMError(2)) < sm.com.threshold
             
            state = 1; % go back to two feet balancing
+           tSwitch = t;
         end
     end
  

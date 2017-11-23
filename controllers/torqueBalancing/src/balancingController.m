@@ -151,10 +151,10 @@ function [tauModel,Sigma,NA,f_HDot, ...
     % constraintMatrixLeftFoot = ConstraintsMatrix*w_R_l_sole
     %
     % The same hold for the right foot
-    constraintMatrixLeftFoot  = ConstraintsMatrix * blkdiag(w_R_l_sole',w_R_l_sole');
-    constraintMatrixRightFoot = ConstraintsMatrix * blkdiag(w_R_r_sole',w_R_r_sole');
-    ConstraintsMatrix2Feet    = blkdiag(constraintMatrixLeftFoot,constraintMatrixRightFoot);
-    bVectorConstraints2Feet   = [bVectorConstraints;bVectorConstraints];
+    constraintMatrixLeftFoot   = ConstraintsMatrix * blkdiag(w_R_l_sole',w_R_l_sole');
+    constraintMatrixRightFoot  = ConstraintsMatrix * blkdiag(w_R_r_sole',w_R_r_sole');
+    ConstraintsMatrix2Feet     = blkdiag(constraintMatrixLeftFoot,constraintMatrixRightFoot);
+    bVectorConstraints2Feet    = [bVectorConstraints;bVectorConstraints];
     
     % Terms used in Eq. 0)
     tauModel        = PInv_JcMinvSt*(JcMinv*h - JcDv) + nullJcMinvSt*(h(7:end) - Mbj'/Mb*h(1:6) ...
@@ -221,7 +221,7 @@ function [tauModel,Sigma,NA,f_HDot, ...
     % Unconstrained solution for the problem 1)
     % f0                        = -pinvDamped(SigmaNA,reg.pinvDamp*1e-5)*(tauModel + Sigma*f_HDot);
     % Unconstrained contact wrenches
-    f                         = zeros(12,1);%pinvA*(HDotDes - gravityWrench) + NA*f0*constraints(1)*constraints(2); 
+    f                         = zeros(12,1); % pinvA*(HDotDes - gravityWrench) + NA*f0*constraints(1)*constraints(2); 
     % Error on the center of mass
     errorCoM                  = xcom - desired_x_dx_ddx_CoM(:,1);
 end

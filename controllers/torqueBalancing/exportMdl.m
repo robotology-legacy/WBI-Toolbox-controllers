@@ -1,5 +1,5 @@
 %% EXPORTMDL 
-%  automatic exports .mdl files in previous Simulink versions for keeping 
+%  Automatic exports .mdl files in previous Simulink versions for keeping 
 %  the back-compatibility of the controllers. 
 % 
 %  - supported Matlab versions: 2016b, 2015b, 2015a, 2014a

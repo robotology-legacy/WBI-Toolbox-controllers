@@ -4,11 +4,11 @@ CONFIG.ON_GAZEBO      = true;
 ROBOT_DOF             = 23;
 PORTS.IMU             = '/icubSim/inertial';
 
-CONFIG.LEFT_RIGHT_FOOT_IN_CONTACT  = [1 1];
-CONFIG.SMOOTH_DES_COM              = 0;    % If equal to one, the desired streamed values 
-                                           % of the center of mass are smoothed internally 
-CONFIG.SMOOTH_DES_Q                = 0;    % If equal to one, the desired streamed values 
-                                           % of the postural tasks are smoothed internally 
+CONFIG.LEFT_RIGHT_FOOT_IN_CONTACT = [1 1];
+CONFIG.SMOOTH_DES_COM             = 0;    % If equal to one, the desired streamed values 
+                                          % of the center of mass are smoothed internally 
+CONFIG.SMOOTH_DES_Q               = 0;    % If equal to one, the desired streamed values 
+                                          % of the postural tasks are smoothed internally 
 
 WBT_wbiList   = '(torso_pitch,torso_roll,torso_yaw,l_shoulder_pitch, l_shoulder_roll, l_shoulder_yaw, l_elbow, r_shoulder_pitch,r_shoulder_roll, r_shoulder_yaw, r_elbow, l_hip_pitch, l_hip_roll, l_hip_yaw, l_knee, l_ankle_pitch, l_ankle_roll, r_hip_pitch,r_hip_roll,r_hip_yaw,r_knee,r_ankle_pitch,r_ankle_roll)';
 WBT_robotName = 'icubSim';
