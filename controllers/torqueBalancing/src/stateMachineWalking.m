@@ -61,7 +61,7 @@ function     [w_H_b, CoMDes, qDes, constraints, impedances, kpCom, kdCom, curren
         kpCom       = gain.PCOM(state,:);   
         kdCom       = gain.DCOM(state,:);   
 
-        if t > (tSwitch+sm.tBalancing) && wrench_leftFoot(3) < sm.wrench.thresholdContactOn && norm(CoMError(2)) < sm.com.threshold
+        if t > (tSwitch+sm.tBalancing) && wrench_leftFoot(3) < sm.wrench.thresholdContactOn %&& norm(CoMError(2)) < sm.com.threshold
             
            state = 1; % go back to two feet balancing
            tSwitch = t;
