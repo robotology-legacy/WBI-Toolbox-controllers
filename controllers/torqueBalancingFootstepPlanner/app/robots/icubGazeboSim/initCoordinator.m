@@ -19,7 +19,7 @@ dump.right_wrench_port = '/icubSim/right_foot/analog:o';
 references.smoothingTimeMinJerkComDesQDes = 3.0;
 CONFIG.smoothingTimeTranDynamics          = 0.05;
 
-sat.torque = 34;
+sat.torque = 60;
 
 ROBOT_DOF_FOR_SIMULINK = eye(ROBOT_DOF);
 gain.qTildeMax         = 20*pi/180;

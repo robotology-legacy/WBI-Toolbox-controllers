@@ -71,6 +71,7 @@ CONFIG.SCOPES.QP             = false;
 % CONFIG.CHECK_LIMITS: if set to true, the controller will stop as soon as 
 % any of the joint limit is touched. 
 CONFIG.CHECK_LIMITS          = false;
+CONFIG.CHECK_PORTS_WALKING   = true;
 
 %% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % CONFIGURATIONS COMPLETED: loading gains and parameters for the specific robot
@@ -116,11 +117,15 @@ CONFIG.ONSOFTCARPET      = false;
 % inequality constraints of contact wrenches
 CONFIG.USE_QP_SOLVER     = true; 
 
+% Ports from footstep planner
+PORTS.COM_DES         = '/walking-coordinator/com:o';
+PORTS.Q_DES           = '/walking-coordinator/joints:o';
+PORTS.LFOOT_DES       = '/walking-coordinator/leftFoot:o';
+PORTS.RFOOT_DES       = '/walking-coordinator/rightFoot:o';
+PORTS.ACTIVE_CONTACTS = '/walking-coordinator/contact:o';
+PORTS.LFOOT_IS_FIXED  = '/walking-coordinator/leftStanding:o';
+
 PORTS.IMU                = '/icub/inertial';
-PORTS.COM_DES            = ['/' WBT_modelName '/comDes:i'];
-PORTS.Q_DES              = ['/' WBT_modelName '/qDes:i'];
-PORTS.ACTIVE_CONTACTS    = ['/' WBT_modelName '/constraints:i'];
-PORTS.BASE_POSE          = ['/' WBT_modelName '/basePose:i'];
 PORTS.WBD_LEFTLEG_EE     = '/wholeBodyDynamics/left_leg/cartesianEndEffectorWrench:o';
 PORTS.WBD_RIGHTLEG_EE    = '/wholeBodyDynamics/right_leg/cartesianEndEffectorWrench:o';
 
@@ -162,10 +167,4 @@ run(robotConfigWalking);
 
 %% Generate contact constraint model
 [ConstraintsMatrix,bVectorConstraints] = constraints(forceFrictionCoefficient,numberOfPoints,torsionalFrictionCoefficient,gain.footSize,fZmin);
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%% [TO BE REMOVED WHEN FULLY OPERATIVE] TEST PLANNER CONFIGURATION
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-PORTS.LEFT_FOOT_IN_CONTACT = ['/' WBT_modelName '/leftInContact:i'];
-run(fullfile('tests/getJointPosFromTxt.m'));
 
