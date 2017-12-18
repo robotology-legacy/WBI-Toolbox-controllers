@@ -124,6 +124,7 @@ PORTS.LFOOT_DES       = '/walking-coordinator/leftFoot:o';
 PORTS.RFOOT_DES       = '/walking-coordinator/rightFoot:o';
 PORTS.ACTIVE_CONTACTS = '/walking-coordinator/contact:o';
 PORTS.LFOOT_IS_FIXED  = '/walking-coordinator/leftStanding:o';
+PORTS.ACK             = '/walking-coordinator/done:i';
 
 PORTS.IMU                = '/icub/inertial';
 PORTS.WBD_LEFTLEG_EE     = '/wholeBodyDynamics/left_leg/cartesianEndEffectorWrench:o';
