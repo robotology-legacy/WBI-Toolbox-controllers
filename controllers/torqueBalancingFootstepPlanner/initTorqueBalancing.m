@@ -1,4 +1,4 @@
-%% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+cd%% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % /**
 %  * Copyright (C) 2016 CoDyCo
 %  * @author: Daniele Pucci
@@ -28,7 +28,8 @@ clc
 % To do this, you can uncomment the 
 
 % setenv('YARP_ROBOT_NAME','iCubGenova04');
-setenv('YARP_ROBOT_NAME','icubGazeboSim');
+ setenv('YARP_ROBOT_NAME','icubGazeboSim');
+% setenv('YARP_ROBOT_NAME','iCubGazeboV2_5');
 
 % Simulation time in seconds
 CONFIG.SIMULATION_TIME = inf;   
