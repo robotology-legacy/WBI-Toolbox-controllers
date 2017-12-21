@@ -6,7 +6,7 @@ Model {
     NumRootInports	    0
     NumRootOutports	    0
     ParameterArgumentNames  ""
-    ComputedModelVersion    "1.3245"
+    ComputedModelVersion    "1.3246"
     NumModelReferences	    0
     NumTestPointedSignals   0
     NumProvidedFunctions    0
@@ -67,7 +67,7 @@ Model {
 	LoadSaveID		"0"
 	Extents			[1821.0, 911.0]
 	ZoomFactor		[0.85645004849660522]
-	Offset			[399.39071347678373, 173.65345413363536]
+	Offset			[399.39071347678373, 173.65345413363548]
       }
       Object {
 	$PropName		"DockComponentsInfo"
@@ -100,9 +100,9 @@ Model {
   ModifiedByFormat	  "%<Auto>"
   LastModifiedBy	  "sdafarra"
   ModifiedDateFormat	  "%<Auto>"
-  LastModifiedDate	  "Tue Dec 19 17:58:40 2017"
-  RTWModifiedTimeStamp	  435607118
-  ModelVersionFormat	  "1.%<AutoIncrement:3245>"
+  LastModifiedDate	  "Thu Dec 21 15:07:28 2017"
+  RTWModifiedTimeStamp	  435761035
+  ModelVersionFormat	  "1.%<AutoIncrement:3246>"
   ConfigurationManager	  "none"
   SampleTimeColors	  off
   SampleTimeAnnotations	  off
@@ -6708,7 +6708,7 @@ Model {
 	  "45098039215686 0.650980392156863],'Title','%<SignalLabel>','LinePropertiesCache',{{}},'UserDefinedChannelNames',{{}"
 	  "},'NumLines',0,'LineNames',{{[]}},'ShowContent',true,'Placement',1),'DisplayLayoutDimensions',[4 1]),extmgr.Configu"
 	  "ration('Tools','Plot Navigation',true,'PreviousAutoscale','XY','OnceAtStop',false),extmgr.Configuration('Tools','Me"
-	  "asurements',true,'Version','2016b')),'Version','2016b','Location',[71 103 1926 1104])"
+	  "asurements',true,'Version','2016b')),'Version','2016b','Location',[66 106 1921 1079])"
 	  NumInputPorts		  "4"
 	}
 	Block {
@@ -20120,7 +20120,7 @@ Model {
 	    TiledPaperMargins	    [0.500000, 0.500000, 0.500000, 0.500000]
 	    TiledPageScale	    1
 	    ShowPageBoundaries	    off
-	    ZoomFactor		    "150"
+	    ZoomFactor		    "152"
 	    Block {
 	      BlockType		      Inport
 	      Name		      "SM_BIN"
@@ -27649,7 +27649,7 @@ Model {
 		  BlockType		  Outport
 		  Name			  "LEFT_RIGHT_FOOT_IN_CONTACT"
 		  SID			  "4358"
-		  Position		  [270, 832, 305, 848]
+		  Position		  [1025, 757, 1060, 773]
 		  ZOrder		  708
 		  Port			  "2"
 		  IconDisplay		  "Port number"
@@ -27944,18 +27944,8 @@ Model {
 		  ZOrder		  446
 		  SrcBlock		  "active contacts (input)"
 		  SrcPort		  1
-		  Points		  [97, 0]
-		  Branch {
-		    ZOrder		    714
-		    Points		    [0, 50]
-		    DstBlock		    "LEFT_RIGHT_FOOT_IN_CONTACT"
-		    DstPort		    1
-		  }
-		  Branch {
-		    ZOrder		    713
-		    DstBlock		    "stateMachineFCN"
-		    DstPort		    10
-		  }
+		  DstBlock		  "stateMachineFCN"
+		  DstPort		  10
 		}
 		Line {
 		  ZOrder		  444
@@ -28111,9 +28101,18 @@ Model {
 		  ZOrder		  709
 		  SrcBlock		  "stateMachineFCN"
 		  SrcPort		  6
-		  Points		  [55, 0; 0, 190]
-		  DstBlock		  "nu"
-		  DstPort		  1
+		  Points		  [55, 0]
+		  Branch {
+		    ZOrder		    754
+		    DstBlock		    "LEFT_RIGHT_FOOT_IN_CONTACT"
+		    DstPort		    1
+		  }
+		  Branch {
+		    ZOrder		    753
+		    Points		    [0, 190]
+		    DstBlock		    "nu"
+		    DstPort		    1
+		  }
 		}
 	      }
 	    }
@@ -30987,6 +30986,9 @@ Stateflow {
     screen		    [1 1 1280 1024 1.000677131425054]
     treeNode		    [0 66 0 0]
     viewObj		    65
+    visible		    1
+    subviewS {
+    }
     ssIdHighWaterMark	    88
     decomposition	    CLUSTER_CHART
     type		    EML_CHART

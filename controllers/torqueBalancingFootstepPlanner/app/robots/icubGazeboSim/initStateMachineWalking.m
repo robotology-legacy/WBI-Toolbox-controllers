@@ -32,8 +32,8 @@ if strcmpi(SM.SM_TYPE, 'WALKING')
     gain.ICOM  = gain.PCOM*0;
     gain.DCOM  = 2*sqrt(gain.PCOM)/10;
 
-    gain.PAngularMomentum  = 0.025 ;
-    gain.DAngularMomentum  = 0.3;
+    gain.PAngularMomentum  = 0.25;
+    gain.DAngularMomentum  = 2*sqrt(gain.PAngularMomentum);
 
     % state ==  1  TWO FEET BALANCING 
     % state ==  2  LEFT FOOT BALANCING 
@@ -46,7 +46,7 @@ if strcmpi(SM.SM_TYPE, 'WALKING')
          
     sm.demoOnlyBalancing             = false;
     sm.com.threshold                 = 0.01;
-    sm.wrench.thresholdContactOn     = 15;     % Force threshold above which contact is considered stable
+    sm.wrench.thresholdContactOn     = 5;     % Force threshold above which contact is considered stable
     sm.wrench.thresholdContactOff    = 75;     % Force threshold under which contact is considered off
     sm.joints.thresholdNotInContact  = 5;      % Degrees
     sm.joints.thresholdInContact     = 50;     % Degrees
