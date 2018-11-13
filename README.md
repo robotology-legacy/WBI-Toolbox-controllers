@@ -1,3 +1,6 @@
+### Warning: this repository is not mantained
+The Simulink controllers contained in the repo are not supposed to work. This repository is currently used as `legacy` of [whole-body-controllers](https://github.com/robotology/whole-body-controllers), see also https://github.com/robotology/whole-body-controllers/blob/master/README.md
+
 # WBI-Toolbox-controllers
 Controllers developed using both the WBI-Toolbox and the WB-Toolbox.
 In the folder which correspond to each controller the user can find a detailed README. Here we present a short 
