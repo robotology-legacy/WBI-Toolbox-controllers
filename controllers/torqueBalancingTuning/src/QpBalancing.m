@@ -15,13 +15,14 @@
 %  * Public License for more details
 %  */
 %% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
 function QpTwoFeet(block)
 
 setup(block);
 
 function setup(block)
     
-block.NumInputPorts  = 8; 
+block.NumInputPorts  = 10; 
 block.NumOutputPorts = 3; 
 
 % Setup port properties to be inherited or dynamic
@@ -35,20 +36,26 @@ block.SetPreCompOutPortInfoToDynamic;
 % %3 % [Aeq,beq]                   
 % %4 % [x0;lb;ub]                  
 
+
 % Definition of port sizes for QP 2 feet
-block.InputPort(1).Dimensions        =  23;       % tauModel               
-block.InputPort(2).Dimensions        =  23;       % Sigmaf_HDot
-block.InputPort(3).Dimensions        = [23 12];   % SigmaNa 
-block.InputPort(4).Dimensions        = [12 12];   % HessianMatrixQP2Feet               
-block.InputPort(5).Dimensions        = [ 1 12];   % gradientQP2Feet
-block.InputPort(6).Dimensions        = [38 12];   % ConstraintsMatrixQP2Feet 
-block.InputPort(7).Dimensions        = [ 1 38];   % bVectorConstraintsQp2Feet 
-block.InputPort(8).Dimensions        = 1 ;        % USE_QP_SOLVER
+block.InputPort(1).Dimensions        = [ 1  2];   % LEFT_RIGHT_FOOT_IN_CONTACT
+block.InputPort(2).Dimensions        = [12 12];   % HessianMatrixQP2Feet               
+block.InputPort(3).Dimensions        = [ 1 12];   % gradientQP2Feet
+block.InputPort(4).Dimensions        = [38 12];   % ConstraintsMatrixQP2Feet 
+block.InputPort(5).Dimensions        = [ 1 38];   % bVectorConstraintsQp2Feet 
+block.InputPort(6).Dimensions        = 1 ;        % USE_QP_SOLVER
+% Definition of port sizes for QP 1 foot
+block.InputPort(7).Dimensions        = [ 6  6];   % HessianMatrixQP1Foot              
+block.InputPort(8).Dimensions        = [ 1  6];   % gradientQP1Foot
+block.InputPort(9).Dimensions        = [19  6];   % ConstraintsMatrixQP1Foot
+block.InputPort(10).Dimensions       = [ 1 19];   % bVectorConstraintsQp1Foot
 
 % Override output port properties
 block.OutputPort(1).Dimensions       = 12;        % f0 Two Feet
 block.OutputPort(2).Dimensions       = 1;         % Exit flag QP 2 Feet
-block.OutputPort(3).Dimensions       = 23;        % tau
+
+% Override output port properties
+block.OutputPort(3).Dimensions       = 12;        % f0 One foot     
 
 for i=1:block.NumInputPorts
     block.InputPort(i).DatatypeID  = -1;          % 'inherited', see http://www.mathworks.com/help/simulink/slref/simulink.blockdata.html#f29-108672
@@ -61,6 +68,7 @@ for i =1:block.NumOutputPorts
     block.OutputPort(i).Complexity  = 'Real';
 end
 
+
 % Register parameters
 block.NumDialogPrms     = 0;
 
@@ -70,7 +78,8 @@ block.NumDialogPrms     = 0;
 %
 %  [-1, 0]               : Inherited sample time
 %  [-2, 0]               : Variable sample time
-block.SampleTimes       = [-1 0];
+block.SampleTimes = [-1 0];
+
 
 % Specify the block simStateCompliance. The allowed values are:
 %    'UnknownSimState', < The default setting; warn and assume DefaultSimState
@@ -129,6 +138,7 @@ function SetInputPortSamplingMode(block, idx, fd)
 
 % end InitializeConditions
 
+
 %%
 %% Start:
 %%   Functionality    : Called once at start of model execution. If you
@@ -138,7 +148,7 @@ function SetInputPortSamplingMode(block, idx, fd)
 %%   C-MEX counterpart: mdlStart
 %%
 % function Start(block)
- 
+% 
 % block.Dwork(1).Data = 0;
 
 %endfunction
@@ -149,35 +159,61 @@ function SetInputPortSamplingMode(block, idx, fd)
 %%                      simulation step
 %%   Required         : Yes
 %%   C-MEX counterpart: mdlOutputs
+%%
 
 function Outputs(block)
-    
-    USE_QPO_SOLVER             = block.InputPort(8).Data;
 
-    tauModel                   = block.InputPort(1).Data;
-    Sigmaf_HDot                = block.InputPort(2).Data;
-    SigmaNa                    = block.InputPort(3).Data;
+
+    CONTACT_THRESHOLD = 0.1;
     
-    HessianMatrixQP2Feet       = block.InputPort(4).Data;
-    gradientQP2Feet            = block.InputPort(5).Data;
-    ConstraintsMatrixQP2Feet   = block.InputPort(6).Data;
-    bVectorConstraintsQp2Feet  = block.InputPort(7).Data;
-    if USE_QPO_SOLVER 
-        [f02Feet,~,exitFlagQP2Feet,~,~,~] ...
-                               = qpOASES(HessianMatrixQP2Feet,gradientQP2Feet',ConstraintsMatrixQP2Feet,[],[],[],bVectorConstraintsQp2Feet');           
-        if exitFlagQP2Feet ~= 0
-            f02Feet            = - inv(HessianMatrixQP2Feet)*gradientQP2Feet';
+    LEFT_RIGHT_FOOT_IN_CONTACT = block.InputPort(1).Data;
+    exitFlagQP                 = 0;
+    f0OneFoot                  = zeros(6,1);
+    f02Feet                    = zeros(6*2,1);
+    USE_QPO_SOLVER             = block.InputPort(6).Data;
+
+    if sum(LEFT_RIGHT_FOOT_IN_CONTACT) > (2 - CONTACT_THRESHOLD)
+        HessianMatrixQP2Feet       = block.InputPort(2).Data;
+        gradientQP2Feet            = block.InputPort(3).Data;
+        ConstraintsMatrixQP2Feet   = block.InputPort(4).Data;
+        bVectorConstraintsQp2Feet  = block.InputPort(5).Data;
+        if USE_QPO_SOLVER 
+            [f02Feet,~,exitFlagQP,~,~,~] = qpOASES(HessianMatrixQP2Feet,gradientQP2Feet',ConstraintsMatrixQP2Feet,[],[],[],bVectorConstraintsQp2Feet');           
+            if exitFlagQP ~= 0
+                f02Feet = - inv(HessianMatrixQP2Feet)*gradientQP2Feet';
+            end
+        else
+            exitFlagQP                 = 1;
+            f02Feet = - inv(HessianMatrixQP2Feet)*gradientQP2Feet';
+        end
+            
+    elseif sum(LEFT_RIGHT_FOOT_IN_CONTACT) > (1 - CONTACT_THRESHOLD) 
+        HessianMatrixQP1Foot       = block.InputPort(7).Data;
+        gradientQP1Foot            = block.InputPort(8).Data;
+        ConstraintsMatrixQP1Foot   = block.InputPort(9).Data;
+        bVectorConstraintsQP1Foot  = block.InputPort(10).Data;
+
+        if USE_QPO_SOLVER 
+            [f0OneFoot,~,exitFlagQP,~,~,~] = qpOASES(HessianMatrixQP1Foot,gradientQP1Foot',ConstraintsMatrixQP1Foot,[],[],[],bVectorConstraintsQP1Foot');           
+
+           if exitFlagQP ~= 0
+                f0OneFoot = - inv(HessianMatrixQP1Foot)*gradientQP1Foot';
+           end
+        else
+            exitFlagQP= 1;
+            f0OneFoot = - inv(HessianMatrixQP1Foot)*gradientQP1Foot';
         end
     else
-        exitFlagQP2Feet        = 1;
-        f02Feet = - inv(HessianMatrixQP2Feet)*gradientQP2Feet';
+        exitFlagQP           = -10;
     end
-            
     block.OutputPort(1).Data = f02Feet;
-    block.OutputPort(2).Data = exitFlagQP2Feet;
-    block.OutputPort(3).Data = tauModel + Sigmaf_HDot + SigmaNa*f02Feet;
+    block.OutputPort(2).Data = exitFlagQP;
+    
+    block.OutputPort(3).Data = [f0OneFoot*LEFT_RIGHT_FOOT_IN_CONTACT(1);
+                                f0OneFoot*LEFT_RIGHT_FOOT_IN_CONTACT(2)]*abs(LEFT_RIGHT_FOOT_IN_CONTACT(2)-LEFT_RIGHT_FOOT_IN_CONTACT(1));
     
 %end Outputs
+
 
 function Terminate(block)
 
